@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Calculations.VO2Max;
 using GeekMDSuite.Contracts;
+using GeekMDSuite.Contracts.Procedures;
 using Xunit;
 
 namespace GeekMDSuite.Calculations.Test.VO2MaxTest

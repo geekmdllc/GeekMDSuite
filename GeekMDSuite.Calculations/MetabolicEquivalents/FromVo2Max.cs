@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Contracts;
+using GeekMDSuite.Contracts.Procedures;
 
 namespace GeekMDSuite.Calculations.MetabolicEquivalents
 {

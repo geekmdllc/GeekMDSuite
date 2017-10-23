@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Calculations.MetabolicEquivalents;
 using GeekMDSuite.Contracts;
+using GeekMDSuite.Contracts.Procedures;
 using Xunit;
 
 namespace GeekMDSuite.Calculations.Test.MetabolicEquivalentsTest

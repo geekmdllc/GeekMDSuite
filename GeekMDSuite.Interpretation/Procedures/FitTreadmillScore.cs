@@ -1,8 +1,4 @@
-﻿using System;
-using GeekMDSuite.Contracts;
-using GeekMDSuite.Calculations;
-
-namespace GeekMDSuite.Interpretation
+﻿namespace GeekMDSuite.Interpretation.Procedures
 {
     public static class FitTreadmillScore
     {
@@ -23,13 +19,5 @@ namespace GeekMDSuite.Interpretation
                     return FitTreadmillScoreInterpretation.HighRisk;
             }
         }
-    }
-
-    public enum FitTreadmillScoreInterpretation
-    {
-        LowestRisk = 0,
-        LowRisk = 1,
-        ModerateRisk = 2,
-        HighRisk = 3
     }
 }

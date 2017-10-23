@@ -8,4 +8,7 @@
       <Name>GeekMDSuite.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Procedures" />
+  </ItemGroup>
 </Project>

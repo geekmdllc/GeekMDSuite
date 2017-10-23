@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Contracts;
+using GeekMDSuite.Contracts.Procedures;
 
 namespace GeekMDSuite.Calculations.VO2Max
 {
