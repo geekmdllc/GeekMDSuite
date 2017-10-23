@@ -27,9 +27,9 @@ namespace GeekMDSuite.Interpretation
 
     public enum FitTreadmillScoreInterpretation
     {
-        LowestRisk,
-        LowRisk,
-        ModerateRisk,
-        HighRisk
+        LowestRisk = 0,
+        LowRisk = 1,
+        ModerateRisk = 2,
+        HighRisk = 3
     }
 }

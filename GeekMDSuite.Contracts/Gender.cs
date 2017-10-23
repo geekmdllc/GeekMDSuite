@@ -2,9 +2,9 @@
 {
     public enum Gender
     {
-        Male,
-        Female,
-        NonBinaryXy,
-        NonBinaryXx
+        Male = 0,
+        Female = 1,
+        NonBinaryXy = 2,
+        NonBinaryXx = 3
     }
 }

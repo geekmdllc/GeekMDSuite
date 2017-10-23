@@ -9,30 +9,30 @@
         int HeartRateResting { get; }
         double HeartRateMaxReached { get; }
         double HeartRateMaxPredicted { get; }
-        double HeartRatePercentReachedOfMaxPredicted { get; }
         string ClinicianComments { get; }
     }
     public enum TreadmillExerciseStressTestProtocol
     {
-        NoneSelected,
-        Bruce,
-        BruceLowLevel,
-        ModifiedBruce,
-        Balke3Point0,
-        Balke3Point4,
-        Cornell,
-        Ellstad,
-        Kattus,
-        Naughton,
-        UsAirforceSam20,
-        UsAirforceSam33
+        Bruce = 0,
+        BruceLowLevel = 1,
+        ModifiedBruce = 2,
+        Balke3Point0 = 3,
+        Balke3Point4 = 4,
+        Cornell = 5,
+        Ellstad = 6,
+        Kattus = 7,
+        Naughton = 8,
+        UsAirforceSam20 = 9,
+        UsAirforceSam33 = 10
     }
     public enum TreadmillExerciseStressTestResultFlag
     {
-        NoneSelected,
-        Normal,
-        Ischemia,
-        Abnormal,
-        Other
+        NoneSelected = 0,
+        Normal = 1,
+        Ischemia = 2,
+        Abnormal = 3,
+        Indeterminant = 4,
+        Incomplete = 5,
+        Other = 6
     }
 }
