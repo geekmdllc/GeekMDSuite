@@ -1,6 +1,8 @@
-﻿namespace GeekMDSuite.Interpretation.Procedures
+﻿using GeekMDSuite.Contracts;
+
+namespace GeekMDSuite.Interpretation
 {
-    public static class BloodPressureInterpretation
+    public static class BloodPressure
     {
         public static readonly int SystolicLowerLimitOfNormal = 100;
         public static readonly int SystolicLowerLimitOfPrehypertensive = 120;

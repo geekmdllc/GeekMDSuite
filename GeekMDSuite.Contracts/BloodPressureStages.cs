@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Interpretation.Procedures
+﻿namespace GeekMDSuite.Contracts
 {
     public enum BloodPressureStages 
     {

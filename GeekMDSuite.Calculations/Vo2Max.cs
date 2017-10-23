@@ -1,12 +1,11 @@
 ﻿using System;
 using GeekMDSuite.Contracts;
-using GeekMDSuite.Contracts.Procedures;
 
-namespace GeekMDSuite.Calculations.VO2Max
+namespace GeekMDSuite.Calculations
 {
-    public static class FromTreadmillExerciseStressTest
+    public static class Vo2Max
     {
-        public static double Calculate(TreadmillExerciseStressTestProtocol protocol, 
+        public static double CalculateFromTreadmillExerciseStressTest(TreadmillExerciseStressTestProtocol protocol, 
             Gender gender, double minutes, double seconds)
         {
             if (minutes <= 0) throw new ArgumentOutOfRangeException(nameof(minutes));
@@ -43,8 +42,8 @@ namespace GeekMDSuite.Calculations.VO2Max
                         throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
                             TreadmillExerciseStressTestProtocol.Naughton));
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(Calculate) + " in " + 
-                                                              nameof(FromTreadmillExerciseStressTest) + 
+                        throw new ArgumentOutOfRangeException(nameof(CalculateFromTreadmillExerciseStressTest) + " in " + 
+                                                              nameof(Vo2Max) + 
                                                               " does not accept that protocol." );
             }
         }
@@ -67,7 +66,7 @@ namespace GeekMDSuite.Calculations.VO2Max
 
         private static string ProtocolNotImplementedExceptionMessage(TreadmillExerciseStressTestProtocol protocol)
         {
-            return nameof(Calculate) + " in " + nameof(FromTreadmillExerciseStressTest) + 
+            return nameof(CalculateFromTreadmillExerciseStressTest) + " in " + nameof(Vo2Max) + 
                    " does not yet implement handling of the protocol described by " + nameof(protocol) + ".";
         }
     }

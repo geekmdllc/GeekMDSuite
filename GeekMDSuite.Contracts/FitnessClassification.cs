@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Interpretation
+﻿namespace GeekMDSuite.Contracts
 {
     public enum FitnessClassification
     {

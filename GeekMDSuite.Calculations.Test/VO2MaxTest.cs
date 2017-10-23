@@ -1,12 +1,10 @@
 ﻿using System;
-using GeekMDSuite.Calculations.VO2Max;
 using GeekMDSuite.Contracts;
-using GeekMDSuite.Contracts.Procedures;
 using Xunit;
 
-namespace GeekMDSuite.Calculations.Test.VO2MaxTest
+namespace GeekMDSuite.Calculations.Test
 {
-    public class CalculateTest
+    public class VO2MaxTest
     {
         private int minutes = 11;
         private int seconds = 33;
@@ -19,14 +17,14 @@ namespace GeekMDSuite.Calculations.Test.VO2MaxTest
         [Fact]
         public void MaleResultInRange()
         {            
-            var result = FromTreadmillExerciseStressTest.Calculate(protocol, male, minutes, seconds);
+            var result = Vo2Max.CalculateFromTreadmillExerciseStressTest(protocol, male, minutes, seconds);
             Assert.InRange(result, 40,41); 
         }
         
         [Fact]
         public void FemaleResultInRange()
         {            
-            var result = FromTreadmillExerciseStressTest.Calculate(protocol, female, minutes, seconds);
+            var result = Vo2Max.CalculateFromTreadmillExerciseStressTest(protocol, female, minutes, seconds);
             Assert.InRange(result, 46,47); 
         }
 
@@ -34,7 +32,7 @@ namespace GeekMDSuite.Calculations.Test.VO2MaxTest
         public void UnsupportedProtocolThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                FromTreadmillExerciseStressTest.Calculate(unsupportedProtocol, female, minutes, seconds));
+                Vo2Max.CalculateFromTreadmillExerciseStressTest(unsupportedProtocol, female, minutes, seconds));
         }
     }
 }

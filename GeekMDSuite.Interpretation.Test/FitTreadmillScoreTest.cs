@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Interpretation.Procedures;
+﻿using GeekMDSuite.Contracts;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test

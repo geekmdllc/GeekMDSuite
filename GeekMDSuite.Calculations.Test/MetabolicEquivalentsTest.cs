@@ -1,9 +1,7 @@
-﻿using GeekMDSuite.Calculations.MetabolicEquivalents;
-using GeekMDSuite.Contracts;
-using GeekMDSuite.Contracts.Procedures;
+﻿using GeekMDSuite.Contracts;
 using Xunit;
 
-namespace GeekMDSuite.Calculations.Test.MetabolicEquivalentsTest
+namespace GeekMDSuite.Calculations.Test
 {
     public class MetabolicEquivalentsTest
     {
@@ -17,13 +15,13 @@ namespace GeekMDSuite.Calculations.Test.MetabolicEquivalentsTest
         [Fact]
         public void MaleResultInRangeFromTreadmillExerciseStressTest()
         {
-            var result = FromTreadmillExerciseStressTest.Calculate(protocol, male, minutes, seconds);
+            var result = MetabolicEquivalents.CalculateFromTreadmillExerciseStressTest(protocol, male, minutes, seconds);
             Assert.InRange(result, 11, 12);
         }
         [Fact]
         public void FemaleResultInRangeFromTreadmillExerciseStressTest()
         {
-            var result = FromTreadmillExerciseStressTest.Calculate(protocol, female, minutes, seconds);
+            var result = MetabolicEquivalents.CalculateFromTreadmillExerciseStressTest(protocol, female, minutes, seconds);
             Assert.InRange(result, 13, 14);
         }
     }

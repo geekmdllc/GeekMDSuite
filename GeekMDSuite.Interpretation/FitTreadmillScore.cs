@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite.Interpretation.Procedures
+﻿using GeekMDSuite.Interpretation;
+
+namespace GeekMDSuite.Contracts
 {
     public static class FitTreadmillScore
     {

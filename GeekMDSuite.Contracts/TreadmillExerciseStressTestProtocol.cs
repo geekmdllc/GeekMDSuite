@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Contracts.Procedures
+﻿namespace GeekMDSuite.Contracts
 {
     public enum TreadmillExerciseStressTestProtocol
     {
