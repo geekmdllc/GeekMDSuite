@@ -1,0 +1,8 @@
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/bin/Debug/netstandard2.0/GeekMDSuite.Contracts.deps.json
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/bin/Debug/netstandard2.0/GeekMDSuite.Contracts.dll
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/bin/Debug/netstandard2.0/GeekMDSuite.Contracts.pdb
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/obj/Debug/netstandard2.0/GeekMDSuite.Contracts.csproj.CoreCompileInputs.cache
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/obj/Debug/netstandard2.0/GeekMDSuite.Contracts.AssemblyInfoInputs.cache
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/obj/Debug/netstandard2.0/GeekMDSuite.Contracts.AssemblyInfo.cs
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/obj/Debug/netstandard2.0/GeekMDSuite.Contracts.dll
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Contracts/obj/Debug/netstandard2.0/GeekMDSuite.Contracts.pdb

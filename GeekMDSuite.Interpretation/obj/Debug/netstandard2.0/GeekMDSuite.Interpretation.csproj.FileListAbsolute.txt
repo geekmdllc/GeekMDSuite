@@ -1,0 +1,12 @@
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/bin/Debug/netstandard2.0/GeekMDSuite.Interpretation.deps.json
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/bin/Debug/netstandard2.0/GeekMDSuite.Interpretation.dll
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/bin/Debug/netstandard2.0/GeekMDSuite.Interpretation.pdb
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/bin/Debug/netstandard2.0/GeekMDSuite.Contracts.dll
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/bin/Debug/netstandard2.0/GeekMDSuite.Contracts.pdb
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/obj/Debug/netstandard2.0/GeekMDSuite.Interpretation.csproj.CoreCompileInputs.cache
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/obj/Debug/netstandard2.0/GeekMDSuite.Interpretation.AssemblyInfoInputs.cache
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/obj/Debug/netstandard2.0/GeekMDSuite.Interpretation.AssemblyInfo.cs
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/obj/Debug/netstandard2.0/GeekMDSuite.Interpretation.dll
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/obj/Debug/netstandard2.0/GeekMDSuite.Interpretation.pdb
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/bin/Debug/netstandard2.0/GeekMDSuite.Calculations.dll
+/Users/tnesbit/RiderProjects/GeekMDSuite/GeekMDSuite.Interpretation/bin/Debug/netstandard2.0/GeekMDSuite.Calculations.pdb

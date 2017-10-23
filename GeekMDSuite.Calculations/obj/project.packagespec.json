@@ -1,0 +1,38 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Calculations/GeekMDSuite.Calculations.csproj",
+    "projectName": "GeekMDSuite.Calculations",
+    "projectPath": "/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Calculations/GeekMDSuite.Calculations.csproj",
+    "outputPath": "/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Calculations/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netstandard2.0"
+    ],
+    "frameworks": {
+      "netstandard2.0": {
+        "projectReferences": {
+          "/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Contracts/GeekMDSuite.Contracts.csproj": {
+            "projectPath": "/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Contracts/GeekMDSuite.Contracts.csproj"
+          }
+        }
+      }
+    }
+  },
+  "frameworks": {
+    "netstandard2.0": {
+      "dependencies": {
+        "NETStandard.Library": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "2.0.0"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
