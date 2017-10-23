@@ -1,13 +1,9 @@
-GeekMD.Objects/bin
-GeekMD.Objects/obj
 GeekMD.Calculations/bin
 GeekMD.Calculations/obj
 GeekMD.Contracts/bin
 GeekMD.Contracts/obj
 GeekMD.Interpretation/obj
 GeekMD.Interpretation/bin
-GeekMD.Objects.Test/bin
-GeekMD.Objects.Test/obj
 GeekMD.Calculations.Test/bin
 GeekMD.Calculations.Test/obj
 GeekMD.Contracts.Test/bin
