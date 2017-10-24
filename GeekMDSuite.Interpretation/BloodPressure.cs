@@ -18,7 +18,7 @@ namespace GeekMDSuite.Interpretation
             return interpretation; 
         }
         
-        private class BloodPressureStageDescriptor
+        private struct BloodPressureStageDescriptor
         {
             public IntegerRange SystolicRange { get; }
             public IntegerRange DiastolicRange { get; }
