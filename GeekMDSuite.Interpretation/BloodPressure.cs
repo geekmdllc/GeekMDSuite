@@ -10,20 +10,20 @@ namespace GeekMDSuite.Interpretation
         public static BloodPressureStages Interpret(BloodPressureParameters parameters)
         {           
             var interpretation = BloodPressureStages.Normotension;
-            foreach (var stage in BloodPressureStageDescriptions())
+            foreach (var description in BloodPressureStageDescriptions())
             {
-                if (stage.Contains(parameters)) 
-                    interpretation = stage.Stage;
+                if (description.Contains(parameters)) 
+                    interpretation = description.Stage;
             }
             return interpretation; 
         }
         
         private class BloodPressureStageDescriptor
         {
-            public IntegerRange SystolicRange { get; set; }
-            public IntegerRange DiastolicRange { get; set; }
-            public BloodPressureStages Stage { get; set; }
-            public bool OrganDamage { get; set; }
+            public IntegerRange SystolicRange { get; }
+            public IntegerRange DiastolicRange { get; }
+            public BloodPressureStages Stage { get; }
+            public bool OrganDamage { get; }
 
             public BloodPressureStageDescriptor(IntegerRange systolicRange, IntegerRange diastolicRange, BloodPressureStages stage, bool organDamage)
             {
