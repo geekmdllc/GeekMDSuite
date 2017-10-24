@@ -8,19 +8,19 @@ namespace GeekMDSuite.Interpretation.Test
         [Fact]
         void InterpretsPrehypertensionCorrectly()
         {
-            var bpStage = BloodPressure.Interpret(133, 69, false);
+            var bpStage = BloodPressure.Interpret(new BloodPressureParameters(133, 69, false));
             Assert.Equal(BloodPressureStages.PreHypertension, bpStage);
         }
         [Fact]
         void InterpretsHypertensiveEmergencyCorrectly()
         {
-            var bpStage = BloodPressure.Interpret(200, 99, true);
+            var bpStage = BloodPressure.Interpret(new BloodPressureParameters(200, 99, true));
             Assert.Equal(BloodPressureStages.HypertensiveEmergency, bpStage);
         }
         [Fact]
         void DistinguishesHypertensiveUrgencyFromHypertensiveEmergencyCorrectly()
         {
-            var bpStage = BloodPressure.Interpret(200, 99, false);
+            var bpStage = BloodPressure.Interpret(new BloodPressureParameters(200, 99, false));
             Assert.Equal(BloodPressureStages.HypertensiveUrgency, bpStage);
         }
     }
