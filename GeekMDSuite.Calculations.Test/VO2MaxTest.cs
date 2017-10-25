@@ -4,27 +4,27 @@ using Xunit;
 
 namespace GeekMDSuite.Calculations.Test
 {
-    public class VO2MaxTest
+    public class Vo2MaxTest
     {
-        private int minutes = 11;
-        private int seconds = 33;
-        private Gender male = Gender.Male;
-        private Gender female = Gender.Female;
-        private TreadmillExerciseStressTestProtocol protocol = TreadmillExerciseStressTestProtocol.Bruce;
-        private TreadmillExerciseStressTestProtocol unsupportedProtocol =
+
+        private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
+        private const Gender _male = Gender.Male;
+        private readonly Gender _female = Gender.Female;
+        private readonly TreadmillExerciseStressTestProtocol _protocol = TreadmillExerciseStressTestProtocol.Bruce;
+        private readonly TreadmillExerciseStressTestProtocol _unsupportedProtocol =
             TreadmillExerciseStressTestProtocol.Balke3Point0;
         
         [Fact]
         public void MaleResultInRange()
         {            
-            var result = Vo2Max.CalculateFromTreadmillExerciseStressTest(protocol, male, minutes, seconds);
+            var result = Vo2Max.CalculateFromTreadmillExerciseStressTest(_male, _protocol, _timeDuration);
             Assert.InRange(result, 40,41); 
         }
         
         [Fact]
         public void FemaleResultInRange()
         {            
-            var result = Vo2Max.CalculateFromTreadmillExerciseStressTest(protocol, female, minutes, seconds);
+            var result = Vo2Max.CalculateFromTreadmillExerciseStressTest(_female, _protocol, _timeDuration);
             Assert.InRange(result, 46,47); 
         }
 
@@ -32,7 +32,7 @@ namespace GeekMDSuite.Calculations.Test
         public void UnsupportedProtocolThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                Vo2Max.CalculateFromTreadmillExerciseStressTest(unsupportedProtocol, female, minutes, seconds));
+                Vo2Max.CalculateFromTreadmillExerciseStressTest(_male, _unsupportedProtocol, _timeDuration));
         }
     }
 }

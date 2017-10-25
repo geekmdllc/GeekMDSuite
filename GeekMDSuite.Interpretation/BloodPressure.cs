@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GeekMDSuite.Calculations;
 using GeekMDSuite.Contracts;
 using GeekMDSuite.Interpretation.Tools;
 
@@ -20,16 +21,21 @@ namespace GeekMDSuite.Interpretation
         public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
         
         public static BloodPressureStages Interpret(BloodPressureParameters parameters)
-        {           
+        {
+            return GetInterpretation(parameters);
+        }
+
+        private static BloodPressureStages GetInterpretation(BloodPressureParameters parameters)
+        {
             var interpretation = BloodPressureStages.Normotension;
             foreach (var description in GetBloodPressureStageDescriptions())
             {
-                if (description.Contains(parameters)) 
+                if (description.Contains(parameters))
                     interpretation = description.Stage;
             }
-            return interpretation; 
+            return interpretation;
         }
-        
+
         private struct StageDescription
         {
             public IntegerRange SystolicRange { get; }

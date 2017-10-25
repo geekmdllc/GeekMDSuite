@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace GeekMDSuite.Interpretation.Tools
+﻿namespace GeekMDSuite.Interpretation.Tools
 {
     public class IntegerRange
     {
-        public int Upper { get; set; }
-        public int Lower { get; set; }
+        public int Upper { get;  }
+        public int Lower { get;  }
 
         public IntegerRange(int lower, int upper)
         {

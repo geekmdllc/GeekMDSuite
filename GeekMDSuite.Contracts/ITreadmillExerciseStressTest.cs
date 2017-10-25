@@ -4,8 +4,7 @@
     {
         TreadmillExerciseStressTestProtocol Protocol { get; }
         TreadmillExerciseStressTestResultFlag  Flag { get; }
-        int Minutes { get; }
-        int Seconds { get;}
+        TimeDuration TimeDuration { get; }
         double HeartRateResting { get; }
         double HeartRateMaxReached { get; }
         double HeartRateMaxPredicted { get; }

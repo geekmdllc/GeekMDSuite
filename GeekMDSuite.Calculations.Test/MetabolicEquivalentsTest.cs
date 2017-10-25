@@ -5,23 +5,22 @@ namespace GeekMDSuite.Calculations.Test
 {
     public class MetabolicEquivalentsTest
     {
-        private int minutes = 11;
-        private int seconds = 33;
-        private Gender male = Gender.Male;
-        private Gender female = Gender.Female;
+        private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
+        private readonly Gender _male = Gender.Male;
+        private readonly Gender _female = Gender.Female;
         private TreadmillExerciseStressTestProtocol protocol = TreadmillExerciseStressTestProtocol.Bruce;
         
         // Implicitly tests static method FromVo2Max(args..)
         [Fact]
         public void MaleResultInRangeFromTreadmillExerciseStressTest()
         {
-            var result = MetabolicEquivalents.CalculateFromTreadmillExerciseStressTest(protocol, male, minutes, seconds);
+            var result = MetabolicEquivalents.CalculateFromTreadmillExerciseStressTest(protocol, _male, _timeDuration);
             Assert.InRange(result, 11, 12);
         }
         [Fact]
         public void FemaleResultInRangeFromTreadmillExerciseStressTest()
         {
-            var result = MetabolicEquivalents.CalculateFromTreadmillExerciseStressTest(protocol, female, minutes, seconds);
+            var result = MetabolicEquivalents.CalculateFromTreadmillExerciseStressTest(protocol, _female, _timeDuration);
             Assert.InRange(result, 13, 14);
         }
     }

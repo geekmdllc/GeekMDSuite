@@ -12,17 +12,11 @@ namespace GeekMDSuite.Contracts
 
         private static FitTreadmillScoreInterpretation ParseTenYearMortalityRisk(int tenYearMortalityRisk)
         {
-            switch (tenYearMortalityRisk)
-            {
-                case 2:
-                    return FitTreadmillScoreInterpretation.LowestRisk;
-                case 3:
-                    return FitTreadmillScoreInterpretation.LowRisk;
-                case 11:
-                    return FitTreadmillScoreInterpretation.ModerateRisk;
-                default:
-                    return FitTreadmillScoreInterpretation.HighRisk;
-            }
+            if (tenYearMortalityRisk == 2)
+                return FitTreadmillScoreInterpretation.LowestRisk;
+            if (tenYearMortalityRisk == 3)
+                return FitTreadmillScoreInterpretation.LowRisk;
+            return tenYearMortalityRisk == 11 ? FitTreadmillScoreInterpretation.ModerateRisk : FitTreadmillScoreInterpretation.HighRisk;
         }
     }
 }
