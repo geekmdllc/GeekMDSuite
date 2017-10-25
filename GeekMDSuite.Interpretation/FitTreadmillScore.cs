@@ -10,13 +10,13 @@ namespace GeekMDSuite.Contracts
             return ParseTenYearMortalityRisk(Calculations.FitTreadmillScore.TenYearMortality(fitTreadmillScore));
         }
 
-        private static FitTreadmillScoreInterpretation ParseTenYearMortalityRisk(int tenYearMortalityRisk)
+        private static FitTreadmillScoreInterpretation ParseTenYearMortalityRisk(int riskPercentage)
         {
-            if (tenYearMortalityRisk == 2)
+            if (riskPercentage == 2)
                 return FitTreadmillScoreInterpretation.LowestRisk;
-            if (tenYearMortalityRisk == 3)
+            if (riskPercentage == 3)
                 return FitTreadmillScoreInterpretation.LowRisk;
-            return tenYearMortalityRisk == 11 ? FitTreadmillScoreInterpretation.ModerateRisk : FitTreadmillScoreInterpretation.HighRisk;
+            return riskPercentage == 11 ? FitTreadmillScoreInterpretation.ModerateRisk : FitTreadmillScoreInterpretation.HighRisk;
         }
     }
 }
