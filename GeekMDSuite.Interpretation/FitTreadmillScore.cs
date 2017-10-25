@@ -1,10 +1,7 @@
-﻿using GeekMDSuite.Interpretation;
-
-namespace GeekMDSuite.Contracts
+﻿namespace GeekMDSuite.Interpretation
 {
     public static class FitTreadmillScore
     {
-
         public static FitTreadmillScoreInterpretation Interpret(double fitTreadmillScore)
         {
             return ParseTenYearMortalityRisk(Calculations.FitTreadmillScore.TenYearMortality(fitTreadmillScore));
