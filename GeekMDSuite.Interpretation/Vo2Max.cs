@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GeekMDSuite.Contracts;
 
 namespace GeekMDSuite.Interpretation
@@ -7,238 +8,227 @@ namespace GeekMDSuite.Interpretation
     {
         public static FitnessClassification Interpret(double vo2Max, Gender gender, double ageInYears)
         {
-            // http://www.topendsports.com/testing/norms/vo2max.htm
-            switch(gender) {
-                case Gender.Female:
-                case Gender.NonBinaryXx:
-                    if(ageInYears <= 25) {
-                        if(vo2Max > 56) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 47) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 42) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 38) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 33) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 28 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 35) {
-                        if(vo2Max > 52) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 45) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 39) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 35) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 31) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 26 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 45) {
-                        if(vo2Max > 45) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 38) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 34) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 31) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 27) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 22 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 55) {
-                        if(vo2Max > 40) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 34) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 31) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 28) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 25) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 20 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 65) {
-                        if(vo2Max > 37) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 32) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 28) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 25) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 22) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 18 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears > 65) {
-                        if(vo2Max > 32) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 28) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 25) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 22) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 19) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 17 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    break;
-                case Gender.Male:
-                case Gender.NonBinaryXy:
-                    if(ageInYears <= 25) {
-                        if(vo2Max > 60) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 52) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 47) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 42) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 37) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 30 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 35) {
-                        if(vo2Max > 56) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 49) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 43) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 40) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 35) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 30 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 45) {
-                        if(vo2Max > 51) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 43) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 39) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 35) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 31) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 26 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 55) {
-                        if(vo2Max > 45) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 39) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 36) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 32) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 29) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 25 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears <= 65) {
-                        if(vo2Max > 41) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 36) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 32) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 30) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 26) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 22 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    if(ageInYears > 65) {
-                        if(vo2Max > 37) {
-                            return FitnessClassification.Excellent;
-                        }
-                        if(vo2Max >= 33) {
-                            return FitnessClassification.Good;
-                        }
-                        if(vo2Max >= 29) {
-                            return FitnessClassification.AboveAverage;
-                        }
-                        if(vo2Max >= 26) {
-                            return FitnessClassification.Average;
-                        }
-                        if(vo2Max >= 22) {
-                            return FitnessClassification.BelowAverage;
-                        }
-                        return vo2Max >= 20 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
-                    }
-                    break;
-                default:
-                    throw new NotImplementedException(nameof(FitnessClassification) + " in " + 
-                                                      nameof(FitnessClassification) + 
-                                                      " does not implement that gender.");
-            }
-            
-            throw new ArgumentOutOfRangeException(nameof(Vo2Max) + "." + nameof(Interpret) + 
-                                                  "(args) does not recognize the arguments supplied as valid.");
+            return GetFitnessClassification(vo2Max, gender, ageInYears);
+        }
+
+        private static FitnessClassification GetFitnessClassification(double vo2Max, Gender gender, double ageInYears)
+        {
+            if (gender == Gender.Female || gender == Gender.NonBinaryXx)
+                return GetFemaleClassification(vo2Max, ageInYears);
+            if (gender == Gender.Male || gender == Gender.NonBinaryXy)
+                return GetMaleClassification(vo2Max, ageInYears);
+
+            throw new ArgumentException($"Invalid argument(s) supplied to {nameof(Vo2Max)}.{nameof(Interpret)}.");
+        }
+
+        private static FitnessClassification GetMaleClassification(double vo2Max, double ageInYears)
+        {
+            if (ageInYears <= 25)
+                return MaleUnder25Classification(vo2Max);
+            if (ageInYears <= 35)
+                return MaleUnder35Classification(vo2Max);
+            if (ageInYears <= 45)
+                return MaleUnder45Classification(vo2Max);
+            if (ageInYears <= 55)
+                return MaleUnder55Classification(vo2Max);
+            if (ageInYears <= 65)
+                return MaleUnder65Classification(vo2Max);
+            return MaleOver65Classification(vo2Max);
+        }
+
+        private static FitnessClassification GetFemaleClassification(double vo2Max, double ageInYears)
+        {
+            if (ageInYears <= 25)
+                return FemaleUnder25Classification(vo2Max);
+            if (ageInYears <= 35)
+                return FemaleUnder35Classification(vo2Max);
+            if (ageInYears <= 45)
+                return FemaleUnder45Classification(vo2Max);
+            if (ageInYears <= 55)
+                return FemaleUnder55Classification(vo2Max);
+            if (ageInYears <= 65)
+                return FemaleUnder65Classification(vo2Max);
+            return FemaleOver65Classification(vo2Max);
+        }
+
+        private static FitnessClassification MaleOver65Classification(double vo2Max)
+        {
+            if (vo2Max > 37)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 33)
+                return FitnessClassification.Good;
+            if (vo2Max >= 29)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 26)
+                return FitnessClassification.Average;
+            if (vo2Max >= 22)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 20 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification MaleUnder65Classification(double vo2Max)
+        {
+            if (vo2Max > 41)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 36)
+                return FitnessClassification.Good;
+            if (vo2Max >= 32)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 30)
+                return FitnessClassification.Average;
+            if (vo2Max >= 26)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 22 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification MaleUnder55Classification(double vo2Max)
+        {
+            if (vo2Max > 45)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 39)
+                return FitnessClassification.Good;
+            if (vo2Max >= 36)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 32)
+                return FitnessClassification.Average;
+            if (vo2Max >= 29)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 25 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification MaleUnder45Classification(double vo2Max)
+        {
+            if (vo2Max > 51)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 43)
+                return FitnessClassification.Good;
+            if (vo2Max >= 39)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 35)
+                return FitnessClassification.Average;
+            if (vo2Max >= 31)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 26 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification MaleUnder35Classification(double vo2Max)
+        {
+            if (vo2Max > 56)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 49)
+                return FitnessClassification.Good;
+            if (vo2Max >= 43)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 40)
+                return FitnessClassification.Average;
+            if (vo2Max >= 35)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 30 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification MaleUnder25Classification(double vo2Max)
+        {
+            if (vo2Max > 60)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 52)
+                return FitnessClassification.Good;
+            if (vo2Max >= 47)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 42)
+                return FitnessClassification.Average;
+            if (vo2Max >= 37)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 30 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification FemaleOver65Classification(double vo2Max)
+        {
+            if (vo2Max > 32)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 28)
+                return FitnessClassification.Good;
+            if (vo2Max >= 25)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 22)
+                return FitnessClassification.Average;
+            if (vo2Max >= 19)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 17 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification FemaleUnder65Classification(double vo2Max)
+        {
+            if (vo2Max > 37)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 32)
+                return FitnessClassification.Good;
+            if (vo2Max >= 28)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 25)
+                return FitnessClassification.Average;
+            if (vo2Max >= 22)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 18 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification FemaleUnder55Classification(double vo2Max)
+        {
+            if (vo2Max > 40)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 34)
+                return FitnessClassification.Good;
+            if (vo2Max >= 31)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 28)
+                return FitnessClassification.Average;
+            if (vo2Max >= 25)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 20 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification FemaleUnder45Classification(double vo2Max)
+        {
+            if (vo2Max > 45)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 38)
+                return FitnessClassification.Good;
+            if (vo2Max >= 34)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 31)
+                return FitnessClassification.Average;
+            if (vo2Max >= 27)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 22 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification FemaleUnder35Classification(double vo2Max)
+        {
+            if (vo2Max > 52)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 45)
+                return FitnessClassification.Good;
+            if (vo2Max >= 39)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 35)
+                return FitnessClassification.Average;
+            if (vo2Max >= 31)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 26 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
+        }
+
+        private static FitnessClassification FemaleUnder25Classification(double vo2Max)
+        {
+            if (vo2Max > 56)
+                return FitnessClassification.Excellent;
+            if (vo2Max >= 47)
+                return FitnessClassification.Good;
+            if (vo2Max >= 42)
+                return FitnessClassification.AboveAverage;
+            if (vo2Max >= 38)
+                return FitnessClassification.Average;
+            if (vo2Max >= 33)
+                return FitnessClassification.BelowAverage;
+            return vo2Max >= 28 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
         }
     }
 }

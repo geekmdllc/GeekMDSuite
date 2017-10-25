@@ -7,8 +7,11 @@ namespace GeekMDSuite.Contracts
 
         public static FitTreadmillScoreInterpretation Interpret(double fitTreadmillScore)
         {
-            var tenYearMortalityRisk = Calculations.FitTreadmillScore.TenYearMortality(fitTreadmillScore);
+            return ParseTenYearMortalityRisk(Calculations.FitTreadmillScore.TenYearMortality(fitTreadmillScore));
+        }
 
+        private static FitTreadmillScoreInterpretation ParseTenYearMortalityRisk(int tenYearMortalityRisk)
+        {
             switch (tenYearMortalityRisk)
             {
                 case 2:
