@@ -31,9 +31,7 @@ namespace GeekMDSuite.Interpretation
                 return MaleUnder45Classification(vo2Max);
             if (ageInYears <= 55)
                 return MaleUnder55Classification(vo2Max);
-            if (ageInYears <= 65)
-                return MaleUnder65Classification(vo2Max);
-            return MaleOver65Classification(vo2Max);
+            return ageInYears <= 65 ? MaleUnder65Classification(vo2Max) : MaleOver65Classification(vo2Max);
         }
 
         private static FitnessClassification GetFemaleClassification(double vo2Max, double ageInYears)
@@ -46,9 +44,7 @@ namespace GeekMDSuite.Interpretation
                 return FemaleUnder45Classification(vo2Max);
             if (ageInYears <= 55)
                 return FemaleUnder55Classification(vo2Max);
-            if (ageInYears <= 65)
-                return FemaleUnder65Classification(vo2Max);
-            return FemaleOver65Classification(vo2Max);
+            return ageInYears <= 65 ? FemaleUnder65Classification(vo2Max) : FemaleOver65Classification(vo2Max);
         }
 
         private static FitnessClassification MaleOver65Classification(double vo2Max)
