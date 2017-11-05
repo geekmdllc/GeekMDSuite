@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Contracts;
+﻿
+using GeekMDSuite.Common;
 
 namespace GeekMDSuite.Calculations
 {

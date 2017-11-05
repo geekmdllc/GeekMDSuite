@@ -1,18 +1,19 @@
 ﻿using System;
 
-namespace GeekMDSuite.Contracts
+namespace GeekMDSuite.Calculations
 {
     public class TimeDuration
     {
+        public double Minutes { get; private set; }
+        public double Seconds { get; private set; }
+        
         public TimeDuration(double minutes, double seconds)
         {
-            ValidateTimeArguments(Minutes, Seconds);
+            ValidateTimeArguments(minutes, seconds);
             Minutes = minutes;
             Seconds = seconds;
         }
 
-        public double Minutes { get; private set; }
-        public double Seconds { get; private set; }
         public double FractionalMinutes => Minutes + Seconds / 60;
         public double TotalSeconds => Minutes * 60 + Seconds;
         

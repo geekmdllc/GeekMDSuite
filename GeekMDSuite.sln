@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Contracts", "GeekMDSuite.Contracts\GeekMDSuite.Contracts.csproj", "{DA0B2146-FBCB-4697-9C2D-DAD6455B2396}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Calculations", "GeekMDSuite.Calculations\GeekMDSuite.Calculations.csproj", "{D7A89288-10C9-4A95-929F-D4B3736FF3A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Calculations.Test", "GeekMDSuite.Calculations.Test\GeekMDSuite.Calculations.Test.csproj", "{CB302D39-15EB-4FC9-82DB-42189DFD0765}"
@@ -13,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Interpretation"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Interpretation.Test", "GeekMDSuite.Interpretation.Test\GeekMDSuite.Interpretation.Test.csproj", "{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Common", "GeekMDSuite.Common\GeekMDSuite.Common.csproj", "{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA0B2146-FBCB-4697-9C2D-DAD6455B2396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA0B2146-FBCB-4697-9C2D-DAD6455B2396}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA0B2146-FBCB-4697-9C2D-DAD6455B2396}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA0B2146-FBCB-4697-9C2D-DAD6455B2396}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7A89288-10C9-4A95-929F-D4B3736FF3A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7A89288-10C9-4A95-929F-D4B3736FF3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7A89288-10C9-4A95-929F-D4B3736FF3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

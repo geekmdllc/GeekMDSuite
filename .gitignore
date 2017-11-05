@@ -1,13 +1,13 @@
 GeekMDSuite.Calculations/bin
 GeekMDSuite.Calculations/obj
-GeekMDSuite.Contracts/bin
-GeekMDSuite.Contracts/obj
+GeekMDSuite.Common/bin
+GeekMDSuite.Common/obj
 GeekMDSuite.Interpretation/obj
 GeekMDSuite.Interpretation/bin
 GeekMDSuite.Calculations.Test/bin
 GeekMDSuite.Calculations.Test/obj
-GeekMDSuite.Contracts.Test/bin
-GeekMDSuite.Contracts.Test/obj
+GeekMDSuite.Common.Test/bin
+GeekMDSuite.Common.Test/obj
 GeekMDSuite.Interpretation.Test/obj
 GeekMDSuite.Interpretation.Test/bin
 .idea

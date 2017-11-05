@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.Calculations;
-using GeekMDSuite.Contracts;
+using GeekMDSuite.Common;
 using GeekMDSuite.Interpretation.Tools;
 
 namespace GeekMDSuite.Interpretation

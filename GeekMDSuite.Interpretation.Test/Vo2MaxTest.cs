@@ -1,6 +1,6 @@
 using System;
 using GeekMDSuite.Calculations;
-using GeekMDSuite.Contracts;
+using GeekMDSuite.Common;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test

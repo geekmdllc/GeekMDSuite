@@ -1,6 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Calculations;
-using GeekMDSuite.Contracts;
+using GeekMDSuite.Common;
 
 namespace GeekMDSuite.Interpretation
 {

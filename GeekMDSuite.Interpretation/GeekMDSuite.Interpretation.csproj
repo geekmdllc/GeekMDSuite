@@ -4,9 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeekMDSuite.Calculations\GeekMDSuite.Calculations.csproj" />
-    <ProjectReference Include="..\GeekMDSuite.Contracts\GeekMDSuite.Contracts.csproj">
-      <Project>{DA0B2146-FBCB-4697-9C2D-DAD6455B2396}</Project>
-      <Name>GeekMDSuite.Contracts</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\GeekMDSuite.Common\GeekMDSuite.Common.csproj" />
   </ItemGroup>
 </Project>

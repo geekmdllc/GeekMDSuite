@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite.Contracts
+﻿using GeekMDSuite.Common;
+
+namespace GeekMDSuite.Calculations
 {
     public class FitTreadmillScoreParameters
     {

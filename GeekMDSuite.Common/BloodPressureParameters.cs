@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Contracts
+﻿namespace GeekMDSuite.Common
 {
     public class BloodPressureParameters
     {
