@@ -5,31 +5,31 @@ namespace GeekMDSuite.Interpretation
 {
     public static class PercentBodyFat
     {       
-        public static BodyFatCategories Interpret (Genders gender, double result) => CategorizeBodyFat(gender, result);
+        public static BodyFatClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
 
-        private static BodyFatCategories CategorizeBodyFat(Genders gender, double result)
+        private static BodyFatClassification Classify(GenderIdentity gender, double result)
         {
-            var athletic = GenderEval.IsXy(gender) ? AthleticBodyFatLowerLimitMale : AthleticBodyFatLowerLimitFemale;
-            var fitness = GenderEval.IsXy(gender) ? FitnessBodyFatLowerLimitMale : FitnessBodyFatLowerLimitFemale;
-            var acceptable = GenderEval.IsXy(gender) ? AcceptableBodyFatLowerLimitMale : AcceptableBodyFatLowerLimitFemale;
-            var overfat = GenderEval.IsXy(gender) ? OverFatLowerLimitMale : OverFatLowerLimitFemale;
+            var athletic = GenderEval.IsGenotypeXy(gender) ? AthleticMaleLLN : AthleticFemaleLLN;
+            var fitness = GenderEval.IsGenotypeXy(gender) ? FitMaleLLN : FitFemaleLLN;
+            var acceptable = GenderEval.IsGenotypeXy(gender) ? AcceptableMaleLLN : AcceptableFemaleLLN;
+            var overfat = GenderEval.IsGenotypeXy(gender) ? OverFatMaleLLN : OverFatFemaleLLN;
             
             if (result < athletic)
-                return BodyFatCategories.UnderFat;
+                return BodyFatClassification.UnderFat;
             if (result < fitness)
-                return BodyFatCategories.Athletic;
+                return BodyFatClassification.Athletic;
             if (result < acceptable)
-                return BodyFatCategories.Fitness;
-            return result < overfat ? BodyFatCategories.Acceptable : BodyFatCategories.OverFat;
+                return BodyFatClassification.Fitness;
+            return result < overfat ? BodyFatClassification.Acceptable : BodyFatClassification.OverFat;
         }
         
-        public static double AthleticBodyFatLowerLimitMale = 6;
-        public static double AthleticBodyFatLowerLimitFemale = 14;
-        public static double FitnessBodyFatLowerLimitMale = 14;
-        public static double FitnessBodyFatLowerLimitFemale = 21;
-        public static double AcceptableBodyFatLowerLimitMale = 18;
-        public static double AcceptableBodyFatLowerLimitFemale = 25;
-        public static double OverFatLowerLimitMale = 25;
-        public static double OverFatLowerLimitFemale = 32;
+        public static double AthleticMaleLLN = 6;
+        public static double AthleticFemaleLLN = 14;
+        public static double FitMaleLLN = 14;
+        public static double FitFemaleLLN = 21;
+        public static double AcceptableMaleLLN = 18;
+        public static double AcceptableFemaleLLN = 25;
+        public static double OverFatMaleLLN = 25;
+        public static double OverFatFemaleLLN = 32;
     }
 }

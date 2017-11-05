@@ -5,13 +5,13 @@ namespace GeekMDSuite.Calculations
 {
     public static class Vo2Max
     {
-        public static double CalculateFromTreadmillExerciseStressTest(Genders genders,
+        public static double CalculateFromTreadmillExerciseStressTest(GenderIdentity genders,
             TreadmillExerciseStressTestProtocol protocol, TimeDuration timeDuration)
         {
             return GetProtocolSpecificResult(genders, protocol, timeDuration);
         }
 
-        private static double GetProtocolSpecificResult(Genders genders, TreadmillExerciseStressTestProtocol protocol,
+        private static double GetProtocolSpecificResult(GenderIdentity genders, TreadmillExerciseStressTestProtocol protocol,
             TimeDuration timeDuration)
         {
             switch (protocol)
@@ -57,9 +57,9 @@ namespace GeekMDSuite.Calculations
 
         
 
-        private static double CalculateFromBruceProtocol(Genders genders, double fractionalMinutes)
+        private static double CalculateFromBruceProtocol(GenderIdentity genders, double fractionalMinutes)
         {
-            if (genders == Genders.Female || genders == Genders.NonBinaryXx)
+            if (genders == GenderIdentity.Female || genders == GenderIdentity.NonBinaryXx)
                 return 4.38 * fractionalMinutes - 3.9; 
             return 14.8 - (1.379 * fractionalMinutes) +
                        (0.451 * Math.Pow(fractionalMinutes, 2)) -

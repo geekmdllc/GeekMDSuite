@@ -2,26 +2,31 @@
 {
     public class Gender
     {
-        public Genders Category { get; set; }
-
-        public static bool IsXx(Genders gender)
+        public Gender(GenderIdentity category)
         {
-            return gender == Genders.Female || gender == Genders.NonBinaryXx;
+            Category = category;
         }
 
-        public static bool IsXy(Genders gender)
+        public GenderIdentity Category { get; set; }
+
+        public static bool IsGenotypeXx(GenderIdentity gender)
         {
-            return !IsXx(gender);
+            return gender == GenderIdentity.Female || gender == GenderIdentity.NonBinaryXx;
         }
 
-        public static bool IsXx(Gender gender)
+        public static bool IsGenotypeXy(GenderIdentity gender)
         {
-            return IsXx(gender.Category);
+            return !IsGenotypeXx(gender);
         }
 
-        public static bool IsXy(Gender gender)
+        public static bool IsGenotypeXx(Gender gender)
         {
-            return !IsXx(gender.Category);
+            return IsGenotypeXx(gender.Category);
+        }
+
+        public static bool IsGenotypeXy(Gender gender)
+        {
+            return !IsGenotypeXx(gender.Category);
         }
     }
 }

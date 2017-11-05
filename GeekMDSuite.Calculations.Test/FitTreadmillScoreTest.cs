@@ -5,8 +5,8 @@ namespace GeekMDSuite.Calculations.Test
 {
     public class FitTreadmillScoreTest
     {
-        private readonly Genders _female = Genders.Female;
-        private readonly Genders _male = Genders.Male;
+        private readonly GenderIdentity _female = GenderIdentity.Female;
+        private readonly GenderIdentity _male = GenderIdentity.Male;
         private readonly double _age = 63;
         private readonly double _metabolicEquivalents = 8;
         private readonly double _percentMaxHeartRateReached = 105.3;

@@ -6,16 +6,16 @@ namespace GeekMDSuite.Interpretation
 {
     public static class Vo2Max
     {
-        public static FitnessClassification Interpret(double vo2Max, Genders genders, double ageInYears)
+        public static FitnessClassification Interpret(double vo2Max, GenderIdentity genders, double ageInYears)
         {
-            return GetFitnessClassification(vo2Max, genders, ageInYears);
+            return Classify(vo2Max, genders, ageInYears);
         }
 
-        private static FitnessClassification GetFitnessClassification(double vo2Max, Genders genders, double ageInYears)
+        private static FitnessClassification Classify(double vo2Max, GenderIdentity genders, double ageInYears)
         {
-            if (genders == Genders.Female || genders == Genders.NonBinaryXx)
+            if (genders == GenderIdentity.Female || genders == GenderIdentity.NonBinaryXx)
                 return GetFemaleClassification(vo2Max, ageInYears);
-            if (genders == Genders.Male || genders == Genders.NonBinaryXy)
+            if (genders == GenderIdentity.Male || genders == GenderIdentity.NonBinaryXy)
                 return GetMaleClassification(vo2Max, ageInYears);
 
             throw new ArgumentException($"Invalid argument(s) supplied to {nameof(Vo2Max)}.{nameof(Interpret)}.");

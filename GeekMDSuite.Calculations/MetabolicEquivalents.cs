@@ -11,7 +11,7 @@ namespace GeekMDSuite.Calculations
         
         public static double CalculateFromTreadmillExerciseStressTest(
             TreadmillExerciseStressTestProtocol protocol,
-            Genders genders, 
+            GenderIdentity genders, 
             TimeDuration timeDuration)
         {
             return CalculateFromVo2Max(

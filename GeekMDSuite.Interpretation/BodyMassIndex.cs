@@ -20,8 +20,8 @@ namespace GeekMDSuite.Interpretation
             if (result < obeseClass1LowerLimit)
                 return BodyMassIndexCategories.OverWeight;
             if (result < ObeseClass2LowerLimit)
-                return BodyMassIndexCategories.ObesityClassI;
-            return result < ObeseClass3LowerLimit ? BodyMassIndexCategories.ObesityClassII : BodyMassIndexCategories.ObesityClassIII;
+                return BodyMassIndexCategories.ObesityClass1;
+            return result < ObeseClass3LowerLimit ? BodyMassIndexCategories.ObesityClass2 : BodyMassIndexCategories.ObesityClass3;
         }
         
         public static double UnderWeightLowerLimit = 17.5;

@@ -18,7 +18,7 @@
             Waist = waist;
         }
 
-        public bool IsXx => Gender.IsXx(Gender);
-        public bool IsXy => Gender.IsXy(Gender);
+        public bool IsXx => Gender.IsGenotypeXx(Gender);
+        public bool IsXy => Gender.IsGenotypeXy(Gender);
     }
 }

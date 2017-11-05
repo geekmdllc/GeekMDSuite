@@ -4,15 +4,15 @@ namespace GeekMDSuite.Calculations
 {
     public class FitTreadmillScoreParameters
     {
-        public FitTreadmillScoreParameters(Genders genders, double ageInYears, double percentMaxHeartRateReached, double metabolicEquivalents)
+        public FitTreadmillScoreParameters(GenderIdentity genders, double ageInYears, double percentMaxHeartRateReached, double metabolicEquivalents)
         {
-            Genders = genders;
+            GenderIdentity = genders;
             AgeInYears = ageInYears;
             PercentMaxHeartRateReached = percentMaxHeartRateReached;
             MetabolicEquivalents = metabolicEquivalents;
         }
 
-        public Genders Genders { get; private set; }
+        public GenderIdentity GenderIdentity { get; private set; }
         public double AgeInYears { get; private set; }
         public double PercentMaxHeartRateReached { get; private set; }
         public double MetabolicEquivalents { get; private set; }

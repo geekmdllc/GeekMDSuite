@@ -6,8 +6,8 @@
         Underweight,
         NormalWeight,
         OverWeight,
-        ObesityClassI,
-        ObesityClassII,
-        ObesityClassIII
+        ObesityClass1,
+        ObesityClass2,
+        ObesityClass3
     }
 }

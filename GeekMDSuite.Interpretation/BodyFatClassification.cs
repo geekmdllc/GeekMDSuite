@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Interpretation
 {
-    public enum BodyFatCategories
+    public enum BodyFatClassification
     {
         UnderFat = 1,
         Athletic = 2,

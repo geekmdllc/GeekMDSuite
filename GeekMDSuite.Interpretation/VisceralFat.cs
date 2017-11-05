@@ -9,15 +9,15 @@ namespace GeekMDSuite.Interpretation
         
         private static VisceralFatClassification ClassifyVisceralFat(double visceralFat)
         {
-            if (visceralFat > VisceralFatAreaUpperLimit * 1.5)
+            if (visceralFat > UpperLimitNormal * 1.5)
                 return VisceralFatClassification.VeryElevated;
-            if (visceralFat > VisceralFatAreaUpperLimit)
+            if (visceralFat > UpperLimitNormal)
                 return VisceralFatClassification.Elevated;
-            return visceralFat > VisceralFatAreaUpperLimit * 0.5
+            return visceralFat > UpperLimitNormal * 0.5
                 ? VisceralFatClassification.Acceptable
                 : VisceralFatClassification.Excellent;
         }
         
-        public static readonly double VisceralFatAreaUpperLimit = 100;        
+        public static readonly double UpperLimitNormal = 100;        
     }
 }

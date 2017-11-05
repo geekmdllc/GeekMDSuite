@@ -16,13 +16,13 @@ namespace GeekMDSuite.Interpretation.Test
         public void Interpret_GivenAsianWithBmi27point9_ReturnsObesityClass1()
         {
             var result = BodyMassIndex.Interpret(Races.Asian, 27.9);
-            Assert.Equal(BodyMassIndexCategories.ObesityClassI, result);
+            Assert.Equal(BodyMassIndexCategories.ObesityClass1, result);
         }
         [Fact]
         public void Interpret_GivenAsianWithBmi35point2_ReturnsObesityClass2()
         {
             var result = BodyMassIndex.Interpret(Races.Asian, 35.2);
-            Assert.Equal(BodyMassIndexCategories.ObesityClassII, result);
+            Assert.Equal(BodyMassIndexCategories.ObesityClass2, result);
         }
         [Fact]
         public void Interpret_GivenNonAsianWithBmi23point2_ReturnsNormalWeight()
@@ -41,7 +41,7 @@ namespace GeekMDSuite.Interpretation.Test
         public void Interpret_GivenNonAsianWithBmi35point2_ReturnsObesityClass2()
         {
             var result = BodyMassIndex.Interpret(Races.BlackOrAfricanAmerican, 35.2);
-            Assert.Equal(BodyMassIndexCategories.ObesityClassII, result);
+            Assert.Equal(BodyMassIndexCategories.ObesityClass2, result);
         }
     }
 }
