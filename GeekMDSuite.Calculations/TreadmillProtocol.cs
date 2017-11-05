@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Calculations
 {
-    public enum TreadmillExerciseStressTestProtocol
+    public enum TreadmillProtocol
     {
         Bruce = 0,
         BruceLowLevel = 1,

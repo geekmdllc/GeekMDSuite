@@ -5,51 +5,50 @@ namespace GeekMDSuite.Calculations
 {
     public static class Vo2Max
     {
-        public static double CalculateFromTreadmillExerciseStressTest(GenderIdentity genders,
-            TreadmillExerciseStressTestProtocol protocol, TimeDuration timeDuration)
+        public static double Calculate(TreadmillProtocol protocol, TimeDuration time, GenderIdentity gender)
         {
-            return GetProtocolSpecificResult(genders, protocol, timeDuration);
+            return ProtocolSpecificCalculation(gender, protocol, time);
         }
 
-        private static double GetProtocolSpecificResult(GenderIdentity genders, TreadmillExerciseStressTestProtocol protocol,
+        private static double ProtocolSpecificCalculation(GenderIdentity genders, TreadmillProtocol protocol,
             TimeDuration timeDuration)
         {
             switch (protocol)
             {
-                case TreadmillExerciseStressTestProtocol.Bruce:
-                    return CalculateFromBruceProtocol(genders, timeDuration.FractionalMinutes);
-                case TreadmillExerciseStressTestProtocol.BruceLowLevel:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.BruceLowLevel));
-                case TreadmillExerciseStressTestProtocol.Balke3Point0:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.Balke3Point0));
-                case TreadmillExerciseStressTestProtocol.Balke3Point4:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.Balke3Point4));
-                case TreadmillExerciseStressTestProtocol.Cornell:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.Cornell));
-                case TreadmillExerciseStressTestProtocol.Ellstad:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.Ellstad));
-                case TreadmillExerciseStressTestProtocol.Kattus:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.Kattus));
-                case TreadmillExerciseStressTestProtocol.ModifiedBruce:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.ModifiedBruce));
-                case TreadmillExerciseStressTestProtocol.Naughton:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.Naughton));
-                case TreadmillExerciseStressTestProtocol.UsAirforceSam20:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.UsAirforceSam20));
-                case TreadmillExerciseStressTestProtocol.UsAirforceSam33:
-                    throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
-                        TreadmillExerciseStressTestProtocol.UsAirforceSam33));
+                case TreadmillProtocol.Bruce:
+                    return Bruce(genders, timeDuration.FractionalMinutes);
+                case TreadmillProtocol.BruceLowLevel:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.BruceLowLevel));
+                case TreadmillProtocol.Balke3Point0:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.Balke3Point0));
+                case TreadmillProtocol.Balke3Point4:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.Balke3Point4));
+                case TreadmillProtocol.Cornell:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.Cornell));
+                case TreadmillProtocol.Ellstad:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.Ellstad));
+                case TreadmillProtocol.Kattus:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.Kattus));
+                case TreadmillProtocol.ModifiedBruce:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.ModifiedBruce));
+                case TreadmillProtocol.Naughton:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.Naughton));
+                case TreadmillProtocol.UsAirforceSam20:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.UsAirforceSam20));
+                case TreadmillProtocol.UsAirforceSam33:
+                    throw new NotImplementedException(NotImplementedMessage(
+                        TreadmillProtocol.UsAirforceSam33));
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(CalculateFromTreadmillExerciseStressTest) + " in " +
+                    throw new ArgumentOutOfRangeException(nameof(Calculate) + " in " +
                                                           nameof(Vo2Max) +
                                                           " does not accept that protocol.");
             }
@@ -57,18 +56,18 @@ namespace GeekMDSuite.Calculations
 
         
 
-        private static double CalculateFromBruceProtocol(GenderIdentity genders, double fractionalMinutes)
+        private static double Bruce(GenderIdentity gender, double fractionalMinutes)
         {
-            if (genders == GenderIdentity.Female || genders == GenderIdentity.NonBinaryXx)
+            if (Gender.IsGenotypeXx(gender))
                 return 4.38 * fractionalMinutes - 3.9; 
             return 14.8 - (1.379 * fractionalMinutes) +
                        (0.451 * Math.Pow(fractionalMinutes, 2)) -
                        (0.012 * Math.Pow(fractionalMinutes, 3));
         }
 
-        private static string ProtocolNotImplementedExceptionMessage(TreadmillExerciseStressTestProtocol protocol)
+        private static string NotImplementedMessage(TreadmillProtocol protocol)
         {
-            return nameof(CalculateFromTreadmillExerciseStressTest) + " in " + nameof(Vo2Max) + 
+            return nameof(Calculate) + " in " + nameof(Vo2Max) + 
                    " does not yet implement handling of the protocol described by " + protocol + ".";
         }
     }

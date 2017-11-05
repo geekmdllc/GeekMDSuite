@@ -4,18 +4,18 @@ namespace GeekMDSuite.Calculations
 {
     public static class MetabolicEquivalents
     {
-        public static double CalculateFromVo2Max(double vo2Max)
+        public static double Calculate(double vo2Max)
         {
             return vo2Max / 3.5;
         }
         
-        public static double CalculateFromTreadmillExerciseStressTest(
-            TreadmillExerciseStressTestProtocol protocol,
-            GenderIdentity genders, 
+        public static double Calculate(
+            TreadmillProtocol protocol,
+            GenderIdentity gender, 
             TimeDuration timeDuration)
         {
-            return CalculateFromVo2Max(
-                Vo2Max.CalculateFromTreadmillExerciseStressTest(genders, protocol, timeDuration));
+            return Calculate(
+                Vo2Max.Calculate(protocol, timeDuration, gender));
         }
     }
 }
