@@ -11,14 +11,9 @@ namespace GeekMDSuite.Interpretation
             return Classify(vo2Max, genders, ageInYears);
         }
 
-        private static FitnessClassification Classify(double vo2Max, GenderIdentity genders, double ageInYears)
+        private static FitnessClassification Classify(double vo2Max, GenderIdentity gender, double ageInYears)
         {
-            if (genders == GenderIdentity.Female || genders == GenderIdentity.NonBinaryXx)
-                return GetFemaleClassification(vo2Max, ageInYears);
-            if (genders == GenderIdentity.Male || genders == GenderIdentity.NonBinaryXy)
-                return GetMaleClassification(vo2Max, ageInYears);
-
-            throw new ArgumentException($"Invalid argument(s) supplied to {nameof(Vo2Max)}.{nameof(Interpret)}.");
+            return Gender.IsGenotypeXx(gender) ? GetFemaleClassification(vo2Max, ageInYears) : GetMaleClassification(vo2Max, ageInYears);
         }
 
         private static FitnessClassification GetMaleClassification(double vo2Max, double ageInYears)

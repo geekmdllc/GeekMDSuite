@@ -42,12 +42,12 @@ namespace GeekMDSuite.Interpretation
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitOfStage1Hypertension, SystolicLowerLimitOfStage2Hypertension),
                     new Interval<int>(DiastolicLowerLimitOfStage1Hypertension, DiastolicLowerLimitOfStage2Hypertension),
-                    BloodPressureStages.StageIHypertension,
+                    BloodPressureStages.Stage1Hypertension,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitOfStage2Hypertension, SystolicLowerLimitofHypertensiveUrgency),
                     new Interval<int>(DiastolicLowerLimitOfStage2Hypertension, DiastolicLowerLimitOfHypertensiveUrgency),
-                    BloodPressureStages.StageIIHypertension,
+                    BloodPressureStages.Stage2Hypertension,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitofHypertensiveUrgency, ceilingPressure),
