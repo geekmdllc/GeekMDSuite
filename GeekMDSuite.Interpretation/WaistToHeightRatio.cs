@@ -3,56 +3,29 @@ using GenderEval = GeekMDSuite.Common.Gender;
 
 namespace GeekMDSuite.Interpretation
 {
-    public class WaistToHeightRatio
+    public static class WaistToHeightRatio
     {
-        public Genders Gender { get; set; }
-        public double Waist { get; set; }
-        public double Height { get; set; }
-
-        public WaistToHeightRatio(Genders gender, double height, double waist)
-        {
-            Gender = gender;
-            Height = height;
-            Waist = waist;
-        }
-
-        public double Result =>
-            Calculations.BodyComposition.WaistToHeightRatio(Waist, Height);
         
-        public WaistToHeightRatioCategorization WaistToHeighRatioFlag => CategorizeWaistToHeightRatio();
+        public static WaistToHeightRatioCategorization Interpret (Genders gender, double result) => CategorizeWaistToHeightRatio(gender, result);
         
-        private WaistToHeightRatioCategorization CategorizeWaistToHeightRatio()
+        private  static WaistToHeightRatioCategorization CategorizeWaistToHeightRatio(Genders gender, double result)
         {
             
-            var Slim = GenderEval.IsXy(Gender)
-                ? SlimWaistToHeightLowerLimitMale
-                : SlimWaistToHeightLowerLimitFemale;
-
-            var Healthy = GenderEval.IsXy(Gender)
-                ? HealthyWaistToHeightLowerLimitMale
-                : HealthyWaistToHeightLowerLimitFemale;
-
-            var Overweight = GenderEval.IsXy(Gender)
-                ? OverweightWaistToHeightLowerLimitMale
-                : OverweightWaistToHeightLowerLimitFemale;
-
-            var VeryOverweight = GenderEval.IsXy(Gender)
-                ? VeryOverweightWaistToHeightLowerLimitMale
-                : VeryOverweightWaistToHeightLowerLimitFemale;
-
-            var MorbidlyObese = GenderEval.IsXy(Gender)
-                ? MorbidlyObeseWaistToHeightLowerLimitMale
-                : MorbidlyObeseWaistToHeightLowerLimitFemale;
+            var Slim = GenderEval.IsXy(gender) ? SlimWaistToHeightLowerLimitMale : SlimWaistToHeightLowerLimitFemale;
+            var Healthy = GenderEval.IsXy(gender) ? HealthyWaistToHeightLowerLimitMale : HealthyWaistToHeightLowerLimitFemale;
+            var Overweight = GenderEval.IsXy(gender) ? OverweightWaistToHeightLowerLimitMale : OverweightWaistToHeightLowerLimitFemale;
+            var VeryOverweight = GenderEval.IsXy(gender) ? VeryOverweightWaistToHeightLowerLimitMale : VeryOverweightWaistToHeightLowerLimitFemale;
+            var MorbidlyObese = GenderEval.IsXy(gender) ? MorbidlyObeseWaistToHeightLowerLimitMale : MorbidlyObeseWaistToHeightLowerLimitFemale;
             
-            if (Result < Slim)
+            if (result < Slim)
                 return WaistToHeightRatioCategorization.ExtremelySlim;
-            if (Result < Healthy)
+            if (result < Healthy)
                 return WaistToHeightRatioCategorization.Slim;
-            if (Result < Overweight)
+            if (result < Overweight)
                 return WaistToHeightRatioCategorization.Healthy;
-            if (Result < VeryOverweight)
+            if (result < VeryOverweight)
                 return WaistToHeightRatioCategorization.Overweight;
-            return Result < MorbidlyObese
+            return result < MorbidlyObese
                 ? WaistToHeightRatioCategorization.VeryOverweight
                 : WaistToHeightRatioCategorization.MorbidlyObese;
         }
@@ -67,5 +40,6 @@ namespace GeekMDSuite.Interpretation
         public static double VeryOverweightWaistToHeightLowerLimitFemale = 0.54;
         public static double MorbidlyObeseWaistToHeightLowerLimitMale = 0.63;
         public static double MorbidlyObeseWaistToHeightLowerLimitFemale = 0.58;
+        
     }
 }

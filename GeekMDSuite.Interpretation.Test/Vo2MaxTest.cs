@@ -13,7 +13,7 @@ namespace GeekMDSuite.Interpretation.Test
         private double age = 52;
 
         [Fact]
-        public void ReturnsCorrectInterpetationForMale()
+        public void Interpret_Given52yrMaleWithVo2Max45_ReturnsGoodFitnessClassification()
         {
             var vo2MaxInterp = Vo2Max.Interpret(vo2Max, male, age);
             
@@ -21,7 +21,7 @@ namespace GeekMDSuite.Interpretation.Test
         }
         
         [Fact]
-        public void ReturnsCorrectInterpetationForFemale()
+        public void Interpret_Given52yrFemaleWithVo2Max45_ReturnsExcellentFitnessClassification()
         {
             var vo2MaxInterp = Vo2Max.Interpret(vo2Max, female, age);
             

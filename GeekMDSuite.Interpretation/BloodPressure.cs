@@ -7,18 +7,6 @@ namespace GeekMDSuite.Interpretation
 {
     public static class BloodPressure
     {
-        // API consumer likely to need access to these values when developing user interfaces.
-        public static readonly int SystolicLowerLimitOfNormal = 100;
-        public static readonly int SystolicLowerLimitOfPrehypertension = 120;
-        public static readonly int SystolicLowerLimitOfStageIHypertension = 140;
-        public static readonly int SystolicLowerLimitOfStageIIHypertension = 160;
-        public static readonly int SystolicLowerLimitofHypertensiveUrgency = 180;
-        public static readonly int DiastolicLowerLimitOfNormal = 60;
-        public static readonly int DiastolicLowerLimitOfPrehypertension = 80;
-        public static readonly int DiastolicLowerLimitOfStageIHypertension = 90;
-        public static readonly int DiastolicLowerLimitOfStageIIHypertension = 100;
-        public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
-        
         public static BloodPressureStages Interpret(BloodPressureParameters parameters)
         {
             return GetInterpretation(parameters);
@@ -101,7 +89,17 @@ namespace GeekMDSuite.Interpretation
                     true)
             };
         }
-        
+        // API consumer likely to need access to these values when developing user interfaces.
+        public static readonly int SystolicLowerLimitOfNormal = 100;
+        public static readonly int SystolicLowerLimitOfPrehypertension = 120;
+        public static readonly int SystolicLowerLimitOfStageIHypertension = 140;
+        public static readonly int SystolicLowerLimitOfStageIIHypertension = 160;
+        public static readonly int SystolicLowerLimitofHypertensiveUrgency = 180;
+        public static readonly int DiastolicLowerLimitOfNormal = 60;
+        public static readonly int DiastolicLowerLimitOfPrehypertension = 80;
+        public static readonly int DiastolicLowerLimitOfStageIHypertension = 90;
+        public static readonly int DiastolicLowerLimitOfStageIIHypertension = 100;
+        public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
         
     }
 }

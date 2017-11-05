@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Interpretation
 {
-    public enum BodyMassIndexClassification
+    public enum BodyMassIndexCategories
     {
         SeverelyUnderweight,
         Underweight,
