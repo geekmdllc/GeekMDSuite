@@ -8,7 +8,7 @@ namespace GeekMDSuite.Calculations
         public static double CalculateScore(FitTreadmillScoreParameters parameters)
         {
             return parameters.PercentMaxHeartRateReached + 12 * parameters.MetabolicEquivalents - 4 * 
-                   parameters.AgeInYears + (parameters.Gender == Gender.Female || parameters.Gender == Gender.NonBinaryXx ? 43 : 0);
+                   parameters.AgeInYears + (parameters.Genders == Genders.Female || parameters.Genders == Genders.NonBinaryXx ? 43 : 0);
         }
 
         public static int TenYearMortality(double fitTreadmillScore)

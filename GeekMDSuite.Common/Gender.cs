@@ -1,10 +1,27 @@
 ﻿namespace GeekMDSuite.Common
 {
-    public enum Gender
+    public class Gender
     {
-        Male = 1,
-        Female = 2,
-        NonBinaryXy = 3,
-        NonBinaryXx = 4
+        public Genders Category { get; set; }
+
+        public static bool IsXx(Genders gender)
+        {
+            return gender == Genders.Female || gender == Genders.NonBinaryXx;
+        }
+
+        public static bool IsXy(Genders gender)
+        {
+            return !IsXx(gender);
+        }
+
+        public static bool IsXx(Gender gender)
+        {
+            return IsXx(gender.Category);
+        }
+
+        public static bool IsXy(Gender gender)
+        {
+            return !IsXx(gender.Category);
+        }
     }
 }

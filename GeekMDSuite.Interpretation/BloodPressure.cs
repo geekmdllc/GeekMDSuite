@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.Calculations;
 using GeekMDSuite.Common;
-using GeekMDSuite.Interpretation.Tools;
+using GeekMDSuite.Common.Tools;
 
 namespace GeekMDSuite.Interpretation
 {
-
     public static class BloodPressure
     {
         // API consumer likely to need access to these values when developing user interfaces.

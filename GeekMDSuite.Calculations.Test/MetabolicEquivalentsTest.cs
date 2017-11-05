@@ -6,8 +6,8 @@ namespace GeekMDSuite.Calculations.Test
     public class MetabolicEquivalentsTest
     {
         private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
-        private readonly Gender _male = Gender.Male;
-        private readonly Gender _female = Gender.Female;
+        private readonly Genders _male = Genders.Male;
+        private readonly Genders _female = Genders.Female;
         private TreadmillExerciseStressTestProtocol protocol = TreadmillExerciseStressTestProtocol.Bruce;
         
         // Implicitly tests static method FromVo2Max(args..)

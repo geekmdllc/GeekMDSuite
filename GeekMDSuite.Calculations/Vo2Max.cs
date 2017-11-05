@@ -5,19 +5,19 @@ namespace GeekMDSuite.Calculations
 {
     public static class Vo2Max
     {
-        public static double CalculateFromTreadmillExerciseStressTest(Gender gender,
+        public static double CalculateFromTreadmillExerciseStressTest(Genders genders,
             TreadmillExerciseStressTestProtocol protocol, TimeDuration timeDuration)
         {
-            return GetProtocolSpecificResult(gender, protocol, timeDuration);
+            return GetProtocolSpecificResult(genders, protocol, timeDuration);
         }
 
-        private static double GetProtocolSpecificResult(Gender gender, TreadmillExerciseStressTestProtocol protocol,
+        private static double GetProtocolSpecificResult(Genders genders, TreadmillExerciseStressTestProtocol protocol,
             TimeDuration timeDuration)
         {
             switch (protocol)
             {
                 case TreadmillExerciseStressTestProtocol.Bruce:
-                    return CalculateFromBruceProtocol(gender, timeDuration.FractionalMinutes);
+                    return CalculateFromBruceProtocol(genders, timeDuration.FractionalMinutes);
                 case TreadmillExerciseStressTestProtocol.BruceLowLevel:
                     throw new NotImplementedException(ProtocolNotImplementedExceptionMessage(
                         TreadmillExerciseStressTestProtocol.BruceLowLevel));
@@ -57,9 +57,9 @@ namespace GeekMDSuite.Calculations
 
         
 
-        private static double CalculateFromBruceProtocol(Gender gender, double fractionalMinutes)
+        private static double CalculateFromBruceProtocol(Genders genders, double fractionalMinutes)
         {
-            if (gender == Gender.Female || gender == Gender.NonBinaryXx)
+            if (genders == Genders.Female || genders == Genders.NonBinaryXx)
                 return 4.38 * fractionalMinutes - 3.9; 
             return 14.8 - (1.379 * fractionalMinutes) +
                        (0.451 * Math.Pow(fractionalMinutes, 2)) -

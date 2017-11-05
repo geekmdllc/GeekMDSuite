@@ -8,8 +8,8 @@ namespace GeekMDSuite.Calculations.Test
     {
 
         private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
-        private const Gender _male = Gender.Male;
-        private readonly Gender _female = Gender.Female;
+        private const Genders _male = Genders.Male;
+        private readonly Genders _female = Genders.Female;
         private readonly TreadmillExerciseStressTestProtocol _protocol = TreadmillExerciseStressTestProtocol.Bruce;
         private readonly TreadmillExerciseStressTestProtocol _unsupportedProtocol =
             TreadmillExerciseStressTestProtocol.Balke3Point0;

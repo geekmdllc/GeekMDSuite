@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Interpretation.Tools
+﻿namespace GeekMDSuite.Common.Tools
 {
     public class IntegerRange
     {

@@ -8,8 +8,8 @@ namespace GeekMDSuite.Interpretation.Test
     public class Vo2MaxTest
     {
         private double vo2Max = 45;
-        private Gender male = Gender.NonBinaryXy;
-        private Gender female = Gender.Female;
+        private Genders male = Genders.NonBinaryXy;
+        private Genders female = Genders.Female;
         private double age = 52;
 
         [Fact]
