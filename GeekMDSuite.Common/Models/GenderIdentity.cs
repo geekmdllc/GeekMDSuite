@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Common
+﻿namespace GeekMDSuite.Common.Models
 {
     public enum GenderIdentity
     {

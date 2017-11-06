@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Common;
-using GenderEval = GeekMDSuite.Common.Gender;
+using GeekMDSuite.Common.Models;
+using GenderEval = GeekMDSuite.Common.Models.Gender;
 
 namespace GeekMDSuite.Interpretation
 {

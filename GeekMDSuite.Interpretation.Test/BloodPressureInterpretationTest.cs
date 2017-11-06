@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Calculations;
 using GeekMDSuite.Common;
+using GeekMDSuite.Common.Models;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test

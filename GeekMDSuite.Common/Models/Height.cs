@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Common.Tools;
 
-namespace GeekMDSuite.Common
+namespace GeekMDSuite.Common.Models
 {
     public class Height : LengthMeasurement 
     {
