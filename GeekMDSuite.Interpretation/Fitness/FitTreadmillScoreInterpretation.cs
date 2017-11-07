@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Interpretation
+﻿namespace GeekMDSuite.Interpretation.Fitness
 {
     public enum FitTreadmillScoreInterpretation
     {

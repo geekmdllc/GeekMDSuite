@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Common;
 using GeekMDSuite.Common.Models;
+using GeekMDSuite.Interpretation.BodyComposition;
 using GenderEval = GeekMDSuite.Common.Models.Gender;
 
 namespace GeekMDSuite.Interpretation

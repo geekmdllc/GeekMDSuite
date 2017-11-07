@@ -1,8 +1,8 @@
-﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
+﻿using GeekMDSuite.Common.Models;
+using GeekMDSuite.Interpretation.BodyComposition;
 using Xunit;
 
-namespace GeekMDSuite.Interpretation.Test
+namespace GeekMDSuite.Interpretation.Test.BodyCompositionTests
 {
     public class PercentBodyFatTest
     {

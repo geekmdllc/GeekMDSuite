@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Interpretation
+﻿namespace GeekMDSuite.Interpretation.BodyComposition
 {
     public enum WaistToHeightRatioClassification {
         ExtremelySlim = 1,

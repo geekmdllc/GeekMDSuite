@@ -1,7 +1,6 @@
-﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
+﻿using GeekMDSuite.Common.Models;
 
-namespace GeekMDSuite.Interpretation
+namespace GeekMDSuite.Interpretation.BodyComposition
 {
     public static class BodyMassIndex
     {

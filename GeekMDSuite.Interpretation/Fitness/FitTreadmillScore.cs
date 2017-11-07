@@ -1,6 +1,6 @@
-﻿using FitInterp = GeekMDSuite.Interpretation.FitTreadmillScoreInterpretation;
+﻿using FitInterp = GeekMDSuite.Interpretation.Fitness.FitTreadmillScoreInterpretation;
 
-namespace GeekMDSuite.Interpretation
+namespace GeekMDSuite.Interpretation.Fitness
 {
     public static class FitTreadmillScore
     {

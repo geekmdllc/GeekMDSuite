@@ -11,7 +11,7 @@ namespace GeekMDSuite.Common.Services
                 return new ExerciseDurationGoals{HighIntensity = 75, ModerateIntensity = 150};
             return exercise == ExerciseClassifications.Resistance 
                 ? new ExerciseDurationGoals{HighIntensity = 90, ModerateIntensity = 120} 
-                : new ExerciseDurationGoals{HighIntensity = 30, ModerateIntensity = 20};
+                : new ExerciseDurationGoals{HighIntensity = 20, ModerateIntensity = 30};
         }
 
         public static Interval<int> ResistanceRestInterval(int upper = 120, int lower = 30)

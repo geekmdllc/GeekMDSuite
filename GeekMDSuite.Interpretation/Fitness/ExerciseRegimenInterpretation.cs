@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Common.Models;
 
-namespace GeekMDSuite.Interpretation
+namespace GeekMDSuite.Interpretation.Fitness
 {
     // To avoid confusion, this class was made internal and abstract. Classes 
     // requiring exposing these helper methods to library users wrap them.
@@ -28,7 +28,7 @@ namespace GeekMDSuite.Interpretation
         }
         internal static bool TimeAspirationalOrHigher(ExerciseRegimenBase regimen) => TimeGoalOrHigher(regimen, true);
 
-        internal static double GoalMinutes(ExerciseRegimenBase regimen)
+        private static double GoalMinutes(ExerciseRegimenBase regimen)
         {
             if (IsHighIntensity(regimen)) return regimen.Goals.HighIntensity;
             

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.Common.Models;
+using GeekMDSuite.Interpretation.Fitness;
 using Xunit;
 
-namespace GeekMDSuite.Interpretation.Test
+namespace GeekMDSuite.Interpretation.Test.FitnessTests
 {
     public class ResistanceRegimenInterpretationTests
     {
