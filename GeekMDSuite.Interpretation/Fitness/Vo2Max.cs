@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Calculations;
+using GeekMDSuite.Common;
 using GeekMDSuite.Common.Models;
 
 namespace GeekMDSuite.Interpretation.Fitness

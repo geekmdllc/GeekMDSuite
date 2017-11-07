@@ -1,0 +1,41 @@
+﻿using GeekMDSuite.Common;
+using GeekMDSuite.Common.Models;
+using GeekMDSuite.Common.Services;
+
+namespace GeekMDSuite.Interpretation.Procedures
+{
+    public static class AudiogramBilateralInterpreation
+    {
+        public static AudiogramInterpretationResult Interpret(Audiogram audiogram)
+        {
+            return new AudiogramInterpretationResult
+            {
+                Classification = GetClassification(audiogram),
+                Laterality = GetLaterality(audiogram)
+            };
+        }
+
+        private static Laterality GetLaterality(Audiogram audiogram)
+        {
+            if (DifferenceLessThan10dB(audiogram))
+                return Laterality.Bilateral;
+                
+            return audiogram.Left.HighestDatapoint > audiogram.Right.HighestDatapoint
+                ? Laterality.Left
+                : Laterality.Right;
+        }
+
+        private static HearingLossClassification GetClassification(Audiogram audiogram)
+        {
+            var laterality = GetLaterality(audiogram);
+
+            return laterality == Laterality.Left || laterality == Laterality.Bilateral
+                ? AudiogramUnillateralInterpretation.Interpret(audiogram.Left)
+                : AudiogramUnillateralInterpretation.Interpret(audiogram.Right);
+        }
+        private static bool DifferenceLessThan10dB(Audiogram audiogram)
+        {
+            return audiogram.Left.HighestDatapoint / 10.0f - audiogram.Right.HighestDatapoint / 10.0f < 1;
+        }
+    }
+}
