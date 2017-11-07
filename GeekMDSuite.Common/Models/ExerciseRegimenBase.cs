@@ -1,6 +1,8 @@
-﻿namespace GeekMDSuite.Common.Models
+﻿using System;
+
+namespace GeekMDSuite.Common.Models
 {
-    public abstract class ExerciseRegimenBase : IExerciseRegimen
+    public class ExerciseRegimenBase : IExerciseRegimen
     {
         public ExerciseRegimenBase (double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
         {
@@ -11,7 +13,11 @@
         public double SessionsPerWeek { get; set; }
         public double AverageSessionDuration { get; set; }
         public ExerciseIntensity Intensity { get; set; }
-        public abstract ExerciseDurationGoals Goals { get; protected set; }
+        public virtual ExerciseDurationGoals Goals
+        {
+            get => throw new NotImplementedException(); 
+            set => throw new NotImplementedException();
+        }
         public double TotalMinutes => SessionsPerWeek * AverageSessionDuration;
     }
 }

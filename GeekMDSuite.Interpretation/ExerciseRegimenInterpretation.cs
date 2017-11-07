@@ -2,33 +2,33 @@
 
 namespace GeekMDSuite.Interpretation
 {
-    public static class ExerciseRegimenInterpretation
+    // To avoid confusion, this class was made internal and abstract. Classes 
+    // requiring exposing these helper methods to library users wrap them.
+    internal abstract class ExerciseRegimenInterpretation
     {
-        public static bool IntensityIsAdequate(ExerciseRegimenBase regimen) => IsHighIntensity(regimen) || IsModerateIntensity(regimen);
+        internal static bool IntensityIsAdequate(ExerciseRegimenBase regimen) => IsHighIntensity(regimen) || IsModerateIntensity(regimen);
 
-        public static bool DurationIsAdequate(ExerciseRegimenBase regimen) => IntensityIsAdequate(regimen) && TimeGreaterOrEqualToGoal(regimen);
+        internal static bool DurationIsAdequate(ExerciseRegimenBase regimen) => IntensityIsAdequate(regimen) && TimeGoalOrHigher(regimen);
 
-        public static bool RegimenIsAdequate(ExerciseRegimenBase regimen) => DurationIsAdequate(regimen) && IntensityIsAdequate(regimen);
+        internal static bool DurationAndIntensityAreAdequate(ExerciseRegimenBase regimen) => DurationIsAdequate(regimen) && IntensityIsAdequate(regimen);
 
-        public static double RegimenPercentOfGoalAchieved(ExerciseRegimenBase regimen)
+        internal static double DurationPercentOfGoalAchieved(ExerciseRegimenBase regimen)
         {
             return GoalMinutes(regimen) >= 0 ? 100 * regimen.TotalMinutes / GoalMinutes(regimen) : 0;
         }
-        public static bool IsModerateIntensity(ExerciseRegimenBase regimen) => regimen.Intensity == ExerciseIntensity.Moderate;
-        
-        public static bool IsHighIntensity(ExerciseRegimenBase regimen)
+        private static bool IsModerateIntensity(IExerciseRegimen regimen) => regimen.Intensity == ExerciseIntensity.Moderate;
+
+        private static bool IsHighIntensity(IExerciseRegimen regimen)
         {
             return (regimen.Intensity == ExerciseIntensity.High || regimen.Intensity == ExerciseIntensity.Vigorous);
         }
-
-        public static bool TimeGreaterOrEqualToGoal(ExerciseRegimenBase regimen, bool compareToAspirational = false)
+        internal static bool TimeGoalOrHigher(ExerciseRegimenBase regimen, bool compareToAspirational = false)
         {
             return regimen.TotalMinutes >= GoalMinutes(regimen) * (compareToAspirational ? 2 : 1);
         }
+        internal static bool TimeAspirationalOrHigher(ExerciseRegimenBase regimen) => TimeGoalOrHigher(regimen, true);
 
-        public static bool TimeGreaterOrEqualToAspirationalGoal(ExerciseRegimenBase regimen) => TimeGreaterOrEqualToGoal(regimen, true);
-
-        public static double GoalMinutes(ExerciseRegimenBase regimen)
+        internal static double GoalMinutes(ExerciseRegimenBase regimen)
         {
             if (IsHighIntensity(regimen)) return regimen.Goals.HighIntensity;
             

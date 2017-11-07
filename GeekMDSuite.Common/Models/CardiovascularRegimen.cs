@@ -1,17 +1,15 @@
-﻿namespace GeekMDSuite.Common.Models
+﻿using GeekMDSuite.Common.Services;
+
+namespace GeekMDSuite.Common.Models
 {
     public class CardiovascularRegimen : ExerciseRegimenBase
     {
-        public CardiovascularRegimen(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity) 
-            : base(sessionsPerWeek, averageSessionDuration, intensity)
+        public CardiovascularRegimen(ExerciseRegimenBase baseRegimen) 
+            : base(baseRegimen.SessionsPerWeek, baseRegimen.AverageSessionDuration, baseRegimen.Intensity)
         {
-            Goals = new ExerciseDurationGoals
-            {
-                HighIntensity =  75,
-                ModerateIntensity = 150
-            };
+            Goals = GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular);
         }
 
-        public sealed override ExerciseDurationGoals Goals { get; protected set; }
+        public sealed override ExerciseDurationGoals Goals { get; set; }
     }
 }

@@ -4,7 +4,8 @@ namespace GeekMDSuite.Common.Tools
 {
     public class Interval<T> where T : struct, IComparable
     {
-        public Interval(T upper, T lower)
+        // TODO: The uppoer and lower are reversed.
+        public Interval(T lower, T upper)
         {
             Upper = upper;
             Lower = lower;
@@ -13,9 +14,9 @@ namespace GeekMDSuite.Common.Tools
         private T Upper { get; }
         private T Lower { get; }
         
-        public bool ContainsClosed(T z) => ( Lower.CompareTo(z) >= 0 && Upper.CompareTo(z) <= 0 );
-        public bool ContainsOpen(T z) => ( Lower.CompareTo(z) > 0 && Upper.CompareTo(z) < 0 );
-        public bool ContainsRightOpen(T z) => ( Lower.CompareTo(z) >= 0 && Upper.CompareTo(z) < 0 );
-        public bool ContainsLeftOpen(T z) => ( Lower.CompareTo(z) > 0 && Upper.CompareTo(z) <= 0 );
+        public bool ContainsClosed(T z) => ( Lower.CompareTo(z) <= 0 && Upper.CompareTo(z) >= 0 );
+        public bool ContainsOpen(T z) => ( Lower.CompareTo(z) < 0 && Upper.CompareTo(z) > 0 );
+        public bool ContainsRightOpen(T z) => ( Lower.CompareTo(z) <= 0 && Upper.CompareTo(z) > 0 );
+        public bool ContainsLeftOpen(T z) => ( Lower.CompareTo(z) < 0 && Upper.CompareTo(z) >= 0 );
     }
 }

@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
+using GeekMDSuite.Common.Services;
+using GeekMDSuite.Common.Tools;
 
 namespace GeekMDSuite.Common.Models
 {
     public class ResistanceRegimen : ExerciseRegimenBase
     {
-        public int SecondsRestDurationPerSet { get; set; }
-        public List<ResistenceRegimenFeatures> Features { get; set; }
-
         public ResistanceRegimen(
-            double sessionsPerWeek, 
-            double averageSessionDuration, 
-            ExerciseIntensity intensity) 
-            : base(sessionsPerWeek, averageSessionDuration, intensity)
+            ExerciseRegimenBase baseRegimen,
+            int secondsRestDurationPerSet,
+            List<ResistenceRegimenFeatures> regimenFeatures = null) 
+            : base(baseRegimen.SessionsPerWeek, baseRegimen.AverageSessionDuration, baseRegimen.Intensity)
         {
-            Goals = new ExerciseDurationGoals
-            {
-                HighIntensity = 90,
-                ModerateIntensity = 120
-            };
+            Goals = GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Resistance);
+            RestIntervalGoalRange = GetExerciseGoalValues.ResistanceRestInterval();
+            SecondsRestDurationPerSet = secondsRestDurationPerSet;
+            Features = regimenFeatures ?? new List<ResistenceRegimenFeatures>();
         }
-
-        public sealed override ExerciseDurationGoals Goals { get; protected set; }
+        
+        public int SecondsRestDurationPerSet { get; }
+        public List<ResistenceRegimenFeatures> Features { get; set; }
+        public Interval<int> RestIntervalGoalRange { get; }
+        public sealed override ExerciseDurationGoals Goals { get; set; }
     }
 }
