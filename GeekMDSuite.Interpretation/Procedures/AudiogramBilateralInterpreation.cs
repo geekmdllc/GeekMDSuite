@@ -24,9 +24,7 @@ namespace GeekMDSuite.Interpretation.Procedures
 
         private static Laterality WorstSide(Audiogram audiogram)
         {
-            return audiogram.Left.HighestDatapoint > audiogram.Right.HighestDatapoint
-                ? Laterality.Left
-                : Laterality.Right;
+            return audiogram.Left.HighestDatapoint > audiogram.Right.HighestDatapoint ? Laterality.Left : Laterality.Right;
         }
 
         private static HearingLossClassification GetClassification(Audiogram audiogram)
