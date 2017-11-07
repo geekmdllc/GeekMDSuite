@@ -21,14 +21,14 @@ namespace GeekMDSuite.Common.Models
             {
                 var list = new List<int>
                 {
-                    F250.Value,
-                    F500.Value,
-                    F1000.Value,
-                    F2000.Value,
-                    F3000.Value,
-                    F4000.Value,
-                    F6000.Value,
-                    F8000.Value
+                    F250?.Value ?? 0,
+                    F500?.Value ?? 0,
+                    F1000?.Value ?? 0,
+                    F2000?.Value ?? 0,
+                    F3000?.Value ?? 0,
+                    F4000?.Value ?? 0,
+                    F6000?.Value ?? 0,
+                    F8000?.Value ?? 0
                 };
                 return list.Max();
             }

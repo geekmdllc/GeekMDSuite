@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Common;
+﻿using System;
+using GeekMDSuite.Common;
 using GeekMDSuite.Common.Models;
 using GeekMDSuite.Common.Services;
 
@@ -11,15 +12,18 @@ namespace GeekMDSuite.Interpretation.Procedures
             return new AudiogramInterpretationResult
             {
                 Classification = GetClassification(audiogram),
-                Laterality = GetLaterality(audiogram)
+                Laterality = GetLaterality(audiogram),
+                WorstSide = WorstSide(audiogram)
             };
         }
 
         private static Laterality GetLaterality(Audiogram audiogram)
         {
-            if (DifferenceLessThan10dB(audiogram))
-                return Laterality.Bilateral;
-                
+            return DifferenceLessThan10dB(audiogram) ? Laterality.Bilateral : WorstSide(audiogram);
+        }
+
+        private static Laterality WorstSide(Audiogram audiogram)
+        {
             return audiogram.Left.HighestDatapoint > audiogram.Right.HighestDatapoint
                 ? Laterality.Left
                 : Laterality.Right;
@@ -27,15 +31,13 @@ namespace GeekMDSuite.Interpretation.Procedures
 
         private static HearingLossClassification GetClassification(Audiogram audiogram)
         {
-            var laterality = GetLaterality(audiogram);
-
-            return laterality == Laterality.Left || laterality == Laterality.Bilateral
+            return WorstSide(audiogram) == Laterality.Left || WorstSide(audiogram) == Laterality.Bilateral
                 ? AudiogramUnillateralInterpretation.Interpret(audiogram.Left)
                 : AudiogramUnillateralInterpretation.Interpret(audiogram.Right);
         }
         private static bool DifferenceLessThan10dB(Audiogram audiogram)
         {
-            return audiogram.Left.HighestDatapoint / 10.0f - audiogram.Right.HighestDatapoint / 10.0f < 1;
+            return Math.Abs(audiogram.Left.HighestDatapoint / 10.0f - audiogram.Right.HighestDatapoint / 10.0f) < 1;
         }
     }
 }
