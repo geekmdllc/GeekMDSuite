@@ -1,11 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
-using Xunit;
+﻿using Xunit;
 using System.Linq;
 
 namespace GeekMDSuite.Interpretation.Test
 {
-    public class InterpretationSectionBuilderTests
+    public class InterpretationSectionTests
     {
         [Fact]
         public void InterpretationSectionBuilder_InterpreationSectionWithFourSections_ReturnsParagraphsInOrder()
