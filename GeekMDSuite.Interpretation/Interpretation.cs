@@ -18,28 +18,17 @@ namespace GeekMDSuite.Interpretation
 
         public override string ToString()
         {
-            return $"{Title}\n\n" +
-                   $"{Summary}\n\n" +
-                   $"{BuildSections()}";
+            return $"{Title}\n\n{Summary}\n\n{BuildSections()}";
         }
 
         private string BuildSections()
         {
-            var sections = "";
-            foreach (var section in Sections)
-            {
-                var result = BuildSectionParagraphs(section);
-                sections += section.Title + "\n\n" + result;
-            }
-            return sections;
+            return Sections.Aggregate(string.Empty, (current, section) => current + $"{section.Title}\n\n{BuildSectionParagraphs(section)}");
         }
 
         private static string BuildSectionParagraphs(InterpretationSection section)
         {
-            var result = "";
-            foreach (var parapraph in section.Paragraphs)
-                result = result + parapraph + "\n\n";
-            return result;
+            return section.Paragraphs.Aggregate(string.Empty, (current, parapraph) => $"{current}{parapraph}\n\n");
         }
     }
 }
