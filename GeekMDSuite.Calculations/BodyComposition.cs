@@ -5,7 +5,7 @@ namespace GeekMDSuite.Calculations
 {
     public static class BodyComposition
     {
-        public static double BodyMassIndexCalculator(double weightLbs, double heightInches)
+        public static double BodyMassIndex(double weightLbs, double heightInches)
         {
             return Conversion.LbsToKilograms(weightLbs) /
                    Math.Pow(Conversion.InchesToCentimeters(heightInches), 2);
