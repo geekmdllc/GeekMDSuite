@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 using System.Linq;
 
 namespace GeekMDSuite.Interpretation.Test
@@ -18,7 +19,7 @@ namespace GeekMDSuite.Interpretation.Test
             Assert.True(stringFound);
         }
 
-
+        [Fact]
         public void InterpretationSectionBuilder_InterpretationSectionWithThreeParagraphs_ReturnsParagraphsInOrder()
         {          
             var stringFound = BuildInterpretation(BuildSection1(), BuildSection2())
