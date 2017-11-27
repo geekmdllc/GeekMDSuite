@@ -1,6 +1,4 @@
-﻿using Calc = GeekMDSuite.Calculations.BodyComposition;
-
-namespace GeekMDSuite.Interpretation.BodyComposition
+﻿namespace GeekMDSuite.Interpretation.BodyComposition
 {
     public static class VisceralFat
     {

@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.Calculations;
 using GeekMDSuite.Common.Models;
 using GeekMDSuite.Common.Tools;
 
-namespace GeekMDSuite.Interpretation
+namespace GeekMDSuite.Interpretation.Vitals
 {
     public class BloodPressureInterpretation
     {
-        
         public BloodPressureInterpretation(IPatient patient)
         {
             _patient = patient;

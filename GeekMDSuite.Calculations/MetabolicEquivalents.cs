@@ -1,5 +1,5 @@
 ﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
+using GeekMDSuite.Common.Tools;
 
 namespace GeekMDSuite.Calculations
 {

@@ -7,7 +7,8 @@
             Inches = inches;
         }
 
-        public double Inches { get; set; }
-        public double Centimeters => Inches * 2.54;
+        public double Inches { get; }
+        public double Centimeters => UnitConversion.InchesToCentimeters(Inches);
+        public double Meters => UnitConversion.CentimetersToMeters(Centimeters);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Calculations
+﻿namespace GeekMDSuite.Interpretation.Vitals
 {
     public enum BloodPressureStage 
     {

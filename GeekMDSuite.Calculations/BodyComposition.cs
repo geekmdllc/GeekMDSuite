@@ -1,19 +1,14 @@
 ﻿using System;
-using Conversion = GeekMDSuite.Calculations.UnitConversion;
+using GeekMDSuite.Common.Models;
 
 namespace GeekMDSuite.Calculations
 {
     public static class BodyComposition
     {
-        public static double BodyMassIndex(double weightLbs, double heightInches)
-        {
-            return Conversion.LbsToKilograms(weightLbs) /
-                   Math.Pow(Conversion.InchesToCentimeters(heightInches), 2);
-        }
+        public static double BodyMassIndex(IPatient patient) => 
+            patient.Weight.Kilograms / Math.Pow(patient.Height.Meters, 2);
 
-        public static double WaistToHeightRatio(double waistInches, double heightInches)
-        {
-            return waistInches / heightInches;
-        }
+        public static double WaistToHeightRatio(IPatient patient) => 
+            patient.Waist.Centimeters / patient.Height.Centimeters;
     }
 }
