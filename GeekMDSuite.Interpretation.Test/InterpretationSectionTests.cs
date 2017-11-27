@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using System.Linq;
 
 namespace GeekMDSuite.Interpretation.Test
@@ -14,7 +13,8 @@ namespace GeekMDSuite.Interpretation.Test
                 .ElementAt(IndexFromPosition(1))?
                 .Paragraphs
                 .ElementAt(IndexFromPosition(4))
-                .Contains("Fourth");
+                .ToLower()
+                .Contains("fourth");
 
             Assert.True(stringFound);
         }
@@ -27,7 +27,8 @@ namespace GeekMDSuite.Interpretation.Test
                 .ElementAt(IndexFromPosition(2))?
                 .Paragraphs
                 .ElementAt(IndexFromPosition(3))
-                .Contains("Third");
+                .ToLower()
+                .Contains("third");
             
             Assert.True(stringFound);
         }
