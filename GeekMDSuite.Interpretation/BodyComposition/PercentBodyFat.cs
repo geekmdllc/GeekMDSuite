@@ -1,15 +1,13 @@
 ﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
-using GeekMDSuite.Interpretation.BodyComposition;
 using GenderEval = GeekMDSuite.Common.Models.Gender;
 
-namespace GeekMDSuite.Interpretation
+namespace GeekMDSuite.Interpretation.BodyComposition
 {
     public static class PercentBodyFat
     {       
-        public static BodyFatClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
+        public static PercentBodyFatClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
 
-        private static BodyFatClassification Classify(GenderIdentity gender, double result)
+        private static PercentBodyFatClassification Classify(GenderIdentity gender, double result)
         {
             var athletic = GenderEval.IsGenotypeXy(gender) ? AthleticMaleLLN : AthleticFemaleLLN;
             var fitness = GenderEval.IsGenotypeXy(gender) ? FitMaleLLN : FitFemaleLLN;
@@ -17,12 +15,12 @@ namespace GeekMDSuite.Interpretation
             var overfat = GenderEval.IsGenotypeXy(gender) ? OverFatMaleLLN : OverFatFemaleLLN;
             
             if (result < athletic)
-                return BodyFatClassification.UnderFat;
+                return PercentBodyFatClassification.UnderFat;
             if (result < fitness)
-                return BodyFatClassification.Athletic;
+                return PercentBodyFatClassification.Athletic;
             if (result < acceptable)
-                return BodyFatClassification.Fitness;
-            return result < overfat ? BodyFatClassification.Acceptable : BodyFatClassification.OverFat;
+                return PercentBodyFatClassification.Fitness;
+            return result < overfat ? PercentBodyFatClassification.Acceptable : PercentBodyFatClassification.OverFat;
         }
         
         public static double AthleticMaleLLN = 6;

@@ -5,12 +5,13 @@ using GeekMDSuite.Interpretation.BodyComposition;
 
 namespace GeekMDSuite.Interpretation.Vitals
 {
-    public class BloodPressureInterpretation
+    public class BloodPressure
     {
-        public BloodPressureInterpretation(IPatient patient)
+        public BloodPressure(IPatient patient)
         {
-            _patient = patient;
-            _bodyMassIndexCategory = BodyMassIndex.Classification(patient);
+            _bloodPressure = patient.Vitals.BloodPressure;
+            _bodyMassIndexClassification = new BodyMassIndex(patient).Classification;
+            // TODO: _bodyMassIndexClassification = BodyMassIndex.Classification(patient);
         }
         
         public Interpretation Interpretation => new InterpretationBuilder()
@@ -27,7 +28,7 @@ namespace GeekMDSuite.Interpretation.Vitals
                 var stage = BloodPressureStage.Normotension;
                 foreach (var description in GetBloodPressureStageDescriptions())
                 {
-                    if (description.Contains(_patient.Vitals.BloodPressure))
+                    if (description.Contains(_bloodPressure))
                         stage = description.Stage;
                 }
                 return stage;
@@ -45,16 +46,61 @@ namespace GeekMDSuite.Interpretation.Vitals
         public static readonly int DiastolicLowerLimitOfStage2Hypertension = 100;
         public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
         
-        private IPatient _patient;
-        private BodyMassIndexCategory _bodyMassIndexCategory;
+        private readonly BloodPressureParameters _bloodPressure;
+        
+        private BodyMassIndexCategory _bodyMassIndexClassification;
         
         private string BuildSummary()
         {
-            var bloodPressure = _patient.Vitals.BloodPressure;
+            var bloodPressure = _bloodPressure;
             return $"Your blood pressure is {bloodPressure.Systolic}/{bloodPressure.Diastolic} mmHg. " +
                    $"This is defined as {Stage}. " +
                    "There " + (bloodPressure.OrganDamage ? "is " : "is not ") + "evidence of current end-organ " +
                    "damage. ";
+        }
+        
+
+        private  InterpretationSection BuildOverviewSection()
+        {
+            return new InterpretationSectionBuilder()
+                .SetTitle("Overview")
+                .AddParagraph("Blood pressure is one of our most important vital signs. " +
+                              "Ideally, the pressures in the arteries will be at a healthy medium level " +
+                              "where it is high enough to adequately deliver nutrients to vital organs, " +
+                              "but not so high that the pressure is causing damage to organs which will " +
+                              "predispose to the development of additional chronic diseases and adverse " +
+                              "events such as heart attack and stroke. ")
+                .SetTitle("Normal Values")
+                .AddParagraph("Levels that are generally considered to be 'too low' will be less than " +
+                              $"{SystolicLowerLimitOfNormal}/{DiastolicLowerLimitOfNormal} mmHg" +
+                              "There are exceptions to this, which can only be determined in proper " +
+                              "clinical context by a trained healthcare provider. ")
+                .AddParagraph($"Ideal values are between {SystolicLowerLimitOfNormal} to " +
+                              $"{SystolicLowerLimitOfPrehypertension}/{DiastolicLowerLimitOfNormal} to " +
+                              $"{DiastolicLowerLimitOfPrehypertension} mmHg. These values are generally " +
+                              "considered to be the least likely to be associated with other chronic " +
+                              "disease states.")
+                .AddParagraph($"Pre-hypertension is defined as {SystolicLowerLimitOfPrehypertension} to " +
+                              $"{SystolicLowerLimitOfStage1Hypertension} / {DiastolicLowerLimitOfPrehypertension} to " +
+                              $"{DiastolicLowerLimitOfStage1Hypertension}. The term 'pre-hypertension' is " +
+                              "used here, however it's important to note that this does not mean that there" +
+                              "is no detriment associated with these blood pressures levels. There is. " +
+                              "even mild levels of blood pressure elevation are associated with increased " +
+                              "risk of heart attack, stroke, and more.")
+                .AddParagraph("From here, hypertension is formally staged. Each stage is successively " +
+                              "worse when compared to the previous stage. Stage 1 Hypertension is " +
+                              $"{SystolicLowerLimitOfStage1Hypertension} to {SystolicLowerLimitOfStage2Hypertension}/" +
+                              $"{DiastolicLowerLimitOfStage1Hypertension} to {DiastolicLowerLimitOfStage2Hypertension}. " +
+                              $"Stage 2 Hypertension is from {SystolicLowerLimitOfStage2Hypertension} to " +
+                              $"{SystolicLowerLimitofHypertensiveUrgency}/{DiastolicLowerLimitOfStage2Hypertension} to " +
+                              $"{DiastolicLowerLimitOfHypertensiveUrgency}. Anything beyond these values " +
+                              "is classified as either hypertensive urgency, or hypertensive emergency.")
+                .AddParagraph("The difference between hypertensive urgency and hypertensive emergency is " +
+                              "the presence of evidence of acute damage to an organ. This often necessitates " +
+                              "two different levels of care, and therefore the distinction is made between " +
+                              "the two of them despite the fact that both have very high pressures values " +
+                              "associated with them.")
+                .Build();
         }
         
         private  InterpretationSection BuildMakingChangesSection()
@@ -99,51 +145,9 @@ namespace GeekMDSuite.Interpretation.Vitals
                 return section.AddParagraph("Your blood pressure needs to be addressed emergently. There is evidence to " +
                     "suggest that the blood pressure elevation is causing acute, dangerous " +
                     "damage to organs of your body. This cannot be delayed. ").Build();
+            
 
             return section.Build();
-        }
-
-        private  InterpretationSection BuildOverviewSection()
-        {
-            return new InterpretationSectionBuilder()
-                .SetTitle("Overview")
-                .AddParagraph("Blood pressure is one of our most important vital signs. " +
-                              "Ideally, the pressures in the arteries will be at a healthy medium level " +
-                              "where it is high enough to adequately deliver nutrients to vital organs, " +
-                              "but not so high that the pressure is causing damage to organs which will " +
-                              "predispose to the development of additional chronic diseases and adverse " +
-                              "events such as heart attack and stroke. ")
-                .SetTitle("Normal Values")
-                .AddParagraph("Levels that are generally considered to be 'too low' will be less than " +
-                              $"{SystolicLowerLimitOfNormal}/{DiastolicLowerLimitOfNormal} mmHg" +
-                              "There are exceptions to this, which can only be determined in proper " +
-                              "clinical context by a trained healthcare provider. ")
-                .AddParagraph($"Ideal values are between {SystolicLowerLimitOfNormal} to " +
-                              $"{SystolicLowerLimitOfPrehypertension}/{DiastolicLowerLimitOfNormal} to " +
-                              $"{DiastolicLowerLimitOfPrehypertension} mmHg. These values are generally " +
-                              "considered to be the least likely to be associated with other chronic " +
-                              "disease states.")
-                .AddParagraph($"Pre-hypertension is defined as {SystolicLowerLimitOfPrehypertension} to " +
-                              $"{SystolicLowerLimitOfStage1Hypertension} / {DiastolicLowerLimitOfPrehypertension} to " +
-                              $"{DiastolicLowerLimitOfStage1Hypertension}. The term 'pre-hypertension' is " +
-                              "used here, however it's important to note that this does not mean that there" +
-                              "is no detriment associated with these blood pressures levels. There is. " +
-                              "even mild levels of blood pressure elevation are associated with increased " +
-                              "risk of heart attack, stroke, and more.")
-                .AddParagraph("From here, hypertension is formally staged. Each stage is successively " +
-                              "worse when compared to the previous stage. Stage 1 Hypertension is " +
-                              $"{SystolicLowerLimitOfStage1Hypertension} to {SystolicLowerLimitOfStage2Hypertension}/" +
-                              $"{DiastolicLowerLimitOfStage1Hypertension} to {DiastolicLowerLimitOfStage2Hypertension}. " +
-                              $"Stage 2 Hypertension is from {SystolicLowerLimitOfStage2Hypertension} to " +
-                              $"{SystolicLowerLimitofHypertensiveUrgency}/{DiastolicLowerLimitOfStage2Hypertension} to " +
-                              $"{DiastolicLowerLimitOfHypertensiveUrgency}. Anything beyond these values " +
-                              "is classified as either hypertensive urgency, or hypertensive emergency.")
-                .AddParagraph("The difference between hypertensive urgency and hypertensive emergency is " +
-                              "the presence of evidence of acute damage to an organ. This often necessitates " +
-                              "two different levels of care, and therefore the distinction is made between " +
-                              "the two of them despite the fact that both have very high pressures values " +
-                              "associated with them.")
-                .Build();
         }
         
         private static List<StageDescription> GetBloodPressureStageDescriptions()

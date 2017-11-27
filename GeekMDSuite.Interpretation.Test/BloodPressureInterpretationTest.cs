@@ -15,7 +15,7 @@ namespace GeekMDSuite.Interpretation.Test
             personMock.Setup(person => person.Vitals.BloodPressure)
                 .Returns(_preHypertensionParameters);
             
-            var bpStage = new BloodPressureInterpretation(personMock.Object).Stage;
+            var bpStage = new BloodPressure(personMock.Object).Stage;
             
             Assert.Equal(BloodPressureStage.PreHypertension, bpStage);
         }
@@ -26,7 +26,7 @@ namespace GeekMDSuite.Interpretation.Test
             personMock.Setup(person => person.Vitals.BloodPressure)
                 .Returns(_hypertensiveEmergencyParameters);
             
-            var bpStage = new BloodPressureInterpretation(personMock.Object).Stage;
+            var bpStage = new BloodPressure(personMock.Object).Stage;
             
             Assert.Equal(BloodPressureStage.HypertensiveEmergency, bpStage);
         }
@@ -37,7 +37,7 @@ namespace GeekMDSuite.Interpretation.Test
             personMock.Setup(person => person.Vitals.BloodPressure)
                 .Returns(_hypertensiveUrgencyParameters);
             
-            var bpStage = new BloodPressureInterpretation(personMock.Object).Stage;
+            var bpStage = new BloodPressure(personMock.Object).Stage;
            
             Assert.Equal(BloodPressureStage.HypertensiveUrgency, bpStage);
         }
