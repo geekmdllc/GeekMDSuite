@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Calculations
 {
-    public enum BloodPressureStages 
+    public enum BloodPressureStage 
     {
         Hypotension = 1,
         Normotension = 2,

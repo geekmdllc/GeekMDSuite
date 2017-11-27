@@ -1,6 +1,7 @@
 ﻿using GeekMDSuite.Calculations;
 using GeekMDSuite.Common.Models;
 using Xunit;
+using Moq;
 
 namespace GeekMDSuite.Interpretation.Test
 {
@@ -9,25 +10,39 @@ namespace GeekMDSuite.Interpretation.Test
         [Fact]
         void Stage_GivenPrehypertensionParameters_InterpretsPrehypertension()
         {
+            var personMock = new Mock<IPatient>();
+            personMock.Setup(person => person.Vitals.BloodPressure)
+                .Returns(_preHypertensionParameters);
             
-            var bpStage = new BloodPressureInterpretation().Stage(_preHypertensionParamters);
-            Assert.Equal(BloodPressureStages.PreHypertension, bpStage);
+            var bpStage = new BloodPressureInterpretation(personMock.Object).Stage;
+            
+            Assert.Equal(BloodPressureStage.PreHypertension, bpStage);
         }
         [Fact]
         void Stage_GivenHypertensiveEmergencyParameters_InterpretsHypertensiveEmergency()
         {
-            var bpStage = new BloodPressureInterpretation().Stage(_hypertensiveEmergencyParameters);
-            Assert.Equal(BloodPressureStages.HypertensiveEmergency, bpStage);
+            var personMock = new Mock<IPatient>();
+            personMock.Setup(person => person.Vitals.BloodPressure)
+                .Returns(_hypertensiveEmergencyParameters);
+            
+            var bpStage = new BloodPressureInterpretation(personMock.Object).Stage;
+            
+            Assert.Equal(BloodPressureStage.HypertensiveEmergency, bpStage);
         }
         [Fact]
         void Stage_GivenHypertensiveUrgencyParameters_DistinguishesHypertensiveUrgencyFromHypertensiveEmergency()
         {
-            var bpStage = new BloodPressureInterpretation().Stage(_hypertensiveUrgencyParameters);
-            Assert.Equal(BloodPressureStages.HypertensiveUrgency, bpStage);
+            var personMock = new Mock<IPatient>();
+            personMock.Setup(person => person.Vitals.BloodPressure)
+                .Returns(_hypertensiveUrgencyParameters);
+            
+            var bpStage = new BloodPressureInterpretation(personMock.Object).Stage;
+           
+            Assert.Equal(BloodPressureStage.HypertensiveUrgency, bpStage);
         }
         // TODO: Test the interpreation string for key words which suggest a proper interpretation.
         
-        private BloodPressureParameters _preHypertensionParamters = new BloodPressureParameters(133, 69, false);
+        private BloodPressureParameters _preHypertensionParameters = new BloodPressureParameters(133, 69, false);
         private BloodPressureParameters _hypertensiveEmergencyParameters = new BloodPressureParameters(200, 99, true);
         private BloodPressureParameters _hypertensiveUrgencyParameters = new BloodPressureParameters(200, 99, false);
     }

@@ -7,44 +7,59 @@ using GeekMDSuite.Common.Tools;
 
 namespace GeekMDSuite.Interpretation
 {
-    public  class BloodPressureInterpretation
+    public class BloodPressureInterpretation
     {
-        public BloodPressureInterpretation()
+        
+        public BloodPressureInterpretation(IPatient patient)
         {
-            
+            _patient = patient;
         }
-        public Interpretation Interpretation(BloodPressureParameters parameters)
-        {
-            return new InterpretationBuilder()
-                .SetTitle("Blood Pressure Interpretation")
-                .SetSummary(BuildSummary(parameters))
-                .AddSection(BuildOverviewSection())
-                .AddSection(BuildMakingChangesSection(parameters))
-                .Build();
-        }
+        
+        public Interpretation Interpretation => new InterpretationBuilder()
+            .SetTitle("Blood Pressure Interpretation")
+            .SetSummary(BuildSummary())
+            .AddSection(BuildOverviewSection())
+            .AddSection(BuildMakingChangesSection())
+            .Build();
 
-        private string BuildSummary(BloodPressureParameters parameters)
+        public BloodPressureStage Stage
         {
-            return $"Your blood pressure is {parameters.Systolic}/{parameters.Diastolic} mmHg. " +
-                   $"This is defined as {Stage(parameters)}. " +
-                   "There " + (parameters.OrganDamage ? "is " : "is not ") + "evidence of current end-organ " +
+            get
+            {
+                var stage = BloodPressureStage.Normotension;
+                foreach (var description in GetBloodPressureStageDescriptions())
+                {
+                    if (description.Contains(_patient.Vitals.BloodPressure))
+                        stage = description.Stage;
+                }
+                return stage;
+            }
+        }
+        
+        public static readonly int SystolicLowerLimitOfNormal = 100;
+        public static readonly int SystolicLowerLimitOfPrehypertension = 120;
+        public static readonly int SystolicLowerLimitOfStage1Hypertension = 140;
+        public static readonly int SystolicLowerLimitOfStage2Hypertension = 160;
+        public static readonly int SystolicLowerLimitofHypertensiveUrgency = 180;
+        public static readonly int DiastolicLowerLimitOfNormal = 60;
+        public static readonly int DiastolicLowerLimitOfPrehypertension = 80;
+        public static readonly int DiastolicLowerLimitOfStage1Hypertension = 90;
+        public static readonly int DiastolicLowerLimitOfStage2Hypertension = 100;
+        public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
+        
+        private IPatient _patient;
+        
+        private string BuildSummary()
+        {
+            var bloodPressure = _patient.Vitals.BloodPressure;
+            return $"Your blood pressure is {bloodPressure.Systolic}/{bloodPressure.Diastolic} mmHg. " +
+                   $"This is defined as {Stage}. " +
+                   "There " + (bloodPressure.OrganDamage ? "is " : "is not ") + "evidence of current end-organ " +
                    "damage. ";
         }
-
-
-        public  BloodPressureStages Stage(BloodPressureParameters parameters)
+        
+        private  InterpretationSection BuildMakingChangesSection()
         {
-            var stage = BloodPressureStages.Normotension;
-            foreach (var description in GetBloodPressureStageDescriptions())
-            {
-                if (description.Contains(parameters))
-                    stage = description.Stage;
-            }
-            return stage;
-        }
-        private  InterpretationSection BuildMakingChangesSection(BloodPressureParameters parameters)
-        {
-            var stage = Stage(parameters);
             var section = new InterpretationSectionBuilder()
                 .SetTitle("Making Changes")
                 .AddParagraph("Making changes for blood pressure consists primary of lifestyle and medical " +
@@ -53,35 +68,35 @@ namespace GeekMDSuite.Interpretation
                               "training, and making dietary changes. A common diet prescribed for hypertension " +
                               "is the DASH diet. When lifestyle is not enough, we include blood pressure " +
                               "medications. We understand that people often wish to avoid medications");
-            if (stage == BloodPressureStages.Hypotension)
+            if (Stage == BloodPressureStage.Hypotension)
                 return section.AddParagraph("Your blood pressure is low. This case is less simple to generalize. " +
                                             "As such, it's importnat to discuss the details of this in the context of " +
                                             "your overall state of health with your clinician.").Build();
 
-            if (stage == BloodPressureStages.PreHypertension)
+            if (Stage == BloodPressureStage.PreHypertension)
                 return section.AddParagraph("Your blood pressure is elevated to a range that is most often addressable " +
                                      "via lifestyle change. Some combination of bodyfat reduction, exercise, and " +
                                      "dietary changes such as those described in the DASH diet, will likely " +
                                      "remedy this.").Build();
-            if (stage == BloodPressureStages.Stage1Hypertension)
+            if (Stage == BloodPressureStage.Stage1Hypertension)
                 return section.AddParagraph("Your blood pressure is elevated to a range that is sometimes addressable " +
                                     "by lifestyle change, but often requires medication. It's reasonable to " +
                                     "have a discussion with your clinician on whether or not lifestyle change " +
                                     "is a good option for your before adding medication, or if both are " +
                                     "necessary at this point.").Build();
-            if (stage == BloodPressureStages.Stage2Hypertension)
+            if (Stage == BloodPressureStage.Stage2Hypertension)
                 return section.AddParagraph("Your blood pressure is elevated to a range that requires medical management. " +
                                     "It is still possible to reduce the blood pressure via lifestyle to a degree that the " +
                                     "medication can be stopped. However, while this is a possibility, the " +
                                     "current levels are such that they should be addressed. ").Build();
-            if (stage == BloodPressureStages.HypertensiveUrgency)
+            if (Stage == BloodPressureStage.HypertensiveUrgency)
                 return section.AddParagraph("Your blood pressure is elevated to such a degree that action is urgent. " +
                                             "Medications are required, and it often takes as many as three medications " +
                                             "to reduce blood pressure that is this elevated to an acceptable level. " +
                                             "Improving blood pressure via medical management should be very high priority " +
                                             "and working closely with your clinician to accomplish this in a relatively " +
                                             "short period of time is strongly encouraged.").Build();
-            if (stage == BloodPressureStages.HypertensiveEmergency)
+            if (Stage == BloodPressureStage.HypertensiveEmergency)
                 return section.AddParagraph("Your blood pressure needs to be addressed emergently. There is evidence to " +
                     "suggest that the blood pressure elevation is causing acute, dangerous " +
                     "damage to organs of your body. This cannot be delayed. ").Build();
@@ -132,7 +147,7 @@ namespace GeekMDSuite.Interpretation
                 .Build();
         }
         
-        private  List<StageDescription> GetBloodPressureStageDescriptions()
+        private static List<StageDescription> GetBloodPressureStageDescriptions()
         {
             var floorPressure = 0;
             var ceilingPressure = 500;
@@ -141,37 +156,37 @@ namespace GeekMDSuite.Interpretation
                 new StageDescription(
                     new Interval<int>(floorPressure, SystolicLowerLimitOfNormal),
                     new Interval<int>(floorPressure, DiastolicLowerLimitOfNormal),
-                    BloodPressureStages.Hypotension,
+                    BloodPressureStage.Hypotension,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitOfNormal, SystolicLowerLimitOfPrehypertension),
                     new Interval<int>(DiastolicLowerLimitOfNormal, DiastolicLowerLimitOfPrehypertension),
-                    BloodPressureStages.Normotension,
+                    BloodPressureStage.Normotension,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitOfPrehypertension, SystolicLowerLimitOfStage1Hypertension),
                     new Interval<int>(DiastolicLowerLimitOfPrehypertension, DiastolicLowerLimitOfStage1Hypertension),
-                    BloodPressureStages.PreHypertension,
+                    BloodPressureStage.PreHypertension,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitOfStage1Hypertension, SystolicLowerLimitOfStage2Hypertension),
                     new Interval<int>(DiastolicLowerLimitOfStage1Hypertension, DiastolicLowerLimitOfStage2Hypertension),
-                    BloodPressureStages.Stage1Hypertension,
+                    BloodPressureStage.Stage1Hypertension,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitOfStage2Hypertension, SystolicLowerLimitofHypertensiveUrgency),
                     new Interval<int>(DiastolicLowerLimitOfStage2Hypertension, DiastolicLowerLimitOfHypertensiveUrgency),
-                    BloodPressureStages.Stage2Hypertension,
+                    BloodPressureStage.Stage2Hypertension,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitofHypertensiveUrgency, ceilingPressure),
                     new Interval<int>(DiastolicLowerLimitOfHypertensiveUrgency, ceilingPressure),
-                    BloodPressureStages.HypertensiveUrgency,
+                    BloodPressureStage.HypertensiveUrgency,
                     false),
                 new StageDescription(
                     new Interval<int>(SystolicLowerLimitofHypertensiveUrgency, ceilingPressure),
                     new Interval<int>(DiastolicLowerLimitOfHypertensiveUrgency, ceilingPressure),
-                    BloodPressureStages.HypertensiveEmergency,
+                    BloodPressureStage.HypertensiveEmergency,
                     true)
             };
         }
@@ -180,10 +195,10 @@ namespace GeekMDSuite.Interpretation
         {
             public Interval<int> SystolicInterval { get; }
             public Interval<int> DiastolicInterval { get; }
-            public BloodPressureStages Stage { get; }
+            public BloodPressureStage Stage { get; }
             public bool OrganDamage { get; }
 
-            public StageDescription(Interval<int> systolicInterval, Interval<int> diastolicInterval, BloodPressureStages stage, bool organDamage)
+            public StageDescription(Interval<int> systolicInterval, Interval<int> diastolicInterval, BloodPressureStage stage, bool organDamage)
             {
                 SystolicInterval = systolicInterval;
                 DiastolicInterval = diastolicInterval;
@@ -193,23 +208,10 @@ namespace GeekMDSuite.Interpretation
 
             public bool Contains(BloodPressureParameters parameters) =>
             (
-                Stage == BloodPressureStages.HypertensiveEmergency &&  OrganDamage ? 
+                Stage == BloodPressureStage.HypertensiveEmergency &&  OrganDamage ? 
                     (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic)) && parameters.OrganDamage :
                     (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic))
             );
         }
-        
-        // API consumer likely to need access to these values when developing user interfaces.
-        public  readonly int SystolicLowerLimitOfNormal = 100;
-        public  readonly int SystolicLowerLimitOfPrehypertension = 120;
-        public  readonly int SystolicLowerLimitOfStage1Hypertension = 140;
-        public  readonly int SystolicLowerLimitOfStage2Hypertension = 160;
-        public  readonly int SystolicLowerLimitofHypertensiveUrgency = 180;
-        public  readonly int DiastolicLowerLimitOfNormal = 60;
-        public  readonly int DiastolicLowerLimitOfPrehypertension = 80;
-        public  readonly int DiastolicLowerLimitOfStage1Hypertension = 90;
-        public  readonly int DiastolicLowerLimitOfStage2Hypertension = 100;
-        public  readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
-        
     }
 }
