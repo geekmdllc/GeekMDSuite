@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GeekMDSuite.Calculations;
-using GeekMDSuite.Common;
 using GeekMDSuite.Common.Models;
 using GeekMDSuite.Common.Tools;
 
@@ -193,12 +191,12 @@ namespace GeekMDSuite.Interpretation
         
         private class StageDescription
         {
-            public Interval<int> SystolicInterval { get; }
-            public Interval<int> DiastolicInterval { get; }
-            public BloodPressureStage Stage { get; }
-            public bool OrganDamage { get; }
+            internal Interval<int> SystolicInterval { get; }
+            internal Interval<int> DiastolicInterval { get; }
+            internal BloodPressureStage Stage { get; }
+            internal bool OrganDamage { get; }
 
-            public StageDescription(Interval<int> systolicInterval, Interval<int> diastolicInterval, BloodPressureStage stage, bool organDamage)
+            internal StageDescription(Interval<int> systolicInterval, Interval<int> diastolicInterval, BloodPressureStage stage, bool organDamage)
             {
                 SystolicInterval = systolicInterval;
                 DiastolicInterval = diastolicInterval;
@@ -206,7 +204,7 @@ namespace GeekMDSuite.Interpretation
                 OrganDamage = organDamage;
             }
 
-            public bool Contains(BloodPressureParameters parameters) =>
+            internal bool Contains(BloodPressureParameters parameters) =>
             (
                 Stage == BloodPressureStage.HypertensiveEmergency &&  OrganDamage ? 
                     (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic)) && parameters.OrganDamage :
