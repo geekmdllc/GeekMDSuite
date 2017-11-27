@@ -1,28 +1,33 @@
-﻿using GeekMDSuite.Common;
-using GenderEval = GeekMDSuite.Common.Models.Gender;
+﻿using GeekMDSuite.Common.Models;
 
 namespace GeekMDSuite.Interpretation.BodyComposition
 {
     public static class PercentBodyFat
     {       
-        public static PercentBodyFatClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
+        public static PercentBodyFatClassification Interpret (IPatient patient) => Classify(patient);
 
-        private static PercentBodyFatClassification Classify(GenderIdentity gender, double result)
+        private static PercentBodyFatClassification Classify(IPatient patient)
         {
-            var athletic = GenderEval.IsGenotypeXy(gender) ? AthleticMaleLLN : AthleticFemaleLLN;
-            var fitness = GenderEval.IsGenotypeXy(gender) ? FitMaleLLN : FitFemaleLLN;
-            var acceptable = GenderEval.IsGenotypeXy(gender) ? AcceptableMaleLLN : AcceptableFemaleLLN;
-            var overfat = GenderEval.IsGenotypeXy(gender) ? OverFatMaleLLN : OverFatFemaleLLN;
-            
-            if (result < athletic)
+            var upperLimit = DetermineBodyFatLimitsByGender(patient.Gender);
+
+            if (patient.PercentBodyFat < upperLimit.Athletic)
                 return PercentBodyFatClassification.UnderFat;
-            if (result < fitness)
+            if (patient.PercentBodyFat < upperLimit.Fitness)
                 return PercentBodyFatClassification.Athletic;
-            if (result < acceptable)
+            if (patient.PercentBodyFat < upperLimit.Athletic)
                 return PercentBodyFatClassification.Fitness;
-            return result < overfat ? PercentBodyFatClassification.Acceptable : PercentBodyFatClassification.OverFat;
+            return patient.PercentBodyFat < upperLimit.OverFat ? PercentBodyFatClassification.Acceptable : PercentBodyFatClassification.OverFat;
         }
-        
+
+        private static BodyFatLimits DetermineBodyFatLimitsByGender(Gender gender)
+        {
+            var athletic = Gender.IsGenotypeXy(gender) ? AthleticMaleLLN : AthleticFemaleLLN;
+            var fitness = Gender.IsGenotypeXy(gender) ? FitMaleLLN : FitFemaleLLN;
+            var acceptable = Gender.IsGenotypeXy(gender) ? AcceptableMaleLLN : AcceptableFemaleLLN;
+            var overfat = Gender.IsGenotypeXy(gender) ? OverFatMaleLLN : OverFatFemaleLLN;
+            return new BodyFatLimits(athletic, fitness, acceptable, overfat);;
+        }
+
         public static double AthleticMaleLLN = 6;
         public static double AthleticFemaleLLN = 14;
         public static double FitMaleLLN = 14;
@@ -31,5 +36,20 @@ namespace GeekMDSuite.Interpretation.BodyComposition
         public static double AcceptableFemaleLLN = 25;
         public static double OverFatMaleLLN = 25;
         public static double OverFatFemaleLLN = 32;
+
+        private class BodyFatLimits
+        {
+            public BodyFatLimits(double athletic, double fitness, double acceptable, double overFat)
+            {
+                Athletic = athletic;
+                Fitness = fitness;
+                Acceptable = acceptable;
+                OverFat = overFat;
+            }
+            internal double Athletic { get; }
+            internal double Fitness { get; }
+            internal double Acceptable { get; }
+            internal double OverFat { get; }
+        }
     }
 }

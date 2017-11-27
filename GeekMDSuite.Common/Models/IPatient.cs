@@ -8,6 +8,7 @@ namespace GeekMDSuite.Common.Models
         ILengthMeasurement Height { get; }
         IMassMeasurement BodyWeight { get; }
         Waist Waist { get; }
+        double PercentBodyFat { get; }
         Race Race { get; }
         IVitalSigns Vitals { get; }
     }

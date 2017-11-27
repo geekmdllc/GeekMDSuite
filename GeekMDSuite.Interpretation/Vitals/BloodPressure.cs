@@ -10,8 +10,7 @@ namespace GeekMDSuite.Interpretation.Vitals
         public BloodPressure(IPatient patient)
         {
             _bloodPressure = patient.Vitals.BloodPressure;
-            _bodyMassIndexClassification = new BodyMassIndex(patient).Classification;
-            // TODO: _bodyMassIndexClassification = BodyMassIndex.Classification(patient);
+            _bodyMassIndexClassification = BodyMassIndex.ClassifyBodyMassIndex(patient);
         }
         
         public Interpretation Interpretation => new InterpretationBuilder()
