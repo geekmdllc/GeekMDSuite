@@ -25,7 +25,7 @@ namespace GeekMDSuite.Interpretation.BodyComposition
             var fitness = Gender.IsGenotypeXy(gender) ? FitMaleLLN : FitFemaleLLN;
             var acceptable = Gender.IsGenotypeXy(gender) ? AcceptableMaleLLN : AcceptableFemaleLLN;
             var overfat = Gender.IsGenotypeXy(gender) ? OverFatMaleLLN : OverFatFemaleLLN;
-            return new BodyFatLimits(athletic, fitness, acceptable, overfat);;
+            return new BodyFatLimits(athletic, fitness, acceptable, overfat);
         }
 
         public static double AthleticMaleLLN = 6;
