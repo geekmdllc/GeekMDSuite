@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.Common.Models;
 using GeekMDSuite.Common.Tools;
+using GeekMDSuite.Interpretation.BodyComposition;
 
 namespace GeekMDSuite.Interpretation.Vitals
 {
@@ -9,10 +10,11 @@ namespace GeekMDSuite.Interpretation.Vitals
         public BloodPressureInterpretation(IPatient patient)
         {
             _patient = patient;
+            _bodyMassIndexCategory = BodyMassIndex.Classification(patient);
         }
         
         public Interpretation Interpretation => new InterpretationBuilder()
-            .SetTitle("Blood Pressure Interpretation")
+            .SetTitle("Blood Pressure Classification")
             .SetSummary(BuildSummary())
             .AddSection(BuildOverviewSection())
             .AddSection(BuildMakingChangesSection())
@@ -44,6 +46,7 @@ namespace GeekMDSuite.Interpretation.Vitals
         public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
         
         private IPatient _patient;
+        private BodyMassIndexCategory _bodyMassIndexCategory;
         
         private string BuildSummary()
         {

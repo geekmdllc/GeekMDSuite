@@ -38,7 +38,7 @@ namespace GeekMDSuite.Interpretation.Test
         private static Interpretation BuildInterpretation(InterpretationSection section1, InterpretationSection section2)
         {
             var interp = new InterpretationBuilder()
-                .SetTitle("Interpretation Title")
+                .SetTitle("Classification Title")
                 .SetSummary("Summary of interpretation")
                 .AddSection(section1)
                 .AddSection(section2)

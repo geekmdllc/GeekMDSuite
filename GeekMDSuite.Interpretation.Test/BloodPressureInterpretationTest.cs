@@ -41,7 +41,7 @@ namespace GeekMDSuite.Interpretation.Test
            
             Assert.Equal(BloodPressureStage.HypertensiveUrgency, bpStage);
         }
-        // TODO: Test the interpreation string for key words which suggest a proper interpretation.
+        // TODO: IMassMeasurement the interpreation string for key words which suggest a proper interpretation.
         
         private BloodPressureParameters _preHypertensionParameters = new BloodPressureParameters(133, 69, false);
         private BloodPressureParameters _hypertensiveEmergencyParameters = new BloodPressureParameters(200, 99, true);
