@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Common
 {
-    public enum Races
+    public enum Race
     {
         White,
         BlackOrAfricanAmerican,
