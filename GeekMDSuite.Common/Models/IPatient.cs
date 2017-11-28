@@ -4,10 +4,10 @@ namespace GeekMDSuite.Common.Models
 {
     public interface IPatient
     {
-        Gender Gender { get; }
+        IGender Gender { get; }
         ILengthMeasurement Height { get; }
         IMassMeasurement BodyWeight { get; }
-        Waist Waist { get; }
+        ILengthMeasurement Waist { get; }
         double PercentBodyFat { get; }
         Race Race { get; }
         IVitalSigns Vitals { get; }
