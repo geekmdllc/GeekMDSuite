@@ -5,7 +5,7 @@ using GeekMDSuite.Interpretation.BodyComposition;
 
 namespace GeekMDSuite.Interpretation.Vitals
 {
-    public class BloodPressure
+    public class BloodPressure : IInterpretable
     {
         public BloodPressure(IPatient patient)
         {

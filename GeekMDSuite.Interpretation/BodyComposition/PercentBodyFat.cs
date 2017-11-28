@@ -1,9 +1,12 @@
-﻿using GeekMDSuite.Common.Models;
+﻿using System;
+using GeekMDSuite.Common.Models;
 
 namespace GeekMDSuite.Interpretation.BodyComposition
 {
-    public static class PercentBodyFat
-    {       
+    public class PercentBodyFat : IInterpretable
+    {
+        public Interpretation Interpretation => throw new NotImplementedException();
+        
         public static PercentBodyFatClassification Interpret (IPatient patient) => Classify(patient);
 
         private static PercentBodyFatClassification Classify(IPatient patient)
@@ -38,6 +41,7 @@ namespace GeekMDSuite.Interpretation.BodyComposition
         public static double AcceptableFemaleLLN = 25;
         public static double OverFatMaleLLN = 25;
         public static double OverFatFemaleLLN = 32;
+        private Interpretation _interpretation;
 
         private class BodyFatLimits
         {
@@ -53,5 +57,6 @@ namespace GeekMDSuite.Interpretation.BodyComposition
             internal double Acceptable { get; }
             internal double OverFat { get; }
         }
+
     }
 }

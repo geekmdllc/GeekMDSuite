@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Common;
 
-namespace GeekMDSuite.Calculations
+namespace GeekMDSuite.Interpretation.Fitness
 {
     public class FitTreadmillScoreParameters
     {

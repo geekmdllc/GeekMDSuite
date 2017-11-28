@@ -1,9 +1,9 @@
 ﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
 using GeekMDSuite.Common.Tools;
+using GeekMDSuite.Interpretation.Fitness;
 using Xunit;
 
-namespace GeekMDSuite.Calculations.Test
+namespace GeekMDSuite.Interpretation.Test
 {
     public class MetabolicEquivalentsTest
     {

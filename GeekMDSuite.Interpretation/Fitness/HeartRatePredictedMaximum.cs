@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Calculations
+﻿namespace GeekMDSuite.Interpretation.Fitness
 {
     public static class HeartRatePredictedMaximum
     {

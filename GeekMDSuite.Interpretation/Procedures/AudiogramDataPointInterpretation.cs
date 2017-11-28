@@ -1,11 +1,16 @@
-﻿using GeekMDSuite.Common.Models;
+﻿using System;
+using GeekMDSuite.Common.Models;
 using GeekMDSuite.Common.Services;
 using GeekMDSuite.Common.Tools;
 
 namespace GeekMDSuite.Interpretation.Procedures
 {
-    public static class AudiogramDataPointInterpretation
+    public class AudiogramDataPointInterpretation : IInterpretable
     {
+        public Interpretation Interpretation => throw new NotImplementedException();
+        
+        private Interpretation _interpretation;
+
         public static AudiogramDatapoint Interpret(int value)
         {
             if (NormalRange.ContainsClosed(value)) 
@@ -23,5 +28,6 @@ namespace GeekMDSuite.Interpretation.Procedures
         public static Interval<int> ModerateRange => GetHearingLossRangeClassifications.GetRange(HearingLossClassification.Moderate);
         public static Interval<int> SevereRange => GetHearingLossRangeClassifications.GetRange(HearingLossClassification.Severe);
         public static Interval<int> ProfounRange => GetHearingLossRangeClassifications.GetRange(HearingLossClassification.Profound);
+
     }
 }

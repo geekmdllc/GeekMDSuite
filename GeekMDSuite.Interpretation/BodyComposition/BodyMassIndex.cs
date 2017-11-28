@@ -4,7 +4,7 @@ using GeekMDSuite.Common.Models;
 
 namespace GeekMDSuite.Interpretation.BodyComposition
 {
-    public class BodyMassIndex
+    public class BodyMassIndex : IInterpretable
     {
         public BodyMassIndex(IPatient patient)
         {
@@ -14,6 +14,8 @@ namespace GeekMDSuite.Interpretation.BodyComposition
             Value = CalculateBodyMassIndex(weightKilograms, heightMeters);
         }
 
+        public Interpretation Interpretation => throw new NotImplementedException();
+        
         public BodyMassIndexCategory Classification { get; }
         public double Value { get; }
 
@@ -22,26 +24,16 @@ namespace GeekMDSuite.Interpretation.BodyComposition
 
         public static BodyMassIndexCategory ClassifyBodyMassIndex(IPatient patient)
         {
-            var weightKilograms = patient.BodyWeight.Kilograms;
-            var heightMeters = patient.Height.Meters;
-            var bmi = CalculateBodyMassIndex(weightKilograms, heightMeters);
-            var race = patient.Race;
+            var bmi = CalculateBodyMassIndex(patient.BodyWeight.Kilograms, patient.Height.Meters);
+            var overWeightLowerLimit = patient.Race == Race.Asian ? OverWeightLowerLimitAsian : OverWeightLowerLimitNonAsian;
+            var obeseClass1LowerLimit = patient.Race == Race.Asian ? ObeseClass1LowerLimitAsian : ObeseClass1LowerLimitNonAsian;
             
-            var overWeightLowerLimit = race == Race.Asian 
-                ? OverWeightLowerLimitAsian : OverWeightLowerLimitNonAsian;
-            var obeseClass1LowerLimit = race == Race.Asian 
-                ? ObeseClass1LowerLimitAsian : ObeseClass1LowerLimitNonAsian;
+            if (bmi < UnderWeightLowerLimit) return BodyMassIndexCategory.SeverelyUnderweight;
+            if (bmi < NormalWeightLowerLimit) return BodyMassIndexCategory.Underweight;
+            if (bmi < overWeightLowerLimit) return BodyMassIndexCategory.NormalWeight;
+            if (bmi < obeseClass1LowerLimit) return BodyMassIndexCategory.OverWeight;
+            if (bmi < ObeseClass2LowerLimit) return BodyMassIndexCategory.ObesityClass1;
             
-            if (bmi < UnderWeightLowerLimit)
-                return BodyMassIndexCategory.SeverelyUnderweight;
-            if (bmi < NormalWeightLowerLimit)
-                return BodyMassIndexCategory.Underweight;
-            if (bmi < overWeightLowerLimit)
-                return BodyMassIndexCategory.NormalWeight;
-            if (bmi < obeseClass1LowerLimit)
-                return BodyMassIndexCategory.OverWeight;
-            if (bmi < ObeseClass2LowerLimit)
-                return BodyMassIndexCategory.ObesityClass1;
             return bmi < ObeseClass3LowerLimit ? BodyMassIndexCategory.ObesityClass2 : BodyMassIndexCategory.ObesityClass3;
         }
         
@@ -53,5 +45,7 @@ namespace GeekMDSuite.Interpretation.BodyComposition
         public static double ObeseClass1LowerLimitNonAsian = 30;
         public static double ObeseClass2LowerLimit = 35;
         public static double ObeseClass3LowerLimit = 40;
+        private Interpretation _interpretation;
+
     }
 }

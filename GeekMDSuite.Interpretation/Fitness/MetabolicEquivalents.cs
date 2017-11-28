@@ -1,7 +1,7 @@
 ﻿using GeekMDSuite.Common;
 using GeekMDSuite.Common.Tools;
 
-namespace GeekMDSuite.Calculations
+namespace GeekMDSuite.Interpretation.Fitness
 {
     public static class MetabolicEquivalents
     {

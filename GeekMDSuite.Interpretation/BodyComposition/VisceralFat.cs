@@ -1,7 +1,10 @@
-﻿namespace GeekMDSuite.Interpretation.BodyComposition
+﻿using System;
+
+namespace GeekMDSuite.Interpretation.BodyComposition
 {
-    public static class VisceralFat
+    public class VisceralFat : IInterpretable
     {
+        public Interpretation Interpretation => throw new NotImplementedException();
         
         public static VisceralFatClassification VisceralFatFlag (double visceralFat) => ClassifyVisceralFat(visceralFat);
         
@@ -16,6 +19,8 @@
                 : VisceralFatClassification.Excellent;
         }
         
-        public static readonly double UpperLimitNormal = 100;        
+        public static readonly double UpperLimitNormal = 100;
+        private Interpretation _interpretation;
+
     }
 }
