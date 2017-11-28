@@ -5,6 +5,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GeekMDSuite.Calculations\GeekMDSuite.Calculations.csproj" />
     <ProjectReference Include="..\GeekMDSuite.Common\GeekMDSuite.Common.csproj" />
+    <ProjectReference Include="..\GeekMDSuite\GeekMDSuite.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="2.0.1" />

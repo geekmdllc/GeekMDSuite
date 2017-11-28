@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Interpretation"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Interpretation.Test", "GeekMDSuite.Interpretation.Test\GeekMDSuite.Interpretation.Test.csproj", "{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Common", "GeekMDSuite.Common\GeekMDSuite.Common.csproj", "{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite", "GeekMDSuite\GeekMDSuite.csproj", "{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

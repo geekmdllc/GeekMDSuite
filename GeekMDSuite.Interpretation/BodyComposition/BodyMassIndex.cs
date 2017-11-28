@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite;
 using GeekMDSuite.Models;
 
 namespace GeekMDSuite.Interpretation.BodyComposition
