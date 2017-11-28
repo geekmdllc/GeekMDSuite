@@ -1,6 +1,4 @@
-﻿using GeekMDSuite.Models;
-using GeekMDSuite.Services;
-using Xunit;
+﻿using Xunit;
 
 namespace GeekMDSuite.Test.ProceduresTests
 {

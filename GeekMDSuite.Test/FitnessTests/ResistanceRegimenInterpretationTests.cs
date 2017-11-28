@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.Models;
 using Xunit;
 
 namespace GeekMDSuite.Test.FitnessTests

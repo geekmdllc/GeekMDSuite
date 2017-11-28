@@ -1,6 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Models;
-using GeekMDSuite.Services;
 
 namespace GeekMDSuite
 {

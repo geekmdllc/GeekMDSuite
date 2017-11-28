@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite
 {
-    public static class StretchingRegimenInterpretation
+    public static class CardiovascularRegimenInterpretation
     {
-        public static ExerciseRegimenClassification Interpret(StretchingRegimen regimen)
+        public static ExerciseRegimenClassification Interpret(CardiovascularRegimen regimen)
         {
             if (ExerciseRegimenInterpretation.DurationAndIntensityAreAdequate(regimen) 
                 && ExerciseRegimenInterpretation.TimeAspirationalOrHigher(regimen))
@@ -20,15 +20,15 @@ namespace GeekMDSuite
         public static double GoalMinutesModerateIntensity = GetExerciseGoalValues
             .TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).ModerateIntensity;
         
-        public static bool RegimenIsAdequate(StretchingRegimen regimen) => ExerciseRegimenInterpretation.DurationAndIntensityAreAdequate(regimen);
+        public static bool RegimenIsAdequate(CardiovascularRegimen regimen) => ExerciseRegimenInterpretation.DurationAndIntensityAreAdequate(regimen);
 
-        public static bool IntensityIsAdequate(StretchingRegimen regimen) =>
+        public static bool IntensityIsAdequate(CardiovascularRegimen regimen) =>
             ExerciseRegimenInterpretation.IntensityIsAdequate(regimen);
 
-        public static bool DurationIsAdequate(StretchingRegimen regimen) => 
+        public static bool DurationIsAdequate(CardiovascularRegimen regimen) => 
             ExerciseRegimenInterpretation.DurationIsAdequate(regimen);
 
-        public static double DurationPercentOfGoalAchieved(StretchingRegimen regimen) =>
+        public static double DurationPercentOfGoalAchieved(CardiovascularRegimen regimen) =>
             ExerciseRegimenInterpretation.DurationPercentOfGoalAchieved(regimen);
     }
 }

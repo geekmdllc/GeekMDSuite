@@ -1,6 +1,4 @@
-﻿using GeekMDSuite.Models;
-
-namespace GeekMDSuite
+﻿namespace GeekMDSuite
 {
     // To avoid confusion, this class was made internal and abstract. Classes 
     // requiring exposing these helper methods to library users wrap them.
