@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xunit;
 
-namespace GeekMDSuite.Test.FitnessTests
+namespace GeekMDSuite.Test
 {
     public class ResistanceRegimenInterpretationTests
     {

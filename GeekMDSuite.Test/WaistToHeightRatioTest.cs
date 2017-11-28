@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace GeekMDSuite.Test.BodyCompositionTests
+namespace GeekMDSuite.Test
 {
     public class WaistToHeightRatioTest
     {

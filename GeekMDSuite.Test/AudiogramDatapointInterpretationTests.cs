@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace GeekMDSuite.Test.ProceduresTests
+namespace GeekMDSuite.Test
 {
     public class AudiogramDatapointInterpretationTests
     {

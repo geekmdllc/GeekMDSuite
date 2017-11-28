@@ -1,7 +1,7 @@
 ﻿using Moq;
 using Xunit;
 
-namespace GeekMDSuite.Test.BodyCompositionTests
+namespace GeekMDSuite.Test
 {
     public class BodyMassIndexTest
     {
