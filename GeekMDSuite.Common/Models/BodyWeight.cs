@@ -1,6 +1,6 @@
-﻿using GeekMDSuite.Common.Tools;
-    
-namespace GeekMDSuite.Common.Models
+﻿using GeekMDSuite.Tools;
+
+namespace GeekMDSuite.Models
 {
     public class BodyWeight : IMassMeasurement
     {

@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Common.Services;
+﻿using GeekMDSuite.Services;
 using GeekMDSuite.Interpretation.Procedures;
 using Xunit;
 

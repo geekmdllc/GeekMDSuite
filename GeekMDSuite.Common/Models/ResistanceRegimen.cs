@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.Common.Services;
-using GeekMDSuite.Common.Tools;
+using GeekMDSuite.Services;
+using GeekMDSuite.Tools;
 
-namespace GeekMDSuite.Common.Models
+namespace GeekMDSuite.Models
 {
     public class ResistanceRegimen : ExerciseRegimenBase
     {

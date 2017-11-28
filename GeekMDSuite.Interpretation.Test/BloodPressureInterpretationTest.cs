@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Common.Models;
+﻿using GeekMDSuite.Models;
 using GeekMDSuite.Interpretation.Vitals;
 using Xunit;
 using Moq;

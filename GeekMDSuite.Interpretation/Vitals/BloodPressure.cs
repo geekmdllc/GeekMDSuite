@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.Common.Models;
-using GeekMDSuite.Common.Tools;
+using GeekMDSuite.Models;
+using GeekMDSuite.Tools;
 using GeekMDSuite.Interpretation.BodyComposition;
 
 namespace GeekMDSuite.Interpretation.Vitals

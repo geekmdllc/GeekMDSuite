@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GeekMDSuite.Common.Models;
+using GeekMDSuite.Models;
 
-namespace GeekMDSuite.Common.Models
+namespace GeekMDSuite.Models
 {
     public class AudiogramSet
     {

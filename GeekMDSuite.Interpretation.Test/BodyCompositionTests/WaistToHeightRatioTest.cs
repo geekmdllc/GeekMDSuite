@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
+﻿using GeekMDSuite;
+using GeekMDSuite.Models;
 using GeekMDSuite.Interpretation.BodyComposition;
 using Xunit;
 

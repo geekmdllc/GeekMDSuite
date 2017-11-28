@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.Common.Models;
-using GeekMDSuite.Common.Services;
+﻿using GeekMDSuite.Models;
+using GeekMDSuite.Services;
 using GeekMDSuite.Interpretation.Procedures;
 using Xunit;
 

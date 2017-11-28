@@ -1,5 +1,5 @@
-using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
+using GeekMDSuite;
+using GeekMDSuite.Models;
 using GeekMDSuite.Interpretation.Fitness;
 using Xunit;
 using Vo2Max = GeekMDSuite.Interpretation.Fitness.Vo2Max;

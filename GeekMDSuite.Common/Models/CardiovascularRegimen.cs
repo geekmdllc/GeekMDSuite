@@ -1,6 +1,6 @@
-﻿using GeekMDSuite.Common.Services;
+﻿using GeekMDSuite.Services;
 
-namespace GeekMDSuite.Common.Models
+namespace GeekMDSuite.Models
 {
     public class CardiovascularRegimen : ExerciseRegimenBase
     {

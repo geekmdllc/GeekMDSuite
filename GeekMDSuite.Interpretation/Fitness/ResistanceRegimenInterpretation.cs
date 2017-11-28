@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
-using GeekMDSuite.Common.Models;
-using GeekMDSuite.Common.Services;
-using GeekMDSuite.Common.Tools;
+using GeekMDSuite.Models;
+using GeekMDSuite.Services;
+using GeekMDSuite.Tools;
 using GeekMDSuite.Interpretation.Fitness;
 
 namespace GeekMDSuite.Interpretation

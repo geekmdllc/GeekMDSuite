@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeekMDSuite.Common.Tools
+namespace GeekMDSuite.Tools
 {
     public class TimeDuration
     {

@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Services;
+﻿using GeekMDSuite;
+using GeekMDSuite.Services;
 
 namespace GeekMDSuite.Interpretation.Procedures
 {

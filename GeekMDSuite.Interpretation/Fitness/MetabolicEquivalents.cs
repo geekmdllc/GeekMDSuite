@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.Common;
-using GeekMDSuite.Common.Tools;
+﻿using GeekMDSuite;
+using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Interpretation.Fitness
 {

@@ -1,7 +1,7 @@
-﻿using GeekMDSuite.Common.Models;
-using GeekMDSuite.Common.Tools;
+﻿using GeekMDSuite.Models;
+using GeekMDSuite.Tools;
 
-namespace GeekMDSuite.Common.Services
+namespace GeekMDSuite.Services
 {
     public static class GetExerciseGoalValues
     {

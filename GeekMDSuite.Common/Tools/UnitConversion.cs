@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Common.Tools
+﻿namespace GeekMDSuite.Tools
 {
     public static class UnitConversion
     {

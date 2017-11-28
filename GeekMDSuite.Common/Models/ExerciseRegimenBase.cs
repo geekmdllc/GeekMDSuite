@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeekMDSuite.Common.Models
+namespace GeekMDSuite.Models
 {
     public class ExerciseRegimenBase : IExerciseRegimen
     {

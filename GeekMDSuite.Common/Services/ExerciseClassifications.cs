@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Common.Services
+﻿namespace GeekMDSuite.Services
 {
     public enum ExerciseClassifications
     {

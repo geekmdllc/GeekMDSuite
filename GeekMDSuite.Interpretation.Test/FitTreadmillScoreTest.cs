@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Common;
+﻿using GeekMDSuite;
 using GeekMDSuite.Interpretation.Fitness;
 using Xunit;
 

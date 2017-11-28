@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Common.Models
+﻿namespace GeekMDSuite.Models
 {
     public struct ExerciseDurationGoals
     {

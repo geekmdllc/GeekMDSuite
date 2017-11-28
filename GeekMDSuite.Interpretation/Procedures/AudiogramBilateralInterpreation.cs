@@ -1,7 +1,7 @@
 ﻿using System;
-using GeekMDSuite.Common;
-using GeekMDSuite.Common.Models;
-using GeekMDSuite.Common.Services;
+using GeekMDSuite;
+using GeekMDSuite.Models;
+using GeekMDSuite.Services;
 
 namespace GeekMDSuite.Interpretation.Procedures
 {

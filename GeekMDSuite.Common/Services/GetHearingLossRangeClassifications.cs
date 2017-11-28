@@ -1,6 +1,6 @@
-﻿using GeekMDSuite.Common.Tools;
+﻿using GeekMDSuite.Tools;
 
-namespace GeekMDSuite.Common.Services
+namespace GeekMDSuite.Services
 {
     public static class GetHearingLossRangeClassifications
     {
