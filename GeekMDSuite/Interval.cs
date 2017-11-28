@@ -4,7 +4,6 @@ namespace GeekMDSuite
 {
     public class Interval<T> where T : struct, IComparable
     {
-        // TODO: The uppoer and lower are reversed.
         public Interval(T lower, T upper)
         {
             Upper = upper;

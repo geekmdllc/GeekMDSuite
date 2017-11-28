@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.Models;
-using Moq;
+﻿using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test.BodyCompositionTests

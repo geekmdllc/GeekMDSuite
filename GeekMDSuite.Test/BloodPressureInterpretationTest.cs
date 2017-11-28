@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.Models;
-using Xunit;
+﻿using Xunit;
 using Moq;
 
 namespace GeekMDSuite.Test

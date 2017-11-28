@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Services
+﻿namespace GeekMDSuite
 {
     public static class GetHearingLossRangeClassifications
     {

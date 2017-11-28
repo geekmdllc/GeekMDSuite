@@ -1,6 +1,4 @@
-﻿using GeekMDSuite.Services;
-
-namespace GeekMDSuite
+﻿namespace GeekMDSuite
 {
     public class StretchingRegimen : ExerciseRegimenBase
     {

@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Models
+﻿namespace GeekMDSuite
 {
     public class Waist : ILengthMeasurement
     {
