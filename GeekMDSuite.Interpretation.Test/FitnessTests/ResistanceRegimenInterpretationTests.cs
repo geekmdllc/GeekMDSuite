@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.Models;
-using GeekMDSuite.Interpretation.Fitness;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test.FitnessTests
@@ -10,7 +9,7 @@ namespace GeekMDSuite.Interpretation.Test.FitnessTests
         [Fact]
         public void Interpret_GivenAllAdequateValues_ReturnsAdequate()
         {
-            var result = ResistanceRegimenInterpretation.Interpret(
+            var result = GeekMDSuite.ResistanceRegimenInterpretation.Interpret(
                 new ResistanceRegimen(
                     new ExerciseRegimenBase(3,45,ExerciseIntensity.High),
                     60,
@@ -29,7 +28,7 @@ namespace GeekMDSuite.Interpretation.Test.FitnessTests
         [Fact]
         public void Interpret_GivenAspirationalDurationAndAdequateElse_ReturnsAspirational()
         {
-            var result = ResistanceRegimenInterpretation.Interpret(
+            var result = GeekMDSuite.ResistanceRegimenInterpretation.Interpret(
                 new ResistanceRegimen(
                     new ExerciseRegimenBase(3,90,ExerciseIntensity.High),
                     60,
@@ -48,7 +47,7 @@ namespace GeekMDSuite.Interpretation.Test.FitnessTests
         [Fact]
         public void Interpret_GivenAdequateExceptInsufficientFeatures_ReturnsInsufficent()
         {
-            var result = ResistanceRegimenInterpretation.Interpret(
+            var result = GeekMDSuite.ResistanceRegimenInterpretation.Interpret(
                 new ResistanceRegimen(
                     new ExerciseRegimenBase(3,90,ExerciseIntensity.High),
                     60,

@@ -10,4 +10,10 @@
   <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="2.0.1" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BodyComposition" />
+    <Folder Include="Fitness" />
+    <Folder Include="Procedures" />
+    <Folder Include="Vitals" />
+  </ItemGroup>
 </Project>

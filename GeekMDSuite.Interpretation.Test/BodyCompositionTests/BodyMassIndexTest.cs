@@ -1,6 +1,5 @@
 ﻿using GeekMDSuite;
 using GeekMDSuite.Models;
-using GeekMDSuite.Interpretation.BodyComposition;
 using Moq;
 using Xunit;
 

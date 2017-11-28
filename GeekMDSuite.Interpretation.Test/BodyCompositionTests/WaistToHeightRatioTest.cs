@@ -1,6 +1,5 @@
 ﻿using GeekMDSuite;
 using GeekMDSuite.Models;
-using GeekMDSuite.Interpretation.BodyComposition;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test.BodyCompositionTests

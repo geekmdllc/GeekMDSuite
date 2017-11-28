@@ -1,6 +1,5 @@
 ﻿using GeekMDSuite.Models;
 using GeekMDSuite.Services;
-using GeekMDSuite.Interpretation.Procedures;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test.ProceduresTests

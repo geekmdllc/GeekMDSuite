@@ -1,7 +1,6 @@
 ﻿using System;
 using GeekMDSuite;
 using GeekMDSuite.Tools;
-using GeekMDSuite.Interpretation.Fitness;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test

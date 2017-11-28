@@ -1,9 +1,0 @@
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/bin/Debug/netstandard2.0/GeekMDSuite.Common.deps.json
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/bin/Debug/netstandard2.0/GeekMDSuite.Common.dll
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/bin/Debug/netstandard2.0/GeekMDSuite.Common.pdb
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/obj/Debug/netstandard2.0/GeekMDSuite.Common.csproj.CoreCompileInputs.cache
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/obj/Debug/netstandard2.0/GeekMDSuite.Common.AssemblyInfo.cs
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/obj/Debug/netstandard2.0/GeekMDSuite.Common.dll
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/obj/Debug/netstandard2.0/GeekMDSuite.Common.pdb
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/obj/Debug/netstandard2.0/GeekMDSuite.Common.csprojResolveAssemblyReference.cache
-/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Common/obj/Debug/netstandard2.0/GeekMDSuite.Common.AssemblyInfoInputs.cache

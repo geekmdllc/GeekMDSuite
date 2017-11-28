@@ -1,5 +1,4 @@
 ﻿using GeekMDSuite;
-using GeekMDSuite.Interpretation.Fitness;
 using Xunit;
 
 namespace GeekMDSuite.Interpretation.Test

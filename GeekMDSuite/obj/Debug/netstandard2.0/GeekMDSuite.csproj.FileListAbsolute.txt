@@ -1,0 +1,8 @@
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/bin/Debug/netstandard2.0/GeekMDSuite.deps.json
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/bin/Debug/netstandard2.0/GeekMDSuite.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/bin/Debug/netstandard2.0/GeekMDSuite.pdb
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/obj/Debug/netstandard2.0/GeekMDSuite.csproj.CoreCompileInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/obj/Debug/netstandard2.0/GeekMDSuite.AssemblyInfoInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/obj/Debug/netstandard2.0/GeekMDSuite.AssemblyInfo.cs
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/obj/Debug/netstandard2.0/GeekMDSuite.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite/obj/Debug/netstandard2.0/GeekMDSuite.pdb
