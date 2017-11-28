@@ -5,8 +5,6 @@ namespace GeekMDSuite
     public class AudiogramDataPointInterpretation : IInterpretable
     {
         public Interpretation Interpretation => throw new NotImplementedException();
-        
-        private Interpretation _interpretation;
 
         public static AudiogramDatapoint Interpret(int value)
         {

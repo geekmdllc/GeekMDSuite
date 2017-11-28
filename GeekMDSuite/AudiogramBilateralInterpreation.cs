@@ -6,8 +6,6 @@ namespace GeekMDSuite
     {
         public Interpretation Interpretation => throw new NotImplementedException();
 
-        private Interpretation _interpretation;
-
         public static AudiogramInterpretationResult Interpret(Audiogram audiogram)
         {
             return new AudiogramInterpretationResult
