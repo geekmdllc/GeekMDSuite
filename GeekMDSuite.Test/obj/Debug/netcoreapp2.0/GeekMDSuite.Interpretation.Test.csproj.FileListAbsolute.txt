@@ -1,0 +1,3 @@
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Interpretation.Test/obj/Debug/netcoreapp2.0/GeekMDSuite.Interpretation.Test.csproj.CoreCompileInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Interpretation.Test/obj/Debug/netcoreapp2.0/GeekMDSuite.Interpretation.Test.AssemblyInfoInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Interpretation.Test/obj/Debug/netcoreapp2.0/GeekMDSuite.Interpretation.Test.AssemblyInfo.cs
