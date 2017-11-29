@@ -1,18 +1,9 @@
 ﻿namespace GeekMDSuite
 {
-    public class Height : ILengthMeasurement 
+    public class Height : LengthMeasurement
     {
-        private double _inches;
-
-        public Height(double inches)
+        public Height(double inches) : base(inches)
         {
-            _inches = inches;
         }
-
-        public double Inches => _inches;
-
-        public double Centimeters => UnitConversion.InchesToCentimeters(Inches);
-
-        public double Meters => UnitConversion.CentimetersToMeters(Centimeters);
     }
 }

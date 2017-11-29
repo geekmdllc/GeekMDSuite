@@ -1,10 +1,17 @@
 ﻿namespace GeekMDSuite
 {
-    public class Waist : ILengthMeasurement
+    public class Waist : LengthMeasurement
+    {
+        public Waist(double inches) : base(inches)
+        {
+        }
+    }
+    
+    public abstract class LengthMeasurement : ILengthMeasurement
     {
         private double _inches;
 
-        public Waist(double inches)
+        public LengthMeasurement(double inches)
         {
             _inches = inches;
         }

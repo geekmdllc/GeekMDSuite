@@ -8,8 +8,8 @@ namespace GeekMDSuite
         
         public static WaistToHeightRatioClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
         
-        public static double WaistToHeightRatioCalculation(IPatient patient) => 
-            patient.Waist.Centimeters / patient.Height.Centimeters;
+        public static double WaistToHeightRatioCalculation(IBodyComposition bodyComposition) => 
+            bodyComposition.Waist.Centimeters / bodyComposition.Height.Centimeters;
         
         private  static WaistToHeightRatioClassification Classify(GenderIdentity gender, double result)
         {

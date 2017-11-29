@@ -4,10 +4,9 @@ namespace GeekMDSuite
 {
     public class BloodPressure : IInterpretable
     {
-        public BloodPressure(IPatient patient)
+        public BloodPressure(BloodPressureParameters bloodPressure)
         {
-            _bloodPressure = patient.Vitals.BloodPressure;
-            _bodyMassIndexClassification = BodyMassIndex.ClassifyBodyMassIndex(patient);
+            _bloodPressure = bloodPressure;
         }
         
         public Interpretation Interpretation => new InterpretationBuilder()
@@ -43,8 +42,6 @@ namespace GeekMDSuite
         public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
         
         private readonly BloodPressureParameters _bloodPressure;
-        
-        private BodyMassIndexCategory _bodyMassIndexClassification;
         
         private string BuildSummary()
         {

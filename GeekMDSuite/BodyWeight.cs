@@ -2,16 +2,14 @@
 {
     public class BodyWeight : IMassMeasurement
     {
-        private double _pounds;
-
         public BodyWeight(double pounds)
         {
-            _pounds = pounds;
+            Pounds = pounds;
         }
 
-        public double Pounds => _pounds;
+        public double Pounds { get; }
 
-        public double Kilograms => UnitConversion.LbsToKilograms(_pounds);
+        public double Kilograms => UnitConversion.LbsToKilograms(Pounds);
 
         public double Grams => UnitConversion.KilogramsToGrams(Kilograms);
     }
