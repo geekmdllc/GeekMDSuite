@@ -2,7 +2,7 @@
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Tools.MeasurementUnits;
 
-namespace GeekMDSuite.Tools.Math.Fitness
+namespace GeekMDSuite
 {
     public static class Vo2Max
     {

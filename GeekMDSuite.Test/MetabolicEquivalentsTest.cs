@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.Tools.Math.Fitness;
-using GeekMDSuite.Tools.MeasurementUnits;
+﻿using GeekMDSuite.Tools.MeasurementUnits;
 using Xunit;
 
 namespace GeekMDSuite.Test

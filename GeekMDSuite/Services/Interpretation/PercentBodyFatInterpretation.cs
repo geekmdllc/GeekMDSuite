@@ -1,7 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Tools;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Services.Interpretation
 {
     public class PercentBodyFatInterpretation : IInterpretable
     {
@@ -10,7 +10,7 @@ namespace GeekMDSuite
             _genderIdentity = genderIdentity;
             _percentBodyFat = percentBodyFat;
         }
-        public Interpretation Interpretation => throw new NotImplementedException();
+        public Tools.Interpretation Interpretation => throw new NotImplementedException();
         public double Value => _percentBodyFat;
         
         public static PercentBodyFatClassification Interpret (double percentBodyFat, GenderIdentity genderIdentity) => 

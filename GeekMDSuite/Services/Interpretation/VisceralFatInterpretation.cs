@@ -1,11 +1,11 @@
 ﻿using System;
 using GeekMDSuite.Tools;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Services.Interpretation
 {
-    public class VisceralFat : IInterpretable
+    public class VisceralFatInterpretation : IInterpretable
     {
-        public Interpretation Interpretation => throw new NotImplementedException();
+        public Tools.Interpretation Interpretation => throw new NotImplementedException();
         
         public static VisceralFatClassification VisceralFatFlag (double visceralFat) => ClassifyVisceralFat(visceralFat);
         
@@ -21,7 +21,7 @@ namespace GeekMDSuite
         }
         
         public static readonly double UpperLimitNormal = 100;
-        private Interpretation _interpretation;
+        private Tools.Interpretation _interpretation;
 
     }
 }

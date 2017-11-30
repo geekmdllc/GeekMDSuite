@@ -1,17 +1,17 @@
 ﻿using System;
 using GeekMDSuite.Tools;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Services.Interpretation
 {
-    public class BodyMassIndex : IInterpretable
+    public class BodyMassIndexInterpretation : IInterpretable
     {
-        public BodyMassIndex( IBodyComposition bodyComposition, Race race)
+        public BodyMassIndexInterpretation( IBodyComposition bodyComposition, Race race)
         {
             Classification = ClassifyBodyMassIndex(bodyComposition, race);
             Value = CalculateBodyMassIndex(bodyComposition.Weight.Kilograms, bodyComposition.Height.Meters);
         }
 
-        public Interpretation Interpretation => throw new NotImplementedException();
+        public Tools.Interpretation Interpretation => throw new NotImplementedException();
         public BodyMassIndexCategory Classification { get; }
         public double Value { get; }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Tools;
-using GeekMDSuite.Tools.Math.Fitness;
 using GeekMDSuite.Tools.MeasurementUnits;
 using Xunit;
 

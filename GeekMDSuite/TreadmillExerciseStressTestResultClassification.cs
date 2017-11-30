@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite
 {
-    public enum TreadmillExerciseStressTestResultFlag
+    public enum TreadmillExerciseStressTestResultClassification
     {
         NoneSelected = 0,
         Normal = 1,

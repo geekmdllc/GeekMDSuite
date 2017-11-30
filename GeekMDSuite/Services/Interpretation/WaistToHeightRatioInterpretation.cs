@@ -1,11 +1,11 @@
 ﻿using System;
 using GeekMDSuite.Tools;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Services.Interpretation
 {
-    public class WaistToHeightRatio : IInterpretable
+    public class WaistToHeightRatioInterpretation : IInterpretable
     {
-        public Interpretation Interpretation => throw new NotImplementedException();
+        public Tools.Interpretation Interpretation => throw new NotImplementedException();
         
         public static WaistToHeightRatioClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
         
@@ -44,7 +44,7 @@ namespace GeekMDSuite
         public static double VeryOverweightFemaleLLN = 0.54;
         public static double MorbidlyObeseMaleLLN = 0.63;
         public static double MoribdlyObeseFemaleLLN = 0.58;
-        private Interpretation _interpretation;
+        private Tools.Interpretation _interpretation;
 
     }
 }
