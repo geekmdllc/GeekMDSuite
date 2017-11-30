@@ -1,4 +1,7 @@
 ﻿using System;
+using GeekMDSuite.Procedures;
+using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite
 {
@@ -8,7 +11,7 @@ namespace GeekMDSuite
         {
             return Classify(vo2Max, genders, ageInYears);
         }
-                public static double Calculate(TreadmillProtocol protocol, TimeDuration time, GenderIdentity gender)
+        public static double Calculate(TreadmillProtocol protocol, TimeDuration time, GenderIdentity gender)
         {
             return ProtocolSpecificCalculation(gender, protocol, time);
         }

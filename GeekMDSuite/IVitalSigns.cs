@@ -1,11 +1,13 @@
-﻿namespace GeekMDSuite
+﻿using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.MeasurementUnits;
+
+namespace GeekMDSuite
 {
     public interface IVitalSigns
     {
         BloodPressureParameters BloodPressure { get; }
         int OxygenSaturation { get; }
         int PulseRate { get; }
-        double TemperatureFarenheit { get; }
-        double TemperatureCelcius { get; }
+        Temperature Temperature { get; }
     }
 }

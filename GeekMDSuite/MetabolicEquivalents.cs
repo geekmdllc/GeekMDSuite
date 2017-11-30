@@ -1,4 +1,7 @@
-﻿namespace GeekMDSuite
+﻿using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.MeasurementUnits;
+
+namespace GeekMDSuite
 {
     public static class MetabolicEquivalents
     {

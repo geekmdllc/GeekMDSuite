@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.MeasurementUnits;
+using Xunit;
 
 namespace GeekMDSuite.Test
 {

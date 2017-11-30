@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using GeekMDSuite.Procedures;
+using Xunit;
 
 namespace GeekMDSuite.Test
 {
@@ -6,32 +7,35 @@ namespace GeekMDSuite.Test
     {
         private readonly GenderIdentity _female = GenderIdentity.Female;
         private readonly GenderIdentity _male = GenderIdentity.Male;
-        private readonly double _age = 63;
-        private readonly double _metabolicEquivalents = 8;
-        private readonly double _percentMaxHeartRateReached = 105.3;
-        private readonly double _maleScoreOffset = -43;
-        private readonly double _testFitScore = 39;
-        
+        private const double Age = 63;
+        private const double MetabolicEquivalents = 8;
+        private const double PercentMaxHeartRateReached = 105.3;
+        private const double MaleScoreOffset = -43;
+        private const int TestFitScore = 39;
+
         [Fact]
         public void FitScoreReturnsCorrectFemaleValue()
         {
-            var fitScore = FitTreadmillScore.CalculateScore(new FitTreadmillScoreParameters(_female, _age, _percentMaxHeartRateReached, _metabolicEquivalents));
+            var fitParams = new FitTreadmillScoreParameters(_female, Age, PercentMaxHeartRateReached, MetabolicEquivalents);
+            var fitScore = new FitTreadmillScore(fitParams).Value;
 
             Assert.InRange(fitScore, -8, -7);
         }
         [Fact]
         public void FitScoreReturnsCorrecMaleValue()
         {
-            var fitScore = FitTreadmillScore.CalculateScore(new FitTreadmillScoreParameters(_male, _age, _percentMaxHeartRateReached, _metabolicEquivalents));
+            var fitParams = new FitTreadmillScoreParameters(_male, Age, PercentMaxHeartRateReached, MetabolicEquivalents);
+            var fitScore = new FitTreadmillScore(fitParams).Value;
 
-            Assert.InRange(fitScore, -8 + _maleScoreOffset, -7 + _maleScoreOffset);
+            Assert.InRange(fitScore, -8 + MaleScoreOffset, -7 + MaleScoreOffset);
         }
 
         [Fact]
         public void ReturnsCorrectTenYearMortality()
         {
-            var tenYearMortality = FitTreadmillScore.TenYearMortality(_testFitScore);
-            Assert.Equal(3, tenYearMortality);
+            var fitParams = new  FitTreadmillScoreParameters(GenderIdentity.Male, 55, 155, 10.5);
+            var fitScore = new FitTreadmillScore(fitParams);
+            Assert.Equal(3, fitScore.TenYearMortality);
         }
     }
 }

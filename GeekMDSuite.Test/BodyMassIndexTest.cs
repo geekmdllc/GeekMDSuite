@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using System;
+using GeekMDSuite.Tools;
+using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test

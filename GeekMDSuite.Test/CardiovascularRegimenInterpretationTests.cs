@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using GeekMDSuite.BehavioralAnalysis;
+using Xunit;
 
 namespace GeekMDSuite.Test
 {

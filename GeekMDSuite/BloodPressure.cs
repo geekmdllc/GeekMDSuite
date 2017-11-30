@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite
 {

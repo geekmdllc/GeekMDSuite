@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using GeekMDSuite.Procedures;
+using Xunit;
 
 namespace GeekMDSuite.Test
 {

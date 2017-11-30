@@ -1,4 +1,6 @@
 ﻿using System;
+using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite
 {

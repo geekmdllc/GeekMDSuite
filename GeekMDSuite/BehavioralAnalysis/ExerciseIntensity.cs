@@ -1,0 +1,11 @@
+﻿namespace GeekMDSuite.BehavioralAnalysis
+{
+    public enum ExerciseIntensity
+    {
+        Low,
+        Moderate,
+        High,
+        Vigorous,
+        None
+    }
+}
