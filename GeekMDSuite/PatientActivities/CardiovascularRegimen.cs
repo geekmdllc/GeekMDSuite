@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Services.Exericse;
 
-namespace GeekMDSuite.BehavioralAnalysis
+namespace GeekMDSuite.PatientActivities
 {
     public class CardiovascularRegimen : ExerciseRegimenBase
     {

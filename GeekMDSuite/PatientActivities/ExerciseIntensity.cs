@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.BehavioralAnalysis
+﻿namespace GeekMDSuite.PatientActivities
 {
     public enum ExerciseIntensity
     {

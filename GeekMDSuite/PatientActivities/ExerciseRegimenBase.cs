@@ -1,7 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Services.Exericse;
 
-namespace GeekMDSuite.BehavioralAnalysis
+namespace GeekMDSuite.PatientActivities
 {
     public class ExerciseRegimenBase : IExerciseRegimen
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using GeekMDSuite.BehavioralAnalysis;
+using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Exericse;
 using GeekMDSuite.Tools;
 

@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.BehavioralAnalysis;
+﻿using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Exericse
