@@ -4,8 +4,6 @@ namespace GeekMDSuite
 {
     public class ResistanceRegimen : ExerciseRegimenBase
     {
-        private bool _regimenIsAdequate;
-
         public ResistanceRegimen(
             ExerciseRegimenBase baseRegimen,
             int secondsRestDurationPerSet,
@@ -25,7 +23,7 @@ namespace GeekMDSuite
                                      && FeaturesOfRegimenAreIdeal                                                
                                      && RestIntervalGoalRange.ContainsOpen(SecondsRestDurationPerSet);
 
-        public ExerciseRegimenClassification Classify
+        public override ExerciseRegimenClassification Classification
         {
             get
             {

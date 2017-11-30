@@ -10,7 +10,7 @@
 
         public sealed override ExerciseDurationGoals Goals { get; }
         
-        public ExerciseRegimenClassification Classification
+        public override ExerciseRegimenClassification Classification
         {
             get
             {

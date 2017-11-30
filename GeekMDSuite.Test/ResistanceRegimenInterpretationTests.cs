@@ -18,7 +18,7 @@ namespace GeekMDSuite.Test
                         ResistenceRegimenFeatures.PushingMovementsPerformed,
                         ResistenceRegimenFeatures.UpperBodyTrained,
                         ResistenceRegimenFeatures.RepetitionsToNearFailure
-                    }).Classify;
+                    }).Classification;
             
             Assert.Equal(ExerciseRegimenClassification.Adequate, result);
         }
@@ -36,7 +36,7 @@ namespace GeekMDSuite.Test
                         ResistenceRegimenFeatures.PushingMovementsPerformed,
                         ResistenceRegimenFeatures.UpperBodyTrained,
                         ResistenceRegimenFeatures.RepetitionsToNearFailure
-                    }).Classify;
+                    }).Classification;
             
             Assert.Equal(ExerciseRegimenClassification.Aspirational, result);
         }
@@ -52,7 +52,7 @@ namespace GeekMDSuite.Test
                         ResistenceRegimenFeatures.PushingMovementsPerformed,
                         ResistenceRegimenFeatures.UpperBodyTrained,
                         ResistenceRegimenFeatures.RepetitionsToNearFailure
-                    }).Classify;
+                    }).Classification;
             
             Assert.Equal(ExerciseRegimenClassification.Insufficient, result);
         }

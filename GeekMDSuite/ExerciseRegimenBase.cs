@@ -4,6 +4,7 @@ namespace GeekMDSuite
 {
     public class ExerciseRegimenBase : IExerciseRegimen
     {
+
         public ExerciseRegimenBase (double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
         {
             SessionsPerWeek = sessionsPerWeek;
@@ -13,7 +14,9 @@ namespace GeekMDSuite
         public double SessionsPerWeek { get; set; }
         public double AverageSessionDuration { get; set; }
         public ExerciseIntensity Intensity { get; set; }
-        
+
+        public virtual ExerciseRegimenClassification Classification => throw new NotImplementedException();
+
         public virtual ExerciseDurationGoals Goals => throw new NotImplementedException();
         
         public double TotalMinutes => SessionsPerWeek * AverageSessionDuration;

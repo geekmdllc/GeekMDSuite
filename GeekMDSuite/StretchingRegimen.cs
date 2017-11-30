@@ -12,13 +12,16 @@ namespace GeekMDSuite
         }
         public sealed override ExerciseDurationGoals Goals { get; }
         
-        public ExerciseRegimenClassification Classify()
+        public override ExerciseRegimenClassification Classification
         {
-            if (DurationAndIntensityAreAdequate && TimeAspirationalOrHigher)
-                return ExerciseRegimenClassification.Aspirational;
-            return DurationAndIntensityAreAdequate  && TimeGoalOrHigher
-                ? ExerciseRegimenClassification.Adequate
-                : ExerciseRegimenClassification.Insufficient;
+            get
+            {
+                if (DurationAndIntensityAreAdequate && TimeAspirationalOrHigher)
+                    return ExerciseRegimenClassification.Aspirational;
+                return DurationAndIntensityAreAdequate  && TimeGoalOrHigher
+                    ? ExerciseRegimenClassification.Adequate
+                    : ExerciseRegimenClassification.Insufficient;
+            }
         }
 
         public Interpretation Interpretation => throw new NotImplementedException();
