@@ -21,7 +21,7 @@ namespace GeekMDSuite
             get
             {
                 var stage = BloodPressureStage.Normotension;
-                foreach (var description in GetBloodPressureStageDescriptions())
+                foreach (var description in GetBloodPressureStageParameters())
                 {
                     if (description.Contains(_bloodPressure))
                         stage = description.Stage;
@@ -42,6 +42,111 @@ namespace GeekMDSuite
         public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
         
         private readonly BloodPressureParameters _bloodPressure;
+        
+        private static List<BloodStageParameters> GetBloodPressureStageParameters()
+        {
+            return new List<BloodStageParameters>()
+            {
+                GetHypotensionStageParameters(),
+                GetNormotensionStageParameters(),
+                GetPrehypertensionStageParameters(),
+                GetStage1HypertensionParameters(),
+                GetStage2HypertensionParameters(),
+                GetHypertensiveUrgencyParameters(),
+                GetHypertensiveEmergencyParameters()
+            };
+        }
+        
+        private class BloodStageParameters
+        {
+            internal Interval<int> SystolicInterval { get; }
+            internal Interval<int> DiastolicInterval { get; }
+            internal BloodPressureStage Stage { get; }
+            internal bool OrganDamage { get; }
+
+            internal BloodStageParameters(Interval<int> systolicInterval, Interval<int> diastolicInterval, BloodPressureStage stage, bool organDamage)
+            {
+                SystolicInterval = systolicInterval;
+                DiastolicInterval = diastolicInterval;
+                Stage = stage;
+                OrganDamage = organDamage;
+            }
+
+            internal bool Contains(BloodPressureParameters parameters) =>
+            (
+                Stage == BloodPressureStage.HypertensiveEmergency &&  OrganDamage ? 
+                    (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic)) && parameters.OrganDamage :
+                    (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic))
+            );
+        }
+
+        private static BloodStageParameters GetHypertensiveEmergencyParameters()
+        {
+            return DifferentiateHypertensiveUrgencyVsEmergencyByOrganDamage(true);
+        }
+
+        private static BloodStageParameters GetHypertensiveUrgencyParameters()
+        {
+            return DifferentiateHypertensiveUrgencyVsEmergencyByOrganDamage(false);
+        }
+
+        private static BloodStageParameters DifferentiateHypertensiveUrgencyVsEmergencyByOrganDamage(
+            bool organDamagePresent)
+        {
+            var ceilingPressure = 500;
+            return new BloodStageParameters(
+                new Interval<int>(SystolicLowerLimitofHypertensiveUrgency, ceilingPressure),
+                new Interval<int>(DiastolicLowerLimitOfHypertensiveUrgency, ceilingPressure),
+                organDamagePresent ? BloodPressureStage.HypertensiveEmergency : BloodPressureStage.HypertensiveUrgency,
+                organDamagePresent);
+        }
+
+        private static BloodStageParameters GetStage2HypertensionParameters()
+        {
+            return new BloodStageParameters(
+                new Interval<int>(SystolicLowerLimitOfStage2Hypertension, SystolicLowerLimitofHypertensiveUrgency),
+                new Interval<int>(DiastolicLowerLimitOfStage2Hypertension, DiastolicLowerLimitOfHypertensiveUrgency),
+                BloodPressureStage.Stage2Hypertension,
+                false);
+        }
+
+        private static BloodStageParameters GetStage1HypertensionParameters()
+        {
+            return new BloodStageParameters(
+                new Interval<int>(SystolicLowerLimitOfStage1Hypertension, SystolicLowerLimitOfStage2Hypertension),
+                new Interval<int>(DiastolicLowerLimitOfStage1Hypertension, DiastolicLowerLimitOfStage2Hypertension),
+                BloodPressureStage.Stage1Hypertension,
+                false);
+        }
+
+        private static BloodStageParameters GetPrehypertensionStageParameters()
+        {
+            return new BloodStageParameters(
+                new Interval<int>(SystolicLowerLimitOfPrehypertension, SystolicLowerLimitOfStage1Hypertension),
+                new Interval<int>(DiastolicLowerLimitOfPrehypertension, DiastolicLowerLimitOfStage1Hypertension),
+                BloodPressureStage.PreHypertension,
+                false);
+        }
+
+        private static BloodStageParameters GetNormotensionStageParameters()
+        {
+            return new BloodStageParameters(
+                new Interval<int>(SystolicLowerLimitOfNormal, SystolicLowerLimitOfPrehypertension),
+                new Interval<int>(DiastolicLowerLimitOfNormal, DiastolicLowerLimitOfPrehypertension),
+                BloodPressureStage.Normotension,
+                false);
+        }
+
+        private static BloodStageParameters GetHypotensionStageParameters()
+        {
+            var floorPressure = 0;
+            return new BloodStageParameters(
+                new Interval<int>(floorPressure, SystolicLowerLimitOfNormal),
+                new Interval<int>(floorPressure, DiastolicLowerLimitOfNormal),
+                BloodPressureStage.Hypotension,
+                false);
+        }
+
         
         private string BuildSummary()
         {
@@ -143,71 +248,5 @@ namespace GeekMDSuite
             return section.Build();
         }
         
-        private static List<StageDescription> GetBloodPressureStageDescriptions()
-        {
-            var floorPressure = 0;
-            var ceilingPressure = 500;
-            return new List<StageDescription>()
-            {
-                new StageDescription(
-                    new Interval<int>(floorPressure, SystolicLowerLimitOfNormal),
-                    new Interval<int>(floorPressure, DiastolicLowerLimitOfNormal),
-                    BloodPressureStage.Hypotension,
-                    false),
-                new StageDescription(
-                    new Interval<int>(SystolicLowerLimitOfNormal, SystolicLowerLimitOfPrehypertension),
-                    new Interval<int>(DiastolicLowerLimitOfNormal, DiastolicLowerLimitOfPrehypertension),
-                    BloodPressureStage.Normotension,
-                    false),
-                new StageDescription(
-                    new Interval<int>(SystolicLowerLimitOfPrehypertension, SystolicLowerLimitOfStage1Hypertension),
-                    new Interval<int>(DiastolicLowerLimitOfPrehypertension, DiastolicLowerLimitOfStage1Hypertension),
-                    BloodPressureStage.PreHypertension,
-                    false),
-                new StageDescription(
-                    new Interval<int>(SystolicLowerLimitOfStage1Hypertension, SystolicLowerLimitOfStage2Hypertension),
-                    new Interval<int>(DiastolicLowerLimitOfStage1Hypertension, DiastolicLowerLimitOfStage2Hypertension),
-                    BloodPressureStage.Stage1Hypertension,
-                    false),
-                new StageDescription(
-                    new Interval<int>(SystolicLowerLimitOfStage2Hypertension, SystolicLowerLimitofHypertensiveUrgency),
-                    new Interval<int>(DiastolicLowerLimitOfStage2Hypertension, DiastolicLowerLimitOfHypertensiveUrgency),
-                    BloodPressureStage.Stage2Hypertension,
-                    false),
-                new StageDescription(
-                    new Interval<int>(SystolicLowerLimitofHypertensiveUrgency, ceilingPressure),
-                    new Interval<int>(DiastolicLowerLimitOfHypertensiveUrgency, ceilingPressure),
-                    BloodPressureStage.HypertensiveUrgency,
-                    false),
-                new StageDescription(
-                    new Interval<int>(SystolicLowerLimitofHypertensiveUrgency, ceilingPressure),
-                    new Interval<int>(DiastolicLowerLimitOfHypertensiveUrgency, ceilingPressure),
-                    BloodPressureStage.HypertensiveEmergency,
-                    true)
-            };
-        }
-        
-        private class StageDescription
-        {
-            internal Interval<int> SystolicInterval { get; }
-            internal Interval<int> DiastolicInterval { get; }
-            internal BloodPressureStage Stage { get; }
-            internal bool OrganDamage { get; }
-
-            internal StageDescription(Interval<int> systolicInterval, Interval<int> diastolicInterval, BloodPressureStage stage, bool organDamage)
-            {
-                SystolicInterval = systolicInterval;
-                DiastolicInterval = diastolicInterval;
-                Stage = stage;
-                OrganDamage = organDamage;
-            }
-
-            internal bool Contains(BloodPressureParameters parameters) =>
-            (
-                Stage == BloodPressureStage.HypertensiveEmergency &&  OrganDamage ? 
-                    (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic)) && parameters.OrganDamage :
-                    (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic))
-            );
-        }
     }
 }

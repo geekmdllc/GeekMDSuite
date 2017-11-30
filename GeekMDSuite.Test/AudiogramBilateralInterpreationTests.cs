@@ -7,58 +7,46 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Interpret_GivenLeftSideWorseAt55db_ReturnsLeftSidedModerateHearingLoss()
         {
-            var result = AudiogramBilateralInterpreation.Interpret(new Audiogram{
-                    Left = new AudiogramSet
-                    {
-                        F1000 = AudiogramDataPointInterpretation.Interpret(55)
-                    },
-                    Right = new AudiogramSet
-                    {
-                        F2000 = AudiogramDataPointInterpretation.Interpret(35)
-                    }
-                }
-            );
+            var leftSet = new AudiogramDatasetBuilder()
+                .Set500HertzDataPoint(55)
+                .Build();
+            var rightSet = new AudiogramDatasetBuilder()
+                .Set1000HertzDataPoint(35)
+                .Build();
+            var result = new Audiogram(leftSet,rightSet).Classification;
             
             Assert.Equal(Laterality.Left, result.Laterality);
-            Assert.Equal(HearingLossClassification.Moderate, result.Classification);
+            Assert.Equal(HearingLoss.Moderate, result.Classification);
         }
         
         [Fact]
         public void Interpret_GivenRightSideWorseAt95db_ReturnsRightSidedProfoundHearingLoss()
         {
-            var result = AudiogramBilateralInterpreation.Interpret(new Audiogram{
-                    Left = new AudiogramSet
-                    {
-                        F1000 = AudiogramDataPointInterpretation.Interpret(55)
-                    },
-                    Right = new AudiogramSet
-                    {
-                        F2000 = AudiogramDataPointInterpretation.Interpret(95)
-                    }
-                }
-            );
+            var leftSet = new AudiogramDatasetBuilder()
+                .Set500HertzDataPoint(55)
+                .Build();
+            var rightSet = new AudiogramDatasetBuilder()
+                .Set1000HertzDataPoint(95)
+                .Build();
+            var result = new Audiogram(leftSet,rightSet).Classification;
             
             Assert.Equal(Laterality.Right, result.Laterality);
-            Assert.Equal(HearingLossClassification.Profound, result.Classification);
+            Assert.Equal(HearingLoss.Profound, result.Classification);
         }
         
         [Fact]
         public void Interpret_GivenLeftAndRightWithin10dBOf70dB_ReturnsBilateralSevereHearingLoss()
         {
-            var result = AudiogramBilateralInterpreation.Interpret(new Audiogram{
-                    Left = new AudiogramSet
-                    {
-                        F1000 = AudiogramDataPointInterpretation.Interpret(66)
-                    },
-                    Right = new AudiogramSet
-                    {
-                        F2000 = AudiogramDataPointInterpretation.Interpret(74)
-                    }
-                }
-            );
+            var leftSet = new AudiogramDatasetBuilder()
+                .Set500HertzDataPoint(66)
+                .Build();
+            var rightSet = new AudiogramDatasetBuilder()
+                .Set1000HertzDataPoint(74)
+                .Build();
+            var result = new Audiogram(leftSet,rightSet).Classification;
             
             Assert.Equal(Laterality.Bilateral, result.Laterality);
-            Assert.Equal(HearingLossClassification.Severe, result.Classification);
+            Assert.Equal(HearingLoss.Severe, result.Classification);
         }
     }
 }
