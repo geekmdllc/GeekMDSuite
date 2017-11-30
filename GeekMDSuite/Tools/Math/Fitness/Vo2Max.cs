@@ -1,17 +1,17 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Tools;
 using GeekMDSuite.Tools.MeasurementUnits;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Tools.Math.Fitness
 {
     public static class Vo2Max
     {
+        //TODO: What to do with this interpret method? Move elsewhere.
         public static FitnessClassification Interpret(double vo2Max, GenderIdentity genders, double ageInYears)
         {
             return Classify(vo2Max, genders, ageInYears);
         }
-        public static double Calculate(TreadmillProtocol protocol, TimeDuration time, GenderIdentity gender)
+        public static double FromTreadmillStressTest(TreadmillProtocol protocol, TimeDuration time, GenderIdentity gender)
         {
             return ProtocolSpecificCalculation(gender, protocol, time);
         }
@@ -54,7 +54,7 @@ namespace GeekMDSuite
                     throw new NotImplementedException(NotImplementedMessage(
                         TreadmillProtocol.UsAirforceSam33));
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(Calculate) + " in " +
+                    throw new ArgumentOutOfRangeException(nameof(FromTreadmillStressTest) + " in " +
                                                           nameof(Vo2Max) +
                                                           " does not accept that protocol.");
             }
@@ -67,13 +67,13 @@ namespace GeekMDSuite
             if (Gender.IsGenotypeXx(gender))
                 return 4.38 * fractionalMinutes - 3.9; 
             return 14.8 - (1.379 * fractionalMinutes) +
-                       (0.451 * Math.Pow(fractionalMinutes, 2)) -
-                       (0.012 * Math.Pow(fractionalMinutes, 3));
+                       (0.451 * System.Math.Pow(fractionalMinutes, 2)) -
+                       (0.012 * System.Math.Pow(fractionalMinutes, 3));
         }
 
         private static string NotImplementedMessage(TreadmillProtocol protocol)
         {
-            return nameof(Calculate) + " in " + nameof(Vo2Max) + 
+            return nameof(FromTreadmillStressTest) + " in " + nameof(Vo2Max) + 
                    " does not yet implement handling of the protocol described by " + protocol + ".";
         }
 
