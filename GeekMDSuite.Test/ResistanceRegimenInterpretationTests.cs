@@ -8,8 +8,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Interpret_GivenAllAdequateValues_ReturnsAdequate()
         {
-            var result = ResistanceRegimenInterpretation.Interpret(
-                new ResistanceRegimen(
+            var result = new ResistanceRegimen(
                     new ExerciseRegimenBase(3,45,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
@@ -19,7 +18,7 @@ namespace GeekMDSuite.Test
                         ResistenceRegimenFeatures.PushingMovementsPerformed,
                         ResistenceRegimenFeatures.UpperBodyTrained,
                         ResistenceRegimenFeatures.RepetitionsToNearFailure
-                    }));
+                    }).Classify;
             
             Assert.Equal(ExerciseRegimenClassification.Adequate, result);
         }
@@ -27,8 +26,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Interpret_GivenAspirationalDurationAndAdequateElse_ReturnsAspirational()
         {
-            var result = ResistanceRegimenInterpretation.Interpret(
-                new ResistanceRegimen(
+            var result = new ResistanceRegimen(
                     new ExerciseRegimenBase(3,90,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
@@ -38,7 +36,7 @@ namespace GeekMDSuite.Test
                         ResistenceRegimenFeatures.PushingMovementsPerformed,
                         ResistenceRegimenFeatures.UpperBodyTrained,
                         ResistenceRegimenFeatures.RepetitionsToNearFailure
-                    }));
+                    }).Classify;
             
             Assert.Equal(ExerciseRegimenClassification.Aspirational, result);
         }
@@ -46,8 +44,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Interpret_GivenAdequateExceptInsufficientFeatures_ReturnsInsufficent()
         {
-            var result = ResistanceRegimenInterpretation.Interpret(
-                new ResistanceRegimen(
+            var result = new ResistanceRegimen(
                     new ExerciseRegimenBase(3,90,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
@@ -55,7 +52,7 @@ namespace GeekMDSuite.Test
                         ResistenceRegimenFeatures.PushingMovementsPerformed,
                         ResistenceRegimenFeatures.UpperBodyTrained,
                         ResistenceRegimenFeatures.RepetitionsToNearFailure
-                    }));
+                    }).Classify;
             
             Assert.Equal(ExerciseRegimenClassification.Insufficient, result);
         }

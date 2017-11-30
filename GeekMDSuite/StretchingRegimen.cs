@@ -1,13 +1,27 @@
-﻿namespace GeekMDSuite
+﻿using System;
+
+namespace GeekMDSuite
 {
-    public class StretchingRegimen : ExerciseRegimenBase
+    public class StretchingRegimen : ExerciseRegimenBase, IInterpretable
     {
-        public StretchingRegimen(ExerciseRegimenBase regimen) 
+
+        public StretchingRegimen(IExerciseRegimen regimen) 
             : base(regimen.SessionsPerWeek, regimen.AverageSessionDuration, regimen.Intensity)
         {
             Goals = GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Stretching);
         }
         public sealed override ExerciseDurationGoals Goals { get; }
+        
+        public ExerciseRegimenClassification Classify()
+        {
+            if (DurationAndIntensityAreAdequate && TimeAspirationalOrHigher)
+                return ExerciseRegimenClassification.Aspirational;
+            return DurationAndIntensityAreAdequate  && TimeGoalOrHigher
+                ? ExerciseRegimenClassification.Adequate
+                : ExerciseRegimenClassification.Insufficient;
+        }
+
+        public Interpretation Interpretation => throw new NotImplementedException();
     }
     
     
