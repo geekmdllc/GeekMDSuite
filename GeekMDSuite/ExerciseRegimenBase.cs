@@ -13,11 +13,8 @@ namespace GeekMDSuite
         public double SessionsPerWeek { get; set; }
         public double AverageSessionDuration { get; set; }
         public ExerciseIntensity Intensity { get; set; }
-        public virtual ExerciseDurationGoals Goals
-        {
-            get => throw new NotImplementedException(); 
-            set => throw new NotImplementedException();
-        }
+        
+        public virtual ExerciseDurationGoals Goals => throw new NotImplementedException();
         public double TotalMinutes => SessionsPerWeek * AverageSessionDuration;
     }
 }

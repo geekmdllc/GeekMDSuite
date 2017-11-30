@@ -6,7 +6,7 @@ namespace GeekMDSuite
     {
         public static ExerciseRegimenClassification Interpret(ResistanceRegimen regimen)
         {
-            if (ExerciseRegimenInterpretation.TimeAspirationalOrHigher(regimen) && RegimenIsAdequate(regimen))
+            if (ExerciseRegimenHelper.TimeAspirationalOrHigher(regimen) && RegimenIsAdequate(regimen))
                 return ExerciseRegimenClassification.Aspirational;
             return RegimenIsAdequate(regimen) ? ExerciseRegimenClassification.Adequate : ExerciseRegimenClassification.Insufficient;
         }
@@ -21,7 +21,7 @@ namespace GeekMDSuite
         
         public static bool RegimenIsAdequate(ResistanceRegimen regimen)
         {
-            return ExerciseRegimenInterpretation.DurationAndIntensityAreAdequate(regimen)
+            return ExerciseRegimenHelper.DurationAndIntensityAreAdequate(regimen)
                    && FeaturesOfRegimenAreIdeal(regimen)
                    && GoalRestInterval.ContainsClosed(regimen.SecondsRestDurationPerSet);
         }
@@ -43,13 +43,13 @@ namespace GeekMDSuite
         }
 
         public static bool IntensityIsAdequate(ResistanceRegimen regimen) =>
-            ExerciseRegimenInterpretation.IntensityIsAdequate(regimen);
+            ExerciseRegimenHelper.IntensityIsAdequate(regimen);
 
         public static bool DurationIsAdequate(ResistanceRegimen regimen) => 
-            ExerciseRegimenInterpretation.DurationIsAdequate(regimen);
+            ExerciseRegimenHelper.DurationIsAdequate(regimen);
 
         public static double DurationPercentOfGoalAchieved(ResistanceRegimen regimen) =>
-            ExerciseRegimenInterpretation.DurationPercentOfGoalAchieved(regimen);
+            ExerciseRegimenHelper.DurationPercentOfGoalAchieved(regimen);
 
         private const int MaxPossibleFeatures = 5;
     }

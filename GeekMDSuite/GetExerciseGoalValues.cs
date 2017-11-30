@@ -1,8 +1,8 @@
 ﻿namespace GeekMDSuite
 {
-    public static class GetExerciseGoalValues
+    internal static class GetExerciseGoalValues
     {
-        public static ExerciseDurationGoals TotalWeeklyDuration(ExerciseClassifications exercise)
+        internal static ExerciseDurationGoals TotalWeeklyDuration(ExerciseClassifications exercise)
         {
             if(exercise == ExerciseClassifications.Cardiovascular)
                 return new ExerciseDurationGoals{HighIntensity = 75, ModerateIntensity = 150};
@@ -11,7 +11,7 @@
                 : new ExerciseDurationGoals{HighIntensity = 20, ModerateIntensity = 30};
         }
 
-        public static Interval<int> ResistanceRestInterval(int upper = 120, int lower = 30)
+        internal static Interval<int> ResistanceRestInterval(int upper = 120, int lower = 30)
         {
             return new Interval<int>(lower,upper);
         }

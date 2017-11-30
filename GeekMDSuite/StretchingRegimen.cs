@@ -7,7 +7,7 @@
         {
             Goals = GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Stretching);
         }
-        public sealed override ExerciseDurationGoals Goals { get; set; }
+        public sealed override ExerciseDurationGoals Goals { get; }
     }
     
     

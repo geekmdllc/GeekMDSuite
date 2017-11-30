@@ -6,10 +6,8 @@ namespace GeekMDSuite
     {
         public BodyMassIndex( IBodyComposition bodyComposition, Race race)
         {
-            var weightKilograms = bodyComposition.Weight.Kilograms;
-            var heightMeters = bodyComposition.Height.Meters;
             Classification = ClassifyBodyMassIndex(bodyComposition, race);
-            Value = CalculateBodyMassIndex(weightKilograms, heightMeters);
+            Value = CalculateBodyMassIndex(bodyComposition.Weight.Kilograms, bodyComposition.Height.Meters);
         }
 
         public Interpretation Interpretation => throw new NotImplementedException();
@@ -18,6 +16,7 @@ namespace GeekMDSuite
 
         public static double CalculateBodyMassIndex(double weightKilograms, double heightMeters) =>
             weightKilograms / Math.Pow(heightMeters, 2);
+        
         public static BodyMassIndexCategory ClassifyBodyMassIndex(IBodyComposition bodyComposition, Race race)
         {
             var bmi = CalculateBodyMassIndex(bodyComposition.Weight.Kilograms, bodyComposition.Height.Meters);

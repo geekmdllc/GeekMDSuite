@@ -17,8 +17,8 @@ namespace GeekMDSuite
         }
         
         public int SecondsRestDurationPerSet { get; }
-        public List<ResistenceRegimenFeatures> Features { get; set; }
+        public List<ResistenceRegimenFeatures> Features { get; }
         public Interval<int> RestIntervalGoalRange { get; }
-        public sealed override ExerciseDurationGoals Goals { get; set; }
+        public sealed override ExerciseDurationGoals Goals { get; }
     }
 }

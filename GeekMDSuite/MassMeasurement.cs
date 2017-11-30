@@ -1,8 +1,8 @@
 ﻿namespace GeekMDSuite
 {
-    public class BodyWeight : IMassMeasurement
+    public abstract class MassMeasurement : IMassMeasurement
     {
-        public BodyWeight(double pounds)
+        public MassMeasurement(double pounds)
         {
             Pounds = pounds;
         }

@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite
+﻿using System;
+
+namespace GeekMDSuite
 {
     public class BodyCompositionExpanded : BodyComposition, IBodyCompositionExpanded
     {
@@ -17,5 +19,7 @@
 
         public double VisceralFat { get; }
         public double PercentBodyFat { get; }
+
+        public override Interpretation Interpretation => throw new NotImplementedException();
     }
 }

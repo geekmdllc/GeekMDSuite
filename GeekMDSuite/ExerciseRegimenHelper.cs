@@ -1,8 +1,8 @@
 ﻿namespace GeekMDSuite
 {
-    // To avoid confusion, this class was made internal and abstract. Classes 
-    // requiring exposing these helper methods to library users wrap them.
-    internal abstract class ExerciseRegimenInterpretation
+    // To avoid confusion, this class was made internal. Classes 
+    // requiring exposing these helper methods to library users can wrap them.
+    internal static class ExerciseRegimenHelper
     {
         internal static bool IntensityIsAdequate(ExerciseRegimenBase regimen) => IsHighIntensity(regimen) || IsModerateIntensity(regimen);
 
