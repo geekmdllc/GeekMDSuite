@@ -5,10 +5,10 @@
         internal static ExerciseDurationGoals TotalWeeklyDuration(ExerciseClassifications exercise)
         {
             if(exercise == ExerciseClassifications.Cardiovascular)
-                return new ExerciseDurationGoals{HighIntensity = 75, ModerateIntensity = 150};
-            return exercise == ExerciseClassifications.Resistance 
-                ? new ExerciseDurationGoals{HighIntensity = 90, ModerateIntensity = 120} 
-                : new ExerciseDurationGoals{HighIntensity = 20, ModerateIntensity = 30};
+                return new ExerciseDurationGoals(150,75);
+            return exercise == ExerciseClassifications.Resistance
+                ? new ExerciseDurationGoals(120, 90)
+                : new ExerciseDurationGoals(30, 20);
         }
 
         internal static Interval<int> ResistanceRestInterval(int upper = 120, int lower = 30)

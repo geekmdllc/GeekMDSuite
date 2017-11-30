@@ -2,7 +2,13 @@
 {
     public struct ExerciseDurationGoals
     {
-        public double ModerateIntensity { get; set; }
-        public double HighIntensity { get; set; }
+        public ExerciseDurationGoals(double moderateIntensity, double highIntensity)
+        {
+            ModerateIntensity = moderateIntensity;
+            HighIntensity = highIntensity;
+        }
+        public double ModerateIntensity { get;  }
+        public double HighIntensity { get;  }
+        
     }
 }
