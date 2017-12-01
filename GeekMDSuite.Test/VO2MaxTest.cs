@@ -11,17 +11,17 @@ namespace GeekMDSuite.Test
     {
 
         private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
-        private readonly TreadmillProtocol _protocol = TreadmillProtocol.Bruce;
-        private readonly TreadmillProtocol _unsupportedProtocol =
-            TreadmillProtocol.Balke3Point0;
-        
+        private const TreadmillProtocol Protocol = TreadmillProtocol.Bruce;
+        private const TreadmillProtocol UnsupportedProtocol = TreadmillProtocol.Balke3Point0;
+        //TODO: Confirm 'classification' is correct.
         [Fact]
         public void MaleResultInRange()
         {            
             var patient = new Mock<IPatient>();
             patient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
+            patient.Setup(p => p.Age).Returns(45);
             
-            var result = CalculateVo2Max.FromTreadmillStressTest(_protocol, _timeDuration, patient.Object);
+            var result = CalculateVo2Max.FromTreadmillStressTest(Protocol, _timeDuration, patient.Object);
             Assert.InRange(result.Value, 40,41); 
         }
         
@@ -30,8 +30,9 @@ namespace GeekMDSuite.Test
         {          
             var patient = new Mock<IPatient>();
             patient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
+            patient.Setup(p => p.Age).Returns(45);
             
-            var result = CalculateVo2Max.FromTreadmillStressTest(_protocol, _timeDuration, patient.Object);
+            var result = CalculateVo2Max.FromTreadmillStressTest(Protocol, _timeDuration, patient.Object);
             Assert.InRange(result.Value, 46,47); 
         }
 
@@ -40,9 +41,10 @@ namespace GeekMDSuite.Test
         {
             var patient = new Mock<IPatient>();
             patient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
+            patient.Setup(p => p.Age).Returns(45);
             
             Assert.Throws<NotImplementedException>(() =>
-                CalculateVo2Max.FromTreadmillStressTest(_unsupportedProtocol, _timeDuration, patient.Object));
+                CalculateVo2Max.FromTreadmillStressTest(UnsupportedProtocol, _timeDuration, patient.Object));
         }
     }
 }

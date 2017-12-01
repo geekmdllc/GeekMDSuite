@@ -72,6 +72,8 @@ namespace GeekMDSuite.Tools.Fitness
 
         private static FitnessClassification Classify(double vo2Max, IPatient patient)
         {
+            if (patient.Age < 13)
+                throw new ArgumentException("Age must be 13 or greater.");
             return Gender.IsGenotypeXx(patient.Gender) 
                 ? GetFemaleClassification(vo2Max, patient.Age) : GetMaleClassification(vo2Max, patient.Age);
         }
