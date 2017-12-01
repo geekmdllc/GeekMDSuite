@@ -2,27 +2,23 @@
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Tools.MeasurementUnits;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Tools.Fitness
 {
-    public static class Vo2Max
+    public static class CalculateVo2Max
     {
-        //TODO: What to do with this interpret method? Move elsewhere.
-        public static FitnessClassification Interpret(double vo2Max, GenderIdentity genders, double ageInYears)
+        public static Vo2Max FromTreadmillStressTest(TreadmillProtocol protocol, TimeDuration time, IPatient patient)
         {
-            return Classify(vo2Max, genders, ageInYears);
-        }
-        public static double FromTreadmillStressTest(TreadmillProtocol protocol, TimeDuration time, GenderIdentity gender)
-        {
-            return ProtocolSpecificCalculation(gender, protocol, time);
+            var value = ResultByProtocol(protocol, time, patient);
+            var classification = Classify(value, patient);
+            return new Vo2Max(value, classification);
         }
 
-        private static double ProtocolSpecificCalculation(GenderIdentity genders, TreadmillProtocol protocol,
-            TimeDuration timeDuration)
+        private static double ResultByProtocol(TreadmillProtocol protocol, TimeDuration time, IPatient patient)
         {
             switch (protocol)
             {
                 case TreadmillProtocol.Bruce:
-                    return Bruce(genders, timeDuration.FractionalMinutes);
+                    return Bruce(time.FractionalMinutes, patient);
                 case TreadmillProtocol.BruceLowLevel:
                     throw new NotImplementedException(NotImplementedMessage(
                         TreadmillProtocol.BruceLowLevel));
@@ -55,16 +51,13 @@ namespace GeekMDSuite
                         TreadmillProtocol.UsAirforceSam33));
                 default:
                     throw new ArgumentOutOfRangeException(nameof(FromTreadmillStressTest) + " in " +
-                                                          nameof(Vo2Max) +
-                                                          " does not accept that protocol.");
+                                                          nameof(CalculateVo2Max) + $" does not accept that {protocol}.");
             }
         }
 
-        
-
-        private static double Bruce(GenderIdentity gender, double fractionalMinutes)
+        private static double Bruce(double fractionalMinutes, IPatient patient)
         {
-            if (Gender.IsGenotypeXx(gender))
+            if (Gender.IsGenotypeXx(patient.Gender))
                 return 4.38 * fractionalMinutes - 3.9; 
             return 14.8 - (1.379 * fractionalMinutes) +
                        (0.451 * System.Math.Pow(fractionalMinutes, 2)) -
@@ -73,13 +66,14 @@ namespace GeekMDSuite
 
         private static string NotImplementedMessage(TreadmillProtocol protocol)
         {
-            return nameof(FromTreadmillStressTest) + " in " + nameof(Vo2Max) + 
+            return nameof(FromTreadmillStressTest) + " in " + nameof(CalculateVo2Max) + 
                    " does not yet implement handling of the protocol described by " + protocol + ".";
         }
 
-        private static FitnessClassification Classify(double vo2Max, GenderIdentity gender, double ageInYears)
+        private static FitnessClassification Classify(double vo2Max, IPatient patient)
         {
-            return Gender.IsGenotypeXx(gender) ? GetFemaleClassification(vo2Max, ageInYears) : GetMaleClassification(vo2Max, ageInYears);
+            return Gender.IsGenotypeXx(patient.Gender) 
+                ? GetFemaleClassification(vo2Max, patient.Age) : GetMaleClassification(vo2Max, patient.Age);
         }
 
         private static FitnessClassification GetMaleClassification(double vo2Max, double ageInYears)
@@ -95,22 +89,10 @@ namespace GeekMDSuite
             return ageInYears <= 65 ? MaleUnder65Classification(vo2Max) : MaleOver65Classification(vo2Max);
         }
 
-        private static FitnessClassification GetFemaleClassification(double vo2Max, double ageInYears)
-        {
-            if (ageInYears <= 25)
-                return FemaleUnder25Classification(vo2Max);
-            if (ageInYears <= 35)
-                return FemaleUnder35Classification(vo2Max);
-            if (ageInYears <= 45)
-                return FemaleUnder45Classification(vo2Max);
-            if (ageInYears <= 55)
-                return FemaleUnder55Classification(vo2Max);
-            return ageInYears <= 65 ? FemaleUnder65Classification(vo2Max) : FemaleOver65Classification(vo2Max);
-        }
-
         private static FitnessClassification MaleOver65Classification(double vo2Max)
         {
             if (vo2Max > 37)
+        
                 return FitnessClassification.Excellent;
             if (vo2Max >= 33)
                 return FitnessClassification.Good;
@@ -198,6 +180,19 @@ namespace GeekMDSuite
             return vo2Max >= 30 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
         }
 
+        private static FitnessClassification GetFemaleClassification(double vo2Max, double ageInYears)
+        {
+            if (ageInYears <= 25)
+                return FemaleUnder25Classification(vo2Max);
+            if (ageInYears <= 35)
+                return FemaleUnder35Classification(vo2Max);
+            if (ageInYears <= 45)
+                return FemaleUnder45Classification(vo2Max);
+            if (ageInYears <= 55)
+                return FemaleUnder55Classification(vo2Max);
+            return ageInYears <= 65 ? FemaleUnder65Classification(vo2Max) : FemaleOver65Classification(vo2Max);
+        }
+        
         private static FitnessClassification FemaleOver65Classification(double vo2Max)
         {
             if (vo2Max > 32)
