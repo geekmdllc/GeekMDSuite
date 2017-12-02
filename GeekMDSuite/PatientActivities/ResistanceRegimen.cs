@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.Services.Exericse;
+using GeekMDSuite.Services.Fitness;
 using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.PatientActivities

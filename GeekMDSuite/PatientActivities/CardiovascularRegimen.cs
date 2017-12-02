@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Services.Exericse;
+﻿using GeekMDSuite.Services.Fitness;
 
 namespace GeekMDSuite.PatientActivities
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using GeekMDSuite.Services.Exericse;
+using GeekMDSuite.Services.Fitness;
 using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools;
 

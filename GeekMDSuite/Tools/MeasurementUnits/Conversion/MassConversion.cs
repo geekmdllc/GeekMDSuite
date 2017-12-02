@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Tools.Math
+﻿namespace GeekMDSuite.Tools.MeasurementUnits.Conversion
 {
     public static class MassConversion
     {

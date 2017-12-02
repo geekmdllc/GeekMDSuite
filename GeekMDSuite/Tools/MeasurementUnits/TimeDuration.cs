@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Tools.MeasurementUnits
 {
-    public class TimeDuration
+    public class TimeDuration : ITimeDuration
     {
 
         public TimeDuration(double seconds)

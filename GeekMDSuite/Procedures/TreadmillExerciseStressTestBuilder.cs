@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Tools.MeasurementUnits;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Procedures
 {
     public class TreadmillExerciseStressTestBuilder
     {

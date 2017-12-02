@@ -1,11 +1,11 @@
 ﻿using GeekMDSuite.Tools.MeasurementUnits;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.Procedures
 {
-    public class TreadmillExerciseStressTest
+    public class TreadmillExerciseStressTest : ITreadmillExerciseStressTest
     {
         public TreadmillProtocol Protocol { get; }
-        public TimeDuration Time { get; }
+        public ITimeDuration Time { get; }
         public TreadmillExerciseStressTestResultClassification Result { get; }
         public BloodPressure SupineBloodPressure { get; }
         public int SupineHeartRate { get; }

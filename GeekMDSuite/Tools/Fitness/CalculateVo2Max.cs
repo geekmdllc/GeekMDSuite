@@ -7,14 +7,14 @@ namespace GeekMDSuite.Tools.Fitness
 {
     public static class CalculateVo2Max
     {
-        public static Vo2Max FromTreadmillStressTest(TreadmillProtocol protocol, TimeDuration time, IPatient patient)
+        public static Vo2Max FromTreadmillStressTest(TreadmillProtocol protocol, ITimeDuration time, IPatient patient)
         {
             var value = ResultByProtocol(protocol, time, patient);
             var classification = Classify(value, patient);
             return new Vo2Max(value, classification);
         }
 
-        private static double ResultByProtocol(TreadmillProtocol protocol, TimeDuration time, IPatient patient)
+        private static double ResultByProtocol(TreadmillProtocol protocol, ITimeDuration time, IPatient patient)
         {
             switch (protocol)
             {

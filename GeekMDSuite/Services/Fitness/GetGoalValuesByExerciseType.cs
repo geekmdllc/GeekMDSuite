@@ -1,7 +1,7 @@
 ﻿using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite.Services.Exericse
+namespace GeekMDSuite.Services.Fitness
 {
     internal static class GetGoalValuesByExerciseType
     {
