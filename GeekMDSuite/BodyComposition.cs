@@ -1,15 +1,13 @@
-﻿using System;
-using GeekMDSuite.Tools;
-using GeekMDSuite.Tools.MeasurementUnits;
+﻿using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite
 {
-    public class BodyComposition : IBodyComposition, IInterpretable
+    public class BodyComposition : IBodyComposition
     {
         public BodyComposition(ILengthMeasurement height, 
-                                ILengthMeasurement waist, 
-                                ILengthMeasurement hips, 
-                                IMassMeasurement weight)
+            ILengthMeasurement waist, 
+            ILengthMeasurement hips, 
+            IMassMeasurement weight)
         {
             Height = height;
             Waist = waist;
@@ -20,7 +18,5 @@ namespace GeekMDSuite
         public ILengthMeasurement Waist { get; }
         public ILengthMeasurement Hips { get; }
         public IMassMeasurement Weight { get; }
-
-        public virtual Interpretation Interpretation => throw new NotImplementedException();
     }
 }

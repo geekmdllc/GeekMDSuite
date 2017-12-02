@@ -10,7 +10,7 @@ namespace GeekMDSuite.Services.Interpretation
             _genderIdentity = genderIdentity;
             _percentBodyFat = percentBodyFat;
         }
-        public Tools.Interpretation Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         public double Value => _percentBodyFat;
         
         public static PercentBodyFatClassification Interpret (double percentBodyFat, GenderIdentity genderIdentity) => 

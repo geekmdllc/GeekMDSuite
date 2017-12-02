@@ -1,21 +1,28 @@
-﻿namespace GeekMDSuite.Services.Interpretation
+﻿using GeekMDSuite.Tools.Cardiology;
+
+namespace GeekMDSuite.Services.Interpretation
 {
     public class FitTreadmillScoreParameters
     {
         public FitTreadmillScoreParameters(GenderIdentity gender, 
             double ageInYears, 
-            double percentMaxHeartRateReached, 
+            double maxHeartRateAchieved, 
             double metabolicEquivalents)
         {
             GenderIdentity = gender;
             AgeInYears = ageInYears;
-            PercentMaxHeartRateReached = percentMaxHeartRateReached;
+            PercentMaxHeartRateAchieved = CalculatePercentMaxHeartRate(maxHeartRateAchieved);
             MetabolicEquivalents = metabolicEquivalents;
+        }
+
+        private double CalculatePercentMaxHeartRate( double maxHeartRateReached)
+        {
+             return 100 * maxHeartRateReached / PredictMaximumHeartRate.Standard(AgeInYears);
         }
 
         public GenderIdentity GenderIdentity { get; }
         public double AgeInYears { get; }
-        public double PercentMaxHeartRateReached { get; }
+        public double PercentMaxHeartRateAchieved { get; }
         public double MetabolicEquivalents { get; }
     }
 }

@@ -5,7 +5,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class WaistToHeightRatioInterpretation : IInterpretable
     {
-        public Tools.Interpretation Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         
         public static WaistToHeightRatioClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
         
@@ -44,7 +44,7 @@ namespace GeekMDSuite.Services.Interpretation
         public static double VeryOverweightFemaleLLN = 0.54;
         public static double MorbidlyObeseMaleLLN = 0.63;
         public static double MoribdlyObeseFemaleLLN = 0.58;
-        private Tools.Interpretation _interpretation;
+        private InterpretationText _interpretationText;
 
     }
 }

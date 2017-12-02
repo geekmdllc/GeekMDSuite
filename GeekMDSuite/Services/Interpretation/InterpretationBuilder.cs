@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GeekMDSuite.Tools
+namespace GeekMDSuite.Services.Interpretation
 {
     public class InterpretationBuilder
     {
@@ -26,9 +26,9 @@ namespace GeekMDSuite.Tools
             return this;
         }
 
-        public Interpretation Build()
+        public InterpretationText Build()
         {
-            return new Interpretation(_title, _summary, _sections);
+            return new InterpretationText(_title, _summary, _sections);
         }
         
     }

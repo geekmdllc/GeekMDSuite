@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Services.Exericse;
+using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.PatientActivities
@@ -26,7 +27,7 @@ namespace GeekMDSuite.PatientActivities
             }
         }
 
-        public Interpretation Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
     }
     
     

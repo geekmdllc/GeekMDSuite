@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GeekMDSuite.Tools
+namespace GeekMDSuite.Services.Interpretation
 {
     public class InterpretationSectionBuilder
     {

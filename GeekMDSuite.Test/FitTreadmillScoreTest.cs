@@ -10,14 +10,14 @@ namespace GeekMDSuite.Test
         private readonly GenderIdentity _male = GenderIdentity.Male;
         private const double Age = 63;
         private const double MetabolicEquivalents = 8;
-        private const double PercentMaxHeartRateReached = 105.3;
+        private const double MaxHeartRateReached = 165.3;
         private const double MaleScoreOffset = -43;
         private const int TestFitScore = 39;
 
         [Fact]
         public void FitScoreReturnsCorrectFemaleValue()
         {
-            var fitParams = new FitTreadmillScoreParameters(_female, Age, PercentMaxHeartRateReached, MetabolicEquivalents);
+            var fitParams = new FitTreadmillScoreParameters(_female, Age, MaxHeartRateReached, MetabolicEquivalents);
             var fitScore = new FitTreadmillScoreInterpretation(fitParams).Value;
 
             Assert.InRange(fitScore, -8, -7);
@@ -25,7 +25,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void FitScoreReturnsCorrecMaleValue()
         {
-            var fitParams = new FitTreadmillScoreParameters(_male, Age, PercentMaxHeartRateReached, MetabolicEquivalents);
+            var fitParams = new FitTreadmillScoreParameters(_male, Age, MaxHeartRateReached, MetabolicEquivalents);
             var fitScore = new FitTreadmillScoreInterpretation(fitParams).Value;
 
             Assert.InRange(fitScore, -8 + MaleScoreOffset, -7 + MaleScoreOffset);
@@ -34,7 +34,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void ReturnsCorrectTenYearMortality()
         {
-            var fitParams = new  FitTreadmillScoreParameters(GenderIdentity.Male, 55, 155, 10.5);
+            var fitParams = new  FitTreadmillScoreParameters(_male, 55, MaxHeartRateReached, 10.5);
             var fitScore = new FitTreadmillScoreInterpretation(fitParams);
             Assert.Equal(3, fitScore.TenYearMortality);
         }

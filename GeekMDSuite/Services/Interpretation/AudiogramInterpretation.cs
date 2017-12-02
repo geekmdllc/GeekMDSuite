@@ -11,7 +11,7 @@ namespace GeekMDSuite.Services.Interpretation
             Left = audiogram.Left;
             Right = audiogram.Right;
         }
-        public Tools.Interpretation Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         
         public AudiogramDataset Left { get; }
         public AudiogramDataset Right { get; }

@@ -1,15 +1,13 @@
-﻿using System;
-using GeekMDSuite.Tools;
-
-namespace GeekMDSuite
+﻿namespace GeekMDSuite
 {
     public class BodyCompositionExpanded : BodyComposition, IBodyCompositionExpanded
     {
-        public BodyCompositionExpanded( 
-            BodyComposition bodyComposition, 
+
+        public BodyCompositionExpanded(
+            IBodyComposition bodyComposition, 
             double visceralFat, 
-            double percentBodyFat) 
-            : base(bodyComposition.Height, 
+            double percentBodyFat) : base(
+                bodyComposition.Height, 
                 bodyComposition.Waist, 
                 bodyComposition.Hips, 
                 bodyComposition.Weight)
@@ -19,8 +17,7 @@ namespace GeekMDSuite
         }
 
         public double VisceralFat { get; }
-        public double PercentBodyFat { get; }
 
-        public override Interpretation Interpretation => throw new NotImplementedException();
+        public double PercentBodyFat { get; }
     }
 }

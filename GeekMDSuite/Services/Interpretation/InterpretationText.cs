@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GeekMDSuite.Tools
+namespace GeekMDSuite.Services.Interpretation
 {
-    public class Interpretation
+    public class InterpretationText
     {
         public string Title { get; }
         public string Summary { get; }
         public List<InterpretationSection> Sections { get; }
 
-        public Interpretation(string title, string summary, List<InterpretationSection> sections)
+        public InterpretationText(string title, string summary, List<InterpretationSection> sections)
         {
             Title = title;
             Summary = summary;

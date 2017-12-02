@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools;
 using Xunit;
 
@@ -37,7 +38,7 @@ namespace GeekMDSuite.Test
 
         private static int IndexFromPosition(int position) => position > 0 ? position - 1 : 0;
         
-        private static Interpretation BuildInterpretation(InterpretationSection section1, InterpretationSection section2)
+        private static InterpretationText BuildInterpretation(InterpretationSection section1, InterpretationSection section2)
         {
             var interp = new InterpretationBuilder()
                 .SetTitle("Classification Title")

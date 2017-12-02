@@ -10,7 +10,7 @@ namespace GeekMDSuite.Services.Interpretation
         {
             _parameters = parameters;
         }
-        public Tools.Interpretation Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         
         public double Value => CalculateScore();
         
@@ -31,7 +31,7 @@ namespace GeekMDSuite.Services.Interpretation
         
         private double CalculateScore()
         {
-            return _parameters.PercentMaxHeartRateReached + 12 * _parameters.MetabolicEquivalents - 4 * 
+            return _parameters.PercentMaxHeartRateAchieved + 12 * _parameters.MetabolicEquivalents - 4 * 
                    _parameters.AgeInYears + (Gender.IsGenotypeXx(_parameters.GenderIdentity) ? 43 : 0);
         }
 

@@ -5,9 +5,9 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class VisceralFatInterpretation : IInterpretable
     {
-        public Tools.Interpretation Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         
-        public static VisceralFatClassification VisceralFatFlag (double visceralFat) => ClassifyVisceralFat(visceralFat);
+        public static VisceralFatClassification Classification (double visceralFat) => ClassifyVisceralFat(visceralFat);
         
         private static VisceralFatClassification ClassifyVisceralFat(double visceralFat)
         {
@@ -21,7 +21,5 @@ namespace GeekMDSuite.Services.Interpretation
         }
         
         public static readonly double UpperLimitNormal = 100;
-        private Tools.Interpretation _interpretation;
-
     }
 }

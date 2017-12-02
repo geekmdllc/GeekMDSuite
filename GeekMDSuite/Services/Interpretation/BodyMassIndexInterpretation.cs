@@ -11,7 +11,7 @@ namespace GeekMDSuite.Services.Interpretation
             Value = CalculateBodyMassIndex(bodyComposition.Weight.Kilograms, bodyComposition.Height.Meters);
         }
 
-        public Tools.Interpretation Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         public BodyMassIndexCategory Classification { get; }
         public double Value { get; }
 
