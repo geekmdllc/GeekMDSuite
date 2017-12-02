@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Exericse;
 using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.PatientActivities
 {
-    public class ResistanceRegimen : ExerciseRegimenBase
+    public class ResistanceRegimen : ExerciseRegimen
     {
         public ResistanceRegimen(
-            ExerciseRegimenBase baseRegimen,
+            IExerciseRegimenParameters regimenParameters,
             int secondsRestDurationPerSet,
             List<ResistenceRegimenFeatures> regimenFeatures = null) 
-            : base(baseRegimen.SessionsPerWeek, baseRegimen.AverageSessionDuration, baseRegimen.Intensity)
+            : base(regimenParameters)
         {
-            Goals = GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Resistance);
+            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Resistance);
             SecondsRestDurationPerSet = secondsRestDurationPerSet;
             Features = regimenFeatures ?? new List<ResistenceRegimenFeatures>();
         }
@@ -36,7 +35,7 @@ namespace GeekMDSuite
             }
         }
 
-        public static Interval<int> RestIntervalGoalRange  => GetExerciseGoalValues.ResistanceRestInterval();
+        public static Interval<int> RestIntervalGoalRange  => GetGoalValuesByExerciseType.ResistanceRestInterval();
         
         private bool FeaturesOfRegimenAreIdeal => (int) FractionOfAdequateRegimen == 100;
 

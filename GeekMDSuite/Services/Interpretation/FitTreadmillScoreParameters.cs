@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Services.Interpretation
 {
     public class FitTreadmillScoreParameters
     {
@@ -13,9 +13,9 @@
             MetabolicEquivalents = metabolicEquivalents;
         }
 
-        public GenderIdentity GenderIdentity { get; private set; }
-        public double AgeInYears { get; private set; }
-        public double PercentMaxHeartRateReached { get; private set; }
-        public double MetabolicEquivalents { get; private set; }
+        public GenderIdentity GenderIdentity { get; }
+        public double AgeInYears { get; }
+        public double PercentMaxHeartRateReached { get; }
+        public double MetabolicEquivalents { get; }
     }
 }

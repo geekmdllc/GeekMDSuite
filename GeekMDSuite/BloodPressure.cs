@@ -9,8 +9,8 @@
             OrganDamage = organDamage;
         }
 
-        public int Systolic { get; private set; }
-        public int Diastolic { get; private set; }
-        public bool OrganDamage { get; private set; }
+        public int Systolic { get; }
+        public int Diastolic { get; }
+        public bool OrganDamage { get; }
     }
 }

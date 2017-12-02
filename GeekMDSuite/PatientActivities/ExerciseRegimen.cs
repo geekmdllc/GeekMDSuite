@@ -3,18 +3,17 @@ using GeekMDSuite.Services.Exericse;
 
 namespace GeekMDSuite.PatientActivities
 {
-    public class ExerciseRegimenBase : IExerciseRegimen
+    public abstract class ExerciseRegimen : IExerciseRegimen
     {
-
-        public ExerciseRegimenBase (double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
+        protected ExerciseRegimen (IExerciseRegimenParameters parameters)
         {
-            SessionsPerWeek = sessionsPerWeek;
-            AverageSessionDuration = averageSessionDuration;
-            Intensity = intensity;
+            SessionsPerWeek = parameters.SessionsPerWeek;
+            AverageSessionDuration = parameters.AverageSessionDuration;
+            Intensity = parameters.Intensity;
         }
-        public double SessionsPerWeek { get; set; }
-        public double AverageSessionDuration { get; set; }
-        public ExerciseIntensity Intensity { get; set; }
+        public double SessionsPerWeek { get; }
+        public double AverageSessionDuration { get; }
+        public ExerciseIntensity Intensity { get; }
 
         public virtual ExerciseRegimenClassification Classification => throw new NotImplementedException();
 
@@ -25,10 +24,10 @@ namespace GeekMDSuite.PatientActivities
         public virtual bool RegimenIsAdequate => DurationAndIntensityAreAdequate;
 
         public static double GoalMinutesHighIntensity => 
-            GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).HighIntensity;
+            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).HighIntensity;
 
         public static double GoalMinutesModerateIntensity => 
-            GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).ModerateIntensity;
+            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).ModerateIntensity;
         
         public bool IntensityIsAdequate => IsHighIntensity || IsModerateIntensity;
 

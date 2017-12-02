@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Tools.Fitness

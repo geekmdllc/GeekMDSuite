@@ -2,12 +2,11 @@
 
 namespace GeekMDSuite.PatientActivities
 {
-    public class CardiovascularRegimen : ExerciseRegimenBase
+    public class CardiovascularRegimen : ExerciseRegimen
     {
-        public CardiovascularRegimen(IExerciseRegimen regimen) 
-            : base(regimen.SessionsPerWeek, regimen.AverageSessionDuration, regimen.Intensity)
+        public CardiovascularRegimen(IExerciseRegimenParameters regimenParameters) : base(regimenParameters)
         {
-            Goals = GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular);
+            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular);
         }
 
         public sealed override ExerciseDurationGoals Goals { get; }

@@ -14,15 +14,10 @@ namespace GeekMDSuite.Procedures
 
         public static HearingLoss Classify(int value)
         {
-            if (NormalRange.ContainsClosed(value))
-                return HearingLoss.None;
-            if (MildRange.ContainsLeftOpen(value))
-                return HearingLoss.Mild;
-            if (ModerateRange.ContainsLeftOpen(value))
-                return HearingLoss.Moderate;
-            return SevereRange.ContainsLeftOpen(value)
-                ? HearingLoss.Severe
-                : HearingLoss.Profound;
+            if (NormalRange.ContainsClosed(value)) return HearingLoss.None;
+            if (MildRange.ContainsLeftOpen(value)) return HearingLoss.Mild;
+            if (ModerateRange.ContainsLeftOpen(value)) return HearingLoss.Moderate;
+            return SevereRange.ContainsLeftOpen(value) ? HearingLoss.Severe : HearingLoss.Profound;
         }
         
         public static Interval<int> NormalRange => HearingLossClassification.GetRange(HearingLoss.None);

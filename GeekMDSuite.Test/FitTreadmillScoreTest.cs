@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -17,7 +18,7 @@ namespace GeekMDSuite.Test
         public void FitScoreReturnsCorrectFemaleValue()
         {
             var fitParams = new FitTreadmillScoreParameters(_female, Age, PercentMaxHeartRateReached, MetabolicEquivalents);
-            var fitScore = new FitTreadmillScore(fitParams).Value;
+            var fitScore = new FitTreadmillScoreInterpretation(fitParams).Value;
 
             Assert.InRange(fitScore, -8, -7);
         }
@@ -25,7 +26,7 @@ namespace GeekMDSuite.Test
         public void FitScoreReturnsCorrecMaleValue()
         {
             var fitParams = new FitTreadmillScoreParameters(_male, Age, PercentMaxHeartRateReached, MetabolicEquivalents);
-            var fitScore = new FitTreadmillScore(fitParams).Value;
+            var fitScore = new FitTreadmillScoreInterpretation(fitParams).Value;
 
             Assert.InRange(fitScore, -8 + MaleScoreOffset, -7 + MaleScoreOffset);
         }
@@ -34,7 +35,7 @@ namespace GeekMDSuite.Test
         public void ReturnsCorrectTenYearMortality()
         {
             var fitParams = new  FitTreadmillScoreParameters(GenderIdentity.Male, 55, 155, 10.5);
-            var fitScore = new FitTreadmillScore(fitParams);
+            var fitScore = new FitTreadmillScoreInterpretation(fitParams);
             Assert.Equal(3, fitScore.TenYearMortality);
         }
     }

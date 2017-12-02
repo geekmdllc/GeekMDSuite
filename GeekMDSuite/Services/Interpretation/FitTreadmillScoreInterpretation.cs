@@ -1,11 +1,16 @@
-﻿namespace GeekMDSuite.Procedures
+﻿using System;
+using GeekMDSuite.Procedures;
+using GeekMDSuite.Tools;
+
+namespace GeekMDSuite.Services.Interpretation
 {
-    public class FitTreadmillScore : IFitTreadmillScore
+    public class FitTreadmillScoreInterpretation : IInterpretable
     {
-        public FitTreadmillScore(FitTreadmillScoreParameters parameters)
+        public FitTreadmillScoreInterpretation(FitTreadmillScoreParameters parameters)
         {
             _parameters = parameters;
         }
+        public Tools.Interpretation Interpretation => throw new NotImplementedException();
         
         public double Value => CalculateScore();
         
@@ -14,7 +19,7 @@
         public int TenYearMortality => GetTenYearMortality();
         
         private readonly FitTreadmillScoreParameters _parameters;
-        
+
         private FitTreadmillScoreMortality ParseTenYearMortalityRisk()
         {
             if (TenYearMortality == 2)
@@ -38,5 +43,7 @@
                 return 11;
             return Value < 100 ? 3 : 2;
         }
+
+
     }
 }

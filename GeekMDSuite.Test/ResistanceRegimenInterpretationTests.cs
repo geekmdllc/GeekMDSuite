@@ -10,7 +10,7 @@ namespace GeekMDSuite.Test
         public void Interpret_GivenAllAdequateValues_ReturnsAdequate()
         {
             var result = new ResistanceRegimen(
-                    new ExerciseRegimenBase(3,45,ExerciseIntensity.High),
+                    new ExerciseRegimenParameters(3,45,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
                     {
@@ -28,7 +28,7 @@ namespace GeekMDSuite.Test
         public void Interpret_GivenAspirationalDurationAndAdequateElse_ReturnsAspirational()
         {
             var result = new ResistanceRegimen(
-                    new ExerciseRegimenBase(3,90,ExerciseIntensity.High),
+                    new ExerciseRegimenParameters(3,90,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
                     {
@@ -46,7 +46,7 @@ namespace GeekMDSuite.Test
         public void Interpret_GivenAdequateExceptInsufficientFeatures_ReturnsInsufficent()
         {
             var result = new ResistanceRegimen(
-                    new ExerciseRegimenBase(3,90,ExerciseIntensity.High),
+                    new ExerciseRegimenParameters(3,90,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
                     {

@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -14,7 +15,7 @@ namespace GeekMDSuite.Test
             var rightSet = new AudiogramDatasetBuilder()
                 .Set1000HertzDataPoint(35)
                 .Build();
-            var result = new Audiogram(leftSet,rightSet).Classification;
+            var result = new AudiogramInterpretation(new Audiogram(leftSet, rightSet)).Classification;
             
             Assert.Equal(Laterality.Left, result.Laterality);
             Assert.Equal(HearingLoss.Moderate, result.Classification);
@@ -29,7 +30,7 @@ namespace GeekMDSuite.Test
             var rightSet = new AudiogramDatasetBuilder()
                 .Set1000HertzDataPoint(95)
                 .Build();
-            var result = new Audiogram(leftSet,rightSet).Classification;
+            var result = new AudiogramInterpretation(new Audiogram(leftSet, rightSet)).Classification;
             
             Assert.Equal(Laterality.Right, result.Laterality);
             Assert.Equal(HearingLoss.Profound, result.Classification);
@@ -44,7 +45,7 @@ namespace GeekMDSuite.Test
             var rightSet = new AudiogramDatasetBuilder()
                 .Set1000HertzDataPoint(74)
                 .Build();
-            var result = new Audiogram(leftSet,rightSet).Classification;
+            var result = new AudiogramInterpretation(new Audiogram(leftSet, rightSet)).Classification;
             
             Assert.Equal(Laterality.Bilateral, result.Laterality);
             Assert.Equal(HearingLoss.Severe, result.Classification);

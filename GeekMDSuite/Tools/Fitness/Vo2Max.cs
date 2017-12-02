@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Tools.Fitness
 {

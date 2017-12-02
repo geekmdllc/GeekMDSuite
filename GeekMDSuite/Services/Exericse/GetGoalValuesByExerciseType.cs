@@ -3,7 +3,7 @@ using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Exericse
 {
-    internal static class GetExerciseGoalValues
+    internal static class GetGoalValuesByExerciseType
     {
         internal static ExerciseDurationGoals TotalWeeklyDuration(ExerciseClassifications exercise)
         {

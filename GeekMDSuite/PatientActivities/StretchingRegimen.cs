@@ -1,17 +1,16 @@
 ﻿using System;
-using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Exericse;
 using GeekMDSuite.Tools;
 
-namespace GeekMDSuite
+namespace GeekMDSuite.PatientActivities
 {
-    public class StretchingRegimen : ExerciseRegimenBase, IInterpretable
+    public class StretchingRegimen : ExerciseRegimen, IInterpretable
     {
 
-        public StretchingRegimen(IExerciseRegimen regimen) 
-            : base(regimen.SessionsPerWeek, regimen.AverageSessionDuration, regimen.Intensity)
+        public StretchingRegimen(IExerciseRegimenParameters regimenParameters) 
+            : base(regimenParameters)
         {
-            Goals = GetExerciseGoalValues.TotalWeeklyDuration(ExerciseClassifications.Stretching);
+            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Stretching);
         }
         public sealed override ExerciseDurationGoals Goals { get; }
         
