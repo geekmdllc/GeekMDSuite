@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.PatientActivities
 {
-    public enum ExerciseClassifications
+    public enum ExerciseClassification
     {
         Cardiovascular,
         Resistance,

@@ -13,7 +13,15 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             Intensity = parameters.Intensity;
         }
 
-        public virtual ExerciseRegimenClassification Classification => throw new NotImplementedException();
+        public virtual ExerciseRegimenClassification Classification
+        {
+            get
+            {
+                if (  RegimenIsAdequate && TimeAspirationalOrHigher)
+                    return ExerciseRegimenClassification.Aspirational;
+                return RegimenIsAdequate ? ExerciseRegimenClassification.Adequate : ExerciseRegimenClassification.Insufficient;
+            }
+        }
 
         public virtual ExerciseDurationGoals Goals => throw new NotImplementedException();
         
@@ -22,10 +30,10 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
         public virtual bool RegimenIsAdequate => DurationAndIntensityAreAdequate;
 
         public static double GoalMinutesHighIntensity => 
-            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).HighIntensity;
+            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Cardiovascular).HighIntensity;
 
         public static double GoalMinutesModerateIntensity => 
-            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).ModerateIntensity;
+            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Cardiovascular).ModerateIntensity;
         
         public bool IntensityIsAdequate => IsHighIntensity || IsModerateIntensity;
 

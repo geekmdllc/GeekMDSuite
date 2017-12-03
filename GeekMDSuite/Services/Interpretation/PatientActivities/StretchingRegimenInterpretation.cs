@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.PatientActivities;
+using GeekMDSuite.Services.Fitness;
 
 namespace GeekMDSuite.Services.Interpretation.PatientActivities
 {
@@ -6,15 +7,9 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
     {
         public StretchingRegimenInterpretation(IExerciseRegimenParameters parameters) : base(parameters)
         {
+            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Stretching);
         }
-    }
 
-    public class StretchingRegimen : ExerciseRegimen
-    {
-        public StretchingRegimen(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity) 
-            : base(sessionsPerWeek, averageSessionDuration, intensity)
-        {
-        }
+        public override ExerciseDurationGoals Goals { get; }
     }
-    
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GeekMDSuite.Tools;
 using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Interpretation
@@ -23,10 +22,10 @@ namespace GeekMDSuite.Services.Interpretation
             get
             {
                 var stage = BloodPressureStage.Normotension;
-                foreach (var description in GetBloodPressureStageParameters())
+                foreach (var parameters in GetBloodPressureStageParameters())
                 {
-                    if (description.Contains(_parameters))
-                        stage = description.Stage;
+                    if (parameters.Contains(_parameters))
+                        stage = parameters.Stage;
                 }
                 return stage;
             }
@@ -42,6 +41,27 @@ namespace GeekMDSuite.Services.Interpretation
         public static readonly int DiastolicLowerLimitOfStage1Hypertension = 90;
         public static readonly int DiastolicLowerLimitOfStage2Hypertension = 100;
         public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
+
+        public static class LowerLimits
+        {
+            public static class Diastolic
+            {
+                public static readonly int Normal = 60;
+                public static readonly int Prehypertension = 80;
+                public static readonly int Stage1Hypertension = 90;
+                public static readonly int Stage2Hypertension = 100;
+                public static readonly int HypertensiveUrgency = 120;
+            }
+
+            public static class Systolic
+            {
+                public static readonly int Normal = 100;
+                public static readonly int Prehypertension = 120;
+                public static readonly int Stage1Hypertension = 140;
+                public static readonly int Stage2Hypertension = 160;
+                public static readonly int HypertensiveUrgency = 180;
+            }
+        }
         
         private readonly BloodPressure _parameters;
         

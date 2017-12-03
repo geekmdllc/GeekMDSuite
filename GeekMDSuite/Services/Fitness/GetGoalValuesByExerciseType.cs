@@ -5,11 +5,11 @@ namespace GeekMDSuite.Services.Fitness
 {
     internal static class GetGoalValuesByExerciseType
     {
-        internal static ExerciseDurationGoals TotalWeeklyDuration(ExerciseClassifications exercise)
+        internal static ExerciseDurationGoals TotalWeeklyDuration(ExerciseClassification exercise)
         {
-            if(exercise == ExerciseClassifications.Cardiovascular)
+            if(exercise == ExerciseClassification.Cardiovascular)
                 return new ExerciseDurationGoals(150,75);
-            return exercise == ExerciseClassifications.Resistance
+            return exercise == ExerciseClassification.Resistance
                 ? new ExerciseDurationGoals(120, 90)
                 : new ExerciseDurationGoals(30, 20);
         }

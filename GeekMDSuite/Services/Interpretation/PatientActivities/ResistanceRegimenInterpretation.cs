@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Extensions;
 using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Fitness;
 using GeekMDSuite.Tools.Generic;
@@ -12,7 +13,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             : base(regimen)
         {
             _regimen = regimen;
-            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Resistance);
+            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Resistance);
         }
         
         public sealed override ExerciseDurationGoals Goals { get; }
@@ -38,20 +39,16 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
         private bool FeaturesOfRegimenAreIdeal {
             get
             {
-                //TODO: Ensure proper count and then consolidate this.
-                var count = Enum.GetNames(typeof(ResistenceRegimenFeatures)).Length;
-                Console.WriteLine(count);
                 var presentFeatures = 0;
+                
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.LowerBodyTrained)) presentFeatures++;
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.UpperBodyTrained)) presentFeatures++;
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.PullingMovementsPerformed)) presentFeatures++;
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.PushingMovementsPerformed)) presentFeatures++;
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.RepetitionsToNearFailure)) presentFeatures++;
-
-                return presentFeatures == MaxPossibleFeatures;
+                
+                return presentFeatures == Enum<ResistenceRegimenFeatures>.Count;
             }
         }
-
-        private const int MaxPossibleFeatures = 5;
     }
 }
