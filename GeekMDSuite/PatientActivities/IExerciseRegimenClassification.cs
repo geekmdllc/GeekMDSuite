@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.PatientActivities
 {
-    public interface IExerciseRegimen : IExerciseRegimenParameters
+    public interface IExerciseRegimenClassification
     {
         ExerciseRegimenClassification Classification { get; }
     }

@@ -1,58 +1,18 @@
-﻿using System;
-using GeekMDSuite.Services.Fitness;
-
-namespace GeekMDSuite.PatientActivities
+﻿namespace GeekMDSuite.PatientActivities
 {
-    public abstract class ExerciseRegimen : IExerciseRegimen
+    public abstract class ExerciseRegimen : IExerciseRegimenParameters
     {
-        protected ExerciseRegimen (IExerciseRegimenParameters parameters)
+        protected ExerciseRegimen(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
         {
-            SessionsPerWeek = parameters.SessionsPerWeek;
-            AverageSessionDuration = parameters.AverageSessionDuration;
-            Intensity = parameters.Intensity;
+            SessionsPerWeek = sessionsPerWeek;
+            AverageSessionDuration = averageSessionDuration;
+            Intensity = intensity;
         }
+
         public double SessionsPerWeek { get; }
+
         public double AverageSessionDuration { get; }
+
         public ExerciseIntensity Intensity { get; }
-
-        public virtual ExerciseRegimenClassification Classification => throw new NotImplementedException();
-
-        public virtual ExerciseDurationGoals Goals => throw new NotImplementedException();
-        
-        public double TotalMinutes => SessionsPerWeek * AverageSessionDuration;
-        
-        public virtual bool RegimenIsAdequate => DurationAndIntensityAreAdequate;
-
-        public static double GoalMinutesHighIntensity => 
-            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).HighIntensity;
-
-        public static double GoalMinutesModerateIntensity => 
-            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassifications.Cardiovascular).ModerateIntensity;
-        
-        public bool IntensityIsAdequate => IsHighIntensity || IsModerateIntensity;
-
-        public bool DurationIsAdequate => IntensityIsAdequate && TimeGoalOrHigher;
-
-        public double DurationPercentOfGoalAchieved =>
-            GoalMinutes >= 0 ? 100 * TotalMinutes / GoalMinutes : 0;
-        
-        protected bool DurationAndIntensityAreAdequate => DurationIsAdequate && IntensityIsAdequate;
-        
-        protected bool TimeGoalOrHigher => TotalMinutes >= GoalMinutes;
-
-        protected bool TimeAspirationalOrHigher => TotalMinutes >= GoalMinutes * 2;
-
-        private bool IsModerateIntensity => Intensity == ExerciseIntensity.Moderate;
-
-        private bool IsHighIntensity => (Intensity == ExerciseIntensity.High || Intensity == ExerciseIntensity.Vigorous);
-        
-        private double GoalMinutes {
-            get
-            {
-                if (IsHighIntensity) return Goals.HighIntensity;
-            
-                return IsModerateIntensity ? Goals.ModerateIntensity : 0;
-            }
-        }
     }
 }

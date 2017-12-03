@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.PatientActivities;
+using GeekMDSuite.Services.Interpretation.PatientActivities;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -9,7 +10,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Interpret_GivenAllAdequateValues_ReturnsAdequate()
         {
-            var result = new ResistanceRegimen(
+            var result = new ResistanceRegimenInterpretation(
                     new ExerciseRegimenParameters(3,45,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
@@ -27,7 +28,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Interpret_GivenAspirationalDurationAndAdequateElse_ReturnsAspirational()
         {
-            var result = new ResistanceRegimen(
+            var result = new ResistanceRegimenInterpretation(
                     new ExerciseRegimenParameters(3,90,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
@@ -45,7 +46,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Interpret_GivenAdequateExceptInsufficientFeatures_ReturnsInsufficent()
         {
-            var result = new ResistanceRegimen(
+            var result = new ResistanceRegimenInterpretation(
                     new ExerciseRegimenParameters(3,90,ExerciseIntensity.High),
                     60,
                     new List<ResistenceRegimenFeatures>
