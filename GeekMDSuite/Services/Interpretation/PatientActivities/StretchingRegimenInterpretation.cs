@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.PatientActivities;
+﻿using System;
+using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Fitness;
 
 namespace GeekMDSuite.Services.Interpretation.PatientActivities
@@ -11,5 +12,6 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
         }
 
         public override ExerciseDurationGoals Goals { get; }
+        public override InterpretationText Interpretation => throw new NotImplementedException();
     }
 }

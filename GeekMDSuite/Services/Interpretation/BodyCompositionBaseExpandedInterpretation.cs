@@ -1,9 +1,8 @@
 ﻿using System;
-using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class BodyCompositionBaseExpandedInterpretation : BodyCompositionBaseInterpretation, IInterpretable
+    public class BodyCompositionBaseExpandedInterpretation : BodyCompositionBaseInterpretation
     {
         public BodyCompositionBaseExpandedInterpretation( 
             IBodyComposition bodyComposition, 

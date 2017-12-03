@@ -16,11 +16,14 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Resistance);
         }
         
+        
         public sealed override ExerciseDurationGoals Goals { get; }
 
         public sealed override bool RegimenIsAdequate => base.RegimenIsAdequate 
                                      && FeaturesOfRegimenAreIdeal                                                
                                      && RestIntervalGoalRange.ContainsOpen(_regimen.SecondsRestDurationPerSet);
+
+        public override InterpretationText Interpretation => throw new NotImplementedException();
 
         public override ExerciseRegimenClassification Classification
         {
@@ -50,5 +53,6 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
                 return presentFeatures == Enum<ResistenceRegimenFeatures>.Count;
             }
         }
+
     }
 }

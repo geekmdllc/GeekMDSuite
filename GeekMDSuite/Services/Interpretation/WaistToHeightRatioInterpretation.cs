@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
@@ -15,11 +14,11 @@ namespace GeekMDSuite.Services.Interpretation
         private  static WaistToHeightRatioClassification Classify(GenderIdentity gender, double result)
         {
             
-            var slim = Gender.IsGenotypeXy(gender) ? SlimMaleLLN : SlimFemaleLLN;
-            var healthy = Gender.IsGenotypeXy(gender) ? HealthyMaleLLN : HealthyFemaleLLN;
-            var overweight = Gender.IsGenotypeXy(gender) ? OverweightMaleLLN : OverweightFemaleLLN;
-            var veryOverweight = Gender.IsGenotypeXy(gender) ? VeryOverweightMaleLLN : VeryOverweightFemaleLLN;
-            var morbidlyObese = Gender.IsGenotypeXy(gender) ? MorbidlyObeseMaleLLN : MoribdlyObeseFemaleLLN;
+            var slim = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.Slim : LowerLimits.Female.Slim;
+            var healthy = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.Healthy : LowerLimits.Female.Healthy;
+            var overweight = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.Overweight : LowerLimits.Female.Overweight;
+            var veryOverweight = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.VeryOverweight : LowerLimits.Female.VeryOverweight;
+            var morbidlyObese = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.MorbidlyObese : LowerLimits.Female.MoribdlyObese;
             
             if (result < slim)
                 return WaistToHeightRatioClassification.ExtremelySlim;
@@ -33,18 +32,25 @@ namespace GeekMDSuite.Services.Interpretation
                 ? WaistToHeightRatioClassification.VeryOverweight
                 : WaistToHeightRatioClassification.MorbidlyObese;
         }
-        
-        public static double SlimMaleLLN = 0.34;
-        public static double SlimFemaleLLN = 0.34;
-        public static double HealthyMaleLLN = 0.43;
-        public static double HealthyFemaleLLN = 0.42;
-        public static double OverweightMaleLLN = 0.53;
-        public static double OverweightFemaleLLN = 0.49;
-        public static double VeryOverweightMaleLLN = 0.58;
-        public static double VeryOverweightFemaleLLN = 0.54;
-        public static double MorbidlyObeseMaleLLN = 0.63;
-        public static double MoribdlyObeseFemaleLLN = 0.58;
-        private InterpretationText _interpretationText;
 
+        public static class LowerLimits
+        {
+            public static class Male
+            {
+                public const double Slim = 0.34;
+                public const double Healthy = 0.43;
+                public const double Overweight = 0.53;
+                public const double VeryOverweight = 0.58;
+                public const double MorbidlyObese = 0.63;
+            }
+            public static class Female
+            {                
+                public const double Slim = 0.34;
+                public const double Healthy = 0.42;
+                public const double Overweight = 0.49;
+                public const double VeryOverweight = 0.54;
+                public const double MoribdlyObese = 0.58;
+            }
+        }
     }
 }

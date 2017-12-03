@@ -19,6 +19,6 @@ namespace GeekMDSuite.Services.Interpretation
         protected ILengthMeasurement Hips { get; }
         protected IMassMeasurement Weight { get; }
 
-        public virtual InterpretationText Interpretation => throw new NotImplementedException();
+        public abstract InterpretationText Interpretation { get; }
     }
 }
