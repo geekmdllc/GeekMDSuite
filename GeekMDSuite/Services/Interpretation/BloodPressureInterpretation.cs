@@ -30,23 +30,12 @@ namespace GeekMDSuite.Services.Interpretation
                 return stage;
             }
         }
-        
-        public static readonly int SystolicLowerLimitOfNormal = 100;
-        public static readonly int SystolicLowerLimitOfPrehypertension = 120;
-        public static readonly int SystolicLowerLimitOfStage1Hypertension = 140;
-        public static readonly int SystolicLowerLimitOfStage2Hypertension = 160;
-        public static readonly int SystolicLowerLimitofHypertensiveUrgency = 180;
-        public static readonly int DiastolicLowerLimitOfNormal = 60;
-        public static readonly int DiastolicLowerLimitOfPrehypertension = 80;
-        public static readonly int DiastolicLowerLimitOfStage1Hypertension = 90;
-        public static readonly int DiastolicLowerLimitOfStage2Hypertension = 100;
-        public static readonly int DiastolicLowerLimitOfHypertensiveUrgency = 120;
 
         public static class LowerLimits
         {
             public static class Diastolic
             {
-                public static readonly int Normal = 60;
+                public static readonly int Normotension = 60;
                 public static readonly int Prehypertension = 80;
                 public static readonly int Stage1Hypertension = 90;
                 public static readonly int Stage2Hypertension = 100;
@@ -55,7 +44,7 @@ namespace GeekMDSuite.Services.Interpretation
 
             public static class Systolic
             {
-                public static readonly int Normal = 100;
+                public static readonly int Normotension = 100;
                 public static readonly int Prehypertension = 120;
                 public static readonly int Stage1Hypertension = 140;
                 public static readonly int Stage2Hypertension = 160;
@@ -117,8 +106,8 @@ namespace GeekMDSuite.Services.Interpretation
         {
             var ceilingPressure = 500;
             return new BloodStageParameters(
-                new Interval<int>(SystolicLowerLimitofHypertensiveUrgency, ceilingPressure),
-                new Interval<int>(DiastolicLowerLimitOfHypertensiveUrgency, ceilingPressure),
+                new Interval<int>(LowerLimits.Systolic.HypertensiveUrgency, ceilingPressure),
+                new Interval<int>(LowerLimits.Diastolic.HypertensiveUrgency, ceilingPressure),
                 organDamagePresent ? BloodPressureStage.HypertensiveEmergency : BloodPressureStage.HypertensiveUrgency,
                 organDamagePresent);
         }
@@ -126,8 +115,8 @@ namespace GeekMDSuite.Services.Interpretation
         private static BloodStageParameters GetStage2HypertensionParameters()
         {
             return new BloodStageParameters(
-                new Interval<int>(SystolicLowerLimitOfStage2Hypertension, SystolicLowerLimitofHypertensiveUrgency),
-                new Interval<int>(DiastolicLowerLimitOfStage2Hypertension, DiastolicLowerLimitOfHypertensiveUrgency),
+                new Interval<int>(LowerLimits.Systolic.Stage2Hypertension, LowerLimits.Systolic.HypertensiveUrgency),
+                new Interval<int>(LowerLimits.Diastolic.Stage2Hypertension, LowerLimits.Diastolic.HypertensiveUrgency),
                 BloodPressureStage.Stage2Hypertension,
                 false);
         }
@@ -135,8 +124,8 @@ namespace GeekMDSuite.Services.Interpretation
         private static BloodStageParameters GetStage1HypertensionParameters()
         {
             return new BloodStageParameters(
-                new Interval<int>(SystolicLowerLimitOfStage1Hypertension, SystolicLowerLimitOfStage2Hypertension),
-                new Interval<int>(DiastolicLowerLimitOfStage1Hypertension, DiastolicLowerLimitOfStage2Hypertension),
+                new Interval<int>(LowerLimits.Systolic.Stage1Hypertension, LowerLimits.Systolic.Stage2Hypertension),
+                new Interval<int>(LowerLimits.Diastolic.Stage1Hypertension, LowerLimits.Diastolic.Stage2Hypertension),
                 BloodPressureStage.Stage1Hypertension,
                 false);
         }
@@ -144,8 +133,8 @@ namespace GeekMDSuite.Services.Interpretation
         private static BloodStageParameters GetPrehypertensionStageParameters()
         {
             return new BloodStageParameters(
-                new Interval<int>(SystolicLowerLimitOfPrehypertension, SystolicLowerLimitOfStage1Hypertension),
-                new Interval<int>(DiastolicLowerLimitOfPrehypertension, DiastolicLowerLimitOfStage1Hypertension),
+                new Interval<int>(LowerLimits.Systolic.Prehypertension, LowerLimits.Systolic.Stage1Hypertension),
+                new Interval<int>(LowerLimits.Diastolic.Prehypertension, LowerLimits.Diastolic.Stage1Hypertension),
                 BloodPressureStage.PreHypertension,
                 false);
         }
@@ -153,8 +142,8 @@ namespace GeekMDSuite.Services.Interpretation
         private static BloodStageParameters GetNormotensionStageParameters()
         {
             return new BloodStageParameters(
-                new Interval<int>(SystolicLowerLimitOfNormal, SystolicLowerLimitOfPrehypertension),
-                new Interval<int>(DiastolicLowerLimitOfNormal, DiastolicLowerLimitOfPrehypertension),
+                new Interval<int>(LowerLimits.Systolic.Normotension, LowerLimits.Systolic.Prehypertension),
+                new Interval<int>(LowerLimits.Diastolic.Normotension, LowerLimits.Systolic.Prehypertension),
                 BloodPressureStage.Normotension,
                 false);
         }
@@ -163,8 +152,8 @@ namespace GeekMDSuite.Services.Interpretation
         {
             var floorPressure = 0;
             return new BloodStageParameters(
-                new Interval<int>(floorPressure, SystolicLowerLimitOfNormal),
-                new Interval<int>(floorPressure, DiastolicLowerLimitOfNormal),
+                new Interval<int>(floorPressure, LowerLimits.Systolic.Normotension),
+                new Interval<int>(floorPressure, LowerLimits.Diastolic.Normotension),
                 BloodPressureStage.Hypotension,
                 false);
         }
@@ -192,28 +181,28 @@ namespace GeekMDSuite.Services.Interpretation
                               "events such as heart attack and stroke. ")
                 .SetTitle("Normal Values")
                 .AddParagraph("Levels that are generally considered to be 'too low' will be less than " +
-                              $"{SystolicLowerLimitOfNormal}/{DiastolicLowerLimitOfNormal} mmHg" +
+                              $"{LowerLimits.Systolic.Normotension}/{LowerLimits.Diastolic.Normotension} mmHg" +
                               "There are exceptions to this, which can only be determined in proper " +
                               "clinical context by a trained healthcare provider. ")
-                .AddParagraph($"Ideal values are between {SystolicLowerLimitOfNormal} to " +
-                              $"{SystolicLowerLimitOfPrehypertension}/{DiastolicLowerLimitOfNormal} to " +
-                              $"{DiastolicLowerLimitOfPrehypertension} mmHg. These values are generally " +
+                .AddParagraph($"Ideal values are between {LowerLimits.Systolic.Normotension}-" +
+                              $"{LowerLimits.Systolic.Prehypertension}/{LowerLimits.Diastolic.Normotension}-" +
+                              $"{LowerLimits.Diastolic.Prehypertension} mmHg. These values are generally " +
                               "considered to be the least likely to be associated with other chronic " +
                               "disease states.")
-                .AddParagraph($"Pre-hypertension is defined as {SystolicLowerLimitOfPrehypertension} to " +
-                              $"{SystolicLowerLimitOfStage1Hypertension} / {DiastolicLowerLimitOfPrehypertension} to " +
-                              $"{DiastolicLowerLimitOfStage1Hypertension}. The term 'pre-hypertension' is " +
+                .AddParagraph($"Pre-hypertension is defined as {LowerLimits.Systolic.Prehypertension}-" +
+                              $"{LowerLimits.Systolic.Stage1Hypertension}/{LowerLimits.Diastolic.Prehypertension}-" +
+                              $"{LowerLimits.Diastolic.Stage1Hypertension}. The term 'pre-hypertension' is " +
                               "used here, however it's important to note that this does not mean that there" +
                               "is no detriment associated with these blood pressures levels. There is. " +
                               "even mild levels of blood pressure elevation are associated with increased " +
                               "risk of heart attack, stroke, and more.")
                 .AddParagraph("From here, hypertension is formally staged. Each stage is successively " +
                               "worse when compared to the previous stage. Stage 1 Hypertension is " +
-                              $"{SystolicLowerLimitOfStage1Hypertension} to {SystolicLowerLimitOfStage2Hypertension}/" +
-                              $"{DiastolicLowerLimitOfStage1Hypertension} to {DiastolicLowerLimitOfStage2Hypertension}. " +
-                              $"Stage 2 Hypertension is from {SystolicLowerLimitOfStage2Hypertension} to " +
-                              $"{SystolicLowerLimitofHypertensiveUrgency}/{DiastolicLowerLimitOfStage2Hypertension} to " +
-                              $"{DiastolicLowerLimitOfHypertensiveUrgency}. Anything beyond these values " +
+                              $"{LowerLimits.Systolic.Stage1Hypertension}-{LowerLimits.Systolic.Stage2Hypertension}/" +
+                              $"{LowerLimits.Diastolic.Stage1Hypertension}-{LowerLimits.Diastolic.Stage2Hypertension}. " +
+                              $"Stage 2 Hypertension is from {LowerLimits.Systolic.Stage2Hypertension}-" +
+                              $"{LowerLimits.Systolic.HypertensiveUrgency}/{LowerLimits.Diastolic.Stage2Hypertension}-" +
+                              $"{LowerLimits.Diastolic.HypertensiveUrgency}. Anything beyond these values " +
                               "is classified as either hypertensive urgency, or hypertensive emergency.")
                 .AddParagraph("The difference between hypertensive urgency and hypertensive emergency is " +
                               "the presence of evidence of acute damage to an organ. This often necessitates " +
