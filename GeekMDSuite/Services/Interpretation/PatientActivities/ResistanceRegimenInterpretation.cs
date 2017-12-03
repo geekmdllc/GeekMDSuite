@@ -50,7 +50,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.PushingMovementsPerformed)) presentFeatures++;
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.RepetitionsToNearFailure)) presentFeatures++;
                 
-                return presentFeatures == Enum<ResistenceRegimenFeatures>.Count;
+                return presentFeatures == EnumExtension<ResistenceRegimenFeatures>.Count;
             }
         }
 

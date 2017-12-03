@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Extensions
 {
-    internal static class Enum<T> where T : struct, IConvertible
+    internal static class EnumExtension<T> where T : struct, IConvertible
     {
         internal static int Count
         {
