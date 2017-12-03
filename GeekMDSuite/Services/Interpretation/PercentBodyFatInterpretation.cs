@@ -1,24 +1,26 @@
 ﻿using System;
-using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
     public class PercentBodyFatInterpretation : IInterpretable
     {
+        // TODO: This needs to be reworked to be consistnet with rest of API.
+        private readonly GenderIdentity _genderIdentity;
+
         public PercentBodyFatInterpretation(double percentBodyFat, GenderIdentity genderIdentity)
         {
             _genderIdentity = genderIdentity;
-            _percentBodyFat = percentBodyFat;
+            Value = percentBodyFat;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
-        public double Value => _percentBodyFat;
+        public double Value { get; }
         
         public static PercentBodyFatClassification Interpret (double percentBodyFat, GenderIdentity genderIdentity) => 
             Classify(percentBodyFat, genderIdentity);
 
         private static PercentBodyFatClassification Classify(double percentBodyFat, GenderIdentity genderIdentity)
         {
-            var upperLimit = DetermineBodyFatLimitsByGender(percentBodyFat, genderIdentity);
+            var upperLimit = DetermineBodyFatLimitsByGender(genderIdentity);
 
             if (percentBodyFat < upperLimit.Athletic)
                 return PercentBodyFatClassification.UnderFat;
@@ -29,28 +31,35 @@ namespace GeekMDSuite.Services.Interpretation
             return percentBodyFat < upperLimit.OverFat ? PercentBodyFatClassification.Acceptable : PercentBodyFatClassification.OverFat;
         }
 
-        private static BodyFatLimits DetermineBodyFatLimitsByGender(double percentBodyFat, GenderIdentity genderIdentity)
+        private static BodyFatLimits DetermineBodyFatLimitsByGender(GenderIdentity genderIdentity)
         {
             var genotypeIsXy = Gender.IsGenotypeXy(genderIdentity);
             
-            var athletic = genotypeIsXy ? AthleticMaleLLN : AthleticFemaleLLN;
-            var fitness = genotypeIsXy ? FitMaleLLN : FitFemaleLLN;
-            var acceptable = genotypeIsXy ? AcceptableMaleLLN : AcceptableFemaleLLN;
-            var overfat = genotypeIsXy ? OverFatMaleLLN : OverFatFemaleLLN;
+            var athletic = genotypeIsXy ? LowerLimits.Male.Athletic : LowerLimits.Female.Athletic;
+            var fitness = genotypeIsXy ? LowerLimits.Male.Fit : LowerLimits.Female.Fit;
+            var acceptable = genotypeIsXy ? LowerLimits.Male.Acceptable : LowerLimits.Female.Acceptable;
+            var overfat = genotypeIsXy ? LowerLimits.Male.OverFat : LowerLimits.Female.OverFat;
             return new BodyFatLimits(athletic, fitness, acceptable, overfat);
         }
 
-        public static double AthleticMaleLLN = 6;
-        public static double AthleticFemaleLLN = 14;
-        public static double FitMaleLLN = 14;
-        public static double FitFemaleLLN = 21;
-        public static double AcceptableMaleLLN = 18;
-        public static double AcceptableFemaleLLN = 25;
-        public static double OverFatMaleLLN = 25;
-        public static double OverFatFemaleLLN = 32;
-        
-        private double _percentBodyFat;
-        private GenderIdentity _genderIdentity;
+        public static class LowerLimits
+        {
+            public static class Male
+            {
+                public const double Athletic = 6;
+                public const double Fit = 14;
+                public const double Acceptable = 18;
+                public const double OverFat = 25;
+            }
+
+            public static class Female
+            {
+                public const double Athletic = 14;
+                public const double Fit = 21;
+                public const double Acceptable = 25;
+                public const double OverFat = 32;
+            }
+        }
 
         private class BodyFatLimits
         {
