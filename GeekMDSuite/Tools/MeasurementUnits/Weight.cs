@@ -1,7 +1,4 @@
-﻿using GeekMDSuite.Tools;
-using GeekMDSuite.Tools.MeasurementUnits;
-
-namespace GeekMDSuite
+﻿namespace GeekMDSuite.Tools.MeasurementUnits
 {
     public class Weight : MassMeasurement
     {

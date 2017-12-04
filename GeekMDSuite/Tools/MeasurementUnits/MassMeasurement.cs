@@ -1,9 +1,8 @@
-﻿using GeekMDSuite.Tools.MeasurementUnits;
-using GeekMDSuite.Tools.MeasurementUnits.Conversion;
+﻿using GeekMDSuite.Tools.MeasurementUnits.Conversion;
 
-namespace GeekMDSuite.Tools
+namespace GeekMDSuite.Tools.MeasurementUnits
 {
-    public class MassMeasurement : IMassMeasurement
+    public abstract class MassMeasurement : IMassMeasurement
     {
         public MassMeasurement(double pounds)
         {
