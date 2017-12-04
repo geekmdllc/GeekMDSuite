@@ -4,7 +4,7 @@ using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public abstract class BodyCompositionBaseInterpretation : IInterpretable
+    public abstract class BodyCompositionBaseInterpretation
     {
         public BodyCompositionBaseInterpretation(IBodyComposition bodyComposition)
         {

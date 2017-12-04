@@ -2,36 +2,19 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class WaistToHeightRatioInterpretation : IInterpretable
+    public class WaistToHeightRatioInterpretation : IInterpretable<WaistToHeightRatioClassification>
     {
+
+        public WaistToHeightRatioInterpretation(IBodyComposition bodyComposition, GenderIdentity gender)
+        {
+            _waistToHeighRatio = Calculate(bodyComposition);
+            _gender = gender;
+        }
         public InterpretationText Interpretation => throw new NotImplementedException();
         
-        public static WaistToHeightRatioClassification Interpret (GenderIdentity gender, double result) => Classify(gender, result);
+        public WaistToHeightRatioClassification Classification => ClassifyWaistToHeight();
         
-        public static double WaistToHeightRatioCalculation(IBodyComposition bodyComposition) => 
-            bodyComposition.Waist.Centimeters / bodyComposition.Height.Centimeters;
-        
-        private  static WaistToHeightRatioClassification Classify(GenderIdentity gender, double result)
-        {
-            
-            var slim = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.Slim : LowerLimits.Female.Slim;
-            var healthy = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.Healthy : LowerLimits.Female.Healthy;
-            var overweight = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.Overweight : LowerLimits.Female.Overweight;
-            var veryOverweight = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.VeryOverweight : LowerLimits.Female.VeryOverweight;
-            var morbidlyObese = Gender.IsGenotypeXy(gender) ? LowerLimits.Male.MorbidlyObese : LowerLimits.Female.MoribdlyObese;
-            
-            if (result < slim)
-                return WaistToHeightRatioClassification.ExtremelySlim;
-            if (result < healthy)
-                return WaistToHeightRatioClassification.Slim;
-            if (result < overweight)
-                return WaistToHeightRatioClassification.Healthy;
-            if (result < veryOverweight)
-                return WaistToHeightRatioClassification.Overweight;
-            return result < morbidlyObese
-                ? WaistToHeightRatioClassification.VeryOverweight
-                : WaistToHeightRatioClassification.MorbidlyObese;
-        }
+        public double Value => _waistToHeighRatio;
 
         public static class LowerLimits
         {
@@ -51,6 +34,36 @@ namespace GeekMDSuite.Services.Interpretation
                 public const double VeryOverweight = 0.54;
                 public const double MoribdlyObese = 0.58;
             }
+        }
+        
+        private readonly double _waistToHeighRatio;
+        private readonly GenderIdentity _gender;
+        
+        private static double Calculate(IBodyComposition bodyComposition) => 
+            bodyComposition.Waist.Centimeters / bodyComposition.Height.Centimeters;
+        
+        private WaistToHeightRatioClassification ClassifyWaistToHeight()
+        {
+            var slim = Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.Slim : LowerLimits.Female.Slim;
+            var healthy = Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.Healthy : LowerLimits.Female.Healthy;
+            var overweight = Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.Overweight : LowerLimits.Female.Overweight;
+            var veryOverweight = Gender.IsGenotypeXy(_gender)
+                ? LowerLimits.Male.VeryOverweight
+                : LowerLimits.Female.VeryOverweight;
+            var morbidlyObese =
+                Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.MorbidlyObese : LowerLimits.Female.MoribdlyObese;
+
+            if (_waistToHeighRatio < slim)
+                return WaistToHeightRatioClassification.ExtremelySlim;
+            if (_waistToHeighRatio < healthy)
+                return WaistToHeightRatioClassification.Slim;
+            if (_waistToHeighRatio < overweight)
+                return WaistToHeightRatioClassification.Healthy;
+            if (_waistToHeighRatio < veryOverweight)
+                return WaistToHeightRatioClassification.Overweight;
+            return _waistToHeighRatio < morbidlyObese
+                ? WaistToHeightRatioClassification.VeryOverweight
+                : WaistToHeightRatioClassification.MorbidlyObese;
         }
     }
 }

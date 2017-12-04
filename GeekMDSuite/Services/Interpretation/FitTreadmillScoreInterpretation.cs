@@ -4,7 +4,7 @@ using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class FitTreadmillScoreInterpretation : IInterpretable
+    public class FitTreadmillScoreInterpretation : IInterpretable<FitTreadmillScoreMortality>
     {
         public FitTreadmillScoreInterpretation(FitTreadmillScoreParameters parameters)
         {

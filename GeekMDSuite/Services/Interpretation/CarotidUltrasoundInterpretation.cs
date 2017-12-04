@@ -3,7 +3,7 @@ using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class CarotidUltrasoundInterpretation : IInterpretable
+    public class CarotidUltrasoundInterpretation : IInterpretable<CarotidPercentStenosisGrade>
     {
         public CarotidUltrasoundInterpretation(CarotidUltrasound carotidUltrasound)
         {
@@ -11,5 +11,6 @@ namespace GeekMDSuite.Services.Interpretation
         }
 
         public InterpretationText Interpretation => throw new NotImplementedException();
+        public CarotidPercentStenosisGrade Classification { get; }
     }
 }

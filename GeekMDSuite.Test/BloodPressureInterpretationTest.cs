@@ -8,7 +8,7 @@ namespace GeekMDSuite.Test
         [Fact]
         void Stage_GivenPrehypertensionParameters_InterpretsPrehypertension()
         {
-            var bpStage = new BloodPressureInterpretation(_preHypertensionParameters).Stage;
+            var bpStage = new BloodPressureInterpretation(_preHypertensionParameters).Classification;
             
             Assert.Equal(BloodPressureStage.PreHypertension, bpStage);
         }
@@ -17,14 +17,14 @@ namespace GeekMDSuite.Test
         [Fact]
         void Stage_GivenHypertensiveEmergencyParameters_InterpretsHypertensiveEmergency()
         {
-            var bpStage = new BloodPressureInterpretation(_hypertensiveEmergencyParameters).Stage;
+            var bpStage = new BloodPressureInterpretation(_hypertensiveEmergencyParameters).Classification;
             
             Assert.Equal(BloodPressureStage.HypertensiveEmergency, bpStage);
         }
         [Fact]
         void Stage_GivenHypertensiveUrgencyParameters_DistinguishesHypertensiveUrgencyFromHypertensiveEmergency()
         {
-            var bpStage = new BloodPressureInterpretation(_hypertensiveUrgencyParameters).Stage;
+            var bpStage = new BloodPressureInterpretation(_hypertensiveUrgencyParameters).Classification;
            
             Assert.Equal(BloodPressureStage.HypertensiveUrgency, bpStage);
         }

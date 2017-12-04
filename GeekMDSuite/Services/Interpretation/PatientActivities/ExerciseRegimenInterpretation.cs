@@ -3,7 +3,7 @@ using GeekMDSuite.Services.Fitness;
 
 namespace GeekMDSuite.Services.Interpretation.PatientActivities
 {
-    public abstract class ExerciseRegimenInterpretation : IExerciseRegimenClassification, IInterpretable
+    public abstract class ExerciseRegimenInterpretation : IExerciseRegimenClassification, IInterpretable<ExerciseRegimenClassification>
     {
         protected ExerciseRegimenInterpretation (IExerciseRegimenParameters parameters)
         {

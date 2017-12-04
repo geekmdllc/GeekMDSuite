@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class BodyCompositionBaseExpandedInterpretation : BodyCompositionBaseInterpretation
+    public class BodyCompositionBaseExpandedInterpretation : BodyCompositionBaseInterpretation, IInterpretable<BodyCompositionClassification>
     {
         public BodyCompositionBaseExpandedInterpretation( 
             IBodyComposition bodyComposition, 
@@ -18,5 +18,6 @@ namespace GeekMDSuite.Services.Interpretation
         public double PercentBodyFat { get; }
 
         public override InterpretationText Interpretation => throw new NotImplementedException();
+        public BodyCompositionClassification Classification => throw new NotImplementedException();
     }
 }

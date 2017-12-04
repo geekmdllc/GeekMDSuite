@@ -4,7 +4,7 @@ using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class AudiogramInterpretation : IInterpretable
+    public class AudiogramInterpretation : IInterpretable<AudiogramClassificationResult>
     {
         public AudiogramInterpretation(Audiogram audiogram)
         {

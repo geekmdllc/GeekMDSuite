@@ -3,7 +3,7 @@ using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class BodyMassIndexInterpretation : IInterpretable
+    public class BodyMassIndexInterpretation : IInterpretable<BodyMassIndexCategory>
     {
         public BodyMassIndexInterpretation( IBodyComposition bodyComposition, Race race)
         {

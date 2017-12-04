@@ -3,19 +3,25 @@ using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class VisceralFatInterpretation : IInterpretable
+    public class VisceralFatInterpretation : IInterpretable<VisceralFatClassification>
     {
+        public VisceralFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded)
+        {
+            _visceralFat = bodyCompositionExpanded.VisceralFat;
+        }
         public InterpretationText Interpretation => throw new NotImplementedException();
         
-        public static VisceralFatClassification Classification (double visceralFat) => ClassifyVisceralFat(visceralFat);
+        public VisceralFatClassification Classification => ClassifyVisceralFat();
+
+        private readonly double _visceralFat;
         
-        private static VisceralFatClassification ClassifyVisceralFat(double visceralFat)
-        {
-            if (visceralFat > UpperLimitNormal * 1.5)
+        private VisceralFatClassification ClassifyVisceralFat()
+        {           
+            if (_visceralFat > UpperLimitNormal * 1.5)
                 return VisceralFatClassification.VeryElevated;
-            if (visceralFat > UpperLimitNormal)
+            if (_visceralFat > UpperLimitNormal)
                 return VisceralFatClassification.Elevated;
-            return visceralFat > UpperLimitNormal * 0.5
+            return _visceralFat > UpperLimitNormal * 0.5
                 ? VisceralFatClassification.Acceptable
                 : VisceralFatClassification.Excellent;
         }

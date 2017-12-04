@@ -2,45 +2,17 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class PercentBodyFatInterpretation : IInterpretable
+    public class PercentBodyFatInterpretation : IInterpretable<PercentBodyFatClassification>
     {
-        // TODO: This needs to be reworked to be consistnet with rest of API.
-        private readonly GenderIdentity _genderIdentity;
-
-        public PercentBodyFatInterpretation(double percentBodyFat, GenderIdentity genderIdentity)
+        public PercentBodyFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded, GenderIdentity genderIdentity)
         {
             _genderIdentity = genderIdentity;
-            Value = percentBodyFat;
+            Value = bodyCompositionExpanded.PercentBodyFat;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
         public double Value { get; }
         
-        public static PercentBodyFatClassification Interpret (double percentBodyFat, GenderIdentity genderIdentity) => 
-            Classify(percentBodyFat, genderIdentity);
-
-        private static PercentBodyFatClassification Classify(double percentBodyFat, GenderIdentity genderIdentity)
-        {
-            var upperLimit = DetermineBodyFatLimitsByGender(genderIdentity);
-
-            if (percentBodyFat < upperLimit.Athletic)
-                return PercentBodyFatClassification.UnderFat;
-            if (percentBodyFat < upperLimit.Fitness)
-                return PercentBodyFatClassification.Athletic;
-            if (percentBodyFat < upperLimit.Acceptable)
-                return PercentBodyFatClassification.Fitness;
-            return percentBodyFat < upperLimit.OverFat ? PercentBodyFatClassification.Acceptable : PercentBodyFatClassification.OverFat;
-        }
-
-        private static BodyFatLimits DetermineBodyFatLimitsByGender(GenderIdentity genderIdentity)
-        {
-            var genotypeIsXy = Gender.IsGenotypeXy(genderIdentity);
-            
-            var athletic = genotypeIsXy ? LowerLimits.Male.Athletic : LowerLimits.Female.Athletic;
-            var fitness = genotypeIsXy ? LowerLimits.Male.Fit : LowerLimits.Female.Fit;
-            var acceptable = genotypeIsXy ? LowerLimits.Male.Acceptable : LowerLimits.Female.Acceptable;
-            var overfat = genotypeIsXy ? LowerLimits.Male.OverFat : LowerLimits.Female.OverFat;
-            return new BodyFatLimits(athletic, fitness, acceptable, overfat);
-        }
+        public PercentBodyFatClassification Classification => ClassifyPercentBodyFat();
 
         public static class LowerLimits
         {
@@ -60,6 +32,33 @@ namespace GeekMDSuite.Services.Interpretation
                 public const double OverFat = 32;
             }
         }
+        
+        private readonly GenderIdentity _genderIdentity;
+        
+        private PercentBodyFatClassification ClassifyPercentBodyFat()
+        {
+            var upperLimit = DetermineBodyFatLimitsByGender(_genderIdentity);
+
+            if (Value < upperLimit.Athletic)
+                return PercentBodyFatClassification.UnderFat;
+            if (Value < upperLimit.Fitness)
+                return PercentBodyFatClassification.Athletic;
+            if (Value < upperLimit.Acceptable)
+                return PercentBodyFatClassification.Fitness;
+            return Value < upperLimit.OverFat ? PercentBodyFatClassification.Acceptable : PercentBodyFatClassification.OverFat;
+        }
+
+        private static BodyFatLimits DetermineBodyFatLimitsByGender(GenderIdentity genderIdentity)
+        {
+            var genotypeIsXy = Gender.IsGenotypeXy(genderIdentity);
+            
+            var athletic = genotypeIsXy ? LowerLimits.Male.Athletic : LowerLimits.Female.Athletic;
+            var fitness = genotypeIsXy ? LowerLimits.Male.Fit : LowerLimits.Female.Fit;
+            var acceptable = genotypeIsXy ? LowerLimits.Male.Acceptable : LowerLimits.Female.Acceptable;
+            var overfat = genotypeIsXy ? LowerLimits.Male.OverFat : LowerLimits.Female.OverFat;
+            return new BodyFatLimits(athletic, fitness, acceptable, overfat);
+        }
+
 
         private class BodyFatLimits
         {

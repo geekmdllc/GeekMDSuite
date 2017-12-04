@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class BloodPressureInterpretation : IInterpretable
+    public class BloodPressureInterpretation : IInterpretable<BloodPressureStage>
     {
         public BloodPressureInterpretation(BloodPressure parameters)
         {
@@ -17,7 +18,8 @@ namespace GeekMDSuite.Services.Interpretation
             .AddSection(BuildMakingChangesSection())
             .Build();
 
-        public BloodPressureStage Stage
+
+        public BloodPressureStage Classification
         {
             get
             {
@@ -163,7 +165,7 @@ namespace GeekMDSuite.Services.Interpretation
         {
             var bloodPressure = _parameters;
             return $"Your blood pressure is {bloodPressure.Systolic}/{bloodPressure.Diastolic} mmHg. " +
-                   $"This is defined as {Stage}. " +
+                   $"This is defined as {Classification}. " +
                    "There " + (bloodPressure.OrganDamage ? "is " : "is not ") + "evidence of current end-organ " +
                    "damage. ";
         }
@@ -222,35 +224,35 @@ namespace GeekMDSuite.Services.Interpretation
                               "training, and making dietary changes. A common diet prescribed for hypertension " +
                               "is the DASH diet. When lifestyle is not enough, we include blood pressure " +
                               "medications. We understand that people often wish to avoid medications");
-            if (Stage == BloodPressureStage.Hypotension)
+            if (Classification == BloodPressureStage.Hypotension)
                 return section.AddParagraph("Your blood pressure is low. This case is less simple to generalize. " +
                                             "As such, it's importnat to discuss the details of this in the context of " +
                                             "your overall state of health with your clinician.").Build();
 
-            if (Stage == BloodPressureStage.PreHypertension)
+            if (Classification == BloodPressureStage.PreHypertension)
                 return section.AddParagraph("Your blood pressure is elevated to a range that is most often addressable " +
                                      "via lifestyle change. Some combination of bodyfat reduction, exercise, and " +
                                      "dietary changes such as those described in the DASH diet, will likely " +
                                      "remedy this.").Build();
-            if (Stage == BloodPressureStage.Stage1Hypertension)
+            if (Classification == BloodPressureStage.Stage1Hypertension)
                 return section.AddParagraph("Your blood pressure is elevated to a range that is sometimes addressable " +
                                     "by lifestyle change, but often requires medication. It's reasonable to " +
                                     "have a discussion with your clinician on whether or not lifestyle change " +
                                     "is a good option for your before adding medication, or if both are " +
                                     "necessary at this point.").Build();
-            if (Stage == BloodPressureStage.Stage2Hypertension)
+            if (Classification == BloodPressureStage.Stage2Hypertension)
                 return section.AddParagraph("Your blood pressure is elevated to a range that requires medical management. " +
                                     "It is still possible to reduce the blood pressure via lifestyle to a degree that the " +
                                     "medication can be stopped. However, while this is a possibility, the " +
                                     "current levels are such that they should be addressed. ").Build();
-            if (Stage == BloodPressureStage.HypertensiveUrgency)
+            if (Classification == BloodPressureStage.HypertensiveUrgency)
                 return section.AddParagraph("Your blood pressure is elevated to such a degree that action is urgent. " +
                                             "Medications are required, and it often takes as many as three medications " +
                                             "to reduce blood pressure that is this elevated to an acceptable level. " +
                                             "Improving blood pressure via medical management should be very high priority " +
                                             "and working closely with your clinician to accomplish this in a relatively " +
                                             "short period of time is strongly encouraged.").Build();
-            if (Stage == BloodPressureStage.HypertensiveEmergency)
+            if (Classification == BloodPressureStage.HypertensiveEmergency)
                 return section.AddParagraph("Your blood pressure needs to be addressed emergently. There is evidence to " +
                     "suggest that the blood pressure elevation is causing acute, dangerous " +
                     "damage to organs of your body. This cannot be delayed. ").Build();
