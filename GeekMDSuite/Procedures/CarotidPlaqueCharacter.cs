@@ -2,13 +2,10 @@
 {
     public enum CarotidPlaqueCharacter
     {
-        NoneSelected,
         None,
         EarlyBuildup,
         Calcified,
         Mixed,
-        Soft,
-        Unspecified,
-        InvalidRead
+        Soft
     }
 }

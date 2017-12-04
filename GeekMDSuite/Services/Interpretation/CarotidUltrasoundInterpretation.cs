@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.Services.Interpretation
@@ -11,33 +12,91 @@ namespace GeekMDSuite.Services.Interpretation
         {
             _carotidUltrasound = carotidUltrasound;
         }
-
+        
+        //todo: ensure that this incorporates IMT and character
         public InterpretationText Interpretation => throw new NotImplementedException();
         
         public CarotidUltrasoundInterpretationResult Classification => ClassifyCarotidUltrasound();
 
         private CarotidUltrasoundInterpretationResult ClassifyCarotidUltrasound()
         {
-            var laterality = GetLaterality();
-            var grade = GetStenosisGrade();
-
-            return new CarotidUltrasoundInterpretationResult(laterality, grade);
+            return new CarotidUltrasoundInterpretationResult(
+                GetLateralityOfSidesAffected(), 
+                GetWorseSideBasedOnStenosis(), 
+                GetStenosisGradeFromWorseSide(),
+                GetPlaqueCharacterFromWorseSide());
         }
 
-        private CarotidPercentStenosisGrade GetStenosisGrade()
+        private CarotidPercentStenosisGrade GetStenosisGradeFromWorseSide()
         {
-            if (_carotidUltrasound.Left.Stenosis > _carotidUltrasound.Right.Stenosis)
-                return _carotidUltrasound.Left.Stenosis;
-            return _carotidUltrasound.Left.Stenosis < _carotidUltrasound.Right.Stenosis 
-                ? _carotidUltrasound.Right.Stenosis : _carotidUltrasound.Left.Stenosis;
+            var left = _carotidUltrasound.Left.Stenosis;
+            var right = _carotidUltrasound.Right.Stenosis;
+            
+            return StenosisSeverityMap[left] >= StenosisSeverityMap[right] ? left : right;
         }
 
-        private Laterality GetLaterality()
+        private Laterality GetWorseSideBasedOnStenosis()
         {
-            if (_carotidUltrasound.Left.Stenosis > _carotidUltrasound.Right.Stenosis)
-                return Laterality.Left;
-            return _carotidUltrasound.Left.Stenosis < _carotidUltrasound.Right.Stenosis 
-                ? Laterality.Right : Laterality.Bilateral;
+            var left = _carotidUltrasound.Left.Stenosis;
+            var right = _carotidUltrasound.Right.Stenosis;
+
+            if (StenosisSeverityMap[left] == StenosisSeverityMap[right])
+                return Laterality.Bilateral;
+
+            return StenosisSeverityMap[left] > StenosisSeverityMap[right] 
+                ? Laterality.Left : Laterality.Right;
         }
+
+        private Laterality GetLateralityOfSidesAffected()
+        {
+            var left = _carotidUltrasound.Left.Stenosis;
+            var right = _carotidUltrasound.Right.Stenosis;
+
+            if (left == CarotidPercentStenosisGrade.None && 
+                right == CarotidPercentStenosisGrade.None) 
+                return Laterality.Bilateral;
+            
+            return StenosisSeverityMap[left] > StenosisSeverityMap[right]  
+                ? Laterality.Left : Laterality.Right;
+        }
+
+        private CarotidPlaqueCharacter GetPlaqueCharacterFromWorseSide()
+        {
+            var left = _carotidUltrasound.Left.Character;
+            var right = _carotidUltrasound.Right.Character;
+            
+            return PlaqueSeverityMap[left] >= PlaqueSeverityMap[right] 
+                ? _carotidUltrasound.Left.Character : _carotidUltrasound.Right.Character;
+        }
+        
+        private static Dictionary<CarotidPlaqueCharacter, int> PlaqueSeverityMap => 
+            new Dictionary<CarotidPlaqueCharacter, int>()
+            {
+                {CarotidPlaqueCharacter.None, 0},
+                {CarotidPlaqueCharacter.EarlyBuildup, 1},
+                {CarotidPlaqueCharacter.Calcified, 2},
+                {CarotidPlaqueCharacter.Mixed, 3},
+                {CarotidPlaqueCharacter.Soft, 4}
+            };
+        
+        private static Dictionary<CarotidPercentStenosisGrade, int> StenosisSeverityMap =>
+            new Dictionary<CarotidPercentStenosisGrade, int>()
+            {
+                {CarotidPercentStenosisGrade.None, 0},
+                {CarotidPercentStenosisGrade.Nominal, 1},
+                {CarotidPercentStenosisGrade.LessThan30, 2},
+                {CarotidPercentStenosisGrade.LessThan50, 3},
+                {CarotidPercentStenosisGrade.MoreThan50, 4}
+            };
+        
+        private static Dictionary<CarotidIntimaMediaThicknessGrade, int> ImtSeverityMap =>
+            new Dictionary<CarotidIntimaMediaThicknessGrade, int>()
+            {
+                {CarotidIntimaMediaThicknessGrade.Normal, 0},
+                {CarotidIntimaMediaThicknessGrade.Mild, 1},
+                {CarotidIntimaMediaThicknessGrade.Moderate, 2},
+                {CarotidIntimaMediaThicknessGrade.Significant, 3},
+                {CarotidIntimaMediaThicknessGrade.CriticalSignificant, 4}
+            };
     }
 }

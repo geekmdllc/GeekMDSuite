@@ -4,13 +4,21 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class CarotidUltrasoundInterpretationResult
     {
-        public CarotidUltrasoundInterpretationResult(Laterality laterality, CarotidPercentStenosisGrade grade)
+        public CarotidUltrasoundInterpretationResult(
+            Laterality laterality, 
+            Laterality worseSide, 
+            CarotidPercentStenosisGrade grade, 
+            CarotidPlaqueCharacter character)
         {
-            Laterality = laterality;
+            WorseSide = worseSide;
             Grade = grade;
+            Character = character;
+            Laterality = laterality;
         }
 
+        public Laterality WorseSide { get; }
         public Laterality Laterality { get; }
         public CarotidPercentStenosisGrade Grade { get; }
+        public CarotidPlaqueCharacter Character { get; }
     }
 }
