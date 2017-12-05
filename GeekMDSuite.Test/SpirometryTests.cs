@@ -60,6 +60,24 @@ namespace GeekMDSuite.Test
             Assert.Equal(SpirometryClassification.ObstructionVerySevere, result.Classification);
         }
         
+        [Fact]
+        public void Classification_GivenMixedPattern_ReturnsMixedPatternClassification()
+        {
+            var spiromenty = new Spirometry(_restrictedVitalCapacity * 0.69, _restrictedVitalCapacity, 8.94, 6.33, 6.2);
+            var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
+            
+            Assert.Equal(SpirometryClassification.RestrictionMild, result.Classification);
+        }
+        
+        [Fact]
+        public void Classification_GivenMildRestrictiveValues_ReturnsMildRestrictionClassification()
+        {
+            var spiromenty = new Spirometry(_restrictedVitalCapacity * 0.71, _restrictedVitalCapacity, 8.94, 6.33, 6.2);
+            var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
+            
+            Assert.Equal(SpirometryClassification.RestrictionMild, result.Classification);
+        }
+        
         private readonly Patient _patient = new Patient(
             new Name("Jim", "Joe", "Bob"), 
             new DateTime(1980, 11, 23), 
@@ -73,6 +91,7 @@ namespace GeekMDSuite.Test
             new Weight(183));
         
         private double _forcedVitalCapacity = 4.395;
+        private double _restrictedVitalCapacity = 3.4721;
         private double _fev1 = 3.62;
     }
 }
