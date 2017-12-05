@@ -8,7 +8,7 @@ namespace GeekMDSuite.Test
 {
     public class SpirometryTests
     {
-        //TODO: Test cases for normal and all restriction cases
+        //TODO: Test cases for mixed and all restriction cases
         [Fact]
         public void Classification_GivenNormalValues_ReturnsNormalClassification()
         {
