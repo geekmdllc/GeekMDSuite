@@ -82,8 +82,13 @@ namespace GeekMDSuite.Services.Interpretation
             {Race.BlackOrAfricanAmerican, 0.87}
         };
 
-        private bool Fev1LessThanGivenPercent(double val) => _spirometry.ForcedVitalCapacity < PredictedForcedExpiratoryVolume1Second * val / 100;
-        
+        private bool Fev1LessThanGivenPercent(double val)
+        {
+           var fractionOfPredicted = PredictedForcedExpiratoryVolume1Second * val / 100.0;
+           var test = _spirometry.ForcedExpiratoryVolume1Second < fractionOfPredicted;
+           return test;
+        }
+
         private SpirometryClassification GradeRestrictionSeverity()
         {
             if (Fev1LessThanGivenPercent(35))
