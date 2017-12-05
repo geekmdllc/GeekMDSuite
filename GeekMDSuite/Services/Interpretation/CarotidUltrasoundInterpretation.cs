@@ -32,7 +32,7 @@ namespace GeekMDSuite.Services.Interpretation
             var left = _carotidUltrasound.Left.Stenosis;
             var right = _carotidUltrasound.Right.Stenosis;
             
-            return StenosisSeverityMap[left] >= StenosisSeverityMap[right] ? left : right;
+            return StenosisSeverityMapToRelativeValue[left] >= StenosisSeverityMapToRelativeValue[right] ? left : right;
         }
 
         private Laterality GetWorseSideBasedOnStenosis()
@@ -40,10 +40,10 @@ namespace GeekMDSuite.Services.Interpretation
             var left = _carotidUltrasound.Left.Stenosis;
             var right = _carotidUltrasound.Right.Stenosis;
 
-            if (StenosisSeverityMap[left] == StenosisSeverityMap[right])
+            if (StenosisSeverityMapToRelativeValue[left] == StenosisSeverityMapToRelativeValue[right])
                 return Laterality.Bilateral;
 
-            return StenosisSeverityMap[left] > StenosisSeverityMap[right] 
+            return StenosisSeverityMapToRelativeValue[left] > StenosisSeverityMapToRelativeValue[right] 
                 ? Laterality.Left : Laterality.Right;
         }
 
@@ -53,10 +53,11 @@ namespace GeekMDSuite.Services.Interpretation
             var right = _carotidUltrasound.Right.Stenosis;
 
             if (left == CarotidPercentStenosisGrade.None && 
-                right == CarotidPercentStenosisGrade.None) 
+                right == CarotidPercentStenosisGrade.None || 
+                StenosisSeverityMapToRelativeValue[left] == StenosisSeverityMapToRelativeValue[right]) 
                 return Laterality.Bilateral;
             
-            return StenosisSeverityMap[left] > StenosisSeverityMap[right]  
+            return StenosisSeverityMapToRelativeValue[left] > StenosisSeverityMapToRelativeValue[right]  
                 ? Laterality.Left : Laterality.Right;
         }
 
@@ -65,11 +66,11 @@ namespace GeekMDSuite.Services.Interpretation
             var left = _carotidUltrasound.Left.Character;
             var right = _carotidUltrasound.Right.Character;
             
-            return PlaqueSeverityMap[left] >= PlaqueSeverityMap[right] 
+            return PlaqueSeverityMapToRelativeValue[left] >= PlaqueSeverityMapToRelativeValue[right] 
                 ? _carotidUltrasound.Left.Character : _carotidUltrasound.Right.Character;
         }
         
-        private static Dictionary<CarotidPlaqueCharacter, int> PlaqueSeverityMap => 
+        private static Dictionary<CarotidPlaqueCharacter, int> PlaqueSeverityMapToRelativeValue => 
             new Dictionary<CarotidPlaqueCharacter, int>()
             {
                 {CarotidPlaqueCharacter.None, 0},
@@ -79,7 +80,7 @@ namespace GeekMDSuite.Services.Interpretation
                 {CarotidPlaqueCharacter.Soft, 4}
             };
         
-        private static Dictionary<CarotidPercentStenosisGrade, int> StenosisSeverityMap =>
+        private static Dictionary<CarotidPercentStenosisGrade, int> StenosisSeverityMapToRelativeValue =>
             new Dictionary<CarotidPercentStenosisGrade, int>()
             {
                 {CarotidPercentStenosisGrade.None, 0},
@@ -89,7 +90,7 @@ namespace GeekMDSuite.Services.Interpretation
                 {CarotidPercentStenosisGrade.MoreThan50, 4}
             };
         
-        private static Dictionary<CarotidIntimaMediaThicknessGrade, int> ImtSeverityMap =>
+        private static Dictionary<CarotidIntimaMediaThicknessGrade, int> ImtSeverityMapToRelativeValue =>
             new Dictionary<CarotidIntimaMediaThicknessGrade, int>()
             {
                 {CarotidIntimaMediaThicknessGrade.Normal, 0},
