@@ -66,16 +66,52 @@ namespace GeekMDSuite.Test
             var spiromenty = new Spirometry(_restrictedVitalCapacity * 0.69, _restrictedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
-            Assert.Equal(SpirometryClassification.RestrictionMild, result.Classification);
+            Assert.Equal(SpirometryClassification.MixedPattern, result.Classification);
         }
         
         [Fact]
         public void Classification_GivenMildRestrictiveValues_ReturnsMildRestrictionClassification()
         {
-            var spiromenty = new Spirometry(_restrictedVitalCapacity * 0.71, _restrictedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(_fev1 * 0.71, _restrictedVitalCapacity * 0.71, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionMild, result.Classification);
+        }
+        
+        [Fact]
+        public void Classification_GivenModerateRestrictiveValues_ReturnsModerateRestrictionClassification()
+        {
+            var spiromenty = new Spirometry(_fev1 * 0.69, _restrictedVitalCapacity * 0.69, 8.94, 6.33, 6.2);
+            var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
+            
+            Assert.Equal(SpirometryClassification.RestrictionModerate, result.Classification);
+        }
+        
+        [Fact]
+        public void Classification_GivenModeratelySevereRestrictiveValues_ReturnsModeratelySevereRestrictionClassification()
+        {
+            var spiromenty = new Spirometry(_fev1 * 0.59, _restrictedVitalCapacity * 0.59, 8.94, 6.33, 6.2);
+            var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
+            
+            Assert.Equal(SpirometryClassification.RestrictionModeratelySevere, result.Classification);
+        }
+        
+        [Fact]
+        public void Classification_GivenSevereRestrictiveValues_ReturnsSevereRestrictionClassification()
+        {
+            var spiromenty = new Spirometry(_fev1 * 0.49, _restrictedVitalCapacity * 0.49, 8.94, 6.33, 6.2);
+            var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
+            
+            Assert.Equal(SpirometryClassification.RestrictionSevere, result.Classification);
+        }
+        
+        [Fact]
+        public void Classification_GivenVerySevereRestrictiveValues_ReturnsVerySevereRestrictionClassification()
+        {
+            var spiromenty = new Spirometry(_fev1 * 0.34, _restrictedVitalCapacity * 0.34, 8.94, 6.33, 6.2);
+            var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
+            
+            Assert.Equal(SpirometryClassification.RestrictionVerySevere, result.Classification);
         }
         
         private readonly Patient _patient = new Patient(
