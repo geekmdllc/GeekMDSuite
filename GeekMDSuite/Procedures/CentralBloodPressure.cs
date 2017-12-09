@@ -25,16 +25,4 @@
         public double ReferenceAge { get;  }
         public double PulseWaveVelocity { get;  }
     }
-
-    public class CentralBloodPressureInterpretation
-    {
-        public CentralBloodPressureInterpretation(CentralBloodPressure centralBloodPressure, IPatient patient)
-        {
-            _centralBloodPressure = centralBloodPressure;
-            _patient = patient;
-        }
-
-        private CentralBloodPressure _centralBloodPressure;
-        private IPatient _patient;
-    }
 }
