@@ -266,8 +266,30 @@ namespace GeekMDSuite.Services.Interpretation
 
             public static class PulseWaveVelocity
             {
-                public static List<PopulationTestData> Male => throw new NotImplementedException();
-                public static List<PopulationTestData> Female => throw new NotImplementedException();
+                //TODO: Update with more robust data
+                //Current data from: Merill F. Elias et al.| Pulse Wave Velocity
+                public static List<PopulationTestData> Male => new List<PopulationTestData>()
+                {
+                    new PopulationTestData(20, 8.1, 1.3),
+                    new PopulationTestData(29, 8.1, 1.3),
+                    new PopulationTestData(39, 8.1, 1.3),
+                    new PopulationTestData(49, 8.0, 1.3),
+                    new PopulationTestData(59, 8.9, 1.3),
+                    new PopulationTestData(69, 10.1, 1.9),
+                    new PopulationTestData(79, 11.4, 2.1),
+                    new PopulationTestData(90, 11.4, 2.6)
+                };
+                public static List<PopulationTestData> Female => new List<PopulationTestData>()
+                {
+                    new PopulationTestData(20, 8.1, 1.3),
+                    new PopulationTestData(29, 8.1, 1.3),
+                    new PopulationTestData(39, 8.1, 1.3),
+                    new PopulationTestData(49, 8.0, 1.3),
+                    new PopulationTestData(59, 8.9, 1.3),
+                    new PopulationTestData(69, 10.1, 1.9),
+                    new PopulationTestData(79, 11.4, 2.1),
+                    new PopulationTestData(90, 11.4, 2.6)
+                };
             }
         }
         
@@ -297,17 +319,5 @@ namespace GeekMDSuite.Services.Interpretation
             {CentralBloodPressureCategory.HighNormal, 4},
             {CentralBloodPressureCategory.High, 5},
         };
-    }
-
-    public class CentralBloodPressureInterpretationResult
-    {
-        public CentralBloodPressureInterpretationResult(CentralBloodPressureCategory category, CentralBloodPressureReferenceAge referenceAge)
-        {
-            Category = category;
-            ReferenceAge = referenceAge;
-        }
-
-        public CentralBloodPressureCategory Category { get; }
-        public CentralBloodPressureReferenceAge ReferenceAge { get; }
     }
 }
