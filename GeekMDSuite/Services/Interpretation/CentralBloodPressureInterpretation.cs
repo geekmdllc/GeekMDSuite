@@ -17,8 +17,8 @@ namespace GeekMDSuite.Services.Interpretation
         public InterpretationText Interpretation => throw new NotImplementedException();
         public CentralBloodPressureInterpretationResult Classification => ClassifyBasedOnWorstResult();
         
-        private CentralBloodPressure _centralBloodPressure;
-        private IPatient _patient;
+        private readonly CentralBloodPressure _centralBloodPressure;
+        private readonly IPatient _patient;
 
         private CentralBloodPressureInterpretationResult ClassifyBasedOnWorstResult()
         {
@@ -289,7 +289,7 @@ namespace GeekMDSuite.Services.Interpretation
             return percentile <= 95 ? CentralBloodPressureCategory.HighNormal : CentralBloodPressureCategory.High;
         }
         
-        private static Dictionary<CentralBloodPressureCategory, int> CategoryValueMap = new Dictionary<CentralBloodPressureCategory, int>()
+        private static readonly Dictionary<CentralBloodPressureCategory, int> CategoryValueMap = new Dictionary<CentralBloodPressureCategory, int>()
         {
             {CentralBloodPressureCategory.Low, 1},
             {CentralBloodPressureCategory.LowNormal, 2},
