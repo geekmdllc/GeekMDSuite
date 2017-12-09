@@ -6,7 +6,7 @@ using MathNet.Numerics.Distributions;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class CentralBloodPressureInterpretation : IInterpretable<CentralBloodPressureCategory>
+    public class CentralBloodPressureInterpretation : IInterpretable<CentralBloodPressureInterpretationResult>
     {
         public CentralBloodPressureInterpretation(CentralBloodPressure centralBloodPressure, IPatient patient)
         {
@@ -15,11 +15,67 @@ namespace GeekMDSuite.Services.Interpretation
         }
         
         public InterpretationText Interpretation => throw new NotImplementedException();
-        public CentralBloodPressureCategory Classification => throw new NotImplementedException();
+        public CentralBloodPressureInterpretationResult Classification => ClassifyBasedOnWorstResult();
         
         private CentralBloodPressure _centralBloodPressure;
         private IPatient _patient;
 
+        private CentralBloodPressureInterpretationResult ClassifyBasedOnWorstResult()
+        {
+            var resultList = new List<CentralBloodPressureCategory>()
+            {
+                CentralSystolicPressure(),
+                PulsePressure(),
+                AugmentedPressure(),
+                AugmentedIndex(),
+                PulseWaveVelocity()
+            };
+
+            var max = resultList.Select(result => CategoryValueMap[result]).Max();
+
+            var category = CategoryValueMap.FirstOrDefault(v => v.Value == max).Key;
+            var referenceAge = ClassifyReferenceAge();
+            
+            return new CentralBloodPressureInterpretationResult(category, referenceAge);
+        }
+
+        private CentralBloodPressureCategory CentralSystolicPressure()
+        {
+            return CategoryFromPercentile(CentralSystolicPressurePercentile());
+        }
+        
+        private CentralBloodPressureCategory PulsePressure()
+        {
+            return CategoryFromPercentile(PulsePressurePercentile());
+        }
+        
+        private CentralBloodPressureCategory AugmentedPressure()
+        {
+            return CategoryFromPercentile(AugmentedPressurePercentile());
+        }
+        
+        private CentralBloodPressureCategory AugmentedIndex()
+        {
+            return CategoryFromPercentile(AugmentedIndexPercentile());
+        }
+        
+        private CentralBloodPressureCategory PulseWaveVelocity()
+        {
+            return CategoryFromPercentile(PulseWaveVelocityPercentile());
+        }
+
+        private CentralBloodPressureReferenceAge ClassifyReferenceAge()
+        {
+            if (_centralBloodPressure.ReferenceAge <= _patient.Age - 10)
+                return CentralBloodPressureReferenceAge.MuchYoungerThanStated;
+            if (_centralBloodPressure.ReferenceAge <= _patient.Age - 2)
+                return CentralBloodPressureReferenceAge.YoungerThanStated;
+            if (_centralBloodPressure.ReferenceAge < _patient.Age + 2)
+                return CentralBloodPressureReferenceAge.SimilarToStated;
+            return _centralBloodPressure.ReferenceAge < _patient.Age + 10 
+                ? CentralBloodPressureReferenceAge.OlderThanStated : CentralBloodPressureReferenceAge.YoungerThanStated;
+        }
+        
         private double CentralSystolicPressurePercentile()
         {
             var male = PopulationValues.CentralSystolic.Male.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
@@ -224,5 +280,34 @@ namespace GeekMDSuite.Services.Interpretation
         {
             return Normal.CDF(mean, standardDeviation, dataPoint) * 100;
         }
+
+        private static CentralBloodPressureCategory CategoryFromPercentile(double percentile)
+        {
+            if (percentile <= 5) return CentralBloodPressureCategory.Low;
+            if (percentile <= 16) return CentralBloodPressureCategory.LowNormal;
+            if (percentile <= 84) return CentralBloodPressureCategory.Normal;
+            return percentile <= 95 ? CentralBloodPressureCategory.HighNormal : CentralBloodPressureCategory.High;
+        }
+        
+        private static Dictionary<CentralBloodPressureCategory, int> CategoryValueMap = new Dictionary<CentralBloodPressureCategory, int>()
+        {
+            {CentralBloodPressureCategory.Low, 1},
+            {CentralBloodPressureCategory.LowNormal, 2},
+            {CentralBloodPressureCategory.Normal, 3},
+            {CentralBloodPressureCategory.HighNormal, 4},
+            {CentralBloodPressureCategory.High, 5},
+        };
+    }
+
+    public class CentralBloodPressureInterpretationResult
+    {
+        public CentralBloodPressureInterpretationResult(CentralBloodPressureCategory category, CentralBloodPressureReferenceAge referenceAge)
+        {
+            Category = category;
+            ReferenceAge = referenceAge;
+        }
+
+        public CentralBloodPressureCategory Category { get; }
+        public CentralBloodPressureReferenceAge ReferenceAge { get; }
     }
 }
