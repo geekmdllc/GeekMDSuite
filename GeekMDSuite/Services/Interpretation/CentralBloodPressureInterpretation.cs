@@ -32,17 +32,15 @@ namespace GeekMDSuite.Services.Interpretation
             };
 
             var max = resultList
-                .Where(result => result != CentralBloodPressureCategory.Normal)
                 .Select(result => CategoryValueMap[result])
                 .Max();
             var min = resultList
-                .Where(result => result != CentralBloodPressureCategory.Normal)
                 .Select(result => CategoryValueMap[result])
                 .Min();
             var normal = CategoryValueMap[CentralBloodPressureCategory.Normal];
 
             var highestPriorityValue = normal;
-            if (min < normal)
+            if (min < normal && max <= normal)
             {
                 highestPriorityValue = min;
             }
