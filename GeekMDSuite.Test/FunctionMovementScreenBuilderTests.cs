@@ -46,8 +46,8 @@ namespace GeekMDSuite.Test
                 errorMessage = e.Message;
             }
             
-            Assert.Contains("SetDeepSquat", errorMessage);
-            Assert.DoesNotContain("SetHurdleStep", errorMessage);
+            Assert.Contains(nameof(FunctionalMovementScreenBuilder.SetDeepSquat), errorMessage);
+            Assert.DoesNotContain(nameof(FunctionalMovementScreenBuilder.SetHurdleStep), errorMessage);
         }
     }
 }

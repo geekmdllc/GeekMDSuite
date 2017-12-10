@@ -88,13 +88,13 @@ namespace GeekMDSuite.Procedures
         private string BuildErrorListForMissingFields()
         {
             var buildErrors = new List<string>();
-            if (_deepSquat == null) buildErrors.Add("SetDeepSquat");
-            if (_hurdleStep == null) buildErrors.Add("SetHurdleStep");
-            if (_inlineLunge == null) buildErrors.Add("SetInlineLunge");
-            if (_shoulderMobility == null) buildErrors.Add("SetShoulderMobility");
-            if (_activeStraightLegRaise == null) buildErrors.Add("SetActiveStraightLegRaise");
-            if (_trunkStabilityPushup == null) buildErrors.Add("SetTrunkStabilityPushup");
-            if (_rotaryStability == null) buildErrors.Add("SetRotaryStability");
+            if (_deepSquat == null) buildErrors.Add(nameof(SetDeepSquat));
+            if (_hurdleStep == null) buildErrors.Add(nameof(SetHurdleStep));
+            if (_inlineLunge == null) buildErrors.Add(nameof(SetInlineLunge));
+            if (_shoulderMobility == null) buildErrors.Add(nameof(SetShoulderMobility));
+            if (_activeStraightLegRaise == null) buildErrors.Add(nameof(SetActiveStraightLegRaise));
+            if (_trunkStabilityPushup == null) buildErrors.Add(nameof(SetTrunkStabilityPuhsup));
+            if (_rotaryStability == null) buildErrors.Add(nameof(SetRotaryStability));
             
             return  buildErrors.Aggregate("", (current, error) => current + (error + " "));
         }
