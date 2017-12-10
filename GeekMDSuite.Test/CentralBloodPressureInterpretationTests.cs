@@ -1,5 +1,4 @@
-﻿using System;
-using GeekMDSuite.Procedures;
+﻿using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;

@@ -1,0 +1,35 @@
+﻿using System;
+
+namespace GeekMDSuite.Procedures
+{
+    public class FunctionalMovementScreenMovementData
+    {
+        public FunctionalMovementScreenMovementData(
+            FmsMovementPattern movementPattern, 
+            Laterality laterality, 
+            int rawScore, 
+            FmsClearanceTest clearance)
+        {
+            MovementPattern = movementPattern;
+            RawScore = ValidateAndSetRawScore(rawScore);
+            Clearance = MovementHasClearanceTest ? clearance : FmsClearanceTest.NotApplicable;
+            Laterality = MovementHasUnilateralLaterality ? laterality : Laterality.Bilateral;
+        }
+
+        public FmsMovementPattern MovementPattern { get; }
+        public Laterality Laterality { get; }
+        public int RawScore { get; }
+        public int ComponentScore => Clearance == FmsClearanceTest.Positive ? 0 : RawScore;
+        public FmsClearanceTest Clearance { get; }
+
+        private static int ValidateAndSetRawScore(int rawScore) => rawScore >= 0 && rawScore <= 3 
+            ? rawScore : throw new ArgumentOutOfRangeException("rawScore", "Must be between 0 and 3.");
+
+        private bool MovementHasUnilateralLaterality => !(MovementPattern == FmsMovementPattern.DeepSquat ||
+                                               MovementPattern == FmsMovementPattern.TrunkStability);
+
+        private bool MovementHasClearanceTest => MovementPattern == FmsMovementPattern.ShoulderMobility ||
+                                                 MovementPattern == FmsMovementPattern.TrunkStability ||
+                                                 MovementPattern == FmsMovementPattern.RotaryStability;
+    }
+}
