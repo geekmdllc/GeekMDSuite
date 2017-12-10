@@ -2,7 +2,7 @@
 {
     public class FmsMovementSet
     {
-        public FmsMovementSet(FmsMovementData dataLeft, FmsMovementData dataRight)
+        internal FmsMovementSet(FmsMovementData dataLeft, FmsMovementData dataRight)
         {
             DataLeft = dataLeft;
             DataRight = dataRight;

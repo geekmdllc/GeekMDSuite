@@ -20,24 +20,18 @@
             RotaryStability = rotaryStability;
         }
 
-        public FmsMovement DeepSquat { get;  } // => (value.Data.MovementPattern == FmsMovementPattern.DeepSquat ? value : null);
+        public FmsMovement DeepSquat { get;  } 
 
-        public FmsMovementSet HurdleStep { get; }// => (IsExpectedMovementPattern(value, FmsMovementPattern.HurdleStep) ? value : null);
+        public FmsMovementSet HurdleStep { get; }
 
-        public FmsMovementSet InlineLunge { get; }// => (IsExpectedMovementPattern(value, FmsMovementPattern.InlineLunge) ? value : null);
+        public FmsMovementSet InlineLunge { get; }
 
-        public FmsMovementSet ShoulderMobility { get; }// => (IsExpectedMovementPattern(value, FmsMovementPattern.ShoulderMobility) ? value : null);
+        public FmsMovementSet ShoulderMobility { get; }
 
-        public FmsMovementSet ActiveStraightLegRaise { get; }// => (IsExpectedMovementPattern(value, FmsMovementPattern.ActiveStraightLegRaise) ? value : null);
+        public FmsMovementSet ActiveStraightLegRaise { get; }
 
-        public FmsMovement TrunkStabilityPushup { get; } // => (value.Data.MovementPattern == FmsMovementPattern.TrunkStability ? value : null);
+        public FmsMovement TrunkStabilityPushup { get; } 
 
-        public FmsMovementSet RotaryStability { get; } // => IsExpectedMovementPattern(value, FmsMovementPattern.RotaryStability) ? value : null);
-
-        private bool IsExpectedMovementPattern(FmsMovementSet movementSet, FmsMovementPattern expectedMovementPattern)
-        {
-            return (movementSet.DataLeft.MovementPattern == expectedMovementPattern &&
-                    movementSet.DataRight.MovementPattern == expectedMovementPattern ? true : false);
-        }
+        public FmsMovementSet RotaryStability { get; } 
     }
 }

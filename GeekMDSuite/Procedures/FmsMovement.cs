@@ -3,7 +3,7 @@
     public class FmsMovement
     {
         //TODO: Remove this unecessary wrapping of data
-        public FmsMovement(FmsMovementData data)
+        internal FmsMovement(FmsMovementData data)
         {
             Data = data;
         }
