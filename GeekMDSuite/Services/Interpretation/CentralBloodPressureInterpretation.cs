@@ -98,18 +98,17 @@ namespace GeekMDSuite.Services.Interpretation
         
         private double CentralSystolicPressurePercentile()
         {
-            var male = PopulationValues.CentralSystolic.Male.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
-            var female = PopulationValues.CentralSystolic.Female.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
+            var population = Gender.IsGenotypeXy(_patient.Gender)
+                ? PopulationValues.CentralSystolic.Male.FirstOrDefault(group => group.AgeUpperLimit == AgeReferenceGroupUpperLimit)
+                : PopulationValues.CentralSystolic.Female.FirstOrDefault(group => group.AgeUpperLimit == AgeReferenceGroupUpperLimit);
             
-            return Gender.IsGenotypeXy(_patient.Gender) 
-                ? GetPercentileForTest(male, _centralBloodPressure.SystolicPressure)
-                : GetPercentileForTest(female, _centralBloodPressure.SystolicPressure);
+            return GetPercentileForTest(population, _centralBloodPressure.SystolicPressure);
         }
         
         private double PulsePressurePercentile()
         {
-            var male = PopulationValues.PulsePressure.Male.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
-            var female = PopulationValues.PulsePressure.Female.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
+            var male = PopulationValues.PulsePressure.Male.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
+            var female = PopulationValues.PulsePressure.Female.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
             
             return Gender.IsGenotypeXy(_patient.Gender) 
                 ? GetPercentileForTest(male, _centralBloodPressure.PulsePressure)
@@ -118,8 +117,8 @@ namespace GeekMDSuite.Services.Interpretation
         
         private double AugmentedPressurePercentile()
         {
-            var male = PopulationValues.AugmentedPressure.Male.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
-            var female = PopulationValues.AugmentedPressure.Female.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
+            var male = PopulationValues.AugmentedPressure.Male.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
+            var female = PopulationValues.AugmentedPressure.Female.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
             
             return Gender.IsGenotypeXy(_patient.Gender) 
                 ? GetPercentileForTest(male, _centralBloodPressure.AugmentedPressure)
@@ -128,8 +127,8 @@ namespace GeekMDSuite.Services.Interpretation
         
         private double AugmentedIndexPercentile()
         {
-            var male = PopulationValues.AugmentedIndex.Male.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
-            var female = PopulationValues.AugmentedIndex.Female.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
+            var male = PopulationValues.AugmentedIndex.Male.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
+            var female = PopulationValues.AugmentedIndex.Female.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
             
             return Gender.IsGenotypeXy(_patient.Gender) 
                 ? GetPercentileForTest(male, _centralBloodPressure.AugmentedIndex)
@@ -138,15 +137,15 @@ namespace GeekMDSuite.Services.Interpretation
         
         private double PulseWaveVelocityPercentile()
         {
-            var male = PopulationValues.PulseWaveVelocity.Male.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
-            var female = PopulationValues.PulseWaveVelocity.Female.FirstOrDefault(p => p.Age == MaximumAgeForReferenceGroup);
+            var male = PopulationValues.PulseWaveVelocity.Male.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
+            var female = PopulationValues.PulseWaveVelocity.Female.FirstOrDefault(p => p.AgeUpperLimit == AgeReferenceGroupUpperLimit);
             
             return Gender.IsGenotypeXy(_patient.Gender) 
                 ? GetPercentileForTest(male, _centralBloodPressure.PulseWaveVelocity)
                 : GetPercentileForTest(female, _centralBloodPressure.PulseWaveVelocity);
         }
              
-        private int MaximumAgeForReferenceGroup 
+        private int AgeReferenceGroupUpperLimit 
         {
             get
             {
@@ -162,14 +161,14 @@ namespace GeekMDSuite.Services.Interpretation
 
         private class PopulationTestData
         {
-            public PopulationTestData(int age, double mean, double standardDeviation)
+            public PopulationTestData(int ageUpperLimit, double mean, double standardDeviation)
             {
-                Age = age;
+                AgeUpperLimit = ageUpperLimit;
                 Mean = mean;
                 StandardDeviation = standardDeviation;
             }
 
-            public int Age { get; }
+            public int AgeUpperLimit { get; }
             public double Mean { get; }
             public double StandardDeviation { get; }
         }
