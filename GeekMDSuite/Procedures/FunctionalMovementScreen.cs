@@ -3,12 +3,12 @@
     public class FunctionalMovementScreen
     {
         internal FunctionalMovementScreen(
-            FmsMovement deepSquat, 
+            FmsMovementData deepSquat, 
             FmsMovementSet hurdleStep, 
             FmsMovementSet inlineLunge, 
             FmsMovementSet shoulderMobility, 
             FmsMovementSet activeStraightLegRaise, 
-            FmsMovement trunkStabilityPushup, 
+            FmsMovementData trunkStabilityPushup, 
             FmsMovementSet rotaryStability)
         {
             DeepSquat = deepSquat;
@@ -20,7 +20,7 @@
             RotaryStability = rotaryStability;
         }
 
-        public FmsMovement DeepSquat { get;  } 
+        public FmsMovementData DeepSquat { get;  } 
 
         public FmsMovementSet HurdleStep { get; }
 
@@ -30,7 +30,7 @@
 
         public FmsMovementSet ActiveStraightLegRaise { get; }
 
-        public FmsMovement TrunkStabilityPushup { get; } 
+        public FmsMovementData TrunkStabilityPushup { get; } 
 
         public FmsMovementSet RotaryStability { get; } 
     }

@@ -15,7 +15,7 @@ namespace GeekMDSuite.Procedures
 
         public FunctionalMovementScreenBuilder SetDeepSquat(int rawScore)
         {
-            _deepSquat  = new FmsMovement(new FmsMovementData(FmsMovementPattern.DeepSquat, Laterality.Bilateral, rawScore, FmsClearanceTest.NotApplicable));
+            _deepSquat  = new FmsMovementData(FmsMovementPattern.DeepSquat, Laterality.Bilateral, rawScore, FmsClearanceTest.NotApplicable);
             return this;
         }
 
@@ -57,7 +57,7 @@ namespace GeekMDSuite.Procedures
 
         public FunctionalMovementScreenBuilder SetTrunkStabilityPuhsup(int rawScore, FmsClearanceTest clearanceTest)
         {
-            _trunkStabilityPushup = new FmsMovement(new FmsMovementData(FmsMovementPattern.TrunkStability, Laterality.Bilateral, rawScore, clearanceTest));
+            _trunkStabilityPushup = new FmsMovementData(FmsMovementPattern.TrunkStability, Laterality.Bilateral, rawScore, clearanceTest);
             return this;
         }
 
@@ -70,12 +70,12 @@ namespace GeekMDSuite.Procedures
             return this;
         }
 
-        private FmsMovement _deepSquat;
+        private FmsMovementData _deepSquat;
         private FmsMovementSet _hurdleStep;
         private FmsMovementSet _inlineLunge;
         private FmsMovementSet _shoulderMobility;
         private FmsMovementSet _activeStraightLegRaise;
-        private FmsMovement _trunkStabilityPushup;
+        private FmsMovementData _trunkStabilityPushup;
         private FmsMovementSet _rotaryStability;
 
         private void ValidateFields()
