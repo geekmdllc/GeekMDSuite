@@ -22,6 +22,33 @@ namespace GeekMDSuite.Services.Interpretation
 
         private CentralBloodPressureInterpretationResult ClassifyBasedOnWorstResult()
         {
+            var highestPriorityValue = GetHighestPriorityValue();
+
+            var category = CategoryValueMap.FirstOrDefault(v => v.Value == highestPriorityValue).Key;
+            var referenceAge = ClassifyReferenceAge();
+            
+            return new CentralBloodPressureInterpretationResult(category, referenceAge);
+        }
+
+        private int GetHighestPriorityValue()
+        {
+            var resultList = GetTestResults();
+            
+            var maxValueResult = resultList.Select(result => CategoryValueMap[result]).Max();
+            var minValueResult = resultList.Select(result => CategoryValueMap[result]).Min();
+            var normalValue = CategoryValueMap[CentralBloodPressureCategory.Normal];
+            
+            var highestPriorityValue = normalValue;
+            if (minValueResult < normalValue && maxValueResult <= normalValue)
+                highestPriorityValue = minValueResult;
+            if (maxValueResult > normalValue)
+                highestPriorityValue = maxValueResult;
+            
+            return highestPriorityValue;
+        }
+
+        private List<CentralBloodPressureCategory> GetTestResults()
+        {
             var resultList = new List<CentralBloodPressureCategory>()
             {
                 CentralSystolicPressure(),
@@ -30,29 +57,7 @@ namespace GeekMDSuite.Services.Interpretation
                 AugmentedIndex(),
                 PulseWaveVelocity()
             };
-
-            var max = resultList
-                .Select(result => CategoryValueMap[result])
-                .Max();
-            var min = resultList
-                .Select(result => CategoryValueMap[result])
-                .Min();
-            var normal = CategoryValueMap[CentralBloodPressureCategory.Normal];
-
-            var highestPriorityValue = normal;
-            if (min < normal && max <= normal)
-            {
-                highestPriorityValue = min;
-            }
-            if (min >= normal && max > normal)
-            {
-                highestPriorityValue = max;
-            }
-
-            var category = CategoryValueMap.FirstOrDefault(v => v.Value == highestPriorityValue).Key;
-            var referenceAge = ClassifyReferenceAge();
-            
-            return new CentralBloodPressureInterpretationResult(category, referenceAge);
+            return resultList;
         }
 
         private CentralBloodPressureCategory CentralSystolicPressure()
