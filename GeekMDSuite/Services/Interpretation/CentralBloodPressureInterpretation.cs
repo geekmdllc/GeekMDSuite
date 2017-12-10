@@ -49,7 +49,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         private List<CentralBloodPressureCategory> GetTestResults()
         {
-            var resultList = new List<CentralBloodPressureCategory>()
+            return new List<CentralBloodPressureCategory>()
             {
                 CentralSystolicPressure(),
                 PulsePressure(),
@@ -57,7 +57,6 @@ namespace GeekMDSuite.Services.Interpretation
                 AugmentedIndex(),
                 PulseWaveVelocity()
             };
-            return resultList;
         }
 
         private CentralBloodPressureCategory CentralSystolicPressure()
