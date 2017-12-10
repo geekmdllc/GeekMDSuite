@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class FunctionalMovementScreenMovementData
+    public class FmsMovementData
     {
-        public FunctionalMovementScreenMovementData(
+        public FmsMovementData(
             FmsMovementPattern movementPattern, 
             Laterality laterality, 
             int rawScore, 

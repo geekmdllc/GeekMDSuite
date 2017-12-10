@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public enum FmSscoreFlag {
+    public enum FmsScoreFlag {
         L0R0,
         L0R1,
         L0R2,
