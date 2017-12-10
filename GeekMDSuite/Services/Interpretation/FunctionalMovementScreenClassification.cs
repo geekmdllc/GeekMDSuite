@@ -2,7 +2,7 @@
 {
     public class FunctionalMovementScreenClassification
     {
-        public FunctionalMovementScreenClassification(
+        internal FunctionalMovementScreenClassification(
             FmsMovementClassification deepSquat,
             FmsMovementClassification hurdleStep,
             FmsMovementClassification shoulderMobility,
