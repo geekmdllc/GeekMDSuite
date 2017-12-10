@@ -31,9 +31,27 @@ namespace GeekMDSuite.Services.Interpretation
                 PulseWaveVelocity()
             };
 
-            var max = resultList.Select(result => CategoryValueMap[result]).Max();
+            var max = resultList
+                .Where(result => result != CentralBloodPressureCategory.Normal)
+                .Select(result => CategoryValueMap[result])
+                .Max();
+            var min = resultList
+                .Where(result => result != CentralBloodPressureCategory.Normal)
+                .Select(result => CategoryValueMap[result])
+                .Min();
+            var normal = CategoryValueMap[CentralBloodPressureCategory.Normal];
 
-            var category = CategoryValueMap.FirstOrDefault(v => v.Value == max).Key;
+            var highestPriorityValue = normal;
+            if (min < normal)
+            {
+                highestPriorityValue = min;
+            }
+            if (min >= normal && max > normal)
+            {
+                highestPriorityValue = max;
+            }
+
+            var category = CategoryValueMap.FirstOrDefault(v => v.Value == highestPriorityValue).Key;
             var referenceAge = ClassifyReferenceAge();
             
             return new CentralBloodPressureInterpretationResult(category, referenceAge);
@@ -300,7 +318,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         private static double Percentile(double mean, double standardDeviation, double dataPoint)
         {
-            return Normal.CDF(mean, standardDeviation, dataPoint) * 100;
+            return Normal.CDF(mean, standardDeviation, dataPoint) * 100.0;
         }
 
         private static CentralBloodPressureCategory CategoryFromPercentile(double percentile)
