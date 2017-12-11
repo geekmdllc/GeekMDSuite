@@ -1,8 +1,9 @@
-﻿using GeekMDSuite.Tools.Generic;
+﻿using GeekMDSuite.Procedures;
+using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite.Procedures
+namespace GeekMDSuite.Services.Repositories
 {
-    public static class HearingLossClassification
+    public static class HearingLossClassificationRepository
     {
         public static Interval<int> GetRange(
             HearingLoss classification)

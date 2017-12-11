@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 
-namespace GeekMDSuite.Services.Respositories
+namespace GeekMDSuite.Services.Repositories
 {
     public static class IshiharaPlateSetRepository
     {

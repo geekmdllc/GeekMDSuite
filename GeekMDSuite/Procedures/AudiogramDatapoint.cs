@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Tools.Generic;
+﻿using GeekMDSuite.Services.Repositories;
+using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Procedures
 {
@@ -20,10 +21,10 @@ namespace GeekMDSuite.Procedures
             return SevereRange.ContainsLeftOpen(value) ? HearingLoss.Severe : HearingLoss.Profound;
         }
         
-        public static Interval<int> NormalRange => HearingLossClassification.GetRange(HearingLoss.None);
-        public static Interval<int> MildRange => HearingLossClassification.GetRange(HearingLoss.Mild);
-        public static Interval<int> ModerateRange => HearingLossClassification.GetRange(HearingLoss.Moderate);
-        public static Interval<int> SevereRange => HearingLossClassification.GetRange(HearingLoss.Severe);
-        public static Interval<int> ProfounRange => HearingLossClassification.GetRange(HearingLoss.Profound);
+        public static Interval<int> NormalRange => HearingLossClassificationRepository.GetRange(HearingLoss.None);
+        public static Interval<int> MildRange => HearingLossClassificationRepository.GetRange(HearingLoss.Mild);
+        public static Interval<int> ModerateRange => HearingLossClassificationRepository.GetRange(HearingLoss.Moderate);
+        public static Interval<int> SevereRange => HearingLossClassificationRepository.GetRange(HearingLoss.Severe);
+        public static Interval<int> ProfounRange => HearingLossClassificationRepository.GetRange(HearingLoss.Profound);
     }
 }
