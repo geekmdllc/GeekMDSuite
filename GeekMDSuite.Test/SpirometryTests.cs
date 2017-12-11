@@ -8,7 +8,7 @@ namespace GeekMDSuite.Test
 {
     public class SpirometryTests
     {
-        //TODO: Test cases for mixed and all restriction cases
+        //TODO: IshiharaSixPlateInterpretation_GivenAllNormal_ReturnsNormalVision cases for mixed and all restriction cases
         [Fact]
         public void Classification_GivenNormalValues_ReturnsNormalClassification()
         {

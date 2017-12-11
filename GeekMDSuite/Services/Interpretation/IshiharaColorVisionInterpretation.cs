@@ -75,7 +75,7 @@ namespace GeekMDSuite.Services.Interpretation
             }
             private static int DetermineUpperLimitOfFail(IshiharaTestType testType)
             {
-                if (testType == IshiharaTestType.Ishihara6) return 5;
+                if (testType == IshiharaTestType.Ishihara6) return 4;
                 if (testType == IshiharaTestType.Ishihara10) throw new NotImplementedException();
                 if (testType == IshiharaTestType.Ishihara14) return 7;
                 return testType == IshiharaTestType.Ishihara24 ? 9 : 13;
