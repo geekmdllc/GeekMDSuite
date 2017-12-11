@@ -4,9 +4,12 @@ using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Procedures
 {
+    public interface IMuscularStrengthTest
+    {
+        int Count { get; }
+    }
     public abstract class MuscularStrengthInterpretation
     {
-        private int _count;
         public abstract int LowerLimitOfPoor { get;  }
         public abstract int LowerLimitOfBelowAverage { get;  }
         public abstract int LowerLimitOfAverage { get;  }
@@ -15,13 +18,16 @@ namespace GeekMDSuite.Procedures
         public abstract int LowerLimitOfExcellent { get;  }
 
         private readonly IPatient _patient;
+        private readonly int _count;
 
-        protected MuscularStrengthInterpretation(IPatient patient)
+        protected MuscularStrengthInterpretation(IMuscularStrengthTest test, IPatient patient)
         {
+            _count = test.Count;
             _patient = patient;
         }
 
-        protected static bool IsInAgeRange(int lowerBound, int upperBound, int age) => age >= lowerBound && age <= upperBound;
+        protected static bool IsInAgeRange(int lowerBound, int upperBound, int age) => 
+            age >= lowerBound && age <= upperBound;
 
         protected FitnessClassification ExerciseCountAssessment(StrengthTestLowerLimits lowerLimits) 
         {
@@ -56,7 +62,7 @@ namespace GeekMDSuite.Procedures
             public int Upper { get; set; }
             public int Lower { get; set; }
         }
-        protected int GetLowerBoundOfExerciseFitnessStratificationFromList(int[] list, List<AgeRange> ageRanges)
+        protected int GetLowerBoundOfFitnessStratification(int[] list, List<AgeRange> ageRanges)
         {
             var patientAge = _patient.Age;
             
@@ -67,12 +73,12 @@ namespace GeekMDSuite.Procedures
             if(IsInAgeRange(ageRanges[3].Lower ,ageRanges[3].Upper, patientAge)) return list[3];
             return IsInAgeRange(ageRanges[4].Lower ,ageRanges[4].Upper, patientAge) ? list[4] : list[5];
         }
-        protected int GetLowerLimitOfExerciseBoundForPatient(int[] femaleList, int[] maleList, List<AgeRange> ageRanges) {
+        protected int GetLowerLimitOfExerciseForPatient(int[] femaleList, int[] maleList, List<AgeRange> ageRanges) {
             switch(Gender.IsGenotypeXx(_patient.Gender)) {
                 case true:
-                    return GetLowerBoundOfExerciseFitnessStratificationFromList(femaleList, ageRanges);
+                    return GetLowerBoundOfFitnessStratification(femaleList, ageRanges);
                 default:
-                    return GetLowerBoundOfExerciseFitnessStratificationFromList(maleList, ageRanges);
+                    return GetLowerBoundOfFitnessStratification(maleList, ageRanges);
             }
         }
     }
