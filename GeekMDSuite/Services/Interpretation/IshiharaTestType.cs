@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Services.Interpretation
 {
     public enum IshiharaTestType
     {

@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System.Collections.Generic;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Xunit;
 

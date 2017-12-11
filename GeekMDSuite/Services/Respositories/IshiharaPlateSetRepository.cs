@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Services.Respositories
 {
