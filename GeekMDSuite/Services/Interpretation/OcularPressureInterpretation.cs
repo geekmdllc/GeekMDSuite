@@ -19,11 +19,11 @@ namespace GeekMDSuite.Services.Interpretation
         private OcularPressureClassification Classify() => _ocularPressure.Left > _ocularPressure.Right 
             ? ClassifyLeft() : ClassifyRight();
 
-        private OcularPressureClassification ClassifyLeft() => _ocularPressure.Left <= UpperLimitOfNormal
-            ? OcularPressureClassification.Normal
-            : OcularPressureClassification.OcularHypertension;
+        private OcularPressureClassification ClassifyLeft() => ClassifySide(_ocularPressure.Left);
 
-        private OcularPressureClassification ClassifyRight() => _ocularPressure.Right <= UpperLimitOfNormal
+        private OcularPressureClassification ClassifyRight() => ClassifySide(_ocularPressure.Right);
+        
+        private static OcularPressureClassification ClassifySide(int side) => side <= UpperLimitOfNormal
             ? OcularPressureClassification.Normal
             : OcularPressureClassification.OcularHypertension;
 

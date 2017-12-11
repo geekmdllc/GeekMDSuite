@@ -1,28 +1,14 @@
-﻿using System;
-using GeekMDSuite.Services.Interpretation;
-
-namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Procedures
 {
     public class PeripheralVision
     {
-        public PeripheralVision(int degrees)
+        public PeripheralVision(int left, int right)
         {
-            Degrees = degrees;
+            Left = left;
+            Right = right;
         }
 
-        public int Degrees { get; }
-    }
-    
-    public class PeripheralVisionInterpreation : IInterpretable<PeripheralVisionClassification>
-    {
-        public static readonly int LowerLimitOfNormal = 70;
-        public InterpretationText Interpretation => throw new NotImplementedException();
-        public PeripheralVisionClassification Classification => throw new NotImplementedException();
-    }
-
-    public enum PeripheralVisionClassification
-    {
-        Normal,
-        Narrow
+        public int Left { get; }
+        public int Right { get; }
     }
 }
