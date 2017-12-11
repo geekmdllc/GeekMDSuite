@@ -18,8 +18,8 @@ namespace GeekMDSuite.Procedures
 
         public FmsMovementPattern MovementPattern { get; }
         public Laterality Laterality { get; }
-        public int RawScore { get; }
-        public int ComponentScore => Clearance == FmsClearanceTest.Positive ? 0 : RawScore;
+        private int RawScore { get; }
+        public int Score => Clearance == FmsClearanceTest.Positive ? 0 : RawScore;
         public FmsClearanceTest Clearance { get; }
 
         private static int ValidateAndSetRawScore(int rawScore) => rawScore >= 0 && rawScore <= 3 

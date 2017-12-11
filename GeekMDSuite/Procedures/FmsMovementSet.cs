@@ -2,13 +2,17 @@
 {
     public class FmsMovementSet
     {
-        internal FmsMovementSet(FmsMovementData dataLeft, FmsMovementData dataRight)
+        internal FmsMovementSet(FmsMovementData left, FmsMovementData right)
         {
-            DataLeft = dataLeft;
-            DataRight = dataRight;
+            Left = left;
+            Right = right;
         }
 
-        public FmsMovementData DataLeft { get; }
-        public FmsMovementData DataRight { get; }
+        public FmsMovementData Left { get; }
+        public FmsMovementData Right { get; }
+
+        public int Score => Left.Score < Right.Score
+            ? Right.Score
+            : Left.Score;
     }
 }
