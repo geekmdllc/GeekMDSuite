@@ -1,37 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Procedures
 {
-    public class MusculoskeletalStrengthTestLowerLimits
+    public abstract class MuscularStrengthInterpretation
     {
-        public MusculoskeletalStrengthTestLowerLimits(
-            int poor, 
-            int belowAverage, 
-            int average, 
-            int aboveAverage, 
-            int good, 
-            int excellent)
-        {
-            Poor = poor;
-            BelowAverage = belowAverage;
-            Average = average;
-            AboveAverage = aboveAverage;
-            Good = good;
-            Excellent = excellent;
-        }
-
-        public int Poor { get; }
-        public int BelowAverage { get; }
-        public int Average { get; }
-        public int AboveAverage { get; }
-        public int Good { get; }
-        public int Excellent { get; }
-    }
-
-    public abstract class MusculoskeletalStrengthTestInterpretation
-    {
-        public int Count { get; set; }
+        private int _count;
         public abstract int LowerLimitOfPoor { get;  }
         public abstract int LowerLimitOfBelowAverage { get;  }
         public abstract int LowerLimitOfAverage { get;  }
@@ -41,32 +16,32 @@ namespace GeekMDSuite.Procedures
 
         private readonly IPatient _patient;
 
-        protected MusculoskeletalStrengthTestInterpretation(IPatient patient)
+        protected MuscularStrengthInterpretation(IPatient patient)
         {
             _patient = patient;
         }
 
         protected static bool IsInAgeRange(int lowerBound, int upperBound, int age) => age >= lowerBound && age <= upperBound;
 
-        protected MusculoskeletalFitnessClassification ExerciseCountAssessment(MusculoskeletalStrengthTestLowerLimits lowerLimits) 
+        protected FitnessClassification ExerciseCountAssessment(StrengthTestLowerLimits lowerLimits) 
         {
-            if (Count < lowerLimits.Poor) 
-                return MusculoskeletalFitnessClassification.VeryPoor;
-            if (Count < lowerLimits.BelowAverage) 
-                return MusculoskeletalFitnessClassification.Poor;
-            if (Count < lowerLimits.Average) 
-                return MusculoskeletalFitnessClassification.BelowAverage;
-            if (Count < lowerLimits.AboveAverage) 
-                return MusculoskeletalFitnessClassification.Average;
-            if (Count < lowerLimits.Good) 
-                return MusculoskeletalFitnessClassification.AboveAverage;
-            return Count < lowerLimits.Excellent ? MusculoskeletalFitnessClassification.Good 
-                : MusculoskeletalFitnessClassification.Excellent;
+            if (_count < lowerLimits.Poor) 
+                return FitnessClassification.VeryPoor;
+            if (_count < lowerLimits.BelowAverage) 
+                return FitnessClassification.Poor;
+            if (_count < lowerLimits.Average) 
+                return FitnessClassification.BelowAverage;
+            if (_count < lowerLimits.AboveAverage) 
+                return FitnessClassification.Average;
+            if (_count < lowerLimits.Good) 
+                return FitnessClassification.AboveAverage;
+            return _count < lowerLimits.Excellent ? FitnessClassification.Good 
+                : FitnessClassification.Excellent;
         }
 
-        protected MusculoskeletalFitnessClassification Classify()
+        protected FitnessClassification Classify()
         {
-            var limits = new MusculoskeletalStrengthTestLowerLimits(
+            var limits = new StrengthTestLowerLimits(
                 LowerLimitOfPoor,
                 LowerLimitOfBelowAverage,
                 LowerLimitOfAverage,
@@ -101,7 +76,7 @@ namespace GeekMDSuite.Procedures
             }
         }
     }
-    public enum MusculoskeletalFitnessClassification
+    public enum FitnessClassification
     {
         VeryPoor,
         Poor,

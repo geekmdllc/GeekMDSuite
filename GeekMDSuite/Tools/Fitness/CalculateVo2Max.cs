@@ -2,6 +2,7 @@
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.MeasurementUnits;
+using FitnessClassification = GeekMDSuite.Services.Interpretation.FitnessClassification;
 
 namespace GeekMDSuite.Tools.Fitness
 {
