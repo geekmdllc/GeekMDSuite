@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Procedures;
+using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite.Procedures
+namespace GeekMDSuite.Services.Interpretation
 {
-    public interface IMuscularStrengthTest
-    {
-        int Count { get; }
-    }
-    public abstract class MuscularStrengthInterpretation
+    public abstract class MuscularStrengthInterpretation : IInterpretable<FitnessClassification>
     {
         public abstract int LowerLimitOfPoor { get;  }
         public abstract int LowerLimitOfBelowAverage { get;  }
@@ -16,6 +13,9 @@ namespace GeekMDSuite.Procedures
         public abstract int LowerLimitOfAboveAverage { get;  }
         public abstract int LowerLimitOfGood { get;  }
         public abstract int LowerLimitOfExcellent { get;  }
+        
+        public InterpretationText Interpretation => throw new NotImplementedException();
+        public FitnessClassification Classification => throw new NotFiniteNumberException();
 
         private readonly IPatient _patient;
         private readonly int _count;
@@ -57,11 +57,6 @@ namespace GeekMDSuite.Procedures
             
             return ExerciseCountAssessment(limits);
         }
-        //TODO: convert to interval
-        public class AgeRange {
-            public int Upper { get; set; }
-            public int Lower { get; set; }
-        }
         protected int GetLowerBoundOfFitnessStratification(int[] list, List<AgeRange> ageRanges)
         {
             var patientAge = _patient.Age;
@@ -81,15 +76,5 @@ namespace GeekMDSuite.Procedures
                     return GetLowerBoundOfFitnessStratification(maleList, ageRanges);
             }
         }
-    }
-    public enum FitnessClassification
-    {
-        VeryPoor,
-        Poor,
-        BelowAverage,
-        Average,
-        AboveAverage,
-        Good,
-        Excellent
     }
 }
