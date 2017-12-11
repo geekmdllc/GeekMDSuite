@@ -5,8 +5,7 @@ namespace GeekMDSuite.Procedures
 {
     public class VisualAcuity
     {
-        public VisualAcuity (int distance, int near, int both, 
-            int pressure) 
+        public VisualAcuity (int distance, int near, int both) 
         {
             Distance = distance;
             Near = near;
