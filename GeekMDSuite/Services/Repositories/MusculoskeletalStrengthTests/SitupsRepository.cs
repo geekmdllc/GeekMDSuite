@@ -20,7 +20,7 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
                 GetMaleAgeLessThan40(), 
                 GetMaleAgeLessThan50(),
                 GetMaleAgeLessThan60(),
-                GetMaleAgeLessThan999()
+                GetMaleAgeLessThanMax()
             };
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan20() => 
@@ -38,8 +38,8 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan60() => 
                 new MuscularStrengthRepositoryEntry(60,  9, 13, 17, 21, 25, 31);
 
-            private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan999() => 
-                new MuscularStrengthRepositoryEntry(60,  7, 11, 15, 19, 22, 28);
+            private static MuscularStrengthRepositoryEntry GetMaleAgeLessThanMax() => 
+                new MuscularStrengthRepositoryEntry(int.MaxValue,  7, 11, 15, 19, 22, 28);
         }
 
         private static class Female
@@ -50,7 +50,7 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
                 GetFemaleAgeLessThan40(), 
                 GetFemaleAgeLessThan50(),
                 GetFemaleAgeLessThan60(),
-                GetFemaleAgeLessThan999()
+                GetFemaleAgeLessThanMax()
             };
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan20() => 
@@ -68,8 +68,8 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan60() => 
                 new MuscularStrengthRepositoryEntry(60,  3,   7, 10, 13, 18, 24);
 
-            private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan999() => 
-                new MuscularStrengthRepositoryEntry(999,  2,   5, 11, 14, 17, 23);
+            private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThanMax() => 
+                new MuscularStrengthRepositoryEntry(int.MaxValue,  2,   5, 11, 14, 17, 23);
         }
     }
 }

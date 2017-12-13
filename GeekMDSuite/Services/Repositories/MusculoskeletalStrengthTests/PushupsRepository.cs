@@ -20,7 +20,7 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
                 GetMaleAgeLessThan40(), 
                 GetMaleAgeLessThan50(),
                 GetMaleAgeLessThan60(),
-                GetMaleAgeLessThan999()
+                GetMaleAgeLessThanMax()
             };
             
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan20() => 
@@ -38,8 +38,8 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan60() => 
                 new MuscularStrengthRepositoryEntry(60, 1,  5,  9, 18, 25, 31);
 
-            private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan999() => 
-                new MuscularStrengthRepositoryEntry(999, 1,  3,  6, 17, 24, 30);
+            private static MuscularStrengthRepositoryEntry GetMaleAgeLessThanMax() => 
+                new MuscularStrengthRepositoryEntry(int.MaxValue, 1,  3,  6, 17, 24, 30);
         }
 
         private static class Female
@@ -50,7 +50,7 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
                 GetFemaleAgeLessThan40(), 
                 GetFemaleAgeLessThan50(),
                 GetFemaleAgeLessThan60(),
-                GetFemaleAgeLessThan999()
+                GetFemaleAgeLessThanMax()
             };
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan20() => 
@@ -68,8 +68,8 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan60() => 
                 new MuscularStrengthRepositoryEntry(60, 1,  3,  7, 15, 21, 25);
 
-            private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan999() => 
-                new MuscularStrengthRepositoryEntry(999, 1,  2,  5, 13, 19, 23);
+            private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThanMax() => 
+                new MuscularStrengthRepositoryEntry(int.MaxValue, 1,  2,  5, 13, 19, 23);
         }
     }
 }
