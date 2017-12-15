@@ -1,75 +1,76 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
 {
-    internal static class PushupsRepository
+    internal class PushupsRepository : MuscularStrengthRepository
     {
         public static MuscularStrengthRepositoryEntry GetValues(IPatient patient)
         {
             return Gender.IsGenotypeXy(patient.Gender) 
-                ? Male.List.First(p => p.AgeLowerLimit < patient.Age)
-                : Female.List.First(p => p.AgeLowerLimit < patient.Age);
+                ? Male.List.First(p => p.AgeRange.ContainsOpen(patient.Age))
+                : Female.List.First(p => p.AgeRange.ContainsOpen(patient.Age));
         }
 
         private static class Male
         {
             public static readonly List<MuscularStrengthRepositoryEntry> List = new List<MuscularStrengthRepositoryEntry>() {
-                GetMaleAgeLessThan20(),
-                GetMaleAgeLessThan30(),
-                GetMaleAgeLessThan40(), 
-                GetMaleAgeLessThan50(),
+                GetMaleAgeLessThanMax(),
                 GetMaleAgeLessThan60(),
-                GetMaleAgeLessThanMax()
+                GetMaleAgeLessThan50(),
+                GetMaleAgeLessThan40(), 
+                GetMaleAgeLessThan30(),
+                GetMaleAgeLessThan20(),
             };
             
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan20() => 
-                new MuscularStrengthRepositoryEntry(20, 4, 11, 19, 35, 47, 56);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(0,19), 4, 11, 19, 35, 47, 56);
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan30() => 
-                new MuscularStrengthRepositoryEntry(30, 4, 10, 17, 30, 39, 47);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(20,29), 4, 10, 17, 30, 39, 47);
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan40() => 
-                new MuscularStrengthRepositoryEntry(40, 2,  8, 13, 25, 34, 41);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(30,39), 2,  8, 13, 25, 34, 41);
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan50() => 
-                new MuscularStrengthRepositoryEntry(50, 1,  6, 11, 21, 28, 34);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(40,49), 1,  6, 11, 21, 28, 34);
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan60() => 
-                new MuscularStrengthRepositoryEntry(60, 1,  5,  9, 18, 25, 31);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(50,59), 1,  5,  9, 18, 25, 31);
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThanMax() => 
-                new MuscularStrengthRepositoryEntry(int.MaxValue, 1,  3,  6, 17, 24, 30);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(60,int.MaxValue), 1,  3,  6, 17, 24, 30);
         }
 
         private static class Female
         {
             public static readonly List<MuscularStrengthRepositoryEntry> List = new List<MuscularStrengthRepositoryEntry>() {
-                GetFemaleAgeLessThan20(),
-                GetFemaleAgeLessThan30(),
-                GetFemaleAgeLessThan40(), 
-                GetFemaleAgeLessThan50(),
+                GetFemaleAgeLessThanMax(),
                 GetFemaleAgeLessThan60(),
-                GetFemaleAgeLessThanMax()
+                GetFemaleAgeLessThan50(),
+                GetFemaleAgeLessThan40(), 
+                GetFemaleAgeLessThan30(),
+                GetFemaleAgeLessThan20(),
             };
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan20() => 
-                new MuscularStrengthRepositoryEntry(20, 2,  6, 11, 21, 27, 35);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(0,19), 2,  6, 11, 21, 27, 35);
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan30() => 
-                new MuscularStrengthRepositoryEntry(30, 2,  7, 12, 23, 30, 36);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(20,29), 2,  7, 12, 23, 30, 36);
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan40() => 
-                new MuscularStrengthRepositoryEntry(40, 1,  5, 10, 22, 30, 37);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(30,39), 1,  5, 10, 22, 30, 37);
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan50() => 
-                new MuscularStrengthRepositoryEntry(50, 1,  4,  8, 18, 25, 31);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(40,49), 1,  4,  8, 18, 25, 31);
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThan60() => 
-                new MuscularStrengthRepositoryEntry(60, 1,  3,  7, 15, 21, 25);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(50,59), 1,  3,  7, 15, 21, 25);
 
             private static MuscularStrengthRepositoryEntry GetFemaleAgeLessThanMax() => 
-                new MuscularStrengthRepositoryEntry(int.MaxValue, 1,  2,  5, 13, 19, 23);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(60,int.MaxValue), 1,  2,  5, 13, 19, 23);
         }
     }
 }

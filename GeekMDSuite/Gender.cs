@@ -5,12 +5,11 @@
         public Gender(GenderIdentity category)
         {
             Category = category;
-            Genotype = IsGenotypeXx(category) ? Genotype.Xx : Genotype.Xy;
         }
 
         public GenderIdentity Category { get; }
         
-        public Genotype Genotype { get; }
+        public Genotype Genotype => IsGenotypeXx(Category) ? Genotype.Xx : Genotype.Xy;
 
         public static bool IsGenotypeXx(GenderIdentity gender)
         {

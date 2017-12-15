@@ -13,7 +13,8 @@ namespace GeekMDSuite.Test
             var pushups = new Situps(24);
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
-            mockPt.Setup(p => p.Age).Returns(40);
+            mockPt.Setup(p => p.Gender.Genotype).Returns(Genotype.Xy);
+            mockPt.Setup(p => p.Age).Returns(39);
 
             var classification = new SitupsInterpretation(pushups, mockPt.Object).Classification;
 
@@ -26,6 +27,7 @@ namespace GeekMDSuite.Test
             var pushups = new Situps(24);
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
+            mockPt.Setup(p => p.Gender.Genotype).Returns(Genotype.Xx);
             mockPt.Setup(p => p.Age).Returns(40);
 
             var classification = new SitupsInterpretation(pushups, mockPt.Object).Classification;

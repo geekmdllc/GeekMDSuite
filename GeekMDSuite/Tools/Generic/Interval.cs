@@ -13,9 +13,14 @@ namespace GeekMDSuite.Tools.Generic
         private T Upper { get; }
         private T Lower { get; }
         
-        public bool ContainsClosed(T z) => ( Lower.CompareTo(z) <= 0 && Upper.CompareTo(z) >= 0 );
-        public bool ContainsOpen(T z) => ( Lower.CompareTo(z) < 0 && Upper.CompareTo(z) > 0 );
-        public bool ContainsRightOpen(T z) => ( Lower.CompareTo(z) <= 0 && Upper.CompareTo(z) > 0 );
-        public bool ContainsLeftOpen(T z) => ( Lower.CompareTo(z) < 0 && Upper.CompareTo(z) >= 0 );
+        public bool ContainsClosed(T val) => ( GreaterThanOrEqualToLowerBound(val) && LowerThanOrEqualToUpperBound(val) );
+        public bool ContainsOpen(T val) => ( GreaterThanLowerBound(val) && LessThanUpperBound(val) );
+        public bool ContainsRightOpen(T val) => ( GreaterThanOrEqualToLowerBound(val) && LessThanUpperBound(val) );
+        public bool ContainsLeftOpen(T val) => ( GreaterThanLowerBound(val) && LowerThanOrEqualToUpperBound(val) );
+        
+        private bool GreaterThanOrEqualToLowerBound(T val) => Lower.CompareTo(val) <= 0;
+        private bool LowerThanOrEqualToUpperBound(T val) => Upper.CompareTo(val) >= 0;
+        private bool GreaterThanLowerBound(T val) => Lower.CompareTo(val) < 0;
+        private bool LessThanUpperBound(T val) => Upper.CompareTo(val) > 0;
     }
 }
