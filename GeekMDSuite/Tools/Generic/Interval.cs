@@ -10,8 +10,8 @@ namespace GeekMDSuite.Tools.Generic
             Lower = lower;
         }
 
-        private T Upper { get; }
-        private T Lower { get; }
+        public T Upper { get; }
+        public T Lower { get; }
         
         public bool ContainsClosed(T val) => ( GreaterThanOrEqualToLowerBound(val) && LowerThanOrEqualToUpperBound(val) );
         public bool ContainsOpen(T val) => ( GreaterThanLowerBound(val) && LessThanUpperBound(val) );

@@ -8,14 +8,11 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
     {
         public static MuscularStrengthRepositoryEntry GetValues(IPatient patient)
         {
-            var maleList = Male.List;
-            var femaleList = Female.List;
-            
-            var found =  Gender.IsGenotypeXy(patient.Gender)
-                ? Male.List.FirstOrDefault(entry => entry.AgeRange.ContainsOpen(patient.Age))
-                : Female.List.FirstOrDefault(entry => entry.AgeRange.ContainsOpen(patient.Age));
+            var values = Gender.IsGenotypeXy(patient.Gender)
+                ? Male.List.FirstOrDefault(BelongsToAgeCategory(patient))
+                : Female.List.FirstOrDefault(BelongsToAgeCategory(patient));
 
-            return found;
+            return values;
         }
 
         private static class Male
@@ -36,7 +33,7 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
                 new MuscularStrengthRepositoryEntry(new Interval<int>(20,29), 22, 29, 31, 35, 40, 45);
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan40() => 
-                new MuscularStrengthRepositoryEntry(new Interval<int>(30,39), 17, 23, 27, 30, 35, 41);
+                new MuscularStrengthRepositoryEntry(new Interval<int>(30, 39), 17, 23, 27, 30, 35, 41);
 
             private static MuscularStrengthRepositoryEntry GetMaleAgeLessThan50() => 
                 new MuscularStrengthRepositoryEntry(new Interval<int>(40,49), 13, 18, 22, 25, 29, 35);

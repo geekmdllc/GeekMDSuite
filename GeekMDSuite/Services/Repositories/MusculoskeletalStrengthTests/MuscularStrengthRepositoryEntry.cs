@@ -5,7 +5,8 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
 {
     public class MuscularStrengthRepositoryEntry : IStrengthTestRanges
     {
-        public MuscularStrengthRepositoryEntry(Interval<int> ageRange, 
+        public MuscularStrengthRepositoryEntry(
+            Interval<int> ageRange, 
             int lowerLimitOfPoor, 
             int lowerLimitOfBelowAverage, 
             int lowerLimitOfAverage, 

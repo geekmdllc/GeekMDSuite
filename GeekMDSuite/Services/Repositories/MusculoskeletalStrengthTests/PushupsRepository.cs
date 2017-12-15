@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Tools.Generic;
 
@@ -9,8 +10,8 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
         public static MuscularStrengthRepositoryEntry GetValues(IPatient patient)
         {
             return Gender.IsGenotypeXy(patient.Gender) 
-                ? Male.List.First(p => p.AgeRange.ContainsOpen(patient.Age))
-                : Female.List.First(p => p.AgeRange.ContainsOpen(patient.Age));
+                ? Male.List.FirstOrDefault(BelongsToAgeCategory(patient))
+                : Female.List.FirstOrDefault(BelongsToAgeCategory(patient));
         }
 
         private static class Male

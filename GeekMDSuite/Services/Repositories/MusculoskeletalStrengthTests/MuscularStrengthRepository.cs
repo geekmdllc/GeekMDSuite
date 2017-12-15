@@ -5,9 +5,9 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
     internal abstract class MuscularStrengthRepository
     {
         
-        protected static Func<MuscularStrengthRepositoryEntry, bool> AgeCheck(IPatient patient)
+        protected static Func<MuscularStrengthRepositoryEntry, bool> BelongsToAgeCategory(IPatient patient)
         {
-            return p => p.AgeRange.ContainsOpen(patient.Age);
+            return entry => entry.AgeRange.ContainsOpen(patient.Age);
         }
     }
 }
