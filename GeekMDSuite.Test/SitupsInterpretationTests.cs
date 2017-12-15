@@ -1,5 +1,4 @@
-﻿using System;
-using GeekMDSuite.Procedures;
+﻿using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
@@ -15,7 +14,7 @@ namespace GeekMDSuite.Test
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(p => p.Gender.Genotype).Returns(Genotype.Xy);
-            mockPt.Setup(p => p.Age).Returns(39);
+            mockPt.Setup(p => p.Age).Returns(40);
 
             var classification = new SitupsInterpretation(pushups, mockPt.Object).Classification;
 
@@ -23,7 +22,7 @@ namespace GeekMDSuite.Test
         }
         
         [Fact]
-        public void Classification_Given24SitupsAnd40yrFemale_ReturnsBelowAverage()
+        public void Classification_Given24SitupsAnd40yrFemale_ReturnsGood()
         {
             var pushups = new Situps(24);
             var mockPt = new Mock<IPatient>();
@@ -33,7 +32,7 @@ namespace GeekMDSuite.Test
 
             var classification = new SitupsInterpretation(pushups, mockPt.Object).Classification;
 
-            Assert.Equal(FitnessClassification.BelowAverage, classification);
+            Assert.Equal(FitnessClassification.Good, classification);
         }
     }
 }

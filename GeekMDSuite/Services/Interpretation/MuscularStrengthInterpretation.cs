@@ -8,13 +8,13 @@ namespace GeekMDSuite.Services.Interpretation
     {
         protected MuscularStrengthInterpretation(IMuscularStrengthTest test, IPatient patient)
         {
-            if (patient == null) throw new ArgumentNullException(nameof(patient));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             _test = test ?? throw new ArgumentNullException(nameof(test));
 
             if (_test.Type == MuscularStrengthTest.Pushups)
-                _ranges = PushupsRepository.GetValues(patient);
+                _ranges = PushupsRepository.GetRanges(_patient);
             else if (_test.Type == MuscularStrengthTest.Situps)
-                _ranges = SitupsRepository.GetValues(patient);
+                _ranges = SitupsRepository.GetRanges(_patient);
         }
 
         public int LowerLimitOfPoor => _ranges.LowerLimitOfPoor;
@@ -29,7 +29,8 @@ namespace GeekMDSuite.Services.Interpretation
 
         private readonly IMuscularStrengthTest _test;
         private readonly IStrengthTestRanges _ranges;
-        
+        private readonly IPatient _patient;
+
         private FitnessClassification Classify()
         {
             var limits = new StrengthTestLowerLimits(
@@ -59,17 +60,6 @@ namespace GeekMDSuite.Services.Interpretation
                 : FitnessClassification.Excellent;
         }
 
-        private IStrengthTestRanges MapLimits(MuscularStrengthRepositoryEntry entry)
-        {
-            return new StrengthTestLowerLimits(
-                entry.LowerLimitOfPoor,
-                entry.LowerLimitOfBelowAverage,
-                entry.LowerLimitOfAverage,
-                entry.LowerLimitOfAboveAverage,
-                entry.LowerLimitOfGood,
-                entry.LowerLimitOfExcellent);
-        }
-        
         private class StrengthTestLowerLimits : IStrengthTestRanges
         {
             public StrengthTestLowerLimits(int poor, int belowAvg, int average, int aboveAvg, int good, int excellent)

@@ -4,13 +4,13 @@ using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
 {
-    internal class SitupsRepository : MuscularStrengthRepository
+    internal static class SitupsRepository 
     {
-        public static MuscularStrengthRepositoryEntry GetValues(IPatient patient)
+        public static MuscularStrengthRepositoryEntry GetRanges(IPatient patient)
         {
             var values = Gender.IsGenotypeXy(patient.Gender)
-                ? Male.List.FirstOrDefault(BelongsToAgeCategory(patient))
-                : Female.List.FirstOrDefault(BelongsToAgeCategory(patient));
+                ? Male.List.FirstOrDefault(entry => entry.AgeRange.ContainsClosed(patient.Age))
+                : Female.List.FirstOrDefault(entry => entry.AgeRange.ContainsClosed(patient.Age));
 
             return values;
         }

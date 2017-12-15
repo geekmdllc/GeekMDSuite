@@ -3,7 +3,7 @@ using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
 {
-    public class MuscularStrengthRepositoryEntry : IStrengthTestRanges
+    internal class MuscularStrengthRepositoryEntry : IStrengthTestRanges
     {
         public MuscularStrengthRepositoryEntry(
             Interval<int> ageRange, 

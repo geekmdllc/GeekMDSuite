@@ -8,9 +8,9 @@ namespace GeekMDSuite.Test
     public class PushupsInterpretationTests
     {
         [Fact]
-        public void Classification_Given24PushupsAnd40yrMale_ReturnsAverage()
+        public void Classification_Given20PushupsAnd40yrMale_ReturnsAverage()
         {
-            var pushups = new Pushups(24);
+            var pushups = new Pushups(20);
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(p => p.Age).Returns(40);
