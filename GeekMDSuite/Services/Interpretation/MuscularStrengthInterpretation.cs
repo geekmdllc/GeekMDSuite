@@ -15,6 +15,8 @@ namespace GeekMDSuite.Services.Interpretation
                 _ranges = PushupsRepository.GetRanges(_patient);
             else if (_test.Type == MuscularStrengthTest.Situps)
                 _ranges = SitupsRepository.GetRanges(_patient);
+            else 
+                throw new NotImplementedException(nameof(_test.Type));
         }
 
         public int LowerLimitOfPoor => _ranges.LowerLimitOfPoor;
