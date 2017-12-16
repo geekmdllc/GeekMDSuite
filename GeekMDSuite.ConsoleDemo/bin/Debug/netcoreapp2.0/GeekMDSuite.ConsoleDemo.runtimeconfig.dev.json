@@ -1,0 +1,9 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/tnesbit/.dotnet/store/|arch|/|tfm|",
+      "/Users/tnesbit/.nuget/packages",
+      "/Users/tnesbit/bin/dotnet-sdk-2.0.3-osx-x64/sdk/NuGetFallbackFolder"
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "dfd9b8799b3c0862fdf4774fb0f54416ca7f0530"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "GeekMDSuite.ConsoleDemo/1.0.0": {
+        "dependencies": {
+          "GeekMDSuite": "0.1.0-alpha"
+        },
+        "runtime": {
+          "GeekMDSuite.ConsoleDemo.dll": {}
+        }
+      },
+      "MathNet.Numerics/4.0.0-alpha02": {
+        "runtime": {
+          "lib/netstandard2.0/MathNet.Numerics.dll": {}
+        }
+      },
+      "GeekMDSuite/0.1.0-alpha": {
+        "dependencies": {
+          "MathNet.Numerics": "4.0.0-alpha02"
+        },
+        "runtime": {
+          "GeekMDSuite.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GeekMDSuite.ConsoleDemo/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MathNet.Numerics/4.0.0-alpha02": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-a0Maetx3iWUZho6Vl3b9clL7Kq8TfLOcUgqbUZS1LEclMVKhV2CX9MmhQqaLk7vC2aWDEr+E5tW67SMPhFkWQw==",
+      "path": "mathnet.numerics/4.0.0-alpha02",
+      "hashPath": "mathnet.numerics.4.0.0-alpha02.nupkg.sha512"
+    },
+    "GeekMDSuite/0.1.0-alpha": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

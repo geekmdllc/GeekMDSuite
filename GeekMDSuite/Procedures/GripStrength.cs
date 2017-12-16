@@ -10,7 +10,13 @@ namespace GeekMDSuite.Procedures
             Right = right;
         }
 
+        public GripStrength(double left, double right) 
+            : this(GripMeasurement.Create(left), GripMeasurement.Create(right))
+        {  }
+
         public IMassMeasurement Left { get; }
         public IMassMeasurement Right { get; }
+
+        public static GripStrength Build(double left, double right) => new GripStrength(left, right);
     }
 }

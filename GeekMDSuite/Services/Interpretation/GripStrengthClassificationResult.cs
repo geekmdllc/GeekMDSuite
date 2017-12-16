@@ -11,8 +11,8 @@ namespace GeekMDSuite.Services.Interpretation
             Right = right;
         }
 
-        public GripStrengthClassification Left { get; private set; }
-        public GripStrengthClassification Right { get; private set; }
+        public GripStrengthClassification Left { get; }
+        public GripStrengthClassification Right { get; }
 
         public GripStrengthClassification WorseSide => LeftWorseThanRight() ? Left : Right;
         public Laterality Laterality => LeftWorseThanRight() ? Laterality.Left : Laterality.Right;
@@ -30,5 +30,8 @@ namespace GeekMDSuite.Services.Interpretation
         {
             return new GripStrengthClassificationResult(left, right);
         }
+
+        public override string ToString() => 
+            $"The worse side is on the {Laterality}, the left strength was {Left}, the right side was {Right}.";
     }
 }

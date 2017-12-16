@@ -5,7 +5,7 @@ namespace GeekMDSuite
     public class VitalSigns : IVitalSigns
     {
 
-        public VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate)
+        internal VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate)
         {
             BloodPressure = bloodPressure;
             Temperature = temperature;

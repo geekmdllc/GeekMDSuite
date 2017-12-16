@@ -4,7 +4,7 @@ namespace GeekMDSuite.Tools.MeasurementUnits
 {
     public class LengthMeasurement : ILengthMeasurement
     {
-        public LengthMeasurement(double inches)
+        protected LengthMeasurement(double inches)
         {
             Inches = inches;
         }

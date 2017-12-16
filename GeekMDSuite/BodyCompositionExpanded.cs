@@ -2,8 +2,7 @@
 {
     public class BodyCompositionExpanded : BodyComposition, IBodyCompositionExpanded
     {
-
-        public BodyCompositionExpanded(
+        private BodyCompositionExpanded(
             IBodyComposition bodyComposition, 
             double visceralFat, 
             double percentBodyFat) : base(
@@ -19,5 +18,8 @@
         public double VisceralFat { get; }
 
         public double PercentBodyFat { get; }
+        
+        internal static BodyCompositionExpanded Build(IBodyComposition bodyComposition, double visceralFat, double percentBodyFat) =>
+            new BodyCompositionExpanded(bodyComposition, visceralFat, percentBodyFat);
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Test", "GeekMDS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite", "GeekMDSuite\GeekMDSuite.csproj", "{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.ConsoleDemo", "GeekMDSuite.ConsoleDemo\GeekMDSuite.ConsoleDemo.csproj", "{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

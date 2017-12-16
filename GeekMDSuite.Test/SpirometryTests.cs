@@ -12,7 +12,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenNormalValues_ReturnsNormalClassification()
         {
-            var spiromenty = new Spirometry(_forcedVitalCapacity * 0.71, _forcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(ForcedVitalCapacity * 0.71, ForcedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.Normal, result.Classification);
@@ -21,7 +21,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenMildObstructionValues_ReturnsMildObstructionClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.71, _forcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.71, ForcedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionMild, result.Classification);
@@ -29,7 +29,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModerateObstructionValues_ReturnsModerateClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.69, _forcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.69, ForcedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionModerate, result.Classification);
@@ -37,7 +37,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModeratelySevereObstructionValues_ReturnsModeratelySevereClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.59, _forcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.59, ForcedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionModeratelySevere, result.Classification);
@@ -45,7 +45,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenSevereObstructionValues_ReturnsSevereClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.49, _forcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.49, ForcedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionSevere, result.Classification);
@@ -54,7 +54,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenVerySevereObstructionValues_ReturnsVerySevereClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.34, _forcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.34, ForcedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionVerySevere, result.Classification);
@@ -63,7 +63,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenMixedPattern_ReturnsMixedPatternClassification()
         {
-            var spiromenty = new Spirometry(_restrictedVitalCapacity * 0.69, _restrictedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(RestrictedVitalCapacity * 0.69, RestrictedVitalCapacity, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.MixedPattern, result.Classification);
@@ -72,7 +72,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenMildRestrictiveValues_ReturnsMildRestrictionClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.71, _restrictedVitalCapacity * 0.71, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.71, RestrictedVitalCapacity * 0.71, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionMild, result.Classification);
@@ -81,7 +81,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModerateRestrictiveValues_ReturnsModerateRestrictionClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.69, _restrictedVitalCapacity * 0.69, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.69, RestrictedVitalCapacity * 0.69, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionModerate, result.Classification);
@@ -90,7 +90,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModeratelySevereRestrictiveValues_ReturnsModeratelySevereRestrictionClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.59, _restrictedVitalCapacity * 0.59, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.59, RestrictedVitalCapacity * 0.59, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionModeratelySevere, result.Classification);
@@ -99,7 +99,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenSevereRestrictiveValues_ReturnsSevereRestrictionClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.49, _restrictedVitalCapacity * 0.49, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.49, RestrictedVitalCapacity * 0.49, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionSevere, result.Classification);
@@ -108,26 +108,28 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenVerySevereRestrictiveValues_ReturnsVerySevereRestrictionClassification()
         {
-            var spiromenty = new Spirometry(_fev1 * 0.34, _restrictedVitalCapacity * 0.34, 8.94, 6.33, 6.2);
+            var spiromenty = new Spirometry(Fev1 * 0.34, RestrictedVitalCapacity * 0.34, 8.94, 6.33, 6.2);
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionVerySevere, result.Classification);
         }
         
         private readonly Patient _patient = new Patient(
-            new Name("Jim", "Joe", "Bob"), 
+            Name.Create("Jim", "Bob", "Joe"), 
             new DateTime(1980, 11, 23), 
-            new Gender(GenderIdentity.Male), 
+            Gender.Create(GenderIdentity.Male), 
             Race.BlackOrAfricanAmerican, 
             "1234" );
-        private readonly BodyComposition _bodyComposition = new BodyComposition(
-            new Height(71), 
-            new Waist(35), 
-            new Hips(41), 
-            new Weight(183));
-        
-        private double _forcedVitalCapacity = 4.395;
-        private double _restrictedVitalCapacity = 3.4721;
-        private double _fev1 = 3.62;
+
+        private readonly BodyComposition _bodyComposition = new BodyCompositionBuilder()
+            .SetHeight(71)
+            .SetWaist(35)
+            .SetHips(41)
+            .SetWeight(183)
+            .Build();
+
+        private const double ForcedVitalCapacity = 4.395;
+        private const double RestrictedVitalCapacity = 3.4721;
+        private const double Fev1 = 3.62;
     }
 }

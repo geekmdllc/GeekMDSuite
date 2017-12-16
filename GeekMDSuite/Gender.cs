@@ -2,7 +2,7 @@
 {
     public class Gender : IGender
     {
-        public Gender(GenderIdentity category)
+        private Gender(GenderIdentity category)
         {
             Category = category;
         }
@@ -19,5 +19,7 @@
         public static bool IsGenotypeXy(GenderIdentity gender) => !IsGenotypeXx(gender);
 
         public static bool IsGenotypeXy(IGender gender) => !IsGenotypeXx(gender.Category);
+
+        public static Gender Create(GenderIdentity category) => new Gender(category);
     }
 }

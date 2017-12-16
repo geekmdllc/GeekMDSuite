@@ -4,7 +4,7 @@ namespace GeekMDSuite.Procedures
 {
     public class TreadmillExerciseStressTestBuilder
     {
-        private TreadmillProtocol _protocol;
+        private TreadmillProtocol _protocol = TreadmillProtocol.Bruce;
         private TimeDuration _time;
         private TreadmillExerciseStressTestResultClassification _result;
         private BloodPressure _supineBloodPressure;
@@ -12,15 +12,15 @@ namespace GeekMDSuite.Procedures
         private BloodPressure _maximumBloodPressure;
         private int _maximumHeartRate;
 
-        public TreadmillExerciseStressTestBuilder SetProtocol(TreadmillProtocol protocol)
+        public TreadmillExerciseStressTestBuilder SetProtocol(TreadmillProtocol protocol = TreadmillProtocol.Bruce)
         {
             _protocol = protocol;
             return this;
         }
 
-        public TreadmillExerciseStressTestBuilder SetTime(TimeDuration time)
+        public TreadmillExerciseStressTestBuilder SetTime(double minutes, double seconds)
         {
-            _time = time;
+            _time = TimeDuration.Create(minutes, seconds);
             return this;
         }
         
@@ -30,9 +30,9 @@ namespace GeekMDSuite.Procedures
             return this;
         }
         
-        public TreadmillExerciseStressTestBuilder SetSupineBloodPressure(BloodPressure bloodPressure)
+        public TreadmillExerciseStressTestBuilder SetSupineBloodPressure(int systolic, int diastolic)
         {
-            _supineBloodPressure = bloodPressure;
+            _supineBloodPressure = BloodPressure.Build(systolic, diastolic);
             return this;
         }
         
@@ -42,9 +42,9 @@ namespace GeekMDSuite.Procedures
             return this;
         }
         
-        public TreadmillExerciseStressTestBuilder SetMaximumBloodPressure(BloodPressure bloodPressure)
+        public TreadmillExerciseStressTestBuilder SetMaximumBloodPressure(int systolic, int diastolic)
         {
-            _maximumBloodPressure = bloodPressure;
+            _maximumBloodPressure = BloodPressure.Build(systolic, diastolic);
             return this;
         }
         

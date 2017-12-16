@@ -21,5 +21,7 @@ namespace GeekMDSuite.Tools.MeasurementUnits
         public int Seconds { get; }
         public double TotalSeconds { get; }
         public double FractionalMinutes => TotalSeconds / 60;
+
+        public static TimeDuration Create(double minutes, double seconds) => new TimeDuration(minutes, seconds);
     }
 }

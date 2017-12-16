@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.Tools.MeasurementUnits
 {
-    public abstract class MassMeasurement : IMassMeasurement
+    public class MassMeasurement : IMassMeasurement
     {
-        public MassMeasurement(double pounds)
+        internal MassMeasurement(double pounds)
         {
             Pounds = pounds;
         }
@@ -14,5 +14,7 @@ namespace GeekMDSuite.Tools.MeasurementUnits
         public double Kilograms => MassConversion.LbsToKilograms(Pounds);
 
         public double Grams => MassConversion.KilogramsToGrams(Kilograms);
+
+        public static MassMeasurement Create(double pounds) => new MassMeasurement(pounds);
     }
 }

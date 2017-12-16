@@ -1,0 +1,14 @@
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.deps.json
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.runtimeconfig.json
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.runtimeconfig.dev.json
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.pdb
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/GeekMDSuite.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/Newtonsoft.Json.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/GeekMDSuite.pdb
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/bin/Debug/netcoreapp2.0/Newtonsoft.Json.xml
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/obj/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.csproj.CoreCompileInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/obj/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.AssemblyInfoInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/obj/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.AssemblyInfo.cs
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/obj/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.ConsoleDemo/obj/Debug/netcoreapp2.0/GeekMDSuite.ConsoleDemo.pdb

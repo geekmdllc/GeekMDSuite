@@ -2,7 +2,7 @@
 {
     public class BloodPressure
     {
-        public BloodPressure(int systolic, int diastolic, bool organDamage)
+        internal BloodPressure(int systolic, int diastolic, bool organDamage)
         {
             Systolic = systolic;
             Diastolic = diastolic;
@@ -12,5 +12,8 @@
         public int Systolic { get; }
         public int Diastolic { get; }
         public bool OrganDamage { get; }
+
+        public static BloodPressure Build(int systolic, int diastolic, bool organDamage = false) => 
+            new BloodPressure(systolic, diastolic, organDamage);
     }
 }

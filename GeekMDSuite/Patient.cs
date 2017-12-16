@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace GeekMDSuite
 {
@@ -20,5 +21,8 @@ namespace GeekMDSuite
         public string MedicalRecordNumber { get; }
         public IGender Gender { get; }
         public Race Race { get; }
+
+        public static Patient Create(Name name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber) 
+            => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
     }
 }
