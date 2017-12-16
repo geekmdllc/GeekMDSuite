@@ -1,5 +1,4 @@
-﻿using System;
-using GeekMDSuite.LaboratoryData;
+﻿using GeekMDSuite.LaboratoryData;
 using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.Services.Interpretation;
 using Moq;

@@ -11,7 +11,7 @@
 // [] Comments complete
 [
   {
-    "LabName":"sodium_serum",
+    "LabName":"sodiumserum",
     "LabNameFull":"Sodium, Serum",
     "LabNameShort": "Na+",
     "Specimen": "Serum",
@@ -34,7 +34,7 @@
     "Comments":"This needs to be updated."
   },
   {
-    "LabName":"potassium_serum",
+    "LabName":"potassiumserum",
     "LabNameFull":"Potassium, Serum",
     "LabNameShort": "K+",
     "Specimen": "Serum",
@@ -57,7 +57,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"chloride_serum",
+    "LabName":"chlorideserum",
     "LabNameFull":"Chloride, Serum",
     "LabNameShort": "Cl-",
     "Specimen": "Serum",
@@ -80,7 +80,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"bicarbonate_serum",
+    "LabName":"bicarbonateserum",
     "LabNameFull":"Bicarbonate, Serum",
     "LabNameShort": "HCO3-",
     "Specimen": "Serum",
@@ -103,7 +103,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"bloodUreaNitrogen_serum",
+    "LabName":"bloodUreaNitrogenserum",
     "LabNameFull":"Blood Urea Nitrogen, Serum",
     "LabNameShort": "BUN",
     "Specimen": "Serum",
@@ -126,7 +126,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"creatinine_serum",
+    "LabName":"creatinineserum",
     "LabNameFull":"Creatinine, Serum",
     "LabNameShort": "Cr",
     "Specimen": "Serum",
@@ -149,7 +149,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"glucose_serum",
+    "LabName":"glucoseserum",
     "LabNameFull":"Glucose, Serum",
     "LabNameShort": "Glucose",
     "Specimen": "Serum",
@@ -172,7 +172,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"calcium_serum",
+    "LabName":"calciumserum",
     "LabNameFull":"Calcium, Serum",
     "LabNameShort": "Ca++",
     "Specimen": "Serum",
@@ -195,7 +195,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"protein_serum",
+    "LabName":"proteinserum",
     "LabNameFull":"Protein, Serum",
     "LabNameShort": "Protein",
     "Specimen": "Serum",
@@ -218,7 +218,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"albumin_serum",
+    "LabName":"albuminserum",
     "LabNameFull":"Albumin, Serum",
     "LabNameShort": "Albumin",
     "Specimen": "Serum",
@@ -241,7 +241,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"alkalinePhosphatase_serum",
+    "LabName":"alkalinePhosphataseserum",
     "LabNameFull":"Alkaline Phosphatase, Serum",
     "LabNameShort": "Alk Phos",
     "Specimen": "Serum",
@@ -264,7 +264,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"aspartateTransaminase_Serum",
+    "LabName":"aspartateTransaminaseSerum",
     "LabNameFull":"Aspartate Transaminase, Serum",
     "LabNameShort": "AST",
     "Specimen": "Serum",
@@ -287,7 +287,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"alanineTransaminase_Serum",
+    "LabName":"alanineTransaminaseSerum",
     "LabNameFull":"Alanine Transaminase, Serum",
     "LabNameShort": "ALT",
     "Specimen": "Serum",
@@ -310,7 +310,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"bilirubin_Total_Serum",
+    "LabName":"bilirubinTotalSerum",
     "LabNameFull":"Bilirubin, Total, Serum",
     "LabNameShort": "T-Bili",
     "Specimen": "Serum",
@@ -333,7 +333,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"cReactiveProtein_Serum",
+    "LabName":"cReactiveProteinSerum",
     "LabNameFull":"High Sensitivity C-Reactive Protein, Serum",
     "LabNameShort": "hsCRP",
     "Specimen": "Serum",
@@ -356,7 +356,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"ldlParticleSize_Mean_Serum",
+    "LabName":"ldlParticleSizeMeanSerum",
     "LabNameFull":"LDL Particle Size, Mean, Serum",
     "LabNameShort": "LDL Particle Size",
     "Specimen": "Serum",
@@ -379,7 +379,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"cholesterol_Total_Serum",
+    "LabName":"cholesterolTotalSerum",
     "LabNameFull":"Cholesterol, Total, Serum",
     "LabNameShort": "Cholesterol, Total",
     "Specimen": "Serum",
@@ -402,7 +402,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"triglycerides_serum",
+    "LabName":"triglyceridesserum",
     "LabNameFull":"Triglycerides, Serum",
     "LabNameShort": "Triglycerides",
     "Specimen": "Serum",
@@ -425,7 +425,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"highDensityLipoprotein_serum",
+    "LabName":"highDensityLipoproteinserum",
     "LabNameFull":"High Density Lipoprotein - Cholesterol, Serum",
     "LabNameShort": "HDL-C",
     "Specimen": "Serum",
@@ -448,7 +448,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"lowDensityLipoprotein_Serum",
+    "LabName":"lowDensityLipoproteinSerum",
     "LabNameFull":"Low Density Lipoprotein , Serum",
     "LabNameShort": "LDL, Serum",
     "Specimen": "Serum",
@@ -471,7 +471,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"veryLowDensityLipoprotein_serum",
+    "LabName":"veryLowDensityLipoproteinserum",
     "LabNameFull":"Very Low Density Lipoprotein - Cholesterol, Serum",
     "LabNameShort": "VLDL-C",
     "Specimen": "Serum",
@@ -494,7 +494,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"LipoproteinA_Serum",
+    "LabName":"LipoproteinASerum",
     "LabNameFull":"Lipoprotein(a), Serum",
     "LabNameShort": "Lipoprotein(a), Serum",
     "Specimen": "Serum",
@@ -517,7 +517,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"nonHighDensityLipoprotein_serum",
+    "LabName":"nonHighDensityLipoproteinserum",
     "LabNameFull":"Non-High Density Lipoprotein - Cholesterol, Serum",
     "LabNameShort": "Non-HDL-C",
     "Specimen": "Serum",
@@ -540,7 +540,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"thyroidStimulatingHormone_serum",
+    "LabName":"thyroidStimulatingHormoneserum",
     "LabNameFull":"Thyroid Stimulating Hormone",
     "LabNameShort": "TSH",
     "Specimen": "Serum",
@@ -563,7 +563,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"vitaminD_25_hydroxy_serum",
+    "LabName":"vitaminD25hydroxyserum",
     "LabNameFull":"Vitamin D, 25-Hydroxy",
     "LabNameShort": "Vit. D, 25-OH",
     "Specimen": "Serum",
@@ -586,7 +586,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"vitaminB12_serum",
+    "LabName":"vitaminB12serum",
     "LabNameFull":"Vitamin B12",
     "LabNameShort": "Vit. B12",
     "Specimen": "Serum",
@@ -609,7 +609,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"folate_serum",
+    "LabName":"folateserum",
     "LabNameFull":"Folate, Serum",
     "LabNameShort": "Folate",
     "Specimen": "Serum",
@@ -632,7 +632,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"protein_urine",
+    "LabName":"proteinurine",
     "LabNameFull":"Protein, Urine",
     "LabNameShort": "Protein",
     "Specimen": "Urine",
@@ -655,7 +655,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"glucose_urine",
+    "LabName":"glucoseurine",
     "LabNameFull":"Glucose, Urine",
     "LabNameShort": "Glucose",
     "Specimen": "Urine",
@@ -678,7 +678,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"redBloodCells_urine",
+    "LabName":"redBloodCellsurine",
     "LabNameFull":"Red Blood Cells, Urine",
     "LabNameShort": "RBC",
     "Specimen": "Urine",
@@ -701,7 +701,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"whiteBloodCells_serum",
+    "LabName":"whiteBloodCellsserum",
     "LabNameFull":"White Blood Cells, Serum",
     "LabNameShort": "WBC",
     "Specimen": "Serum",
@@ -725,7 +725,7 @@
   },
 
   {
-    "LabName":"redBloodCells_serum",
+    "LabName":"redBloodCellsserum",
     "LabNameFull":"Red Blood Cells, Serum",
     "LabNameShort": "RBC",
     "Specimen": "Serum",
@@ -748,7 +748,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"hemoglobin_serum",
+    "LabName":"hemoglobinserum",
     "LabNameFull":"Hemoglobin, Serum",
     "LabNameShort": "Hgb",
     "Specimen": "Serum",
@@ -771,7 +771,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"insulin_serum",
+    "LabName":"insulinserum",
     "LabNameFull":"Insulin, Fasting, Serum",
     "LabNameShort": "Insulin",
     "Specimen": "Serum",
@@ -794,7 +794,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"hemoglobin_urine",
+    "LabName":"hemoglobinurine",
     "LabNameFull":"Hemoglobin, Urine",
     "LabNameShort": "Hb",
     "Specimen": "Urine",
@@ -817,7 +817,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"ketones_urine",
+    "LabName":"ketonesurine",
     "LabNameFull":"Ketones, Urine",
     "LabNameShort": "Ketones",
     "Specimen": "Urine",
@@ -840,7 +840,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"hematocrit_serum",
+    "LabName":"hematocritserum",
     "LabNameFull":"Hematocrit, Serum",
     "LabNameShort": "Hct",
     "Specimen": "Serum",
@@ -863,7 +863,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"meanCorpuscularVolume_serum",
+    "LabName":"meanCorpuscularVolumeserum",
     "LabNameFull":"Mean Corupscular Volume, Serum",
     "LabNameShort": "MCV",
     "Specimen": "Serum",
@@ -886,7 +886,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"meanCorpuscularHemoglobin_serum",
+    "LabName":"meanCorpuscularHemoglobinserum",
     "LabNameFull":"Mean Corupscular Hemoglobin, Serum",
     "LabNameShort": "MCH",
     "Specimen": "Serum",
@@ -909,7 +909,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"meanCorpuscularHemoglobinConcentration_serum",
+    "LabName":"meanCorpuscularHemoglobinConcentrationserum",
     "LabNameFull":"Mean Corupscular Hemoglobin Concentration, Serum",
     "LabNameShort": "MCHC",
     "Specimen": "Serum",
@@ -932,7 +932,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"redBloodCellDistributionWidth_cv_serum",
+    "LabName":"redBloodCellDistributionWidthcvserum",
     "LabNameFull":"Red Blood Cell Distribution Width CV, Serum",
     "LabNameShort": "RDW-CV",
     "Specimen": "Serum",
@@ -955,7 +955,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"plateletCount_serum",
+    "LabName":"plateletCountserum",
     "LabNameFull":"Platelet Count, Serum",
     "LabNameShort": "Platelets",
     "Specimen": "Serum",
@@ -978,7 +978,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"neutrophils_serum",
+    "LabName":"neutrophilsserum",
     "LabNameFull":"Neutrophils, Serum",
     "LabNameShort": "Neutrophils",
     "Specimen": "Serum",
@@ -1001,7 +1001,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"lymphocytes_serum",
+    "LabName":"lymphocytesserum",
     "LabNameFull":"Lymphocytes, Serum",
     "LabNameShort": "Lymphocytes",
     "Specimen": "Serum",
@@ -1024,7 +1024,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"monocytes_serum",
+    "LabName":"monocytesserum",
     "LabNameFull":"Monocytes, Serum",
     "LabNameShort": "Monocytes",
     "Specimen": "Serum",
@@ -1047,7 +1047,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"eosinophils_serum",
+    "LabName":"eosinophilsserum",
     "LabNameFull":"Eosinophils, Serum",
     "LabNameShort": "Eosinophils",
     "Specimen": "Serum",
@@ -1070,7 +1070,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"basophils_serum",
+    "LabName":"basophilsserum",
     "LabNameFull":"Basophils, Serum",
     "LabNameShort": "Basophils",
     "Specimen": "Serum",
@@ -1093,7 +1093,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"hemoglobinA1c_serum",
+    "LabName":"hemoglobinA1cserum",
     "LabNameFull":"Hemoglobin A1c (%), Serum",
     "LabNameShort": "Hb A1c",
     "Specimen": "Serum",
@@ -1116,7 +1116,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"apolipoproteinB_serum",
+    "LabName":"apolipoproteinBserum",
     "LabNameFull":"Apolipoprotein B, Serum",
     "LabNameShort": "Hb A1c",
     "Specimen": "Serum",
@@ -1139,7 +1139,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"sexHormoneBindingGlobulin_Serum",
+    "LabName":"sexHormoneBindingGlobulinSerum",
     "LabNameFull":"Sex Hormone Binding Globulin, Serum",
     "LabNameShort": "SHBG",
     "Specimen": "Serum",
@@ -1162,7 +1162,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"testosterone_Free_Serum",
+    "LabName":"testosteroneFreeSerum",
     "LabNameFull":"Testosterone, Free, Serum",
     "LabNameShort": "Testosterone, Free",
     "Specimen": "Serum",
@@ -1185,7 +1185,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"testosterone_Total_Serum",
+    "LabName":"testosteroneTotalSerum",
     "LabNameFull":"Testosterone, Total, Serum",
     "LabNameShort": "Testosterone, Total",
     "Specimen": "Serum",
@@ -1208,7 +1208,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"estradiol_Serum",
+    "LabName":"estradiolSerum",
     "LabNameFull":"Estradiol, Serum",
     "LabNameShort": "Estradiol",
     "Specimen": "Serum",
@@ -1231,7 +1231,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"bilirubin_Direct_Serum",
+    "LabName":"bilirubinDirectSerum",
     "LabNameFull":"Bilirubin, Direct, Serum",
     "LabNameShort": "Bilirubin, Direct",
     "Specimen": "Serum",
@@ -1254,7 +1254,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"FollicularStimulating_Hormone",
+    "LabName":"FollicularStimulatingHormone",
     "LabNameFull":"Follicular Stimulating Hormone",
     "LabNameShort": "FSH",
     "Specimen": "Serum",
@@ -1300,7 +1300,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"homocysteine_Serum",
+    "LabName":"homocysteineSerum",
     "LabNameFull":"Homocysteine, Serum",
     "LabNameShort": "Homocysteine",
     "Specimen": "Serum",
@@ -1323,7 +1323,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"lipase_Serum",
+    "LabName":"lipaseSerum",
     "LabNameFull":"Lipase, Serum",
     "LabNameShort": "Lipase",
     "Specimen": "Serum",
@@ -1346,7 +1346,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"magnesium_Serum",
+    "LabName":"magnesiumSerum",
     "LabNameFull":"Magnesium, Serum",
     "LabNameShort": "Mg++",
     "Specimen": "Serum",
@@ -1369,7 +1369,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"ProstateSpecificAntigen_Serum",
+    "LabName":"ProstateSpecificAntigenSerum",
     "LabNameFull":"Prostate Specific Antigen, Serum",
     "LabNameShort": "PSA",
     "Specimen": "Serum",
@@ -1392,7 +1392,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"thyroxine_Free_Serum",
+    "LabName":"thyroxineFreeSerum",
     "LabNameFull":"Thyroxine, Free, Serum",
     "LabNameShort": "T4, Free",
     "Specimen": "Serum",
@@ -1415,7 +1415,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"thyroxine_Total_Serum",
+    "LabName":"thyroxineTotalSerum",
     "LabNameFull":"Thyroxine, Total, Serum",
     "LabNameShort": "T4, Total",
     "Specimen": "Serum",
@@ -1438,7 +1438,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"triiodothyronine_Free_Serum",
+    "LabName":"triiodothyronineFreeSerum",
     "LabNameFull":"Triiodothyronine, Free, Serum",
     "LabNameShort": "T3, Free",
     "Specimen": "Serum",
@@ -1461,7 +1461,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"triiodothyronine_Total_Serum",
+    "LabName":"triiodothyronineTotalSerum",
     "LabNameFull":"Triiodothyronine, Total, Serum",
     "LabNameShort": "T3, Total",
     "Specimen": "Serum",
@@ -1484,7 +1484,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"reverseTriiodothyronine_Serum",
+    "LabName":"reverseTriiodothyronineSerum",
     "LabNameFull":"Reverse Triiodothyronine, Serum",
     "LabNameShort": "rT3",
     "Specimen": "Serum",
@@ -1507,7 +1507,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"uricAcid_Serum",
+    "LabName":"uricAcidSerum",
     "LabNameFull":"Uric Acid, Serum",
     "LabNameShort": "rT3",
     "Specimen": "Serum",
@@ -1530,7 +1530,7 @@
     "Comments":"UPDATE NEEDED"
   },
   {
-    "LabName":"whiteBloodCells_Urine",
+    "LabName":"whiteBloodCellsUrine",
     "LabNameFull":"White Blood Cells, Urine",
     "LabNameShort": "WBC",
     "Specimen": "Urine",
