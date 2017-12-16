@@ -21,12 +21,12 @@ namespace GeekMDSuite.Services.Interpretation
                 throw new NotImplementedException(nameof(_test.Type));
         }
 
-        public int LowerLimitOfPoor => _ranges.LowerLimitOfPoor;
-        public int LowerLimitOfBelowAverage => _ranges.LowerLimitOfBelowAverage;
-        public int LowerLimitOfAverage => _ranges.LowerLimitOfAverage;
-        public int LowerLimitOfAboveAverage => _ranges.LowerLimitOfAboveAverage;
-        public int LowerLimitOfGood => _ranges.LowerLimitOfGood;
-        public int LowerLimitOfExcellent => _ranges.LowerLimitOfExcellent;
+        public double LowerLimitOfPoor => _ranges.LowerLimitOfPoor;
+        public double LowerLimitOfBelowAverage => _ranges.LowerLimitOfBelowAverage;
+        public double LowerLimitOfAverage => _ranges.LowerLimitOfAverage;
+        public double LowerLimitOfAboveAverage => _ranges.LowerLimitOfAboveAverage;
+        public double LowerLimitOfGood => _ranges.LowerLimitOfGood;
+        public double LowerLimitOfExcellent => _ranges.LowerLimitOfExcellent;
         
         public InterpretationText Interpretation => throw new NotImplementedException();
         public FitnessClassification Classification => Classify();
@@ -50,23 +50,23 @@ namespace GeekMDSuite.Services.Interpretation
   
         private FitnessClassification ParseCountToFitnessClassification(IStrengthTestRanges lowerLimits) 
         {
-            if (_test.Count < lowerLimits.LowerLimitOfPoor) 
+            if (_test.Value < lowerLimits.LowerLimitOfPoor) 
                 return FitnessClassification.VeryPoor;
-            if (_test.Count < lowerLimits.LowerLimitOfBelowAverage) 
+            if (_test.Value < lowerLimits.LowerLimitOfBelowAverage) 
                 return FitnessClassification.Poor;
-            if (_test.Count < lowerLimits.LowerLimitOfAverage) 
+            if (_test.Value < lowerLimits.LowerLimitOfAverage) 
                 return FitnessClassification.BelowAverage;
-            if (_test.Count < lowerLimits.LowerLimitOfAboveAverage) 
+            if (_test.Value < lowerLimits.LowerLimitOfAboveAverage) 
                 return FitnessClassification.Average;
-            if (_test.Count < lowerLimits.LowerLimitOfGood) 
+            if (_test.Value < lowerLimits.LowerLimitOfGood) 
                 return FitnessClassification.AboveAverage;
-            return _test.Count < lowerLimits.LowerLimitOfExcellent ? FitnessClassification.Good 
+            return _test.Value < lowerLimits.LowerLimitOfExcellent ? FitnessClassification.Good 
                 : FitnessClassification.Excellent;
         }
 
         private class StrengthTestLowerLimits : IStrengthTestRanges
         {
-            public StrengthTestLowerLimits(int poor, int belowAvg, int average, int aboveAvg, int good, int excellent)
+            public StrengthTestLowerLimits(double poor, double belowAvg, double average, double aboveAvg, double good, double excellent)
             {
                 LowerLimitOfPoor = poor;
                 LowerLimitOfBelowAverage = belowAvg;
@@ -76,12 +76,12 @@ namespace GeekMDSuite.Services.Interpretation
                 LowerLimitOfExcellent = excellent;
             }
 
-            public int LowerLimitOfPoor { get; }
-            public int LowerLimitOfBelowAverage { get; }
-            public int LowerLimitOfAverage { get; }
-            public int LowerLimitOfAboveAverage { get; }
-            public int LowerLimitOfGood { get; }
-            public int LowerLimitOfExcellent { get; }
+            public double LowerLimitOfPoor { get; }
+            public double LowerLimitOfBelowAverage { get; }
+            public double LowerLimitOfAverage { get; }
+            public double LowerLimitOfAboveAverage { get; }
+            public double LowerLimitOfGood { get; }
+            public double LowerLimitOfExcellent { get; }
         }
     }
 }

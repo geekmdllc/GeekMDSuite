@@ -1,17 +1,13 @@
-﻿using GeekMDSuite.Tools.MeasurementUnits;
-using GeekMDSuite.Tools.MeasurementUnits.Conversion;
-
-namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Procedures
 {
-    public class SitAndReach : IMuscularStrengthTestType
+    public class SitAndReach : IMuscularStrengthTest
     {
         public SitAndReach(double centimeters)
         {
-            Distance = LengthMeasurement.Create(LengthConversion.CentimetersToInches(centimeters));
+            Value = centimeters;
         }
 
-        public ILengthMeasurement Distance { get; }
-        
-        public MuscularStrengthTest Type => MuscularStrengthTest.SitAndReach;        
+        public double Value { get; }
+        public MuscularStrengthTest Type => MuscularStrengthTest.SitAndReach;
     }
 }

@@ -4,10 +4,10 @@
     {
         public Situps(int count)
         {
-            Count = count;
+            Value = count;
         }
 
-        public int Count { get; }
+        public double Value { get; }
         public MuscularStrengthTest Type => MuscularStrengthTest.Situps;
     }
 }

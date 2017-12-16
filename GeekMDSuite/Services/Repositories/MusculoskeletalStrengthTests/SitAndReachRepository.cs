@@ -10,42 +10,16 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
 
         private static class Male
         {
-            private const int LowerLimitOfPoor = -20;
-            private const int LowerLimitOfBelowAverage = -8;
-            private const int LowerLimitOfAverage = 0;
-            private const int LowerLimitOfAboveAverage = 6;
-            private const int LowerLimitOfGood = 17;
-            private const int LowerLimitOfExcellent = 28;
-
             public static MuscularStrengthRepositoryEntry Ranges =>
-                new MuscularStrengthRepositoryEntry(
-                    new Interval<int>(0,999), 
-                    LowerLimitOfPoor,
-                    LowerLimitOfBelowAverage,
-                    LowerLimitOfAverage,
-                    LowerLimitOfAboveAverage,
-                    LowerLimitOfGood,
-                    LowerLimitOfExcellent);
+                new MuscularStrengthRepositoryEntry(AgeRange, -20, -8, 0, 6, 17, 28);
         }
 
         private static class Female
         {
-            private const int LowerLimitOfPoor = -15;
-            private const int LowerLimitOfBelowAverage = -7;
-            private const int LowerLimitOfAverage = 1;
-            private const int LowerLimitOfAboveAverage = 11;
-            private const int LowerLimitOfGood = 21;
-            private const int LowerLimitOfExcellent = 30;
-
             public static MuscularStrengthRepositoryEntry Ranges =>
-                new MuscularStrengthRepositoryEntry(
-                    new Interval<int>(0,999), 
-                    LowerLimitOfPoor,
-                    LowerLimitOfBelowAverage,
-                    LowerLimitOfAverage,
-                    LowerLimitOfAboveAverage,
-                    LowerLimitOfGood,
-                    LowerLimitOfExcellent);
+                new MuscularStrengthRepositoryEntry(AgeRange, -15, -7, 1, 11, 21, 30);
         }
+        
+        private static Interval<int> AgeRange => Interval<int>.Create(0,999);
     }
 }

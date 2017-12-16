@@ -7,12 +7,12 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
     {
         public MuscularStrengthRepositoryEntry(
             Interval<int> ageRange, 
-            int lowerLimitOfPoor, 
-            int lowerLimitOfBelowAverage, 
-            int lowerLimitOfAverage, 
-            int lowerLimitOfAboveAverage, 
-            int lowerLimitOfGood, 
-            int lowerLimitOfExcellent)
+            double lowerLimitOfPoor, 
+            double lowerLimitOfBelowAverage, 
+            double lowerLimitOfAverage, 
+            double lowerLimitOfAboveAverage, 
+            double lowerLimitOfGood, 
+            double lowerLimitOfExcellent)
         {
             AgeRange = ageRange;
             LowerLimitOfPoor = lowerLimitOfPoor;
@@ -24,11 +24,11 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
         }
 
         public Interval<int> AgeRange { get; }
-        public int LowerLimitOfPoor { get; }
-        public int LowerLimitOfBelowAverage { get; }
-        public int LowerLimitOfAverage { get; }
-        public int LowerLimitOfAboveAverage { get; }
-        public int LowerLimitOfGood { get; }
-        public int LowerLimitOfExcellent { get; }
+        public double LowerLimitOfPoor { get; }
+        public double LowerLimitOfBelowAverage { get; }
+        public double LowerLimitOfAverage { get; }
+        public double LowerLimitOfAboveAverage { get; }
+        public double LowerLimitOfGood { get; }
+        public double LowerLimitOfExcellent { get; }
     }
 }
