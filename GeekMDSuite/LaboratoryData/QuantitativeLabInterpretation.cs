@@ -61,6 +61,5 @@ namespace GeekMDSuite.LaboratoryData
         }
         private readonly QuantitativeLab _lab;
         private readonly IPatient _patient;
-        
     }
 }

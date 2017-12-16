@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using GeekMDSuite.Helpers;
 using GeekMDSuite.LaboratoryData;
+using MathNet.Numerics.LinearAlgebra;
 using Newtonsoft.Json;
 
 namespace GeekMDSuite.Services.Repositories
@@ -11,8 +15,7 @@ namespace GeekMDSuite.Services.Repositories
     {
         public static IEnumerable<QuantitativeLabInterpretationModel> GetAllLabs()
         {
-            //todo: Get current working file dir from assembly rather than relative from test.
-            var jsonFile = File.ReadAllText("../../../../GeekMDSuite/Services/Repositories/quantitative_labs.json");
+            var jsonFile = Reflection.GetAssetFromExecutingAssembly("quantitative_labs.json");
             return JsonConvert.DeserializeObject<List<QuantitativeLabInterpretationModel>>(jsonFile);
         }
 
