@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Tools.MeasurementUnits;
 
-namespace GeekMDSuite.Procedures
+namespace GeekMDSuite.Services.Interpretation
 {
     public interface IGripStrengthLimits
     {

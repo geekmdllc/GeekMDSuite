@@ -17,7 +17,7 @@ namespace GeekMDSuite.Services.Interpretation
         public GripStrengthClassification WorseSide => LeftWorseThanRight() ? Left : Right;
         public Laterality Laterality => LeftWorseThanRight() ? Laterality.Left : Laterality.Right;
 
-        private bool LeftWorseThanRight() => _mapToValue[Left] > _mapToValue[Right];
+        private bool LeftWorseThanRight() => _mapToValue[Left] < _mapToValue[Right];
 
         private readonly Dictionary<GripStrengthClassification, int> _mapToValue = new Dictionary<GripStrengthClassification, int>()
         {

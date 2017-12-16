@@ -1,6 +1,7 @@
-﻿using GeekMDSuite.Tools.MeasurementUnits.Conversion;
+﻿using GeekMDSuite.Tools.MeasurementUnits;
+using GeekMDSuite.Tools.MeasurementUnits.Conversion;
 
-namespace GeekMDSuite.Tools.MeasurementUnits
+namespace GeekMDSuite.Procedures
 {
     public class GripMeasurement : IMassMeasurement
     {

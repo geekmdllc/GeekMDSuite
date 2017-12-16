@@ -23,20 +23,12 @@ namespace GeekMDSuite.Services.Interpretation
         private readonly GripStrength _gripStrength;
         private readonly GripStrengthLimits _ranges;
 
-        private GripStrengthClassificationResult Classify()
-        {
-            return GripStrengthClassificationResult.Create(ClassifyLeft(), ClassifyRight());
-        }
+        private GripStrengthClassificationResult Classify() => 
+            GripStrengthClassificationResult.Create(ClassifyLeft(), ClassifyRight());
 
-        private GripStrengthClassification ClassifyRight()
-        {
-            return ClassifySide(_gripStrength.Right);
-        }
+        private GripStrengthClassification ClassifyRight() => ClassifySide(_gripStrength.Right);
 
-        private GripStrengthClassification ClassifyLeft()
-        {
-            return ClassifySide(_gripStrength.Left);
-        }
+        private GripStrengthClassification ClassifyLeft() => ClassifySide(_gripStrength.Left);
 
         private GripStrengthClassification ClassifySide(IMassMeasurement gripStrength)
         {

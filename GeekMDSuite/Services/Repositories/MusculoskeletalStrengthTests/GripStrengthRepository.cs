@@ -1,6 +1,8 @@
-﻿using GeekMDSuite.Services.Interpretation;
+﻿using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Generic;
 using GeekMDSuite.Tools.MeasurementUnits;
+using GeekMDSuite.Tools.MeasurementUnits.Conversion;
 
 namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
 {
@@ -57,7 +59,12 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
         private static bool IsInAgeRange(int lower, int upper) => 
             Interval<int>.Create(lower, upper).ContainsClosed(_patient.Age);
 
-        private static GripStrengthLimits GenerateGripStrengthLimits(double upper, double lower) => 
-            new GripStrengthLimits(GripMeasurement.Create(upper), GripMeasurement.Create(lower));
+        private static GripStrengthLimits GenerateGripStrengthLimits(double lowerKilograms, double upperKilograms)
+        {
+            var upperLbs = MassConversion.KilogramsToLbs(lowerKilograms);
+            var lowerLbs = MassConversion.KilogramsToLbs(upperKilograms);
+            
+            return new GripStrengthLimits(GripMeasurement.Create(upperLbs), GripMeasurement.Create(lowerLbs));
+        }
     }
 }
