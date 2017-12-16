@@ -2,6 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+    <PropertyGroup>
+        <VersionPrefix>0.1</VersionPrefix>
+        <VersionSuffix>alpha</VersionSuffix>
+    </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="4.0.0-alpha02" />
   </ItemGroup>
