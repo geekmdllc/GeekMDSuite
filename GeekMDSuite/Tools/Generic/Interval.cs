@@ -12,7 +12,9 @@ namespace GeekMDSuite.Tools.Generic
 
         public T Upper { get; }
         public T Lower { get; }
-        
+
+        public static Interval<T> Create(T lower, T upper) => new Interval<T>(lower, upper);
+
         public bool ContainsClosed(T val) => ( GreaterThanOrEqualToLowerBound(val) && LowerThanOrEqualToUpperBound(val) );
         public bool ContainsOpen(T val) => ( GreaterThanLowerBound(val) && LessThanUpperBound(val) );
         public bool ContainsRightOpen(T val) => ( GreaterThanOrEqualToLowerBound(val) && LessThanUpperBound(val) );
