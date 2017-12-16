@@ -2,7 +2,7 @@
 {
     public class ExerciseRegimenParameters : IExerciseRegimenParameters
     {
-        public ExerciseRegimenParameters(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
+        private ExerciseRegimenParameters(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
         {
             SessionsPerWeek = sessionsPerWeek;
             AverageSessionDuration = averageSessionDuration;
@@ -14,5 +14,8 @@
         public double AverageSessionDuration { get; }
 
         public ExerciseIntensity Intensity { get; }
+
+        public static ExerciseRegimenParameters Build(double sessionsPerWeek, double averageSessionDuration,
+            ExerciseIntensity intensity) => new ExerciseRegimenParameters(sessionsPerWeek, averageSessionDuration, intensity);
     }
 }

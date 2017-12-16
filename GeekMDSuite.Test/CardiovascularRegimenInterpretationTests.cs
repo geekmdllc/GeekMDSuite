@@ -10,7 +10,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Calculate_GivenLowIntensityAnd150Minutes_ReturnsInsufficient()
         {
-            var regimen = new CardiovascularRegimenInterpretation(new ExerciseRegimenParameters(3, 50,ExerciseIntensity.Low));
+            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50,ExerciseIntensity.Low));
             
             Assert.Equal(ExerciseRegimenClassification.Insufficient, regimen.Classification);
         }
@@ -18,7 +18,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Calculate_GivenModerateIntensityAnd150Minutes_ReturnsAdequate()
         {
-            var regimen = new CardiovascularRegimenInterpretation(new ExerciseRegimenParameters(3, 50, ExerciseIntensity.Moderate));
+            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.Moderate));
             
             Assert.Equal(ExerciseRegimenClassification.Adequate, regimen.Classification);
         }
@@ -26,7 +26,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Calculate_GivenHighIntensityAnd150Minutes_ReturnsAspirational()
         {
-            var regimen = new CardiovascularRegimenInterpretation(new ExerciseRegimenParameters(3, 50, ExerciseIntensity.High));
+            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.High));
             
             Assert.Equal(ExerciseRegimenClassification.Aspirational, regimen.Classification);
         }
@@ -34,7 +34,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void RegimenPercentOfGoalAchieved_GivenHighIntensityCardiovascularAnd150Minutes_Returns200()
         {
-            var regimen = new CardiovascularRegimenInterpretation(new ExerciseRegimenParameters(3, 50, ExerciseIntensity.High));
+            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.High));
             
             Assert.Equal(200, regimen.DurationPercentOfGoalAchieved);
         }
@@ -42,7 +42,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void IntensityIsAdequate_GivenModerateIntensityCardiovascularAnd150Minutes_ReturnsTrue()
         {
-            var regimen = new CardiovascularRegimenInterpretation(new ExerciseRegimenParameters(3, 50, ExerciseIntensity.Moderate));
+            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.Moderate));
             
             Assert.True(regimen.IntensityIsAdequate);
         }
@@ -50,7 +50,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void DurationIsAdequate_GivenModerateIntensityCardiovascularAnd150Minutes_ReturnsTrue()
         {
-            var regimen = new CardiovascularRegimenInterpretation(new ExerciseRegimenParameters(3, 50, ExerciseIntensity.Moderate));
+            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.Moderate));
             
             Assert.True(regimen.DurationIsAdequate);
         }
@@ -58,7 +58,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void RegimenIsAdequate_GivenModerateIntensityCardiovascularAnd150Minutes_ReturnsTrue()
         {
-            var regimen = new CardiovascularRegimenInterpretation(new ExerciseRegimenParameters(3, 50, ExerciseIntensity.Moderate));
+            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.Moderate));
             
             Assert.True(regimen.RegimenIsAdequate);
         }

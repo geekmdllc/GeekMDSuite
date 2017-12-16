@@ -2,9 +2,12 @@
 {
     public class CardiovascularRegimen : ExerciseRegimen
     {
-        public CardiovascularRegimen(IExerciseRegimenParameters parameters) 
-            : base(parameters.SessionsPerWeek, 
-                parameters.AverageSessionDuration, 
-                parameters.Intensity) { }
+        private CardiovascularRegimen(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
+            : base (sessionsPerWeek, averageSessionDuration, intensity)
+        {
+        }
+        
+        public static CardiovascularRegimen Build(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity) =>
+         new CardiovascularRegimen(sessionsPerWeek, averageSessionDuration, intensity);
     }
 }

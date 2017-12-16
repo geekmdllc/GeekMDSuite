@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using GeekMDSuite.LaboratoryData;
 using GeekMDSuite.LaboratoryData.Builder;
+using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Fitness;
@@ -69,6 +71,10 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine($"Quantitative Lab Type: {quantitativeLab.Type}, Result: {quantitativeLab.Result}.");
             Console.WriteLine($"Qualitative Lab Type: {qualitativeLab.Type}, Result: {qualitativeLab.Result}");
+
+            var cardioRegimen = CardiovascularRegimen.Build(3, 98.5, ExerciseIntensity.Moderate);
+            var resistanceRegimen = new ResistanceRegimen(ExerciseRegimenParameters.Build(3, 60, ExerciseIntensity.High),
+                90, new List<ResistenceRegimenFeatures>() {ResistenceRegimenFeatures.PullingMovementsPerformed});
         }
     }
 }

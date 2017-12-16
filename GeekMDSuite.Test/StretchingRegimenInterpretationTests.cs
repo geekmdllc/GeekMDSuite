@@ -10,7 +10,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Calculate_GivenLowIntensityAnd150Minutes_ReturnsInsufficient()
         {
-            var result = new StretchingRegimenInterpretation(new ExerciseRegimenParameters(3, 50, ExerciseIntensity.Low)).Classification;
+            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.Low)).Classification;
             
             Assert.Equal(ExerciseRegimenClassification.Insufficient, result);
         }
@@ -18,7 +18,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Calculate_GivenModerateIntensityAnd7Minutes_ReturnsAdequate()
         {
-            var result = new StretchingRegimenInterpretation(new ExerciseRegimenParameters(3, 10, ExerciseIntensity.Moderate)).Classification;
+            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 10, ExerciseIntensity.Moderate)).Classification;
             
             Assert.Equal(ExerciseRegimenClassification.Adequate, result);
         }
@@ -26,7 +26,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Calculate_GivenHighIntensityAnd20Minutes_ReturnsAspirational()
         {
-            var result = new StretchingRegimenInterpretation(new ExerciseRegimenParameters(3, 20, ExerciseIntensity.High)).Classification;
+            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 20, ExerciseIntensity.High)).Classification;
             
             Assert.Equal(ExerciseRegimenClassification.Aspirational, result);
         }
@@ -34,7 +34,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void RegimenPercentOfGoalAchieved_GivenHighIntensityStretchingAnd40Minutes_Returns200()
         {
-            var result = new StretchingRegimenInterpretation(new ExerciseRegimenParameters(4, 10, ExerciseIntensity.High)).DurationPercentOfGoalAchieved;
+            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(4, 10, ExerciseIntensity.High)).DurationPercentOfGoalAchieved;
             
             Assert.Equal(200, result);
         }
@@ -42,7 +42,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void IntensityIsAdequate_GivenModerateIntensityStretchingAnd30Minutes_ReturnsTrue()
         {
-            var result = new StretchingRegimenInterpretation(new ExerciseRegimenParameters(3, 10, ExerciseIntensity.Moderate)).IntensityIsAdequate;
+            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 10, ExerciseIntensity.Moderate)).IntensityIsAdequate;
             
             Assert.True(result);
         }
@@ -50,7 +50,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void DurationIsAdequate_GivenModerateIntensityStretchingAnd30Minutes_ReturnsTrue()
         {
-            var result = new StretchingRegimenInterpretation(new ExerciseRegimenParameters(3, 10, ExerciseIntensity.Moderate)).IntensityIsAdequate;
+            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 10, ExerciseIntensity.Moderate)).IntensityIsAdequate;
             
             Assert.True(result);
         }
@@ -58,7 +58,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void RegimenIsAdequate_GivenModerateIntensityStretchingAnd30Minutes_ReturnsTrue()
         {
-            var result = new StretchingRegimenInterpretation(new ExerciseRegimenParameters(3, 30, ExerciseIntensity.Moderate)).RegimenIsAdequate;
+            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 30, ExerciseIntensity.Moderate)).RegimenIsAdequate;
             
             Assert.True(result);
         }
