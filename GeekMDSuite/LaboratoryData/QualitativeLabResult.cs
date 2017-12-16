@@ -1,15 +1,10 @@
 ﻿namespace GeekMDSuite.LaboratoryData
 {
-    public enum LaboratoryResult
+    public enum QualitativeLabResult
     {
         Negative,
         Positive,
-        VeryLow,
-        Low,
-        Normal,
         Borderline,
-        High,
-        VeryHigh,
         Abnormal,
         Indeterminant,
         InvalidResult

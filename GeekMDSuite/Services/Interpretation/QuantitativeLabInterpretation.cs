@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.LaboratoryData;
 using GeekMDSuite.Services.Repositories;
-using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite.LaboratoryData
+namespace GeekMDSuite.Services.Interpretation
 {
-    public class QuantitativeLabInterpretation : IInterpretable<LaboratoryResult>
+    public class QuantitativeLabInterpretation : IInterpretable<QuantitativeLabResult>
     {
 
         public QuantitativeLabInterpretation(QuantitativeLab lab, IPatient patient)
@@ -19,44 +17,44 @@ namespace GeekMDSuite.LaboratoryData
         public QuantitativeLabInterpretationModel Lab { get; }
 
         public InterpretationText Interpretation => throw new NotImplementedException();
-        public LaboratoryResult Classification => Classify();
+        public QuantitativeLabResult Classification => Classify();
 
-        private LaboratoryResult Classify()
+        private QuantitativeLabResult Classify()
         {
             switch (Gender.IsGenotypeXx(_patient.Gender))
             {
                 case true:
                     if (_lab.Result < Lab.LowerLimitOfLowFemale)
-                        return LaboratoryResult.VeryLow;
+                        return QuantitativeLabResult.VeryLow;
                     else if (_lab.Result >= Lab.LowerLimitOfLowFemale &&
                              _lab.Result < Lab.LowerLimitOfNormalFemale)
-                        return LaboratoryResult.Low;
+                        return QuantitativeLabResult.Low;
                     else if (_lab.Result >= Lab.LowerLimitOfNormalFemale &&
                              _lab.Result <= Lab.UpperLimitOfNormalFemale)
-                        return LaboratoryResult.Normal;
+                        return QuantitativeLabResult.Normal;
                     else if (_lab.Result > Lab.UpperLimitOfNormalFemale &&
                              _lab.Result <= Lab.UpperLimitOfHighFemale)
-                        return LaboratoryResult.High;
+                        return QuantitativeLabResult.High;
                     else if (_lab.Result > Lab.UpperLimitOfHighFemale)
-                        return LaboratoryResult.VeryHigh;
+                        return QuantitativeLabResult.VeryHigh;
                     else
-                        return LaboratoryResult.InvalidResult;
+                        return QuantitativeLabResult.InvalidResult;
                 default:
                     if (_lab.Result < Lab.LowerLimitOfLowMale)
-                        return LaboratoryResult.VeryLow;
+                        return QuantitativeLabResult.VeryLow;
                     else if (_lab.Result >= Lab.LowerLimitOfLowMale &&
                              _lab.Result < Lab.LowerLimitOfNormalMale)
-                        return LaboratoryResult.Low;
+                        return QuantitativeLabResult.Low;
                     else if (_lab.Result >= Lab.LowerLimitOfNormalMale &&
                              _lab.Result <= Lab.UpperLimitOfNormalMale)
-                        return LaboratoryResult.Normal;
+                        return QuantitativeLabResult.Normal;
                     else if (_lab.Result > Lab.UpperLimitOfNormalMale &&
                              _lab.Result <= Lab.UpperLimitOfHighMale)
-                        return LaboratoryResult.High;
+                        return QuantitativeLabResult.High;
                     else if (_lab.Result > Lab.UpperLimitOfHighMale)
-                        return LaboratoryResult.VeryHigh;
+                        return QuantitativeLabResult.VeryHigh;
                     else
-                        return LaboratoryResult.InvalidResult;
+                        return QuantitativeLabResult.InvalidResult;
             }
         }
         private readonly QuantitativeLab _lab;

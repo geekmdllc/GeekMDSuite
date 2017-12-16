@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.LaboratoryData;
-using GeekMDSuite.LaboratoryData.Builder;
+﻿using GeekMDSuite.LaboratoryData.Builder;
+using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
 
@@ -16,7 +16,7 @@ namespace GeekMDSuite.Test
             
             var classification = new QuantitativeLabInterpretation(test, mockPatient.Object).Classification;
             
-            Assert.Equal(LaboratoryResult.High, classification);
+            Assert.Equal(QuantitativeLabResult.High, classification);
         }
         
         [Fact]
@@ -28,7 +28,7 @@ namespace GeekMDSuite.Test
             
             var classification = new QuantitativeLabInterpretation(test, mockPatient.Object).Classification;
             
-            Assert.Equal(LaboratoryResult.Low, classification);
+            Assert.Equal(QuantitativeLabResult.Low, classification);
         }
         
         [Fact]
@@ -40,7 +40,7 @@ namespace GeekMDSuite.Test
             
             var classification = new QuantitativeLabInterpretation(test, mockPatient.Object).Classification;
             
-            Assert.Equal(LaboratoryResult.High, classification);
+            Assert.Equal(QuantitativeLabResult.High, classification);
         }
     }
 }

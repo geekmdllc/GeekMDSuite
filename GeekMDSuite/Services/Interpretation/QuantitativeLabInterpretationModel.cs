@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.LaboratoryData
+﻿namespace GeekMDSuite.Services.Interpretation
 {
     public class QuantitativeLabInterpretationModel
     {

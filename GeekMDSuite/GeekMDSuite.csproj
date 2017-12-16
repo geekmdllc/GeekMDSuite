@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="_assets\quantitative_labs.json" />
+    <EmbeddedResource Include="_assets\qualitative_labs.json" />
   </ItemGroup>
 </Project>
