@@ -1,7 +1,6 @@
 ﻿using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Generic;
-using GeekMDSuite.Tools.MeasurementUnits;
 using GeekMDSuite.Tools.MeasurementUnits.Conversion;
 
 namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests

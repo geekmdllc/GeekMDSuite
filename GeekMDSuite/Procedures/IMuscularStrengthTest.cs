@@ -1,8 +1,7 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public interface IMuscularStrengthTest
+    public interface IMuscularStrengthTest : IMuscularStrengthTestType
     {
         int Count { get; }
-        MuscularStrengthTest Type { get; }
     }
 }

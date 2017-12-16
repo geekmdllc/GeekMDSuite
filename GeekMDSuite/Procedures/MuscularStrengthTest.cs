@@ -3,6 +3,7 @@
     public enum MuscularStrengthTest
     {
         Situps,
-        Pushups
+        Pushups, 
+        SitAndReach
     }
 }

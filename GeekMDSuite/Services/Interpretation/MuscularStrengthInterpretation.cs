@@ -4,7 +4,7 @@ using GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public abstract class MuscularStrengthInterpretation : IInterpretable<FitnessClassification>
+    public abstract class MuscularStrengthInterpretation : IInterpretable<FitnessClassification>, IStrengthTestRanges
     {
         protected MuscularStrengthInterpretation(IMuscularStrengthTest test, IPatient patient)
         {
@@ -15,6 +15,8 @@ namespace GeekMDSuite.Services.Interpretation
                 _ranges = PushupsRepository.GetRanges(_patient);
             else if (_test.Type == MuscularStrengthTest.Situps)
                 _ranges = SitupsRepository.GetRanges(_patient);
+            else if (_test.Type == MuscularStrengthTest.SitAndReach)
+                _ranges = SitAndReachRepository.GetRanges(_patient);
             else 
                 throw new NotImplementedException(nameof(_test.Type));
         }
