@@ -11,7 +11,7 @@ namespace GeekMDSuite.Procedures
         }
 
         public GripStrength(double left, double right) 
-            : this(GripMeasurement.Create(left), GripMeasurement.Create(right))
+            : this(GripMeasurement.Build(left), GripMeasurement.Build(right))
         {  }
 
         public IMassMeasurement Left { get; }

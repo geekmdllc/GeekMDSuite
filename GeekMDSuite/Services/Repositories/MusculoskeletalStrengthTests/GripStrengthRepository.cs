@@ -63,7 +63,7 @@ namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
             var upperLbs = MassConversion.KilogramsToLbs(lowerKilograms);
             var lowerLbs = MassConversion.KilogramsToLbs(upperKilograms);
             
-            return new GripStrengthLimits(GripMeasurement.Create(upperLbs), GripMeasurement.Create(lowerLbs));
+            return new GripStrengthLimits(GripMeasurement.Build(upperLbs), GripMeasurement.Build(lowerLbs));
         }
     }
 }
