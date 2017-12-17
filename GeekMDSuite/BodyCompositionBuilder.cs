@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite
+﻿using System;
+
+namespace GeekMDSuite
 {
     public class BodyCompositionBuilder
     {
@@ -31,6 +33,23 @@
             return this;
         }
 
-        public BodyComposition Build() => BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds);
+        public BodyComposition Build()
+        {
+            ValidatePreBuildState();
+            return BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds);
+        }
+
+        private void ValidatePreBuildState()
+        {
+            var message = string.Empty;
+            if (IsEffectivelyZero(_heightInches)) message += $"{nameof(SetHeight)} ";
+            if (IsEffectivelyZero(_waistInches)) message += $"{nameof(SetWaist)} ";
+            if (IsEffectivelyZero(_hipsInches)) message += $"{nameof(SetHips)} ";
+            if (IsEffectivelyZero(_weightPounds)) message += $"{nameof(SetWeight)} ";
+
+            if (!string.IsNullOrEmpty(message)) throw new MissingMethodException(message + " needs to be set.");
+        }
+
+        private static bool IsEffectivelyZero(double value) => Math.Abs(value - default(double)) < 0.001;
     }
 }

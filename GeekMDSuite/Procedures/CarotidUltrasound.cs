@@ -13,5 +13,10 @@
 
         public static CarotidUltrasound Build(CarotidUltrasoundResult left, CarotidUltrasoundResult right) => 
             new CarotidUltrasound(left, right);
+
+        public override string ToString()
+        {
+            return $"Left: {Left}\nRight: {Right}";
+        }
     }
 }

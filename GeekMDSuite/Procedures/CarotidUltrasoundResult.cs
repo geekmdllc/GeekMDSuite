@@ -19,5 +19,8 @@
             CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character,
             CarotidPercentStenosisGrade stenosis) => 
             new CarotidUltrasoundResult(intimaMediaMeasurementMillimeters, grade, character, stenosis);
+
+        public override string ToString() => 
+            $"{IntimaMediaMeasurementMillimeters}mm {Grade} IMT thickening {Stenosis} stenosis {Character} character";
     }
 }

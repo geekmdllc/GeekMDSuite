@@ -6,7 +6,7 @@ using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.ConsoleDemo
 {
-    public static class Program
+    public static class Demo
     {
         public static void Main(string[] args)
         {
@@ -102,6 +102,21 @@ namespace GeekMDSuite.ConsoleDemo
             
             var audiogram = Audiogram.Build(audiogramDataLeft, audiogramDataRight);
             Console.WriteLine($"Audiogram\n{audiogram}\n");
+
+            var carotidLeft = new CarotidUltrasoundResultBuilder()
+                .SetIntimaMediaThickeness(0.693)
+                .Build();
+
+            var carotidRight = new CarotidUltrasoundResultBuilder()
+                .SetIntimaMediaThickeness(0.732)
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.Nominal)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.EarlyBuildup)
+                .Build();
+
+            var carotidUs = CarotidUltrasound.Build(carotidLeft, carotidRight);
+
+            Console.WriteLine($"Carotid US\n{carotidUs}\n");
         }
     }
 }

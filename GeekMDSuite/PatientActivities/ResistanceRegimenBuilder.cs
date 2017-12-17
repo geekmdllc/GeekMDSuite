@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GeekMDSuite.PatientActivities
 {
     public class ResistanceRegimenBuilder
     {
-        private double _sessionsPerWeek;
-        private double _averageSessionDuration;
-        private ExerciseIntensity _intensity;
-        private int _secondsRestDurationPerSet;
-        private readonly List<ResistenceRegimenFeatures> _features = new List<ResistenceRegimenFeatures>();
-
         public ResistanceRegimenBuilder SetSessionsPerWeek(double sessionsPerWeek)
         {
             _sessionsPerWeek = sessionsPerWeek;
@@ -24,6 +19,7 @@ namespace GeekMDSuite.PatientActivities
 
         public ResistanceRegimenBuilder SetIntensity(ExerciseIntensity intensity)
         {
+            _intensityIsSet = true;
             _intensity = intensity;
             return this;
         }
@@ -61,10 +57,32 @@ namespace GeekMDSuite.PatientActivities
             return this;
         }
 
-        public ResistanceRegimen Build() => new ResistanceRegimen(
-            ExerciseRegimenParameters.Build(_sessionsPerWeek, _averageSessionDuration, _intensity),
-            _secondsRestDurationPerSet, _features);
-        
-        
+        public ResistanceRegimen Build()
+        {
+            ValidatePreBuildState();
+            return new ResistanceRegimen(
+                ExerciseRegimenParameters.Build(_sessionsPerWeek, _averageSessionDuration, _intensity),
+                _secondsRestDurationPerSet, _features);
+        }
+
+        private void ValidatePreBuildState()
+        {
+            var message = string.Empty;
+            if (IsEffectivelyZero(_sessionsPerWeek)) message += $"{nameof(SetSessionsPerWeek)} ";
+            if (IsEffectivelyZero(_averageSessionDuration)) message += $"{nameof(SetAverageSessionDuration)} ";
+            if (!_intensityIsSet) message += $"{nameof(SetSessionsPerWeek)} ";
+            if (IsEffectivelyZero(_secondsRestDurationPerSet)) message += $"{nameof(SetSecondsRestDurationPerSet)} ";
+            
+            if (!string.IsNullOrEmpty(message)) throw new MissingMethodException(message + " must be set");
+        }
+
+        private static bool IsEffectivelyZero(double value) => Math.Abs(value - default(double)) < 0.001;
+
+        private double _sessionsPerWeek;
+        private double _averageSessionDuration;
+        private ExerciseIntensity _intensity;
+        private int _secondsRestDurationPerSet;
+        private readonly List<ResistenceRegimenFeatures> _features = new List<ResistenceRegimenFeatures>();
+        private bool _intensityIsSet;
     }
 }

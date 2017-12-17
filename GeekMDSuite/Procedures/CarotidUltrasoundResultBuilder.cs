@@ -1,13 +1,17 @@
-﻿namespace GeekMDSuite.Procedures
+﻿using System;
+
+namespace GeekMDSuite.Procedures
 {
     public class CarotidUltrasoundResultBuilder
     {
 
         public CarotidUltrasoundResult Build()
         {
+            ValidatePreBuildState();
+
             return CarotidUltrasoundResult.Build(_imtThickenssMm, _imtGrade, _plaqueCharacter, _stenosisGrade);
         }
-        
+
         public CarotidUltrasoundResultBuilder SetIntimaMediaThickeness(double millimeters)
         {
             _imtThickenssMm = millimeters;
@@ -36,5 +40,11 @@
         private CarotidPercentStenosisGrade _stenosisGrade = CarotidPercentStenosisGrade.None;
         private CarotidPlaqueCharacter _plaqueCharacter = CarotidPlaqueCharacter.None;
         private CarotidIntimaMediaThicknessGrade _imtGrade = CarotidIntimaMediaThicknessGrade.Normal;
+        
+        private void ValidatePreBuildState()
+        {
+            if (Math.Abs(_imtThickenssMm - default(double)) < 0.001)
+                throw new MissingMethodException(nameof(SetIntimaMediaThickeness) + " must be set.");
+        }
     }
 }

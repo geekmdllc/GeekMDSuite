@@ -9,6 +9,7 @@ namespace GeekMDSuite
         private string _medicalRecordNumber;
         private Gender _gender;
         private Race _race;
+        private bool _raceIsSet;
 
         public PatientBuilder SetDateOfBirth(int year, int month, int day)
         {
@@ -36,13 +37,27 @@ namespace GeekMDSuite
 
         public PatientBuilder SetRace(Race race)
         {
+            _raceIsSet = true;
             _race = race;
             return this;
         }
 
         public Patient Build()
         {
+            ValidatePreBuildState();
             return Patient.Create(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
+        }
+
+        private void ValidatePreBuildState()
+        {
+            var message = string.Empty;
+            if (_dateOfBirth == default(DateTime)) message += $"{nameof(SetDateOfBirth)} ";
+            if (_name == null) message += $"{nameof(SetName)} ";
+            if (_medicalRecordNumber == string.Empty) message += $"{nameof(SetMedicalRecordNumber)} ";
+            if (_gender == null) message += $"{nameof(SetGender)} ";
+            if (!_raceIsSet) message += $"{nameof(SetRace)} ";
+
+            if (!string.IsNullOrEmpty(message)) throw new MissingMethodException(message + " need to be set.");
         }
     }
 }
