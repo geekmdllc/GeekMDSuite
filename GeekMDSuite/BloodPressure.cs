@@ -15,5 +15,10 @@
 
         public static BloodPressure Build(int systolic, int diastolic, bool organDamage = false) => 
             new BloodPressure(systolic, diastolic, organDamage);
+
+        public override string ToString()
+        {
+            return $"{Systolic}/{Diastolic} mmHg";
+        }
     }
 }

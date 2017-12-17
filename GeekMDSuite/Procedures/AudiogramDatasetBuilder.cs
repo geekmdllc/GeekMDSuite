@@ -2,6 +2,10 @@
 {
     public class AudiogramDatasetBuilder
     {
+        public AudiogramDataset Build()
+        {
+            return new AudiogramDataset(_f125, _f250, _f500, _f1000, _f2000, _f3000, _f4000, _f6000, _f8000);
+        }
     
         public AudiogramDatasetBuilder Set125HertzDataPoint(int value)
         {
@@ -48,11 +52,6 @@
         {
             _f8000 = new AudiogramDatapoint(value);
             return this;
-        }
-
-        public AudiogramDataset Build()
-        {
-            return new AudiogramDataset(_f125, _f250, _f500, _f1000, _f2000, _f3000, _f4000, _f6000, _f8000);
         }
         
         private AudiogramDatapoint _f125;

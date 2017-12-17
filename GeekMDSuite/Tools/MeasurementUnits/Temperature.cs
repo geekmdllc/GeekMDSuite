@@ -14,5 +14,10 @@ namespace GeekMDSuite.Tools.MeasurementUnits
         
         public static Temperature Create(double temperatureFarenheight) =>
             new Temperature(temperatureFarenheight);
+
+        public override string ToString()
+        {
+            return $"{Farenheit} F";
+        }
     }
 }

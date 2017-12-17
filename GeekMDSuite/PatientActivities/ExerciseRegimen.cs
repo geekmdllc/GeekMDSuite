@@ -14,5 +14,8 @@
         public double AverageSessionDuration { get; }
 
         public ExerciseIntensity Intensity { get; }
+        
+        public override string ToString() => 
+            $"{SessionsPerWeek * AverageSessionDuration} minutes per week at {Intensity} intensity.";
     }
 }

@@ -20,5 +20,10 @@ namespace GeekMDSuite
         public int PulseRate { get; }
 
         public Temperature Temperature { get; }
+
+        public override string ToString()
+        {
+            return string.Format($"{BloodPressure} {Temperature} {OxygenSaturation}% {PulseRate} bpm");
+        }
     }
 }

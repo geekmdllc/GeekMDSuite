@@ -2,9 +2,12 @@
 {
     public class StretchingRegimen : ExerciseRegimen
     {
-        public StretchingRegimen(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity) 
+        private StretchingRegimen(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity) 
             : base(sessionsPerWeek, averageSessionDuration, intensity)
         {
         }
+
+        public static StretchingRegimen Build(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity) 
+            => new StretchingRegimen(sessionsPerWeek, averageSessionDuration, intensity);
     }
 }

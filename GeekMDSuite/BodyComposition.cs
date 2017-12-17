@@ -30,5 +30,7 @@ namespace GeekMDSuite
 
         internal static BodyComposition Build(double heightInches, double waistInches, double hipsInches,
             double weightPounds) => new BodyComposition(heightInches, waistInches, hipsInches, weightPounds);
+
+        public override string ToString() => $"Height: {Height} Waist: {Waist} Hips: {Hips} Weight: {Weight}";
     }
 }

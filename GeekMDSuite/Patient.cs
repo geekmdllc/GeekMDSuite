@@ -24,5 +24,10 @@ namespace GeekMDSuite
 
         public static Patient Create(Name name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber) 
             => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
+
+        public override string ToString()
+        {
+            return string.Format($@"{Name} ({Age} yr {Race} {Gender}) MRN: {MedicalRecordNumber}");
+        }
     }
 }

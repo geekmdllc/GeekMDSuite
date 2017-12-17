@@ -16,5 +16,7 @@ namespace GeekMDSuite.Tools.MeasurementUnits
         public double Meters => LengthConversion.CentimetersToMeters(Centimeters);
 
         public static LengthMeasurement Create(double inches) => new LengthMeasurement(inches);
+
+        public override string ToString() => $"{Inches} in";
     }
 }

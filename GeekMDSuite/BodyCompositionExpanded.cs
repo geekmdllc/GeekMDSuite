@@ -21,5 +21,8 @@
         
         internal static BodyCompositionExpanded Build(IBodyComposition bodyComposition, double visceralFat, double percentBodyFat) =>
             new BodyCompositionExpanded(bodyComposition, visceralFat, percentBodyFat);
+
+        public override string ToString() => 
+            base.ToString() + $" Visceral: {VisceralFat} cm^2 Body Fat: {PercentBodyFat} %";
     }
 }

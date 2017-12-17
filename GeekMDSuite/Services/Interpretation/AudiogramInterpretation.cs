@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
@@ -8,13 +7,13 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public AudiogramInterpretation(Audiogram audiogram)
         {
-            Left = audiogram.Left;
-            Right = audiogram.Right;
+            _left = audiogram.Left;
+            _right = audiogram.Right;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
-        
-        public AudiogramDataset Left { get; }
-        public AudiogramDataset Right { get; }
+
+        private readonly AudiogramDataset _left;
+        private readonly AudiogramDataset _right;
         
         public AudiogramClassificationResult Classification => new AudiogramClassificationResult(
                 GetClassification(),
@@ -28,18 +27,18 @@ namespace GeekMDSuite.Services.Interpretation
 
         private Laterality WorstSide()
         {
-            return Left.HighestDatapoint > Right.HighestDatapoint ? Laterality.Left : Laterality.Right;
+            return _left.HighestDatapoint > _right.HighestDatapoint ? Laterality.Left : Laterality.Right;
         }
 
         private HearingLoss GetClassification()
         {
             return WorstSide() == Laterality.Left || WorstSide() == Laterality.Bilateral
-                ? Left.Classification
-                : Right.Classification;
+                ? _left.Classification
+                : _right.Classification;
         }
         private bool DifferenceLessThan10dB()
         {
-            return Math.Abs(Left.HighestDatapoint / 10.0f - Right.HighestDatapoint / 10.0f) < 1;
+            return Math.Abs(_left.HighestDatapoint / 10.0f - _right.HighestDatapoint / 10.0f) < 1;
         }
 
     }
