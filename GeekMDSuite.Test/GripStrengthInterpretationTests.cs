@@ -13,7 +13,7 @@ namespace GeekMDSuite.Test
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Age).Returns(40);
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.NonBinaryXy);
-            var gs = new GripStrength(new GripMeasurement(60), new GripMeasurement(60));
+            var gs = GripStrength.Build(60, 60);
             
             var classification = new GripStrengthInterpretation(gs, mockPt.Object).Classification;
             
@@ -26,7 +26,7 @@ namespace GeekMDSuite.Test
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Age).Returns(40);
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.NonBinaryXy);
-            var gs = new GripStrength(new GripMeasurement(100), new GripMeasurement(100));
+            var gs = GripStrength.Build(100, 100);
             
             var classification = new GripStrengthInterpretation(gs, mockPt.Object).Classification;
             
@@ -39,7 +39,7 @@ namespace GeekMDSuite.Test
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Age).Returns(40);
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.NonBinaryXy);
-            var gs = new GripStrength(new GripMeasurement(150), new GripMeasurement(150));
+            var gs = GripStrength.Build(150, 150);
             
             var classification = new GripStrengthInterpretation(gs, mockPt.Object).Classification;
             
@@ -52,7 +52,7 @@ namespace GeekMDSuite.Test
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Age).Returns(40);
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.NonBinaryXy);
-            var gs = new GripStrength(new GripMeasurement(150), new GripMeasurement(50));
+            var gs = GripStrength.Build(150, 50);
             
             var classification = new GripStrengthInterpretation(gs, mockPt.Object).Classification;
             
@@ -66,7 +66,7 @@ namespace GeekMDSuite.Test
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Age).Returns(40);
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.NonBinaryXy);
-            var gs = new GripStrength(new GripMeasurement(50), new GripMeasurement(150));
+            var gs = GripStrength.Build(50, 150);
             
             var classification = new GripStrengthInterpretation(gs, mockPt.Object).Classification;
             
@@ -80,7 +80,7 @@ namespace GeekMDSuite.Test
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Age).Returns(40);
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.NonBinaryXx);
-            var gs = new GripStrength(new GripMeasurement(33), new GripMeasurement(66));
+            var gs = GripStrength.Build(33, 66);
             
             var classification = new GripStrengthInterpretation(gs, mockPt.Object).Classification;
             

@@ -140,6 +140,9 @@ namespace GeekMDSuite.ConsoleDemo
                 .Build();
 
             Console.WriteLine($"Functional Movement Screen\n{functionalMovementScreen}\n");
+
+            var gripStrength = GripStrength.Build(123, 135);
+            Console.WriteLine($"Grip strength {gripStrength}");
         }
     }
 }

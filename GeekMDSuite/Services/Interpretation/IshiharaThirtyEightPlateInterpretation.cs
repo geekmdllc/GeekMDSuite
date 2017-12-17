@@ -14,7 +14,7 @@ namespace GeekMDSuite.Services.Interpretation
                 throw new Exception(nameof(answerList) + " item count doesn't match test.");
         }
         
-        protected sealed override List<IshiharaPlate> PlateSet { get; set; }
+        protected sealed override List<IshiharaPlateModel> PlateSet { get; set; }
         protected sealed override IshiharaResultFlag Classify() => AssessIshiharaVisionAssessment();
 
         public InterpretationText Interpretation => throw new NotImplementedException();

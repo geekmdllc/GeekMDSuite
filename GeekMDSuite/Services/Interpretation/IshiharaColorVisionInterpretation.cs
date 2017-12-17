@@ -23,7 +23,7 @@ namespace GeekMDSuite.Services.Interpretation
         public IshiharaTestType TestType { get; }
         public List<IshiharaPlateAnswer> AnswerList { get; }
         
-        protected abstract List<IshiharaPlate> PlateSet { get; set; }
+        protected abstract List<IshiharaPlateModel> PlateSet { get; set; }
 
         protected abstract IshiharaResultFlag Classify();
 

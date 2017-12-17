@@ -17,5 +17,7 @@ namespace GeekMDSuite.Procedures
         public double Grams { get; }
 
         public static GripMeasurement Build(double pounds) => new GripMeasurement(pounds);
+
+        public override string ToString() => $"{Pounds} lbs";
     }
 }

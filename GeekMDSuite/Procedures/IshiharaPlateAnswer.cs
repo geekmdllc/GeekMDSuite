@@ -4,7 +4,7 @@ namespace GeekMDSuite.Procedures
 {
     public class IshiharaPlateAnswer {
 
-        public IshiharaPlateAnswer(int plateNumber, IshiharaAnswerResult plateRead)
+        private IshiharaPlateAnswer(int plateNumber, IshiharaAnswerResult plateRead)
         {
             PlateNumber = plateNumber;
             PlateRead = plateRead;
@@ -12,5 +12,7 @@ namespace GeekMDSuite.Procedures
         public int PlateNumber { get; }
         public IshiharaAnswerResult PlateRead { get;  }
 
+        internal static IshiharaPlateAnswer Build(int plateNumber, IshiharaAnswerResult plateRead) => 
+            new IshiharaPlateAnswer(plateNumber, plateRead);
     }
 }

@@ -1,8 +1,6 @@
-﻿using GeekMDSuite.Services.Interpretation;
-
-namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Services.Interpretation
 {
-    public class IshiharaPlate 
+    public class IshiharaPlateModel 
     {
         public int PlateNumber { get; }
         public IshiharaPlateType PlateType  { get; }
@@ -10,7 +8,7 @@ namespace GeekMDSuite.Procedures
         public string RedGreenDeficientRead { get; }
         public string TotalColorBlindnessRead { get; }
 
-        public IshiharaPlate(int plateNumber, IshiharaPlateType plateType, 
+        public IshiharaPlateModel(int plateNumber, IshiharaPlateType plateType, 
             string normalVisionRead, string redGreenDeficientRead, string totalColorBindnessRead) 
         {
             PlateNumber = plateNumber;
