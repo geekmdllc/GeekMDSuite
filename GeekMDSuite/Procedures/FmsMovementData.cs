@@ -31,5 +31,10 @@ namespace GeekMDSuite.Procedures
         private bool MovementHasClearanceTest => MovementPattern == FmsMovementPattern.ShoulderMobility ||
                                                  MovementPattern == FmsMovementPattern.TrunkStability ||
                                                  MovementPattern == FmsMovementPattern.RotaryStability;
+
+        public override string ToString() => $"{MovementPattern} " +
+                                             (Laterality == Laterality.Bilateral ? "" : $"({Laterality}) ") +
+                                             $"Score: {Score}" + 
+                                             (Clearance == FmsClearanceTest.NotApplicable ? "" : $" Pain: {Clearance}");
     }
 }

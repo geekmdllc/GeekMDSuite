@@ -14,5 +14,7 @@
         public int Score => Left.Score < Right.Score
             ? Right.Score
             : Left.Score;
+
+        public override string ToString() => $"{Left}\n{Right}";
     }
 }

@@ -32,6 +32,9 @@
 
         public FmsMovementData TrunkStabilityPushup { get; } 
 
-        public FmsMovementSet RotaryStability { get; } 
+        public FmsMovementSet RotaryStability { get; }
+
+        public override string ToString() => 
+            $"{DeepSquat}\n{HurdleStep}\n{InlineLunge}\n{ShoulderMobility}\n{ActiveStraightLegRaise}\n{TrunkStabilityPushup}\n{RotaryStability}";
     }
 }

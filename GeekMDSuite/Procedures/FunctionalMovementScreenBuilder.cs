@@ -8,7 +8,7 @@ namespace GeekMDSuite.Procedures
     {
         public FunctionalMovementScreen Build()
         {
-            ValidateFields();
+            ValidatePreBuildState();
             return new FunctionalMovementScreen(_deepSquat, _hurdleStep, _inlineLunge, _shoulderMobility, _activeStraightLegRaise,
                 _trunkStabilityPushup, _rotaryStability);
         }
@@ -78,7 +78,7 @@ namespace GeekMDSuite.Procedures
         private FmsMovementData _trunkStabilityPushup;
         private FmsMovementSet _rotaryStability;
 
-        private void ValidateFields()
+        private void ValidatePreBuildState()
         {
             var buildErrors = BuildErrorListForMissingFields();
             if (!string.IsNullOrEmpty(buildErrors))

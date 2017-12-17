@@ -128,6 +128,18 @@ namespace GeekMDSuite.ConsoleDemo
                 .Build();
 
             Console.WriteLine($"Central BP: {centralBp}\n");
+
+            var functionalMovementScreen = new FunctionalMovementScreenBuilder()
+                .SetActiveStraightLegRaise(2, 3)
+                .SetDeepSquat(3)
+                .SetHurdleStep(2, 2)
+                .SetInlineLunge(3, 3)
+                .SetRotaryStability(2, FmsClearanceTest.Positive, 2, FmsClearanceTest.Negative)
+                .SetShoulderMobility(2, FmsClearanceTest.Negative, 2, FmsClearanceTest.Negative)
+                .SetTrunkStabilityPuhsup(2, FmsClearanceTest.Negative)
+                .Build();
+
+            Console.WriteLine($"Functional Movement Screen\n{functionalMovementScreen}\n");
         }
     }
 }
