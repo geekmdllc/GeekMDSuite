@@ -2,7 +2,7 @@
 {
     public class CarotidUltrasoundResult
     {
-        public CarotidUltrasoundResult(double intimaMediaMeasurementMillimeters, CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character, CarotidPercentStenosisGrade stenosis)
+        private CarotidUltrasoundResult(double intimaMediaMeasurementMillimeters, CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character, CarotidPercentStenosisGrade stenosis)
         {
             IntimaMediaMeasurementMillimeters = intimaMediaMeasurementMillimeters;
             Grade = grade;
@@ -14,5 +14,10 @@
         public CarotidIntimaMediaThicknessGrade Grade { get; }
         public CarotidPlaqueCharacter Character { get; }
         public CarotidPercentStenosisGrade Stenosis { get; }
+
+        internal static CarotidUltrasoundResult Build(double intimaMediaMeasurementMillimeters,
+            CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character,
+            CarotidPercentStenosisGrade stenosis) => 
+            new CarotidUltrasoundResult(intimaMediaMeasurementMillimeters, grade, character, stenosis);
     }
 }

@@ -32,5 +32,10 @@
         public AudiogramDatapoint F4000 { get; }
         public AudiogramDatapoint F6000 { get; }
         public AudiogramDatapoint F8000 { get; }
+
+        public override string ToString()
+        {
+            return $".125K {F125} .25K {F250} .5K {F500} 1K {F1000} 2K {F2000} 3K {F3000} 4K {F4000} 6K {F6000} 8K {F8000}";
+        }
     }
 }

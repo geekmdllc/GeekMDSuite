@@ -2,6 +2,7 @@
 using GeekMDSuite.LaboratoryData;
 using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.PatientActivities;
+using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.ConsoleDemo
 {
@@ -75,6 +76,32 @@ namespace GeekMDSuite.ConsoleDemo
                 .Build();
             Console.WriteLine($"Resistance regimen: {resistanceRegimen}\n");
 
+            var audiogramDataLeft = new AudiogramDatasetBuilder()
+                .Set125HertzDataPoint(10)
+                .Set125HertzDataPoint(20)
+                .Set500HertzDataPoint(30)
+                .Set1000HertzDataPoint(10)
+                .Set2000HertzDataPoint(25)
+                .Set3000HertzDataPoint(45)
+                .Set4000HertzDataPoint(40)
+                .Set6000HertzDataPoint(50)
+                .Set8000HertzDataPoint(70)
+                .Build();
+            
+            var audiogramDataRight = new AudiogramDatasetBuilder()
+                .Set125HertzDataPoint(10)
+                .Set125HertzDataPoint(20)
+                .Set500HertzDataPoint(30)
+                .Set1000HertzDataPoint(10)
+                .Set2000HertzDataPoint(25)
+                .Set3000HertzDataPoint(45)
+                .Set4000HertzDataPoint(40)
+                .Set6000HertzDataPoint(50)
+                .Set8000HertzDataPoint(70)
+                .Build();
+            
+            var audiogram = Audiogram.Build(audiogramDataLeft, audiogramDataRight);
+            Console.WriteLine($"Audiogram\n{audiogram}\n");
         }
     }
 }

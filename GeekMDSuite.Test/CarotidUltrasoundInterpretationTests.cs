@@ -9,12 +9,18 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenLeftSidedPlaque_ReturnsLeftWorseThanRightStenosis()
         {
-            var left = new CarotidUltrasoundResult(
-                0.812, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan30);
-            var right = new CarotidUltrasoundResult(
-                0.791, CarotidIntimaMediaThicknessGrade.Normal, CarotidPlaqueCharacter.None, CarotidPercentStenosisGrade.None);
-            
-            var us = new CarotidUltrasound(left, right);
+            var left = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.812)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan30)
+                .Build();
+
+            var right = new CarotidUltrasoundResultBuilder()
+                .SetIntimaMediaThickeness(0.791)
+                .Build();
+
+            var us = CarotidUltrasound.Build(left, right);
 
             var result = new CarotidUltrasoundInterpretation(us);
             
@@ -23,12 +29,18 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenLeftSidedPlaque_ReturnsLeftLaterality()
         {
-            var left = new CarotidUltrasoundResult(
-                0.812, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan30);
-            var right = new CarotidUltrasoundResult(
-                0.791, CarotidIntimaMediaThicknessGrade.Normal, CarotidPlaqueCharacter.None, CarotidPercentStenosisGrade.None);
+            var left = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.812)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan30)
+                .Build();
+
+            var right = new CarotidUltrasoundResultBuilder()
+                .SetIntimaMediaThickeness(0.791)
+                .Build();
             
-            var us = new CarotidUltrasound(left, right);
+            var us = CarotidUltrasound.Build(left, right);
 
             var result = new CarotidUltrasoundInterpretation(us);
             
@@ -37,12 +49,18 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenRightSidedPlaque_ReturnsRightWorseThanRightStenosis()
         {
-            var left = new CarotidUltrasoundResult(
-                0.812, CarotidIntimaMediaThicknessGrade.Normal, CarotidPlaqueCharacter.None, CarotidPercentStenosisGrade.None);
-            var right = new CarotidUltrasoundResult(
-                0.791, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan50);
+            var left = new CarotidUltrasoundResultBuilder()
+                .SetIntimaMediaThickeness(0.791)
+                .Build();
             
-            var us = new CarotidUltrasound(left, right);
+            var right = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.812)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan30)
+                .Build();
+            
+            var us = CarotidUltrasound.Build(left, right);
 
             var result = new CarotidUltrasoundInterpretation(us);
             
@@ -51,12 +69,18 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenRightSidedPlaque_ReturnsRightLaterality()
         {
-            var left = new CarotidUltrasoundResult(
-                0.812, CarotidIntimaMediaThicknessGrade.Normal, CarotidPlaqueCharacter.None, CarotidPercentStenosisGrade.None);
-            var right = new CarotidUltrasoundResult(
-                0.791, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan50);
+            var left = new CarotidUltrasoundResultBuilder()
+                .SetIntimaMediaThickeness(0.812)
+                .Build();
             
-            var us = new CarotidUltrasound(left, right);
+            var right = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.791)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan50)
+                .Build();
+            
+            var us = CarotidUltrasound.Build(left, right);
 
             var result = new CarotidUltrasoundInterpretation(us);
             
@@ -65,12 +89,21 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenEqualPlaque_ReturnsBilateralLaterality()
         {
-            var left = new CarotidUltrasoundResult(
-                0.812, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan50);
-            var right = new CarotidUltrasoundResult(
-                0.791, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan50);
+            var left = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.812)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan50)
+                .Build();
             
-            var us = new CarotidUltrasound(left, right);
+            var right = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.791)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan50)
+                .Build();
+
+            var us = CarotidUltrasound.Build(left, right);
 
             var result = new CarotidUltrasoundInterpretation(us);
             
@@ -80,12 +113,21 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenBilateralButLeftWorseThanRightPlaque_ReturnsLeftWorseThanRight()
         {
-            var left = new CarotidUltrasoundResult(
-                0.812, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan50);
-            var right = new CarotidUltrasoundResult(
-                0.791, CarotidIntimaMediaThicknessGrade.Mild, CarotidPlaqueCharacter.Mixed, CarotidPercentStenosisGrade.LessThan30);
+            var left = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.812)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan50)
+                .Build();
             
-            var us = new CarotidUltrasound(left, right);
+            var right = new CarotidUltrasoundResultBuilder()
+                .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
+                .SetIntimaMediaThickeness(0.791)
+                .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan30)
+                .Build();
+            
+            var us = CarotidUltrasound.Build(left, right);
 
             var result = new CarotidUltrasoundInterpretation(us);
             
