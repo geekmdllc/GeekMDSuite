@@ -14,5 +14,7 @@ namespace GeekMDSuite.Procedures
 
         internal static IshiharaPlateAnswer Build(int plateNumber, IshiharaAnswerResult plateRead) => 
             new IshiharaPlateAnswer(plateNumber, plateRead);
+
+        public override string ToString() => $"#{PlateNumber} - {PlateRead}";
     }
 }

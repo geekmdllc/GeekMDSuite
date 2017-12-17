@@ -3,6 +3,7 @@ using GeekMDSuite.LaboratoryData;
 using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.ConsoleDemo
 {
@@ -142,7 +143,19 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine($"Functional Movement Screen\n{functionalMovementScreen}\n");
 
             var gripStrength = GripStrength.Build(123, 135);
-            Console.WriteLine($"Grip strength {gripStrength}");
+            Console.WriteLine($"Grip strength {gripStrength}\n");
+
+            var ishiharaSix = new IshiharaSixPlateScreenBuilder()
+                .SetPlate1(IshiharaAnswerResult.NormalVision)
+                .SetPlate2(IshiharaAnswerResult.ColorVisionDefict)
+                .SetPlate3(IshiharaAnswerResult.NormalVision)
+                .SetPlate4(IshiharaAnswerResult.NormalVision)
+                .SetPlate5(IshiharaAnswerResult.NormalVision)
+                .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
+                .Build();
+
+            Console.WriteLine("Ishihara Six Plate Screener");
+            foreach (var plate in ishiharaSix) Console.WriteLine(plate);
         }
     }
 }

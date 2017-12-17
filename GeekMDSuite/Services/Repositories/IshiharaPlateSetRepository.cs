@@ -9,6 +9,7 @@ namespace GeekMDSuite.Services.Repositories
     {
         public static List<IshiharaPlateModel> SixPlateScreen() => GetSet(IshiharaTestType.Ishihara6);
         public static List<IshiharaPlateModel> FourteenPlateScreen() => GetSet(IshiharaTestType.Ishihara14);
+        public static List<IshiharaPlateModel> TenPlateScreen() => throw new NotImplementedException(nameof(IshiharaPlateSetRepository));
         public static List<IshiharaPlateModel> TwentyFourPlateScreen() => GetSet(IshiharaTestType.Ishihara24);
         public static List<IshiharaPlateModel> ThirtyEightPlateScreen() => GetSet(IshiharaTestType.Ishihara38);
         

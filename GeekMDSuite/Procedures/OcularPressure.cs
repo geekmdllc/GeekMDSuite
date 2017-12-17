@@ -2,13 +2,15 @@
 {
     public class OcularPressure
     {
-        public OcularPressure(int left, int right)
+        private OcularPressure(int leftMmHg, int rightMmHg)
         {
-            Left = left;
-            Right = right;
+            Left = leftMmHg;
+            Right = rightMmHg;
         }
 
         public int Left { get; }
         public int Right { get; }
+
+        public static OcularPressure Build(int leftMmHg, int rightMmHg) => new OcularPressure(leftMmHg, rightMmHg);
     }
 }

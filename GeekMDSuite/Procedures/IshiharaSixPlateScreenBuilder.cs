@@ -6,16 +6,9 @@ namespace GeekMDSuite.Procedures
 {
     public class IshiharaSixPlateScreenBuilder
     {
-
         public List<IshiharaPlateAnswer> Build()
         {
-            if (_list.Count != 6) 
-                throw new IndexOutOfRangeException($"{nameof(IshiharaSixPlateScreenBuilder)} has {_list.Count} of 6 plates set.");
-            foreach (var plate in _list)
-            {
-                if (plate.PlateNumber != _list.IndexOf(plate) + 1)
-                    throw new IndexOutOfRangeException($"{nameof(IshiharaSixPlateScreenBuilder)} has plate number {plate.PlateNumber} in index position {_list.IndexOf(plate)}.");
-            }
+            ValidatePreBuildState();
             return _list;
         }
 
@@ -63,6 +56,19 @@ namespace GeekMDSuite.Procedures
                 return;
             }
             _list.Add(IshiharaPlateAnswer.Build(plateNumber, plateRead));
+        }
+        
+        private void ValidatePreBuildState()
+        {
+            if (_list.Count != 6)
+                throw new IndexOutOfRangeException(
+                    $"{nameof(IshiharaSixPlateScreenBuilder)} has {_list.Count} of 6 plates set.");
+            foreach (var plate in _list)
+            {
+                if (plate.PlateNumber != _list.IndexOf(plate) + 1)
+                    throw new IndexOutOfRangeException(
+                        $"{nameof(IshiharaSixPlateScreenBuilder)} has plate number {plate.PlateNumber} in index position {_list.IndexOf(plate)}.");
+            }
         }
     }
 }

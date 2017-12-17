@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Repositories;
 
 // Ishihara Test
 // 06 plate interpretation: 6/6 to pass
@@ -18,12 +19,24 @@ namespace GeekMDSuite.Services.Interpretation
         {
             TestType = testType;
             AnswerList = answerList ?? throw new ArgumentNullException(nameof(answerList));
+            PlateSet = GetPlateSet(testType);
+            if(answerList.Count != PlateSet.Count) 
+                throw new IndexOutOfRangeException($"{nameof(answerList)} has {answerList.Count} items and it should have {PlateSet.Count}.");
         }
-        
+
+        private List<IshiharaPlateModel> GetPlateSet(IshiharaTestType testType)
+        {
+            if (testType == IshiharaTestType.Ishihara6) return IshiharaPlateSetRepository.SixPlateScreen();
+            if (testType == IshiharaTestType.Ishihara10) return IshiharaPlateSetRepository.SixPlateScreen();
+            if (testType == IshiharaTestType.Ishihara14) return IshiharaPlateSetRepository.FourteenPlateScreen();
+            return testType == IshiharaTestType.Ishihara24 
+                ? IshiharaPlateSetRepository.TwentyFourPlateScreen() : IshiharaPlateSetRepository.ThirtyEightPlateScreen();
+        }
+
         public IshiharaTestType TestType { get; }
         public List<IshiharaPlateAnswer> AnswerList { get; }
         
-        protected abstract List<IshiharaPlateModel> PlateSet { get; set; }
+        protected List<IshiharaPlateModel> PlateSet { get; set; }
 
         protected abstract IshiharaResultFlag Classify();
 
