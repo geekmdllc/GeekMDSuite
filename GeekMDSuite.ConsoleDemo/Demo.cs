@@ -117,6 +117,17 @@ namespace GeekMDSuite.ConsoleDemo
             var carotidUs = CarotidUltrasound.Build(carotidLeft, carotidRight);
 
             Console.WriteLine($"Carotid US\n{carotidUs}\n");
+
+            var centralBp = new CentralBloodPressureBuilder()
+                .SetAugmentedIndex(25)
+                .SetAugmentedPressure(4)
+                .SetCentralSystolicPressure(113)
+                .SetPulsePressure(16)
+                .SetPulseWaveVelocity(7.9)
+                .SetReferenceAge(43)
+                .Build();
+
+            Console.WriteLine($"Central BP: {centralBp}\n");
         }
     }
 }

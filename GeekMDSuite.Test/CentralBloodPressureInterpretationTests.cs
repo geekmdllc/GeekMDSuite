@@ -12,7 +12,15 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenNormalCentralSystolic_ReturnsNormal()
         {
-            var cbp = new CentralBloodPressure(103, 28, 0, 0, 19, 8.1);
+            var cbp = new CentralBloodPressureBuilder()
+                .SetCentralSystolicPressure(103)
+                .SetPulsePressure(28)
+                .SetAugmentedPressure(0)
+                .SetAugmentedIndex(0)
+                .SetReferenceAge(19)
+                .SetPulseWaveVelocity(8.1)
+                .Build();
+            
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(patient => patient.Age).Returns(19);
@@ -25,7 +33,15 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenLowNormalCentralSystolic_ReturnsLowNormal()
         {
-            var cbp = new CentralBloodPressure(90, 28, 0, 0, 19, 8.1);
+            var cbp = new CentralBloodPressureBuilder()
+                .SetCentralSystolicPressure(90)
+                .SetPulsePressure(28)
+                .SetAugmentedPressure(0)
+                .SetAugmentedIndex(0)
+                .SetReferenceAge(19)
+                .SetPulseWaveVelocity(8.1)
+                .Build();
+            
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(patient => patient.Age).Returns(19);
@@ -37,7 +53,15 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenLowCentralSystolic_ReturnsLow()
         {
-            var cbp = new CentralBloodPressure(80, 28, 0, 0, 19, 8.1);
+            var cbp = new CentralBloodPressureBuilder()
+                .SetCentralSystolicPressure(80)
+                .SetPulsePressure(28)
+                .SetAugmentedPressure(0)
+                .SetAugmentedIndex(0)
+                .SetReferenceAge(19)
+                .SetPulseWaveVelocity(8.1)
+                .Build();
+            
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(patient => patient.Age).Returns(19);
@@ -49,7 +73,15 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenHighNormalCentralSystolic_ReturnsHighNormal()
         {
-            var cbp = new CentralBloodPressure(116, 28, 0, 0, 19, 8.1);
+            var cbp = new CentralBloodPressureBuilder()
+                .SetCentralSystolicPressure(116)
+                .SetPulsePressure(28)
+                .SetAugmentedPressure(0)
+                .SetAugmentedIndex(0)
+                .SetReferenceAge(19)
+                .SetPulseWaveVelocity(8.1)
+                .Build();
+            
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(patient => patient.Age).Returns(19);
@@ -61,7 +93,15 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenHighCentralSystolic_ReturnsHigh()
         {
-            var cbp = new CentralBloodPressure(120, 28, 0, 0, 19, 8.1);
+            var cbp = new CentralBloodPressureBuilder()
+                .SetCentralSystolicPressure(120)
+                .SetPulsePressure(28)
+                .SetAugmentedPressure(0)
+                .SetAugmentedIndex(0)
+                .SetReferenceAge(19)
+                .SetPulseWaveVelocity(8.1)
+                .Build();
+            
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(patient => patient.Age).Returns(19);

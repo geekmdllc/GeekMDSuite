@@ -2,7 +2,7 @@
 {
     public class CentralBloodPressure
     {
-        public CentralBloodPressure(
+        private CentralBloodPressure(
             double systolicPressure, 
             double pulsePressure, 
             double augmentedPressure, 
@@ -24,5 +24,17 @@
         public double AugmentedIndex { get; }
         public double ReferenceAge { get;  }
         public double PulseWaveVelocity { get;  }
+
+        public static CentralBloodPressure Build(
+            double systolicPressure,
+            double pulsePressure,
+            double augmentedPressure,
+            double augmentedIndex,
+            double referenceAge,
+            double pulseWaveVelocity) => 
+            new CentralBloodPressure(systolicPressure, pulsePressure, augmentedPressure, augmentedIndex, referenceAge, pulseWaveVelocity);
+
+        public override string ToString() => 
+            $"CSP {SystolicPressure} mmHg PP {PulsePressure} mmHg AP {PulsePressure} mmHg AIx {AugmentedIndex}% Ref Age {ReferenceAge} yrs PWV {PulseWaveVelocity} m/s";
     }
 }
