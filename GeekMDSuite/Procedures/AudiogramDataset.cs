@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Procedures
 {
     public class AudiogramDataset
     {
-
         internal AudiogramDataset(
             AudiogramDatapoint f125,
             AudiogramDatapoint f250,
@@ -27,9 +23,6 @@ namespace GeekMDSuite.Procedures
             F6000 = f6000;
             F8000 = f8000;
         }
-        
-        public HearingLoss Classification => AudiogramDatapoint.Classify(HighestDatapoint);
-        
         public AudiogramDatapoint F125 { get; }
         public AudiogramDatapoint F250 { get; }
         public AudiogramDatapoint F500 { get; }
@@ -39,25 +32,5 @@ namespace GeekMDSuite.Procedures
         public AudiogramDatapoint F4000 { get; }
         public AudiogramDatapoint F6000 { get; }
         public AudiogramDatapoint F8000 { get; }
-        
-        public int HighestDatapoint
-        {
-            get
-            {
-                var list = new List<int>
-                {
-                    F125?.Value ?? 0,
-                    F250?.Value ?? 0,
-                    F500?.Value ?? 0,
-                    F1000?.Value ?? 0,
-                    F2000?.Value ?? 0,
-                    F3000?.Value ?? 0,
-                    F4000?.Value ?? 0,
-                    F6000?.Value ?? 0,
-                    F8000?.Value ?? 0
-                };
-                return list.Max();
-            }
-        }
     }
 }

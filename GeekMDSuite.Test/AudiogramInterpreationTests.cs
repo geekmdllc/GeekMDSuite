@@ -5,7 +5,7 @@ using Xunit;
 
 namespace GeekMDSuite.Test
 {
-    public class AudiogramBilateralInterpreationTests
+    public class AudiogramInterpreationTests
     {
         [Fact]
         public void Interpret_GivenLeftSideWorseAt55db_ReturnsLeftSidedModerateHearingLoss()

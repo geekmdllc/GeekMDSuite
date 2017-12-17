@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Procedures;
+using GeekMDSuite.Services.Interpretation;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -20,9 +21,10 @@ namespace GeekMDSuite.Test
                 .Set8000HertzDataPoint(30)
                 .Build();
             
-            var result = audiogramSet.Classification;
+            var result = audiogramSet;
+            var interp = new AudiogramDatasetInterpretation(result);
             
-            Assert.Equal(HearingLoss.Severe, result);
+            Assert.Equal(HearingLoss.Severe, interp.Classification);
         }
         
         [Fact]
@@ -39,10 +41,11 @@ namespace GeekMDSuite.Test
                 .Set6000HertzDataPoint(10)
                 .Set8000HertzDataPoint(10)
                 .Build();
+
+            var result = audiogramSet;
+            var interp = new AudiogramDatasetInterpretation(result);
             
-            var result = audiogramSet.Classification;
-            
-            Assert.Equal(HearingLoss.None, result);
+            Assert.Equal(HearingLoss.None, interp.Classification);
         }
     }
 }

@@ -18,27 +18,39 @@ namespace GeekMDSuite.Services.Interpretation
         public AudiogramClassificationResult Classification => new AudiogramClassificationResult(
                 GetClassification(),
                 GetLaterality(),
-                WorstSide());
+                WorseSide());
         
         private Laterality GetLaterality()
         {
-            return DifferenceLessThan10dB() ? Laterality.Bilateral : WorstSide();
+            return DifferenceLessThan10dB() ? Laterality.Bilateral : WorseSide();
         }
 
-        private Laterality WorstSide()
+        private Laterality WorseSide()
         {
-            return _left.HighestDatapoint > _right.HighestDatapoint ? Laterality.Left : Laterality.Right;
+            if (LeftAndRightSideAreEqual()) return Laterality.Bilateral;
+            return LeftIsWorseThanRight() ? Laterality.Left : Laterality.Right;
+        }
+
+        private bool LeftIsWorseThanRight()
+        {
+            return AudiogramDatasetInterpretation.HighestDatapoint(_left) >  AudiogramDatasetInterpretation.HighestDatapoint(_right);
+        }
+
+        private bool LeftAndRightSideAreEqual()
+        {
+            return AudiogramDatasetInterpretation.HighestDatapoint(_left) ==
+                   AudiogramDatasetInterpretation.HighestDatapoint(_right);
         }
 
         private HearingLoss GetClassification()
         {
-            return WorstSide() == Laterality.Left || WorstSide() == Laterality.Bilateral
-                ? _left.Classification
-                : _right.Classification;
+            return WorseSide() == Laterality.Left || WorseSide() == Laterality.Bilateral
+                ? new AudiogramDatasetInterpretation(_left).Classification
+                : new AudiogramDatasetInterpretation(_right).Classification;
         }
         private bool DifferenceLessThan10dB()
         {
-            return Math.Abs(_left.HighestDatapoint / 10.0f - _right.HighestDatapoint / 10.0f) < 1;
+            return Math.Abs(AudiogramDatasetInterpretation.HighestDatapoint(_left) - AudiogramDatasetInterpretation.HighestDatapoint(_right)) < 10.0f;
         }
 
     }
