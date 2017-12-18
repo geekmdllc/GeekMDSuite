@@ -15,7 +15,9 @@ namespace GeekMDSuite.Services.Interpretation
         public double VisceralFat { get; }
         public double PercentBodyFat { get; }
 
-        public override InterpretationText Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         public BodyCompositionClassification Classification => throw new NotImplementedException();
+
+        public override string ToString() => Classification.ToString();
     }
 }

@@ -18,7 +18,5 @@ namespace GeekMDSuite.Services.Interpretation
         protected ILengthMeasurement Waist { get; }
         protected ILengthMeasurement Hips { get; }
         protected IMassMeasurement Weight { get; }
-
-        public abstract InterpretationText Interpretation { get; }
     }
 }

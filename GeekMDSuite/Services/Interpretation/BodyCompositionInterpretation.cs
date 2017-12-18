@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
@@ -10,15 +9,10 @@ namespace GeekMDSuite.Services.Interpretation
         {
         }
 
-        public sealed override InterpretationText Interpretation => throw new NotImplementedException();
+        public InterpretationText Interpretation => throw new NotImplementedException();
         
         public BodyCompositionClassification Classification => throw new NotImplementedException();
-    }
 
-    public enum BodyCompositionClassification
-    {
-        Underweight,
-        NormalWeight,
-        OverWeight
+        public override string ToString() => Classification.ToString();
     }
 }
