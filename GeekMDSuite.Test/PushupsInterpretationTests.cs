@@ -10,7 +10,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_Given20PushupsAnd40yrMale_ReturnsAverage()
         {
-            var pushups = new Pushups(20);
+            var pushups = Pushups.Build(20);
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
             mockPt.Setup(p => p.Age).Returns(40);
@@ -23,7 +23,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_Given24PushupsAnd40yrFemale_ReturnsAboveAverage()
         {
-            var pushups = new Pushups(24);
+            var pushups = Pushups.Build(24);
             var mockPt = new Mock<IPatient>();
             mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
             mockPt.Setup(p => p.Age).Returns(40);

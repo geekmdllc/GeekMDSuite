@@ -1,11 +1,8 @@
-﻿using GeekMDSuite.Services.Interpretation;
-using MathNet.Numerics;
-
-namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Procedures
 {
     public class VisualAcuity
     {
-        public VisualAcuity (int distance, int near, int both) 
+        private VisualAcuity (int distance, int near, int both) 
         {
             Distance = distance;
             Near = near;
@@ -15,5 +12,9 @@ namespace GeekMDSuite.Procedures
         public int Distance { get; }
         public int Near { get; }
         public int Both { get; }
+
+        public static VisualAcuity Build(int distance, int near, int both) => new VisualAcuity(distance, near, both);
+
+        public override string ToString() => $"Distance: {Distance}/20 Near: {Near}/20 Both: {Both}/20";
     }
 }

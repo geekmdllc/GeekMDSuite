@@ -4,8 +4,7 @@ namespace GeekMDSuite.Tools.MeasurementUnits
 {
     public class TimeDuration : ITimeDuration
     {
-
-        public TimeDuration(double seconds)
+        private TimeDuration(double seconds)
         {
             if (seconds <= 0) throw new ArgumentOutOfRangeException(nameof(seconds));
 
@@ -22,6 +21,8 @@ namespace GeekMDSuite.Tools.MeasurementUnits
         public double TotalSeconds { get; }
         public double FractionalMinutes => TotalSeconds / 60;
 
-        public static TimeDuration Create(double minutes, double seconds) => new TimeDuration(minutes, seconds);
+        public static TimeDuration Build(double minutes, double seconds) => new TimeDuration(minutes, seconds);
+
+        public override string ToString() => $"{Minutes}'{Seconds}\"";
     }
 }

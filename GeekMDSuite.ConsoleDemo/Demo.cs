@@ -156,6 +156,47 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine("Ishihara Six Plate Screener");
             foreach (var plate in ishiharaSix) Console.WriteLine(plate);
+            Console.WriteLine();
+
+            var ocularPressure = OcularPressure.Build(15, 13);
+            Console.WriteLine($"Ocular pressure: {ocularPressure}\n");
+
+            var peripheralVision = PeripheralVision.Build(85, 85);
+            Console.WriteLine($"Peripheral vision: {peripheralVision}\n");
+
+            var pushups = Pushups.Build(35);
+            Console.WriteLine($"Pushups: {pushups}\n");
+
+            var sitAndReach = SitAndReach.Build(13);
+            Console.WriteLine($"Sit & Reach: {sitAndReach}\n");
+
+            var situps = Situps.Build(55);
+            Console.WriteLine($"Situps: {situps}\n");
+
+            var spirometry = new SpirometryBuilder()
+                .SetForcedVitalCapacity(6.3)
+                .SetForcedExpiratoryVolume1Second(5.5)
+                .SetForcedExpiratoryFlow25To75(6.3)
+                .SetForcedExpiratoryTime(7.5)
+                .SetPeakExpiratoryFlow(9.3)
+                .Build();
+
+            Console.WriteLine($"Spirometry: {spirometry}\n");
+
+            var treadmillStressTest = new TreadmillExerciseStressTestBuilder()
+                .SetMaximumBloodPressure(205, 95)
+                .SetMaximumHeartRate(183)
+                .SetProtocol()
+                .SetResult(TreadmillExerciseStressTestResultClassification.Normal)
+                .SetSupineBloodPressure(133, 82)
+                .SetSupineHeartRate(66)
+                .SetTime(11, 33)
+                .Build();
+
+            Console.WriteLine($"Treadmill: {treadmillStressTest}\n");
+
+            var visualAcuity = VisualAcuity.Build(20, 20, 20);
+            Console.WriteLine($"Visual acuity: {visualAcuity}\n");
         }
     }
 }

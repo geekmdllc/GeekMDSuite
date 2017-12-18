@@ -12,5 +12,7 @@
         public int Right { get; }
 
         public static OcularPressure Build(int leftMmHg, int rightMmHg) => new OcularPressure(leftMmHg, rightMmHg);
+
+        public override string ToString() => $"Left: {Left} mmHg, Right: {Right} mmHg";
     }
 }

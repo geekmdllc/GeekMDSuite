@@ -20,11 +20,11 @@ namespace GeekMDSuite.Procedures
 
         public TreadmillExerciseStressTestBuilder SetTime(double minutes, double seconds)
         {
-            _time = TimeDuration.Create(minutes, seconds);
+            _time = TimeDuration.Build(minutes, seconds);
             return this;
         }
         
-        public TreadmillExerciseStressTestBuilder SetTime(TreadmillExerciseStressTestResultClassification result)
+        public TreadmillExerciseStressTestBuilder SetResult(TreadmillExerciseStressTestResultClassification result)
         {
             _result = result;
             return this;
@@ -54,10 +54,8 @@ namespace GeekMDSuite.Procedures
             return this;
         }
 
-        public TreadmillExerciseStressTest Build()
-        {
-            return new TreadmillExerciseStressTest(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 
-                _maximumBloodPressure, _maximumHeartRate);
-        }
+        public TreadmillExerciseStressTest Build() => 
+            new TreadmillExerciseStressTest(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 
+            _maximumBloodPressure, _maximumHeartRate);
     }
 }

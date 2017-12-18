@@ -14,7 +14,7 @@ namespace GeekMDSuite.Procedures
 
         internal TreadmillExerciseStressTest(
             TreadmillProtocol protocol, 
-            TimeDuration time, 
+            ITimeDuration time, 
             TreadmillExerciseStressTestResultClassification result, 
             BloodPressure supineBloodPressure, 
             int supineHeartRate, 
@@ -29,5 +29,9 @@ namespace GeekMDSuite.Procedures
             MaximumBloodPressure = maximumBloodPressure;
             MaximumHeartRate = maximumHeartRate;
         }
+
+        public override string ToString() => 
+            $"{Time} on {Protocol}, max BP {MaximumBloodPressure}, max HR {MaximumHeartRate}, result {Result} | " +
+            $"supine BP {SupineBloodPressure} supine HR {SupineHeartRate}";
     }
 }

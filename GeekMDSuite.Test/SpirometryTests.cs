@@ -1,7 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
-using GeekMDSuite.Tools.MeasurementUnits;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -12,7 +11,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenNormalValues_ReturnsNormalClassification()
         {
-            var spiromenty = new Spirometry(ForcedVitalCapacity * 0.71, ForcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(ForcedVitalCapacity * 0.71)
+                .SetForcedVitalCapacity(ForcedVitalCapacity)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.Normal, result.Classification);
@@ -21,7 +27,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenMildObstructionValues_ReturnsMildObstructionClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.71, ForcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.71)
+                .SetForcedVitalCapacity(ForcedVitalCapacity)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionMild, result.Classification);
@@ -29,7 +42,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModerateObstructionValues_ReturnsModerateClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.69, ForcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.69)
+                .SetForcedVitalCapacity(ForcedVitalCapacity)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionModerate, result.Classification);
@@ -37,7 +57,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModeratelySevereObstructionValues_ReturnsModeratelySevereClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.59, ForcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.59)
+                .SetForcedVitalCapacity(ForcedVitalCapacity)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionModeratelySevere, result.Classification);
@@ -45,7 +72,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenSevereObstructionValues_ReturnsSevereClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.49, ForcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.49)
+                .SetForcedVitalCapacity(ForcedVitalCapacity)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionSevere, result.Classification);
@@ -54,7 +88,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenVerySevereObstructionValues_ReturnsVerySevereClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.34, ForcedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.34)
+                .SetForcedVitalCapacity(ForcedVitalCapacity)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.ObstructionVerySevere, result.Classification);
@@ -63,7 +104,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenMixedPattern_ReturnsMixedPatternClassification()
         {
-            var spiromenty = new Spirometry(RestrictedVitalCapacity * 0.69, RestrictedVitalCapacity, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(RestrictedVitalCapacity * 0.69)
+                .SetForcedVitalCapacity(RestrictedVitalCapacity)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.MixedPattern, result.Classification);
@@ -72,7 +120,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenMildRestrictiveValues_ReturnsMildRestrictionClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.71, RestrictedVitalCapacity * 0.71, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.71)
+                .SetForcedVitalCapacity(RestrictedVitalCapacity * 0.71)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionMild, result.Classification);
@@ -81,7 +136,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModerateRestrictiveValues_ReturnsModerateRestrictionClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.69, RestrictedVitalCapacity * 0.69, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.69)
+                .SetForcedVitalCapacity(RestrictedVitalCapacity * 0.69)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionModerate, result.Classification);
@@ -90,7 +152,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenModeratelySevereRestrictiveValues_ReturnsModeratelySevereRestrictionClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.59, RestrictedVitalCapacity * 0.59, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.59)
+                .SetForcedVitalCapacity(RestrictedVitalCapacity * 0.59)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionModeratelySevere, result.Classification);
@@ -99,7 +168,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenSevereRestrictiveValues_ReturnsSevereRestrictionClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.49, RestrictedVitalCapacity * 0.49, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.49)
+                .SetForcedVitalCapacity(RestrictedVitalCapacity * 0.49)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionSevere, result.Classification);
@@ -108,7 +184,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenVerySevereRestrictiveValues_ReturnsVerySevereRestrictionClassification()
         {
-            var spiromenty = new Spirometry(Fev1 * 0.34, RestrictedVitalCapacity * 0.34, 8.94, 6.33, 6.2);
+            var spiromenty = new SpirometryBuilder()
+                .SetForcedExpiratoryVolume1Second(Fev1 * 0.34)
+                .SetForcedVitalCapacity(RestrictedVitalCapacity * 0.34)
+                .SetPeakExpiratoryFlow(8.94)
+                .SetForcedExpiratoryFlow25To75(6.33)
+                .SetForcedExpiratoryTime(6.2)
+                .Build();
+            
             var result = new SpirometryInterpretation(spiromenty, _patient, _bodyComposition);
             
             Assert.Equal(SpirometryClassification.RestrictionVerySevere, result.Classification);

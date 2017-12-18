@@ -2,7 +2,7 @@
 {
     public class Spirometry
     {
-        public Spirometry(double forcedExpiratoryVolume1Second, 
+        internal Spirometry(double forcedExpiratoryVolume1Second, 
             double forcedVitalCapacity, 
             double peakExpiratoryFlow, 
             double forcedExpiratoryFlow25To75, 
@@ -21,5 +21,9 @@
         public double ForcedExpiratoryTime { get; }
         public double ForcedExpiratoryVolume1SecondToForcedVitalCapacityRatio =>
             ForcedExpiratoryVolume1Second / ForcedVitalCapacity;
+
+        public override string ToString() => 
+            $"FEV1 {ForcedExpiratoryVolume1Second} L, FVC {ForcedVitalCapacity} L, FEF25-75 {ForcedExpiratoryFlow25To75} L/s " +
+            $"PET {PeakExpiratoryFlow} L/s, FET {ForcedExpiratoryTime} sec, FEV1:FVC {ForcedExpiratoryVolume1SecondToForcedVitalCapacityRatio}";
     }
 }

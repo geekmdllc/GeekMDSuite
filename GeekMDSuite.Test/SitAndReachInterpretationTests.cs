@@ -13,7 +13,7 @@ namespace GeekMDSuite.Test
             var mockPatient = new Mock<IPatient>();
             mockPatient.Setup(p => p.Age).Returns(32);
             mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
-            var sitAndReach = new SitAndReach(8);
+            var sitAndReach = SitAndReach.Build(8);
             
             var classification = new SitAndReachInterpretation(sitAndReach, mockPatient.Object).Classification;
             
@@ -26,7 +26,7 @@ namespace GeekMDSuite.Test
             var mockPatient = new Mock<IPatient>();
             mockPatient.Setup(p => p.Age).Returns(32);
             mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
-            var sitAndReach = new SitAndReach(8);
+            var sitAndReach = SitAndReach.Build(8);
             
             var classification = new SitAndReachInterpretation(sitAndReach, mockPatient.Object).Classification;
             
