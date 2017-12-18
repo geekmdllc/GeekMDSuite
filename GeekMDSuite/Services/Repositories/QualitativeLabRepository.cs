@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace GeekMDSuite.Services.Repositories
 {
-    public static class QualitativeLabRepository
+    internal static class QualitativeLabRepository
     {
         public static IEnumerable<QualitativeLabInterpretationModel> GetAllLabs()
         {

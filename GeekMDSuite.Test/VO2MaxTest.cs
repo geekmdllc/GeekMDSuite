@@ -14,6 +14,7 @@ namespace GeekMDSuite.Test
         private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
         private const TreadmillProtocol Protocol = TreadmillProtocol.Bruce;
         private const TreadmillProtocol UnsupportedProtocol = TreadmillProtocol.Balke3Point0;
+
         //TODO: Confirm 'classification' is correct.
         [Fact]
         public void MaleResultInRange()

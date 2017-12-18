@@ -5,7 +5,7 @@ using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Services.Repositories
 {
-    public static class IshiharaPlateSetRepository
+    internal static class IshiharaPlateSetRepository
     {
         public static List<IshiharaPlateModel> SixPlateScreen() => GetSet(IshiharaTestType.Ishihara6);
         public static List<IshiharaPlateModel> FourteenPlateScreen() => GetSet(IshiharaTestType.Ishihara14);

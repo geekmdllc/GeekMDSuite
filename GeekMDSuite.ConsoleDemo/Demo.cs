@@ -4,6 +4,8 @@ using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Tools.Cardiology;
+using GeekMDSuite.Tools.Fitness;
 
 namespace GeekMDSuite.ConsoleDemo
 {
@@ -197,6 +199,21 @@ namespace GeekMDSuite.ConsoleDemo
 
             var visualAcuity = VisualAcuity.Build(20, 20, 20);
             Console.WriteLine($"Visual acuity: {visualAcuity}\n");
+
+            var predictedMaxHrStd = PredictMaximumHeartRate.Standard(joe.Age);
+            Console.WriteLine($"Joes predicted max HR (standard formula): {predictedMaxHrStd} bpm\n");
+
+            var predictedMaxHrRevisited = PredictMaximumHeartRate.Revisited(joe.Age);
+            Console.WriteLine($"Joes predicted max HR (revisted formula): {predictedMaxHrRevisited} bpm\n");
+
+            var vo2Max = CalculateVo2Max.FromTreadmillStressTest(treadmillStressTest, joe);
+            Console.WriteLine($"Joes VO2Max as calculated from his treadmill stress test: {vo2Max}\n");
+
+            var metsTreadmill = CalculateMetabolicEquivalents.FromTreadmillStressTest(treadmillStressTest, joe);
+            Console.WriteLine($"Joes METS as calculated from his treadmill stress test: {metsTreadmill}\n");
+
+            var metsVo2Max = CalculateMetabolicEquivalents.FromVo2Max(vo2Max);
+            Console.WriteLine($"Joes METS as calcualted from his VO2Max: {metsVo2Max}\n");
         }
     }
 }

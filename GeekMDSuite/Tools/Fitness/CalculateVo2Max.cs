@@ -12,7 +12,14 @@ namespace GeekMDSuite.Tools.Fitness
         {
             var value = ResultByProtocol(protocol, time, patient);
             var classification = Classify(value, patient);
-            return new Vo2Max(value, classification);
+            return Vo2Max.Build(value, classification);
+        }
+        
+        public static Vo2Max FromTreadmillStressTest(ITreadmillExerciseStressTest stressTest, IPatient patient)
+        {
+            var value = ResultByProtocol(stressTest.Protocol, stressTest.Time, patient);
+            var classification = Classify(value, patient);
+            return Vo2Max.Build(value, classification);
         }
 
         private static double ResultByProtocol(TreadmillProtocol protocol, ITimeDuration time, IPatient patient)
@@ -62,8 +69,8 @@ namespace GeekMDSuite.Tools.Fitness
             if (Gender.IsGenotypeXx(patient.Gender))
                 return 4.38 * fractionalMinutes - 3.9; 
             return 14.8 - (1.379 * fractionalMinutes) +
-                       (0.451 * System.Math.Pow(fractionalMinutes, 2)) -
-                       (0.012 * System.Math.Pow(fractionalMinutes, 3));
+                       (0.451 * Math.Pow(fractionalMinutes, 2)) -
+                       (0.012 * Math.Pow(fractionalMinutes, 3));
         }
 
         private static string NotImplementedMessage(TreadmillProtocol protocol)

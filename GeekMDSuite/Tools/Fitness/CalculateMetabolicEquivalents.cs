@@ -11,7 +11,7 @@ namespace GeekMDSuite.Tools.Fitness
         
         public static double FromTreadmillStressTest(ITreadmillExerciseStressTest stressTest, IPatient patient)
         {
-            return FromVo2Max(CalculateVo2Max.FromTreadmillStressTest(stressTest.Protocol, stressTest.Time, patient));
+            return FromVo2Max(CalculateVo2Max.FromTreadmillStressTest(stressTest, patient));
         }
     }
 }

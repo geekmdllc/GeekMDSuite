@@ -3,7 +3,7 @@ using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Repositories
 {
-    public static class HearingLossClassificationRepository
+    internal static class HearingLossClassificationRepository
     {
         public static Interval<int> GetRange(
             HearingLoss classification)
