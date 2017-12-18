@@ -1,6 +1,4 @@
-﻿using System;
-using GeekMDSuite.Services.Interpretation;
-using GeekMDSuite.Tools;
+﻿using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
 
@@ -13,7 +11,7 @@ namespace GeekMDSuite.Test
         {
             var mockBodyComposition = BuildMockBodyCompositionByBmi(23.2);
 
-            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, Race.Asian).Classification;
+            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, _asian.Object).Classification;
             
             Assert.Equal(BodyMassIndexCategory.OverWeight, result);
         }
@@ -22,7 +20,7 @@ namespace GeekMDSuite.Test
         {
             var mockBodyComposition = BuildMockBodyCompositionByBmi(27.9);
 
-            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, Race.Asian).Classification;
+            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, _asian.Object).Classification;
             
             Assert.Equal(BodyMassIndexCategory.ObesityClass1, result);
         }
@@ -31,7 +29,7 @@ namespace GeekMDSuite.Test
         {
             var mockBodyComposition = BuildMockBodyCompositionByBmi(35.2);
 
-            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, Race.Asian).Classification;
+            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, _asian.Object).Classification;
 
             Assert.Equal(BodyMassIndexCategory.ObesityClass2, result);
         }
@@ -40,7 +38,7 @@ namespace GeekMDSuite.Test
         {
             var mockBodyComposition = BuildMockBodyCompositionByBmi(23.2);
 
-            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, Race.White).Classification;
+            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, _white.Object).Classification;
 
             Assert.Equal(BodyMassIndexCategory.NormalWeight, result);
         }
@@ -50,7 +48,7 @@ namespace GeekMDSuite.Test
         {
             var mockBodyComposition = BuildMockBodyCompositionByBmi(27.9);
 
-            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, Race.BlackOrAfricanAmerican).Classification;
+            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, _blackOrAfricanAmerican.Object).Classification;
 
             Assert.Equal(BodyMassIndexCategory.OverWeight, result);
         }
@@ -59,10 +57,14 @@ namespace GeekMDSuite.Test
         {
             var mockBodyComposition = BuildMockBodyCompositionByBmi(35.2);
 
-            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, Race.BlackOrAfricanAmerican).Classification;
+            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, _blackOrAfricanAmerican.Object).Classification;
             
             Assert.Equal(BodyMassIndexCategory.ObesityClass2, result);
         }
+
+        private readonly Mock<IPatient> _asian = BuildMockPatient(Race.Asian);
+        private readonly Mock<IPatient> _white = BuildMockPatient(Race.White);
+        private readonly Mock<IPatient> _blackOrAfricanAmerican = BuildMockPatient(Race.BlackOrAfricanAmerican);
         
         private static Mock<IBodyComposition> BuildMockBodyCompositionByBmi(double bmi)
         {
@@ -71,5 +73,13 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(bc => bc.Weight.Kilograms).Returns(bmi);
             return mockBodyComposition;
         }
+
+        private static Mock<IPatient> BuildMockPatient(Race race)
+        {
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Race).Returns(race);
+            return mockPatient;
+        }
+        
     }
 }

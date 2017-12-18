@@ -6,17 +6,17 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public abstract class BodyCompositionBaseInterpretation
     {
-        public BodyCompositionBaseInterpretation(IBodyComposition bodyCompositionExpanded)
+        protected BodyCompositionBaseInterpretation(IBodyComposition bodyComposition)
         {
-            Height = bodyCompositionExpanded.Height;
-            Waist = bodyCompositionExpanded.Waist;
-            Hips = bodyCompositionExpanded.Hips;
-            Weight = bodyCompositionExpanded.Weight;
+            _bodyComposition = bodyComposition;
         }
-
-        protected  ILengthMeasurement Height { get; }
-        protected ILengthMeasurement Waist { get; }
-        protected ILengthMeasurement Hips { get; }
-        protected IMassMeasurement Weight { get; }
+        
+        private IBodyComposition _bodyComposition;
+        // TODO: Develop BodyCompositionBaseInterpretation
+        // Hip to waist
+        // Hip to height
+        // BMI
+        // Classify (needs new class)
+        protected virtual BodyCompositionClassification Classify() => throw new NotImplementedException();
     }
 }

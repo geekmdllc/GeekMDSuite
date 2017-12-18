@@ -1,45 +1,56 @@
 ﻿using System;
-using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.BodyComposition;
 
 namespace GeekMDSuite.Services.Interpretation
 {
     public class BodyMassIndexInterpretation : IInterpretable<BodyMassIndexCategory>
     {
-        public BodyMassIndexInterpretation( IBodyComposition bodyComposition, Race race)
+        public BodyMassIndexInterpretation( IBodyComposition bodyComposition, IPatient patient)
         {
-            Classification = ClassifyBodyMassIndex(bodyComposition, race);
-            Value = CalculateBodyMassIndex(bodyComposition.Weight.Kilograms, bodyComposition.Height.Meters);
+            _patient = patient;
+            _bodyComposition = bodyComposition;
         }
 
         public InterpretationText Interpretation => throw new NotImplementedException();
-        public BodyMassIndexCategory Classification { get; }
-        public double Value { get; }
-
-        public static double CalculateBodyMassIndex(double weightKilograms, double heightMeters) =>
-            weightKilograms / Math.Pow(heightMeters, 2);
+        public BodyMassIndexCategory Classification => Classify();
         
-        public static BodyMassIndexCategory ClassifyBodyMassIndex(IBodyComposition bodyComposition, Race race)
+        public static class LowerLimits
         {
-            var bmi = CalculateBodyMassIndex(bodyComposition.Weight.Kilograms, bodyComposition.Height.Meters);
-            var overWeightLowerLimit = race == Race.Asian ? OverWeightLowerLimitAsian : OverWeightLowerLimitNonAsian;
-            var obeseClass1LowerLimit = race == Race.Asian ? ObeseClass1LowerLimitAsian : ObeseClass1LowerLimitNonAsian;
+            public static class Overweight
+            {
+                public const double Asian = 23;
+                public const double NonAsian = 25;
+            }
+
+            public static class ObeseClass1
+            {
+                public const double Asian = 27;
+                public const double NonAsian = 30;
+            }
+            public const double UnderWeight = 17.5;
+            public const double NormalWeight = 18.5;
+            public const double ObeseClass2 = 35;
+            public const double ObeseClass3 = 40;
+        }
+
+        private readonly IBodyComposition _bodyComposition;
+        private readonly IPatient _patient;
+
+        private BodyMassIndexCategory Classify()
+        {
+            var bmi = CalculateBodyMassIndex.Calculate(_bodyComposition.Weight.Kilograms, _bodyComposition.Height.Meters);
+            var overWeightLowerLimit = _patient.Race == Race.Asian 
+                ? LowerLimits.Overweight.Asian : LowerLimits.Overweight.NonAsian;
+            var obeseClass1LowerLimit = _patient.Race == Race.Asian 
+                ? LowerLimits.ObeseClass1.Asian : LowerLimits.ObeseClass1.NonAsian;
             
-            if (bmi < UnderWeightLowerLimit) return BodyMassIndexCategory.SeverelyUnderweight;
-            if (bmi < NormalWeightLowerLimit) return BodyMassIndexCategory.Underweight;
+            if (bmi < LowerLimits.UnderWeight) return BodyMassIndexCategory.SeverelyUnderweight;
+            if (bmi < LowerLimits.NormalWeight) return BodyMassIndexCategory.Underweight;
             if (bmi < overWeightLowerLimit) return BodyMassIndexCategory.NormalWeight;
             if (bmi < obeseClass1LowerLimit) return BodyMassIndexCategory.OverWeight;
-            if (bmi < ObeseClass2LowerLimit) return BodyMassIndexCategory.ObesityClass1;
-            
-            return bmi < ObeseClass3LowerLimit ? BodyMassIndexCategory.ObesityClass2 : BodyMassIndexCategory.ObesityClass3;
+            if (bmi < LowerLimits.ObeseClass2) return BodyMassIndexCategory.ObesityClass1;
+            return bmi < LowerLimits.ObeseClass3 ? BodyMassIndexCategory.ObesityClass2 
+                : BodyMassIndexCategory.ObesityClass3;
         }
-        
-        public static double UnderWeightLowerLimit = 17.5;
-        public static double NormalWeightLowerLimit = 18.5;
-        public static double OverWeightLowerLimitAsian = 23;
-        public static double OverWeightLowerLimitNonAsian = 25;
-        public static double ObeseClass1LowerLimitAsian = 27;
-        public static double ObeseClass1LowerLimitNonAsian = 30;
-        public static double ObeseClass2LowerLimit = 35;
-        public static double ObeseClass3LowerLimit = 40;
     }
 }
