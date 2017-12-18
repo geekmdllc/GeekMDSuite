@@ -1,6 +1,6 @@
 ﻿using System;
 using GeekMDSuite.PatientActivities;
-using GeekMDSuite.Services.Fitness;
+using GeekMDSuite.Services.Repositories;
 
 namespace GeekMDSuite.Services.Interpretation.PatientActivities
 {
@@ -8,7 +8,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
     {
         public CardiovascularRegimenInterpretation(IExerciseRegimenParameters parameters) : base(parameters)
         {
-            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Cardiovascular);
+            Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular);
         }
 
         public override ExerciseDurationGoals Goals { get; }

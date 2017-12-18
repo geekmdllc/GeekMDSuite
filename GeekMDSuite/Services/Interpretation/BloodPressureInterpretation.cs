@@ -52,7 +52,9 @@ namespace GeekMDSuite.Services.Interpretation
                 public static readonly int HypertensiveUrgency = 180;
             }
         }
-        
+
+        public override string ToString() => Classification.ToString();
+
         private readonly BloodPressure _parameters;
         
         private static List<BloodStageParameters> GetBloodPressureStageParameters()

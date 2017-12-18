@@ -1,11 +1,11 @@
 ﻿using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite.Services.Fitness
+namespace GeekMDSuite.Services.Repositories
 {
-    internal static class GetGoalValuesByExerciseType
+    internal static class ExerciseRegimenGoalsRepository
     {
-        internal static ExerciseDurationGoals TotalWeeklyDuration(ExerciseClassification exercise)
+        internal static ExerciseDurationGoals GetTotalWeeklyDurationGoals(ExerciseClassification exercise)
         {
             if(exercise == ExerciseClassification.Cardiovascular)
                 return new ExerciseDurationGoals(150,75);
@@ -14,7 +14,7 @@ namespace GeekMDSuite.Services.Fitness
                 : new ExerciseDurationGoals(30, 20);
         }
 
-        internal static Interval<int> ResistanceRestInterval(int upper = 120, int lower = 30)
+        internal static Interval<int> GetResistanceRestIntervalGoals(int upper = 120, int lower = 30)
         {
             return new Interval<int>(lower,upper);
         }

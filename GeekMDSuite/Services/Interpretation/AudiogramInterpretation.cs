@@ -19,7 +19,9 @@ namespace GeekMDSuite.Services.Interpretation
                 GetClassification(),
                 GetLaterality(),
                 WorseSide());
-        
+
+        public override string ToString() => Classification.ToString();
+
         private Laterality GetLaterality()
         {
             return DifferenceLessThan10dB() ? Laterality.Bilateral : WorseSide();

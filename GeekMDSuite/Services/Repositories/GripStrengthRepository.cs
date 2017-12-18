@@ -3,7 +3,7 @@ using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Generic;
 using GeekMDSuite.Tools.MeasurementUnits.Conversion;
 
-namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
+namespace GeekMDSuite.Services.Repositories
 {
     internal static class GripStrengthRepository
     {

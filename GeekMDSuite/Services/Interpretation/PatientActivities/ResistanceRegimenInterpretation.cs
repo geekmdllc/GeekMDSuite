@@ -1,7 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Extensions;
 using GeekMDSuite.PatientActivities;
-using GeekMDSuite.Services.Fitness;
+using GeekMDSuite.Services.Repositories;
 using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Interpretation.PatientActivities
@@ -13,7 +13,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             : base(regimen)
         {
             _regimen = regimen;
-            Goals = GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Resistance);
+            Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Resistance);
         }
         
         
@@ -35,7 +35,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             }
         }
 
-        public static Interval<int> RestIntervalGoalRange  => GetGoalValuesByExerciseType.ResistanceRestInterval();
+        public static Interval<int> RestIntervalGoalRange  => ExerciseRegimenGoalsRepository.GetResistanceRestIntervalGoals();
         
         private readonly ResistanceRegimen _regimen;
         

@@ -100,7 +100,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .Set3000HertzDataPoint(45)
                 .Set4000HertzDataPoint(40)
                 .Set6000HertzDataPoint(50)
-                .Set8000HertzDataPoint(70)
+                .Set8000HertzDataPoint(90)
                 .Build();
             
             var audiogram = Audiogram.Build(audiogramDataLeft, audiogramDataRight);
@@ -214,6 +214,15 @@ namespace GeekMDSuite.ConsoleDemo
 
             var metsVo2Max = CalculateMetabolicEquivalents.FromVo2Max(vo2Max);
             Console.WriteLine($"Joes METS as calcualted from his VO2Max: {metsVo2Max}\n");
+            
+            var audiogramInterpretation = new AudiogramInterpretation(audiogram);
+            Console.WriteLine($"Audiogram Classification: {audiogramInterpretation}\n");
+            
+            var bpInterpretation = new BloodPressureInterpretation(vitals.BloodPressure);
+            Console.WriteLine($"BP Classification: {bpInterpretation}\n");
+            
+            var bodyCompExpandedInterp = new BodyCompositionBaseExpandedInterpretation(bodyCompositionExpanded);
+            Console.WriteLine($"Body comp: ${bodyCompExpandedInterp}\n");
         }
     }
 }

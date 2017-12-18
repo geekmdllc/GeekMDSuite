@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Tools;
 using GeekMDSuite.Tools.Fitness;
 using GeekMDSuite.Tools.MeasurementUnits;
 using Moq;
@@ -10,12 +9,6 @@ namespace GeekMDSuite.Test
 {
     public class Vo2MaxTest
     {
-
-        private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
-        private const TreadmillProtocol Protocol = TreadmillProtocol.Bruce;
-        private const TreadmillProtocol UnsupportedProtocol = TreadmillProtocol.Balke3Point0;
-
-        //TODO: Confirm 'classification' is correct.
         [Fact]
         public void MaleResultInRange()
         {            
@@ -24,7 +17,7 @@ namespace GeekMDSuite.Test
             patient.Setup(p => p.Age).Returns(45);
             
             var result = CalculateVo2Max.FromTreadmillStressTest(Protocol, _timeDuration, patient.Object);
-            Assert.InRange(result.Value, 40,41); 
+            Assert.InRange(result, 40,41); 
         }
         
         [Fact]
@@ -35,7 +28,7 @@ namespace GeekMDSuite.Test
             patient.Setup(p => p.Age).Returns(45);
             
             var result = CalculateVo2Max.FromTreadmillStressTest(Protocol, _timeDuration, patient.Object);
-            Assert.InRange(result.Value, 46,47); 
+            Assert.InRange(result, 46,47); 
         }
 
         [Fact]
@@ -48,5 +41,9 @@ namespace GeekMDSuite.Test
             Assert.Throws<NotImplementedException>(() =>
                 CalculateVo2Max.FromTreadmillStressTest(UnsupportedProtocol, _timeDuration, patient.Object));
         }
+        
+        private readonly TimeDuration _timeDuration = new TimeDuration(11,33);
+        private const TreadmillProtocol Protocol = TreadmillProtocol.Bruce;
+        private const TreadmillProtocol UnsupportedProtocol = TreadmillProtocol.Balke3Point0;
     }
 }

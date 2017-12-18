@@ -1,5 +1,5 @@
 ﻿using GeekMDSuite.PatientActivities;
-using GeekMDSuite.Services.Fitness;
+using GeekMDSuite.Services.Repositories;
 
 namespace GeekMDSuite.Services.Interpretation.PatientActivities
 {
@@ -30,10 +30,10 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
         
 
         public static double GoalMinutesHighIntensity => 
-            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Cardiovascular).HighIntensity;
+            ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular).HighIntensity;
 
         public static double GoalMinutesModerateIntensity => 
-            GetGoalValuesByExerciseType.TotalWeeklyDuration(ExerciseClassification.Cardiovascular).ModerateIntensity;
+            ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular).ModerateIntensity;
         
         public bool IntensityIsAdequate => IsHighIntensity || IsModerateIntensity;
 

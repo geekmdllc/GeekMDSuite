@@ -5,13 +5,11 @@ namespace GeekMDSuite.Services.Interpretation
     public class BodyCompositionBaseExpandedInterpretation : BodyCompositionBaseInterpretation, IInterpretable<BodyCompositionClassification>
     {
         public BodyCompositionBaseExpandedInterpretation( 
-            IBodyComposition bodyComposition, 
-            double visceralFat, 
-            double percentBodyFat) 
-            : base(bodyComposition)
+            IBodyCompositionExpanded bodyCompositionExpanded) 
+            : base(bodyCompositionExpanded)
         {
-            VisceralFat = visceralFat;
-            PercentBodyFat = percentBodyFat;
+            VisceralFat = bodyCompositionExpanded.VisceralFat;
+            PercentBodyFat = bodyCompositionExpanded.PercentBodyFat;
         }
 
         public double VisceralFat { get; }

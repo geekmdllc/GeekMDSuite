@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
+namespace GeekMDSuite.Services.Repositories
 {
     internal static class SitAndReachRepository
     {

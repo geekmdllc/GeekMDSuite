@@ -1,6 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests;
+using GeekMDSuite.Services.Repositories;
 
 namespace GeekMDSuite.Services.Interpretation
 {

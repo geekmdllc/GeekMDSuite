@@ -1,7 +1,7 @@
 ﻿using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Generic;
 
-namespace GeekMDSuite.Services.Repositories.MusculoskeletalStrengthTests
+namespace GeekMDSuite.Services.Repositories
 {
     internal class MuscularStrengthRepositoryEntry : IStrengthTestRanges
     {
