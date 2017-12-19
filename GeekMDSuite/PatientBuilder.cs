@@ -10,7 +10,7 @@ namespace GeekMDSuite
             ValidatePreBuildState();
             return Patient.Create(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
         }
-        
+
         public PatientBuilder SetDateOfBirth(int year, int month, int day)
         {
             _dateOfBirth = new DateTime(year, month, day);

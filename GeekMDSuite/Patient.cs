@@ -6,6 +6,10 @@ namespace GeekMDSuite
 {
     public class Patient : IPatient
     {
+        public Patient()
+        {
+            
+        }
         public Patient(Name name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber)
         {
             DateOfBirth = dateOfBirth;

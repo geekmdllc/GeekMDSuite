@@ -1,9 +1,5 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public interface IBuilder<T>
-    {
-        T Build();
-    }
     public class AudiogramDatasetBuilder : IBuilder<AudiogramDataset>
     {
         public AudiogramDataset Build()
