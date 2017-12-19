@@ -1,16 +1,16 @@
 ﻿using System;
+using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite
 {
-    public class PatientBuilder
+    public class PatientBuilder : IBuilder<Patient>
     {
-        private DateTime _dateOfBirth;
-        private Name _name;
-        private string _medicalRecordNumber;
-        private Gender _gender;
-        private Race _race;
-        private bool _raceIsSet;
-
+        public Patient Build()
+        {
+            ValidatePreBuildState();
+            return Patient.Create(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
+        }
+        
         public PatientBuilder SetDateOfBirth(int year, int month, int day)
         {
             _dateOfBirth = new DateTime(year, month, day);
@@ -42,11 +42,12 @@ namespace GeekMDSuite
             return this;
         }
 
-        public Patient Build()
-        {
-            ValidatePreBuildState();
-            return Patient.Create(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
-        }
+        private DateTime _dateOfBirth;
+        private Name _name;
+        private string _medicalRecordNumber;
+        private Gender _gender;
+        private Race _race;
+        private bool _raceIsSet;
 
         private void ValidatePreBuildState()
         {

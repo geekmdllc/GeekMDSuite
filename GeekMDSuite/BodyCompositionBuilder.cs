@@ -1,13 +1,16 @@
 ﻿using System;
+using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite
 {
-    public class BodyCompositionBuilder
+    public class BodyCompositionBuilder : IBuilder<BodyComposition>
     {
-        private double _heightInches;
-        private double _waistInches;
-        private double _hipsInches;
-        private double _weightPounds;
+
+        public BodyComposition Build()
+        {
+            ValidatePreBuildState();
+            return BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds);
+        }
 
         public BodyCompositionBuilder SetHeight(double inches)
         {
@@ -33,12 +36,11 @@ namespace GeekMDSuite
             return this;
         }
 
-        public BodyComposition Build()
-        {
-            ValidatePreBuildState();
-            return BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds);
-        }
-
+        private double _heightInches;
+        private double _waistInches;
+        private double _hipsInches;
+        private double _weightPounds;
+        
         private void ValidatePreBuildState()
         {
             var message = string.Empty;

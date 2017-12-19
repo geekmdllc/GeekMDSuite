@@ -1,13 +1,16 @@
-﻿using GeekMDSuite.Tools.MeasurementUnits;
+﻿using System;
+using GeekMDSuite.Procedures;
+using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite
 {
-    public class VitalSignsBuilder
+    public class VitalSignsBuilder : IBuilder<VitalSigns>
     {
-        private BloodPressure _bloodPressure;
-        private Temperature _temperature;
-        private int _oxygenSaturation;
-        private int _pulseRate;
+        public VitalSigns Build()
+        {
+            ValidatePreBuildState();
+            return VitalSigns.Build(_bloodPressure, _temperature, _oxygenSaturation, _pulseRate);
+        }
 
         public VitalSignsBuilder SetBloodPressure(int systolic, int diastolic, bool endOrganDamage)
         {
@@ -31,7 +34,21 @@ namespace GeekMDSuite
             _pulseRate = pulseRate;
             return this;
         }
+        
+        private BloodPressure _bloodPressure;
+        private Temperature _temperature;
+        private int _oxygenSaturation;
+        private int _pulseRate;
+        
+        private void ValidatePreBuildState()
+        {
+            var message = string.Empty;
+            if (_bloodPressure == null) message += $"{nameof(SetBloodPressure)} ";
+            if (_temperature == null) message += $"{nameof(SetTemperature)} ";
+            if (_oxygenSaturation == default(int)) message += $"{nameof(SetOxygenSaturation)} ";
+            if (_pulseRate == default(int)) message += $"{nameof(SetPulseRate)} ";
+            if (!string.IsNullOrEmpty(message)) throw new MissingMethodException(message + " should be set");
+        }
 
-        public VitalSigns Build() => new VitalSigns(_bloodPressure, _temperature, _oxygenSaturation, _pulseRate);
     }
 }

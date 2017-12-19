@@ -5,7 +5,7 @@ namespace GeekMDSuite
     public class VitalSigns : IVitalSigns
     {
 
-        internal VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate)
+        private VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate)
         {
             BloodPressure = bloodPressure;
             Temperature = temperature;
@@ -25,5 +25,9 @@ namespace GeekMDSuite
         {
             return string.Format($"{BloodPressure} {Temperature} {OxygenSaturation}% {PulseRate} bpm");
         }
+        
+        
+        internal static VitalSigns Build(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation,
+            int pulseRate) => new VitalSigns(bloodPressure, temperature, oxygenSaturation, pulseRate);
     }
 }

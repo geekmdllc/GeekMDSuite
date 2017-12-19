@@ -1,16 +1,16 @@
-﻿using GeekMDSuite.Tools.MeasurementUnits;
+﻿using System;
+using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Procedures
 {
     public class TreadmillExerciseStressTestBuilder
     {
-        private TreadmillProtocol _protocol = TreadmillProtocol.Bruce;
-        private TimeDuration _time;
-        private TreadmillExerciseStressTestResultClassification _result;
-        private BloodPressure _supineBloodPressure;
-        private int _supineHeartRate;
-        private BloodPressure _maximumBloodPressure;
-        private int _maximumHeartRate;
+        public TreadmillExerciseStressTest Build()
+        {
+            ValidatePreBuildState();
+            return new TreadmillExerciseStressTest(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 
+                _maximumBloodPressure, _maximumHeartRate);
+        }
 
         public TreadmillExerciseStressTestBuilder SetProtocol(TreadmillProtocol protocol = TreadmillProtocol.Bruce)
         {
@@ -26,6 +26,7 @@ namespace GeekMDSuite.Procedures
         
         public TreadmillExerciseStressTestBuilder SetResult(TreadmillExerciseStressTestResultClassification result)
         {
+            _resultIsSet = true;
             _result = result;
             return this;
         }
@@ -53,9 +54,29 @@ namespace GeekMDSuite.Procedures
             _maximumHeartRate = heartRate;
             return this;
         }
+        
+        private TreadmillProtocol _protocol = TreadmillProtocol.Bruce;
+        private TimeDuration _time;
+        private TreadmillExerciseStressTestResultClassification _result;
+        private BloodPressure _supineBloodPressure;
+        private int _supineHeartRate;
+        private BloodPressure _maximumBloodPressure;
+        private int _maximumHeartRate;
+        private bool _resultIsSet;
+        
+        
+        private void ValidatePreBuildState()
+        {
+            var message = string.Empty;
+            if (_time == null) message += $"{nameof(SetTime)} ";
+            if (!_resultIsSet) message += $"{nameof(SetResult)} ";
+            if (_supineBloodPressure == null) message += $"{nameof(SetSupineBloodPressure)} ";
+            if (_supineHeartRate == default(int)) message += $"{nameof(SetSupineHeartRate)} ";
+            if (_maximumBloodPressure == null) message += $"{nameof(SetMaximumBloodPressure)} ";
+            if (_maximumHeartRate == default(int)) message += $"{nameof(SetMaximumHeartRate)} ";
+            if (!string.IsNullOrEmpty(message)) throw new MissingMethodException(message + " should be set.");
+        }
 
-        public TreadmillExerciseStressTest Build() => 
-            new TreadmillExerciseStressTest(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 
-            _maximumBloodPressure, _maximumHeartRate);
+
     }
 }

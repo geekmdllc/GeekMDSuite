@@ -4,7 +4,7 @@ using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Procedures
 {
-    public class IshiharaSixPlateScreenBuilder
+    public class IshiharaSixPlateScreenBuilder : IBuilder<List<IshiharaPlateAnswer>>
     {
         public List<IshiharaPlateAnswer> Build()
         {

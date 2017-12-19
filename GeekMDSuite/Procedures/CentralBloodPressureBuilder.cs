@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class CentralBloodPressureBuilder
+    public class CentralBloodPressureBuilder : IBuilder<CentralBloodPressure>
     {
         public CentralBloodPressure Build()
         {

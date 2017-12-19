@@ -1,12 +1,16 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class AudiogramDatasetBuilder
+    public interface IBuilder<T>
+    {
+        T Build();
+    }
+    public class AudiogramDatasetBuilder : IBuilder<AudiogramDataset>
     {
         public AudiogramDataset Build()
         {
             return new AudiogramDataset(_f125, _f250, _f500, _f1000, _f2000, _f3000, _f4000, _f6000, _f8000);
         }
-    
+
         public AudiogramDatasetBuilder Set125HertzDataPoint(int value)
         {
             _f125 = new AudiogramDatapoint(value);

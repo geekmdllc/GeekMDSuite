@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class CarotidUltrasoundResultBuilder
+    public class CarotidUltrasoundResultBuilder : IBuilder<CarotidUltrasoundResult>
     {
 
         public CarotidUltrasoundResult Build()

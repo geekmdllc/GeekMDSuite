@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GeekMDSuite.Procedures
 {
-    public class FunctionalMovementScreenBuilder
+    public class FunctionalMovementScreenBuilder : IBuilder<FunctionalMovementScreen>
     {
         public FunctionalMovementScreen Build()
         {

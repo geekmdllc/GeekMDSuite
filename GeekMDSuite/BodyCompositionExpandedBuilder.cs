@@ -1,16 +1,18 @@
 ﻿using System;
+using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite
 {
-    public class BodyCompositionExpandedBuilder
+    public class BodyCompositionExpandedBuilder : IBuilder<BodyCompositionExpanded>
     {
-        private double _heightInches;
-        private double _waistInches;
-        private double _hipsInches;
-        private double _weightPounds;
-        private double _visceralFatCm2;
-        private double _percentBodyFat;
-
+        public BodyCompositionExpanded Build()
+        {
+            ValidatePreBuildState();
+            return BodyCompositionExpanded.Build(
+                BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds), 
+                _visceralFatCm2, _percentBodyFat);
+        } 
+        
         public BodyCompositionExpandedBuilder SetHeight(double inches)
         {
             _heightInches = inches;
@@ -46,15 +48,13 @@ namespace GeekMDSuite
             _percentBodyFat = percentage;
             return this;
         }
-
-        public BodyCompositionExpanded Build()
-        {
-            ValidatePreBuildState();
-            return BodyCompositionExpanded.Build(
-                BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds), 
-                _visceralFatCm2, _percentBodyFat);
-        } 
             
+        private double _heightInches;
+        private double _waistInches;
+        private double _hipsInches;
+        private double _weightPounds;
+        private double _visceralFatCm2;
+        private double _percentBodyFat;
         
         private void ValidatePreBuildState()
         {

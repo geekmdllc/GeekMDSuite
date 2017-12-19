@@ -2,14 +2,18 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class SpirometryBuilder
+    public class SpirometryBuilder : IBuilder<Spirometry>
     {
-        private double _forcedExpiratoryVolume1Second;
-        private double _forcedVitalCapacity;
-        private double _peakExpiratoryFlow;
-        private double _forcedExpiratoryFlow25To75;
-        private double _forcedExpiratoryTime;
-
+        public Spirometry Build()
+        {
+            ValidatePreBuildState();
+            return new Spirometry(_forcedExpiratoryVolume1Second, 
+                _forcedVitalCapacity, 
+                _peakExpiratoryFlow, 
+                _forcedExpiratoryFlow25To75, 
+                _forcedExpiratoryTime);
+        }
+        
         public SpirometryBuilder SetForcedExpiratoryVolume1Second(double liters)
         {
             _forcedExpiratoryVolume1Second = liters;
@@ -39,18 +43,14 @@ namespace GeekMDSuite.Procedures
             _forcedExpiratoryTime = seconds;
             return this;
         }
-
-        public Spirometry Build()
-        {
-            ValidatePreBuildState();
-            return new Spirometry(_forcedExpiratoryVolume1Second, 
-                _forcedVitalCapacity, 
-                _peakExpiratoryFlow, 
-                _forcedExpiratoryFlow25To75, 
-                _forcedExpiratoryTime);
-        }
-
+        
+        private double _forcedExpiratoryVolume1Second;
+        private double _forcedVitalCapacity;
+        private double _peakExpiratoryFlow;
+        private double _forcedExpiratoryFlow25To75;
+        private double _forcedExpiratoryTime;
         private void ValidatePreBuildState()
+        
         {
             var message = string.Empty;
             if (IsEffectivelyZero(_forcedExpiratoryVolume1Second)) message += $"{nameof(SetForcedExpiratoryVolume1Second)} ";
