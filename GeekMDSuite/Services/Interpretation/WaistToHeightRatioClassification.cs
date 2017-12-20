@@ -1,6 +1,7 @@
 ﻿namespace GeekMDSuite.Services.Interpretation
 {
-    public enum WaistToHeightRatioClassification {
+    public enum WaistToHeightRatioClassification 
+    {
         ExtremelySlim = 1,
         Slim = 2,
         Healthy = 3,

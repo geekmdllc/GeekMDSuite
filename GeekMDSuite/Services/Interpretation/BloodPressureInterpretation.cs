@@ -36,20 +36,20 @@ namespace GeekMDSuite.Services.Interpretation
         {
             public static class Diastolic
             {
-                public static readonly int Normotension = 60;
-                public static readonly int Prehypertension = 80;
-                public static readonly int Stage1Hypertension = 90;
-                public static readonly int Stage2Hypertension = 100;
-                public static readonly int HypertensiveUrgency = 120;
+                public const int Normotension = 60;
+                public const int Prehypertension = 80;
+                public const int Stage1Hypertension = 90;
+                public const int Stage2Hypertension = 100;
+                public const int HypertensiveUrgency = 120;
             }
 
             public static class Systolic
             {
-                public static readonly int Normotension = 100;
-                public static readonly int Prehypertension = 120;
-                public static readonly int Stage1Hypertension = 140;
-                public static readonly int Stage2Hypertension = 160;
-                public static readonly int HypertensiveUrgency = 180;
+                public const int Normotension = 100;
+                public const int Prehypertension = 120;
+                public const int Stage1Hypertension = 140;
+                public const int Stage2Hypertension = 160;
+                public const int HypertensiveUrgency = 180;
             }
         }
 
@@ -107,7 +107,7 @@ namespace GeekMDSuite.Services.Interpretation
         private static BloodStageParameters DifferentiateHypertensiveUrgencyVsEmergencyByOrganDamage(
             bool organDamagePresent)
         {
-            var ceilingPressure = 500;
+            const int ceilingPressure = 500;
             return new BloodStageParameters(
                 new Interval<int>(LowerLimits.Systolic.HypertensiveUrgency, ceilingPressure),
                 new Interval<int>(LowerLimits.Diastolic.HypertensiveUrgency, ceilingPressure),
@@ -153,7 +153,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         private static BloodStageParameters GetHypotensionStageParameters()
         {
-            var floorPressure = 0;
+            const int floorPressure = 0;
             return new BloodStageParameters(
                 new Interval<int>(floorPressure, LowerLimits.Systolic.Normotension),
                 new Interval<int>(floorPressure, LowerLimits.Diastolic.Normotension),

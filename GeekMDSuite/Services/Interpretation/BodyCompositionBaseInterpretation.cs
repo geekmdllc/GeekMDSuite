@@ -11,7 +11,7 @@ namespace GeekMDSuite.Services.Interpretation
         
         private IBodyComposition _bodyComposition;
         // TODO: Develop BodyCompositionBaseInterpretation
-        // Hip to waist
+        // Hip to waist: DONE
         // Waist to height: DONE
         // BMI: DONE
         // Classify (needs new class)

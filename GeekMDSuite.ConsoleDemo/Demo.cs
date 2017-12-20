@@ -35,7 +35,8 @@ namespace GeekMDSuite.ConsoleDemo
             var bp = BloodPressure.Build(100, 66);
             Console.WriteLine($"If {joe.Name.First} used to have good blood pressure, it  was {bp}.\n");
 
-            var bodyComposition = new BodyCompositionBuilder()
+            var bodyComposition = BodyCompositionBuilder
+                .Initialize()
                 .SetHeight(73)
                 .SetHips(41)
                 .SetWaist(52)
