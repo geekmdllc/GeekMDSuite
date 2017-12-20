@@ -8,7 +8,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void PatientBuilder_SkippingMethodInvocations_ThrowsMissingMethodException()
         {
-            Assert.Throws<MissingMethodException>(() => new PatientBuilder().Build());
+            Assert.Throws<MissingMethodException>(() => PatientBuilder.Initialize().Build());
         }
     }
 }

@@ -3,9 +3,9 @@ using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite
 {
-    public class BodyCompositionExpandedBuilder : IBuilder<BodyCompositionExpanded>
+    public class BodyCompositionExpandedBuilder : Builder<BodyCompositionExpandedBuilder,BodyCompositionExpanded>
     {
-        public BodyCompositionExpanded Build()
+        public override BodyCompositionExpanded Build()
         {
             ValidatePreBuildState();
             return BodyCompositionExpanded.Build(

@@ -2,13 +2,12 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class CarotidUltrasoundResultBuilder : IBuilder<CarotidUltrasoundResult>
+    public class CarotidUltrasoundResultBuilder : Builder<CarotidUltrasoundResultBuilder, CarotidUltrasoundResult>
     {
 
-        public CarotidUltrasoundResult Build()
+        public override CarotidUltrasoundResult Build()
         {
             ValidatePreBuildState();
-
             return CarotidUltrasoundResult.Build(_imtThickenssMm, _imtGrade, _plaqueCharacter, _stenosisGrade);
         }
 

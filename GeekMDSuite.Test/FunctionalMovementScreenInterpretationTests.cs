@@ -14,9 +14,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Positive, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,false, 3,false)
+                .SetShoulderMobility(3,true, 3,false)
+                .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
             var deepSquat = new FunctionalMovementScreenInterpretation(fms).Classification.DeepSquat;
@@ -32,9 +32,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(1)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Positive, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,false, 3,false)
+                .SetShoulderMobility(3,true, 3,false)
+                .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
             var deepSquat = new FunctionalMovementScreenInterpretation(fms).Classification.DeepSquat;
@@ -50,9 +50,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Positive, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,false, 3,false)
+                .SetShoulderMobility(3,true, 3,false)
+                .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
             var activeStraightLegRaise = new FunctionalMovementScreenInterpretation(fms).Classification.ActiveStraightLegRaise;
@@ -69,9 +69,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Positive, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,false, 3,false)
+                .SetShoulderMobility(3,true, 3,false)
+                .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
             var activeStraightLegRaise = new FunctionalMovementScreenInterpretation(fms).Classification.ActiveStraightLegRaise;
@@ -87,9 +87,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Positive, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,true, 3,false)
+                .SetShoulderMobility(3,false, 3,false)
+                .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
             var rotaryStability = new FunctionalMovementScreenInterpretation(fms).Classification.RotaryStability;
@@ -106,9 +106,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 1, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,false, 1,false)
+                .SetShoulderMobility(3,false, 3,false)
+                .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
             var rotaryStability = new FunctionalMovementScreenInterpretation(fms).Classification.RotaryStability;
@@ -124,9 +124,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,false, 3,false)
+                .SetShoulderMobility(3,false, 3,false)
+                .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
             var trunkStabilityPushup = new FunctionalMovementScreenInterpretation(fms).Classification.TrunkStabilityPushup;
@@ -142,9 +142,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Positive)
+                .SetRotaryStability(3,false, 3,false)
+                .SetShoulderMobility(3,false, 3,false)
+                .SetTrunkStabilityPuhsup(3,true)
                 .Build();
             
             var trunkStabilityPushup = new FunctionalMovementScreenInterpretation(fms).Classification.TrunkStabilityPushup;
@@ -160,9 +160,9 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetShoulderMobility(3, FmsClearanceTest.Negative, 3, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(1, FmsClearanceTest.Negative)
+                .SetRotaryStability(3,false, 3,false)
+                .SetShoulderMobility(3,false, 3,false)
+                .SetTrunkStabilityPuhsup(1,false)
                 .Build();
             
             var trunkStabilityPushup = new FunctionalMovementScreenInterpretation(fms).Classification.TrunkStabilityPushup;

@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace GeekMDSuite.Procedures
 {
-    public class FunctionalMovementScreenBuilder : IBuilder<FunctionalMovementScreen>
+    public class FunctionalMovementScreenBuilder : Builder<FunctionalMovementScreenBuilder, FunctionalMovementScreen>
     {
-        public FunctionalMovementScreen Build()
+        public override FunctionalMovementScreen Build()
         {
             ValidatePreBuildState();
             return new FunctionalMovementScreen(_deepSquat, _hurdleStep, _inlineLunge, _shoulderMobility, _activeStraightLegRaise,
@@ -37,11 +37,11 @@ namespace GeekMDSuite.Procedures
             return this;
         }
 
-        public FunctionalMovementScreenBuilder SetShoulderMobility(int leftScore, FmsClearanceTest clearanceLeft, int rightScore, FmsClearanceTest clearanceRight)
+        public FunctionalMovementScreenBuilder SetShoulderMobility(int leftScore, bool leftPain, int rightScore, bool rightPain)
         {
             _shoulderMobility = new FmsMovementSet(
-                new FmsMovementData(FmsMovementPattern.ShoulderMobility, Laterality.Left, leftScore, clearanceLeft), 
-                new FmsMovementData(FmsMovementPattern.ShoulderMobility, Laterality.Right, rightScore, clearanceRight)
+                new FmsMovementData(FmsMovementPattern.ShoulderMobility, Laterality.Left, leftScore, ParsePainResult(leftPain)), 
+                new FmsMovementData(FmsMovementPattern.ShoulderMobility, Laterality.Right, rightScore, ParsePainResult(rightPain))
             );
             return this;
         }
@@ -55,17 +55,17 @@ namespace GeekMDSuite.Procedures
             return this;
         }
 
-        public FunctionalMovementScreenBuilder SetTrunkStabilityPuhsup(int rawScore, FmsClearanceTest clearanceTest)
+        public FunctionalMovementScreenBuilder SetTrunkStabilityPuhsup(int rawScore, bool pain)
         {
-            _trunkStabilityPushup = new FmsMovementData(FmsMovementPattern.TrunkStability, Laterality.Bilateral, rawScore, clearanceTest);
+            _trunkStabilityPushup = new FmsMovementData(FmsMovementPattern.TrunkStability, Laterality.Bilateral, rawScore, ParsePainResult(pain));
             return this;
         }
 
-        public FunctionalMovementScreenBuilder SetRotaryStability(int leftScore, FmsClearanceTest clearanceLeft, int rightScore, FmsClearanceTest clearanceRight)
+        public FunctionalMovementScreenBuilder SetRotaryStability(int leftScore, bool leftPain, int rightScore, bool rightPain)
         {
             _rotaryStability = new FmsMovementSet(
-                new FmsMovementData(FmsMovementPattern.RotaryStability, Laterality.Left, leftScore, clearanceLeft), 
-                new FmsMovementData(FmsMovementPattern.RotaryStability, Laterality.Right, rightScore, clearanceRight)
+                new FmsMovementData(FmsMovementPattern.RotaryStability, Laterality.Left, leftScore, ParsePainResult(leftPain)), 
+                new FmsMovementData(FmsMovementPattern.RotaryStability, Laterality.Right, rightScore, ParsePainResult(rightPain))
             );
             return this;
         }
@@ -77,6 +77,9 @@ namespace GeekMDSuite.Procedures
         private FmsMovementSet _activeStraightLegRaise;
         private FmsMovementData _trunkStabilityPushup;
         private FmsMovementSet _rotaryStability;
+        
+        private static FmsClearanceTest ParsePainResult(bool leftPain) 
+            => leftPain ? FmsClearanceTest.Positive : FmsClearanceTest.Negative;
 
         private void ValidatePreBuildState()
         {

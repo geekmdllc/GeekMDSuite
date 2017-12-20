@@ -13,7 +13,8 @@ namespace GeekMDSuite.ConsoleDemo
     {
         public static void Main(string[] args)
         {
-            var joe = new PatientBuilder()
+            var joe = PatientBuilder
+                .Initialize()
                 .SetDateOfBirth(1977, 3, 31)
                 .SetGender(GenderIdentity.NonBinaryXy)
                 .SetMedicalRecordNumber("1234")
@@ -23,7 +24,7 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine($"Meet our patient: {joe}\n");
 
-            var vitals = new VitalSignsBuilder()
+            var vitals = VitalSignsBuilder.Initialize()
                 .SetBloodPressure(168, 99, false)
                 .SetOxygenSaturation(96)
                 .SetPulseRate(105)
@@ -43,7 +44,8 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine($"Simple body composition measures: {bodyComposition}\n");
 
-            var bodyCompositionExpanded = new BodyCompositionExpandedBuilder()
+            var bodyCompositionExpanded = BodyCompositionExpandedBuilder
+                .Initialize()
                 .SetBodyFatPercentage(35.6)
                 .SetHeight(73)
                 .SetHips(41)
@@ -66,7 +68,8 @@ namespace GeekMDSuite.ConsoleDemo
             var stretchRegimen = StretchingRegimen.Build(1, 10, ExerciseIntensity.Low);
             Console.WriteLine($"Stretching regimen: {stretchRegimen}\n");
             
-            var resistanceRegimen =  new ResistanceRegimenBuilder()
+            var resistanceRegimen =  ResistanceRegimenBuilder
+                .Initialize()
                 .SetAverageSessionDuration(120)
                 .SetIntensity(ExerciseIntensity.Moderate)
                 .SetSecondsRestDurationPerSet(90)
@@ -79,7 +82,8 @@ namespace GeekMDSuite.ConsoleDemo
                 .Build();
             Console.WriteLine($"Resistance regimen: {resistanceRegimen}\n");
 
-            var audiogramDataLeft = new AudiogramDatasetBuilder()
+            var audiogramDataLeft = AudiogramDatasetBuilder
+                .Initialize()
                 .Set125HertzDataPoint(10)
                 .Set125HertzDataPoint(20)
                 .Set500HertzDataPoint(30)
@@ -91,7 +95,8 @@ namespace GeekMDSuite.ConsoleDemo
                 .Set8000HertzDataPoint(70)
                 .Build();
             
-            var audiogramDataRight = new AudiogramDatasetBuilder()
+            var audiogramDataRight = AudiogramDatasetBuilder
+                .Initialize()
                 .Set125HertzDataPoint(10)
                 .Set125HertzDataPoint(20)
                 .Set500HertzDataPoint(30)
@@ -106,11 +111,13 @@ namespace GeekMDSuite.ConsoleDemo
             var audiogram = Audiogram.Build(audiogramDataLeft, audiogramDataRight);
             Console.WriteLine($"Audiogram\n{audiogram}\n");
 
-            var carotidLeft = new CarotidUltrasoundResultBuilder()
+            var carotidLeft = CarotidUltrasoundResultBuilder
+                .Initialize()
                 .SetIntimaMediaThickeness(0.693)
                 .Build();
 
-            var carotidRight = new CarotidUltrasoundResultBuilder()
+            var carotidRight = CarotidUltrasoundResultBuilder
+                .Initialize()
                 .SetIntimaMediaThickeness(0.732)
                 .SetImtGrade(CarotidIntimaMediaThicknessGrade.Mild)
                 .SetPercentStenosisGrade(CarotidPercentStenosisGrade.Nominal)
@@ -121,7 +128,8 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine($"Carotid US\n{carotidUs}\n");
 
-            var centralBp = new CentralBloodPressureBuilder()
+            var centralBp = CentralBloodPressureBuilder
+                .Initialize()
                 .SetAugmentedIndex(25)
                 .SetAugmentedPressure(4)
                 .SetCentralSystolicPressure(113)
@@ -132,14 +140,15 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine($"Central BP: {centralBp}\n");
 
-            var functionalMovementScreen = new FunctionalMovementScreenBuilder()
+            var functionalMovementScreen = FunctionalMovementScreenBuilder
+                .Initialize()
                 .SetActiveStraightLegRaise(2, 3)
                 .SetDeepSquat(3)
                 .SetHurdleStep(2, 2)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(2, FmsClearanceTest.Positive, 2, FmsClearanceTest.Negative)
-                .SetShoulderMobility(2, FmsClearanceTest.Negative, 2, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(2, FmsClearanceTest.Negative)
+                .SetRotaryStability(2, true, 2, false)
+                .SetShoulderMobility(2, false, 2, false)
+                .SetTrunkStabilityPuhsup(2, false)
                 .Build();
 
             Console.WriteLine($"Functional Movement Screen\n{functionalMovementScreen}\n");
@@ -147,7 +156,8 @@ namespace GeekMDSuite.ConsoleDemo
             var gripStrength = GripStrength.Build(123, 135);
             Console.WriteLine($"Grip strength {gripStrength}\n");
 
-            var ishiharaSix = new IshiharaSixPlateScreenBuilder()
+            var ishiharaSix = IshiharaSixPlateScreenBuilder
+                .Initialize()
                 .SetPlate1(IshiharaAnswerResult.NormalVision)
                 .SetPlate2(IshiharaAnswerResult.ColorVisionDefict)
                 .SetPlate3(IshiharaAnswerResult.NormalVision)
@@ -175,7 +185,8 @@ namespace GeekMDSuite.ConsoleDemo
             var situps = Situps.Build(55);
             Console.WriteLine($"Situps: {situps}\n");
 
-            var spirometry = new SpirometryBuilder()
+            var spirometry = SpirometryBuilder
+                .Initialize()
                 .SetForcedVitalCapacity(6.3)
                 .SetForcedExpiratoryVolume1Second(5.5)
                 .SetForcedExpiratoryFlow25To75(6.3)
@@ -185,7 +196,8 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine($"Spirometry: {spirometry}\n");
 
-            var treadmillStressTest = new TreadmillExerciseStressTestBuilder()
+            var treadmillStressTest = TreadmillExerciseStressTestBuilder
+                .Initialize()
                 .SetMaximumBloodPressure(205, 95)
                 .SetMaximumHeartRate(183)
                 .SetProtocol()

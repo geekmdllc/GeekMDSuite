@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class SpirometryBuilder : IBuilder<Spirometry>
+    public class SpirometryBuilder : Builder<SpirometryBuilder, Spirometry>
     {
-        public Spirometry Build()
+        public override Spirometry Build()
         {
             ValidatePreBuildState();
             return new Spirometry(_forcedExpiratoryVolume1Second, 

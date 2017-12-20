@@ -4,9 +4,9 @@ using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Procedures
 {
-    public class IshiharaSixPlateScreenBuilder : IBuilder<List<IshiharaPlateAnswer>>
+    public class IshiharaSixPlateScreenBuilder : Builder<IshiharaSixPlateScreenBuilder, List<IshiharaPlateAnswer>>
     {
-        public List<IshiharaPlateAnswer> Build()
+        public override List<IshiharaPlateAnswer> Build()
         {
             ValidatePreBuildState();
             return _list;

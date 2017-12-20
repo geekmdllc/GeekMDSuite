@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace GeekMDSuite.PatientActivities
 {
-    public class ResistanceRegimenBuilder
+    public class ResistanceRegimenBuilder : Builder<ResistanceRegimenBuilder, ResistanceRegimen>
     {
+        public override ResistanceRegimen Build()
+        {
+            ValidatePreBuildState();
+            return new ResistanceRegimen(
+                ExerciseRegimenParameters.Build(_sessionsPerWeek, _averageSessionDuration, _intensity),
+                _secondsRestDurationPerSet, _features);
+        }
+        
         public ResistanceRegimenBuilder SetSessionsPerWeek(double sessionsPerWeek)
         {
             _sessionsPerWeek = sessionsPerWeek;
@@ -55,14 +63,6 @@ namespace GeekMDSuite.PatientActivities
         {
             _features.Add(ResistenceRegimenFeatures.UpperBodyTrained);
             return this;
-        }
-
-        public ResistanceRegimen Build()
-        {
-            ValidatePreBuildState();
-            return new ResistanceRegimen(
-                ExerciseRegimenParameters.Build(_sessionsPerWeek, _averageSessionDuration, _intensity),
-                _secondsRestDurationPerSet, _features);
         }
 
         private void ValidatePreBuildState()

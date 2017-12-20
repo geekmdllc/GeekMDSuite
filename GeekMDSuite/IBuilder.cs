@@ -1,7 +1,7 @@
 ﻿namespace GeekMDSuite
 {
-    public interface IBuilder<out T>
+    public interface IBuilder<out TObj>
     {
-        T Build();
+        TObj Build();
     }
 }

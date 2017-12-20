@@ -19,9 +19,9 @@ namespace GeekMDSuite.Test
                 .SetActiveStraightLegRaise(2, 3)
                 .SetHurdleStep(1, 2)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(2, FmsClearanceTest.Negative, 2, FmsClearanceTest.Positive)
-                .SetShoulderMobility(1, FmsClearanceTest.Negative, 2, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative);
+                .SetRotaryStability(2, false, 2, true)
+                .SetShoulderMobility(1, false, 2, false)
+                .SetTrunkStabilityPuhsup(3, false);
             
             Assert.Throws<MissingMethodException>(() => fmsBuilder.Build());
         }
@@ -32,9 +32,9 @@ namespace GeekMDSuite.Test
                 .SetActiveStraightLegRaise(2, 3)
                 .SetHurdleStep(1, 2)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(2, FmsClearanceTest.Negative, 2, FmsClearanceTest.Positive)
-                .SetShoulderMobility(1, FmsClearanceTest.Negative, 2, FmsClearanceTest.Negative)
-                .SetTrunkStabilityPuhsup(3, FmsClearanceTest.Negative);
+                .SetRotaryStability(2, false, 2, true)
+                .SetShoulderMobility(1, false, 2, false)
+                .SetTrunkStabilityPuhsup(3, false);
 
             var errorMessage = string.Empty;
             try

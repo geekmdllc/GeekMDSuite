@@ -3,9 +3,9 @@ using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite
 {
-    public class PatientBuilder : IBuilder<Patient>
+    public class PatientBuilder : Builder<PatientBuilder,Patient>
     {
-        public Patient Build()
+        public override Patient Build()
         {
             ValidatePreBuildState();
             return Patient.Create(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);

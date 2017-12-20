@@ -3,10 +3,10 @@ using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite
 {
-    public class BodyCompositionBuilder : IBuilder<BodyComposition>
+    public class BodyCompositionBuilder : Builder<BodyCompositionBuilder,BodyComposition>
     {
 
-        public BodyComposition Build()
+        public override BodyComposition Build()
         {
             ValidatePreBuildState();
             return BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds);

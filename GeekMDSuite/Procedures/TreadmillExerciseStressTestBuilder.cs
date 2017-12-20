@@ -3,9 +3,9 @@ using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Procedures
 {
-    public class TreadmillExerciseStressTestBuilder
+    public class TreadmillExerciseStressTestBuilder : Builder<TreadmillExerciseStressTestBuilder, TreadmillExerciseStressTest>
     {
-        public TreadmillExerciseStressTest Build()
+        public override TreadmillExerciseStressTest Build()
         {
             ValidatePreBuildState();
             return new TreadmillExerciseStressTest(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 

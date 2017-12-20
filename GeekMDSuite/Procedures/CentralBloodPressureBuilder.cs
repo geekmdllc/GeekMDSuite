@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class CentralBloodPressureBuilder : IBuilder<CentralBloodPressure>
+    public class CentralBloodPressureBuilder : Builder<CentralBloodPressureBuilder, CentralBloodPressure>
     {
-        public CentralBloodPressure Build()
+        public override CentralBloodPressure Build()
         {
             ValidatePreBuildState();
             return CentralBloodPressure.Build(_systolicPressure, _pulsePressure, _augmentedPressure, _augmentedIndex, _referenceAge, _pulseWaveVelocity);

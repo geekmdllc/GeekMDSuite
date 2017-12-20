@@ -4,9 +4,9 @@ using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite
 {
-    public class VitalSignsBuilder : IBuilder<VitalSigns>
+    public class VitalSignsBuilder : Builder<VitalSignsBuilder, VitalSigns>
     {
-        public VitalSigns Build()
+        public override VitalSigns Build()
         {
             ValidatePreBuildState();
             return VitalSigns.Build(_bloodPressure, _temperature, _oxygenSaturation, _pulseRate);
