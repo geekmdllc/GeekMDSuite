@@ -1,6 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Tools;
-using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Services.Interpretation
 {
@@ -14,8 +12,8 @@ namespace GeekMDSuite.Services.Interpretation
         private IBodyComposition _bodyComposition;
         // TODO: Develop BodyCompositionBaseInterpretation
         // Hip to waist
-        // Hip to height
-        // BMI
+        // Waist to height: DONE
+        // BMI: DONE
         // Classify (needs new class)
         protected virtual BodyCompositionClassification Classify() => throw new NotImplementedException();
     }
