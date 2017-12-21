@@ -26,6 +26,6 @@ namespace GeekMDSuite.Services.Interpretation
         public static Interval<int> MildRange => HearingLossClassificationRepository.GetRange(HearingLoss.Mild);
         public static Interval<int> ModerateRange => HearingLossClassificationRepository.GetRange(HearingLoss.Moderate);
         public static Interval<int> SevereRange => HearingLossClassificationRepository.GetRange(HearingLoss.Severe);
-        public static Interval<int> ProfounRange => HearingLossClassificationRepository.GetRange(HearingLoss.Profound);
+        public static Interval<int> ProfoundRange => HearingLossClassificationRepository.GetRange(HearingLoss.Profound);
     }
 }

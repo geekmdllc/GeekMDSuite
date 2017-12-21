@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Services.Interpretation
 {
-    public enum HipToWaistRatioClassification
+    public enum HipToWaistRatio
     {
         Normal,
         Overweight,

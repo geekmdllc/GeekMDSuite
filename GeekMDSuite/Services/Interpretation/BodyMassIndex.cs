@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Services.Interpretation
 {
-    public enum BodyMassIndexCategory
+    public enum BodyMassIndex
     {
         SeverelyUnderweight,
         Underweight,

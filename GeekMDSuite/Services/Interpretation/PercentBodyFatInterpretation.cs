@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class PercentBodyFatInterpretation : IInterpretable<PercentBodyFatClassification>
+    public class PercentBodyFatInterpretation : IInterpretable<PercentBodyFat>
     {
         public PercentBodyFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded, GenderIdentity genderIdentity)
         {
@@ -12,7 +12,7 @@ namespace GeekMDSuite.Services.Interpretation
         public InterpretationText Interpretation => throw new NotImplementedException();
         public double Value { get; }
         
-        public PercentBodyFatClassification Classification => ClassifyPercentBodyFat();
+        public PercentBodyFat Classification => Classify();
 
         public static class LowerLimits
         {
@@ -35,17 +35,17 @@ namespace GeekMDSuite.Services.Interpretation
         
         private readonly GenderIdentity _genderIdentity;
         
-        private PercentBodyFatClassification ClassifyPercentBodyFat()
+        private PercentBodyFat Classify()
         {
             var upperLimit = DetermineBodyFatLimitsByGender(_genderIdentity);
 
             if (Value < upperLimit.Athletic)
-                return PercentBodyFatClassification.UnderFat;
+                return PercentBodyFat.UnderFat;
             if (Value < upperLimit.Fitness)
-                return PercentBodyFatClassification.Athletic;
+                return PercentBodyFat.Athletic;
             if (Value < upperLimit.Acceptable)
-                return PercentBodyFatClassification.Fitness;
-            return Value < upperLimit.OverFat ? PercentBodyFatClassification.Acceptable : PercentBodyFatClassification.OverFat;
+                return PercentBodyFat.Fitness;
+            return Value < upperLimit.OverFat ? PercentBodyFat.Acceptable : PercentBodyFat.OverFat;
         }
 
         private static BodyFatLimits DetermineBodyFatLimitsByGender(GenderIdentity genderIdentity)

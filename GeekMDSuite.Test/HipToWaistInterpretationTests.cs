@@ -16,7 +16,7 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(8.9);
 
             var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatioClassification.Normal, classification);
+            Assert.Equal(HipToWaistRatio.Normal, classification);
         }
         
         [Fact]
@@ -29,7 +29,7 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(9.9);
 
             var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatioClassification.Overweight, classification);
+            Assert.Equal(HipToWaistRatio.Overweight, classification);
         }
         
         [Fact]
@@ -42,7 +42,7 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(1);
 
             var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatioClassification.Obese, classification);
+            Assert.Equal(HipToWaistRatio.Obese, classification);
         }
         
         [Fact]
@@ -55,7 +55,7 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(7.9);
 
             var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatioClassification.Normal, classification);
+            Assert.Equal(HipToWaistRatio.Normal, classification);
         }
         
         [Fact]
@@ -68,7 +68,7 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(8.4);
 
             var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatioClassification.Overweight, classification);
+            Assert.Equal(HipToWaistRatio.Overweight, classification);
         }
         
         [Fact]
@@ -81,7 +81,7 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(8.5);
 
             var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatioClassification.Obese, classification);
+            Assert.Equal(HipToWaistRatio.Obese, classification);
         }
     }
     

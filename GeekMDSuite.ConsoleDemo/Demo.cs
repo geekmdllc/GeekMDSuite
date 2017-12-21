@@ -6,6 +6,7 @@ using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Cardiology;
 using GeekMDSuite.Tools.Fitness;
+using static System.Environment;
 
 namespace GeekMDSuite.ConsoleDemo
 {
@@ -22,7 +23,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetRace(Race.BlackOrAfricanAmerican)
                 .Build();
 
-            Console.WriteLine($"Meet our patient: {joe}\n");
+            Console.WriteLine($"Meet our patient: {joe}{NewLine}");
 
             var vitals = VitalSignsBuilder.Initialize()
                 .SetBloodPressure(168, 99, false)
@@ -30,10 +31,10 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetPulseRate(105)
                 .SetTemperature(101.2)
                 .Build();
-            Console.WriteLine($"{joe.Name.First}'s vitals: {vitals}\n");
+            Console.WriteLine($"{joe.Name.First}'s vitals: {vitals}{NewLine}");
 
             var bp = BloodPressure.Build(100, 66);
-            Console.WriteLine($"If {joe.Name.First} used to have good blood pressure, it  was {bp}.\n");
+            Console.WriteLine($"If {joe.Name.First} used to have good blood pressure, it  was {bp}.{NewLine}");
 
             var bodyComposition = BodyCompositionBuilder
                 .Initialize()
@@ -43,7 +44,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetWeight(316.4)
                 .Build();
 
-            Console.WriteLine($"Simple body composition measures: {bodyComposition}\n");
+            Console.WriteLine($"Simple body composition measures: {bodyComposition}{NewLine}");
 
             var bodyCompositionExpanded = BodyCompositionExpandedBuilder
                 .Initialize()
@@ -55,19 +56,19 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetWeight(316.4)
                 .Build();
 
-            Console.WriteLine($"Expanded body composition measures: {bodyCompositionExpanded}\n");
+            Console.WriteLine($"Expanded body composition measures: {bodyCompositionExpanded}{NewLine}");
 
             var quantitativeLab = Quantitative.Serum.BilirubinTotal(1.3);
-            Console.WriteLine($"Quantitative Lab: {quantitativeLab.Type}, Result: {quantitativeLab.Result}.\n");
+            Console.WriteLine($"Quantitative Lab: {quantitativeLab.Type}, Result: {quantitativeLab.Result}.{NewLine}");
             
             var qualitativeLab = Qualitative.HepatitisCAntibody(QualitativeLabResult.Negative);
-            Console.WriteLine($"Qualitative Lab: {qualitativeLab.Type}, Result: {qualitativeLab.Result}\n");
+            Console.WriteLine($"Qualitative Lab: {qualitativeLab.Type}, Result: {qualitativeLab.Result}{NewLine}");
 
             var cardioRegimen = CardiovascularRegimen.Build(3, 98.5, ExerciseIntensity.Moderate);
-            Console.WriteLine($"Cardio regimen: {cardioRegimen}\n");
+            Console.WriteLine($"Cardio regimen: {cardioRegimen}{NewLine}");
             
             var stretchRegimen = StretchingRegimen.Build(1, 10, ExerciseIntensity.Low);
-            Console.WriteLine($"Stretching regimen: {stretchRegimen}\n");
+            Console.WriteLine($"Stretching regimen: {stretchRegimen}{NewLine}");
             
             var resistanceRegimen =  ResistanceRegimenBuilder
                 .Initialize()
@@ -81,7 +82,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .ConfirmPushingMovementsPerformed()
                 .ConfirmRepetitionsToNearFailure()
                 .Build();
-            Console.WriteLine($"Resistance regimen: {resistanceRegimen}\n");
+            Console.WriteLine($"Resistance regimen: {resistanceRegimen}{NewLine}");
 
             var audiogramDataLeft = AudiogramDatasetBuilder
                 .Initialize()
@@ -110,7 +111,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .Build();
             
             var audiogram = Audiogram.Build(audiogramDataLeft, audiogramDataRight);
-            Console.WriteLine($"Audiogram\n{audiogram}\n");
+            Console.WriteLine($"Audiogram{NewLine}{audiogram}{NewLine}");
 
             var carotidLeft = CarotidUltrasoundResultBuilder
                 .Initialize()
@@ -127,7 +128,7 @@ namespace GeekMDSuite.ConsoleDemo
 
             var carotidUs = CarotidUltrasound.Build(carotidLeft, carotidRight);
 
-            Console.WriteLine($"Carotid US\n{carotidUs}\n");
+            Console.WriteLine($"Carotid US{NewLine}{carotidUs}{NewLine}");
 
             var centralBp = CentralBloodPressureBuilder
                 .Initialize()
@@ -139,7 +140,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetReferenceAge(43)
                 .Build();
 
-            Console.WriteLine($"Central BP: {centralBp}\n");
+            Console.WriteLine($"Central BP: {centralBp}{NewLine}");
 
             var functionalMovementScreen = FunctionalMovementScreenBuilder
                 .Initialize()
@@ -152,10 +153,10 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetTrunkStabilityPuhsup(2, false)
                 .Build();
 
-            Console.WriteLine($"Functional Movement Screen\n{functionalMovementScreen}\n");
+            Console.WriteLine($"Functional Movement Screen{NewLine}{functionalMovementScreen}{NewLine}");
 
             var gripStrength = GripStrength.Build(123, 135);
-            Console.WriteLine($"Grip strength {gripStrength}\n");
+            Console.WriteLine($"Grip strength {gripStrength}{NewLine}");
 
             var ishiharaSix = IshiharaSixPlateScreenBuilder
                 .Initialize()
@@ -172,19 +173,19 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine();
 
             var ocularPressure = OcularPressure.Build(15, 13);
-            Console.WriteLine($"Ocular pressure: {ocularPressure}\n");
+            Console.WriteLine($"Ocular pressure: {ocularPressure}{NewLine}");
 
             var peripheralVision = PeripheralVision.Build(85, 85);
-            Console.WriteLine($"Peripheral vision: {peripheralVision}\n");
+            Console.WriteLine($"Peripheral vision: {peripheralVision}{NewLine}");
 
             var pushups = Pushups.Build(35);
-            Console.WriteLine($"Pushups: {pushups}\n");
+            Console.WriteLine($"Pushups: {pushups}{NewLine}");
 
             var sitAndReach = SitAndReach.Build(13);
-            Console.WriteLine($"Sit & Reach: {sitAndReach}\n");
+            Console.WriteLine($"Sit & Reach: {sitAndReach}{NewLine}");
 
             var situps = Situps.Build(55);
-            Console.WriteLine($"Situps: {situps}\n");
+            Console.WriteLine($"Situps: {situps}{NewLine}");
 
             var spirometry = SpirometryBuilder
                 .Initialize()
@@ -195,7 +196,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetPeakExpiratoryFlow(9.3)
                 .Build();
 
-            Console.WriteLine($"Spirometry: {spirometry}\n");
+            Console.WriteLine($"Spirometry: {spirometry}{NewLine}");
 
             var treadmillStressTest = TreadmillExerciseStressTestBuilder
                 .Initialize()
@@ -208,34 +209,34 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetTime(11, 33)
                 .Build();
 
-            Console.WriteLine($"Treadmill: {treadmillStressTest}\n");
+            Console.WriteLine($"Treadmill: {treadmillStressTest}{NewLine}");
 
             var visualAcuity = VisualAcuity.Build(20, 20, 20);
-            Console.WriteLine($"Visual acuity: {visualAcuity}\n");
+            Console.WriteLine($"Visual acuity: {visualAcuity}{NewLine}");
 
             var predictedMaxHrStd = PredictMaximumHeartRate.Standard(joe.Age);
-            Console.WriteLine($"Joes predicted max HR (standard formula): {predictedMaxHrStd} bpm\n");
+            Console.WriteLine($"Joes predicted max HR (standard formula): {predictedMaxHrStd} bpm{NewLine}");
 
             var predictedMaxHrRevisited = PredictMaximumHeartRate.Revisited(joe.Age);
-            Console.WriteLine($"Joes predicted max HR (revisted formula): {predictedMaxHrRevisited} bpm\n");
+            Console.WriteLine($"Joes predicted max HR (revisted formula): {predictedMaxHrRevisited} bpm{NewLine}");
 
             var vo2Max = CalculateVo2Max.FromTreadmillStressTest(treadmillStressTest, joe);
-            Console.WriteLine($"Joes VO2Max as calculated from his treadmill stress test: {vo2Max}\n");
+            Console.WriteLine($"Joes VO2Max as calculated from his treadmill stress test: {vo2Max}{NewLine}");
 
             var metsTreadmill = CalculateMetabolicEquivalents.FromTreadmillStressTest(treadmillStressTest, joe);
-            Console.WriteLine($"Joes METS as calculated from his treadmill stress test: {metsTreadmill}\n");
+            Console.WriteLine($"Joes METS as calculated from his treadmill stress test: {metsTreadmill}{NewLine}");
 
             var metsVo2Max = CalculateMetabolicEquivalents.FromVo2Max(vo2Max);
-            Console.WriteLine($"Joes METS as calcualted from his VO2Max: {metsVo2Max}\n");
+            Console.WriteLine($"Joes METS as calcualted from his VO2Max: {metsVo2Max}{NewLine}");
             
             var audiogramInterpretation = new AudiogramInterpretation(audiogram);
-            Console.WriteLine($"Audiogram Classification: {audiogramInterpretation}\n");
+            Console.WriteLine($"Audiogram Classification: {audiogramInterpretation}{NewLine}");
             
             var bpInterpretation = new BloodPressureInterpretation(vitals.BloodPressure);
-            Console.WriteLine($"BP Classification: {bpInterpretation}\n");
+            Console.WriteLine($"BP Classification: {bpInterpretation}{NewLine}");
             
-            var bodyCompExpandedInterp = new BodyCompositionBaseExpandedInterpretation(bodyCompositionExpanded);
-            Console.WriteLine($"Body comp: ${bodyCompExpandedInterp}\n");
+            var bodyCompExpandedInterp = new BodyCompositionExpandedInterpretation(bodyCompositionExpanded);
+            Console.WriteLine($"Body comp: ${bodyCompExpandedInterp}{NewLine}");
         }
     }
 }

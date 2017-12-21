@@ -40,7 +40,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
         public bool DurationIsAdequate => IntensityIsAdequate && TimeGoalOrHigher;
 
         public double DurationPercentOfGoalAchieved =>
-            GoalMinutes >= 0 ? 100 * TotalMinutes / GoalMinutes : 0;
+            GoalMinutes > 0 ? 100 * TotalMinutes / GoalMinutes : 0;
         
         protected bool DurationAndIntensityAreAdequate => DurationIsAdequate && IntensityIsAdequate;
         

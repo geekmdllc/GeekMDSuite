@@ -2,17 +2,17 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class WaistToHeightRatioInterpretation : IInterpretable<WaistToHeightRatioClassification>
+    public class WaistToHeightRatioInterpretation : IInterpretable<WaistToHeightRatio>
     {
 
-        public WaistToHeightRatioInterpretation(IBodyComposition bodyComposition, GenderIdentity gender)
+        public WaistToHeightRatioInterpretation(IBodyComposition bodyComposition, IPatient patient)
         {
             _waistToHeighRatio = Calculate(bodyComposition);
-            _gender = gender;
+            _patient = patient;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
         
-        public WaistToHeightRatioClassification Classification => Classify();
+        public WaistToHeightRatio Classification => Classify();
 
         public static class LowerLimits
         {
@@ -35,33 +35,33 @@ namespace GeekMDSuite.Services.Interpretation
         }
         
         private readonly double _waistToHeighRatio;
-        private readonly GenderIdentity _gender;
+        private readonly IPatient _patient;
         
         private static double Calculate(IBodyComposition bodyComposition) => 
             bodyComposition.Waist.Centimeters / bodyComposition.Height.Centimeters;
         
-        private WaistToHeightRatioClassification Classify()
+        private WaistToHeightRatio Classify()
         {
-            var slim = Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.Slim : LowerLimits.Female.Slim;
-            var healthy = Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.Healthy : LowerLimits.Female.Healthy;
-            var overweight = Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.Overweight : LowerLimits.Female.Overweight;
-            var veryOverweight = Gender.IsGenotypeXy(_gender)
+            var slim = Gender.IsGenotypeXy(_patient.Gender) ? LowerLimits.Male.Slim : LowerLimits.Female.Slim;
+            var healthy = Gender.IsGenotypeXy(_patient.Gender) ? LowerLimits.Male.Healthy : LowerLimits.Female.Healthy;
+            var overweight = Gender.IsGenotypeXy(_patient.Gender) ? LowerLimits.Male.Overweight : LowerLimits.Female.Overweight;
+            var veryOverweight = Gender.IsGenotypeXy(_patient.Gender)
                 ? LowerLimits.Male.VeryOverweight
                 : LowerLimits.Female.VeryOverweight;
             var morbidlyObese =
-                Gender.IsGenotypeXy(_gender) ? LowerLimits.Male.MorbidlyObese : LowerLimits.Female.MoribdlyObese;
+                Gender.IsGenotypeXy(_patient.Gender) ? LowerLimits.Male.MorbidlyObese : LowerLimits.Female.MoribdlyObese;
 
             if (_waistToHeighRatio < slim)
-                return WaistToHeightRatioClassification.ExtremelySlim;
+                return WaistToHeightRatio.ExtremelySlim;
             if (_waistToHeighRatio < healthy)
-                return WaistToHeightRatioClassification.Slim;
+                return WaistToHeightRatio.Slim;
             if (_waistToHeighRatio < overweight)
-                return WaistToHeightRatioClassification.Healthy;
+                return WaistToHeightRatio.Healthy;
             if (_waistToHeighRatio < veryOverweight)
-                return WaistToHeightRatioClassification.Overweight;
+                return WaistToHeightRatio.Overweight;
             return _waistToHeighRatio < morbidlyObese
-                ? WaistToHeightRatioClassification.VeryOverweight
-                : WaistToHeightRatioClassification.MorbidlyObese;
+                ? WaistToHeightRatio.VeryOverweight
+                : WaistToHeightRatio.MorbidlyObese;
         }
     }
 }

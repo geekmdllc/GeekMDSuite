@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class BodyCompositionBaseExpandedInterpretation : BodyCompositionBaseInterpretation, IInterpretable<BodyCompositionClassification>
+    public class BodyCompositionExpandedInterpretation : BodyCompositionBaseInterpretation, IInterpretable<BodyCompositionClassification>
     {
-        public BodyCompositionBaseExpandedInterpretation( 
+        public BodyCompositionExpandedInterpretation( 
             IBodyCompositionExpanded bodyComposition) 
             : base(bodyComposition)
         {
@@ -21,5 +21,9 @@ namespace GeekMDSuite.Services.Interpretation
         public override string ToString() => Classification.ToString();
 
         protected override BodyCompositionClassification Classify() => throw new NotImplementedException();
+        
+        //TODO
+        // Visceral Fat Interpretation: DONE
+        // Percent Body Fat Interpretation
     }
 }

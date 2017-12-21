@@ -1,9 +1,8 @@
 ﻿using System;
-using GeekMDSuite.Tools;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class VisceralFatInterpretation : IInterpretable<VisceralFatClassification>
+    public class VisceralFatInterpretation : IInterpretable<VisceralFat>
     {
         public VisceralFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded)
         {
@@ -11,21 +10,27 @@ namespace GeekMDSuite.Services.Interpretation
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
         
-        public VisceralFatClassification Classification => ClassifyVisceralFat();
+        public VisceralFat Classification => ClassifyVisceralFat();
+
+        public static class LowerLimits
+        {
+            public const double Excellent = 0;
+            public const double Acceptable = 50;
+            public const double Elevated = 100;
+            public const double VeryElevated = 150;
+        }
 
         private readonly double _visceralFat;
         
-        private VisceralFatClassification ClassifyVisceralFat()
+        private VisceralFat ClassifyVisceralFat()
         {           
-            if (_visceralFat > UpperLimitNormal * 1.5)
-                return VisceralFatClassification.VeryElevated;
-            if (_visceralFat > UpperLimitNormal)
-                return VisceralFatClassification.Elevated;
-            return _visceralFat > UpperLimitNormal * 0.5
-                ? VisceralFatClassification.Acceptable
-                : VisceralFatClassification.Excellent;
+            if (_visceralFat >= LowerLimits.VeryElevated)
+                return VisceralFat.VeryElevated;
+            if (_visceralFat >= LowerLimits.Elevated)
+                return VisceralFat.Elevated;
+            return _visceralFat > LowerLimits.Acceptable
+                ? VisceralFat.Acceptable
+                : VisceralFat.Excellent;
         }
-        
-        public static readonly double UpperLimitNormal = 100;
     }
 }

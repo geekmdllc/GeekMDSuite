@@ -3,7 +3,7 @@ using GeekMDSuite.Tools.BodyComposition;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class BodyMassIndexInterpretation : IInterpretable<BodyMassIndexCategory>
+    public class BodyMassIndexInterpretation : IInterpretable<BodyMassIndex>
     {
         public BodyMassIndexInterpretation( IBodyComposition bodyComposition, IPatient patient)
         {
@@ -12,7 +12,7 @@ namespace GeekMDSuite.Services.Interpretation
         }
 
         public InterpretationText Interpretation => throw new NotImplementedException();
-        public BodyMassIndexCategory Classification => Classify();
+        public BodyMassIndex Classification => Classify();
         
         public static class LowerLimits
         {
@@ -36,7 +36,7 @@ namespace GeekMDSuite.Services.Interpretation
         private readonly IBodyComposition _bodyComposition;
         private readonly IPatient _patient;
 
-        private BodyMassIndexCategory Classify()
+        private BodyMassIndex Classify()
         {
             var bmi = CalculateBodyMassIndex.Calculate(_bodyComposition.Weight.Kilograms, _bodyComposition.Height.Meters);
             var overWeightLowerLimit = _patient.Race == Race.Asian 
@@ -44,13 +44,13 @@ namespace GeekMDSuite.Services.Interpretation
             var obeseClass1LowerLimit = _patient.Race == Race.Asian 
                 ? LowerLimits.ObeseClass1.Asian : LowerLimits.ObeseClass1.NonAsian;
             
-            if (bmi < LowerLimits.UnderWeight) return BodyMassIndexCategory.SeverelyUnderweight;
-            if (bmi < LowerLimits.NormalWeight) return BodyMassIndexCategory.Underweight;
-            if (bmi < overWeightLowerLimit) return BodyMassIndexCategory.NormalWeight;
-            if (bmi < obeseClass1LowerLimit) return BodyMassIndexCategory.OverWeight;
-            if (bmi < LowerLimits.ObeseClass2) return BodyMassIndexCategory.ObesityClass1;
-            return bmi < LowerLimits.ObeseClass3 ? BodyMassIndexCategory.ObesityClass2 
-                : BodyMassIndexCategory.ObesityClass3;
+            if (bmi < LowerLimits.UnderWeight) return BodyMassIndex.SeverelyUnderweight;
+            if (bmi < LowerLimits.NormalWeight) return BodyMassIndex.Underweight;
+            if (bmi < overWeightLowerLimit) return BodyMassIndex.NormalWeight;
+            if (bmi < obeseClass1LowerLimit) return BodyMassIndex.OverWeight;
+            if (bmi < LowerLimits.ObeseClass2) return BodyMassIndex.ObesityClass1;
+            return bmi < LowerLimits.ObeseClass3 ? BodyMassIndex.ObesityClass2 
+                : BodyMassIndex.ObesityClass3;
         }
     }
 }

@@ -2,8 +2,10 @@
 {
     public enum BodyCompositionClassification
     {
-        Underweight,
-        NormalWeight,
-        OverWeight
+        ThinAndLean,
+        SkinnyFat,
+        OverweightSuspectMuscular,
+        MuscularAndLean,
+        OverweightOverFat
     }
 }

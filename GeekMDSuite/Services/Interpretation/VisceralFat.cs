@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Services.Interpretation
 {
-    public enum VisceralFatClassification
+    public enum VisceralFat
     {
         Excellent = 1,
         Acceptable = 2,

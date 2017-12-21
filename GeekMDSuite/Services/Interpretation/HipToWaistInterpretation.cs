@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class HipToWaistInterpretation : IInterpretable<HipToWaistRatioClassification>
+    public class HipToWaistInterpretation : IInterpretable<HipToWaistRatio>
     {
         public HipToWaistInterpretation(IBodyComposition bodyComposition, IPatient patient)
         {
@@ -11,19 +11,19 @@ namespace GeekMDSuite.Services.Interpretation
         }
         
         public InterpretationText Interpretation => throw new NotImplementedException();
-        public HipToWaistRatioClassification Classification => Classify();
+        public HipToWaistRatio Classification => Classify();
         public double Ratio =>  _bodyComposition.Waist.Inches / _bodyComposition.Hips.Inches;
 
-        private HipToWaistRatioClassification Classify()
+        private HipToWaistRatio Classify()
         {
             var lowerLimits = GetLimits();
             
             if (Ratio < lowerLimits.Normal) 
                 throw new ArgumentOutOfRangeException(nameof(Ratio));
             if (Ratio < lowerLimits.Overweight) 
-                return HipToWaistRatioClassification.Normal;
+                return HipToWaistRatio.Normal;
             return Ratio < lowerLimits.Obese 
-                ? HipToWaistRatioClassification.Overweight : HipToWaistRatioClassification.Obese;
+                ? HipToWaistRatio.Overweight : HipToWaistRatio.Obese;
         }
 
         private HipToWaistLowerLimits GetLimits()

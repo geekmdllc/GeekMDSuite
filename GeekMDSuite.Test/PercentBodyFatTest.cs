@@ -13,7 +13,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(5);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
             
-            Assert.Equal(PercentBodyFatClassification.UnderFat, result.Classification);
+            Assert.Equal(PercentBodyFat.UnderFat, result.Classification);
         }
         [Fact]
         public void Interpret_GivenMaleWith13point9Percent_ReturnsAthletic()
@@ -22,7 +22,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(13.9);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
 
-            Assert.Equal(PercentBodyFatClassification.Athletic, result.Classification);
+            Assert.Equal(PercentBodyFat.Athletic, result.Classification);
         }
         
         [Fact]
@@ -32,7 +32,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(15);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
 
-            Assert.Equal(PercentBodyFatClassification.Fitness, result.Classification);
+            Assert.Equal(PercentBodyFat.Fitness, result.Classification);
         }
         
         [Fact]
@@ -42,7 +42,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(20);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
 
-            Assert.Equal(PercentBodyFatClassification.Acceptable, result.Classification);
+            Assert.Equal(PercentBodyFat.Acceptable, result.Classification);
         }
         
         [Fact]
@@ -52,7 +52,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(30);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
 
-            Assert.Equal(PercentBodyFatClassification.OverFat, result.Classification);
+            Assert.Equal(PercentBodyFat.OverFat, result.Classification);
         }
         [Fact]
         public void Interpret_GivenFemaleWith13Percent_ReturnsUnderFat()
@@ -61,7 +61,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(13);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
 
-            Assert.Equal(PercentBodyFatClassification.UnderFat, result.Classification);
+            Assert.Equal(PercentBodyFat.UnderFat, result.Classification);
         }
         [Fact]
         public void Interpret_GivenFemaleWith20point9Percent_ReturnsAthletic()
@@ -70,7 +70,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(20.9);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
 
-            Assert.Equal(PercentBodyFatClassification.Athletic, result.Classification);
+            Assert.Equal(PercentBodyFat.Athletic, result.Classification);
         }
         
         [Fact]
@@ -80,7 +80,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(24.9);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
 
-            Assert.Equal(PercentBodyFatClassification.Fitness, result.Classification);
+            Assert.Equal(PercentBodyFat.Fitness, result.Classification);
         }
         
         [Fact]
@@ -90,7 +90,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(30);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
 
-            Assert.Equal(PercentBodyFatClassification.Acceptable, result.Classification);
+            Assert.Equal(PercentBodyFat.Acceptable, result.Classification);
         }
         
         [Fact]
@@ -100,7 +100,7 @@ namespace GeekMDSuite.Test
             bce.Setup(b => b.PercentBodyFat).Returns(35);
             var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
 
-            Assert.Equal(PercentBodyFatClassification.OverFat, result.Classification);
+            Assert.Equal(PercentBodyFat.OverFat, result.Classification);
         }
 
     }

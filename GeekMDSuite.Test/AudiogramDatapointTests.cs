@@ -6,45 +6,18 @@ namespace GeekMDSuite.Test
 {
     public class AudiogramDatapointTests
     {
-        [Fact]
-        public void Value_Given15_ReturnsNoHearingLoss()
+        [Theory]
+        [InlineData(15, HearingLoss.None)]
+        [InlineData(30, HearingLoss.Mild)]
+        [InlineData(55, HearingLoss.Moderate)]
+        [InlineData(75, HearingLoss.Severe)]
+        [InlineData(95, HearingLoss.Profound)]
+        public void Classification_GivenADecibalValue_ReturnsExpectedClassification(int value, HearingLoss expectedClassification)
         {
-            var result = new AudiogramDatapoint(15);
+            var result = new AudiogramDatapoint(value);
             var interp = new AudiogramDataPointInterpretation(result);
             
-            Assert.Equal(HearingLoss.None, interp.Classification);
-        }
-        [Fact]
-        public void Value_Given30_ReturnsMildHearingLoss()
-        {
-            var result = new AudiogramDatapoint(30);
-            var interp = new AudiogramDataPointInterpretation(result);
-            
-            Assert.Equal(HearingLoss.Mild, interp.Classification);
-        }
-        [Fact]
-        public void Value_Given55_ReturnsModerateHearingLoss()
-        {
-            var result = new AudiogramDatapoint(55);
-            var interp = new AudiogramDataPointInterpretation(result);
-            
-            Assert.Equal(HearingLoss.Moderate, interp.Classification);
-        }
-        [Fact]
-        public void Value_Given75_ReturnsSevereHearingLoss()
-        {
-            var result = new AudiogramDatapoint(75);
-            var interp = new AudiogramDataPointInterpretation(result);
-            
-            Assert.Equal(HearingLoss.Severe, interp.Classification);
-        }
-        [Fact]
-        public void Value_Given95_ReturnsProfoundHearingLoss()
-        {
-            var result = new AudiogramDatapoint(95);
-            var interp = new AudiogramDataPointInterpretation(result);
-            
-            Assert.Equal(HearingLoss.Profound, interp.Classification);
+            Assert.Equal(expectedClassification, interp.Classification);
         }
     }
 }

@@ -13,9 +13,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(33);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Male);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.ExtremelySlim, result.Classification);
+            Assert.Equal(WaistToHeightRatio.ExtremelySlim, result.Classification);
         }
 
         [Fact]
@@ -25,9 +25,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(33);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Female);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockFemale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.ExtremelySlim, result.Classification);
+            Assert.Equal(WaistToHeightRatio.ExtremelySlim, result.Classification);
         }
         
         [Fact]
@@ -37,9 +37,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(42);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Male);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.Slim, result.Classification);
+            Assert.Equal(WaistToHeightRatio.Slim, result.Classification);
         }
 
         [Fact]
@@ -49,9 +49,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(41);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Male);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.Slim, result.Classification);
+            Assert.Equal(WaistToHeightRatio.Slim, result.Classification);
         }
 
         [Fact]
@@ -61,9 +61,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(52);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.NonBinaryXy);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.Healthy, result.Classification);
+            Assert.Equal(WaistToHeightRatio.Healthy, result.Classification);
         }
 
         [Fact]
@@ -73,9 +73,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(48);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Male);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.Healthy, result.Classification);
+            Assert.Equal(WaistToHeightRatio.Healthy, result.Classification);
         }
         
         [Fact]
@@ -85,9 +85,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(57);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.NonBinaryXy);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.Overweight, result.Classification);
+            Assert.Equal(WaistToHeightRatio.Overweight, result.Classification);
         }
 
         [Fact]
@@ -97,9 +97,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(53);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Female);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockFemale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.Overweight, result.Classification);
+            Assert.Equal(WaistToHeightRatio.Overweight, result.Classification);
         }
         
         [Fact]
@@ -109,9 +109,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(62);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Male);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.VeryOverweight, result.Classification);
+            Assert.Equal(WaistToHeightRatio.VeryOverweight, result.Classification);
         }
 
         [Fact]
@@ -121,9 +121,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(57);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Female);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockFemale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.VeryOverweight, result.Classification);
+            Assert.Equal(WaistToHeightRatio.VeryOverweight, result.Classification);
         }
         
         [Fact]
@@ -133,9 +133,9 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(65);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Male);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockMale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.MorbidlyObese, result.Classification);
+            Assert.Equal(WaistToHeightRatio.MorbidlyObese, result.Classification);
         }
 
         [Fact]
@@ -145,9 +145,22 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(100);
             bc.Setup(b => b.Waist.Centimeters).Returns(60);
             
-            var result = new WaistToHeightRatioInterpretation(bc.Object, GenderIdentity.Female);
+            var result = new WaistToHeightRatioInterpretation(bc.Object, _mockFemale.Object);
             
-            Assert.Equal(WaistToHeightRatioClassification.MorbidlyObese, result.Classification);
+            Assert.Equal(WaistToHeightRatio.MorbidlyObese, result.Classification);
         }
+
+        private static Mock<IPatient> GetMockPatientByGender(GenderIdentity genderIdentity)
+        {
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+
+            return mockPatient;
+        }
+
+        private readonly Mock<IPatient> _mockMale = GetMockPatientByGender(GenderIdentity.Male);
+        private readonly Mock<IPatient> _mockFemale = GetMockPatientByGender(GenderIdentity.Female);
+
+
     }
 }
