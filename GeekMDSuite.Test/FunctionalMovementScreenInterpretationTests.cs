@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Xunit;
 
@@ -169,6 +170,12 @@ namespace GeekMDSuite.Test
             
             Assert.Equal(FmsScoreFlag.L1R1, trunkStabilityPushup.Score);
             Assert.Equal(FmsRecommendedAction.Restricted, trunkStabilityPushup.RecommendedAction);
+        }
+
+        [Fact]
+        public void NullFunctionalMovementScreen_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new FunctionalMovementScreenClassification(null));
         }
     }
 }

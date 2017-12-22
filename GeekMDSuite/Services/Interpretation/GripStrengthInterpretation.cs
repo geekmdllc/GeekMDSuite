@@ -8,7 +8,7 @@ namespace GeekMDSuite.Services.Interpretation
     public class GripStrengthInterpretation : IInterpretable<GripStrengthClassificationResult>, IGripStrengthLimits
     {
 
-        public GripStrengthInterpretation(GripStrength gripStrength, IPatient patient)
+        public GripStrengthInterpretation(IGripStrength gripStrength, IPatient patient)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
             _gripStrength = gripStrength;
@@ -23,7 +23,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public override string ToString() => Classification.ToString();
 
-        private readonly GripStrength _gripStrength;
+        private readonly IGripStrength _gripStrength;
         private readonly GripStrengthLimits _ranges;
 
         private GripStrengthClassificationResult Classify() => 

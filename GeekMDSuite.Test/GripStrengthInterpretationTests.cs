@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
@@ -86,6 +87,19 @@ namespace GeekMDSuite.Test
             
             Assert.Equal(GripStrengthClassification.Weak, classification.WorseSide);
             Assert.Equal(Laterality.Left, classification.Laterality);
+        }
+
+        [Fact]
+        public void NullGripStrength_ThrowsNullReferenceException()
+        {
+            Assert.Throws<NullReferenceException>(() => new GripStrengthInterpretation(null, new Mock<IPatient>().Object));
+        }
+
+        [Fact]
+        public void NullPatient_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new GripStrengthInterpretation(new Mock<IGripStrength>().Object, null));
         }
     }
 }

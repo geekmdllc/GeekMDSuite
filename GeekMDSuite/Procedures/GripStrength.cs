@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class GripStrength
+    public class GripStrength : IGripStrength
     {
         private GripStrength(IMassMeasurement left, IMassMeasurement right)
         {

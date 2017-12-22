@@ -1,6 +1,6 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
-using GeekMDSuite.Tools.Fitness;
 using GeekMDSuite.Tools.MeasurementUnits;
 using Moq;
 using Xunit;
@@ -63,6 +63,19 @@ namespace GeekMDSuite.Test
             var classification = new FitTreadmillScoreInterpretation(mockTreadmillStressTest.Object, mockPatient.Object).Classification;
             
             Assert.Equal(expectedClassification, classification);
+        }
+
+        [Fact]
+        public void NullTreadmillStressTest_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new FitTreadmillScoreInterpretation(null, new Mock<IPatient>().Object));
+        }
+
+        [Fact]
+        public void NullPatient_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new FitTreadmillScoreInterpretation(new Mock<ITreadmillExerciseStressTest>().Object, null));
         }
     }
 }
