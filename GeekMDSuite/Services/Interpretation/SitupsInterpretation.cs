@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.Services.Interpretation
 {
@@ -6,6 +7,8 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public SitupsInterpretation(IMuscularStrengthTest test, IPatient patient) : base(test, patient)
         {
+            if (test == null) throw new ArgumentNullException(nameof(test));
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
         }
     }
 }

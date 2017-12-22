@@ -7,7 +7,7 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public OcularPressureInterpretation(OcularPressure pressure)
         {
-            _ocularPressure = pressure;
+            _ocularPressure = pressure ?? throw new ArgumentNullException(nameof(pressure));
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
         public OcularPressureClassification Classification => Classify();

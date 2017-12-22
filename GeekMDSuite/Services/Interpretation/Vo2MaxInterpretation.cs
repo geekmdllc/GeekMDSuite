@@ -10,7 +10,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public Vo2MaxInterpretation(double vo2Max, IPatient patient)
         {
-            _patient = patient;
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             _vo2Max = vo2Max;
         }
         

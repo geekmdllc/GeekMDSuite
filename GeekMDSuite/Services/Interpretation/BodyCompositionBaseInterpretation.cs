@@ -6,8 +6,8 @@ namespace GeekMDSuite.Services.Interpretation
     {
         protected BodyCompositionBaseInterpretation(IBodyComposition bodyComposition, IPatient patient)
         {
-            _bodyComposition = bodyComposition;
-            _patient = patient;
+            _bodyComposition = bodyComposition ?? throw new ArgumentNullException(nameof(bodyComposition));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
         }
 
         public HipToWaistRatio HipToWaistRatio => new HipToWaistInterpretation(_bodyComposition, _patient).Classification;

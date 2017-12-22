@@ -9,9 +9,10 @@ namespace GeekMDSuite.Services.Interpretation
 
         public PeripheralVisionInterpreation(PeripheralVision peripheralVision)
         {
-            _peripheralVision = peripheralVision;
+            _peripheralVision = peripheralVision ?? throw new ArgumentNullException(nameof(peripheralVision));
         }
-        public static readonly int LowerLimitOfNormal = 70;
+
+        public const int LowerLimitOfNormal = 70;
         public InterpretationText Interpretation => throw new NotImplementedException();
         public PeripheralVisionClassification Classification => Classify();
         public PeripheralVisionClassification Left => ClassifyLeft();

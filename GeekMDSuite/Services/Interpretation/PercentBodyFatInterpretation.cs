@@ -6,7 +6,8 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public PercentBodyFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded, IPatient patient)
         {
-            _patient = patient;
+            if (bodyCompositionExpanded == null) throw new ArgumentNullException(nameof(bodyCompositionExpanded));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             Value = bodyCompositionExpanded.PercentBodyFat;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();

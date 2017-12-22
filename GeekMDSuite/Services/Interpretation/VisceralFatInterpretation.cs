@@ -6,6 +6,7 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public VisceralFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded)
         {
+            if (bodyCompositionExpanded == null) throw new ArgumentNullException(nameof(bodyCompositionExpanded));
             _visceralFat = bodyCompositionExpanded.VisceralFat;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();

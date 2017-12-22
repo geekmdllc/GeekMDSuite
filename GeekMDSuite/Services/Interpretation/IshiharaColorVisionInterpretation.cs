@@ -4,13 +4,6 @@ using System.Linq;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Repositories;
 
-// Ishihara Test
-// 06 plate interpretation: 6/6 to pass
-// 10 plate interpretation: looking for details??? Not implemnnted
-// 14 Plate interpretation: 10/11 of plates 1-11: https://web.stanford.edu/group/vista/wikiupload/0/0a/Ishihara.14.Plate.Instructions.pdf
-// 24 Plate interpretation: 13/15 of plates 1-15: http://www.dfis.ubi.pt/~hgil/P.V.2/Ishihara/Ishihara.24.Plate.TEST.Book.pdf
-// 38 Plate interpretation: 17/21 of plates 1-21: http://zonemedical.com.au/c.728341/site/PDF/PAL/Ishihara-Test-User-Manual.pdf
-
 namespace GeekMDSuite.Services.Interpretation
 {
     public abstract class IshiharaColorVisionInterpretation
@@ -24,7 +17,7 @@ namespace GeekMDSuite.Services.Interpretation
                 throw new IndexOutOfRangeException($"{nameof(answerList)} has {answerList.Count} items and it should have {PlateSet.Count}.");
         }
 
-        private List<IshiharaPlateModel> GetPlateSet(IshiharaTestType testType)
+        private static List<IshiharaPlateModel> GetPlateSet(IshiharaTestType testType)
         {
             if (testType == IshiharaTestType.Ishihara6) return IshiharaPlateSetRepository.SixPlateScreen();
             if (testType == IshiharaTestType.Ishihara10) return IshiharaPlateSetRepository.SixPlateScreen();
@@ -33,12 +26,14 @@ namespace GeekMDSuite.Services.Interpretation
                 ? IshiharaPlateSetRepository.TwentyFourPlateScreen() : IshiharaPlateSetRepository.ThirtyEightPlateScreen();
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public IshiharaTestType TestType { get; }
+        // ReSharper disable once MemberCanBePrivate.Global
         public List<IshiharaPlateAnswer> AnswerList { get; }
 
         public override string ToString() => Classify().ToString();
 
-        protected List<IshiharaPlateModel> PlateSet { get; set; }
+        private List<IshiharaPlateModel> PlateSet { get; set; }
 
         protected abstract IshiharaResultFlag Classify();
 
@@ -104,4 +99,11 @@ namespace GeekMDSuite.Services.Interpretation
             }
         }
     }
+    
+// Ishihara Test
+// 06 plate interpretation: 6/6 to pass
+// 10 plate interpretation: looking for details??? Not implemnnted
+// 14 Plate interpretation: 10/11 of plates 1-11: https://web.stanford.edu/group/vista/wikiupload/0/0a/Ishihara.14.Plate.Instructions.pdf
+// 24 Plate interpretation: 13/15 of plates 1-15: http://www.dfis.ubi.pt/~hgil/P.V.2/Ishihara/Ishihara.24.Plate.TEST.Book.pdf
+// 38 Plate interpretation: 17/21 of plates 1-21: http://zonemedical.com.au/c.728341/site/PDF/PAL/Ishihara-Test-User-Manual.pdf
 }

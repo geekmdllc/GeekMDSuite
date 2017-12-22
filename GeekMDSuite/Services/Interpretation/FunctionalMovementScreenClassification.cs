@@ -9,6 +9,7 @@ namespace GeekMDSuite.Services.Interpretation
         public FunctionalMovementScreenClassification(
             FunctionalMovementScreen functionalMovementScreen)
         {
+            if (functionalMovementScreen == null) throw new ArgumentNullException(nameof(functionalMovementScreen));
             DeepSquat = ClassifyMovement(functionalMovementScreen.DeepSquat);
             HurdleStep = ClassifyMovement(functionalMovementScreen.HurdleStep);
             ShoulderMobility = ClassifyMovement(functionalMovementScreen.ShoulderMobility);
@@ -27,7 +28,7 @@ namespace GeekMDSuite.Services.Interpretation
         public FmsMovementClassification ActiveStraightLegRaise { get; }
         public FmsMovementClassification TrunkStabilityPushup { get; }
         public FmsMovementClassification RotaryStability { get; }
-        public int Score { get; }
+        public readonly int Score;
 
         public override string ToString()
         {

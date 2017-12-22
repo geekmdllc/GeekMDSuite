@@ -8,8 +8,8 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public QualitativeLabInterpretation(QualitativeLab lab, IPatient patient)
         {
-            _lab = lab;
-            _patient = patient;
+            _lab = lab ?? throw new ArgumentNullException(nameof(lab));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             Lab = QualitativeLabRepository.GetLab(lab);
         }
 

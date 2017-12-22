@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GeekMDSuite.Tools.Generic;
 
@@ -7,7 +8,7 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public BloodPressureInterpretation(BloodPressure parameters)
         {
-            _parameters = parameters;
+            _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
         
         public InterpretationText Interpretation => new InterpretationBuilder()

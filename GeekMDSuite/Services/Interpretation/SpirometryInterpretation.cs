@@ -8,9 +8,9 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public SpirometryInterpretation(Spirometry spirometry, IPatient patient, IBodyComposition bodyComposition)
         {
-            _spirometry = spirometry;
-            _patient = patient;
-            _bodyComposition = bodyComposition;
+            _spirometry = spirometry ?? throw new ArgumentNullException(nameof(spirometry));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            _bodyComposition = bodyComposition ?? throw new ArgumentNullException(nameof(bodyComposition));
         }
 
         public InterpretationText Interpretation => throw new NotImplementedException();

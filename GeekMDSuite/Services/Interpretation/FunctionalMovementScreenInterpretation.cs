@@ -7,7 +7,7 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public FunctionalMovementScreenInterpretation(FunctionalMovementScreen fms)
         {
-            _fms = fms;
+            _fms = fms ?? throw new ArgumentNullException(nameof(fms));
         }
         
         public InterpretationText Interpretation => throw new NotImplementedException();

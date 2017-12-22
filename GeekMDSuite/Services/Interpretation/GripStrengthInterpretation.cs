@@ -10,6 +10,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public GripStrengthInterpretation(GripStrength gripStrength, IPatient patient)
         {
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
             _gripStrength = gripStrength;
             _ranges = GripStrengthRepository.GetRanges(patient);
         }

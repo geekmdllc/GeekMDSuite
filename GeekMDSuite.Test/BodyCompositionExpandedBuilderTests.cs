@@ -8,7 +8,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void FailingToSetAllValues_ThrowsMissingMethodException()
         {
-            Assert.Throws<MissingMethodException>(() => new BodyCompositionExpandedBuilder().Build());
+            Assert.Throws<MissingMethodException>(() => BodyCompositionExpandedBuilder.Initialize().Build());
         }
     }
 }

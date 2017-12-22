@@ -8,6 +8,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
     {
         public CardiovascularRegimenInterpretation(IExerciseRegimenParameters parameters) : base(parameters)
         {
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular);
         }
 

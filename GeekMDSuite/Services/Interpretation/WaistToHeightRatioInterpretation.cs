@@ -7,13 +7,15 @@ namespace GeekMDSuite.Services.Interpretation
 
         public WaistToHeightRatioInterpretation(IBodyComposition bodyComposition, IPatient patient)
         {
+            if (bodyComposition == null) throw new ArgumentNullException(nameof(bodyComposition));
             _waistToHeighRatio = Calculate(bodyComposition);
-            _patient = patient;
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
         
         public WaistToHeightRatio Classification => Classify();
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public static class LowerLimits
         {
             public static class Male

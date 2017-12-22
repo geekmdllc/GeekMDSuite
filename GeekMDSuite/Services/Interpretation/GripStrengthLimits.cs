@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Tools.MeasurementUnits;
 using static GeekMDSuite.Tools.MeasurementUnits.Conversion.MassConversion;
 
@@ -19,8 +20,8 @@ namespace GeekMDSuite.Services.Interpretation
         
         private GripStrengthLimits(IMassMeasurement lower, IMassMeasurement upper)
         {
-            LowerLimitOfNormal = lower;
-            UpperLimitOfNormal = upper;
+            LowerLimitOfNormal = lower ?? throw new ArgumentNullException(nameof(lower));
+            UpperLimitOfNormal = upper ?? throw new ArgumentNullException(nameof(upper));
         }
 
         public IMassMeasurement LowerLimitOfNormal { get; }

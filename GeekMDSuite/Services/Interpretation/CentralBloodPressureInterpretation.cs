@@ -10,8 +10,8 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public CentralBloodPressureInterpretation(CentralBloodPressure centralBloodPressure, IPatient patient)
         {
-            _centralBloodPressure = centralBloodPressure;
-            _patient = patient;
+            _centralBloodPressure = centralBloodPressure ?? throw new ArgumentNullException(nameof(centralBloodPressure));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
         }
         
         public InterpretationText Interpretation => throw new NotImplementedException();

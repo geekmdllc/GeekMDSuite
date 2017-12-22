@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Repositories;
 using GeekMDSuite.Tools.Generic;
 
@@ -8,7 +9,7 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public AudiogramDataPointInterpretation(AudiogramDatapoint datapoint)
         {
-            _datapoint = datapoint;
+            _datapoint = datapoint ?? throw new ArgumentNullException(nameof(datapoint));
         }
         public HearingLoss Classification => Classify(_datapoint.Value);
 

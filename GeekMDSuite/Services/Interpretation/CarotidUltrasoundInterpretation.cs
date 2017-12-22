@@ -6,11 +6,9 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class CarotidUltrasoundInterpretation : IInterpretable<CarotidUltrasoundInterpretationResult>
     {
-        private readonly CarotidUltrasound _carotidUltrasound;
-
         public CarotidUltrasoundInterpretation(CarotidUltrasound carotidUltrasound)
         {
-            _carotidUltrasound = carotidUltrasound;
+            _carotidUltrasound = carotidUltrasound ?? throw new ArgumentNullException(nameof(carotidUltrasound));
         }
         
         //todo: ensure that this incorporates IMT and character
@@ -20,6 +18,8 @@ namespace GeekMDSuite.Services.Interpretation
 
         public override string ToString() => Classification.ToString();
 
+        private readonly CarotidUltrasound _carotidUltrasound;
+        
         private CarotidUltrasoundInterpretationResult ClassifyCarotidUltrasound()
         {
             return new CarotidUltrasoundInterpretationResult(

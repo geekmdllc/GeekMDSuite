@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GeekMDSuite.PatientActivities
 {
-    public class ResistanceRegimen : ExerciseRegimen
+    public class ResistanceRegimen : ExerciseRegimen, IResistanceRegimen
     {
         internal ResistanceRegimen(
             IExerciseRegimenParameters regimen, 
@@ -13,8 +14,9 @@ namespace GeekMDSuite.PatientActivities
                 regimen.AverageSessionDuration, 
                 regimen.Intensity)
         {
+            if (regimen == null) throw new ArgumentNullException(nameof(regimen));
             SecondsRestDurationPerSet = secondsRestDurationPerSet;
-            Features = features;
+            Features = features ?? throw new ArgumentNullException(nameof(features));
         }
         public int SecondsRestDurationPerSet { get; }
         public List<ResistenceRegimenFeatures> Features { get; }

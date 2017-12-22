@@ -11,8 +11,8 @@ namespace GeekMDSuite.Services.Interpretation
         public FitTreadmillScoreInterpretation(ITreadmillExerciseStressTest treadmillExerciseStressTest,
             IPatient patient)
         {
-            _patient = patient;
-            _treadmillExerciseStressTest = treadmillExerciseStressTest;
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            _treadmillExerciseStressTest = treadmillExerciseStressTest ?? throw new ArgumentNullException(nameof(treadmillExerciseStressTest));
         }
 
         public InterpretationText Interpretation => throw new NotImplementedException();
@@ -23,20 +23,22 @@ namespace GeekMDSuite.Services.Interpretation
         private readonly ITreadmillExerciseStressTest _treadmillExerciseStressTest;
         private readonly IPatient _patient;
         
+        // ReSharper disable once MemberCanBePrivate.Global
         public static class RiskPercentages
         {
-            public static readonly int Lowest = 2;
-            public static readonly int Low = 3;
-            public static readonly int Moderate = 11;
-            public static readonly int Highest = 38;
+            public const int Lowest = 2;
+            public const int Low = 3;
+            public const int Moderate = 11;
+            public const int Highest = 38;
         }
         
+        // ReSharper disable once MemberCanBePrivate.Global
         public static class CutoffLowerLimits
         {
-            public static readonly double LowestRisk = 100;
-            public static readonly double LowRisk = 0;
-            public static readonly double ModerateRisk = -99;
-            public static readonly double HighestRisk = double.MinValue;
+            public const double LowestRisk = 100;
+            public const double LowRisk = 0;
+            public const double ModerateRisk = -99;
+            public const double HighestRisk = double.MinValue;
         }
 
         public override string ToString() => 

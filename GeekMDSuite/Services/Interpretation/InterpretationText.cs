@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GeekMDSuite.Services.Interpretation
@@ -13,7 +14,7 @@ namespace GeekMDSuite.Services.Interpretation
         {
             Title = title;
             Summary = summary;
-            Sections = sections;
+            Sections = sections ?? throw new ArgumentNullException(nameof(sections));
         }
 
         public override string ToString() => $"{Title}\n\n{Summary}\n\n{BuildSections()}";

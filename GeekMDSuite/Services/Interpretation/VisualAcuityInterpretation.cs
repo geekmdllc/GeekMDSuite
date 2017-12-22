@@ -7,7 +7,7 @@ namespace GeekMDSuite.Services.Interpretation
     {
         public VisualAcuityInterpretation(VisualAcuity visualAcuity)
         {
-            _visualAcuity = visualAcuity;
+            _visualAcuity = visualAcuity ?? throw new ArgumentNullException(nameof(visualAcuity));
         }
 
         public InterpretationText Interpretation => throw new NotImplementedException();

@@ -12,7 +12,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             ResistanceRegimen regimen) 
             : base(regimen)
         {
-            _regimen = regimen;
+            _regimen = regimen ?? throw new ArgumentNullException(nameof(regimen));
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Resistance);
         }
         

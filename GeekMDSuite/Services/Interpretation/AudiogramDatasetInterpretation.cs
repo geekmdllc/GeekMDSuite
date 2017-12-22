@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Procedures;
 
@@ -9,7 +10,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public AudiogramDatasetInterpretation(AudiogramDataset dataset)
         {
-            _audiogramDataset = dataset;
+            _audiogramDataset = dataset ?? throw new ArgumentNullException(nameof(dataset));
         }
         public HearingLoss Classification => AudiogramDataPointInterpretation.Classify(HighestDatapoint(_audiogramDataset));
         public static int HighestDatapoint(AudiogramDataset audiogramDataset)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GeekMDSuite.Services.Interpretation
 {
@@ -10,7 +11,7 @@ namespace GeekMDSuite.Services.Interpretation
         public InterpretationSection(string title, List<string> paragraphs)
         {
             Title = title;
-            Paragraphs = paragraphs;
+            Paragraphs = paragraphs ?? throw new ArgumentNullException(nameof(paragraphs));
         }
     }
 }

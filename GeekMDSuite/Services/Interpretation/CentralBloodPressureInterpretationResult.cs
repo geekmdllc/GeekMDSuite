@@ -9,6 +9,7 @@
         }
 
         public CentralBloodPressureCategory Category { get; }
+        // ReSharper disable once MemberCanBePrivate.Global
         public CentralBloodPressureReferenceAge ReferenceAge { get; }
 
         public override string ToString() => $"Category: {Category}, Reference Age: {ReferenceAge}";

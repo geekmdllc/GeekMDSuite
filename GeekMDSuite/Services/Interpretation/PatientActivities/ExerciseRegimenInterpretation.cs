@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.PatientActivities;
+﻿using System;
+using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Repositories;
 
 namespace GeekMDSuite.Services.Interpretation.PatientActivities
@@ -7,6 +8,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
     {
         protected ExerciseRegimenInterpretation (IExerciseRegimenParameters parameters)
         {
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
             SessionsPerWeek = parameters.SessionsPerWeek;
             AverageSessionDuration = parameters.AverageSessionDuration;
             Intensity = parameters.Intensity;

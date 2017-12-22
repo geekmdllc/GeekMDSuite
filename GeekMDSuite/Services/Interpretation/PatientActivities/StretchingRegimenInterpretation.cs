@@ -8,6 +8,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
     {
         public StretchingRegimenInterpretation(IExerciseRegimenParameters parameters) : base(parameters)
         {
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Stretching);
         }
 
