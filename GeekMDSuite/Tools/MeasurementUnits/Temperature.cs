@@ -4,7 +4,7 @@ namespace GeekMDSuite.Tools.MeasurementUnits
 {
     public class Temperature : ITemperature
     {
-        internal Temperature(double temperatureFarenheight)
+        private Temperature(double temperatureFarenheight)
         {
             Farenheit = temperatureFarenheight;
         }

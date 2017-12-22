@@ -2,7 +2,7 @@
 {
     public class BloodPressure
     {
-        internal BloodPressure(int systolic, int diastolic, bool organDamage)
+        private BloodPressure(int systolic, int diastolic, bool organDamage)
         {
             Systolic = systolic;
             Diastolic = diastolic;

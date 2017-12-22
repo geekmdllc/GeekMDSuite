@@ -2,7 +2,7 @@
 {
     public class QualitativeLab
     {
-        internal QualitativeLab(QualitativeLabType type, QualitativeLabResult result)
+        private QualitativeLab(QualitativeLabType type, QualitativeLabResult result)
         {
             Type = type;
             Result = result;

@@ -14,9 +14,7 @@ namespace GeekMDSuite.Services.Repositories
                 : new ExerciseDurationGoals(30, 20);
         }
 
-        internal static Interval<int> GetResistanceRestIntervalGoals(int upper = 120, int lower = 30)
-        {
-            return new Interval<int>(lower,upper);
-        }
+        internal static Interval<int> GetResistanceRestIntervalGoals(int upper = 120, int lower = 30) 
+            => new Interval<int>(lower,upper);
     }
 }

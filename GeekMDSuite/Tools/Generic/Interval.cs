@@ -10,6 +10,7 @@ namespace GeekMDSuite.Tools.Generic
             Lower = lower;
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public T Upper { get; }
         public T Lower { get; }
 

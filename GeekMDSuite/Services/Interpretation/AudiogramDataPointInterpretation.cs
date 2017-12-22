@@ -14,17 +14,20 @@ namespace GeekMDSuite.Services.Interpretation
 
         public static HearingLoss Classify(int value)
         {
-            if (NormalRange.ContainsClosed(value)) return HearingLoss.None;
-            if (MildRange.ContainsLeftOpen(value)) return HearingLoss.Mild;
-            if (ModerateRange.ContainsLeftOpen(value)) return HearingLoss.Moderate;
-            return SevereRange.ContainsLeftOpen(value) ? HearingLoss.Severe : HearingLoss.Profound;
+            if (value < LowerLimits.Mild) return HearingLoss.None;
+            if (value < LowerLimits.Moderate) return HearingLoss.Mild;
+            if (value < LowerLimits.Severe) return HearingLoss.Moderate;
+            return value < LowerLimits.Profound ? HearingLoss.Severe : HearingLoss.Profound;
         }
-        
-        public static Interval<int> NormalRange => HearingLossClassificationRepository.GetRange(HearingLoss.None);
-        public static Interval<int> MildRange => HearingLossClassificationRepository.GetRange(HearingLoss.Mild);
-        public static Interval<int> ModerateRange => HearingLossClassificationRepository.GetRange(HearingLoss.Moderate);
-        public static Interval<int> SevereRange => HearingLossClassificationRepository.GetRange(HearingLoss.Severe);
-        public static Interval<int> ProfoundRange => HearingLossClassificationRepository.GetRange(HearingLoss.Profound);
+
+        public static class LowerLimits
+        {
+            public static readonly int Normal = HearingLossClassificationRepository.GetRange(HearingLoss.None).Lower;
+            public static readonly int Mild = HearingLossClassificationRepository.GetRange(HearingLoss.Mild).Lower;
+            public static readonly int Moderate = HearingLossClassificationRepository.GetRange(HearingLoss.Moderate).Lower;
+            public static readonly int Severe = HearingLossClassificationRepository.GetRange(HearingLoss.Severe).Lower;
+            public static readonly int Profound = HearingLossClassificationRepository.GetRange(HearingLoss.Profound).Lower;
+        }
         
         private readonly AudiogramDatapoint _datapoint;
     }

@@ -10,6 +10,7 @@ namespace GeekMDSuite.Services.Repositories
 {
     internal static class QualitativeLabRepository
     {
+        // ReSharper disable once MemberCanBePrivate.Global
         public static IEnumerable<QualitativeLabInterpretationModel> GetAllLabs()
         {
             var jsonFile = Reflection.GetAssetFromExecutingAssembly("qualitative_labs.json");

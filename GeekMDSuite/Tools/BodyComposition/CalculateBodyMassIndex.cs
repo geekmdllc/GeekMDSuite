@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Tools.BodyComposition
 {
-    static internal class CalculateBodyMassIndex
+    internal static class CalculateBodyMassIndex
     {
         public static double Calculate(double weightKilograms, double heightMeters) =>
             weightKilograms / Math.Pow(heightMeters, 2);

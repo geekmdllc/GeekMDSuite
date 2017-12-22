@@ -1,7 +1,7 @@
 ﻿namespace GeekMDSuite
 {
     public enum MeasurementSystem {
-        TraditionalUS,
+        TraditionalUs,
         Metric
     }
 }
