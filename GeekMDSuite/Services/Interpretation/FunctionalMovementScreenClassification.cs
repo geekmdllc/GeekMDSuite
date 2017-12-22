@@ -6,7 +6,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class FunctionalMovementScreenClassification
     {
-        internal FunctionalMovementScreenClassification(
+        public FunctionalMovementScreenClassification(
             FunctionalMovementScreen functionalMovementScreen)
         {
             DeepSquat = ClassifyMovement(functionalMovementScreen.DeepSquat);
@@ -28,6 +28,18 @@ namespace GeekMDSuite.Services.Interpretation
         public FmsMovementClassification TrunkStabilityPushup { get; }
         public FmsMovementClassification RotaryStability { get; }
         public int Score { get; }
+
+        public override string ToString()
+        {
+            return $"Deep Squat: {DeepSquat}{Environment.NewLine}"+
+                   $"Hurdle Step: {HurdleStep}{Environment.NewLine}"+
+                   $"Shoulder Mobility: {ShoulderMobility}{Environment.NewLine}" +
+                   $"Inline Lunge: {InlineLunge}{Environment.NewLine}" +
+                   $"Active Straight Leg Raise: {ActiveStraightLegRaise}{Environment.NewLine}" +
+                   $"Trunk Stability Pushup: {TrunkStabilityPushup}{Environment.NewLine}"+
+                   $"Rotary Stability: {RotaryStability}{Environment.NewLine}"+ 
+                   $"Score: {Score}";
+        }
 
         private static int GetTotalScore(FunctionalMovementScreen functionalMovementScreen)
         {

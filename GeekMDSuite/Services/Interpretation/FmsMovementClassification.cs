@@ -12,5 +12,6 @@ namespace GeekMDSuite.Services.Interpretation
 
         public FmsRecommendedAction RecommendedAction { get; }
         public FmsScoreFlag Score { get; }
+        public override string ToString() => $"Score: {Score}, Recommended Action: {RecommendedAction}";
     }
 }

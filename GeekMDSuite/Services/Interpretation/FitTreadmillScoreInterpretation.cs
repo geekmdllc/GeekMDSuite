@@ -1,49 +1,75 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Tools;
+using GeekMDSuite.Tools.Cardiology;
+using GeekMDSuite.Tools.Fitness;
 
 namespace GeekMDSuite.Services.Interpretation
 {
     public class FitTreadmillScoreInterpretation : IInterpretable<FitTreadmillScoreMortality>
     {
-        public FitTreadmillScoreInterpretation(FitTreadmillScoreParameters parameters)
+        public FitTreadmillScoreInterpretation(ITreadmillExerciseStressTest treadmillExerciseStressTest,
+            IPatient patient)
         {
-            _parameters = parameters;
+            _patient = patient;
+            _treadmillExerciseStressTest = treadmillExerciseStressTest;
         }
-        public InterpretationText Interpretation => throw new NotImplementedException();
-        
-        public double Value => CalculateScore();
-        
-        public FitTreadmillScoreMortality Classification =>  ParseTenYearMortalityRisk();
 
+        public InterpretationText Interpretation => throw new NotImplementedException();
+        public double Value => CalculateScore();
+        public FitTreadmillScoreMortality Classification =>  ParseTenYearMortalityRisk();
         public int TenYearMortality => GetTenYearMortality();
+
+        private readonly ITreadmillExerciseStressTest _treadmillExerciseStressTest;
+        private readonly IPatient _patient;
         
-        private readonly FitTreadmillScoreParameters _parameters;
+        public static class RiskPercentages
+        {
+            public static readonly int Lowest = 2;
+            public static readonly int Low = 3;
+            public static readonly int Moderate = 11;
+            public static readonly int Highest = 38;
+        }
+        
+        public static class CutoffLowerLimits
+        {
+            public static readonly double LowestRisk = 100;
+            public static readonly double LowRisk = 0;
+            public static readonly double ModerateRisk = -99;
+            public static readonly double HighestRisk = double.MinValue;
+        }
+
+        public override string ToString() => 
+            $"Value: {Value}, Ten-Year Mortality: {TenYearMortality}%, Classification: {Classification}";
 
         private FitTreadmillScoreMortality ParseTenYearMortalityRisk()
         {
-            if (TenYearMortality == 2)
+            if (TenYearMortality == RiskPercentages.Lowest)
                 return FitTreadmillScoreMortality.LowestRisk;
-            if (TenYearMortality == 3)
+            if (TenYearMortality == RiskPercentages.Low)
                 return FitTreadmillScoreMortality.LowRisk;
-            return TenYearMortality == 11 ? FitTreadmillScoreMortality.ModerateRisk : FitTreadmillScoreMortality.HighRisk;
+            return TenYearMortality == RiskPercentages.Moderate 
+                ? FitTreadmillScoreMortality.ModerateRisk : FitTreadmillScoreMortality.HighRisk;
         }
         
-        private double CalculateScore()
-        {
-            return _parameters.PercentMaxHeartRateAchieved + 12 * _parameters.MetabolicEquivalents - 4 * 
-                   _parameters.AgeInYears + (Gender.IsGenotypeXx(_parameters.GenderIdentity) ? 43 : 0);
-        }
+        private double CalculateScore() => 
+            PercentMaxHeartRate() +  12 * MetabolicEquivalents() - 4 *  _patient.Age + GenderOffset();
+
+        private int GenderOffset() => (Gender.IsGenotypeXx(_patient.Gender) ? 43 : 0);
+
+        private double MetabolicEquivalents() => 
+            CalculateMetabolicEquivalents.FromTreadmillStressTest(_treadmillExerciseStressTest, _patient);
 
         private int GetTenYearMortality()
         {
-            if (Value <= -100)
-                return 38;
-            if (Value <= 0)
-                return 11;
-            return Value < 100 ? 3 : 2;
+            if (Value < CutoffLowerLimits.ModerateRisk)
+                return RiskPercentages.Highest;
+            if (Value < CutoffLowerLimits.LowRisk)
+                return RiskPercentages.Moderate;
+            return Value < CutoffLowerLimits.LowestRisk ? RiskPercentages.Low : RiskPercentages.Lowest;
         }
-
-
+        
+        private double PercentMaxHeartRate() 
+            => 100 * _treadmillExerciseStressTest.MaximumHeartRate / PredictMaximumHeartRate.Standard(_patient.Age);
     }
 }

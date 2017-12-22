@@ -18,6 +18,8 @@ namespace GeekMDSuite.Services.Interpretation
         
         public CarotidUltrasoundInterpretationResult Classification => ClassifyCarotidUltrasound();
 
+        public override string ToString() => Classification.ToString();
+
         private CarotidUltrasoundInterpretationResult ClassifyCarotidUltrasound()
         {
             return new CarotidUltrasoundInterpretationResult(

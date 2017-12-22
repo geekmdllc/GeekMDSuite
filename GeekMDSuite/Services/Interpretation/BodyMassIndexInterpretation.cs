@@ -33,6 +33,8 @@ namespace GeekMDSuite.Services.Interpretation
             public const double ObeseClass3 = 40;
         }
 
+        public override string ToString() => Classification.ToString();
+
         private readonly IBodyComposition _bodyComposition;
         private readonly IPatient _patient;
 

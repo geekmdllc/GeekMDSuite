@@ -10,5 +10,7 @@
 
         public CentralBloodPressureCategory Category { get; }
         public CentralBloodPressureReferenceAge ReferenceAge { get; }
+
+        public override string ToString() => $"Category: {Category}, Reference Age: {ReferenceAge}";
     }
 }

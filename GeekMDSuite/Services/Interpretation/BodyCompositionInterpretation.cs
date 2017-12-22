@@ -2,10 +2,10 @@
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public abstract class BodyCompositionInterpretation : BodyCompositionBaseInterpretation, IInterpretable<BodyCompositionClassification>
+    public class BodyCompositionInterpretation : BodyCompositionBaseInterpretation, IInterpretable<BodyCompositionClassification>
     {
 
-        protected BodyCompositionInterpretation(IBodyComposition bodyComposition, IPatient patient) 
+        public BodyCompositionInterpretation(IBodyComposition bodyComposition, IPatient patient) 
             : base(bodyComposition, patient)
         {
         }

@@ -16,7 +16,9 @@ namespace GeekMDSuite.Services.Interpretation
         
         public InterpretationText Interpretation => throw new NotImplementedException();
         public CentralBloodPressureInterpretationResult Classification => ClassifyBasedOnWorstResult();
-        
+
+        public override string ToString() => Classification.ToString();
+
         private readonly CentralBloodPressure _centralBloodPressure;
         private readonly IPatient _patient;
 

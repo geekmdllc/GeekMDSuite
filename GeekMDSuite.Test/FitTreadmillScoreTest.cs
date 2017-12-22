@@ -1,42 +1,68 @@
 ﻿using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Tools.Fitness;
+using GeekMDSuite.Tools.MeasurementUnits;
+using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test
 {
     public class FitTreadmillScoreTest
     {
-        private readonly GenderIdentity _female = GenderIdentity.Female;
-        private readonly GenderIdentity _male = GenderIdentity.Male;
-        private const double Age = 63;
-        private const double MetabolicEquivalents = 8;
-        private const double MaxHeartRateReached = 165.3;
-        private const double MaleScoreOffset = -43;
-        private const int TestFitScore = 39;
-
-        [Fact]
-        public void FitScoreReturnsCorrectFemaleValue()
+        // PercentMaxHeartRate +  12 * MetabolicEquivalents - 4 *  Age + (female ? 43 : 0)
+        [Theory]
+        [InlineData(GenderIdentity.Female, 63, 165, 12, 00, 62.9298271155596)]
+        [InlineData(GenderIdentity.Male, 63, 165, 12, 00, -1.32731574158328)]
+        public void Value_GivenTreadmillAndPatientData_ReturnsCorrectValue(GenderIdentity genderIdentity, int age, 
+            int maxHeartRate, double minutes, double seconds, double expectedScore)
         {
-            var fitParams = new FitTreadmillScoreParameters(_female, Age, MaxHeartRateReached, MetabolicEquivalents);
-            var fitScore = new FitTreadmillScoreInterpretation(fitParams).Value;
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Age).Returns(age);
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
 
-            Assert.InRange(fitScore, -8, -7);
+            var mockTreadmillStressTest = new Mock<ITreadmillExerciseStressTest>();
+            mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
+            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
+            
+            var fitScore = new FitTreadmillScoreInterpretation(mockTreadmillStressTest.Object, mockPatient.Object).Value;
+            
+            Assert.InRange(fitScore, expectedScore - 0.001, expectedScore + 0.001);
         }
-        [Fact]
-        public void FitScoreReturnsCorrecMaleValue()
+        [Theory]
+        [InlineData(GenderIdentity.Female, 63, 165, 12, 00, 3)]
+        [InlineData(GenderIdentity.Male, 63, 165, 12, 00, 11)]
+        public void TenYearMortality_GivenTreadmillAndPatientData_ReturnsCorrectTenYearMortality(GenderIdentity genderIdentity, int age, 
+            int maxHeartRate, double minutes, double seconds, int expectedTenYearMortality)
         {
-            var fitParams = new FitTreadmillScoreParameters(_male, Age, MaxHeartRateReached, MetabolicEquivalents);
-            var fitScore = new FitTreadmillScoreInterpretation(fitParams).Value;
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Age).Returns(age);
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
 
-            Assert.InRange(fitScore, -8 + MaleScoreOffset, -7 + MaleScoreOffset);
+            var mockTreadmillStressTest = new Mock<ITreadmillExerciseStressTest>();
+            mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
+            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
+            
+            var tenYearMortality = new FitTreadmillScoreInterpretation(mockTreadmillStressTest.Object, mockPatient.Object).TenYearMortality;
+            
+            Assert.Equal(expectedTenYearMortality, tenYearMortality);
         }
-
-        [Fact]
-        public void ReturnsCorrectTenYearMortality()
+        [Theory]
+        [InlineData(GenderIdentity.Female, 63, 165, 12, 00, FitTreadmillScoreMortality.LowRisk)]
+        [InlineData(GenderIdentity.Male, 63, 165, 12, 00, FitTreadmillScoreMortality.ModerateRisk)]
+        public void Classification_GivenTreadmillAndPatientData_ReturnsCorrectClassification(GenderIdentity genderIdentity, int age, 
+            int maxHeartRate, double minutes, double seconds, FitTreadmillScoreMortality expectedClassification)
         {
-            var fitParams = new  FitTreadmillScoreParameters(_male, 55, MaxHeartRateReached, 10.5);
-            var fitScore = new FitTreadmillScoreInterpretation(fitParams);
-            Assert.Equal(3, fitScore.TenYearMortality);
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Age).Returns(age);
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+
+            var mockTreadmillStressTest = new Mock<ITreadmillExerciseStressTest>();
+            mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
+            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
+            
+            var classification = new FitTreadmillScoreInterpretation(mockTreadmillStressTest.Object, mockPatient.Object).Classification;
+            
+            Assert.Equal(expectedClassification, classification);
         }
     }
 }

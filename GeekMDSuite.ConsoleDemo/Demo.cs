@@ -235,8 +235,26 @@ namespace GeekMDSuite.ConsoleDemo
             var bpInterpretation = new BloodPressureInterpretation(vitals.BloodPressure);
             Console.WriteLine($"BP Classification: {bpInterpretation}{NewLine}");
             
+            var bodyCompInterp = new BodyCompositionInterpretation(bodyCompositionExpanded, joe);
+            Console.WriteLine($"Body comp: {bodyCompInterp}{NewLine}");
+            
             var bodyCompExpandedInterp = new BodyCompositionExpandedInterpretation(bodyCompositionExpanded, joe);
-            Console.WriteLine($"Body comp: {bodyCompExpandedInterp}{NewLine}");
+            Console.WriteLine($"Body comp expanded: {bodyCompExpandedInterp}{NewLine}");
+            
+            var bmiInterp = new BodyMassIndexInterpretation(bodyComposition, joe);
+            Console.WriteLine($"BMI: {bmiInterp}\n");
+            
+            var carotidUsInterp = new CarotidUltrasoundInterpretation(carotidUs);
+            Console.WriteLine($"Carotid US: {carotidUsInterp}\n");
+            
+            var centralBpInterp = new CentralBloodPressureInterpretation(centralBp, joe);
+            Console.WriteLine($"Central BP: {centralBpInterp}\n");
+            
+            var fitScoreInterp = new FitTreadmillScoreInterpretation(treadmillStressTest, joe);
+            Console.WriteLine($"FIT Score: {fitScoreInterp}\n");
+            
+            var fmsInterpretation = new FunctionalMovementScreenInterpretation(functionalMovementScreen);
+            Console.WriteLine($"FMS\n{fmsInterpretation}\n");
         }
     }
 }

@@ -13,14 +13,12 @@ namespace GeekMDSuite.Services.Interpretation
         public InterpretationText Interpretation => throw new NotImplementedException();
         public FunctionalMovementScreenClassification Classification => Classify();
 
+        public override string ToString() => Classification.ToString();
+
         private readonly FunctionalMovementScreen _fms;
         private FunctionalMovementScreenClassification Classify()
         {
             return new FunctionalMovementScreenClassification(_fms);
         }
-        
-
     }
-    
-    
 }

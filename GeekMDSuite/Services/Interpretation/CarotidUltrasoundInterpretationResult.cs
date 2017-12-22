@@ -20,5 +20,8 @@ namespace GeekMDSuite.Services.Interpretation
         public Laterality Laterality { get; }
         public CarotidPercentStenosisGrade Grade { get; }
         public CarotidPlaqueCharacter Character { get; }
+
+        public override string ToString() 
+            => $"Laterality: {Laterality}, Worse: {WorseSide}, Stenosis Grade: {Grade}, PlaqueCharacter: {Character}";
     }
 }
