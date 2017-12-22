@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Xunit;
 
@@ -30,6 +31,12 @@ namespace GeekMDSuite.Test
             
             Assert.Equal(expectedLaterality, result.Laterality);
             Assert.Equal(expectedHearingLoss, result.Classification);
+        }
+
+        [Fact]
+        public void NullDataSets_ThrowsNullReferenceException()
+        {
+            Assert.Throws<NullReferenceException>(() => new AudiogramInterpretation(null));
         }
     }
 }

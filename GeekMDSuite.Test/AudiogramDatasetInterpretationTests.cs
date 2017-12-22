@@ -5,7 +5,7 @@ using Xunit;
 
 namespace GeekMDSuite.Test
 {
-    public class AudiogramDatasetTests
+    public class AudiogramDatasetInterpretationTests
     {
         [Theory]
         [InlineData(15, HearingLoss.None)]
@@ -35,6 +35,12 @@ namespace GeekMDSuite.Test
             var interp = new AudiogramDatasetInterpretation(result);
             
             Assert.Equal(expectedClassification, interp.Classification);
+        }
+    
+        [Fact]
+        public void NullDataset_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new AudiogramDatasetInterpretation(null));
         }
 
         private static int SetValueInEitherNormalRangeOrToTestValue(Random rand, int value)

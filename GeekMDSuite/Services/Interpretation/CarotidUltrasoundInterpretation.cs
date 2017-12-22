@@ -6,7 +6,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class CarotidUltrasoundInterpretation : IInterpretable<CarotidUltrasoundInterpretationResult>
     {
-        public CarotidUltrasoundInterpretation(CarotidUltrasound carotidUltrasound)
+        public CarotidUltrasoundInterpretation(ICarotidUltrasound carotidUltrasound)
         {
             _carotidUltrasound = carotidUltrasound ?? throw new ArgumentNullException(nameof(carotidUltrasound));
         }
@@ -18,7 +18,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public override string ToString() => Classification.ToString();
 
-        private readonly CarotidUltrasound _carotidUltrasound;
+        private readonly ICarotidUltrasound _carotidUltrasound;
         
         private CarotidUltrasoundInterpretationResult ClassifyCarotidUltrasound()
         {

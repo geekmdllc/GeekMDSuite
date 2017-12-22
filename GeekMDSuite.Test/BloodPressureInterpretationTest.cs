@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Services.Interpretation;
+﻿using System;
+using GeekMDSuite.Services.Interpretation;
 using Xunit;
 using static GeekMDSuite.Services.Interpretation.BloodPressureInterpretation.LowerLimits;
 
@@ -26,6 +27,12 @@ namespace GeekMDSuite.Test
             var bpStage = new BloodPressureInterpretation(bloodPressure).Classification;
             
             Assert.Equal(expectedStage, bpStage);
+        }
+    
+        [Fact]
+        public void NullBloodPressure_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new BloodPressureInterpretation(null));
         }
     }
 }

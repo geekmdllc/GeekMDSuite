@@ -1,11 +1,13 @@
-﻿namespace GeekMDSuite.Procedures
+﻿using System;
+
+namespace GeekMDSuite.Procedures
 {
     public class Audiogram
     {
         private Audiogram (AudiogramDataset left, AudiogramDataset right)
         {
-            Left = left;
-            Right = right;
+            Left = left ?? throw new ArgumentNullException(nameof(left));
+            Right = right ?? throw new ArgumentNullException(nameof(right));
         }
 
         public AudiogramDataset Right { get; }

@@ -7,108 +7,32 @@ namespace GeekMDSuite.Test
 {
     public class CentralBloodPressureInterpretationTests
     {
-        // Augmetntation pressure, pulse pressure, augmented index, pulse wave velocity, etc. 
-        // all implement an identical system, so just checking CentralSystolic.
-        [Fact]
-        public void Classification_GivenNormalCentralSystolic_ReturnsNormal()
+        [Theory]
+        [InlineData(103, 28, 0, 0, 19, 8.1, GenderIdentity.Male, 19, CentralBloodPressureCategory.Normal)]
+        [InlineData(90, 28, 0, 0, 19, 8.1, GenderIdentity.Male, 19, CentralBloodPressureCategory.LowNormal)]
+        [InlineData(80, 28, 0, 0, 19, 8.1, GenderIdentity.Male, 19, CentralBloodPressureCategory.Low)]
+        [InlineData(116, 28, 0, 0, 19, 8.1, GenderIdentity.Male, 19, CentralBloodPressureCategory.HighNormal)]
+        [InlineData(120, 28, 0, 0, 19, 8.1, GenderIdentity.Male, 19, CentralBloodPressureCategory.High)]
+        //TODO: Cover PP, AP, AIx, RA, PWV
+        public void Classification_GivenCentralSystolicValues_ReturnsCorrectCategory(int csp, int pp, int ap, 
+            int aix, int ra, double pwv, GenderIdentity genderIdentity, int age, CentralBloodPressureCategory expectctedCategory)
         {
             var cbp = new CentralBloodPressureBuilder()
-                .SetCentralSystolicPressure(103)
-                .SetPulsePressure(28)
-                .SetAugmentedPressure(0)
-                .SetAugmentedIndex(0)
-                .SetReferenceAge(19)
-                .SetPulseWaveVelocity(8.1)
+                .SetCentralSystolicPressure(csp)
+                .SetPulsePressure(pp)
+                .SetAugmentedPressure(ap)
+                .SetAugmentedIndex(aix)
+                .SetReferenceAge(ra)
+                .SetPulseWaveVelocity(pwv)
                 .Build();
             
             var mockPt = new Mock<IPatient>();
-            mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
-            mockPt.Setup(patient => patient.Age).Returns(19);
+            mockPt.Setup(patient => patient.Gender.Category).Returns(genderIdentity);
+            mockPt.Setup(patient => patient.Age).Returns(age);
 
-            var test = new CentralBloodPressureInterpretation(cbp, mockPt.Object);
+            var actualCategory = new CentralBloodPressureInterpretation(cbp, mockPt.Object).Classification.Category;
 
-            Assert.Equal(CentralBloodPressureCategory.Normal, test.Classification.Category);
-        }
-        
-        [Fact]
-        public void Classification_GivenLowNormalCentralSystolic_ReturnsLowNormal()
-        {
-            var cbp = new CentralBloodPressureBuilder()
-                .SetCentralSystolicPressure(90)
-                .SetPulsePressure(28)
-                .SetAugmentedPressure(0)
-                .SetAugmentedIndex(0)
-                .SetReferenceAge(19)
-                .SetPulseWaveVelocity(8.1)
-                .Build();
-            
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
-            mockPt.Setup(patient => patient.Age).Returns(19);
-
-            var test = new CentralBloodPressureInterpretation(cbp, mockPt.Object);
-            
-            Assert.Equal(CentralBloodPressureCategory.LowNormal, test.Classification.Category);
-        }
-        [Fact]
-        public void Classification_GivenLowCentralSystolic_ReturnsLow()
-        {
-            var cbp = new CentralBloodPressureBuilder()
-                .SetCentralSystolicPressure(80)
-                .SetPulsePressure(28)
-                .SetAugmentedPressure(0)
-                .SetAugmentedIndex(0)
-                .SetReferenceAge(19)
-                .SetPulseWaveVelocity(8.1)
-                .Build();
-            
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
-            mockPt.Setup(patient => patient.Age).Returns(19);
-
-            var test = new CentralBloodPressureInterpretation(cbp, mockPt.Object);
-            
-            Assert.Equal(CentralBloodPressureCategory.Low, test.Classification.Category);
-        }
-        [Fact]
-        public void Classification_GivenHighNormalCentralSystolic_ReturnsHighNormal()
-        {
-            var cbp = new CentralBloodPressureBuilder()
-                .SetCentralSystolicPressure(116)
-                .SetPulsePressure(28)
-                .SetAugmentedPressure(0)
-                .SetAugmentedIndex(0)
-                .SetReferenceAge(19)
-                .SetPulseWaveVelocity(8.1)
-                .Build();
-            
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
-            mockPt.Setup(patient => patient.Age).Returns(19);
-
-            var test = new CentralBloodPressureInterpretation(cbp, mockPt.Object);
-            
-            Assert.Equal(CentralBloodPressureCategory.HighNormal, test.Classification.Category);
-        }
-        [Fact]
-        public void Classification_GivenHighCentralSystolic_ReturnsHigh()
-        {
-            var cbp = new CentralBloodPressureBuilder()
-                .SetCentralSystolicPressure(120)
-                .SetPulsePressure(28)
-                .SetAugmentedPressure(0)
-                .SetAugmentedIndex(0)
-                .SetReferenceAge(19)
-                .SetPulseWaveVelocity(8.1)
-                .Build();
-            
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(patient => patient.Gender.Category).Returns(GenderIdentity.Male);
-            mockPt.Setup(patient => patient.Age).Returns(19);
-
-            var test = new CentralBloodPressureInterpretation(cbp, mockPt.Object);
-            
-            Assert.Equal(CentralBloodPressureCategory.High, test.Classification.Category);
+            Assert.Equal(expectctedCategory, actualCategory);
         }
     }
 }

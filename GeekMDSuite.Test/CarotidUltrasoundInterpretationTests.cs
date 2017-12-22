@@ -1,5 +1,7 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
+using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -132,6 +134,12 @@ namespace GeekMDSuite.Test
             var result = new CarotidUltrasoundInterpretation(us);
             
             Assert.Equal(Laterality.Left, result.Classification.WorseSide);
+        }
+
+        [Fact]
+        public void NullUltrasound_ThrowsAargumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new CarotidUltrasoundInterpretation(null));
         }
     }
 }

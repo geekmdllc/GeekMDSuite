@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Services.Interpretation;
+﻿using System;
+using GeekMDSuite.Services.Interpretation;
 using static GeekMDSuite.Services.Interpretation.BodyMassIndexInterpretation;
 using Moq;
 using Xunit;
@@ -35,6 +36,20 @@ namespace GeekMDSuite.Test
             var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
             
             Assert.Equal(expectecBodyMassIndex, result);
+        }
+
+        [Fact]
+        public void NullBodyComposition_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new BodyMassIndexInterpretation(null, new Mock<IPatient>().Object).Classification);
+        }
+        
+        [Fact]
+        public void NullPatient_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new BodyMassIndexInterpretation(new Mock<IBodyComposition>().Object, null));
         }
     }
 }

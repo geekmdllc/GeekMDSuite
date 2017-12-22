@@ -1,5 +1,7 @@
-﻿using GeekMDSuite.PatientActivities;
+﻿using System;
+using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Interpretation.PatientActivities;
+using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -73,6 +75,12 @@ namespace GeekMDSuite.Test
             var regimen = new CardiovascularRegimenInterpretation(exerciseRegimenParameters);
             
             Assert.Equal(expectedAdequacy, regimen.DurationIsAdequate);
+        }
+
+        [Fact]
+        public void NullExerciseRegimenParameters_ThrowsException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new CardiovascularRegimenInterpretation(null));
         }
     }
 }
