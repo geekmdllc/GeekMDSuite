@@ -23,5 +23,7 @@
         public string UnitsUS  { get; set; }
         public string Interpretation { get; set; }
         public string Comments { get; set; }
+
+        public override string ToString() => $"{LabNameShort} ({Specimen})";
     }
 }

@@ -24,6 +24,8 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             }
         }
 
+        public override string ToString() => Classification.ToString();
+
         public virtual bool RegimenIsAdequate => DurationAndIntensityAreAdequate;
         
         public double TotalMinutes => SessionsPerWeek * AverageSessionDuration;

@@ -16,6 +16,8 @@ namespace GeekMDSuite.Services.Interpretation
         
         public static readonly int UpperLimitOfNormal = 21;
 
+        public override string ToString() => Classification.ToString();
+
         private OcularPressureClassification Classify() => _ocularPressure.Left > _ocularPressure.Right 
             ? ClassifyLeft() : ClassifyRight();
 

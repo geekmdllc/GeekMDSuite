@@ -4,6 +4,7 @@ using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Services.Interpretation.PatientActivities;
 using GeekMDSuite.Tools.Cardiology;
 using GeekMDSuite.Tools.Fitness;
 using static System.Environment;
@@ -76,7 +77,6 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetIntensity(ExerciseIntensity.Moderate)
                 .SetSecondsRestDurationPerSet(90)
                 .SetSessionsPerWeek(6)
-                .ConfirmLowerBodyTrained()
                 .ConfirmUpperBodyTrained()
                 .ConfirmPullingMovementsPerformed()
                 .ConfirmPushingMovementsPerformed()
@@ -228,6 +228,15 @@ namespace GeekMDSuite.ConsoleDemo
 
             var metsVo2Max = CalculateMetabolicEquivalents.FromVo2Max(vo2Max);
             Console.WriteLine($"Joes METS as calcualted from his VO2Max: {metsVo2Max}{NewLine}");
+
+            var cardioIniterp = new CardiovascularRegimenInterpretation(cardioRegimen);
+            Console.WriteLine($"Cardio Regimen: {cardioIniterp}{NewLine}");
+            
+            var resistanceInterp = new ResistanceRegimenInterpretation(resistanceRegimen);
+            Console.WriteLine($"Resistance Regimen: {resistanceInterp}{NewLine}");
+
+            var stretchingInterp = new StretchingRegimenInterpretation(stretchRegimen);
+            Console.WriteLine($"Stretching Regimen: {stretchingInterp}{NewLine}");
             
             var audiogramInterpretation = new AudiogramInterpretation(audiogram);
             Console.WriteLine($"Audiogram Classification: {audiogramInterpretation}{NewLine}");
@@ -288,6 +297,21 @@ namespace GeekMDSuite.ConsoleDemo
             
             var situpsInterp = new SitupsInterpretation(situps, patient);
             Console.WriteLine($"Situps: {situpsInterp}{NewLine}");
+            
+            var spirometryInterp = new SpirometryInterpretation(spirometry, patient, bodyComposition);
+            Console.WriteLine($"Spirometry: {spirometryInterp}{NewLine}");
+            
+            var visceralFatInterp = new VisceralFatInterpretation(bodyCompositionExpanded);
+            Console.WriteLine($"Visceral fat: {visceralFatInterp}{NewLine}");
+            
+            var visualAcuityInterp = new VisualAcuityInterpretation(visualAcuity);
+            Console.WriteLine($"Visual Acuity: {visualAcuityInterp}{NewLine}");
+            
+            var vo2MaxInterp = new Vo2MaxInterpretation(vo2Max, patient);
+            Console.WriteLine($"VO2 Max: {vo2MaxInterp}{NewLine}");
+            
+            var waistToHeightInterp = new WaistToHeightRatioInterpretation(bodyComposition, patient);
+            Console.WriteLine($"Waist to Height: {waistToHeightInterp}{NewLine}");
         }
     }
 }

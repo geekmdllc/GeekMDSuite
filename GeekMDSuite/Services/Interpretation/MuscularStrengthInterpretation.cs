@@ -27,7 +27,9 @@ namespace GeekMDSuite.Services.Interpretation
         public double LowerLimitOfAboveAverage => _ranges.LowerLimitOfAboveAverage;
         public double LowerLimitOfGood => _ranges.LowerLimitOfGood;
         public double LowerLimitOfExcellent => _ranges.LowerLimitOfExcellent;
-        
+
+        public override string ToString() => Classification.ToString();
+
         public InterpretationText Interpretation => throw new NotImplementedException();
         public FitnessClassification Classification => Classify();
 

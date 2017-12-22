@@ -19,6 +19,15 @@ namespace GeekMDSuite.Services.Interpretation
         public InterpretationText Interpretation => throw new NotImplementedException();
         public QuantitativeLabResult Classification => Classify();
 
+        public override string ToString() => 
+            $"Lab - {_lab.Result} {Lab.UnitsUS} ({Classification}) [{GetLowerBound()} - {GetUpperBound()} {Lab.UnitsUS}]";
+
+        private double GetUpperBound() => Gender.IsGenotypeXx(_patient.Gender) 
+            ? Lab.UpperLimitOfNormalFemale : Lab.UpperLimitOfNormalMale;
+
+        private double GetLowerBound() => Gender.IsGenotypeXx(_patient.Gender)
+            ? Lab.LowerLimitOfNormalFemale : Lab.LowerLimitOfNormalMale;
+
         private QuantitativeLabResult Classify()
         {
             switch (Gender.IsGenotypeXx(_patient.Gender))

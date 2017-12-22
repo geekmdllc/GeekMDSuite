@@ -27,6 +27,11 @@ namespace GeekMDSuite.Services.Interpretation
             Gender.IsGenotypeXy(_patient.Gender) ? PredictMaleForcedExpiratoryVolumeToForcedVitalCapacityRatio() 
                 : PredictFemaleForcedExpiratoryVolumeToForcedVitalCapacityRatio();
 
+        public override string ToString() => 
+            $"FVC: {_spirometry.ForcedVitalCapacity} L, " + 
+            $"FEV1:FVC: {_spirometry.ForcedExpiratoryVolume1SecondToForcedVitalCapacityRatio}, " + 
+            $"Classification: {Classification.ToString()}";
+
         private readonly Spirometry _spirometry;
         private readonly IPatient _patient;
         private readonly IBodyComposition _bodyComposition;

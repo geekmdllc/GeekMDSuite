@@ -16,7 +16,9 @@ namespace GeekMDSuite.Services.Interpretation
         public PeripheralVisionClassification Classification => Classify();
         public PeripheralVisionClassification Left => ClassifyLeft();
         public PeripheralVisionClassification Right => ClassifyRight();
-        
+
+        public override string ToString() => Classification.ToString();
+
         private PeripheralVisionClassification Classify() => _peripheralVision.Left < _peripheralVision.Right 
             ? ClassifyLeft() : ClassifyRight();
 

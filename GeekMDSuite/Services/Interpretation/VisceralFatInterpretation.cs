@@ -10,7 +10,7 @@ namespace GeekMDSuite.Services.Interpretation
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
         
-        public VisceralFat Classification => ClassifyVisceralFat();
+        public VisceralFat Classification => Classify();
 
         public static class LowerLimits
         {
@@ -20,9 +20,11 @@ namespace GeekMDSuite.Services.Interpretation
             public const double VeryElevated = 150;
         }
 
+        public override string ToString() => Classification.ToString();
+
         private readonly double _visceralFat;
         
-        private VisceralFat ClassifyVisceralFat()
+        private VisceralFat Classify()
         {           
             if (_visceralFat >= LowerLimits.VeryElevated)
                 return VisceralFat.VeryElevated;

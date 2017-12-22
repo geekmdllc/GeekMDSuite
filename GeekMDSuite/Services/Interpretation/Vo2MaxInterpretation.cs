@@ -8,7 +8,7 @@ namespace GeekMDSuite.Services.Interpretation
         private readonly double _vo2Max;
         private readonly IPatient _patient;
 
-        private Vo2MaxInterpretation(double vo2Max, IPatient patient)
+        public Vo2MaxInterpretation(double vo2Max, IPatient patient)
         {
             _patient = patient;
             _vo2Max = vo2Max;
@@ -16,6 +16,8 @@ namespace GeekMDSuite.Services.Interpretation
         
         public InterpretationText Interpretation => throw new NotImplementedException();
         public FitnessClassification Classification => Classify();
+
+        public override string ToString() => Classification.ToString();
 
         private FitnessClassification Classify()
         {

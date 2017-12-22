@@ -14,6 +14,8 @@ namespace GeekMDSuite.Services.Interpretation
         
         public PercentBodyFat Classification => Classify();
 
+        public override string ToString() => Classification.ToString();
+
         public static class LowerLimits
         {
             public static class Male

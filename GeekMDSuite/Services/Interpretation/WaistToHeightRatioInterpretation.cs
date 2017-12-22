@@ -33,7 +33,9 @@ namespace GeekMDSuite.Services.Interpretation
                 public const double MoribdlyObese = 0.58;
             }
         }
-        
+
+        public override string ToString() => Classification.ToString();
+
         private readonly double _waistToHeighRatio;
         private readonly IPatient _patient;
         
