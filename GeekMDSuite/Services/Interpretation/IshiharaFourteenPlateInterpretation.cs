@@ -4,7 +4,7 @@ using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.Services.Interpretation
 {
-    public class IshiharaFourteenPlateInterpretation : IshiharaColorVisionInterpretation, IInterpretable<IshiharaResultFlag>
+    internal class IshiharaFourteenPlateInterpretation : IshiharaColorVisionInterpretation, IInterpretable<IshiharaResultFlag>
     {
         public IshiharaFourteenPlateInterpretation(List<IshiharaPlateAnswer> answerList) : base(answerList, IshiharaTestType.Ishihara14)
         {

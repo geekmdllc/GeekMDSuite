@@ -14,6 +14,8 @@ namespace GeekMDSuite.Services.Interpretation
         public HipToWaistRatio Classification => Classify();
         public double Ratio =>  _bodyComposition.Waist.Inches / _bodyComposition.Hips.Inches;
 
+        public override string ToString() => Classification.ToString();
+
         private HipToWaistRatio Classify()
         {
             var lowerLimits = GetLimits();

@@ -17,14 +17,6 @@ namespace GeekMDSuite.Services.Interpretation
         public GripStrengthClassification WorseSide => LeftWorseThanRight() ? Left : Right;
         public Laterality Laterality => LeftWorseThanRight() ? Laterality.Left : Laterality.Right;
 
-        private bool LeftWorseThanRight() => _mapToValue[Left] < _mapToValue[Right];
-
-        private readonly Dictionary<GripStrengthClassification, int> _mapToValue = new Dictionary<GripStrengthClassification, int>()
-        {
-            {GripStrengthClassification.Weak, 0},
-            {GripStrengthClassification.Normal, 1},
-            {GripStrengthClassification.Strong, 2}
-        };
         
         public static GripStrengthClassificationResult Create(GripStrengthClassification left, GripStrengthClassification right)
         {
@@ -33,5 +25,14 @@ namespace GeekMDSuite.Services.Interpretation
 
         public override string ToString() => 
             $"The worse side is on the {Laterality}, the left strength was {Left}, the right side was {Right}.";
+        
+        private bool LeftWorseThanRight() => _mapToValue[Left] < _mapToValue[Right];
+
+        private readonly Dictionary<GripStrengthClassification, int> _mapToValue = new Dictionary<GripStrengthClassification, int>()
+        {
+            {GripStrengthClassification.Weak, 0},
+            {GripStrengthClassification.Normal, 1},
+            {GripStrengthClassification.Strong, 2}
+        };
     }
 }

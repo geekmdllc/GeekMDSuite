@@ -19,7 +19,9 @@ namespace GeekMDSuite.Services.Interpretation
 
         public IMassMeasurement LowerLimitOfNormal => _ranges.LowerLimitOfNormal;
         public IMassMeasurement UpperLimitOfNormal => _ranges.UpperLimitOfNormal;
-        
+
+        public override string ToString() => Classification.ToString();
+
         private readonly GripStrength _gripStrength;
         private readonly GripStrengthLimits _ranges;
 

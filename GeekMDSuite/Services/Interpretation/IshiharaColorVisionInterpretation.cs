@@ -35,7 +35,9 @@ namespace GeekMDSuite.Services.Interpretation
 
         public IshiharaTestType TestType { get; }
         public List<IshiharaPlateAnswer> AnswerList { get; }
-        
+
+        public override string ToString() => Classify().ToString();
+
         protected List<IshiharaPlateModel> PlateSet { get; set; }
 
         protected abstract IshiharaResultFlag Classify();

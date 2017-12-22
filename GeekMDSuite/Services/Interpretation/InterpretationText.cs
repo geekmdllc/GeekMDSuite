@@ -16,10 +16,7 @@ namespace GeekMDSuite.Services.Interpretation
             Sections = sections;
         }
 
-        public override string ToString()
-        {
-            return $"{Title}\n\n{Summary}\n\n{BuildSections()}";
-        }
+        public override string ToString() => $"{Title}\n\n{Summary}\n\n{BuildSections()}";
 
         private string BuildSections()
         {

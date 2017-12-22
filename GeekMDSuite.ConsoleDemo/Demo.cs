@@ -14,7 +14,7 @@ namespace GeekMDSuite.ConsoleDemo
     {
         public static void Main(string[] args)
         {
-            var joe = PatientBuilder
+            var patient = PatientBuilder
                 .Initialize()
                 .SetDateOfBirth(1977, 3, 31)
                 .SetGender(GenderIdentity.NonBinaryXy)
@@ -23,7 +23,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetRace(Race.BlackOrAfricanAmerican)
                 .Build();
 
-            Console.WriteLine($"Meet our patient: {joe}{NewLine}");
+            Console.WriteLine($"Meet our patient: {patient}{NewLine}");
 
             var vitals = VitalSignsBuilder.Initialize()
                 .SetBloodPressure(168, 99, false)
@@ -31,10 +31,10 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetPulseRate(105)
                 .SetTemperature(101.2)
                 .Build();
-            Console.WriteLine($"{joe.Name.First}'s vitals: {vitals}{NewLine}");
+            Console.WriteLine($"{patient.Name.First}'s vitals: {vitals}{NewLine}");
 
             var bp = BloodPressure.Build(100, 66);
-            Console.WriteLine($"If {joe.Name.First} used to have good blood pressure, it  was {bp}.{NewLine}");
+            Console.WriteLine($"If {patient.Name.First} used to have good blood pressure, it  was {bp}.{NewLine}");
 
             var bodyComposition = BodyCompositionBuilder
                 .Initialize()
@@ -214,16 +214,16 @@ namespace GeekMDSuite.ConsoleDemo
             var visualAcuity = VisualAcuity.Build(20, 20, 20);
             Console.WriteLine($"Visual acuity: {visualAcuity}{NewLine}");
 
-            var predictedMaxHrStd = PredictMaximumHeartRate.Standard(joe.Age);
+            var predictedMaxHrStd = PredictMaximumHeartRate.Standard(patient.Age);
             Console.WriteLine($"Joes predicted max HR (standard formula): {predictedMaxHrStd} bpm{NewLine}");
 
-            var predictedMaxHrRevisited = PredictMaximumHeartRate.Revisited(joe.Age);
+            var predictedMaxHrRevisited = PredictMaximumHeartRate.Revisited(patient.Age);
             Console.WriteLine($"Joes predicted max HR (revisted formula): {predictedMaxHrRevisited} bpm{NewLine}");
 
-            var vo2Max = CalculateVo2Max.FromTreadmillStressTest(treadmillStressTest, joe);
+            var vo2Max = CalculateVo2Max.FromTreadmillStressTest(treadmillStressTest, patient);
             Console.WriteLine($"Joes VO2Max as calculated from his treadmill stress test: {vo2Max}{NewLine}");
 
-            var metsTreadmill = CalculateMetabolicEquivalents.FromTreadmillStressTest(treadmillStressTest, joe);
+            var metsTreadmill = CalculateMetabolicEquivalents.FromTreadmillStressTest(treadmillStressTest, patient);
             Console.WriteLine($"Joes METS as calculated from his treadmill stress test: {metsTreadmill}{NewLine}");
 
             var metsVo2Max = CalculateMetabolicEquivalents.FromVo2Max(vo2Max);
@@ -235,26 +235,59 @@ namespace GeekMDSuite.ConsoleDemo
             var bpInterpretation = new BloodPressureInterpretation(vitals.BloodPressure);
             Console.WriteLine($"BP Classification: {bpInterpretation}{NewLine}");
             
-            var bodyCompInterp = new BodyCompositionInterpretation(bodyCompositionExpanded, joe);
+            var bodyCompInterp = new BodyCompositionInterpretation(bodyCompositionExpanded, patient);
             Console.WriteLine($"Body comp: {bodyCompInterp}{NewLine}");
             
-            var bodyCompExpandedInterp = new BodyCompositionExpandedInterpretation(bodyCompositionExpanded, joe);
+            var bodyCompExpandedInterp = new BodyCompositionExpandedInterpretation(bodyCompositionExpanded, patient);
             Console.WriteLine($"Body comp expanded: {bodyCompExpandedInterp}{NewLine}");
             
-            var bmiInterp = new BodyMassIndexInterpretation(bodyComposition, joe);
-            Console.WriteLine($"BMI: {bmiInterp}\n");
+            var bmiInterp = new BodyMassIndexInterpretation(bodyComposition, patient);
+            Console.WriteLine($"BMI: {bmiInterp}{NewLine}");
             
             var carotidUsInterp = new CarotidUltrasoundInterpretation(carotidUs);
-            Console.WriteLine($"Carotid US: {carotidUsInterp}\n");
+            Console.WriteLine($"Carotid US: {carotidUsInterp}{NewLine}");
             
-            var centralBpInterp = new CentralBloodPressureInterpretation(centralBp, joe);
-            Console.WriteLine($"Central BP: {centralBpInterp}\n");
+            var centralBpInterp = new CentralBloodPressureInterpretation(centralBp, patient);
+            Console.WriteLine($"Central BP: {centralBpInterp}{NewLine}");
             
-            var fitScoreInterp = new FitTreadmillScoreInterpretation(treadmillStressTest, joe);
-            Console.WriteLine($"FIT Score: {fitScoreInterp}\n");
+            var fitScoreInterp = new FitTreadmillScoreInterpretation(treadmillStressTest, patient);
+            Console.WriteLine($"FIT Score: {fitScoreInterp}{NewLine}");
             
             var fmsInterpretation = new FunctionalMovementScreenInterpretation(functionalMovementScreen);
-            Console.WriteLine($"FMS\n{fmsInterpretation}\n");
+            Console.WriteLine($"FMS{NewLine}{fmsInterpretation}{NewLine}");
+            
+            var gripInterp = new GripStrengthInterpretation(gripStrength, patient);
+            Console.WriteLine($"Grip strength: {gripInterp}{NewLine}");
+            
+            var hipToWaistInterp = new HipToWaistInterpretation(bodyCompositionExpanded, patient);
+            Console.WriteLine($"Hip to Waist: {hipToWaistInterp}{NewLine}");
+            
+            var ishiharaSixInterp = new IshiharaSixPlateInterpretation(ishiharaSix);
+            Console.WriteLine($"Ishihara 6 Plate: {ishiharaSixInterp}{NewLine}");
+            
+            var ocularPressureInterp = new OcularPressureInterpretation(ocularPressure);
+            Console.WriteLine($"Ocular Pressure: {ocularPressureInterp}{NewLine}");
+            
+            var percentBodyFatInterp = new PercentBodyFatInterpretation(bodyCompositionExpanded, patient);
+            Console.WriteLine($"Percent BF: {percentBodyFatInterp}{NewLine}");
+
+            var peripheralVisionInterp = new PeripheralVisionInterpreation(peripheralVision);
+            Console.WriteLine($"Peripheral Vision: {peripheralVisionInterp}{NewLine}");
+            
+            var pushupsInterp = new PushupsInterpretation(pushups, patient);
+            Console.WriteLine($"Pushups: {pushupsInterp}{NewLine}");
+            
+            var qualitativeLabInterp = new QualitativeLabInterpretation(qualitativeLab, patient);
+            Console.WriteLine($"Qualitative Lab: {qualitativeLabInterp}{NewLine}");
+            
+            var quantLabInterp = new QuantitativeLabInterpretation(quantitativeLab, patient);
+            Console.WriteLine($"Quantitative Lab: {quantLabInterp}{NewLine}");
+            
+            var sitAndReachInterp = new SitAndReachInterpretation(sitAndReach, patient);
+            Console.WriteLine($"Sit & Reach: {sitAndReachInterp}{NewLine}");
+            
+            var situpsInterp = new SitupsInterpretation(situps, patient);
+            Console.WriteLine($"Situps: {situpsInterp}{NewLine}");
         }
     }
 }
