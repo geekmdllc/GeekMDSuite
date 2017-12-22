@@ -2,7 +2,20 @@
 {
     public class AudiogramDataset
     {
-        internal AudiogramDataset(
+        internal static AudiogramDataset Build(
+            AudiogramDatapoint f125,
+            AudiogramDatapoint f250,
+            AudiogramDatapoint f500,
+            AudiogramDatapoint f1000,
+            AudiogramDatapoint f2000,
+            AudiogramDatapoint f3000,
+            AudiogramDatapoint f4000,
+            AudiogramDatapoint f6000,
+            AudiogramDatapoint f8000)
+        {
+            return new AudiogramDataset(f125, f250, f500, f1000, f2000, f3000, f4000, f6000, f8000);
+        }
+        private AudiogramDataset(
             AudiogramDatapoint f125,
             AudiogramDatapoint f250,
             AudiogramDatapoint f500,

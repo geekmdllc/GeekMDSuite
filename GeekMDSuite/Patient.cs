@@ -26,7 +26,7 @@ namespace GeekMDSuite
         public IGender Gender { get; }
         public Race Race { get; }
 
-        public static Patient Create(Name name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber) 
+        internal static Patient Build(Name name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber) 
             => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
 
         public override string ToString()

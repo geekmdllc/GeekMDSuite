@@ -14,7 +14,7 @@ namespace GeekMDSuite.Test
         [InlineData(95, HearingLoss.Profound)]
         public void Classification_GivenADecibalValue_ReturnsExpectedClassification(int value, HearingLoss expectedClassification)
         {
-            var result = new AudiogramDatapoint(value);
+            var result = AudiogramDatapoint.Build(value);
             var interp = new AudiogramDataPointInterpretation(result);
             
             Assert.Equal(expectedClassification, interp.Classification);

@@ -2,7 +2,9 @@
 {
     public class AudiogramDatapoint
     {
-        public AudiogramDatapoint(int value)
+        public static AudiogramDatapoint Build(int value) => new AudiogramDatapoint(value);
+        
+        internal AudiogramDatapoint(int value)
         {
             Value = value;
         }

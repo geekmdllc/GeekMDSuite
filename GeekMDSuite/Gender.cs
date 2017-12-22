@@ -20,7 +20,7 @@
 
         public static bool IsGenotypeXy(IGender gender) => !IsGenotypeXx(gender.Category);
 
-        public static Gender Create(GenderIdentity category) => new Gender(category);
+        public static Gender Build(GenderIdentity category) => new Gender(category);
 
         public override string ToString()
         {

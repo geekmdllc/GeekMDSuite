@@ -7,7 +7,7 @@ namespace GeekMDSuite.Procedures
         public override Spirometry Build()
         {
             ValidatePreBuildState();
-            return new Spirometry(_forcedExpiratoryVolume1Second, 
+            return Spirometry.Build(_forcedExpiratoryVolume1Second, 
                 _forcedVitalCapacity, 
                 _peakExpiratoryFlow, 
                 _forcedExpiratoryFlow25To75, 

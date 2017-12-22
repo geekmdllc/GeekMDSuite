@@ -8,7 +8,7 @@ namespace GeekMDSuite.Procedures
         public override TreadmillExerciseStressTest Build()
         {
             ValidatePreBuildState();
-            return new TreadmillExerciseStressTest(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 
+            return TreadmillExerciseStressTest.Build(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 
                 _maximumBloodPressure, _maximumHeartRate);
         }
 

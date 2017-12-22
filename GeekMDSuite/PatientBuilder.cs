@@ -8,7 +8,7 @@ namespace GeekMDSuite
         public override Patient Build()
         {
             ValidatePreBuildState();
-            return Patient.Create(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
+            return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
         }
 
         public PatientBuilder SetDateOfBirth(int year, int month, int day)
@@ -31,7 +31,7 @@ namespace GeekMDSuite
 
         public PatientBuilder SetGender(GenderIdentity gender)
         {
-            _gender = Gender.Create(gender);
+            _gender = Gender.Build(gender);
             return this;
         }
 

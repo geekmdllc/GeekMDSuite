@@ -6,8 +6,6 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class AudiogramDataPointInterpretation
     {
-        private readonly AudiogramDatapoint _datapoint;
-
         public AudiogramDataPointInterpretation(AudiogramDatapoint datapoint)
         {
             _datapoint = datapoint;
@@ -27,5 +25,7 @@ namespace GeekMDSuite.Services.Interpretation
         public static Interval<int> ModerateRange => HearingLossClassificationRepository.GetRange(HearingLoss.Moderate);
         public static Interval<int> SevereRange => HearingLossClassificationRepository.GetRange(HearingLoss.Severe);
         public static Interval<int> ProfoundRange => HearingLossClassificationRepository.GetRange(HearingLoss.Profound);
+        
+        private readonly AudiogramDatapoint _datapoint;
     }
 }

@@ -4,7 +4,16 @@ namespace GeekMDSuite.Procedures
 {
     public class FmsMovementData
     {
-        internal FmsMovementData(
+        public static FmsMovementData Build (
+            FmsMovementPattern movementPattern, 
+            Laterality laterality, 
+            int rawScore, 
+            FmsClearanceTest clearance)
+        {
+            return new FmsMovementData(movementPattern, laterality, rawScore, clearance);
+        }
+        
+        private FmsMovementData(
             FmsMovementPattern movementPattern, 
             Laterality laterality, 
             int rawScore, 

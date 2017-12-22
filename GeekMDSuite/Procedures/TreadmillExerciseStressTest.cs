@@ -12,7 +12,21 @@ namespace GeekMDSuite.Procedures
         public BloodPressure MaximumBloodPressure { get; }
         public int MaximumHeartRate { get; }
 
-        internal TreadmillExerciseStressTest(
+        internal static TreadmillExerciseStressTest Build(
+            TreadmillProtocol protocol,
+            ITimeDuration time,
+            TreadmillExerciseStressTestResultClassification result,
+            BloodPressure supineBloodPressure,
+            int supineHeartRate,
+            BloodPressure maximumBloodPressure,
+            int maximumHeartRate)
+        {
+            return new TreadmillExerciseStressTest(protocol, time, result, supineBloodPressure, supineHeartRate,
+                maximumBloodPressure, maximumHeartRate);
+        }
+
+        
+        private TreadmillExerciseStressTest(
             TreadmillProtocol protocol, 
             ITimeDuration time, 
             TreadmillExerciseStressTestResultClassification result, 

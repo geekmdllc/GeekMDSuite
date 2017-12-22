@@ -15,15 +15,15 @@ namespace GeekMDSuite.Procedures
 
         public FunctionalMovementScreenBuilder SetDeepSquat(int rawScore)
         {
-            _deepSquat  = new FmsMovementData(FmsMovementPattern.DeepSquat, Laterality.Bilateral, rawScore, FmsClearanceTest.NotApplicable);
+            _deepSquat  = FmsMovementData.Build(FmsMovementPattern.DeepSquat, Laterality.Bilateral, rawScore, FmsClearanceTest.NotApplicable);
             return this;
         }
 
         public FunctionalMovementScreenBuilder SetHurdleStep(int leftScore, int rightScore)
         {
             _hurdleStep = new FmsMovementSet(
-                new FmsMovementData(FmsMovementPattern.HurdleStep, Laterality.Left, leftScore, FmsClearanceTest.NotApplicable), 
-                new FmsMovementData(FmsMovementPattern.HurdleStep, Laterality.Right, rightScore, FmsClearanceTest.NotApplicable)
+                FmsMovementData.Build(FmsMovementPattern.HurdleStep, Laterality.Left, leftScore, FmsClearanceTest.NotApplicable), 
+                FmsMovementData.Build(FmsMovementPattern.HurdleStep, Laterality.Right, rightScore, FmsClearanceTest.NotApplicable)
                 );
             return this;
         }
@@ -31,8 +31,8 @@ namespace GeekMDSuite.Procedures
         public FunctionalMovementScreenBuilder SetInlineLunge(int leftScore, int rightScore)
         {
             _inlineLunge = new FmsMovementSet(
-                new FmsMovementData(FmsMovementPattern.InlineLunge, Laterality.Left, leftScore, FmsClearanceTest.NotApplicable), 
-                new FmsMovementData(FmsMovementPattern.InlineLunge, Laterality.Right, rightScore, FmsClearanceTest.NotApplicable)
+                FmsMovementData.Build(FmsMovementPattern.InlineLunge, Laterality.Left, leftScore, FmsClearanceTest.NotApplicable), 
+                FmsMovementData.Build(FmsMovementPattern.InlineLunge, Laterality.Right, rightScore, FmsClearanceTest.NotApplicable)
             );
             return this;
         }
@@ -40,8 +40,8 @@ namespace GeekMDSuite.Procedures
         public FunctionalMovementScreenBuilder SetShoulderMobility(int leftScore, bool leftPain, int rightScore, bool rightPain)
         {
             _shoulderMobility = new FmsMovementSet(
-                new FmsMovementData(FmsMovementPattern.ShoulderMobility, Laterality.Left, leftScore, ParsePainResult(leftPain)), 
-                new FmsMovementData(FmsMovementPattern.ShoulderMobility, Laterality.Right, rightScore, ParsePainResult(rightPain))
+                FmsMovementData.Build(FmsMovementPattern.ShoulderMobility, Laterality.Left, leftScore, ParsePainResult(leftPain)), 
+                FmsMovementData.Build(FmsMovementPattern.ShoulderMobility, Laterality.Right, rightScore, ParsePainResult(rightPain))
             );
             return this;
         }
@@ -49,23 +49,23 @@ namespace GeekMDSuite.Procedures
         public FunctionalMovementScreenBuilder SetActiveStraightLegRaise(int leftScore, int rightScore)
         {
             _activeStraightLegRaise = new FmsMovementSet(
-                new FmsMovementData(FmsMovementPattern.ActiveStraightLegRaise, Laterality.Left, leftScore, FmsClearanceTest.NotApplicable), 
-                new FmsMovementData(FmsMovementPattern.ActiveStraightLegRaise, Laterality.Right, rightScore, FmsClearanceTest.NotApplicable)
+                FmsMovementData.Build(FmsMovementPattern.ActiveStraightLegRaise, Laterality.Left, leftScore, FmsClearanceTest.NotApplicable), 
+                FmsMovementData.Build(FmsMovementPattern.ActiveStraightLegRaise, Laterality.Right, rightScore, FmsClearanceTest.NotApplicable)
             );
             return this;
         }
 
         public FunctionalMovementScreenBuilder SetTrunkStabilityPuhsup(int rawScore, bool pain)
         {
-            _trunkStabilityPushup = new FmsMovementData(FmsMovementPattern.TrunkStability, Laterality.Bilateral, rawScore, ParsePainResult(pain));
+            _trunkStabilityPushup = FmsMovementData.Build(FmsMovementPattern.TrunkStability, Laterality.Bilateral, rawScore, ParsePainResult(pain));
             return this;
         }
 
         public FunctionalMovementScreenBuilder SetRotaryStability(int leftScore, bool leftPain, int rightScore, bool rightPain)
         {
             _rotaryStability = new FmsMovementSet(
-                new FmsMovementData(FmsMovementPattern.RotaryStability, Laterality.Left, leftScore, ParsePainResult(leftPain)), 
-                new FmsMovementData(FmsMovementPattern.RotaryStability, Laterality.Right, rightScore, ParsePainResult(rightPain))
+                FmsMovementData.Build(FmsMovementPattern.RotaryStability, Laterality.Left, leftScore, ParsePainResult(leftPain)), 
+                FmsMovementData.Build(FmsMovementPattern.RotaryStability, Laterality.Right, rightScore, ParsePainResult(rightPain))
             );
             return this;
         }

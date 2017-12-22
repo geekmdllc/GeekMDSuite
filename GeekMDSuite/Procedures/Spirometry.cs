@@ -2,7 +2,16 @@
 {
     public class Spirometry
     {
-        internal Spirometry(double forcedExpiratoryVolume1Second, 
+        internal static Spirometry Build(double forcedExpiratoryVolume1Second,
+            double forcedVitalCapacity,
+            double peakExpiratoryFlow,
+            double forcedExpiratoryFlow25To75,
+            double forcedExpiratoryTime)
+        {
+            return new Spirometry(forcedExpiratoryVolume1Second, forcedVitalCapacity, 
+                peakExpiratoryFlow, forcedExpiratoryFlow25To75, forcedExpiratoryTime);
+        }
+        private Spirometry(double forcedExpiratoryVolume1Second, 
             double forcedVitalCapacity, 
             double peakExpiratoryFlow, 
             double forcedExpiratoryFlow25To75, 
