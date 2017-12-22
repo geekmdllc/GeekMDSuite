@@ -1,7 +1,6 @@
 ﻿using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Xunit;
-using static GeekMDSuite.Services.Interpretation.AudiogramDataPointInterpretation;
 
 namespace GeekMDSuite.Test
 {

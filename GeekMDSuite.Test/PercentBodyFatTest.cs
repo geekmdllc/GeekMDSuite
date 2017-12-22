@@ -1,107 +1,34 @@
 ﻿using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
+using static GeekMDSuite.Services.Interpretation.PercentBodyFatInterpretation.LowerLimits;
 
 namespace GeekMDSuite.Test
 {
     public class PercentBodyFatTest
     {
-        [Fact]
-        public void Interpret_GivenMaleWith5Percent_ReturnsUnderFat()
+        [Theory]
+        [InlineData(Male.Athletic - 1, GenderIdentity.Male, PercentBodyFat.UnderFat)]
+        [InlineData(Male.Athletic, GenderIdentity.Male, PercentBodyFat.Athletic)]
+        [InlineData(Male.Fit, GenderIdentity.Male, PercentBodyFat.Fitness)]
+        [InlineData(Male.Acceptable, GenderIdentity.Male, PercentBodyFat.Acceptable)]
+        [InlineData(Male.OverFat, GenderIdentity.Male, PercentBodyFat.OverFat)]
+        [InlineData(Female.Athletic - 1, GenderIdentity.Female, PercentBodyFat.UnderFat)]
+        [InlineData(Female.Athletic, GenderIdentity.Female, PercentBodyFat.Athletic)]
+        [InlineData(Female.Fit, GenderIdentity.Female, PercentBodyFat.Fitness)]
+        [InlineData(Female.Acceptable, GenderIdentity.Female, PercentBodyFat.Acceptable)]
+        [InlineData(Female.OverFat, GenderIdentity.Female, PercentBodyFat.OverFat)]
+        public void Classify_GivenBodyCompositionAndBodyFatPercent_ReturnsCorrectClassification(double percentBodyFat, 
+            GenderIdentity genderIdentity, PercentBodyFat expectedClassification)
         {
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
             var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(5);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
+            bce.Setup(b => b.PercentBodyFat).Returns(percentBodyFat);
             
-            Assert.Equal(PercentBodyFat.UnderFat, result.Classification);
+            var classification = new PercentBodyFatInterpretation(bce.Object, mockPatient.Object).Classification;
+            
+            Assert.Equal(expectedClassification, classification);
         }
-        [Fact]
-        public void Interpret_GivenMaleWith13point9Percent_ReturnsAthletic()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(13.9);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
-
-            Assert.Equal(PercentBodyFat.Athletic, result.Classification);
-        }
-        
-        [Fact]
-        public void Interpret_GivenMaleWith15Percent_ReturnsFitness()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(15);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
-
-            Assert.Equal(PercentBodyFat.Fitness, result.Classification);
-        }
-        
-        [Fact]
-        public void Interpret_GivenMaleWith20Percent_ReturnsAcceptable()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(20);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
-
-            Assert.Equal(PercentBodyFat.Acceptable, result.Classification);
-        }
-        
-        [Fact]
-        public void Interpret_GivenMaleWith30Percent_ReturnsOverFat()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(30);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Male);
-
-            Assert.Equal(PercentBodyFat.OverFat, result.Classification);
-        }
-        [Fact]
-        public void Interpret_GivenFemaleWith13Percent_ReturnsUnderFat()
-        {            
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(13);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
-
-            Assert.Equal(PercentBodyFat.UnderFat, result.Classification);
-        }
-        [Fact]
-        public void Interpret_GivenFemaleWith20point9Percent_ReturnsAthletic()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(20.9);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
-
-            Assert.Equal(PercentBodyFat.Athletic, result.Classification);
-        }
-        
-        [Fact]
-        public void Interpret_GivenFemaleWith24point9Percent_ReturnsFitness()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(24.9);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
-
-            Assert.Equal(PercentBodyFat.Fitness, result.Classification);
-        }
-        
-        [Fact]
-        public void Interpret_GivenFemaleWith30Percent_ReturnsAcceptable()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(30);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
-
-            Assert.Equal(PercentBodyFat.Acceptable, result.Classification);
-        }
-        
-        [Fact]
-        public void Interpret_GivenFemaleWith35Percent_ReturnsOverFat()
-        {
-            var bce = new Mock<IBodyCompositionExpanded>();
-            bce.Setup(b => b.PercentBodyFat).Returns(35);
-            var result = new PercentBodyFatInterpretation(bce.Object, GenderIdentity.Female);
-
-            Assert.Equal(PercentBodyFat.OverFat, result.Classification);
-        }
-
     }
 }

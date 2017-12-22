@@ -4,9 +4,9 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class PercentBodyFatInterpretation : IInterpretable<PercentBodyFat>
     {
-        public PercentBodyFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded, GenderIdentity genderIdentity)
+        public PercentBodyFatInterpretation(IBodyCompositionExpanded bodyCompositionExpanded, IPatient patient)
         {
-            _genderIdentity = genderIdentity;
+            _patient = patient;
             Value = bodyCompositionExpanded.PercentBodyFat;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
@@ -33,11 +33,11 @@ namespace GeekMDSuite.Services.Interpretation
             }
         }
         
-        private readonly GenderIdentity _genderIdentity;
+        private readonly IPatient _patient;
         
         private PercentBodyFat Classify()
         {
-            var upperLimit = DetermineBodyFatLimitsByGender(_genderIdentity);
+            var upperLimit = DetermineBodyFatLimitsByGender(_patient.Gender);
 
             if (Value < upperLimit.Athletic)
                 return PercentBodyFat.UnderFat;
@@ -48,9 +48,9 @@ namespace GeekMDSuite.Services.Interpretation
             return Value < upperLimit.OverFat ? PercentBodyFat.Acceptable : PercentBodyFat.OverFat;
         }
 
-        private static BodyFatLimits DetermineBodyFatLimitsByGender(GenderIdentity genderIdentity)
+        private static BodyFatLimits DetermineBodyFatLimitsByGender(IGender gender)
         {
-            var genotypeIsXy = Gender.IsGenotypeXy(genderIdentity);
+            var genotypeIsXy = Gender.IsGenotypeXy(gender);
             
             var athletic = genotypeIsXy ? LowerLimits.Male.Athletic : LowerLimits.Female.Athletic;
             var fitness = genotypeIsXy ? LowerLimits.Male.Fit : LowerLimits.Female.Fit;

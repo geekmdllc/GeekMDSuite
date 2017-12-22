@@ -38,22 +38,22 @@ namespace GeekMDSuite.ConsoleDemo
 
             var bodyComposition = BodyCompositionBuilder
                 .Initialize()
-                .SetHeight(73)
-                .SetHips(41)
-                .SetWaist(52)
-                .SetWeight(316.4)
+                .SetHeight(70.9)
+                .SetHips(40)
+                .SetWaist(34)
+                .SetWeight(193)
                 .Build();
 
             Console.WriteLine($"Simple body composition measures: {bodyComposition}{NewLine}");
 
             var bodyCompositionExpanded = BodyCompositionExpandedBuilder
                 .Initialize()
-                .SetBodyFatPercentage(35.6)
-                .SetHeight(73)
-                .SetHips(41)
-                .SetVisceralFat(205)
-                .SetWaist(52)
-                .SetWeight(316.4)
+                .SetBodyFatPercentage(16.5)
+                .SetHeight(bodyComposition.Height.Inches)
+                .SetHips(bodyComposition.Hips.Inches)
+                .SetVisceralFat(70)
+                .SetWaist(bodyComposition.Waist.Inches)
+                .SetWeight(bodyComposition.Weight.Pounds)
                 .Build();
 
             Console.WriteLine($"Expanded body composition measures: {bodyCompositionExpanded}{NewLine}");
@@ -235,8 +235,8 @@ namespace GeekMDSuite.ConsoleDemo
             var bpInterpretation = new BloodPressureInterpretation(vitals.BloodPressure);
             Console.WriteLine($"BP Classification: {bpInterpretation}{NewLine}");
             
-            var bodyCompExpandedInterp = new BodyCompositionExpandedInterpretation(bodyCompositionExpanded);
-            Console.WriteLine($"Body comp: ${bodyCompExpandedInterp}{NewLine}");
+            var bodyCompExpandedInterp = new BodyCompositionExpandedInterpretation(bodyCompositionExpanded, joe);
+            Console.WriteLine($"Body comp: {bodyCompExpandedInterp}{NewLine}");
         }
     }
 }
