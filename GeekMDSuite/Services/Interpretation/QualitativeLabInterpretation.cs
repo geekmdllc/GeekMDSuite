@@ -6,7 +6,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class QualitativeLabInterpretation : IInterpretable<QualitativeLabResult>
     {
-        public QualitativeLabInterpretation(QualitativeLab lab, IPatient patient)
+        public QualitativeLabInterpretation(IQualitativeLab lab, IPatient patient)
         {
             _lab = lab ?? throw new ArgumentNullException(nameof(lab));
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -15,7 +15,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public QualitativeLabInterpretationModel Lab { get; set; }
 
-        private readonly QualitativeLab _lab;
+        private readonly IQualitativeLab _lab;
         private readonly IPatient _patient;
         
         public InterpretationText Interpretation => throw new NotImplementedException();

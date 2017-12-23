@@ -1191,7 +1191,7 @@
     "Specimen": "Serum",
     "UsToSiConversionFactor":1.6,
     "LowerBound":0.0,
-    "LowerLimitOfLowFemale": 0,
+    "LowerLimitOfLowFemale": 1,
     "LowerLimitOfLowMale": 240,
     "LowerLimitOfNormalFemale":8,
     "LowerLimitOfNormalMale":300,
