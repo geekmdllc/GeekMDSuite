@@ -19,7 +19,8 @@ namespace GeekMDSuite.Test
         public void Classification_GivenSatisfactoryFeaturesAndDifferentValues_ReturnsCorrectClassification(int sessionDuration, int secondsRest, 
             int sessionsPerWeek, ExerciseIntensity intensity, ExerciseRegimenClassification expectedClassification)
         {
-            var regimen = new ResistanceRegimenBuilder()
+            var regimen = ResistanceRegimenBuilder
+                .Initialize()
                 .SetAverageSessionDuration(sessionDuration)
                 .SetIntensity(intensity)
                 .SetSecondsRestDurationPerSet(secondsRest)
@@ -39,7 +40,8 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classification_GivenAdequateValuesAndInsufficientFeatures_ReturnsInsufficent()
         {
-            var regimen = new ResistanceRegimenBuilder()
+            var regimen = ResistanceRegimenBuilder
+                .Initialize()
                 .SetAverageSessionDuration(60)
                 .SetIntensity(ExerciseIntensity.Moderate)
                 .SetSecondsRestDurationPerSet(90)
@@ -51,7 +53,6 @@ namespace GeekMDSuite.Test
             
             var result = new ResistanceRegimenInterpretation(regimen).Classification;
 
-            
             Assert.Equal(ExerciseRegimenClassification.Insufficient, result);
         }
 

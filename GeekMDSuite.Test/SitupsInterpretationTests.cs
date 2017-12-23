@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
@@ -7,32 +8,46 @@ namespace GeekMDSuite.Test
 {
     public class SitupsInterpretationTests
     {
-        [Fact]
-        public void Classification_Given24SitupsAnd40yrMale_ReturnsAverage()
+        [Theory]
+        [InlineData(16, 32, GenderIdentity.Male, FitnessClassification.VeryPoor)]
+        [InlineData(22, 32, GenderIdentity.Male, FitnessClassification.Poor)]
+        [InlineData(26, 32, GenderIdentity.Male, FitnessClassification.BelowAverage)]
+        [InlineData(29, 32, GenderIdentity.Male, FitnessClassification.Average)]
+        [InlineData(34, 32, GenderIdentity.Male, FitnessClassification.AboveAverage)]
+        [InlineData(40, 32, GenderIdentity.Male, FitnessClassification.Good)]
+        [InlineData(42, 32, GenderIdentity.Male, FitnessClassification.Excellent)]
+        [InlineData(6, 32, GenderIdentity.Female, FitnessClassification.VeryPoor)]
+        [InlineData(14, 32, GenderIdentity.Female, FitnessClassification.Poor)]
+        [InlineData(18, 32, GenderIdentity.Female, FitnessClassification.BelowAverage)]
+        [InlineData(22, 32, GenderIdentity.Female, FitnessClassification.Average)]
+        [InlineData(26, 32, GenderIdentity.Female, FitnessClassification.AboveAverage)]
+        [InlineData(32, 32, GenderIdentity.Female, FitnessClassification.Good)]
+        [InlineData(34, 32, GenderIdentity.Female, FitnessClassification.Excellent)]
+        public void Classification_GivenPatientAndData_ReturnsCorrectClassifiation(int distance, int age,
+            GenderIdentity genderIdentity, FitnessClassification expectedFitnessClassification)
         {
-            var pushups = Situps.Build(24);
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
-            mockPt.Setup(p => p.Gender.Genotype).Returns(Genotype.Xy);
-            mockPt.Setup(p => p.Age).Returns(40);
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Age).Returns(age);
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            var situps = Situps.Build(distance);
+            
+            var classification = new SitupsInterpretation(situps, mockPatient.Object).Classification;
+            
+            Assert.Equal(expectedFitnessClassification, classification);
+        }
 
-            var classification = new SitupsInterpretation(pushups, mockPt.Object).Classification;
-
-            Assert.Equal(FitnessClassification.Average, classification);
+        [Fact]
+        public void NullSitAndReach_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new SitupsInterpretation(null, new Mock<IPatient>().Object));
         }
         
         [Fact]
-        public void Classification_Given24SitupsAnd40yrFemale_ReturnsGood()
+        public void NullPatient_ThrowsArgumentNullException()
         {
-            var pushups = Situps.Build(24);
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
-            mockPt.Setup(p => p.Gender.Genotype).Returns(Genotype.Xx);
-            mockPt.Setup(p => p.Age).Returns(40);
-
-            var classification = new SitupsInterpretation(pushups, mockPt.Object).Classification;
-
-            Assert.Equal(FitnessClassification.Good, classification);
+            Assert.Throws<ArgumentNullException>(() =>
+                new SitupsInterpretation(new Mock<IMuscularStrengthTest>().Object, null));
         }
     }
 }

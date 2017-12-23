@@ -6,33 +6,20 @@ namespace GeekMDSuite.Test
 {
     public class VisualAcuityInterpretationTests
     {
-        [Fact]
-        public void Classification_Given15ViewDistance_ReturnsNormal()
+        [Theory]
+        [InlineData(15, 15, 15, VisualAcuityClassification.Ideal)]
+        [InlineData(15, 20, 15, VisualAcuityClassification.Normal)]
+        [InlineData(15, 15, 30, VisualAcuityClassification.NearNormal)]
+        [InlineData(15, 15, 70, VisualAcuityClassification.ModerateLowVision)]
+        [InlineData(15, 200, 15, VisualAcuityClassification.SevereLowVision)]
+        [InlineData(500, 15, 15, VisualAcuityClassification.ProfoundLowVision)]
+        [InlineData(1500, 15, 15, VisualAcuityClassification.NearTotalBlindness)]
+        public void Classification_GivenData_ReturnsCorrectClassification(int distance, int near, int both,
+            VisualAcuityClassification expectedClassification)
         {
-            var classifcation = new VisualAcuityInterpretation(VisualAcuity.Build(15, 15, 15)).Classification;
+            var classifcation = new VisualAcuityInterpretation(VisualAcuity.Build(distance, near, both)).Classification;
             
-            Assert.Equal(VisualAcuityClassification.Ideal, classifcation);
-        }
-        [Fact]
-        public void Classification_Given20ViewDistance_ReturnsNormal()
-        {
-            var classifcation = new VisualAcuityInterpretation(VisualAcuity.Build(20, 20, 20)).Classification;
-            
-            Assert.Equal(VisualAcuityClassification.Normal, classifcation);
-        }
-        [Fact]
-        public void Classification_Given200ViewDistance_ReturnsSevereVisionLoss()
-        {
-            var classifcation = new VisualAcuityInterpretation(VisualAcuity.Build(200, 200, 200)).Classification;
-            
-            Assert.Equal(VisualAcuityClassification.SevereLowVision, classifcation);
-        }
-        [Fact]
-        public void Classification_Given1500ViewDistance_ReturnsNearTotalBlindness()
-        {
-            var classifcation = new VisualAcuityInterpretation(VisualAcuity.Build(1500, 200, 200)).Classification;
-            
-            Assert.Equal(VisualAcuityClassification.NearTotalBlindness, classifcation);
+            Assert.Equal(expectedClassification, classifcation);
         }
     }
 }

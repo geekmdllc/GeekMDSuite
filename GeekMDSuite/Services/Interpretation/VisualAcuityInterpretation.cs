@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.Services.Interpretation
@@ -28,9 +30,17 @@ namespace GeekMDSuite.Services.Interpretation
         }
         
         private VisualAcuity _visualAcuity;
-        
-        private VisualAcuityClassification ClassifyByPoorestVision() => 
-            Classify(_visualAcuity.Distance > _visualAcuity.Near ? _visualAcuity.Distance : _visualAcuity.Near);
+
+        private VisualAcuityClassification ClassifyByPoorestVision()
+        {
+            var visionList = new List<int>()
+            {
+                _visualAcuity.Near, 
+                _visualAcuity.Distance, 
+                _visualAcuity.Both
+            };
+            return Classify(visionList.Max());
+        }
         
         private static VisualAcuityClassification Classify(int viewDistance)
         {

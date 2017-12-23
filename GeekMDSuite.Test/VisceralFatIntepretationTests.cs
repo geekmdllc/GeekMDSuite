@@ -1,53 +1,31 @@
-﻿using GeekMDSuite.Services.Interpretation;
+﻿using System;
+using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test
 {
-    public class VisceralFatIntepretationTests
+    public class VisceralFatInterpretationTests
     {
-        [Fact]
-        public void Classfication_GivenVisceralFatLessThan50_ReturnsExcellent()
+        [Theory]
+        [InlineData(45, VisceralFat.Excellent)]
+        [InlineData(99, VisceralFat.Acceptable)]
+        [InlineData(149, VisceralFat.Elevated)]
+        [InlineData(150, VisceralFat.VeryElevated)]
+        public void Classification_GivenData_ReturnsCorrectClassification(double visceralFat, VisceralFat expectedVisceralFat)
         {
             var mockBodyCompExpanded = new Mock<IBodyCompositionExpanded>();
-            mockBodyCompExpanded.Setup(bc => bc.VisceralFat).Returns(45);
+            mockBodyCompExpanded.Setup(bc => bc.VisceralFat).Returns(visceralFat);
             
             var classification = new VisceralFatInterpretation(mockBodyCompExpanded.Object).Classification;
             
-            Assert.Equal(VisceralFat.Excellent, classification);
+            Assert.Equal(expectedVisceralFat, classification);
         }
-        
+
         [Fact]
-        public void Classfication_GivenVisceralFatLessThan100_ReturnsAcceptable()
+        public void NullBodyComposition_ThrowsArgumentNullException()
         {
-            var mockBodyCompExpanded = new Mock<IBodyCompositionExpanded>();
-            mockBodyCompExpanded.Setup(bc => bc.VisceralFat).Returns(99);
-            
-            var classification = new VisceralFatInterpretation(mockBodyCompExpanded.Object).Classification;
-            
-            Assert.Equal(VisceralFat.Acceptable, classification);
-        }
-        
-        [Fact]
-        public void Classfication_GivenVisceralFatLessThan150_ReturnsElevated()
-        {
-            var mockBodyCompExpanded = new Mock<IBodyCompositionExpanded>();
-            mockBodyCompExpanded.Setup(bc => bc.VisceralFat).Returns(149);
-            
-            var classification = new VisceralFatInterpretation(mockBodyCompExpanded.Object).Classification;
-            
-            Assert.Equal(VisceralFat.Elevated, classification);
-        }
-        
-        [Fact]
-        public void Classfication_GivenVisceralFatGreaterOrEqualTo150_ReturnsExcellent()
-        {
-            var mockBodyCompExpanded = new Mock<IBodyCompositionExpanded>();
-            mockBodyCompExpanded.Setup(bc => bc.VisceralFat).Returns(150);
-            
-            var classification = new VisceralFatInterpretation(mockBodyCompExpanded.Object).Classification;
-            
-            Assert.Equal(VisceralFat.VeryElevated, classification);
+            Assert.Throws<ArgumentNullException>(() => new VisceralFatInterpretation(null));
         }
     }
 }

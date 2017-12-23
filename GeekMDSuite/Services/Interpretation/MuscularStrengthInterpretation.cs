@@ -8,15 +8,15 @@ namespace GeekMDSuite.Services.Interpretation
     {
         protected MuscularStrengthInterpretation(IMuscularStrengthTest test, IPatient patient)
         {
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            var patient1 = patient ?? throw new ArgumentNullException(nameof(patient));
             _test = test ?? throw new ArgumentNullException(nameof(test));
 
             if (_test.Type == MuscularStrengthTest.Pushups)
-                _ranges = PushupsRepository.GetRanges(_patient);
+                _ranges = PushupsRepository.GetRanges(patient1);
             else if (_test.Type == MuscularStrengthTest.Situps)
-                _ranges = SitupsRepository.GetRanges(_patient);
+                _ranges = SitupsRepository.GetRanges(patient1);
             else if (_test.Type == MuscularStrengthTest.SitAndReach)
-                _ranges = SitAndReachRepository.GetRanges(_patient);
+                _ranges = SitAndReachRepository.GetRanges(patient1);
             else 
                 throw new NotImplementedException(nameof(_test.Type));
         }
@@ -35,7 +35,6 @@ namespace GeekMDSuite.Services.Interpretation
 
         private readonly IMuscularStrengthTest _test;
         private readonly IStrengthTestRanges _ranges;
-        private readonly IPatient _patient;
 
         private FitnessClassification Classify()
         {

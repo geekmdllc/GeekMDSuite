@@ -6,29 +6,19 @@ namespace GeekMDSuite.Test
 {
     public class StretchingRegimenInterpretationTests
     {
-        
-        [Fact]
-        public void Calculate_GivenLowIntensityAnd150Minutes_ReturnsInsufficient()
+        [Theory]
+        [InlineData(3,10,ExerciseIntensity.Low,ExerciseRegimenClassification.Insufficient)]
+        [InlineData(3,10,ExerciseIntensity.Moderate,ExerciseRegimenClassification.Adequate)]
+        [InlineData(3,20,ExerciseIntensity.High,ExerciseRegimenClassification.Aspirational)]
+        [InlineData(3,50,ExerciseIntensity.Low,ExerciseRegimenClassification.Insufficient)]
+
+        public void Classification_GivenValues_ReturnsCorrectClassification(double sessionsPerWeek, double minutesPerSession,
+            ExerciseIntensity intensity, ExerciseRegimenClassification expectedExerciseRegimenClassification)
         {
-            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 50, ExerciseIntensity.Low)).Classification;
+            var classification = new StretchingRegimenInterpretation(
+                ExerciseRegimenParameters.Build(sessionsPerWeek, minutesPerSession, intensity)).Classification;
             
-            Assert.Equal(ExerciseRegimenClassification.Insufficient, result);
-        }
-        
-        [Fact]
-        public void Calculate_GivenModerateIntensityAnd7Minutes_ReturnsAdequate()
-        {
-            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 10, ExerciseIntensity.Moderate)).Classification;
-            
-            Assert.Equal(ExerciseRegimenClassification.Adequate, result);
-        }
-        
-        [Fact]
-        public void Calculate_GivenHighIntensityAnd20Minutes_ReturnsAspirational()
-        {
-            var result = new StretchingRegimenInterpretation(ExerciseRegimenParameters.Build(3, 20, ExerciseIntensity.High)).Classification;
-            
-            Assert.Equal(ExerciseRegimenClassification.Aspirational, result);
+            Assert.Equal(expectedExerciseRegimenClassification, classification);
         }
         
         [Fact]
@@ -38,7 +28,7 @@ namespace GeekMDSuite.Test
             
             Assert.Equal(200, result);
         }
-
+        
         [Fact]
         public void IntensityIsAdequate_GivenModerateIntensityStretchingAnd30Minutes_ReturnsTrue()
         {
