@@ -9,13 +9,14 @@ namespace GeekMDSuite.Test
     {
         [Theory]
         [InlineData(45,120,2,ExerciseIntensity.Low,ExerciseRegimenClassification.Insufficient )]
-        [InlineData(45,121,2,ExerciseIntensity.Moderate,ExerciseRegimenClassification.Insufficient )]
+        [InlineData(45,120,2,ExerciseIntensity.Moderate,ExerciseRegimenClassification.Insufficient )]
         [InlineData(45,120,1,ExerciseIntensity.High,ExerciseRegimenClassification.Insufficient )]
         [InlineData(44,120,2,ExerciseIntensity.Low,ExerciseRegimenClassification.Insufficient )]
         [InlineData(45,75,3,ExerciseIntensity.Moderate,ExerciseRegimenClassification.Adequate )]
         [InlineData(75,90,2,ExerciseIntensity.Moderate,ExerciseRegimenClassification.Adequate )] 
-        [InlineData(75,90,2,ExerciseIntensity.High,ExerciseRegimenClassification.Aspirational )] 
-        public void Classification_GivenValues_ReturnsCorrectClassification(int sessionDuration, int secondsRest, 
+        [InlineData(90,90,2,ExerciseIntensity.High,ExerciseRegimenClassification.Aspirational )] 
+        [InlineData(120,90,2,ExerciseIntensity.Moderate,ExerciseRegimenClassification.Aspirational )] 
+        public void Classification_GivenSatisfactoryFeaturesAndDifferentValues_ReturnsCorrectClassification(int sessionDuration, int secondsRest, 
             int sessionsPerWeek, ExerciseIntensity intensity, ExerciseRegimenClassification expectedClassification)
         {
             var regimen = new ResistanceRegimenBuilder()
@@ -36,7 +37,7 @@ namespace GeekMDSuite.Test
         }
         
         [Fact]
-        public void Classification_GivenAdequateExceptInsufficientFeatures_ReturnsInsufficent()
+        public void Classification_GivenAdequateValuesAndInsufficientFeatures_ReturnsInsufficent()
         {
             var regimen = new ResistanceRegimenBuilder()
                 .SetAverageSessionDuration(60)

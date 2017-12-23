@@ -8,9 +8,7 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
 {
     public class ResistanceRegimenInterpretation : ExerciseRegimenInterpretation
     {
-        public ResistanceRegimenInterpretation(
-            ResistanceRegimen regimen) 
-            : base(regimen)
+        public ResistanceRegimenInterpretation(ResistanceRegimen regimen) : base(regimen)
         {
             _regimen = regimen ?? throw new ArgumentNullException(nameof(regimen));
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Resistance);
