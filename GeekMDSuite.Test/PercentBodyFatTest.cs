@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Services.Interpretation;
+﻿using System;
+using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
 using static GeekMDSuite.Services.Interpretation.PercentBodyFatInterpretation.LowerLimits;
@@ -29,6 +30,18 @@ namespace GeekMDSuite.Test
             var classification = new PercentBodyFatInterpretation(bce.Object, mockPatient.Object).Classification;
             
             Assert.Equal(expectedClassification, classification);
+        }
+
+        public void GivenNullBodyComposition_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new PercentBodyFatInterpretation(null, new Mock<IPatient>().Object));
+        }
+
+        public void GivenNullPatient_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new PercentBodyFatInterpretation(new Mock<IBodyCompositionExpanded>().Object, null));
         }
     }
 }

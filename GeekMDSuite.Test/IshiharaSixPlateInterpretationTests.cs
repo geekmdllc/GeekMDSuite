@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Xunit;
 
@@ -51,6 +52,12 @@ namespace GeekMDSuite.Test
             
             var assessment = new IshiharaSixPlateInterpretation(answerList.GetRange(0,6));
             Assert.Equal(IshiharaResultFlag.ColorVisionDeficit, assessment.Classification);
+        }
+
+        [Fact]
+        public void NullAnswerList_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new IshiharaSixPlateInterpretation(null));
         }
     }
 }

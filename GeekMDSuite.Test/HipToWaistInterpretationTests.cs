@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Services.Interpretation;
+﻿using System;
+using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
 
@@ -6,82 +7,36 @@ namespace GeekMDSuite.Test
 {
     public class HipToWaistInterpretationTests
     {
-        [Fact]
-        public void Classification_GivenMaleLessThanZeroPoint9_ReturnsHealthy()
+        [Theory]
+        [InlineData(0.89, GenderIdentity.Male, HipToWaistRatio.Normal)]
+        [InlineData(0.99, GenderIdentity.Male, HipToWaistRatio.Overweight)]
+        [InlineData(1, GenderIdentity.Male, HipToWaistRatio.Obese)]
+        [InlineData(0.79, GenderIdentity.Female, HipToWaistRatio.Normal)]
+        [InlineData(0.84, GenderIdentity.Female, HipToWaistRatio.Overweight)]
+        [InlineData(0.85, GenderIdentity.Female, HipToWaistRatio.Obese)]
+        public void Classification_GivenHipToWaistRatioAndGender_ReturnsCorrectClassification(double ratio, 
+            GenderIdentity genderIdentity, HipToWaistRatio expectedClassifcation)
         {
             var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
-            var mockBodyComposition = new Mock<IBodyComposition>();
-            mockBodyComposition.Setup(b => b.Hips.Inches).Returns(10);
-            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(8.9);
-
-            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatio.Normal, classification);
-        }
-        
-        [Fact]
-        public void Classification_GivenMaleLessThanOne_ReturnsOverweight()
-        {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
-            var mockBodyComposition = new Mock<IBodyComposition>();
-            mockBodyComposition.Setup(b => b.Hips.Inches).Returns(10);
-            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(9.9);
-
-            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatio.Overweight, classification);
-        }
-        
-        [Fact]
-        public void Classification_GivenMaleEqualToOne_ReturnsObese()
-        {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
             var mockBodyComposition = new Mock<IBodyComposition>();
             mockBodyComposition.Setup(b => b.Hips.Inches).Returns(1);
-            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(1);
+            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(ratio);
 
             var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatio.Obese, classification);
+            Assert.Equal(expectedClassifcation, classification);
+        }
+
+        [Fact]
+        public void NullBodyComposition_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new HipToWaistInterpretation(new Mock<IBodyComposition>().Object, null));
         }
         
         [Fact]
-        public void Classification_GivenFemaleLessThanZeroPoint8_ReturnsHealthy()
+        public void NullPatient_ThrowsArgumentNullException()
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
-            var mockBodyComposition = new Mock<IBodyComposition>();
-            mockBodyComposition.Setup(b => b.Hips.Inches).Returns(10);
-            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(7.9);
-
-            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatio.Normal, classification);
-        }
-        
-        [Fact]
-        public void Classification_GivenFemaleLessZeroPoint85_ReturnsOverweight()
-        {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
-            var mockBodyComposition = new Mock<IBodyComposition>();
-            mockBodyComposition.Setup(b => b.Hips.Inches).Returns(10);
-            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(8.4);
-
-            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatio.Overweight, classification);
-        }
-        
-        [Fact]
-        public void Classification_GivenFemaleEqualToZeroPoint85_ReturnsObese()
-        {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Female);
-            var mockBodyComposition = new Mock<IBodyComposition>();
-            mockBodyComposition.Setup(b => b.Hips.Inches).Returns(1);
-            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(8.5);
-
-            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
-            Assert.Equal(HipToWaistRatio.Obese, classification);
+            Assert.Throws<ArgumentNullException>(() => new HipToWaistInterpretation(null, new Mock<IPatient>().Object));
         }
     }
     

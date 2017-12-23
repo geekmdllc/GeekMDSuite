@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Xunit;
 
@@ -6,40 +7,24 @@ namespace GeekMDSuite.Test
 {
     public class OcularPressureInterpretationTests
     {
-        [Fact]
-        public void Classify_GivenPressureInNormalRange_ReturnsNormal()
+        [Theory]
+        [InlineData(18, 18, OcularPressureClassification.Normal)]
+        [InlineData(25, 18, OcularPressureClassification.OcularHypertension)]
+        [InlineData(18, 25, OcularPressureClassification.OcularHypertension)]
+        [InlineData(25, 25, OcularPressureClassification.OcularHypertension)]
+        public void Classify_GivenValues_ReturnsExpectedClassification(int left, int right,
+            OcularPressureClassification expectedClassification)
         {
-            var ocularPressure = OcularPressure.Build(18,17);
+            var ocularPressure = OcularPressure.Build(left, right);
             var classification = new OcularPressureInterpretation(ocularPressure).Classification;
             
-            Assert.Equal(OcularPressureClassification.Normal, classification);
+            Assert.Equal(expectedClassification, classification);
         }
-        
+
         [Fact]
-        public void Classify_GivenLeftEyePressureInHypertensiveRange_ReturnsOcularHypertension()
+        public void NullOcularPressure_ThrowsArgumentNullException()
         {
-            var ocularPressure = OcularPressure.Build(25,18);
-            var classification = new OcularPressureInterpretation(ocularPressure).Classification;
-            
-            Assert.Equal(OcularPressureClassification.OcularHypertension, classification);
-        }
-        
-        [Fact]
-        public void Classify_GivenRightEyePressureInHypertensiveRange_ReturnsOcularHypertension()
-        {
-            var ocularPressure = OcularPressure.Build(17,30);
-            var classification = new OcularPressureInterpretation(ocularPressure).Classification;
-            
-            Assert.Equal(OcularPressureClassification.OcularHypertension, classification);
-        }
-        
-        [Fact]
-        public void Classify_GivenBothEyePressureInHypertensiveRange_ReturnsOcularHypertension()
-        {
-            var ocularPressure = OcularPressure.Build(25,29);
-            var classification = new OcularPressureInterpretation(ocularPressure).Classification;
-            
-            Assert.Equal(OcularPressureClassification.OcularHypertension, classification);
+            Assert.Throws<ArgumentNullException>(() => new OcularPressureInterpretation(null));
         }
     }
 }
