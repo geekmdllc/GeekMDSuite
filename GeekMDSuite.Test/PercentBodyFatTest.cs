@@ -32,12 +32,14 @@ namespace GeekMDSuite.Test
             Assert.Equal(expectedClassification, classification);
         }
 
+        [Fact]
         public void GivenNullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
                 new PercentBodyFatInterpretation(null, new Mock<IPatient>().Object));
         }
 
+        [Fact]
         public void GivenNullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>

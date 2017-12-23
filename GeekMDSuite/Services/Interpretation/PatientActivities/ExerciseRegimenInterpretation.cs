@@ -22,7 +22,8 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
             {
                 if (  RegimenIsAdequate && TimeAspirationalOrHigher)
                     return ExerciseRegimenClassification.Aspirational;
-                return RegimenIsAdequate ? ExerciseRegimenClassification.Adequate : ExerciseRegimenClassification.Insufficient;
+                return RegimenIsAdequate ? ExerciseRegimenClassification.Adequate 
+                    : ExerciseRegimenClassification.Insufficient;
             }
         }
 
@@ -31,7 +32,6 @@ namespace GeekMDSuite.Services.Interpretation.PatientActivities
         public virtual bool RegimenIsAdequate => DurationAndIntensityAreAdequate;
         
         public double TotalMinutes => SessionsPerWeek * AverageSessionDuration;
-        
 
         public static double GoalMinutesHighIntensity => 
             ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular).HighIntensity;
