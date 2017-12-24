@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite
 {
-    public class BloodPressure
+    public class BloodPressure : IBloodPressure
     {
         private BloodPressure(int systolic, int diastolic, bool organDamage)
         {

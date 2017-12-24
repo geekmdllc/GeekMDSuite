@@ -27,5 +27,19 @@ namespace GeekMDSuite.Test
             Console.WriteLine($"ASCVD Risk%: {ascvd}");
             Assert.InRange(ascvd, expected - tolerance, expected + tolerance);
         }
+
+        [Fact]
+        public void NullPatient_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new PooledCohortsEquation(null, new Mock<IBloodPressure>().Object, 200, 50));
+        }
+        
+        [Fact]
+        public void NullBloodPressure_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new PooledCohortsEquation(new Mock<IPatient>().Object, null, 200, 50));
+        }
     }
 }

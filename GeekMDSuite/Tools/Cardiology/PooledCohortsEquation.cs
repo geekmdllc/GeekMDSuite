@@ -4,9 +4,12 @@ namespace GeekMDSuite.Tools.Cardiology
 {
     public class PooledCohortsEquation
     {
-        public PooledCohortsEquation(IPatient patient, BloodPressure bloodPressure, int totalCholesterol, int hdlCholesterol,
+        public PooledCohortsEquation(IPatient patient, IBloodPressure bloodPressure, int totalCholesterol, int hdlCholesterol,
             bool hypertensionTreatment = false, bool smoker = false, bool diabetic = false)
         {
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
+            if (bloodPressure == null) throw new ArgumentNullException(nameof(bloodPressure));
+            
             _gender = patient.Gender;
             _race = patient.Race;
             _age = patient.Age;
