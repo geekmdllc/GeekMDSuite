@@ -1,7 +1,9 @@
 ﻿using System;
+using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.Tools.Cardiology;
 using Moq;
 using Xunit;
+using static GeekMDSuite.LaboratoryData.Builder.Quantitative.Serum;
 
 namespace GeekMDSuite.Test
 {
@@ -21,7 +23,7 @@ namespace GeekMDSuite.Test
             mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
             mockPatient.Setup(p => p.Race).Returns(race);
 
-            var ascvd = new PooledCohortsEquation(mockPatient.Object, BloodPressure.Build(120, 75), 213, 50).AscvdRiskPercentOver10Years();
+            var ascvd = new PooledCohortsEquation(mockPatient.Object, BloodPressure.Build(120, 75), CholesterolTotal(213), HighDensityLipoprotein(50)).AscvdRiskPercentOver10Years();
 
             const double tolerance = 0.1;
             Console.WriteLine($"ASCVD Risk%: {ascvd}");
@@ -32,14 +34,14 @@ namespace GeekMDSuite.Test
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PooledCohortsEquation(null, new Mock<IBloodPressure>().Object, 200, 50));
+                new PooledCohortsEquation(null, new Mock<IBloodPressure>().Object, CholesterolTotal(213), HighDensityLipoprotein(50)));
         }
         
         [Fact]
         public void NullBloodPressure_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PooledCohortsEquation(new Mock<IPatient>().Object, null, 200, 50));
+                new PooledCohortsEquation(new Mock<IPatient>().Object, null, CholesterolTotal(213), HighDensityLipoprotein(50)));
         }
     }
 }

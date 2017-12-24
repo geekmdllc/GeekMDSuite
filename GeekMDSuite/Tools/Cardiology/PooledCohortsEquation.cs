@@ -1,10 +1,12 @@
 ﻿using System;
+using GeekMDSuite.LaboratoryData;
 
 namespace GeekMDSuite.Tools.Cardiology
 {
     public class PooledCohortsEquation
     {
-        public PooledCohortsEquation(IPatient patient, IBloodPressure bloodPressure, int totalCholesterol, int hdlCholesterol,
+        public PooledCohortsEquation(IPatient patient, IBloodPressure bloodPressure, 
+            QuantitativeLab totalCholesterol, QuantitativeLab hdlCholesterol,
             bool hypertensionTreatment = false, bool smoker = false, bool diabetic = false)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
@@ -14,145 +16,70 @@ namespace GeekMDSuite.Tools.Cardiology
             _race = patient.Race;
             _age = patient.Age;
             _systolicBloodPressure = bloodPressure.Systolic;
-            _totalCholesterol = totalCholesterol;
-            _hdlCholesterol = hdlCholesterol;
+            _totalCholesterol = totalCholesterol.Result;
+            _hdlCholesterol = hdlCholesterol.Result;
             _hypertensionTreatment = hypertensionTreatment;
             _smoker = smoker;
             _diabetic = diabetic;
         }
 
         public double AscvdRiskPercentOver10Years() => 100 *
-            (1 - Math.Pow(BaselineSurvival, Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientvalueProduct)));
+            (1 - Math.Pow(BaselineSurvival, Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientValueProduct)));
 
-        private double BaselineSurvival
+        private double BaselineSurvival => GetBaselineSurvival();
+
+        private double MeanSumCoefficientValueProduct => GetMeanSumCoefficentValueProduct();
+
+        private double SumCoefficientValueProduct => GetSumOfCoefficientAndValueProduct();
+
+        private readonly IGender _gender;
+        private readonly Race _race;
+        private readonly int _age;
+        private readonly double _totalCholesterol;
+        private readonly double _hdlCholesterol;
+        private readonly int _systolicBloodPressure;
+        private readonly bool _hypertensionTreatment;
+        private readonly bool _smoker;
+        private readonly bool _diabetic;
+                
+        private static double Ln(double value) => Math.Log(value, Math.E);
+        private static double Square(double value) => Math.Pow(value, 2);
+                
+        private double GetBaselineSurvival()
         {
-            get
-            {
-                if (Gender.IsGenotypeXy(_gender))
-                    return _race == Race.BlackOrAfricanAmerican 
-                        ? BaseLineSurvival.Xy.AfricanAmerican 
-                        : BaseLineSurvival.Xy.NonAfricanAmerican;
-
+            if (Gender.IsGenotypeXy(_gender))
                 return _race == Race.BlackOrAfricanAmerican
-                    ? BaseLineSurvival.Xx.AfricanAmerican
-                    : BaseLineSurvival.Xx.NonAfricanAmerican;
-            }
+                    ? BaseLineSurvival.Xy.AfricanAmerican
+                    : BaseLineSurvival.Xy.NonAfricanAmerican;
+
+            return _race == Race.BlackOrAfricanAmerican
+                ? BaseLineSurvival.Xx.AfricanAmerican
+                : BaseLineSurvival.Xx.NonAfricanAmerican;
         }
         
-        private double MeanSumCoefficientvalueProduct
+        private double GetMeanSumCoefficentValueProduct()
         {
-            get
-            {
-                if (Gender.IsGenotypeXy(_gender))
-                    return _race == Race.BlackOrAfricanAmerican 
-                        ? MeanCoefficientTimesValue.Xy.AfricanAmerican 
-                        : MeanCoefficientTimesValue.Xy.NonAfricanAmerican;
-
+            if (Gender.IsGenotypeXy(_gender))
                 return _race == Race.BlackOrAfricanAmerican
-                    ? MeanCoefficientTimesValue.Xx.AfricanAmerican
-                    : MeanCoefficientTimesValue.Xx.NonAfricanAmerican;
-            }
-        }
-        
-        private double SumCoefficientValueProduct
-        {
-            get
-            {
-                if (Gender.IsGenotypeXy(_gender))
-                    return _race == Race.BlackOrAfricanAmerican 
-                        ? MaleAfricanAmericanCoefficientTimesValueSum() 
-                        : MaleNonAfricanAmericanCoefficientTimesValueSum();
+                    ? MeanCoefficientTimesValue.Xy.AfricanAmerican
+                    : MeanCoefficientTimesValue.Xy.NonAfricanAmerican;
 
+            return _race == Race.BlackOrAfricanAmerican
+                ? MeanCoefficientTimesValue.Xx.AfricanAmerican
+                : MeanCoefficientTimesValue.Xx.NonAfricanAmerican;
+        }
+
+        private double GetSumOfCoefficientAndValueProduct()
+        {
+            if (Gender.IsGenotypeXy(_gender))
                 return _race == Race.BlackOrAfricanAmerican
-                    ? FemaleAfricanAmericanCoefficientTimesValueSum()
-                    : FemaleNonAfricanAmericanCoefficientTimesValueSum();
-            }
+                    ? MaleAfricanAmericanCoefficientTimesValueSum()
+                    : MaleNonAfricanAmericanCoefficientTimesValueSum();
+
+            return _race == Race.BlackOrAfricanAmerican
+                ? FemaleAfricanAmericanCoefficientTimesValueSum()
+                : FemaleNonAfricanAmericanCoefficientTimesValueSum();
         }
-
-        private double FemaleNonAfricanAmericanCoefficientTimesValueSum()
-        {
-            var lnAge = Ln(_age) * Coefficients.Xx.NonAfricanAmerican.Ln.Age;
-            var lnAgeSquared = Square(Ln(_age)) * Coefficients.Xx.NonAfricanAmerican.Ln.AgeSquared;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xx.NonAfricanAmerican.Ln.TotalCholesterol;
-            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol) * Coefficients.Xx.NonAfricanAmerican.Ln.AgeTimesCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xx.NonAfricanAmerican.Ln.HdlC;
-            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xx.NonAfricanAmerican.Ln.AgeTimesHdlC;
-            var logTreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xx.NonAfricanAmerican.Log.TreatedSystolicBp;
-            var logUntreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xx.NonAfricanAmerican.Log.UntreatedSystolicBp;
-            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xx.NonAfricanAmerican.Normal.CurrentSmoker;
-            var logAgeCurrentSmoker = Log(_age) * (_smoker ? 7.574 : 0) * Coefficients.Xx.NonAfricanAmerican.Log.AgeTimesCurrentSmoker;
-            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.NonAfricanAmerican.Normal.Diabetes;
-
-            var sbp = _hypertensionTreatment ?  logTreatedSbp : logUntreatedSbp;
-
-            var sum = lnAge + lnAgeSquared + lnTotalChol + lnAgelnTotalChol + lnHdlC + lnAgelnHdlC +
-                   sbp + currentSmoker + logAgeCurrentSmoker + diabetes;
-
-            return sum;
-        }
-
-        private double FemaleAfricanAmericanCoefficientTimesValueSum()
-        {
-            var lnAge = Ln(_age) * Coefficients.Xx.AfricanAmerican.Ln.Age;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xx.AfricanAmerican.Ln.TotalCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.Ln.HdlC;
-            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.Ln.AgeTimesHdlC;
-            var logTreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.TreatedSystolicBp;
-            var logAgeLogTreatedSbp = Log(_age) * Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.AgeTimesTreatedSystolicBp;
-            var logUntreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.UntreatedSystolicBp;
-            var logAgeLogUnreatedSbp = Log(_age) * Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.AgetimesUntreatedSystolicBp;
-            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xx.AfricanAmerican.Normal.CurrentSmoker;
-            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.AfricanAmerican.Normal.Diabetes;
-            var sbp = _hypertensionTreatment ?  logTreatedSbp + logAgeLogTreatedSbp : logUntreatedSbp + logAgeLogUnreatedSbp;
-
-            var sum = lnAge + lnTotalChol + lnHdlC + lnAgelnHdlC +
-                      sbp + currentSmoker +  diabetes;
-
-            return sum;
-        }
-
-        private double MaleNonAfricanAmericanCoefficientTimesValueSum()
-        {
-            var lnAge = Ln(_age) * Coefficients.Xy.NonAfricanAmerican.Log.Age;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.TotalCholesterol;
-            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.AgeTimesTotalCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.HdlC;
-            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.AgeTimesHdlC;
-            var logTreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.NonAfricanAmerican.Log.TreatedSystolicBp;
-            var logUntreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.NonAfricanAmerican.Log.UntreatedSystolicBp;
-            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xy.NonAfricanAmerican.Normal.CurrentSmoker;
-            var logAgeCurrentSmoker = Log(_age) * (_smoker ? 7.574 : 0) * Coefficients.Xy.NonAfricanAmerican.Log.AgeTimesCurrentSmoker;
-            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.NonAfricanAmerican.Normal.Diabetes;
-
-            var sbp = _hypertensionTreatment ?  logTreatedSbp : logUntreatedSbp;
-
-            var sum = lnAge + lnTotalChol + lnAgelnTotalChol + lnHdlC + lnAgelnHdlC +
-                      sbp + currentSmoker + logAgeCurrentSmoker + diabetes;
-
-            return sum;
-        }
-
-        private double MaleAfricanAmericanCoefficientTimesValueSum()
-        {
-            var lnAge = Ln(_age) * Coefficients.Xy.AfricanAmerican.Log.Age;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.AfricanAmerican.Log.TotalCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.AfricanAmerican.Log.HdlC;
-            var logTreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.AfricanAmerican.Log.TreatedSystolicBp;
-            var logUntreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.AfricanAmerican.Log.UntreatedSystolicBp;
-            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xy.AfricanAmerican.Normal.CurrentSmoker;
-            var logAgeCurrentSmoker = Log(_age) * (_smoker ? 7.574 : 0) * Coefficients.Xy.AfricanAmerican.Log.AgeTimesCurrentSmoker;
-            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.AfricanAmerican.Normal.Diabetes;
-
-            var sbp = _hypertensionTreatment ?  logTreatedSbp : logUntreatedSbp;
-
-            var sum = lnAge + lnTotalChol + lnHdlC + sbp + currentSmoker + logAgeCurrentSmoker + diabetes;
-
-            return sum;
-        }
-
-        private double Ln(double value) => Math.Log(value, Math.E);
-        private double Square(double value) => value * value; //Math.Pow(value, 2);
-        private double Log(double value) => Ln(value); //Math.Log10(value);
         
         private static class MeanCoefficientTimesValue
         {
@@ -190,116 +117,128 @@ namespace GeekMDSuite.Tools.Cardiology
             {
                 public static class NonAfricanAmerican
                 {
-                    public static class Log
-                    {
-                        public const double Age = 12.344;
-                        public const double TotalCholesterol = 11.853;
-                        public const double AgeTimesTotalCholesterol = -2.664;
-                        public const double HdlC = -7.990;
-                        public const double AgeTimesHdlC = 1.769;
-                        public const double TreatedSystolicBp = 1.797;
-                        public const double UntreatedSystolicBp = 1.764;
-                        public const double AgeTimesCurrentSmoker = 7.837;
-                    }
-
-                    public static class Normal
-                    {
-                        public const double CurrentSmoker = 7.837;
-                        public const double Diabetes = 0.658;
-                    }
+                    public const double Age = 12.344;
+                    public const double TotalCholesterol = 11.853;
+                    public const double AgeTimesTotalCholesterol = -2.664;
+                    public const double HdlC = -7.990;
+                    public const double AgeTimesHdlC = 1.769;
+                    public const double TreatedSystolicBp = 1.797;
+                    public const double UntreatedSystolicBp = 1.764;
+                    public const double AgeTimesCurrentSmoker = 7.837;
+                    public const double CurrentSmoker = 7.837;
+                    public const double Diabetes = 0.658;
                 }
             
                 public static class AfricanAmerican
                 {
-                    public static class Log
-                    {
-                        public const double Age = 2.469;
-                        public const double TotalCholesterol = 0.302;
-                        public const double AgeTimesTotalCholesterol = 0; // not applicable
-                        public const double HdlC = -0.307;
-                        public const double AgeTimesHdlC = 1; // not applicable
-                        public const double TreatedSystolicBp = 1.916;
-                        public const double UntreatedSystolicBp = 1.809;
-                        public const double AgeTimesCurrentSmoker = 0; // not applicable
-                    }
-
-                    public static class Normal
-                    {
-                        public const double CurrentSmoker = 0.549;
-                        public const double Diabetes = 0.645;
-                    }
+                    public const double Age = 2.469;
+                    public const double TotalCholesterol = 0.302;
+                    public const double HdlC = -0.307;
+                    public const double TreatedSystolicBp = 1.916;
+                    public const double UntreatedSystolicBp = 1.809;
+                    public const double CurrentSmoker = 0.549;
                 }
             }
             public static class Xx
             {
                 public static class NonAfricanAmerican
                 {
-                    public static class Ln
-                    {
-                        public const double Age = -29.799;
-                        public const double AgeSquared = 4.884;
-                        public const double TotalCholesterol = 13.540;
-                        public const double AgeTimesCholesterol = -3.114;
-                        public const double HdlC = -13.578;
-                        public const double AgeTimesHdlC = 3.149;
-                    }
-
-                    public static class Log
-                    {
-                        public const double TreatedSystolicBp = 2.019;
-                        public const double AgeTimesTreatedSystolicBp = 0; // not applicable
-                        public const double UntreatedSystolicBp = 1.957;
-                        public const double AgetimesUntreatedSystolicBp = 0; // not applicable
-                        
-                        public const double AgeTimesCurrentSmoker = -1.665;
-                    }
-
-                    public static class Normal
-                    {
-                        public const double CurrentSmoker = 7.574;
-                        public const double Diabetes = 0.661;
-                    }
+                    public const double Age = -29.799;
+                    public const double AgeSquared = 4.884;
+                    public const double TotalCholesterol = 13.540;
+                    public const double AgeTimesCholesterol = -3.114;
+                    public const double HdlC = -13.578;
+                    public const double AgeTimesHdlC = 3.149;
+                    public const double TreatedSystolicBp = 2.019;
+                    public const double UntreatedSystolicBp = 1.957;
+                    public const double AgeTimesCurrentSmoker = -1.665;
+                    public const double CurrentSmoker = 7.574;
+                    public const double Diabetes = 0.661;
                 }
             
                 public static class AfricanAmerican
                 {
-                    public static class Ln
-                    {
-                        public const double Age = 17.114;
-                        public const double AgeSquared = 0; //not applicable
-                        public const double TotalCholesterol = 0.940;
-                        public const double AgeTimesCholesterol = 0; // not applicable
-                        public const double HdlC = -18.920;
-                        public const double AgeTimesHdlC = 4.475;
-                    }
-
-                    public static class Log
-                    {
-                        public const double TreatedSystolicBp = 29.291;
-                        public const double AgeTimesTreatedSystolicBp = -6.432;
-                        public const double UntreatedSystolicBp = 27.820;
-                        public const double AgetimesUntreatedSystolicBp = -6.087;
-                        public const double AgeTimesCurrentSmoker = 0; // not applicable
-                    }
-
-                    public static class Normal
-                    {
-                        public const double CurrentSmoker = 0.691;
-                        public const double Diabetes = 0.874;
-                    }
+                    public const double Age = 17.114;
+                    public const double TotalCholesterol = 0.940;
+                    public const double HdlC = -18.920;
+                    public const double AgeTimesHdlC = 4.475;
+                    public const double TreatedSystolicBp = 29.291;
+                    public const double AgeTimesTreatedSystolicBp = -6.432;
+                    public const double UntreatedSystolicBp = 27.820;
+                    public const double AgetimesUntreatedSystolicBp = -6.087;
+                    public const double CurrentSmoker = 0.691;
+                    public const double Diabetes = 0.874;
                 }
             }
         }
-                
-        private readonly IGender _gender;
-        private readonly Race _race;
-        private readonly int _age;
-        private readonly int _totalCholesterol;
-        private readonly int _hdlCholesterol;
-        private readonly int _systolicBloodPressure;
-        private readonly bool _hypertensionTreatment;
-        private readonly bool _smoker;
-        private readonly bool _diabetic;
 
+        private double FemaleNonAfricanAmericanCoefficientTimesValueSum()
+        {
+            var lnAge = Ln(_age) * Coefficients.Xx.NonAfricanAmerican.Age;
+            var lnAgeSquared = Square(Ln(_age)) * Coefficients.Xx.NonAfricanAmerican.AgeSquared;
+            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xx.NonAfricanAmerican.TotalCholesterol;
+            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol) * Coefficients.Xx.NonAfricanAmerican.AgeTimesCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xx.NonAfricanAmerican.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xx.NonAfricanAmerican.AgeTimesHdlC;
+            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+                             ? Coefficients.Xx.NonAfricanAmerican.TreatedSystolicBp
+                             : Coefficients.Xx.NonAfricanAmerican.UntreatedSystolicBp);
+            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xx.NonAfricanAmerican.CurrentSmoker;
+            var logAgeCurrentSmoker = Ln(_age) * (_smoker ? 7.574 : 0) * Coefficients.Xx.NonAfricanAmerican.AgeTimesCurrentSmoker;
+            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.NonAfricanAmerican.Diabetes;
+
+            return lnAge + lnAgeSquared + lnTotalChol + lnAgelnTotalChol + lnHdlC + lnAgelnHdlC +
+                   logSbp + currentSmoker + logAgeCurrentSmoker + diabetes;
+        }
+
+        private double FemaleAfricanAmericanCoefficientTimesValueSum()
+        {
+            var lnAge = Ln(_age) * Coefficients.Xx.AfricanAmerican.Age;
+            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xx.AfricanAmerican.TotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.AgeTimesHdlC;
+            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+                             ? Coefficients.Xx.AfricanAmerican.TreatedSystolicBp
+                             : Coefficients.Xx.AfricanAmerican.UntreatedSystolicBp);
+            var logAgelogSbp = Ln(_age) * Ln(_systolicBloodPressure) * (_hypertensionTreatment
+                                          ? Coefficients.Xx.AfricanAmerican.AgeTimesTreatedSystolicBp
+                                          : Coefficients.Xx.AfricanAmerican.AgetimesUntreatedSystolicBp);
+            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xx.AfricanAmerican.CurrentSmoker;
+            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.AfricanAmerican.Diabetes;
+
+            return lnAge + lnTotalChol + lnHdlC + lnAgelnHdlC + logSbp + logAgelogSbp + currentSmoker +  diabetes;
+        }
+
+        private double MaleNonAfricanAmericanCoefficientTimesValueSum()
+        {
+            var lnAge = Ln(_age) * Coefficients.Xy.NonAfricanAmerican.Age;
+            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.NonAfricanAmerican.TotalCholesterol;
+            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol) * Coefficients.Xy.NonAfricanAmerican.AgeTimesTotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.AgeTimesHdlC;
+            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+                             ? Coefficients.Xy.NonAfricanAmerican.TreatedSystolicBp
+                             : Coefficients.Xy.NonAfricanAmerican.UntreatedSystolicBp);
+            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xy.NonAfricanAmerican.CurrentSmoker;
+            var logAgeCurrentSmoker = Ln(_age) * (_smoker ? 7.574 : 0) * Coefficients.Xy.NonAfricanAmerican.AgeTimesCurrentSmoker;
+            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xy.NonAfricanAmerican.Diabetes;
+
+            return lnAge + lnTotalChol + lnAgelnTotalChol + lnHdlC + lnAgelnHdlC + logSbp + currentSmoker + logAgeCurrentSmoker + diabetes;
+        }
+
+        private double MaleAfricanAmericanCoefficientTimesValueSum()
+        {
+            var lnAge = Ln(_age) * Coefficients.Xy.AfricanAmerican.Age;
+            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.AfricanAmerican.TotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.AfricanAmerican.HdlC;
+            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+                             ? Coefficients.Xy.AfricanAmerican.TreatedSystolicBp
+                             : Coefficients.Xy.AfricanAmerican.UntreatedSystolicBp);
+            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xy.AfricanAmerican.CurrentSmoker;
+            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.AfricanAmerican.Diabetes;
+
+            return lnAge + lnTotalChol + lnHdlC + logSbp + currentSmoker +  diabetes;
+        }
+        
     }
 }
