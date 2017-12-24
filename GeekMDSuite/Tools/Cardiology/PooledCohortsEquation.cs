@@ -18,16 +18,8 @@ namespace GeekMDSuite.Tools.Cardiology
             _diabetic = diabetic;
         }
 
-        public double Calculate()
-        {
-            var baselineSurvival = GetBaselineSurvival();
-            var coefficientTimesvalueSum = CoefficientTimesValueSum();
-            var meanTimesValuesSum = MeanCoefficientTimesValueSum();
-            var innerEquation = Math.Pow(baselineSurvival,
-                Math.Exp(coefficientTimesvalueSum - meanTimesValuesSum));
-            
-            return 1.0 - innerEquation;
-        }
+        public double PercentAscvdRisk() => 100 *
+            (1 - Math.Pow(GetBaselineSurvival(), Math.Exp(CoefficientTimesValueSum() - MeanCoefficientTimesValueSum())));
 
         private double GetBaselineSurvival()
         {
@@ -91,8 +83,8 @@ namespace GeekMDSuite.Tools.Cardiology
         private double FemaleAfricanAmericanCoefficientTimesValueSum() => throw new NotImplementedException();
 
         private double Ln(double value) => Math.Log(value, Math.E);
-        private double Square(double value) => Math.Pow(value, 2);
-        private double Log(double value) => Math.Log10(value);
+        private double Square(double value) => value * value; //Math.Pow(value, 2);
+        private double Log(double value) => Ln(value); //Math.Log10(value);
         
         private static class MeanCoefficientTimesValue
         {
