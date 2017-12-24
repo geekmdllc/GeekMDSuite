@@ -17,9 +17,17 @@ namespace GeekMDSuite.Tools.Cardiology
             _smoker = smoker;
             _diabetic = diabetic;
         }
-        
-        public double Calculate() => 1 - (Math.Pow(GetBaselineSurvival(),
-                Math.Exp(CoefficientTimesValueSum() - MeanCoefficientTimesValueSum())));
+
+        public double Calculate()
+        {
+            var baselineSurvival = GetBaselineSurvival();
+            var coefficientTimesvalueSum = CoefficientTimesValueSum();
+            var meanTimesValuesSum = MeanCoefficientTimesValueSum();
+            var innerEquation = Math.Pow(baselineSurvival,
+                Math.Exp(coefficientTimesvalueSum - meanTimesValuesSum));
+            
+            return 1.0 - innerEquation;
+        }
 
         private double GetBaselineSurvival()
         {
@@ -88,13 +96,13 @@ namespace GeekMDSuite.Tools.Cardiology
         
         private static class MeanCoefficientTimesValue
         {
-            public static class Xy
+            public static class Xx
             {
                 public const double NonAfricanAmerican = -29.18;
                 public const double AfricanAmerican = 86.16;
             }
 
-            public static class Xx
+            public static class Xy
             {
                 public const double NonAfricanAmerican = 61.18;
                 public const double AfricanAmerican = 19.54; 
