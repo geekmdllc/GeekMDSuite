@@ -21,7 +21,7 @@ namespace GeekMDSuite.Tools.Cardiology
             _diabetic = diabetic;
         }
 
-        public double PercentAscvdRisk() => 100 *
+        public double AscvdRiskPercentOver10Years() => 100 *
             (1 - Math.Pow(BaselineSurvival, Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientvalueProduct)));
 
         private double BaselineSurvival
@@ -90,9 +90,65 @@ namespace GeekMDSuite.Tools.Cardiology
 
             return sum;
         }
-        private double MaleNonAfricanAmericanCoefficientTimesValueSum() => throw new NotImplementedException();
-        private double MaleAfricanAmericanCoefficientTimesValueSum() => throw new NotImplementedException();
-        private double FemaleAfricanAmericanCoefficientTimesValueSum() => throw new NotImplementedException();
+
+        private double FemaleAfricanAmericanCoefficientTimesValueSum()
+        {
+            var lnAge = Ln(_age) * Coefficients.Xx.AfricanAmerican.Ln.Age;
+            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xx.AfricanAmerican.Ln.TotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.Ln.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.Ln.AgeTimesHdlC;
+            var logTreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.TreatedSystolicBp;
+            var logAgeLogTreatedSbp = Log(_age) * Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.AgeTimesTreatedSystolicBp;
+            var logUntreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.UntreatedSystolicBp;
+            var logAgeLogUnreatedSbp = Log(_age) * Log(_systolicBloodPressure) * Coefficients.Xx.AfricanAmerican.Log.AgetimesUntreatedSystolicBp;
+            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xx.AfricanAmerican.Normal.CurrentSmoker;
+            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.AfricanAmerican.Normal.Diabetes;
+            var sbp = _hypertensionTreatment ?  logTreatedSbp + logAgeLogTreatedSbp : logUntreatedSbp + logAgeLogUnreatedSbp;
+
+            var sum = lnAge + lnTotalChol + lnHdlC + lnAgelnHdlC +
+                      sbp + currentSmoker +  diabetes;
+
+            return sum;
+        }
+
+        private double MaleNonAfricanAmericanCoefficientTimesValueSum()
+        {
+            var lnAge = Ln(_age) * Coefficients.Xy.NonAfricanAmerican.Log.Age;
+            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.TotalCholesterol;
+            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.AgeTimesTotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.Log.AgeTimesHdlC;
+            var logTreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.NonAfricanAmerican.Log.TreatedSystolicBp;
+            var logUntreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.NonAfricanAmerican.Log.UntreatedSystolicBp;
+            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xy.NonAfricanAmerican.Normal.CurrentSmoker;
+            var logAgeCurrentSmoker = Log(_age) * (_smoker ? 7.574 : 0) * Coefficients.Xy.NonAfricanAmerican.Log.AgeTimesCurrentSmoker;
+            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.NonAfricanAmerican.Normal.Diabetes;
+
+            var sbp = _hypertensionTreatment ?  logTreatedSbp : logUntreatedSbp;
+
+            var sum = lnAge + lnTotalChol + lnAgelnTotalChol + lnHdlC + lnAgelnHdlC +
+                      sbp + currentSmoker + logAgeCurrentSmoker + diabetes;
+
+            return sum;
+        }
+
+        private double MaleAfricanAmericanCoefficientTimesValueSum()
+        {
+            var lnAge = Ln(_age) * Coefficients.Xy.AfricanAmerican.Log.Age;
+            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.AfricanAmerican.Log.TotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.AfricanAmerican.Log.HdlC;
+            var logTreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.AfricanAmerican.Log.TreatedSystolicBp;
+            var logUntreatedSbp = Log(_systolicBloodPressure) * Coefficients.Xy.AfricanAmerican.Log.UntreatedSystolicBp;
+            var currentSmoker = (_smoker ? 7.574 : 0) * Coefficients.Xy.AfricanAmerican.Normal.CurrentSmoker;
+            var logAgeCurrentSmoker = Log(_age) * (_smoker ? 7.574 : 0) * Coefficients.Xy.AfricanAmerican.Log.AgeTimesCurrentSmoker;
+            var diabetes = (_diabetic ? 0.661 : 0) * Coefficients.Xx.AfricanAmerican.Normal.Diabetes;
+
+            var sbp = _hypertensionTreatment ?  logTreatedSbp : logUntreatedSbp;
+
+            var sum = lnAge + lnTotalChol + lnHdlC + sbp + currentSmoker + logAgeCurrentSmoker + diabetes;
+
+            return sum;
+        }
 
         private double Ln(double value) => Math.Log(value, Math.E);
         private double Square(double value) => value * value; //Math.Pow(value, 2);
@@ -103,7 +159,7 @@ namespace GeekMDSuite.Tools.Cardiology
             public static class Xx
             {
                 public const double NonAfricanAmerican = -29.18;
-                public const double AfricanAmerican = 86.16;
+                public const double AfricanAmerican = 86.61;
             }
 
             public static class Xy
