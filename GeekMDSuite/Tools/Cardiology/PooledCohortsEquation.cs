@@ -22,42 +22,51 @@ namespace GeekMDSuite.Tools.Cardiology
         }
 
         public double PercentAscvdRisk() => 100 *
-            (1 - Math.Pow(GetBaselineSurvival(), Math.Exp(CoefficientTimesValueSum() - MeanCoefficientTimesValueSum())));
+            (1 - Math.Pow(BaselineSurvival, Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientvalueProduct)));
 
-        private double GetBaselineSurvival()
+        private double BaselineSurvival
         {
-            if (Gender.IsGenotypeXy(_gender))
-                return _race == Race.BlackOrAfricanAmerican 
-                    ? BaseLineSurvival.Xy.AfricanAmerican 
-                    : BaseLineSurvival.Xy.NonAfricanAmerican;
+            get
+            {
+                if (Gender.IsGenotypeXy(_gender))
+                    return _race == Race.BlackOrAfricanAmerican 
+                        ? BaseLineSurvival.Xy.AfricanAmerican 
+                        : BaseLineSurvival.Xy.NonAfricanAmerican;
 
-            return _race == Race.BlackOrAfricanAmerican
-                ? BaseLineSurvival.Xx.AfricanAmerican
-                : BaseLineSurvival.Xx.NonAfricanAmerican;
+                return _race == Race.BlackOrAfricanAmerican
+                    ? BaseLineSurvival.Xx.AfricanAmerican
+                    : BaseLineSurvival.Xx.NonAfricanAmerican;
+            }
         }
         
-        private double MeanCoefficientTimesValueSum()
+        private double MeanSumCoefficientvalueProduct
         {
-            if (Gender.IsGenotypeXy(_gender))
-                return _race == Race.BlackOrAfricanAmerican 
-                    ? MeanCoefficientTimesValue.Xy.AfricanAmerican 
-                    : MeanCoefficientTimesValue.Xy.NonAfricanAmerican;
+            get
+            {
+                if (Gender.IsGenotypeXy(_gender))
+                    return _race == Race.BlackOrAfricanAmerican 
+                        ? MeanCoefficientTimesValue.Xy.AfricanAmerican 
+                        : MeanCoefficientTimesValue.Xy.NonAfricanAmerican;
 
-            return _race == Race.BlackOrAfricanAmerican
-                ? MeanCoefficientTimesValue.Xx.AfricanAmerican
-                : MeanCoefficientTimesValue.Xx.NonAfricanAmerican;
+                return _race == Race.BlackOrAfricanAmerican
+                    ? MeanCoefficientTimesValue.Xx.AfricanAmerican
+                    : MeanCoefficientTimesValue.Xx.NonAfricanAmerican;
+            }
         }
         
-        private double CoefficientTimesValueSum()
+        private double SumCoefficientValueProduct
         {
-            if (Gender.IsGenotypeXy(_gender))
-                return _race == Race.BlackOrAfricanAmerican 
-                    ? MaleAfricanAmericanCoefficientTimesValueSum() 
-                    : MaleNonAfricanAmericanCoefficientTimesValueSum();
+            get
+            {
+                if (Gender.IsGenotypeXy(_gender))
+                    return _race == Race.BlackOrAfricanAmerican 
+                        ? MaleAfricanAmericanCoefficientTimesValueSum() 
+                        : MaleNonAfricanAmericanCoefficientTimesValueSum();
 
-            return _race == Race.BlackOrAfricanAmerican
-                ? FemaleAfricanAmericanCoefficientTimesValueSum()
-                : FemaleNonAfricanAmericanCoefficientTimesValueSum();
+                return _race == Race.BlackOrAfricanAmerican
+                    ? FemaleAfricanAmericanCoefficientTimesValueSum()
+                    : FemaleNonAfricanAmericanCoefficientTimesValueSum();
+            }
         }
 
         private double FemaleNonAfricanAmericanCoefficientTimesValueSum()
@@ -150,12 +159,12 @@ namespace GeekMDSuite.Tools.Cardiology
                     {
                         public const double Age = 2.469;
                         public const double TotalCholesterol = 0.302;
-                        public const double AgeTimesTotalCholesterol = 1; // not applicable
+                        public const double AgeTimesTotalCholesterol = 0; // not applicable
                         public const double HdlC = -0.307;
                         public const double AgeTimesHdlC = 1; // not applicable
                         public const double TreatedSystolicBp = 1.916;
                         public const double UntreatedSystolicBp = 1.809;
-                        public const double AgeTimesCurrentSmoker = 1; // not applicable
+                        public const double AgeTimesCurrentSmoker = 0; // not applicable
                     }
 
                     public static class Normal
@@ -182,9 +191,9 @@ namespace GeekMDSuite.Tools.Cardiology
                     public static class Log
                     {
                         public const double TreatedSystolicBp = 2.019;
-                        public const double AgeTimesTreatedSystolicBp = 1; // not applicable
+                        public const double AgeTimesTreatedSystolicBp = 0; // not applicable
                         public const double UntreatedSystolicBp = 1.957;
-                        public const double AgetimesUntreatedSystolicBp = 1; // not applicable
+                        public const double AgetimesUntreatedSystolicBp = 0; // not applicable
                         
                         public const double AgeTimesCurrentSmoker = -1.665;
                     }
@@ -201,9 +210,9 @@ namespace GeekMDSuite.Tools.Cardiology
                     public static class Ln
                     {
                         public const double Age = 17.114;
-                        public const double AgeSquared = 1; //not applicable
+                        public const double AgeSquared = 0; //not applicable
                         public const double TotalCholesterol = 0.940;
-                        public const double AgeTimesCholesterol = 1; // not applicable
+                        public const double AgeTimesCholesterol = 0; // not applicable
                         public const double HdlC = -18.920;
                         public const double AgeTimesHdlC = 4.475;
                     }
@@ -214,7 +223,7 @@ namespace GeekMDSuite.Tools.Cardiology
                         public const double AgeTimesTreatedSystolicBp = -6.432;
                         public const double UntreatedSystolicBp = 27.820;
                         public const double AgetimesUntreatedSystolicBp = -6.087;
-                        public const double AgeTimesCurrentSmoker = 1; // not applicable
+                        public const double AgeTimesCurrentSmoker = 0; // not applicable
                     }
 
                     public static class Normal
@@ -228,13 +237,13 @@ namespace GeekMDSuite.Tools.Cardiology
                 
         private readonly IGender _gender;
         private readonly Race _race;
-        private int _age;
-        private int _totalCholesterol;
-        private int _hdlCholesterol;
-        private int _systolicBloodPressure;
-        private bool _hypertensionTreatment;
-        private bool _smoker;
-        private bool _diabetic;
+        private readonly int _age;
+        private readonly int _totalCholesterol;
+        private readonly int _hdlCholesterol;
+        private readonly int _systolicBloodPressure;
+        private readonly bool _hypertensionTreatment;
+        private readonly bool _smoker;
+        private readonly bool _diabetic;
 
     }
 }
