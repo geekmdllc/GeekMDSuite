@@ -17,7 +17,7 @@ namespace GeekMDSuite.ConsoleDemo
         {
             var patient = PatientBuilder
                 .Initialize()
-                .SetDateOfBirth(1977, 3, 31)
+                .SetDateOfBirth(1952, 3, 31)
                 .SetGender(GenderIdentity.NonBinaryXy)
                 .SetMedicalRecordNumber("1234")
                 .SetName("Joe", "Bob")
@@ -59,8 +59,11 @@ namespace GeekMDSuite.ConsoleDemo
 
             Console.WriteLine($"Expanded body composition measures: {bodyCompositionExpanded}{NewLine}");
 
-            var quantitativeLab = Quantitative.Serum.BilirubinTotal(1.3);
-            Console.WriteLine($"Quantitative Lab: {quantitativeLab.Type}, Result: {quantitativeLab.Result}.{NewLine}");
+            var quantitativeLabChoesterol = Quantitative.Serum.CholesterolTotal(300);
+            Console.WriteLine($"Quantitative Lab: {quantitativeLabChoesterol.Type}, Result: {quantitativeLabChoesterol.Result}.{NewLine}");
+            
+            var quantitativeLabHdlC = Quantitative.Serum.CholesterolTotal(35);
+            Console.WriteLine($"Quantitative Lab: {quantitativeLabHdlC.Type}, Result: {quantitativeLabHdlC.Result}.{NewLine}");
             
             var qualitativeLab = Qualitative.HepatitisCAntibody(QualitativeLabResult.Negative);
             Console.WriteLine($"Qualitative Lab: {qualitativeLab.Type}, Result: {qualitativeLab.Result}{NewLine}");
@@ -289,8 +292,11 @@ namespace GeekMDSuite.ConsoleDemo
             var qualitativeLabInterp = new QualitativeLabInterpretation(qualitativeLab, patient);
             Console.WriteLine($"Qualitative Lab: {qualitativeLabInterp}{NewLine}");
             
-            var quantLabInterp = new QuantitativeLabInterpretation(quantitativeLab, patient);
-            Console.WriteLine($"Quantitative Lab: {quantLabInterp}{NewLine}");
+            var quantLabInterpTotalChol = new QuantitativeLabInterpretation(quantitativeLabChoesterol, patient);
+            Console.WriteLine($"Quantitative Lab: {quantLabInterpTotalChol}{NewLine}");
+            
+            var quantLabInterpHdlC = new QuantitativeLabInterpretation(quantitativeLabChoesterol, patient);
+            Console.WriteLine($"Quantitative Lab: {quantLabInterpHdlC}{NewLine}");
             
             var sitAndReachInterp = new SitAndReachInterpretation(sitAndReach, patient);
             Console.WriteLine($"Sit & Reach: {sitAndReachInterp}{NewLine}");
@@ -312,6 +318,9 @@ namespace GeekMDSuite.ConsoleDemo
             
             var waistToHeightInterp = new WaistToHeightRatioInterpretation(bodyComposition, patient);
             Console.WriteLine($"Waist to Height: {waistToHeightInterp}{NewLine}");
+            
+            var ascvdCalc = new PooledCohortsEquation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, true, false, false);
+            Console.WriteLine($"ASCVD 10yr-Risk%: {ascvdCalc.AscvdRiskPercentOver10Years()}{NewLine}");
         }
     }
 }

@@ -8,7 +8,6 @@ namespace GeekMDSuite.Test
 {
     public class PooledCohortsTests
     {
-        // Data from 2013 ACC/AHA Cardiovascular Risk Guideline (Goff DC Jr, et al.)
         [Theory]
         [InlineData(Race.White, GenderIdentity.Female, false, false, false, 2.1)]
         [InlineData(Race.White, GenderIdentity.Female, true, false, false, 2.8)]

@@ -18,6 +18,8 @@ namespace GeekMDSuite.Services.Interpretation
         public VisualAcuityClassification Near => Classify(_visualAcuity.Near);
         public VisualAcuityClassification Distance => Classify(_visualAcuity.Distance);
         public VisualAcuityClassification Both => Classify(_visualAcuity.Both);
+        
+        public override string ToString() => Classification.ToString();
 
         public static class LowerLimits
         {
