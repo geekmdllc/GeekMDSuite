@@ -51,14 +51,13 @@ namespace GeekMDSuite.Test
             mockPatient.Setup(p => p.Race).Returns(race);
 
             var ascvd = new PooledCohortsEquation(
-                mockPatient.Object, 
-                BloodPressure.Build(120, 75), 
-                CholesterolTotal(213), 
-                HighDensityLipoprotein(50),
-                hypertensionTreatment, 
-                smoker, 
-                diabetes
-                )
+                    mockPatient.Object, 
+                    BloodPressure.Build(120, 75), 
+                    CholesterolTotal(213), 
+                    HighDensityLipoprotein(50),
+                    hypertensionTreatment, 
+                    smoker, 
+                    diabetes)
                 .AscvdRiskPercentOver10Years();
 
             const double tolerance = 0.1;
