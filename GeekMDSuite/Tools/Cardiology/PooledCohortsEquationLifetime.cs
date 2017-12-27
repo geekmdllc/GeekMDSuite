@@ -6,17 +6,10 @@ namespace GeekMDSuite.Tools.Cardiology
     {
         public double AscvdLifetimeRisk()
         {
-            if (MajorPoints >= 2)                
-                return Gender.IsGenotypeXy(_gender) ? Male.TwoMajor : Female.TwoMajor;
-            
-            if (MajorPoints == 1)
-                return Gender.IsGenotypeXy(_gender) ? Male.OneMajor : Female.OneMajor;
-
-            if (Elevated)
-                return Gender.IsGenotypeXy(_gender) ? Male.Elevated : Female.Elevated;
-
-            if (NotOptimal)
-                return Gender.IsGenotypeXy(_gender) ? Male.NotOptimal : Female.NotOptimal;
+            if (MajorPoints >= 2) return Gender.IsGenotypeXy(_gender) ? Male.TwoMajor : Female.TwoMajor;
+            if (MajorPoints == 1) return Gender.IsGenotypeXy(_gender) ? Male.OneMajor : Female.OneMajor;
+            if (Elevated) return Gender.IsGenotypeXy(_gender) ? Male.Elevated : Female.Elevated;
+            if (NotOptimal) return Gender.IsGenotypeXy(_gender) ? Male.NotOptimal : Female.NotOptimal;
             
             return Gender.IsGenotypeXy(_gender) ? Male.Optimal : Female.Optimal;
         }
