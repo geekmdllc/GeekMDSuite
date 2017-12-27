@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public enum TreadmillExerciseStressTestResultClassification
+    public enum TmstResult
     {
         NoneSelected = 0,
         Normal = 1,

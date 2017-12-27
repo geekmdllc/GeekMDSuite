@@ -24,7 +24,7 @@ namespace GeekMDSuite.Procedures
             return this;
         }
         
-        public TreadmillExerciseStressTestBuilder SetResult(TreadmillExerciseStressTestResultClassification result)
+        public TreadmillExerciseStressTestBuilder SetResult(TmstResult result)
         {
             _resultIsSet = true;
             _result = result;
@@ -57,7 +57,7 @@ namespace GeekMDSuite.Procedures
         
         private TreadmillProtocol _protocol = TreadmillProtocol.Bruce;
         private TimeDuration _time;
-        private TreadmillExerciseStressTestResultClassification _result;
+        private TmstResult _result;
         private BloodPressure _supineBloodPressure;
         private int _supineHeartRate;
         private BloodPressure _maximumBloodPressure;

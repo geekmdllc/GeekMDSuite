@@ -6,7 +6,7 @@ namespace GeekMDSuite.Procedures
     {
         TreadmillProtocol Protocol { get; }
         ITimeDuration Time { get; }
-        TreadmillExerciseStressTestResultClassification Result { get; }
+        TmstResult Result { get; }
         BloodPressure SupineBloodPressure { get; }
         int SupineHeartRate { get; }
         BloodPressure MaximumBloodPressure { get; }

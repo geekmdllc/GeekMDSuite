@@ -6,7 +6,7 @@ using static GeekMDSuite.LaboratoryData.Builder.Quantitative.Serum;
 
 namespace GeekMDSuite.Test
 {
-    public class PooledCohortsTests
+    public class PooledCohortsEquationTests
     {
         [Theory]
         [InlineData(Race.White, GenderIdentity.Female, false, false, false, 2.1)]

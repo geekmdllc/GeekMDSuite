@@ -6,7 +6,7 @@ namespace GeekMDSuite.Procedures
     {
         public TreadmillProtocol Protocol { get; }
         public ITimeDuration Time { get; }
-        public TreadmillExerciseStressTestResultClassification Result { get; }
+        public TmstResult Result { get; }
         public BloodPressure SupineBloodPressure { get; }
         public int SupineHeartRate { get; }
         public BloodPressure MaximumBloodPressure { get; }
@@ -15,7 +15,7 @@ namespace GeekMDSuite.Procedures
         internal static TreadmillExerciseStressTest Build(
             TreadmillProtocol protocol,
             ITimeDuration time,
-            TreadmillExerciseStressTestResultClassification result,
+            TmstResult result,
             BloodPressure supineBloodPressure,
             int supineHeartRate,
             BloodPressure maximumBloodPressure,
@@ -29,7 +29,7 @@ namespace GeekMDSuite.Procedures
         private TreadmillExerciseStressTest(
             TreadmillProtocol protocol, 
             ITimeDuration time, 
-            TreadmillExerciseStressTestResultClassification result, 
+            TmstResult result, 
             BloodPressure supineBloodPressure, 
             int supineHeartRate, 
             BloodPressure maximumBloodPressure, 

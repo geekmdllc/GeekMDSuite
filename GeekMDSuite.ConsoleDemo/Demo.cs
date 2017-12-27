@@ -206,7 +206,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetMaximumBloodPressure(205, 95)
                 .SetMaximumHeartRate(183)
                 .SetProtocol()
-                .SetResult(TreadmillExerciseStressTestResultClassification.Normal)
+                .SetResult(TmstResult.Normal)
                 .SetSupineBloodPressure(133, 82)
                 .SetSupineHeartRate(66)
                 .SetTime(11, 33)
