@@ -321,6 +321,7 @@ namespace GeekMDSuite.ConsoleDemo
             
             var ascvdCalc = new PooledCohortsEquation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, true, false, false);
             Console.WriteLine($"ASCVD 10yr-Risk%: {ascvdCalc.AscvdRiskPercentOver10Years()}{NewLine}");
+            Console.WriteLine($"ASCVD Lifetime Risk%: {ascvdCalc.AscvdLifetimeRisk()}{NewLine}");
         }
     }
 }

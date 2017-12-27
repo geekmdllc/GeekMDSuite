@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using GeekMDSuite.Tools.Generic;
+using static GeekMDSuite.Services.Interpretation.BloodPressureInterpretation.LowerLimits;
 
 namespace GeekMDSuite.Services.Interpretation
 {
@@ -18,151 +17,58 @@ namespace GeekMDSuite.Services.Interpretation
             .AddSection(BuildMakingChangesSection())
             .Build();
 
+        public BloodPressureStage Classification => Classify();
 
-        public BloodPressureStage Classification
-        {
-            get
-            {
-                var stage = BloodPressureStage.Normotension;
-                foreach (var parameters in GetBloodPressureStageParameters())
-                {
-                    if (parameters.Contains(_parameters))
-                        stage = parameters.Stage;
-                }
-                return stage;
-            }
-        }
+        public override string ToString() => Classification.ToString();
+        
+        private readonly BloodPressure _parameters;
 
         public static class LowerLimits
         {
             public static class Diastolic
             {
-                public const int Normotension = 60;
-                public const int Prehypertension = 80;
-                public const int Stage1Hypertension = 90;
-                public const int Stage2Hypertension = 100;
+                public const int Normal = 60;
+                public const int Stage1Hypertension = 80;
+                public const int Stage2Hypertension = 90;
                 public const int HypertensiveUrgency = 120;
             }
 
             public static class Systolic
             {
-                public const int Normotension = 100;
-                public const int Prehypertension = 120;
-                public const int Stage1Hypertension = 140;
-                public const int Stage2Hypertension = 160;
+                public const int Normal = 100;
+                public const int Elevated = 120;
+                public const int Stage1Hypertension = 130;
+                public const int Stage2Hypertension = 140;
                 public const int HypertensiveUrgency = 180;
             }
         }
-
-        public override string ToString() => Classification.ToString();
-
-        private readonly BloodPressure _parameters;
         
-        private static List<BloodStageParameters> GetBloodPressureStageParameters()
+        private BloodPressureStage Classify()
         {
-            return new List<BloodStageParameters>()
-            {
-                GetHypotensionStageParameters(),
-                GetNormotensionStageParameters(),
-                GetPrehypertensionStageParameters(),
-                GetStage1HypertensionParameters(),
-                GetStage2HypertensionParameters(),
-                GetHypertensiveUrgencyParameters(),
-                GetHypertensiveEmergencyParameters()
-            };
-        }
-        
-        private class BloodStageParameters
-        {
-            internal Interval<int> SystolicInterval { get; }
-            internal Interval<int> DiastolicInterval { get; }
-            internal BloodPressureStage Stage { get; }
-            internal bool OrganDamage { get; }
-
-            internal BloodStageParameters(Interval<int> systolicInterval, Interval<int> diastolicInterval, BloodPressureStage stage, bool organDamage)
-            {
-                SystolicInterval = systolicInterval;
-                DiastolicInterval = diastolicInterval;
-                Stage = stage;
-                OrganDamage = organDamage;
-            }
-
-            internal bool Contains(BloodPressure parameters) =>
-            (
-                Stage == BloodPressureStage.HypertensiveEmergency &&  OrganDamage ? 
-                    (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic)) && parameters.OrganDamage :
-                    (SystolicInterval.ContainsRightOpen(parameters.Systolic) || DiastolicInterval.ContainsRightOpen(parameters.Diastolic))
-            );
+            if (IsLow) return BloodPressureStage.Low;
+            if (IsNormal) return BloodPressureStage.Normal;
+            if (IsElevated) return BloodPressureStage.Elevated;
+            if (IsStage1Htn) return BloodPressureStage.Stage1Hypertension;
+            if (IsStage2Htn) return BloodPressureStage.Stage2Hypertension;
+            return IsUrgency ? BloodPressureStage.HypertensiveUrgency : BloodPressureStage.HypertensiveEmergency;
         }
 
-        private static BloodStageParameters GetHypertensiveEmergencyParameters()
-        {
-            return DifferentiateHypertensiveUrgencyVsEmergencyByOrganDamage(true);
-        }
+        private bool IsLow => _parameters.Systolic < Systolic.Normal && _parameters.Diastolic < Diastolic.Normal;
 
-        private static BloodStageParameters GetHypertensiveUrgencyParameters()
-        {
-            return DifferentiateHypertensiveUrgencyVsEmergencyByOrganDamage(false);
-        }
+        private bool IsNormal => !IsLow && _parameters.Systolic < Systolic.Elevated &&
+                                 _parameters.Diastolic < Diastolic.Stage1Hypertension;
 
-        private static BloodStageParameters DifferentiateHypertensiveUrgencyVsEmergencyByOrganDamage(
-            bool organDamagePresent)
-        {
-            const int ceilingPressure = 500;
-            return new BloodStageParameters(
-                new Interval<int>(LowerLimits.Systolic.HypertensiveUrgency, ceilingPressure),
-                new Interval<int>(LowerLimits.Diastolic.HypertensiveUrgency, ceilingPressure),
-                organDamagePresent ? BloodPressureStage.HypertensiveEmergency : BloodPressureStage.HypertensiveUrgency,
-                organDamagePresent);
-        }
+        private bool IsElevated => !IsNormal && _parameters.Systolic < Systolic.Stage1Hypertension &&
+                                   _parameters.Diastolic < Diastolic.Stage1Hypertension;
 
-        private static BloodStageParameters GetStage2HypertensionParameters()
-        {
-            return new BloodStageParameters(
-                new Interval<int>(LowerLimits.Systolic.Stage2Hypertension, LowerLimits.Systolic.HypertensiveUrgency),
-                new Interval<int>(LowerLimits.Diastolic.Stage2Hypertension, LowerLimits.Diastolic.HypertensiveUrgency),
-                BloodPressureStage.Stage2Hypertension,
-                false);
-        }
+        private bool IsStage1Htn => !IsElevated && _parameters.Systolic < Systolic.Stage2Hypertension &&
+                                    _parameters.Diastolic < Diastolic.Stage2Hypertension;
 
-        private static BloodStageParameters GetStage1HypertensionParameters()
-        {
-            return new BloodStageParameters(
-                new Interval<int>(LowerLimits.Systolic.Stage1Hypertension, LowerLimits.Systolic.Stage2Hypertension),
-                new Interval<int>(LowerLimits.Diastolic.Stage1Hypertension, LowerLimits.Diastolic.Stage2Hypertension),
-                BloodPressureStage.Stage1Hypertension,
-                false);
-        }
+        private bool IsStage2Htn => !IsStage1Htn && _parameters.Systolic < Systolic.HypertensiveUrgency &&
+                                    _parameters.Diastolic < Diastolic.HypertensiveUrgency;
 
-        private static BloodStageParameters GetPrehypertensionStageParameters()
-        {
-            return new BloodStageParameters(
-                new Interval<int>(LowerLimits.Systolic.Prehypertension, LowerLimits.Systolic.Stage1Hypertension),
-                new Interval<int>(LowerLimits.Diastolic.Prehypertension, LowerLimits.Diastolic.Stage1Hypertension),
-                BloodPressureStage.PreHypertension,
-                false);
-        }
+        private bool IsUrgency => !IsStage2Htn && !_parameters.OrganDamage;
 
-        private static BloodStageParameters GetNormotensionStageParameters()
-        {
-            return new BloodStageParameters(
-                new Interval<int>(LowerLimits.Systolic.Normotension, LowerLimits.Systolic.Prehypertension),
-                new Interval<int>(LowerLimits.Diastolic.Normotension, LowerLimits.Systolic.Prehypertension),
-                BloodPressureStage.Normotension,
-                false);
-        }
-
-        private static BloodStageParameters GetHypotensionStageParameters()
-        {
-            const int floorPressure = 0;
-            return new BloodStageParameters(
-                new Interval<int>(floorPressure, LowerLimits.Systolic.Normotension),
-                new Interval<int>(floorPressure, LowerLimits.Diastolic.Normotension),
-                BloodPressureStage.Hypotension,
-                false);
-        }
-
-        
         private string BuildSummary()
         {
             var bloodPressure = _parameters;
@@ -185,28 +91,28 @@ namespace GeekMDSuite.Services.Interpretation
                               "events such as heart attack and stroke. ")
                 .SetTitle("Normal Values")
                 .AddParagraph("Levels that are generally considered to be 'too low' will be less than " +
-                              $"{LowerLimits.Systolic.Normotension}/{LowerLimits.Diastolic.Normotension} mmHg" +
+                              $"{Systolic.Normal}/{Diastolic.Normal} mmHg" +
                               "There are exceptions to this, which can only be determined in proper " +
                               "clinical context by a trained healthcare provider. ")
-                .AddParagraph($"Ideal values are between {LowerLimits.Systolic.Normotension}-" +
-                              $"{LowerLimits.Systolic.Prehypertension}/{LowerLimits.Diastolic.Normotension}-" +
-                              $"{LowerLimits.Diastolic.Prehypertension} mmHg. These values are generally " +
+                .AddParagraph($"Ideal values are between {Systolic.Normal}-" +
+                              $"{Systolic.Elevated}/{Diastolic.Normal}-" +
+                              $"{Diastolic.Stage1Hypertension} mmHg. These values are generally " +
                               "considered to be the least likely to be associated with other chronic " +
                               "disease states.")
-                .AddParagraph($"Pre-hypertension is defined as {LowerLimits.Systolic.Prehypertension}-" +
-                              $"{LowerLimits.Systolic.Stage1Hypertension}/{LowerLimits.Diastolic.Prehypertension}-" +
-                              $"{LowerLimits.Diastolic.Stage1Hypertension}. The term 'pre-hypertension' is " +
+                .AddParagraph($"Pre-hypertension is defined as {Systolic.Elevated}-" +
+                              $"{Systolic.Stage1Hypertension}/{Diastolic.Stage1Hypertension}-" +
+                              $"{Diastolic.Stage1Hypertension}. The term 'pre-hypertension' is " +
                               "used here, however it's important to note that this does not mean that there" +
                               "is no detriment associated with these blood pressures levels. There is. " +
                               "even mild levels of blood pressure elevation are associated with increased " +
                               "risk of heart attack, stroke, and more.")
                 .AddParagraph("From here, hypertension is formally staged. Each stage is successively " +
                               "worse when compared to the previous stage. Stage 1 Hypertension is " +
-                              $"{LowerLimits.Systolic.Stage1Hypertension}-{LowerLimits.Systolic.Stage2Hypertension}/" +
-                              $"{LowerLimits.Diastolic.Stage1Hypertension}-{LowerLimits.Diastolic.Stage2Hypertension}. " +
-                              $"Stage 2 Hypertension is from {LowerLimits.Systolic.Stage2Hypertension}-" +
-                              $"{LowerLimits.Systolic.HypertensiveUrgency}/{LowerLimits.Diastolic.Stage2Hypertension}-" +
-                              $"{LowerLimits.Diastolic.HypertensiveUrgency}. Anything beyond these values " +
+                              $"{Systolic.Stage1Hypertension}-{Systolic.Stage2Hypertension}/" +
+                              $"{Diastolic.Stage1Hypertension}-{Diastolic.Stage2Hypertension}. " +
+                              $"Stage 2 Hypertension is from {Systolic.Stage2Hypertension}-" +
+                              $"{Systolic.HypertensiveUrgency}/{Diastolic.Stage2Hypertension}-" +
+                              $"{Diastolic.HypertensiveUrgency}. Anything beyond these values " +
                               "is classified as either hypertensive urgency, or hypertensive emergency.")
                 .AddParagraph("The difference between hypertensive urgency and hypertensive emergency is " +
                               "the presence of evidence of acute damage to an organ. This often necessitates " +
@@ -226,12 +132,12 @@ namespace GeekMDSuite.Services.Interpretation
                               "training, and making dietary changes. A common diet prescribed for hypertension " +
                               "is the DASH diet. When lifestyle is not enough, we include blood pressure " +
                               "medications. We understand that people often wish to avoid medications");
-            if (Classification == BloodPressureStage.Hypotension)
+            if (Classification == BloodPressureStage.Low)
                 return section.AddParagraph("Your blood pressure is low. This case is less simple to generalize. " +
                                             "As such, it's importnat to discuss the details of this in the context of " +
                                             "your overall state of health with your clinician.").Build();
 
-            if (Classification == BloodPressureStage.PreHypertension)
+            if (Classification == BloodPressureStage.Elevated)
                 return section.AddParagraph("Your blood pressure is elevated to a range that is most often addressable " +
                                      "via lifestyle change. Some combination of bodyfat reduction, exercise, and " +
                                      "dietary changes such as those described in the DASH diet, will likely " +
