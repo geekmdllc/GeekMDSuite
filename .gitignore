@@ -8,3 +8,5 @@ GeekMDSuite.ConsoleDemo/obj
 GeekMDSuite.sln.DotSettings.user
 GeekMDSuite.WebAPI/bin
 GeekMDSuite.WebAPI/obj
+GeekMDSuite.WebAPI/context.db
+GeekMDSuite.WebAPI/Migrations

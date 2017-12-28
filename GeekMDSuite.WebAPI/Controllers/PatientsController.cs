@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeekMDSuite.WebAPI.TestRepositories;
+using System.Net;
+using GeekMDSuite.WebAPI.Models;
+using GeekMDSuite.WebAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Controllers
@@ -10,45 +12,72 @@ namespace GeekMDSuite.WebAPI.Controllers
     [Produces("application/json")]
     public class PatientsController : Controller
     {
-        private readonly IPatientRepo _testPatientRepo;
-
-        public PatientsController(IPatientRepo testPatientRepo)
+        public PatientsController(IPatientRepository repository)
         {
-            _testPatientRepo = testPatientRepo;
+            _repository = repository;
         }
+        
         // GET api/patients
         [HttpGet]
-        public IEnumerable<Patient> Get()
+        public IEnumerable<PatientEntity> Get()
         {
-            return _testPatientRepo.All;
+            return _repository.All();
         }
 
         // GET api/patients/5
         [HttpGet("{id}")]
-        public Patient Get(int id)
+        public IActionResult Get(int id)
         {
-            return _testPatientRepo.All.ElementAt(id);
+            var found = _repository.FindById(id);
+            if (found == null) return NotFound();
+            
+            return Ok(found);
+        }
+        
+        // GET api/patients/joe
+        [HttpGet]
+        [Route("name/{name}")]
+        public IActionResult GetByName(string name)
+        {
+            var found = _repository.FindByName(name);
+            if (!found.Any()) return NotFound();
+            
+            return Ok(found);
+        }
+        
+        // GET api/patients/joe
+        [HttpGet]
+        [Route("mrn/{mrn}")]
+        public IActionResult GetByMrn(string mrn)
+        {
+            var found = _repository.FindByMedicalRecordNumber(mrn);
+            if (!found.Any()) return NotFound();
+            
+            return Ok(found);
         }
 
         // POST api/patients
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] PatientEntity patient)
         {
+            _repository.Add(patient);
         }
 
         // PUT api/patients/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+            throw new NotImplementedException();
         }
 
         // DELETE api/patients/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            Console.WriteLine($"Removing element at {id}.");
+            throw new NotImplementedException();
         }
         
-        
+        private readonly IPatientRepository _repository;
+
     }
 }
