@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class FmsMovementSet
+    public class FmsMovementSet : IFmsMovementSet
     {
         internal FmsMovementSet(FmsMovementData left, FmsMovementData right)
         {

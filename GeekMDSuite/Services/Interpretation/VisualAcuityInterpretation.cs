@@ -7,7 +7,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class VisualAcuityInterpretation : IInterpretable<VisualAcuityClassification>
     {
-        public VisualAcuityInterpretation(VisualAcuity visualAcuity)
+        public VisualAcuityInterpretation(IVisualAcuity visualAcuity)
         {
             _visualAcuity = visualAcuity ?? throw new ArgumentNullException(nameof(visualAcuity));
         }
@@ -31,7 +31,7 @@ namespace GeekMDSuite.Services.Interpretation
             public static readonly int NearTotalBlindness = 1000;
         }
         
-        private VisualAcuity _visualAcuity;
+        private IVisualAcuity _visualAcuity;
 
         private VisualAcuityClassification ClassifyByPoorestVision()
         {

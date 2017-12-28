@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Services.Interpretation
 {
-    public class QuantitativeLabInterpretationModel
+    public class QuantitativeLabInterpretationModel : IQuantitativeLabInterpretationModel
     {
         public string LabName { get; set; }
         public string LabNameFull { get; set; }

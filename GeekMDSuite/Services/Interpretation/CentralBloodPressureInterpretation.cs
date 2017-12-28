@@ -8,7 +8,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class CentralBloodPressureInterpretation : IInterpretable<CentralBloodPressureInterpretationResult>
     {
-        public CentralBloodPressureInterpretation(CentralBloodPressure centralBloodPressure, IPatient patient)
+        public CentralBloodPressureInterpretation(ICentralBloodPressure centralBloodPressure, IPatient patient)
         {
             _centralBloodPressure = centralBloodPressure ?? throw new ArgumentNullException(nameof(centralBloodPressure));
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -19,7 +19,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public override string ToString() => Classification.ToString();
 
-        private readonly CentralBloodPressure _centralBloodPressure;
+        private readonly ICentralBloodPressure _centralBloodPressure;
         private readonly IPatient _patient;
 
         private CentralBloodPressureInterpretationResult ClassifyBasedOnWorstResult()

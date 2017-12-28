@@ -8,12 +8,12 @@ namespace GeekMDSuite.Services.Interpretation
     public class AudiogramDatasetInterpretation
     {
 
-        public AudiogramDatasetInterpretation(AudiogramDataset dataset)
+        public AudiogramDatasetInterpretation(IAudiogramDataset dataset)
         {
             _audiogramDataset = dataset ?? throw new ArgumentNullException(nameof(dataset));
         }
         public HearingLoss Classification => AudiogramDataPointInterpretation.Classify(HighestDatapoint(_audiogramDataset));
-        public static int HighestDatapoint(AudiogramDataset audiogramDataset)
+        public static int HighestDatapoint(IAudiogramDataset audiogramDataset)
         {
             var list = new List<int>
             {
@@ -30,6 +30,6 @@ namespace GeekMDSuite.Services.Interpretation
             return list.Max();
         }
         
-        private readonly AudiogramDataset _audiogramDataset;
+        private readonly IAudiogramDataset _audiogramDataset;
     }
 }

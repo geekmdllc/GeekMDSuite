@@ -5,7 +5,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class OcularPressureInterpretation : IInterpretable<OcularPressureClassification>
     {
-        public OcularPressureInterpretation(OcularPressure pressure)
+        public OcularPressureInterpretation(IOcularPressure pressure)
         {
             _ocularPressure = pressure ?? throw new ArgumentNullException(nameof(pressure));
         }
@@ -29,6 +29,6 @@ namespace GeekMDSuite.Services.Interpretation
             ? OcularPressureClassification.Normal
             : OcularPressureClassification.OcularHypertension;
 
-        private readonly OcularPressure _ocularPressure;
+        private readonly IOcularPressure _ocularPressure;
     }
 }

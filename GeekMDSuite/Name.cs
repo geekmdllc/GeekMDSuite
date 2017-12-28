@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite
 {
-    public class Name
+    public class Name : IName
     {
         private Name(string first, string last, string middle = "")
         {

@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class Spirometry
+    public class Spirometry : ISpirometry
     {
         internal static Spirometry Build(double forcedExpiratoryVolume1Second,
             double forcedVitalCapacity,

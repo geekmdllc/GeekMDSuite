@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class CarotidUltrasoundResult
+    public class CarotidUltrasoundResult : ICarotidUltrasoundResult
     {
         private CarotidUltrasoundResult(double intimaMediaMeasurementMillimeters, CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character, CarotidPercentStenosisGrade stenosis)
         {

@@ -6,7 +6,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class SpirometryInterpretation : IInterpretable<SpirometryClassification>
     {
-        public SpirometryInterpretation(Spirometry spirometry, IPatient patient, IBodyComposition bodyComposition)
+        public SpirometryInterpretation(ISpirometry spirometry, IPatient patient, IBodyComposition bodyComposition)
         {
             _spirometry = spirometry ?? throw new ArgumentNullException(nameof(spirometry));
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -32,7 +32,7 @@ namespace GeekMDSuite.Services.Interpretation
             $"FEV1:FVC: {_spirometry.ForcedExpiratoryVolume1SecondToForcedVitalCapacityRatio}, " + 
             $"Classification: {Classification.ToString()}";
 
-        private readonly Spirometry _spirometry;
+        private readonly ISpirometry _spirometry;
         private readonly IPatient _patient;
         private readonly IBodyComposition _bodyComposition;
         

@@ -5,7 +5,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class BloodPressureInterpretation : IInterpretable<BloodPressureStage>
     {
-        public BloodPressureInterpretation(BloodPressure parameters)
+        public BloodPressureInterpretation(IBloodPressure parameters)
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
@@ -21,7 +21,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public override string ToString() => Classification.ToString();
         
-        private readonly BloodPressure _parameters;
+        private readonly IBloodPressure _parameters;
 
         public static class LowerLimits
         {

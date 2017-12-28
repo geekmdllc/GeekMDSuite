@@ -5,15 +5,15 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class AudiogramInterpretation : IInterpretable<AudiogramClassificationResult>
     {
-        public AudiogramInterpretation(Audiogram audiogram)
+        public AudiogramInterpretation(IAudiogram audiogram)
         {
             _left = audiogram.Left;
             _right = audiogram.Right;
         }
         public InterpretationText Interpretation => throw new NotImplementedException();
 
-        private readonly AudiogramDataset _left;
-        private readonly AudiogramDataset _right;
+        private readonly IAudiogramDataset _left;
+        private readonly IAudiogramDataset _right;
         
         public AudiogramClassificationResult Classification => new AudiogramClassificationResult(
                 GetClassification(),

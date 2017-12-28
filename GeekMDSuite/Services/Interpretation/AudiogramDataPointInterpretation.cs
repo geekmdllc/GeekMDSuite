@@ -6,7 +6,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class AudiogramDataPointInterpretation
     {
-        public AudiogramDataPointInterpretation(AudiogramDatapoint datapoint)
+        public AudiogramDataPointInterpretation(IAudiogramDatapoint datapoint)
         {
             _datapoint = datapoint ?? throw new ArgumentNullException(nameof(datapoint));
         }
@@ -29,6 +29,6 @@ namespace GeekMDSuite.Services.Interpretation
             public static readonly int Profound = HearingLossClassificationRepository.GetRange(HearingLoss.Profound).Lower;
         }
         
-        private readonly AudiogramDatapoint _datapoint;
+        private readonly IAudiogramDatapoint _datapoint;
     }
 }

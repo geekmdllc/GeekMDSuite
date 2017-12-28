@@ -2,7 +2,8 @@
 
 namespace GeekMDSuite.Procedures
 {
-    public class IshiharaPlateAnswer {
+    public class IshiharaPlateAnswer : IIshiharaPlateAnswer
+    {
 
         internal static IshiharaPlateAnswer Build(int plateNumber, IshiharaAnswerResult plateRead) => 
             new IshiharaPlateAnswer(plateNumber, plateRead);

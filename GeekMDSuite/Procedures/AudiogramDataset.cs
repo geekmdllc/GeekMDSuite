@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class AudiogramDataset
+    public class AudiogramDataset : IAudiogramDataset
     {
         internal static AudiogramDataset Build(
             AudiogramDatapoint f125,

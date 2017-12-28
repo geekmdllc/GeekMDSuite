@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class PeripheralVision
+    public class PeripheralVision : IPeripheralVision
     {
         public static PeripheralVision Build(int leftDegrees, int rightDegrees) 
             => new PeripheralVision(leftDegrees, rightDegrees);

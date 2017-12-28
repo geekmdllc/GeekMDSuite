@@ -5,7 +5,7 @@ namespace GeekMDSuite.Services.Interpretation
 {
     public class FunctionalMovementScreenInterpretation : IInterpretable<FunctionalMovementScreenClassification>
     {
-        public FunctionalMovementScreenInterpretation(FunctionalMovementScreen fms)
+        public FunctionalMovementScreenInterpretation(IFunctionalMovementScreen fms)
         {
             _fms = fms ?? throw new ArgumentNullException(nameof(fms));
         }
@@ -15,7 +15,7 @@ namespace GeekMDSuite.Services.Interpretation
 
         public override string ToString() => Classification.ToString();
 
-        private readonly FunctionalMovementScreen _fms;
+        private readonly IFunctionalMovementScreen _fms;
         private FunctionalMovementScreenClassification Classify()
         {
             return new FunctionalMovementScreenClassification(_fms);

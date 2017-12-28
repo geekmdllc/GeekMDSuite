@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class CentralBloodPressure
+    public class CentralBloodPressure : ICentralBloodPressure
     {
         
         public static CentralBloodPressure Build(

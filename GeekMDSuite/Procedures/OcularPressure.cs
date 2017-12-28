@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Procedures
 {
-    public class OcularPressure
+    public class OcularPressure : IOcularPressure
     {
         private OcularPressure(int leftMmHg, int rightMmHg)
         {

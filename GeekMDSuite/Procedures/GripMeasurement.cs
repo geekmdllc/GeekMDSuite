@@ -5,7 +5,7 @@ namespace GeekMDSuite.Procedures
 {
     public class GripMeasurement : IMassMeasurement
     {
-        public GripMeasurement(double pounds)
+        private GripMeasurement(double pounds)
         {
             Pounds = pounds;
             Kilograms = MassConversion.LbsToKilograms(Pounds);
