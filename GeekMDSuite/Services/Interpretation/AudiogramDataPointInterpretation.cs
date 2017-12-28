@@ -1,7 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Repositories;
-using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Interpretation
 {

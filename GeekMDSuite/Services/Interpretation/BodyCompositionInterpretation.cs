@@ -10,8 +10,8 @@ namespace GeekMDSuite.Services.Interpretation
         public BodyCompositionInterpretation(IBodyComposition bodyComposition, IPatient patient) 
             : base(bodyComposition, patient)
         {
-            _bodyComposition = bodyComposition;
-            _patient = patient;
+            _bodyComposition = bodyComposition ?? throw new ArgumentNullException(nameof(bodyComposition));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
         }
 
         public InterpretationText Interpretation => throw new NotImplementedException();

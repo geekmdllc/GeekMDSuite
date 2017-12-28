@@ -1,7 +1,6 @@
 ﻿using System;
 using GeekMDSuite.PatientActivities;
 using GeekMDSuite.Services.Interpretation.PatientActivities;
-using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test

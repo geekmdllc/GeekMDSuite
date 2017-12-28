@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Tools.Cardiology
 {
-    public class PooledCohortEquationParameters
+    public class PooledCohortEquationParameters : IPooledCohortEquationParameters
     {
         public IPatient Patient { get; }
         public IBloodPressure BloodPressure { get; }

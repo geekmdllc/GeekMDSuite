@@ -1,5 +1,4 @@
 ﻿using System;
-using FitnessClassification = GeekMDSuite.Services.Interpretation.FitnessClassification;
 
 namespace GeekMDSuite.Services.Interpretation
 {

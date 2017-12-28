@@ -21,6 +21,6 @@ namespace GeekMDSuite.Services.Interpretation
         public InterpretationText Interpretation => throw new NotImplementedException();
         public QualitativeLabResult Classification => _lab.Result;
 
-        public override string ToString() => Lab.ToString() + " - " + Classification.ToString();
+        public override string ToString() => Lab + " - " + Classification.ToString();
     }
 }

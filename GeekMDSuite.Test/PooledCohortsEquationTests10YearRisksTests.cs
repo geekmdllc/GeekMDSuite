@@ -1,6 +1,4 @@
-﻿using GeekMDSuite.LaboratoryData.Builder;
-using GeekMDSuite.Tools.Cardiology;
-using Moq;
+﻿using GeekMDSuite.Tools.Cardiology;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -44,19 +42,18 @@ namespace GeekMDSuite.Test
             GenderIdentity genderIdentity, bool hypertensionTreatment, bool diabetes,
             bool smoker, double expected)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Age).Returns(55);
-            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
-            mockPatient.Setup(p => p.Race).Returns(race);
+            _patientMock.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patientMock.Setup(p => p.Race).Returns(race);
 
-            var ascvd = new PooledCohortsEquation(
-                mockPatient.Object,
-                BloodPressure.Build(120, 75),
-                Quantitative.Serum.CholesterolTotal(213),
-                Quantitative.Serum.HighDensityLipoprotein(50),
-                hypertensionTreatment,
-                smoker,
-                diabetes).Ascvd10YearRiskPercentage;
+            _parametersBuilder
+                .SetPatient(_patientMock.Object);
+
+            if (hypertensionTreatment) _parametersBuilder.ConfirmOnAntiHypertensiveMedication();
+            if (diabetes) _parametersBuilder.ConfirmDiabetic();
+            if (smoker) _parametersBuilder.ConfirmSmoker();
+                
+
+            var ascvd = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).Ascvd10YearRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(ascvd, expected - tolerance, expected + tolerance);
@@ -70,16 +67,16 @@ namespace GeekMDSuite.Test
         public void IdealPercentAscvdRisk10Year_Given2013AccAhaSampleParams_ReturnsCorrectRiskPercentage(Race race,
             GenderIdentity genderIdentity, double expected)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Age).Returns(55);
-            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
-            mockPatient.Setup(p => p.Race).Returns(race);
+            _patientMock.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patientMock.Setup(p => p.Race).Returns(race);
 
-            var idealAscvd = new PooledCohortsEquation(
-                mockPatient.Object,
-                BloodPressure.Build(default(int), default(int)),
-                Quantitative.Serum.CholesterolTotal(default(int)),
-                Quantitative.Serum.HighDensityLipoprotein(default(int))).IdealAscvd10YearRiskPercentage;
+            _parametersBuilder
+                .SetPatient(_patientMock.Object)
+                .SetBloodPressure(BloodPressure.Build(default(int), default(int)))
+                .SetTotalCholesterol(default(int))
+                .SetHdlCholesterol(default(int));
+
+            var idealAscvd = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).IdealAscvd10YearRiskPercentage;
 
             const double tolerance = 0.31; // Tolerance necessary because expected values are estimates.
             Assert.InRange(idealAscvd, expected - tolerance, expected + tolerance);

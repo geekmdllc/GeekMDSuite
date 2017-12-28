@@ -335,15 +335,15 @@ namespace GeekMDSuite.ConsoleDemo
                 .ConfirmSmoker()
                 .Build();
             
-            var ascvdCalc = PooledCohortsEquation.Initialize(pooledCohortParams);
-            Console.WriteLine($"ASCVD 10yr-Risk%: {ascvdCalc.Ascvd10YearRiskPercentage}{NewLine}");
-            Console.WriteLine($"ASCVD Lifetime Risk%: {ascvdCalc.AscvdLifetimeRiskPercentage}{NewLine}");
+            var pooledCohortsEquation = PooledCohortsEquation.Initialize(pooledCohortParams);
+            Console.WriteLine($"ASCVD 10yr-Risk%: {pooledCohortsEquation.Ascvd10YearRiskPercentage}{NewLine}");
+            Console.WriteLine($"ASCVD Lifetime Risk%: {pooledCohortsEquation.AscvdLifetimeRiskPercentage}{NewLine}");
             
             var ascvd10YrInterp = new Ascvd10YearInterpretation(pooledCohortParams, quantitativeLabLdlC, true);
 
             Console.WriteLine($"ASCVD 10-Year Risk Interpretation{NewLine}{ascvd10YrInterp.Classification}{NewLine}");
             
-            var ascvdLifetimeInterp = new AscvdLifetimeInterpretation(ascvdCalc.Ascvd10YearRiskPercentage, patient).Classification;
+            var ascvdLifetimeInterp = new AscvdLifetimeInterpretation(pooledCohortsEquation.Ascvd10YearRiskPercentage, patient).Classification;
             Console.WriteLine($"ASCVD Lifetime Interpretation: {ascvdLifetimeInterp}{NewLine}");
             
         }

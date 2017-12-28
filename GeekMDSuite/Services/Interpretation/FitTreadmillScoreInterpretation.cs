@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Tools;
 using GeekMDSuite.Tools.Cardiology;
 using GeekMDSuite.Tools.Fitness;
 

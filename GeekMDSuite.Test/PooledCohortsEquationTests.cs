@@ -1,40 +1,31 @@
 ﻿using System;
-using System.ComponentModel;
 using GeekMDSuite.Tools.Cardiology;
 using Moq;
 using Xunit;
-using static GeekMDSuite.LaboratoryData.Builder.Quantitative.Serum;
 
 namespace GeekMDSuite.Test
 {
     public partial class PooledCohortsEquationTests
     {
         [Fact]
-        public void NullPatient_ThrowsArgumentNullException()
+        public void NullParameters_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PooledCohortsEquation(null, new Mock<IBloodPressure>().Object, CholesterolTotal(213), HighDensityLipoprotein(50)));
-        }
-        
-        [Fact]
-        public void NullBloodPressure_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-                new PooledCohortsEquation(new Mock<IPatient>().Object, null, CholesterolTotal(213), HighDensityLipoprotein(50)));
+                PooledCohortsEquation.Initialize(null));
         }
 
-        [Fact]
-        public void WrongQuantitativeLabType_InPlaceOfCholesterolTotal_ThrowsException()
+        public PooledCohortsEquationTests()
         {
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                new PooledCohortsEquation(new Mock<IPatient>().Object, new Mock<IBloodPressure>().Object, TestosteroneTotal(213), HighDensityLipoprotein(50)));
+            _patientMock= new Mock<IPatient>(); 
+            _patientMock.Setup(p => p.Age).Returns(55);
+
+            _parametersBuilder = PooledCohortEquationParametersBuilder.Initialize()
+                .SetBloodPressure(BloodPressure.Build(120, 75))
+                .SetHdlCholesterol(50)
+                .SetTotalCholesterol(213);
         }
-        
-        [Fact]
-        public void WrongQuantitativeLabType_InPlaceOfHighDensityLipoprotein_ThrowsException()
-        {
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                new PooledCohortsEquation(new Mock<IPatient>().Object, new Mock<IBloodPressure>().Object, CholesterolTotal(213), TestosteroneTotal(50)));
-        }
+
+        private readonly Mock<IPatient> _patientMock;
+        private readonly PooledCohortEquationParametersBuilder _parametersBuilder;
     }
 }

@@ -11,7 +11,7 @@ namespace GeekMDSuite.Services.Interpretation
     // 2013 ACC/AHA
     public class Ascvd10YearInterpretation : IInterpretable<AscvdInterpretationResult>
     {
-        public Ascvd10YearInterpretation(PooledCohortEquationParameters equationParams, IQuantitativeLab ldlCholesterol, bool clinicialAscvdPresent = false)
+        public Ascvd10YearInterpretation(IPooledCohortEquationParameters equationParams, IQuantitativeLab ldlCholesterol, bool clinicialAscvdPresent = false)
         {
             _smoker = equationParams.Smoker;
             _cholesterolHdlC = equationParams.HdlCholesterol ?? throw new ArgumentNullException(nameof(equationParams.HdlCholesterol));

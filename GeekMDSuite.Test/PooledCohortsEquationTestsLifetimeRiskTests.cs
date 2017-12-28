@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.LaboratoryData.Builder;
-using GeekMDSuite.Tools.Cardiology;
+﻿using GeekMDSuite.Tools.Cardiology;
 using Moq;
 using Xunit;
 
@@ -26,14 +25,17 @@ namespace GeekMDSuite.Test
             var mockPatient = new Mock<IPatient>();
             mockPatient.Setup(p => p.Gender.Category).Returns(gender);
 
-            var lifetime = new PooledCohortsEquation(
-                mockPatient.Object,
-                BloodPressure.Build(systolicBloodPressure, 75),
-                Quantitative.Serum.CholesterolTotal(totalCholesterol),
-                Quantitative.Serum.HighDensityLipoprotein(50),
-                hypertensionTreatment,
-                smoker,
-                diabetes).AscvdLifetimeRiskPercentage;
+            _parametersBuilder
+                .SetPatient(mockPatient.Object)
+                .SetBloodPressure(systolicBloodPressure, 75)
+                .SetTotalCholesterol(totalCholesterol)
+                .SetHdlCholesterol(50);
+            
+            if (hypertensionTreatment) _parametersBuilder.ConfirmOnAntiHypertensiveMedication();
+            if (diabetes) _parametersBuilder.ConfirmDiabetic();
+            if (smoker) _parametersBuilder.ConfirmSmoker();
+
+            var lifetime = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).AscvdLifetimeRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(lifetime, expected - tolerance, expected + tolerance);
@@ -47,11 +49,13 @@ namespace GeekMDSuite.Test
             var mockPatient = new Mock<IPatient>();
             mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
 
-            var idealAscvdLifetimeRisk = new PooledCohortsEquation(
-                mockPatient.Object,
-                BloodPressure.Build(default(int), default(int)),
-                Quantitative.Serum.CholesterolTotal(default(int)),
-                Quantitative.Serum.HighDensityLipoprotein(default(int))).IdealAscvdLifetimeRiskPercentage;
+            _parametersBuilder
+                .SetPatient(mockPatient.Object)
+                .SetBloodPressure(default(int), default(int))
+                .SetTotalCholesterol(default(int))
+                .SetHdlCholesterol(default(int));
+
+            var idealAscvdLifetimeRisk = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).IdealAscvdLifetimeRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(idealAscvdLifetimeRisk, expectedRisk - tolerance, expectedRisk + tolerance);

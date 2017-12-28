@@ -6,12 +6,14 @@ namespace GeekMDSuite.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
-        public static PooledCohortsEquation Initialize(PooledCohortEquationParameters parameters)
+        public static PooledCohortsEquation Initialize(IPooledCohortEquationParameters parameters)
         {
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+            
             return new PooledCohortsEquation(parameters);
         }
         
-        private PooledCohortsEquation(PooledCohortEquationParameters parameters)
+        private PooledCohortsEquation(IPooledCohortEquationParameters parameters)
         {
             _hdlCholesterol = parameters.HdlCholesterol ?? throw new ArgumentNullException(nameof(parameters.HdlCholesterol));
             _totalCholesterol = parameters.TotalCholesterol ?? throw new ArgumentNullException(nameof(parameters.TotalCholesterol));

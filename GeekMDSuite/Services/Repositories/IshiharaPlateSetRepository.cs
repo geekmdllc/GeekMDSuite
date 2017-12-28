@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 
 namespace GeekMDSuite.Services.Repositories
@@ -142,7 +141,6 @@ namespace GeekMDSuite.Services.Repositories
             plates.Add(new IshiharaPlateModel(4, IshiharaPlateType.Numeral, "6", UnableToRead, UnableToRead));
             plates.Add(new IshiharaPlateModel(5, IshiharaPlateType.Numeral, "16", UnableToRead, UnableToRead));
             plates.Add(new IshiharaPlateModel(6, IshiharaPlateType.Numeral, UnableToRead, "5", UnableToRead));
-            return;
         }
     }
 }
