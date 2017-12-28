@@ -13,6 +13,8 @@
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public MeasurementSystem MeasurementSystem { get; }
+        
+        public override string ToString() => $"Quantitative Lab: {Type}, Result: {Result}";
 
         internal static QuantitativeLab Create(double result, QuantitativeLabType type) => new QuantitativeLab(result, type);
     }

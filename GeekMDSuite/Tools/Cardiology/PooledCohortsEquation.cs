@@ -11,27 +11,22 @@ namespace GeekMDSuite.Tools.Cardiology
             IQuantitativeLab totalCholesterol, IQuantitativeLab hdlCholesterol,
             bool hypertensionTreatment = false, bool smoker = false, bool diabetic = false)
         {
-            _hdlCholesterol = hdlCholesterol;
-            _totalCholesterol = totalCholesterol;
-            _bloodPressure = bloodPressure;
-            _patient = patient;
-            if (patient == null) throw new ArgumentNullException(nameof(patient));
-            if (bloodPressure == null) throw new ArgumentNullException(nameof(bloodPressure));
-            if (totalCholesterol == null) throw new ArgumentNullException(nameof(totalCholesterol));
-            if (hdlCholesterol == null) throw new ArgumentNullException(nameof(hdlCholesterol));
-            if (totalCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum) 
-                throw new InvalidEnumArgumentException($"{nameof(totalCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.CholesterolTotalSerum)}.");
-            if (hdlCholesterol.Type != QuantitativeLabType.HighDensityLipoproteinSerum)
-                throw new InvalidEnumArgumentException($"{nameof(hdlCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}.");
-
+            _hdlCholesterol = hdlCholesterol ?? throw new ArgumentNullException(nameof(hdlCholesterol));
+            _totalCholesterol = totalCholesterol ?? throw new ArgumentNullException(nameof(totalCholesterol));
+            _bloodPressure = bloodPressure ?? throw new ArgumentNullException(nameof(bloodPressure));
+            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             _race = patient.Race;
             _age = patient.Age;
             _hypertensionTreatment = hypertensionTreatment;
             _smoker = smoker;
             _diabetic = diabetic;
+            
+            if (totalCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum) 
+                throw new InvalidEnumArgumentException($"{nameof(totalCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.CholesterolTotalSerum)}.");
+            if (hdlCholesterol.Type != QuantitativeLabType.HighDensityLipoproteinSerum)
+                throw new InvalidEnumArgumentException($"{nameof(hdlCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}.");
         }
-        
-        
+                
         private readonly IPatient _patient;
         private readonly IBloodPressure _bloodPressure;
         private readonly IQuantitativeLab _totalCholesterol;
@@ -41,8 +36,5 @@ namespace GeekMDSuite.Tools.Cardiology
         private readonly bool _hypertensionTreatment;
         private readonly bool _smoker;
         private readonly bool _diabetic;
-        private double BaselineSurvival => GetBaselineSurvival();
-        private double SumCoefficientValueProduct => GetSumOfCoefficientAndValueProduct();
-        private double MeanSumCoefficientValueProduct => GetMeanSumCoefficentValueProduct();
     }
 }

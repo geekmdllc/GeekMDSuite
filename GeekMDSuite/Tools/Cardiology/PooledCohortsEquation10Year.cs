@@ -15,6 +15,10 @@ namespace GeekMDSuite.Tools.Cardiology
         
         public double AscvdRiskPercentOver10Years()=> 100 * 
               (1 - Math.Pow(BaselineSurvival,  Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientValueProduct)));
+                
+        private double BaselineSurvival => GetBaselineSurvival();
+        private double SumCoefficientValueProduct => GetSumOfCoefficientAndValueProduct();
+        private double MeanSumCoefficientValueProduct => GetMeanSumCoefficentValueProduct();
 
         private double GetBaselineSurvival()
         {

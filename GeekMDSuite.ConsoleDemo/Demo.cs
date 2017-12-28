@@ -60,10 +60,13 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine($"Expanded body composition measures: {bodyCompositionExpanded}{NewLine}");
 
             var quantitativeLabChoesterol = Quantitative.Serum.CholesterolTotal(300);
-            Console.WriteLine($"Quantitative Lab: {quantitativeLabChoesterol.Type}, Result: {quantitativeLabChoesterol.Result}.{NewLine}");
+            Console.WriteLine($"Quantitative Lab: {quantitativeLabChoesterol}.{NewLine}");
             
             var quantitativeLabHdlC = Quantitative.Serum.HighDensityLipoprotein(35);
-            Console.WriteLine($"Quantitative Lab: {quantitativeLabHdlC.Type}, Result: {quantitativeLabHdlC.Result}.{NewLine}");
+            Console.WriteLine($"Quantitative Lab: {quantitativeLabHdlC}.{NewLine}");
+
+            var quantitativeLabLdlC = Quantitative.Serum.LowDensityLipoprotein(173);
+            Console.WriteLine($"Quantitative Lab: {quantitativeLabLdlC}.{NewLine}");
             
             var qualitativeLab = Qualitative.HepatitisCAntibody(QualitativeLabResult.Negative);
             Console.WriteLine($"Qualitative Lab: {qualitativeLab.Type}, Result: {qualitativeLab.Result}{NewLine}");
@@ -298,6 +301,9 @@ namespace GeekMDSuite.ConsoleDemo
             var quantLabInterpHdlC = new QuantitativeLabInterpretation(quantitativeLabHdlC, patient);
             Console.WriteLine($"Quantitative Lab: {quantLabInterpHdlC}{NewLine}");
             
+            var quantLabInterpLdlC = new QuantitativeLabInterpretation(quantitativeLabLdlC, patient);
+            Console.WriteLine($"Quantitative Lab: {quantLabInterpLdlC}{NewLine}");
+            
             var sitAndReachInterp = new SitAndReachInterpretation(sitAndReach, patient);
             Console.WriteLine($"Sit & Reach: {sitAndReachInterp}{NewLine}");
             
@@ -324,7 +330,7 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine($"ASCVD Lifetime Risk%: {ascvdCalc.AscvdLifetimeRisk()}{NewLine}");
             
             var ascvdInterp = new Ascvd10YearInterpretation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, 
-                Quantitative.Serum.LowDensityLipoprotein(173), true, true, true, true);
+                quantitativeLabLdlC, true, true, true, true);
 
             Console.WriteLine($"ASCVD 10% Interp: {ascvdInterp.Classification}{NewLine}");
         }
