@@ -345,7 +345,6 @@ namespace GeekMDSuite.ConsoleDemo
             
             var ascvdLifetimeInterp = new AscvdLifetimeInterpretation(pooledCohortsEquation.Ascvd10YearRiskPercentage, patient).Classification;
             Console.WriteLine($"ASCVD Lifetime Interpretation: {ascvdLifetimeInterp}{NewLine}");
-            
         }
     }
 }

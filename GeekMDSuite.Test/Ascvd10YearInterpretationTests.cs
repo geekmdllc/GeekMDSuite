@@ -1,5 +1,4 @@
-﻿using System;
-using GeekMDSuite.LaboratoryData.Builder;
+﻿using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Cardiology;
 using Moq;

@@ -95,13 +95,12 @@ namespace GeekMDSuite.Services.Interpretation
                               "There are exceptions to this, which can only be determined in proper " +
                               "clinical context by a trained healthcare provider. ")
                 .AddParagraph($"Ideal values are between {Systolic.Normal}-" +
-                              $"{Systolic.Elevated}/{Diastolic.Normal}-" +
-                              $"{Diastolic.Stage1Hypertension} mmHg. These values are generally " +
+                              $"{Systolic.Elevated}/<{Diastolic.Stage1Hypertension} mmHg. These values are generally " +
                               "considered to be the least likely to be associated with other chronic " +
                               "disease states.")
                 .AddParagraph($"Pre-hypertension is defined as {Systolic.Elevated}-" +
-                              $"{Systolic.Stage1Hypertension}/{Diastolic.Stage1Hypertension}-" +
-                              $"{Diastolic.Stage1Hypertension}. The term 'pre-hypertension' is " +
+                              $"{Systolic.Stage1Hypertension}/<{Diastolic.Stage1Hypertension} mmHg. "+
+                              "The term 'pre-hypertension' is " +
                               "used here, however it's important to note that this does not mean that there" +
                               "is no detriment associated with these blood pressures levels. There is. " +
                               "even mild levels of blood pressure elevation are associated with increased " +
@@ -109,10 +108,10 @@ namespace GeekMDSuite.Services.Interpretation
                 .AddParagraph("From here, hypertension is formally staged. Each stage is successively " +
                               "worse when compared to the previous stage. Stage 1 Hypertension is " +
                               $"{Systolic.Stage1Hypertension}-{Systolic.Stage2Hypertension}/" +
-                              $"{Diastolic.Stage1Hypertension}-{Diastolic.Stage2Hypertension}. " +
+                              $"{Diastolic.Stage1Hypertension}-{Diastolic.Stage2Hypertension} mmHg. " +
                               $"Stage 2 Hypertension is from {Systolic.Stage2Hypertension}-" +
                               $"{Systolic.HypertensiveUrgency}/{Diastolic.Stage2Hypertension}-" +
-                              $"{Diastolic.HypertensiveUrgency}. Anything beyond these values " +
+                              $"{Diastolic.HypertensiveUrgency} mmHg. Anything beyond these values " +
                               "is classified as either hypertensive urgency, or hypertensive emergency.")
                 .AddParagraph("The difference between hypertensive urgency and hypertensive emergency is " +
                               "the presence of evidence of acute damage to an organ. This often necessitates " +
