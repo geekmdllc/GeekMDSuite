@@ -2,7 +2,7 @@
 {
     public interface IGender
     {
-        GenderIdentity Category { get; }
+        GenderIdentity Category { get; set; }
         Genotype Genotype { get; }
     }
 }

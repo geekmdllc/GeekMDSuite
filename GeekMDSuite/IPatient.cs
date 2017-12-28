@@ -4,11 +4,11 @@ namespace GeekMDSuite
 {
     public interface IPatient
     {
-        DateTime DateOfBirth { get; }
+        DateTime DateOfBirth { get; set; }
         int Age { get; }
-        IName Name { get; }
-        string MedicalRecordNumber { get; }
-        IGender Gender { get; }
-        Race Race { get; }
+        Name Name { get; set; }
+        string MedicalRecordNumber { get; set; }
+        Gender Gender { get; set; }
+        Race Race { get; set; }
     }
 }

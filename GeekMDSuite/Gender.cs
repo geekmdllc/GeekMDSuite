@@ -2,14 +2,21 @@
 {
     public class Gender : IGender
     {
+        public Gender()
+        {
+            
+        }
         private Gender(GenderIdentity category)
         {
             Category = category;
         }
 
-        public GenderIdentity Category { get; }
+        public GenderIdentity Category { get; set; }
         
-        public Genotype Genotype => IsGenotypeXx(Category) ? Genotype.Xx : Genotype.Xy;
+        public Genotype Genotype => GetGenotype(Category);
+
+        public static Genotype GetGenotype(GenderIdentity category) => 
+            IsGenotypeXx(category) ? Genotype.Xx : Genotype.Xy;
 
         public static bool IsGenotypeXx(GenderIdentity gender) => 
             gender == GenderIdentity.Female || gender == GenderIdentity.NonBinaryXx;

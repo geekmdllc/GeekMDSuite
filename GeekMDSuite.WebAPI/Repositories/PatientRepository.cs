@@ -5,7 +5,6 @@ using GeekMDSuite.WebAPI.Exceptions;
 using GeekMDSuite.WebAPI.Helpers;
 using GeekMDSuite.WebAPI.Models;
 using GeekMDSuite.WebAPI.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.Repositories
 {
@@ -58,7 +57,6 @@ namespace GeekMDSuite.WebAPI.Repositories
             var entityToUpdate = FindById(entity.Id);
             entityToUpdate.DateOfBirth = entity.DateOfBirth;
             entityToUpdate.Gender.Category = entity.Gender.Category;
-            entityToUpdate.Gender.Genotype = entity.Gender.Genotype;
             entityToUpdate.MedicalRecordNumber = entity.MedicalRecordNumber;
             entityToUpdate.Name.First = entity.Name.First;
             entityToUpdate.Name.Middle = entity.Name.Middle;
