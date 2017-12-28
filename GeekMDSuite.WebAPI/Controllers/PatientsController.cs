@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using GeekMDSuite.WebAPI.Models;
 using GeekMDSuite.WebAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -12,23 +11,23 @@ namespace GeekMDSuite.WebAPI.Controllers
     [Produces("application/json")]
     public class PatientsController : Controller
     {
-        public PatientsController(IPatientRepository repository)
+        public PatientsController(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
         
         // GET api/patients
         [HttpGet]
         public IEnumerable<PatientEntity> Get()
         {
-            return _repository.All();
+            return _unitOfWork.Patients.All();
         }
 
         // GET api/patients/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var found = _repository.FindById(id);
+            var found = _unitOfWork.Patients.FindById(id);
             if (found == null) return NotFound();
             
             return Ok(found);
@@ -39,7 +38,7 @@ namespace GeekMDSuite.WebAPI.Controllers
         [Route("name/{name}")]
         public IActionResult GetByName(string name)
         {
-            var found = _repository.FindByName(name);
+            var found = _unitOfWork.Patients.FindByName(name);
             if (!found.Any()) return NotFound();
             
             return Ok(found);
@@ -50,7 +49,7 @@ namespace GeekMDSuite.WebAPI.Controllers
         [Route("mrn/{mrn}")]
         public IActionResult GetByMrn(string mrn)
         {
-            var found = _repository.FindByMedicalRecordNumber(mrn);
+            var found = _unitOfWork.Patients.FindByMedicalRecordNumber(mrn);
             if (!found.Any()) return NotFound();
             
             return Ok(found);
@@ -60,24 +59,62 @@ namespace GeekMDSuite.WebAPI.Controllers
         [HttpPost]
         public void Post([FromBody] PatientEntity patient)
         {
-            _repository.Add(patient);
+            _unitOfWork.Patients.Add(patient);
+            _unitOfWork.Complete();
         }
 
         // PUT api/patients/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public ActionResult Put([FromBody] PatientEntity patient)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _unitOfWork.Patients.Update(patient);
+                _unitOfWork.Complete();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
 
         // DELETE api/patients/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _unitOfWork.Patients.Delete(id);
+                _unitOfWork.Complete();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
         
-        private readonly IPatientRepository _repository;
+        // DELETE/api/patients --> from body [1,2,3,...,n]
+        [HttpDelete]
+        public ActionResult Delete([FromBody] int[] ids)
+        {
+            try
+            {
+                foreach (var id in ids)
+                {
+                    _unitOfWork.Patients.Delete(id);
+                }
+                _unitOfWork.Complete();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+        
+        private readonly IUnitOfWork _unitOfWork;
 
     }
 }

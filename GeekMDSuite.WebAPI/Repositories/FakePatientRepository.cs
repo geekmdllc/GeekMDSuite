@@ -11,10 +11,10 @@ namespace GeekMDSuite.WebAPI.Repositories
         public PatientEntity FindById(int id)
         { 
             try
-            {
+            { 
                 return _fakeRepository.First(p => p.Id == id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -25,7 +25,16 @@ namespace GeekMDSuite.WebAPI.Repositories
         public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query) => 
             _fakeRepository.Where(p => query.Equals(p.MedicalRecordNumber));
         
-        public void Add(PatientEntity patient) => _fakeRepository.Append(patient);
+        public void Add(PatientEntity entity) => _fakeRepository.Append(entity);
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(PatientEntity entity)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<PatientEntity> FindByName(string query)  => 
             _fakeRepository.Where(p => StringHelpers.StringContainsQuery(query, p.Name.ToString()));
