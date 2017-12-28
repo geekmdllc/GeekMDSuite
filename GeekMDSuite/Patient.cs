@@ -9,7 +9,7 @@ namespace GeekMDSuite
         {
             
         }
-        public Patient(Name name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber)
+        public Patient(IName name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber)
         {
             DateOfBirth = dateOfBirth;
             Name = name;
@@ -20,12 +20,12 @@ namespace GeekMDSuite
 
         public DateTime DateOfBirth { get; }
         public int Age => DateOfBirth.ElapsedYears();
-        public Name Name { get; }
+        public IName Name { get; }
         public string MedicalRecordNumber { get; }
         public IGender Gender { get; }
         public Race Race { get; }
 
-        internal static Patient Build(Name name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber) 
+        internal static Patient Build(IName name, DateTime dateOfBirth, IGender gender, Race race, string medicalRecordNumber) 
             => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
 
         public override string ToString()
