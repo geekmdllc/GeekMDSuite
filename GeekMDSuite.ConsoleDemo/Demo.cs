@@ -324,15 +324,28 @@ namespace GeekMDSuite.ConsoleDemo
             
             var waistToHeightInterp = new WaistToHeightRatioInterpretation(bodyComposition, patient);
             Console.WriteLine($"Waist to Height: {waistToHeightInterp}{NewLine}");
-            
-            var ascvdCalc = new PooledCohortsEquation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, true);
-            Console.WriteLine($"ASCVD 10yr-Risk%: {ascvdCalc.AscvdRiskPercentOver10Years()}{NewLine}");
-            Console.WriteLine($"ASCVD Lifetime Risk%: {ascvdCalc.AscvdLifetimeRisk()}{NewLine}");
-            
-            var ascvdInterp = new Ascvd10YearInterpretation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, 
-                quantitativeLabLdlC, true, true, true, true);
 
-            Console.WriteLine($"ASCVD 10% Interp: {ascvdInterp.Classification}{NewLine}");
+            var pooledCohortParams = PooledCohortEquationParametersBuilder.Initialize()
+                .SetBloodPressure(vitals.BloodPressure)
+                .SetHdlCholesterol(quantitativeLabHdlC.Result)
+                .SetTotalCholesterol(quantitativeLabChoesterol.Result)
+                .SetPatient(patient)
+                .ConfirmDiabetic()
+                .ConfirmOnAntiHypertensiveMedication()
+                .ConfirmSmoker()
+                .Build();
+            
+            var ascvdCalc = PooledCohortsEquation.Initialize(pooledCohortParams);
+            Console.WriteLine($"ASCVD 10yr-Risk%: {ascvdCalc.Ascvd10YearRiskPercentage}{NewLine}");
+            Console.WriteLine($"ASCVD Lifetime Risk%: {ascvdCalc.AscvdLifetimeRiskPercentage}{NewLine}");
+            
+            var ascvd10YrInterp = new Ascvd10YearInterpretation(pooledCohortParams, quantitativeLabLdlC, true);
+
+            Console.WriteLine($"ASCVD 10-Year Risk Interpretation{NewLine}{ascvd10YrInterp.Classification}{NewLine}");
+            
+            var ascvdLifetimeInterp = new AscvdLifetimeInterpretation(ascvdCalc.Ascvd10YearRiskPercentage, patient).Classification;
+            Console.WriteLine($"ASCVD Lifetime Interpretation: {ascvdLifetimeInterp}{NewLine}");
+            
         }
     }
 }

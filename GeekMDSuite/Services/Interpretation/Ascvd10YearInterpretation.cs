@@ -11,19 +11,17 @@ namespace GeekMDSuite.Services.Interpretation
     // 2013 ACC/AHA
     public class Ascvd10YearInterpretation : IInterpretable<AscvdInterpretationResult>
     {
-        public Ascvd10YearInterpretation(IPatient patient, IBloodPressure bloodPressure, IQuantitativeLab cholesterolTotal,
-            IQuantitativeLab cholesterolHdlC, IQuantitativeLab ldlCholesterol, bool hypertensiveTreatment = false, 
-            bool smoker = false, bool clinicialAscvdPresent = false, bool isDiabetic = false)
+        public Ascvd10YearInterpretation(PooledCohortEquationParameters equationParams, IQuantitativeLab ldlCholesterol, bool clinicialAscvdPresent = false)
         {
-            _smoker = smoker;
-            _cholesterolHdlC = cholesterolHdlC ?? throw new ArgumentNullException(nameof(cholesterolHdlC));
-            _cholesterolTotal = cholesterolTotal ?? throw new ArgumentNullException(nameof(cholesterolTotal));
-            _bloodPressure = bloodPressure ?? throw new ArgumentNullException(nameof(bloodPressure));
-            _isDiabetic = isDiabetic;
+            _smoker = equationParams.Smoker;
+            _cholesterolHdlC = equationParams.HdlCholesterol ?? throw new ArgumentNullException(nameof(equationParams.HdlCholesterol));
+            _cholesterolTotal = equationParams.TotalCholesterol ?? throw new ArgumentNullException(nameof(equationParams.TotalCholesterol));
+            _bloodPressure = equationParams.BloodPressure ?? throw new ArgumentNullException(nameof(equationParams.BloodPressure));
+            _isDiabetic = equationParams.Diabetic;
             _clinicialAscvdPresent = clinicialAscvdPresent;
             _ldlCholesterol = ldlCholesterol ?? throw new ArgumentNullException(nameof(ldlCholesterol));
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
-            _riskPercentage = new PooledCohortsEquation(_patient, _bloodPressure, _cholesterolTotal, cholesterolHdlC, hypertensiveTreatment, smoker, isDiabetic ).AscvdRiskPercentOver10Years();
+            _patient = equationParams.Patient ?? throw new ArgumentNullException(nameof(equationParams.Patient));
+            _riskPercentage = PooledCohortsEquation.Initialize(equationParams).Ascvd10YearRiskPercentage;
         }
         
         public InterpretationText Interpretation => throw new NotImplementedException();
@@ -32,7 +30,7 @@ namespace GeekMDSuite.Services.Interpretation
         public AscvdInterpretationResult Classify() => 
             AscvdInterpretationResult.Build(AscvdRisk(), StatinCandidacy(), StatinRecommendation(), AspirinCandidacy(), GetRiskFactors() );
 
-        public override string ToString() => $"{Classify().ToString()}";
+        public override string ToString() => $"{Classify()}";
 
         private readonly double _riskPercentage;
         private readonly IPatient _patient;
@@ -42,7 +40,7 @@ namespace GeekMDSuite.Services.Interpretation
         private readonly IBloodPressure _bloodPressure;
         private readonly IQuantitativeLab _cholesterolTotal;
         private readonly IQuantitativeLab _cholesterolHdlC;
-        private bool _smoker;
+        private readonly bool _smoker;
 
         private AscvdRiskClassification AscvdRisk()
         {

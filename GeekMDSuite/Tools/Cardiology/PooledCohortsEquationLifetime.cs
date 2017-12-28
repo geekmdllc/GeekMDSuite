@@ -4,16 +4,19 @@ namespace GeekMDSuite.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
-        public double IdealAscvdLifetimeRisk() => Gender.IsGenotypeXy(_patient.Gender) ? Male.Optimal : Female.Optimal;
+        public double IdealAscvdLifetimeRiskPercentage => Gender.IsGenotypeXy(_patient.Gender) ? Male.Optimal : Female.Optimal;
 
-        public double AscvdLifetimeRisk()
+        public double AscvdLifetimeRiskPercentage
         {
-            if (MajorPoints >= 2) return Gender.IsGenotypeXy(_patient.Gender) ? Male.TwoMajor : Female.TwoMajor;
-            if (MajorPoints == 1) return Gender.IsGenotypeXy(_patient.Gender) ? Male.OneMajor : Female.OneMajor;
-            if (Elevated) return Gender.IsGenotypeXy(_patient.Gender) ? Male.Elevated : Female.Elevated;
-            if (NotOptimal) return Gender.IsGenotypeXy(_patient.Gender) ? Male.NotOptimal : Female.NotOptimal;
-            
-            return IdealAscvdLifetimeRisk();
+            get
+            {
+                if (MajorPoints >= 2) return Gender.IsGenotypeXy(_patient.Gender) ? Male.TwoMajor : Female.TwoMajor;
+                if (MajorPoints == 1) return Gender.IsGenotypeXy(_patient.Gender) ? Male.OneMajor : Female.OneMajor;
+                if (Elevated) return Gender.IsGenotypeXy(_patient.Gender) ? Male.Elevated : Female.Elevated;
+                if (NotOptimal) return Gender.IsGenotypeXy(_patient.Gender) ? Male.NotOptimal : Female.NotOptimal;
+
+                return IdealAscvdLifetimeRiskPercentage;
+            }
         }
 
         private bool NotOptimal => (_totalCholesterol.Result >= 180 || _bloodPressure.Systolic >= 120) && !_hypertensionTreatment;

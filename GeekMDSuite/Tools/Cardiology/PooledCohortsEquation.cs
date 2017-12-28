@@ -6,33 +6,31 @@ namespace GeekMDSuite.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
-
-        public PooledCohortsEquation(IPatient patient, IBloodPressure bloodPressure, 
-            IQuantitativeLab totalCholesterol, IQuantitativeLab hdlCholesterol,
-            bool hypertensionTreatment = false, bool smoker = false, bool diabetic = false)
+        public static PooledCohortsEquation Initialize(PooledCohortEquationParameters parameters)
         {
-            _hdlCholesterol = hdlCholesterol ?? throw new ArgumentNullException(nameof(hdlCholesterol));
-            _totalCholesterol = totalCholesterol ?? throw new ArgumentNullException(nameof(totalCholesterol));
-            _bloodPressure = bloodPressure ?? throw new ArgumentNullException(nameof(bloodPressure));
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
-            _race = patient.Race;
-            _age = patient.Age;
-            _hypertensionTreatment = hypertensionTreatment;
-            _smoker = smoker;
-            _diabetic = diabetic;
+            return new PooledCohortsEquation(parameters);
+        }
+        
+        private PooledCohortsEquation(PooledCohortEquationParameters parameters)
+        {
+            _hdlCholesterol = parameters.HdlCholesterol ?? throw new ArgumentNullException(nameof(parameters.HdlCholesterol));
+            _totalCholesterol = parameters.TotalCholesterol ?? throw new ArgumentNullException(nameof(parameters.TotalCholesterol));
+            _bloodPressure = parameters.BloodPressure ?? throw new ArgumentNullException(nameof(parameters.BloodPressure));
+            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
+            _hypertensionTreatment = parameters.HypertensionTreatment;
+            _smoker = parameters.Smoker;
+            _diabetic = parameters.Diabetic;
             
-            if (totalCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum) 
-                throw new InvalidEnumArgumentException($"{nameof(totalCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.CholesterolTotalSerum)}.");
-            if (hdlCholesterol.Type != QuantitativeLabType.HighDensityLipoproteinSerum)
-                throw new InvalidEnumArgumentException($"{nameof(hdlCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}.");
+            if (parameters.TotalCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum) 
+                throw new InvalidEnumArgumentException($"{nameof(parameters.TotalCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.CholesterolTotalSerum)}.");
+            if (parameters.HdlCholesterol.Type != QuantitativeLabType.HighDensityLipoproteinSerum)
+                throw new InvalidEnumArgumentException($"{nameof(parameters.HdlCholesterol)} should have an enum 'Type' of {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}.");
         }
                 
         private readonly IPatient _patient;
         private readonly IBloodPressure _bloodPressure;
         private readonly IQuantitativeLab _totalCholesterol;
         private readonly IQuantitativeLab _hdlCholesterol;
-        private readonly Race _race;
-        private readonly int _age;
         private readonly bool _hypertensionTreatment;
         private readonly bool _smoker;
         private readonly bool _diabetic;

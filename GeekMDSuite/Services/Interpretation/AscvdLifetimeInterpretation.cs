@@ -13,7 +13,9 @@ namespace GeekMDSuite.Services.Interpretation
         
         public InterpretationText Interpretation => throw new NotImplementedException();
         public AscvdRiskClassification Classification => Classify();
-        
+
+        public override string ToString() => Classification.ToString();
+
         private readonly double _riskPercentage;
         private readonly IPatient _patient;
 

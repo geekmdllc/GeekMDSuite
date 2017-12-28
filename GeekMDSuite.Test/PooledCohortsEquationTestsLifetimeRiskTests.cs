@@ -27,14 +27,13 @@ namespace GeekMDSuite.Test
             mockPatient.Setup(p => p.Gender.Category).Returns(gender);
 
             var lifetime = new PooledCohortsEquation(
-                    mockPatient.Object,
-                    BloodPressure.Build(systolicBloodPressure, 75),
-                    Quantitative.Serum.CholesterolTotal(totalCholesterol),
-                    Quantitative.Serum.HighDensityLipoprotein(50),
-                    hypertensionTreatment,
-                    smoker,
-                    diabetes)
-                .AscvdLifetimeRisk();
+                mockPatient.Object,
+                BloodPressure.Build(systolicBloodPressure, 75),
+                Quantitative.Serum.CholesterolTotal(totalCholesterol),
+                Quantitative.Serum.HighDensityLipoprotein(50),
+                hypertensionTreatment,
+                smoker,
+                diabetes).AscvdLifetimeRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(lifetime, expected - tolerance, expected + tolerance);
@@ -49,11 +48,10 @@ namespace GeekMDSuite.Test
             mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
 
             var idealAscvdLifetimeRisk = new PooledCohortsEquation(
-                    mockPatient.Object,
-                    BloodPressure.Build(default(int), default(int)),
-                    Quantitative.Serum.CholesterolTotal(default(int)),
-                    Quantitative.Serum.HighDensityLipoprotein(default(int)))
-                .IdealAscvdLifetimeRisk();
+                mockPatient.Object,
+                BloodPressure.Build(default(int), default(int)),
+                Quantitative.Serum.CholesterolTotal(default(int)),
+                Quantitative.Serum.HighDensityLipoprotein(default(int))).IdealAscvdLifetimeRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(idealAscvdLifetimeRisk, expectedRisk - tolerance, expectedRisk + tolerance);

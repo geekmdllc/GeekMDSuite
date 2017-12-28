@@ -50,14 +50,13 @@ namespace GeekMDSuite.Test
             mockPatient.Setup(p => p.Race).Returns(race);
 
             var ascvd = new PooledCohortsEquation(
-                    mockPatient.Object,
-                    BloodPressure.Build(120, 75),
-                    Quantitative.Serum.CholesterolTotal(213),
-                    Quantitative.Serum.HighDensityLipoprotein(50),
-                    hypertensionTreatment,
-                    smoker,
-                    diabetes)
-                .AscvdRiskPercentOver10Years();
+                mockPatient.Object,
+                BloodPressure.Build(120, 75),
+                Quantitative.Serum.CholesterolTotal(213),
+                Quantitative.Serum.HighDensityLipoprotein(50),
+                hypertensionTreatment,
+                smoker,
+                diabetes).Ascvd10YearRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(ascvd, expected - tolerance, expected + tolerance);
@@ -77,11 +76,10 @@ namespace GeekMDSuite.Test
             mockPatient.Setup(p => p.Race).Returns(race);
 
             var idealAscvd = new PooledCohortsEquation(
-                    mockPatient.Object,
-                    BloodPressure.Build(default(int), default(int)),
-                    Quantitative.Serum.CholesterolTotal(default(int)),
-                    Quantitative.Serum.HighDensityLipoprotein(default(int)))
-                .IdealAscvdRiskPercentOver10Years();
+                mockPatient.Object,
+                BloodPressure.Build(default(int), default(int)),
+                Quantitative.Serum.CholesterolTotal(default(int)),
+                Quantitative.Serum.HighDensityLipoprotein(default(int))).IdealAscvd10YearRiskPercentage;
 
             const double tolerance = 0.31; // Tolerance necessary because expected values are estimates.
             Assert.InRange(idealAscvd, expected - tolerance, expected + tolerance);
