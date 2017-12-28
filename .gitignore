@@ -6,3 +6,5 @@ GeekMDSuite.ConsoleDemo/bin
 GeekMDSuite.ConsoleDemo/obj
 .idea
 GeekMDSuite.sln.DotSettings.user
+GeekMDSuite.WebAPI/bin
+GeekMDSuite.WebAPI/obj
