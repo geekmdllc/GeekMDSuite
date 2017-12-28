@@ -24,5 +24,9 @@
         public AscvdStatinCandidacy StatinCandidacy { get; }
         public AscvdStatinRecommendation StatinRecommendation { get; }
         public AscvdAspirinRecommendation AspirinRecommendation { get; }
+
+        public override string ToString() => $"Risk: {RiskClassification}, Statin Candidacy: {StatinCandidacy}, " +
+                                             $"Statin Recommendation: {StatinRecommendation}, " +
+                                             $"Aspirin Recommendation: {AspirinRecommendation}";
     }
 }

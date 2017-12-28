@@ -26,6 +26,8 @@ namespace GeekMDSuite.Services.Interpretation
         public AscvdInterpretationResult Classify() => 
             AscvdInterpretationResult.Build(AscvdRisk(), StatinCandidacy(), StatinRecommendation(), AspirinCandidacy() );
 
+        public override string ToString() => $"{Classify().ToString()}";
+
         private readonly double _riskPercentage;
         private readonly IPatient _patient;
         private readonly IQuantitativeLab _ldlCholesterol;

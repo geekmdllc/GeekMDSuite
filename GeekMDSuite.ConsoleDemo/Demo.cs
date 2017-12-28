@@ -62,7 +62,7 @@ namespace GeekMDSuite.ConsoleDemo
             var quantitativeLabChoesterol = Quantitative.Serum.CholesterolTotal(300);
             Console.WriteLine($"Quantitative Lab: {quantitativeLabChoesterol.Type}, Result: {quantitativeLabChoesterol.Result}.{NewLine}");
             
-            var quantitativeLabHdlC = Quantitative.Serum.CholesterolTotal(35);
+            var quantitativeLabHdlC = Quantitative.Serum.HighDensityLipoprotein(35);
             Console.WriteLine($"Quantitative Lab: {quantitativeLabHdlC.Type}, Result: {quantitativeLabHdlC.Result}.{NewLine}");
             
             var qualitativeLab = Qualitative.HepatitisCAntibody(QualitativeLabResult.Negative);
@@ -322,6 +322,9 @@ namespace GeekMDSuite.ConsoleDemo
             var ascvdCalc = new PooledCohortsEquation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, true, false, false);
             Console.WriteLine($"ASCVD 10yr-Risk%: {ascvdCalc.AscvdRiskPercentOver10Years()}{NewLine}");
             Console.WriteLine($"ASCVD Lifetime Risk%: {ascvdCalc.AscvdLifetimeRisk()}{NewLine}");
+            
+            var ascvdInterp = new Ascvd10YearInterpretation(patient, Quantitative.Serum.LowDensityLipoprotein(145), ascvdCalc.AscvdRiskPercentOver10Years());
+            Console.WriteLine($"ASCVD Classification: {ascvdInterp.Classification}");
         }
     }
 }
