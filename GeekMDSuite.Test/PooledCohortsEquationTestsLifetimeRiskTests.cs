@@ -39,5 +39,24 @@ namespace GeekMDSuite.Test
             const double tolerance = 0.1;
             Assert.InRange(lifetime, expected - tolerance, expected + tolerance);
         }
+
+        [Theory]
+        [InlineData(GenderIdentity.Female, 8.0)]
+        [InlineData(GenderIdentity.Male, 5.0)]
+        public void IdealLifeTimeRisk_IsCorrect(GenderIdentity genderIdentity, double expectedRisk)
+        {
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+
+            var idealAscvdLifetimeRisk = new PooledCohortsEquation(
+                    mockPatient.Object,
+                    BloodPressure.Build(default(int), default(int)),
+                    Quantitative.Serum.CholesterolTotal(default(int)),
+                    Quantitative.Serum.HighDensityLipoprotein(default(int)))
+                .IdealAscvdLifetimeRisk();
+
+            const double tolerance = 0.1;
+            Assert.InRange(idealAscvdLifetimeRisk, expectedRisk - tolerance, expectedRisk + tolerance);
+        }
     }
 }

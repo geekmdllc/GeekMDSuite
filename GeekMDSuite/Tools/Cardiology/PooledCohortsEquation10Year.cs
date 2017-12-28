@@ -1,28 +1,24 @@
 ﻿using System;
+using GeekMDSuite.LaboratoryData.Builder;
 
 namespace GeekMDSuite.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
+        public double IdealAscvdRiskPercentOver10Years() => 
+            new PooledCohortsEquation(
+                _patient, 
+                BloodPressure.Build(110,79), 
+                Quantitative.Serum.CholesterolTotal(169), 
+                Quantitative.Serum.HighDensityLipoprotein(65))
+            .AscvdRiskPercentOver10Years();
+        
         public double AscvdRiskPercentOver10Years()=> 100 * 
               (1 - Math.Pow(BaselineSurvival,  Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientValueProduct)));
 
-        private readonly IGender _gender;
-        private readonly Race _race;
-        private readonly int _age;
-        private readonly double _totalCholesterol;
-        private readonly double _hdlCholesterol;
-        private readonly int _systolicBloodPressure;
-        private readonly bool _hypertensionTreatment;
-        private readonly bool _smoker;
-        private readonly bool _diabetic;
-        private double BaselineSurvival => GetBaselineSurvival();
-        private double SumCoefficientValueProduct => GetSumOfCoefficientAndValueProduct();
-        private double MeanSumCoefficientValueProduct => GetMeanSumCoefficentValueProduct();
-
         private double GetBaselineSurvival()
         {
-            if (Gender.IsGenotypeXy(_gender))
+            if (Gender.IsGenotypeXy(_patient.Gender))
                 return _race == Race.BlackOrAfricanAmerican
                     ? BaseLineSurvival.Xy.AfricanAmerican
                     : BaseLineSurvival.Xy.NonAfricanAmerican;
@@ -34,7 +30,7 @@ namespace GeekMDSuite.Tools.Cardiology
 
         private double GetMeanSumCoefficentValueProduct()
         {
-            if (Gender.IsGenotypeXy(_gender))
+            if (Gender.IsGenotypeXy(_patient.Gender))
                 return _race == Race.BlackOrAfricanAmerican
                     ? MeanCoefficientTimesValue.Xy.AfricanAmerican
                     : MeanCoefficientTimesValue.Xy.NonAfricanAmerican;
@@ -46,7 +42,7 @@ namespace GeekMDSuite.Tools.Cardiology
 
         private double GetSumOfCoefficientAndValueProduct()
         {
-            if (Gender.IsGenotypeXy(_gender))
+            if (Gender.IsGenotypeXy(_patient.Gender))
                 return _race == Race.BlackOrAfricanAmerican
                     ? MaleAfricanAmericanCoefficientTimesValueSum()
                     : MaleNonAfricanAmericanCoefficientTimesValueSum();
@@ -60,12 +56,12 @@ namespace GeekMDSuite.Tools.Cardiology
         {
             var lnAge = Ln(_age) * Coefficients.Xx.NonAfricanAmerican.Age;
             var lnAgeSquared = Square(Ln(_age)) * Coefficients.Xx.NonAfricanAmerican.AgeSquared;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xx.NonAfricanAmerican.TotalCholesterol;
-            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol) *
+            var lnTotalChol = Ln(_totalCholesterol.Result) * Coefficients.Xx.NonAfricanAmerican.TotalCholesterol;
+            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol.Result) *
                                    Coefficients.Xx.NonAfricanAmerican.AgeTimesCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xx.NonAfricanAmerican.HdlC;
-            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xx.NonAfricanAmerican.AgeTimesHdlC;
-            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+            var lnHdlC = Ln(_hdlCholesterol.Result) * Coefficients.Xx.NonAfricanAmerican.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol.Result) * Coefficients.Xx.NonAfricanAmerican.AgeTimesHdlC;
+            var logSbp = Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                              ? Coefficients.Xx.NonAfricanAmerican.TreatedSystolicBp
                              : Coefficients.Xx.NonAfricanAmerican.UntreatedSystolicBp);
             var currentSmoker = SmokerFactor() * Coefficients.Xx.NonAfricanAmerican.CurrentSmoker;
@@ -80,13 +76,13 @@ namespace GeekMDSuite.Tools.Cardiology
         private double FemaleAfricanAmericanCoefficientTimesValueSum()
         {
             var lnAge = Ln(_age) * Coefficients.Xx.AfricanAmerican.Age;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xx.AfricanAmerican.TotalCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.HdlC;
-            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xx.AfricanAmerican.AgeTimesHdlC;
-            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+            var lnTotalChol = Ln(_totalCholesterol.Result) * Coefficients.Xx.AfricanAmerican.TotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol.Result) * Coefficients.Xx.AfricanAmerican.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol.Result) * Coefficients.Xx.AfricanAmerican.AgeTimesHdlC;
+            var logSbp = Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                              ? Coefficients.Xx.AfricanAmerican.TreatedSystolicBp
                              : Coefficients.Xx.AfricanAmerican.UntreatedSystolicBp);
-            var logAgelogSbp = Ln(_age) * Ln(_systolicBloodPressure) * (_hypertensionTreatment
+            var logAgelogSbp = Ln(_age) * Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                                    ? Coefficients.Xx.AfricanAmerican.AgeTimesTreatedSystolicBp
                                    : Coefficients.Xx.AfricanAmerican.AgetimesUntreatedSystolicBp);
             var currentSmoker = SmokerFactor() * Coefficients.Xx.AfricanAmerican.CurrentSmoker;
@@ -98,12 +94,12 @@ namespace GeekMDSuite.Tools.Cardiology
         private double MaleNonAfricanAmericanCoefficientTimesValueSum()
         {
             var lnAge = Ln(_age) * Coefficients.Xy.NonAfricanAmerican.Age;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.NonAfricanAmerican.TotalCholesterol;
-            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol) *
+            var lnTotalChol = Ln(_totalCholesterol.Result) * Coefficients.Xy.NonAfricanAmerican.TotalCholesterol;
+            var lnAgelnTotalChol = Ln(_age) * Ln(_totalCholesterol.Result) *
                                    Coefficients.Xy.NonAfricanAmerican.AgeTimesTotalCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.HdlC;
-            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol) * Coefficients.Xy.NonAfricanAmerican.AgeTimesHdlC;
-            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+            var lnHdlC = Ln(_hdlCholesterol.Result) * Coefficients.Xy.NonAfricanAmerican.HdlC;
+            var lnAgelnHdlC = Ln(_age) * Ln(_hdlCholesterol.Result) * Coefficients.Xy.NonAfricanAmerican.AgeTimesHdlC;
+            var logSbp = Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                              ? Coefficients.Xy.NonAfricanAmerican.TreatedSystolicBp
                              : Coefficients.Xy.NonAfricanAmerican.UntreatedSystolicBp);
             var currentSmoker = SmokerFactor() * Coefficients.Xy.NonAfricanAmerican.CurrentSmoker;
@@ -118,9 +114,9 @@ namespace GeekMDSuite.Tools.Cardiology
         private double MaleAfricanAmericanCoefficientTimesValueSum()
         {
             var lnAge = Ln(_age) * Coefficients.Xy.AfricanAmerican.Age;
-            var lnTotalChol = Ln(_totalCholesterol) * Coefficients.Xy.AfricanAmerican.TotalCholesterol;
-            var lnHdlC = Ln(_hdlCholesterol) * Coefficients.Xy.AfricanAmerican.HdlC;
-            var logSbp = Ln(_systolicBloodPressure) * (_hypertensionTreatment
+            var lnTotalChol = Ln(_totalCholesterol.Result) * Coefficients.Xy.AfricanAmerican.TotalCholesterol;
+            var lnHdlC = Ln(_hdlCholesterol.Result) * Coefficients.Xy.AfricanAmerican.HdlC;
+            var logSbp = Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                              ? Coefficients.Xy.AfricanAmerican.TreatedSystolicBp
                              : Coefficients.Xy.AfricanAmerican.UntreatedSystolicBp);
             var currentSmoker = SmokerFactor() * Coefficients.Xy.AfricanAmerican.CurrentSmoker;

@@ -7,7 +7,7 @@ namespace GeekMDSuite.Services.Interpretation
     public class QuantitativeLabInterpretation : IInterpretable<QuantitativeLabResult>
     {
 
-        public QuantitativeLabInterpretation(QuantitativeLab lab, IPatient patient)
+        public QuantitativeLabInterpretation(IQuantitativeLab lab, IPatient patient)
         {
             _lab = lab ?? throw new ArgumentNullException(nameof(lab));
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -66,7 +66,7 @@ namespace GeekMDSuite.Services.Interpretation
                         return QuantitativeLabResult.InvalidResult;
             }
         }
-        private readonly QuantitativeLab _lab;
+        private readonly IQuantitativeLab _lab;
         private readonly IPatient _patient;
     }
 }

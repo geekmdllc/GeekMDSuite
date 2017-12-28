@@ -62,5 +62,29 @@ namespace GeekMDSuite.Test
             const double tolerance = 0.1;
             Assert.InRange(ascvd, expected - tolerance, expected + tolerance);
         }
+        
+        [Theory]
+        [InlineData(Race.White, GenderIdentity.Female, 1.1)]
+        [InlineData(Race.White, GenderIdentity.Male, 3.0)]
+        [InlineData(Race.BlackOrAfricanAmerican, GenderIdentity.Female, 1.5)]
+        [InlineData(Race.BlackOrAfricanAmerican, GenderIdentity.Male, 4.2)]
+        public void IdealPercentAscvdRisk10Year_Given2013AccAhaSampleParams_ReturnsCorrectRiskPercentage(Race race,
+            GenderIdentity genderIdentity, double expected)
+        {
+            var mockPatient = new Mock<IPatient>();
+            mockPatient.Setup(p => p.Age).Returns(55);
+            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            mockPatient.Setup(p => p.Race).Returns(race);
+
+            var idealAscvd = new PooledCohortsEquation(
+                    mockPatient.Object,
+                    BloodPressure.Build(default(int), default(int)),
+                    Quantitative.Serum.CholesterolTotal(default(int)),
+                    Quantitative.Serum.HighDensityLipoprotein(default(int)))
+                .IdealAscvdRiskPercentOver10Years();
+
+            const double tolerance = 0.31; // Tolerance necessary because expected values are estimates.
+            Assert.InRange(idealAscvd, expected - tolerance, expected + tolerance);
+        }
     }
 }

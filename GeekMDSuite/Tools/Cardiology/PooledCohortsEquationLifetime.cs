@@ -4,22 +4,24 @@ namespace GeekMDSuite.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
+        public double IdealAscvdLifetimeRisk() => Gender.IsGenotypeXy(_patient.Gender) ? Male.Optimal : Female.Optimal;
+
         public double AscvdLifetimeRisk()
         {
-            if (MajorPoints >= 2) return Gender.IsGenotypeXy(_gender) ? Male.TwoMajor : Female.TwoMajor;
-            if (MajorPoints == 1) return Gender.IsGenotypeXy(_gender) ? Male.OneMajor : Female.OneMajor;
-            if (Elevated) return Gender.IsGenotypeXy(_gender) ? Male.Elevated : Female.Elevated;
-            if (NotOptimal) return Gender.IsGenotypeXy(_gender) ? Male.NotOptimal : Female.NotOptimal;
+            if (MajorPoints >= 2) return Gender.IsGenotypeXy(_patient.Gender) ? Male.TwoMajor : Female.TwoMajor;
+            if (MajorPoints == 1) return Gender.IsGenotypeXy(_patient.Gender) ? Male.OneMajor : Female.OneMajor;
+            if (Elevated) return Gender.IsGenotypeXy(_patient.Gender) ? Male.Elevated : Female.Elevated;
+            if (NotOptimal) return Gender.IsGenotypeXy(_patient.Gender) ? Male.NotOptimal : Female.NotOptimal;
             
-            return Gender.IsGenotypeXy(_gender) ? Male.Optimal : Female.Optimal;
+            return IdealAscvdLifetimeRisk();
         }
 
-        private bool NotOptimal => (_totalCholesterol >= 180 || _systolicBloodPressure >= 120) && !_hypertensionTreatment;
+        private bool NotOptimal => (_totalCholesterol.Result >= 180 || _bloodPressure.Systolic >= 120) && !_hypertensionTreatment;
 
-        private bool Elevated => (_totalCholesterol >= 200 || _systolicBloodPressure >= 140) && !_hypertensionTreatment;
+        private bool Elevated => (_totalCholesterol.Result >= 200 || _bloodPressure.Systolic >= 140) && !_hypertensionTreatment;
 
-        private int MajorPoints => (_totalCholesterol >= 240 ? 1 : 0) +
-                                   (_systolicBloodPressure >= 160 ? 1 : 0) +
+        private int MajorPoints => (_totalCholesterol.Result >= 240 ? 1 : 0) +
+                                   (_bloodPressure.Systolic >= 160 ? 1 : 0) +
                                    (_hypertensionTreatment ? 1 : 0) +
                                    (_diabetic ? 1 : 0) +
                                    (_smoker ? 1 : 0);

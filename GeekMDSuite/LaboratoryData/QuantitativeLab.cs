@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.LaboratoryData
 {
-    public partial class QuantitativeLab
+    public class QuantitativeLab : IQuantitativeLab
     {
         private QuantitativeLab(double result, QuantitativeLabType type, MeasurementSystem measurementSystem = MeasurementSystem.TraditionalUs)
         {
