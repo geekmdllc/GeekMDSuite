@@ -46,12 +46,10 @@ namespace GeekMDSuite.Test
             _patientMock.Setup(p => p.Race).Returns(race);
 
             _parametersBuilder
-                .SetPatient(_patientMock.Object);
-
-            if (hypertensionTreatment) _parametersBuilder.ConfirmOnAntiHypertensiveMedication();
-            if (diabetes) _parametersBuilder.ConfirmDiabetic();
-            if (smoker) _parametersBuilder.ConfirmSmoker();
-                
+                .SetPatient(_patientMock.Object)
+                .ConfirmDiabetic(diabetes)
+                .ConfirmOnAntiHypertensiveMedication(hypertensionTreatment)
+                .ConfirmSmoker(smoker);
 
             var ascvd = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).Ascvd10YearRiskPercentage;
 

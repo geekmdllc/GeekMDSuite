@@ -27,7 +27,7 @@ namespace GeekMDSuite.Services.Interpretation
         public InterpretationText Interpretation => throw new NotImplementedException();
         public AscvdInterpretationResult Classification => Classify();
 
-        public AscvdInterpretationResult Classify() => 
+        private AscvdInterpretationResult Classify() => 
             AscvdInterpretationResult.Build(AscvdRisk(), StatinCandidacy(), StatinRecommendation(), AspirinCandidacy(), GetRiskFactors() );
 
         public override string ToString() => $"{Classify()}";
@@ -53,7 +53,7 @@ namespace GeekMDSuite.Services.Interpretation
         {
             if (Interval<int>.Create(50, 59).ContainsClosed(_patient.Age) && _riskPercentage >= 10)
                 return AscvdAspirinRecommendation.Beneficial;
-            if (Interval<int>.Create(60, 60).ContainsClosed(_patient.Age) && _riskPercentage >= 10)
+            if (Interval<int>.Create(60, 69).ContainsClosed(_patient.Age) && _riskPercentage >= 10)
                 return AscvdAspirinRecommendation.BeneficialWithReservation;
             return _riskPercentage >= 10 ? AscvdAspirinRecommendation.InsufficientEvidenceLikelyBeneficial 
                 : AscvdAspirinRecommendation.InsufficientEvidenceLikelyNotBeneficial;
@@ -79,9 +79,14 @@ namespace GeekMDSuite.Services.Interpretation
             if (IsStatinCandidate && PatientIsInTreatmentAgeGroup)
                 return AscvdStatinRecommendation.ModerateToHighIntensity;
 
-            return StatinCandidacy() == AscvdStatinCandidacy.PossibleCandidate 
+            return IsPossibleStatinCandidate || IsStatinCandidate
                 ? AscvdStatinRecommendation.PossiblyBeneficial 
                 : AscvdStatinRecommendation.LikelyNotBeneficial;
+        }
+
+        private bool IsPossibleStatinCandidate
+        {
+            get { return StatinCandidacy() == AscvdStatinCandidacy.PossibleCandidate; }
         }
 
         private bool IsStatinCandidate => StatinCandidacy() == AscvdStatinCandidacy.Candidate;

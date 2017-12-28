@@ -47,21 +47,21 @@ namespace GeekMDSuite.Tools.Cardiology
             return this;
         }
 
-        public PooledCohortEquationParametersBuilder ConfirmOnAntiHypertensiveMedication()
+        public PooledCohortEquationParametersBuilder ConfirmOnAntiHypertensiveMedication(bool confirm = true)
         {
-            _hypertensionTreatment = true;
+            _hypertensionTreatment = confirm;
             return this;
         }
         
-        public PooledCohortEquationParametersBuilder ConfirmDiabetic()
+        public PooledCohortEquationParametersBuilder ConfirmDiabetic(bool confirm = true)
         {
-            _diabetic = true;
+            _diabetic = confirm;
             return this;
         }
         
-        public PooledCohortEquationParametersBuilder ConfirmSmoker()
+        public PooledCohortEquationParametersBuilder ConfirmSmoker(bool confirm = true)
         {
-            _smoker = true;
+            _smoker = confirm;
             return this;
         }
 

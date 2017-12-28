@@ -29,11 +29,10 @@ namespace GeekMDSuite.Test
                 .SetPatient(mockPatient.Object)
                 .SetBloodPressure(systolicBloodPressure, 75)
                 .SetTotalCholesterol(totalCholesterol)
-                .SetHdlCholesterol(50);
-            
-            if (hypertensionTreatment) _parametersBuilder.ConfirmOnAntiHypertensiveMedication();
-            if (diabetes) _parametersBuilder.ConfirmDiabetic();
-            if (smoker) _parametersBuilder.ConfirmSmoker();
+                .SetHdlCholesterol(50)
+                .ConfirmDiabetic(diabetes)
+                .ConfirmOnAntiHypertensiveMedication(hypertensionTreatment)
+                .ConfirmSmoker(smoker);
 
             var lifetime = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).AscvdLifetimeRiskPercentage;
 
