@@ -15,11 +15,14 @@ namespace GeekMDSuite.Test
         public void QualitativeLab_GivenResult_ReturnsCorrectClassification(
             QualitativeLabResult result, QualitativeLabResult expectedClassification)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.NonBinaryXy);
+            var patient = new Patient()
+            {
+                Gender = Gender.Build(GenderIdentity.Male)
+            };
+
             var test = Qualitative.HepatitisCAntibody(result);
 
-            var interp = new QualitativeLabInterpretation(test, mockPatient.Object);
+            var interp = new QualitativeLabInterpretation(test, patient);
 
             var classification = interp.Classification;
 

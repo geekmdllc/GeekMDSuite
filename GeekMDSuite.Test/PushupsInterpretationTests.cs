@@ -27,11 +27,10 @@ namespace GeekMDSuite.Test
             GenderIdentity genderIdentity, int age, FitnessClassification expectedClassification)
         {
             var pushups = Pushups.Build(count);
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(p => p.Gender.Category).Returns(genderIdentity);
-            mockPt.Setup(p => p.Age).Returns(age);
+            _patient.Gender = Gender.Build(genderIdentity);
+            _patient.DateOfBirth = DateTime.Now.AddYears(-age);
 
-            var classification = new PushupsInterpretation(pushups, mockPt.Object).Classification;
+            var classification = new PushupsInterpretation(pushups, _patient).Classification;
 
             Assert.Equal(expectedClassification, classification);
         }
@@ -48,5 +47,12 @@ namespace GeekMDSuite.Test
             Assert.Throws<ArgumentNullException>(() =>
                 new PushupsInterpretation(new Mock<IMuscularStrengthTest>().Object, null));
         }
+
+        public PushupsInterpretationTests()
+        {
+            _patient = new Patient();
+        }
+
+        private readonly Patient _patient;
     }
 }

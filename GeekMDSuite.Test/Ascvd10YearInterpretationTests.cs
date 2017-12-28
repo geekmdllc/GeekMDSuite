@@ -1,7 +1,7 @@
-﻿using GeekMDSuite.LaboratoryData.Builder;
+﻿using System;
+using GeekMDSuite.LaboratoryData.Builder;
 using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.Tools.Cardiology;
-using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -11,13 +11,10 @@ namespace GeekMDSuite.Test
         [Fact]
         public void Classfication_GivenParams_ReturnsCorrectListOfRiskFactors()
         {
-            _mockPatient.Setup(p => p.Gender.Category).Returns(GenderIdentity.Male);
-            _mockPatient.Setup(p => p.Age).Returns(55);
-
             _pooledParams
                 .SetBloodPressure(130, 75)
                 .SetHdlCholesterol(50)
-                .SetPatient(_mockPatient.Object)
+                .SetPatient(_patient)
                 .SetTotalCholesterol(213)
                 .ConfirmDiabetic()
                 .ConfirmSmoker();
@@ -30,7 +27,7 @@ namespace GeekMDSuite.Test
             Assert.Contains(AscvdModifiableRiskFactors.Diabetes, riskFactors);
             Assert.Contains(AscvdModifiableRiskFactors.Smoker, riskFactors);
          }
-        
+
         [Theory]
         [InlineData(GenderIdentity.Male, 110, 50, 170, 100, false, false, false, false, 55, AscvdStatinRecommendation.LikelyNotBeneficial)]
         [InlineData(GenderIdentity.Male, 110, 50, 200, 190, false, false, false, false, 55, AscvdStatinRecommendation.HighIntensity)]
@@ -44,13 +41,13 @@ namespace GeekMDSuite.Test
             bool diabetic, bool antiHypertensive, bool smoker, bool ascvdPresent, 
             int age, AscvdStatinRecommendation expected)
         {
-            _mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
-            _mockPatient.Setup(p => p.Age).Returns(age);
+            _patient.Gender = Gender.Build(genderIdentity);
+            _patient.DateOfBirth = SetDateOfBirthMinusYears(age);
 
             _pooledParams
                 .SetBloodPressure(systolic, 75)
                 .SetHdlCholesterol(hdl)
-                .SetPatient(_mockPatient.Object)
+                .SetPatient(_patient)
                 .SetTotalCholesterol(totalCholesterol)
                 .ConfirmDiabetic(diabetic)
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
@@ -69,12 +66,12 @@ namespace GeekMDSuite.Test
         public void Classification_GivenParams_ReturnsCorrectAscvdRiskClassification(GenderIdentity genderIdentity, int systolic, double hdl, double totalCholesterol, double ldl, 
             bool diabetic, bool antiHypertensive, bool smoker, bool ascvdPresent, AscvdRiskClassification expected)
         {
-            _mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patient.Gender = Gender.Build(genderIdentity);
 
             _pooledParams
                 .SetBloodPressure(systolic, 75)
                 .SetHdlCholesterol(hdl)
-                .SetPatient(_mockPatient.Object)
+                .SetPatient(_patient)
                 .SetTotalCholesterol(totalCholesterol)
                 .ConfirmDiabetic(diabetic)
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
@@ -95,13 +92,13 @@ namespace GeekMDSuite.Test
         public void Classfication_GivenParams_ReturnsCorrectAscvdAspirinRecommendation(GenderIdentity genderIdentity, int systolic, double hdl, double totalCholesterol, double ldl, 
             bool diabetic, bool antiHypertensive, bool smoker, bool ascvdPresent, int age, AscvdAspirinRecommendation expected)
         {
-            _mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
-            _mockPatient.Setup(p => p.Age).Returns(age);
+            _patient.Gender = Gender.Build(genderIdentity);
+            _patient.DateOfBirth = SetDateOfBirthMinusYears(age);
 
             _pooledParams
                 .SetBloodPressure(systolic, 75)
                 .SetHdlCholesterol(hdl)
-                .SetPatient(_mockPatient.Object)
+                .SetPatient(_patient)
                 .SetTotalCholesterol(totalCholesterol)
                 .ConfirmDiabetic(diabetic)
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
@@ -121,12 +118,12 @@ namespace GeekMDSuite.Test
         public void Classification_GivenParams_ReturnsCorrectStatinCandicacy(GenderIdentity genderIdentity, int systolic, double hdl, double totalCholesterol, double ldl, 
             bool diabetic, bool antiHypertensive, bool smoker, bool ascvdPresent, AscvdStatinCandidacy expected)
         {
-            _mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patient.Gender = Gender.Build(genderIdentity);
 
             _pooledParams
                 .SetBloodPressure(systolic, 75)
                 .SetHdlCholesterol(hdl)
-                .SetPatient(_mockPatient.Object)
+                .SetPatient(_patient)
                 .SetTotalCholesterol(totalCholesterol)
                 .ConfirmDiabetic(diabetic)
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
@@ -139,12 +136,21 @@ namespace GeekMDSuite.Test
         }
         public Ascvd10YearInterpretationTests()
         {
-            _mockPatient = new Mock<IPatient>();
-            _mockPatient.Setup(p => p.Age).Returns(55);
             _pooledParams = PooledCohortEquationParametersBuilder.Initialize();
+            _patient = new Patient()
+            {
+                DateOfBirth = SetDateOfBirthMinusYears(55),
+                Gender =  Gender.Build(GenderIdentity.Male)
+            };
+        }
+        
+        public static DateTime SetDateOfBirthMinusYears(int years)
+        {
+            return DateTime.Now.AddYears(-years);
         }
 
-        private readonly Mock<IPatient> _mockPatient;
         private readonly PooledCohortEquationParametersBuilder _pooledParams;
+        private readonly Patient _patient;
+
     }
 }

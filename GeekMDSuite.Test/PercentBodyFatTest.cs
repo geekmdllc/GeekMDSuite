@@ -22,12 +22,12 @@ namespace GeekMDSuite.Test
         public void Classify_GivenBodyCompositionAndBodyFatPercent_ReturnsCorrectClassification(double percentBodyFat, 
             GenderIdentity genderIdentity, PercentBodyFat expectedClassification)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patient.Gender = Gender.Build(genderIdentity);
+            
             var bce = new Mock<IBodyCompositionExpanded>();
             bce.Setup(b => b.PercentBodyFat).Returns(percentBodyFat);
             
-            var classification = new PercentBodyFatInterpretation(bce.Object, mockPatient.Object).Classification;
+            var classification = new PercentBodyFatInterpretation(bce.Object, _patient).Classification;
             
             Assert.Equal(expectedClassification, classification);
         }
@@ -45,5 +45,12 @@ namespace GeekMDSuite.Test
             Assert.Throws<ArgumentNullException>(() =>
                 new PercentBodyFatInterpretation(new Mock<IBodyCompositionExpanded>().Object, null));
         }
+
+        public PercentBodyFatTest()
+        {
+            _patient = new Patient();
+        }
+        
+        private readonly Patient _patient;
     }
 }

@@ -42,11 +42,11 @@ namespace GeekMDSuite.Test
             GenderIdentity genderIdentity, bool hypertensionTreatment, bool diabetes,
             bool smoker, double expected)
         {
-            _patientMock.Setup(p => p.Gender.Category).Returns(genderIdentity);
-            _patientMock.Setup(p => p.Race).Returns(race);
+            _patient.Gender = Gender.Build(genderIdentity);
+            _patient.Race = race;
 
             _parametersBuilder
-                .SetPatient(_patientMock.Object)
+                .SetPatient(_patient)
                 .ConfirmDiabetic(diabetes)
                 .ConfirmOnAntiHypertensiveMedication(hypertensionTreatment)
                 .ConfirmSmoker(smoker);
@@ -65,11 +65,11 @@ namespace GeekMDSuite.Test
         public void IdealPercentAscvdRisk10Year_Given2013AccAhaSampleParams_ReturnsCorrectRiskPercentage(Race race,
             GenderIdentity genderIdentity, double expected)
         {
-            _patientMock.Setup(p => p.Gender.Category).Returns(genderIdentity);
-            _patientMock.Setup(p => p.Race).Returns(race);
+            _patient.Gender = Gender.Build(genderIdentity);
+            _patient.Race = race;
 
             _parametersBuilder
-                .SetPatient(_patientMock.Object)
+                .SetPatient(_patient)
                 .SetBloodPressure(BloodPressure.Build(default(int), default(int)))
                 .SetTotalCholesterol(default(int))
                 .SetHdlCholesterol(default(int));
@@ -79,5 +79,6 @@ namespace GeekMDSuite.Test
             const double tolerance = 0.31; // Tolerance necessary because expected values are estimates.
             Assert.InRange(idealAscvd, expected - tolerance, expected + tolerance);
         }
+        
     }
 }

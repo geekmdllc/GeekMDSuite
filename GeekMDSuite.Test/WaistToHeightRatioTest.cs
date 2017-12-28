@@ -23,13 +23,13 @@ namespace GeekMDSuite.Test
         public void Classification_GivenPatientAndData_ReturnsCorrectClassification(double ratio,
             GenderIdentity genderIdentity, WaistToHeightRatio expectedWaistToHeightRatio)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patient.Gender = Gender.Build(genderIdentity);
+
             var bc = new Mock<IBodyComposition>();
             bc.Setup(b => b.Height.Centimeters).Returns(1);
             bc.Setup(b => b.Waist.Centimeters).Returns(ratio);
             
-            var classification = new WaistToHeightRatioInterpretation(bc.Object, mockPatient.Object).Classification;
+            var classification = new WaistToHeightRatioInterpretation(bc.Object, _patient).Classification;
             
             Assert.Equal(expectedWaistToHeightRatio, classification);
         }
@@ -47,5 +47,11 @@ namespace GeekMDSuite.Test
             Assert.Throws<NullReferenceException>(() =>
                 new WaistToHeightRatioInterpretation(new Mock<IBodyComposition>().Object, null));
         }
+
+        public WaistToHeightRatioTest()
+        {
+            _patient = new Patient();
+        }
+        private readonly Patient _patient;
     }
 }

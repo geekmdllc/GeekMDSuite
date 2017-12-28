@@ -22,11 +22,10 @@ namespace GeekMDSuite.Test
             int systolicBloodPressure, bool hypertensionTreatment, bool diabetes,
             bool smoker, double expected)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(gender);
+            _patient.Gender = Gender.Build(gender);
 
             _parametersBuilder
-                .SetPatient(mockPatient.Object)
+                .SetPatient(_patient)
                 .SetBloodPressure(systolicBloodPressure, 75)
                 .SetTotalCholesterol(totalCholesterol)
                 .SetHdlCholesterol(50)
@@ -43,13 +42,12 @@ namespace GeekMDSuite.Test
         [Theory]
         [InlineData(GenderIdentity.Female, 8.0)]
         [InlineData(GenderIdentity.Male, 5.0)]
-        public void IdealLifeTimeRisk_IsCorrect(GenderIdentity genderIdentity, double expectedRisk)
+        public void IdealLifeTimeRisk_IsCorrect(GenderIdentity gender, double expectedRisk)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patient.Gender = Gender.Build(gender);
 
             _parametersBuilder
-                .SetPatient(mockPatient.Object)
+                .SetPatient(_patient)
                 .SetBloodPressure(default(int), default(int))
                 .SetTotalCholesterol(default(int))
                 .SetHdlCholesterol(default(int));

@@ -10,20 +10,20 @@ namespace GeekMDSuite.Test
         [Theory]
         [InlineData(0.89, GenderIdentity.Male, HipToWaistRatio.Normal)]
         [InlineData(0.99, GenderIdentity.Male, HipToWaistRatio.Overweight)]
-        [InlineData(1, GenderIdentity.Male, HipToWaistRatio.Obese)]
+        [InlineData(1.00, GenderIdentity.Male, HipToWaistRatio.Obese)]
         [InlineData(0.79, GenderIdentity.Female, HipToWaistRatio.Normal)]
         [InlineData(0.84, GenderIdentity.Female, HipToWaistRatio.Overweight)]
         [InlineData(0.85, GenderIdentity.Female, HipToWaistRatio.Obese)]
         public void Classification_GivenHipToWaistRatioAndGender_ReturnsCorrectClassification(double ratio, 
             GenderIdentity genderIdentity, HipToWaistRatio expectedClassifcation)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patient.Gender = Gender.Build(genderIdentity);
+            
             var mockBodyComposition = new Mock<IBodyComposition>();
             mockBodyComposition.Setup(b => b.Hips.Inches).Returns(1);
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(ratio);
 
-            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
+            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, _patient).Classification;
             Assert.Equal(expectedClassifcation, classification);
         }
 
@@ -38,6 +38,13 @@ namespace GeekMDSuite.Test
         {
             Assert.Throws<ArgumentNullException>(() => new HipToWaistInterpretation(null, new Mock<IPatient>().Object));
         }
+
+        public HipToWaistInterpretationTests()
+        {
+            _patient = new Patient();
+        }
+
+        private Patient _patient;
     }
     
     

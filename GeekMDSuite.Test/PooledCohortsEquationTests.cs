@@ -16,8 +16,10 @@ namespace GeekMDSuite.Test
 
         public PooledCohortsEquationTests()
         {
-            _patientMock= new Mock<IPatient>(); 
-            _patientMock.Setup(p => p.Age).Returns(55);
+            _patient = new Patient()
+            {
+                DateOfBirth = DateTime.Now.AddYears(-55)
+            };
 
             _parametersBuilder = PooledCohortEquationParametersBuilder.Initialize()
                 .SetBloodPressure(BloodPressure.Build(120, 75))
@@ -25,7 +27,7 @@ namespace GeekMDSuite.Test
                 .SetTotalCholesterol(213);
         }
 
-        private readonly Mock<IPatient> _patientMock;
+        private readonly Patient _patient;
         private readonly PooledCohortEquationParametersBuilder _parametersBuilder;
     }
 }

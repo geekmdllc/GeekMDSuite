@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Procedures;
+﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.Services.Interpretation;
 using Moq;
 using Xunit;
@@ -26,11 +27,13 @@ namespace GeekMDSuite.Test
                 .SetPulseWaveVelocity(pwv)
                 .Build();
             
-            var mockPt = new Mock<IPatient>();
-            mockPt.Setup(patient => patient.Gender.Category).Returns(genderIdentity);
-            mockPt.Setup(patient => patient.Age).Returns(age);
+            var patient = new Patient()
+            {
+                Gender = Gender.Build(genderIdentity),
+                DateOfBirth = DateTime.Now.AddYears(-age)
+            };
 
-            var actualCategory = new CentralBloodPressureInterpretation(cbp, mockPt.Object).Classification.Category;
+            var actualCategory = new CentralBloodPressureInterpretation(cbp, patient).Classification.Category;
 
             Assert.Equal(expectctedCategory, actualCategory);
         }

@@ -26,12 +26,11 @@ namespace GeekMDSuite.Test
         public void Classification_GivenPatientAndData_ReturnsCorrectClassifiation(int distance, int age,
             GenderIdentity genderIdentity, FitnessClassification expectedFitnessClassification)
         {
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Age).Returns(age);
-            mockPatient.Setup(p => p.Gender.Category).Returns(genderIdentity);
+            _patient.DateOfBirth = DateTime.Now.AddYears(-age);
+            _patient.Gender = Gender.Build(genderIdentity);
             var sitAndReach = SitAndReach.Build(distance);
             
-            var classification = new SitAndReachInterpretation(sitAndReach, mockPatient.Object).Classification;
+            var classification = new SitAndReachInterpretation(sitAndReach, _patient).Classification;
             
             Assert.Equal(expectedFitnessClassification, classification);
         }
@@ -49,5 +48,11 @@ namespace GeekMDSuite.Test
             Assert.Throws<ArgumentNullException>(() =>
                 new SitAndReachInterpretation(new Mock<IMuscularStrengthTest>().Object, null));
         }
+
+        public SitAndReachInterpretationTests()
+        {
+            _patient = new Patient();
+        }
+        private Patient _patient;
     }
 }
