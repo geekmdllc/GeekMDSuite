@@ -295,7 +295,7 @@ namespace GeekMDSuite.ConsoleDemo
             var quantLabInterpTotalChol = new QuantitativeLabInterpretation(quantitativeLabChoesterol, patient);
             Console.WriteLine($"Quantitative Lab: {quantLabInterpTotalChol}{NewLine}");
             
-            var quantLabInterpHdlC = new QuantitativeLabInterpretation(quantitativeLabChoesterol, patient);
+            var quantLabInterpHdlC = new QuantitativeLabInterpretation(quantitativeLabHdlC, patient);
             Console.WriteLine($"Quantitative Lab: {quantLabInterpHdlC}{NewLine}");
             
             var sitAndReachInterp = new SitAndReachInterpretation(sitAndReach, patient);
@@ -319,12 +319,14 @@ namespace GeekMDSuite.ConsoleDemo
             var waistToHeightInterp = new WaistToHeightRatioInterpretation(bodyComposition, patient);
             Console.WriteLine($"Waist to Height: {waistToHeightInterp}{NewLine}");
             
-            var ascvdCalc = new PooledCohortsEquation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, true, false, false);
+            var ascvdCalc = new PooledCohortsEquation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, true);
             Console.WriteLine($"ASCVD 10yr-Risk%: {ascvdCalc.AscvdRiskPercentOver10Years()}{NewLine}");
             Console.WriteLine($"ASCVD Lifetime Risk%: {ascvdCalc.AscvdLifetimeRisk()}{NewLine}");
             
-            var ascvdInterp = new Ascvd10YearInterpretation(patient, Quantitative.Serum.LowDensityLipoprotein(145), ascvdCalc.AscvdRiskPercentOver10Years());
-            Console.WriteLine($"ASCVD Classification: {ascvdInterp.Classification}");
+            var ascvdInterp = new Ascvd10YearInterpretation(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabHdlC, 
+                Quantitative.Serum.LowDensityLipoprotein(173), true, true, true, true);
+
+            Console.WriteLine($"ASCVD 10% Interp: {ascvdInterp.Classification}{NewLine}");
         }
     }
 }
