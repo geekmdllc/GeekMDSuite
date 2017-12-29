@@ -1,7 +1,9 @@
-﻿using GeekMDSuite.WebAPI.Persistence;
+﻿using System;
+using GeekMDSuite.WebAPI.Persistence;
 using GeekMDSuite.WebAPI.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,17 +22,15 @@ namespace GeekMDSuite.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<GeekMdSuiteDbContext>();
+            services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            // services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite("Data Source=context.db"));
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseMvc();
         }

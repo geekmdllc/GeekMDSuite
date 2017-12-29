@@ -7,5 +7,14 @@ namespace GeekMDSuite.WebAPI.Models
     {
         public int Id { get; set; }
         public Guid Visit { get; set; }
+
+        public AudiogramEntity()
+        { }
+
+        public AudiogramEntity(Audiogram audiogram)
+        {
+            Left = audiogram.Left;
+            Right = audiogram.Right;
+        }
     }
 }

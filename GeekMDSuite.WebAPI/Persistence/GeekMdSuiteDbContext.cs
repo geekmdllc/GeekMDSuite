@@ -9,6 +9,11 @@ namespace GeekMDSuite.WebAPI.Persistence
         {            
         }
 
+        public GeekMdSuiteDbContext()
+        {
+            
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -40,13 +45,7 @@ namespace GeekMDSuite.WebAPI.Persistence
             });
         }
         
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var test = new AudiogramEntity();
-            optionsBuilder.UseSqlite("Data Source=context.db");
-        }
-        
-        public DbSet<PatientEntity> Patients { get; set; }
-        public DbSet<AudiogramEntity> Audiograms { get; set; }
+        public virtual DbSet<PatientEntity> Patients { get; set; }
+        public virtual DbSet<AudiogramEntity> Audiograms { get; set; }
     }
 }
