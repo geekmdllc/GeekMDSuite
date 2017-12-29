@@ -7,10 +7,12 @@ namespace GeekMDSuite.WebAPI.Repositories
         public UnitOfWork(GeekMdSuiteDbContext context)
         {
             _context = context;
-            Patients = new PatientRepository(_context);
+            Patients = new PatientsRepository(_context);
+            Audiograms = new AudiogramRepository(_context);
         }
 
-        public IPatientRepository Patients { get; }
+        public IPatientsRepository Patients { get; }
+        public IAudiogramRepository Audiograms { get;  }
 
         public void Complete()
         {

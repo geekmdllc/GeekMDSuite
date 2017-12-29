@@ -63,7 +63,7 @@ namespace GeekMDSuite.WebAPI.Controllers
             _unitOfWork.Complete();
         }
 
-        // PUT api/patients/5
+        // PUT api/patients/
         [HttpPut]
         public ActionResult Put([FromBody] PatientEntity patient)
         {

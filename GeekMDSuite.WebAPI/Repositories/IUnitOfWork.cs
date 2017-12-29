@@ -4,7 +4,8 @@ namespace GeekMDSuite.WebAPI.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {
-        IPatientRepository Patients { get; }
+        IPatientsRepository Patients { get; }
+        IAudiogramRepository Audiograms { get; }
         void Complete();
     }
 }
