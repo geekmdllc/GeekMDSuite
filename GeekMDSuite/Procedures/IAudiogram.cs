@@ -2,7 +2,7 @@
 {
     public interface IAudiogram
     {
-        IAudiogramDataset Right { get; }
-        IAudiogramDataset Left { get; }
+        AudiogramDataset Right { get; set; }
+        AudiogramDataset Left { get; set; }
     }
 }

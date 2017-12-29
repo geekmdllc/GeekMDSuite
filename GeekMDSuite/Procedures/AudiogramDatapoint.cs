@@ -9,8 +9,13 @@
             Value = value;
         }
         
-        public int Value { get; }
+        public int Value { get; set; }
 
         public override string ToString() => $"{Value}dB";
+
+        public AudiogramDatapoint()
+        {
+            
+        }
     }
 }

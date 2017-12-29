@@ -2,6 +2,6 @@
 {
     public interface IAudiogramDatapoint
     {
-        int Value { get; }
+        int Value { get; set; }
     }
 }
