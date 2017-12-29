@@ -6,9 +6,8 @@ namespace GeekMDSuite.WebAPI.Repositories
 {
     public class AudiogramRepository : Repository<AudiogramEntity>, IAudiogramRepository
     {
-        public AudiogramRepository(GeekMdSuiteDbContext context)
+        public AudiogramRepository(GeekMdSuiteDbContext context) : base (context)
         {
-            _context = context;
         }
 
         public override void Update(AudiogramEntity entity)
@@ -16,7 +15,5 @@ namespace GeekMDSuite.WebAPI.Repositories
             if (entity == null) throw new ArgumentNullException(nameof(entity));
             throw new System.NotImplementedException();
         }
-        
-        private readonly GeekMdSuiteDbContext _context;
     }
 }

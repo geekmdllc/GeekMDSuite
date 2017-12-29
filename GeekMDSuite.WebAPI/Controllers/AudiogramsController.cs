@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using GeekMDSuite.WebAPI.Models;
 using GeekMDSuite.WebAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +21,7 @@ namespace GeekMDSuite.WebAPI.Controllers
            return _unitOfWork.Audiograms.All();
         }
         
-        // PUT api/audiograms/
+        // POST api/audiograms/
         [HttpPost]
         public void Post([FromBody] AudiogramEntity audiogram)
         {
