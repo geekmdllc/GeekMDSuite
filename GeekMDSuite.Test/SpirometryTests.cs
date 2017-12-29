@@ -197,7 +197,7 @@ namespace GeekMDSuite.Test
         }
         
         private readonly Patient _patient = new Patient(
-            Name.Create("Jim", "Bob", "Joe"), 
+            Name.Build("Jim", "Bob", "Joe"), 
             new DateTime(1980, 11, 23), 
             Gender.Build(GenderIdentity.Male), 
             Race.BlackOrAfricanAmerican, 

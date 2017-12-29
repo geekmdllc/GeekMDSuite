@@ -18,7 +18,7 @@ namespace GeekMDSuite
 
         public PatientBuilder SetName(string first, string last, string middle = "")
         {
-            _name = Name.Create(first, last, middle);
+            _name = Name.Build(first, last, middle);
             return this;
         }
 

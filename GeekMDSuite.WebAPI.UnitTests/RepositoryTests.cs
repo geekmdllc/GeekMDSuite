@@ -10,10 +10,9 @@ namespace GeekMDSuite.WebAPI.UnitTests
     public class RepositoryTests
     {
         [Fact]
-        public void All_ReturnsCorrectNumberOfEntities()
+        public void All_ReturnsNonEmptyList()
         {
-            var unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            var found = unitOfWork.Audiograms.All();
+            var found = _unitOfWork.Audiograms.All();
             
             Assert.True(found.Any());
         }
@@ -21,8 +20,7 @@ namespace GeekMDSuite.WebAPI.UnitTests
         [Fact]
         public void FindById_ReturnsCorrectEntity()
         {
-            var unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            var foundAudiogram = unitOfWork.Audiograms.FindById(1);
+            var foundAudiogram = _unitOfWork.Audiograms.FindById(1);
             
             Assert.Equal(1, foundAudiogram.Id);
             Assert.IsType<AudiogramEntity>(foundAudiogram);
@@ -32,8 +30,7 @@ namespace GeekMDSuite.WebAPI.UnitTests
         [Fact]
         public void FindById_GivenIndexOutOfRange_ReturnsNull()
         {
-            var unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            var foundAudiogram = unitOfWork.Audiograms.FindById(9999);
+            var foundAudiogram = _unitOfWork.Audiograms.FindById(int.MaxValue);
             
             Assert.Equal(null, foundAudiogram);
         }
@@ -41,38 +38,35 @@ namespace GeekMDSuite.WebAPI.UnitTests
         [Fact]
         public void Add_GivenNull_ThrowsArgumentNullException()
         {
-            var unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            Assert.Throws<ArgumentNullException>(() => unitOfWork.Audiograms.Add(null));
+            Assert.Throws<ArgumentNullException>(() => _unitOfWork.Audiograms.Add(null));
         }
 
         [Fact]
         public void Add_GivenOneEntity_Succeeds()
         {
-            var unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            unitOfWork.Audiograms.Add(new AudiogramEntity());
-            unitOfWork.Complete();
-            Assert.Equal(3, unitOfWork.Audiograms.All().Count());
+            _unitOfWork.Audiograms.Add(new AudiogramEntity());
+            _unitOfWork.Complete();
+            Assert.Equal(3, _unitOfWork.Audiograms.All().Count());
         }
 
         [Fact]
         public void Delete_GivenIndexOutOfRange_ThrowsRepositoryElementNotFoundException()
         {
-            var unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            Assert.Throws<RepositoryElementNotFoundException>(() => unitOfWork.Audiograms.Delete(9999));
+            Assert.Throws<RepositoryElementNotFoundException>(() => _unitOfWork.Audiograms.Delete(int.MaxValue));
         }
         
         [Fact]
         public void Delete_GivenOneId_Succeeds()
         {
-            var unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            var beforeIndex = unitOfWork.Audiograms.All().Count();
-            unitOfWork.Audiograms.Delete(beforeIndex);
-            unitOfWork.Complete();
+            var beforeIndex = _unitOfWork.Audiograms.All().Count();
+            _unitOfWork.Audiograms.Delete(beforeIndex);
+            _unitOfWork.Complete();
 
-            var afterIndex = unitOfWork.Audiograms.All().Count();
+            var afterIndex = _unitOfWork.Audiograms.All().Count();
             Assert.Equal(beforeIndex - 1, afterIndex);
         }
 
+        private readonly IUnitOfWork _unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
     }
     
 }
