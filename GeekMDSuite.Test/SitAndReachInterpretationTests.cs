@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -30,7 +31,7 @@ namespace GeekMDSuite.Test
             _patient.Gender = Gender.Build(genderIdentity);
             var sitAndReach = SitAndReach.Build(distance);
             
-            var classification = new SitAndReachInterpretation(sitAndReach, _patient).Classification;
+            var classification = new SitAndReachClassification(sitAndReach, _patient).Classification;
             
             Assert.Equal(expectedFitnessClassification, classification);
         }
@@ -39,14 +40,14 @@ namespace GeekMDSuite.Test
         public void NullSitAndReach_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitAndReachInterpretation(null, new Mock<IPatient>().Object));
+                new SitAndReachClassification(null, new Mock<IPatient>().Object));
         }
         
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitAndReachInterpretation(new Mock<IMuscularStrengthTest>().Object, null));
+                new SitAndReachClassification(new Mock<IMuscularStrengthTest>().Object, null));
         }
 
         public SitAndReachInterpretationTests()

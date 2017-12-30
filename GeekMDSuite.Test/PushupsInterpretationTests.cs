@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -30,7 +31,7 @@ namespace GeekMDSuite.Test
             _patient.Gender = Gender.Build(genderIdentity);
             _patient.DateOfBirth = DateTime.Now.AddYears(-age);
 
-            var classification = new PushupsInterpretation(pushups, _patient).Classification;
+            var classification = new PushupsClassification(pushups, _patient).Classification;
 
             Assert.Equal(expectedClassification, classification);
         }
@@ -38,14 +39,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void GivenNullPushups_ThrowsArgumentNullError()
         {
-            Assert.Throws<ArgumentNullException>(() => new PushupsInterpretation(null, new Mock<IPatient>().Object));
+            Assert.Throws<ArgumentNullException>(() => new PushupsClassification(null, new Mock<IPatient>().Object));
         }
 
         [Fact]
         public void GivenNullPatient_ThrowsArguemntNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PushupsInterpretation(new Mock<IMuscularStrengthTest>().Object, null));
+                new PushupsClassification(new Mock<IMuscularStrengthTest>().Object, null));
         }
 
         public PushupsInterpretationTests()

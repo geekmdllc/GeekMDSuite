@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.LaboratoryData.Builder;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Tools.Cardiology;
 using Xunit;
 
@@ -19,7 +20,7 @@ namespace GeekMDSuite.Test
                 .ConfirmDiabetic()
                 .ConfirmSmoker();
 
-            var riskFactors = new Ascvd10YearInterpretation(_pooledParams.Build(), 
+            var riskFactors = new Ascvd10YearClassification(_pooledParams.Build(), 
                 Quantitative.Serum.LowDensityLipoprotein(195)).Classification.RiskFactors;
             
             Assert.Contains(AscvdModifiableRiskFactors.BloodPressureElevated, riskFactors);
@@ -53,7 +54,7 @@ namespace GeekMDSuite.Test
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
                 .ConfirmSmoker(smoker);
 
-            var ascvdClassification = new Ascvd10YearInterpretation(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
+            var ascvdClassification = new Ascvd10YearClassification(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
                 ascvdPresent).Classification;
             
             Assert.Equal(expected, ascvdClassification.StatinRecommendation);
@@ -77,7 +78,7 @@ namespace GeekMDSuite.Test
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
                 .ConfirmSmoker(smoker);
 
-            var ascvdClassification = new Ascvd10YearInterpretation(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
+            var ascvdClassification = new Ascvd10YearClassification(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
                 ascvdPresent).Classification;
             
             Assert.Equal(expected, ascvdClassification.RiskClassification);
@@ -104,7 +105,7 @@ namespace GeekMDSuite.Test
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
                 .ConfirmSmoker(smoker);
 
-            var ascvdClassification = new Ascvd10YearInterpretation(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
+            var ascvdClassification = new Ascvd10YearClassification(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
                 ascvdPresent).Classification;
             
             Assert.Equal(expected, ascvdClassification.AspirinRecommendation);
@@ -129,7 +130,7 @@ namespace GeekMDSuite.Test
                 .ConfirmOnAntiHypertensiveMedication(antiHypertensive)
                 .ConfirmSmoker(smoker);
 
-            var ascvdClassification = new Ascvd10YearInterpretation(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
+            var ascvdClassification = new Ascvd10YearClassification(_pooledParams.Build(), Quantitative.Serum.LowDensityLipoprotein(ldl),
                 ascvdPresent).Classification;
             
             Assert.Equal(expected, ascvdClassification.StatinCandidacy);

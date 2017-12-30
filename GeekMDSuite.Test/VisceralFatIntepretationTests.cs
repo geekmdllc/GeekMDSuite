@@ -1,5 +1,6 @@
 ﻿using System;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -17,7 +18,7 @@ namespace GeekMDSuite.Test
             var mockBodyCompExpanded = new Mock<IBodyCompositionExpanded>();
             mockBodyCompExpanded.Setup(bc => bc.VisceralFat).Returns(visceralFat);
             
-            var classification = new VisceralFatInterpretation(mockBodyCompExpanded.Object).Classification;
+            var classification = new VisceralFatClassification(mockBodyCompExpanded.Object).Classification;
             
             Assert.Equal(expectedVisceralFat, classification);
         }
@@ -25,7 +26,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new VisceralFatInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new VisceralFatClassification(null));
         }
     }
 }

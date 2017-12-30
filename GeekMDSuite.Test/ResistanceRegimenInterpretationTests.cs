@@ -1,7 +1,8 @@
 ﻿using System;
 using GeekMDSuite.PatientActivities;
-using GeekMDSuite.Services.Interpretation.PatientActivities;
+using GeekMDSuite.Analytics.Classification.PatientActivities;
 using Xunit;
+using ExerciseRegimenClassification = GeekMDSuite.PatientActivities.ExerciseRegimenClassification;
 
 namespace GeekMDSuite.Test
 {
@@ -32,7 +33,7 @@ namespace GeekMDSuite.Test
                 .ConfirmRepetitionsToNearFailure()
                 .Build();
             
-            var classification = new ResistanceRegimenInterpretation(regimen).Classification;
+            var classification = new ResistanceRegimenClassification(regimen).Classification;
             
             Assert.Equal(expectedClassification, classification);
         }
@@ -51,7 +52,7 @@ namespace GeekMDSuite.Test
                 .ConfirmPullingMovementsPerformed()
                 .Build();
             
-            var result = new ResistanceRegimenInterpretation(regimen).Classification;
+            var result = new ResistanceRegimenClassification(regimen).Classification;
 
             Assert.Equal(ExerciseRegimenClassification.Insufficient, result);
         }
@@ -59,7 +60,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullRegimen_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ResistanceRegimenInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new ResistanceRegimenClassification(null));
         }
     }
 }

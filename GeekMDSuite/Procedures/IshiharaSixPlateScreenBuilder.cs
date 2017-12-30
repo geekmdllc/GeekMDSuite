@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 
 namespace GeekMDSuite.Procedures
 {

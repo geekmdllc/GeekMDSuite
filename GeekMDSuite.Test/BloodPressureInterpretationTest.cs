@@ -1,7 +1,8 @@
 ﻿using System;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
-using static GeekMDSuite.Services.Interpretation.BloodPressureInterpretation.LowerLimits;
+using static GeekMDSuite.Analytics.Classification.BloodPressureClassification.LowerLimits;
 
 namespace GeekMDSuite.Test
 {
@@ -37,7 +38,7 @@ namespace GeekMDSuite.Test
         {
             var bloodPressure = BloodPressure.Build(systolic, diastolic, organDamagePresent);
                 
-            var bpStage = new BloodPressureInterpretation(bloodPressure).Classification;
+            var bpStage = new BloodPressureClassification(bloodPressure).Classification;
             
             Assert.Equal(expectedStage, bpStage);
         }
@@ -45,7 +46,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullBloodPressure_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new BloodPressureInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new BloodPressureClassification(null));
         }
     }
 }

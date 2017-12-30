@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Tools.MeasurementUnits;
 using Moq;
 using Xunit;
@@ -23,7 +24,7 @@ namespace GeekMDSuite.Test
             mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
             mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
             
-            var fitScore = new FitTreadmillScoreInterpretation(mockTreadmillStressTest.Object, _patient).Value;
+            var fitScore = new FitTreadmillScoreClassification(mockTreadmillStressTest.Object, _patient).Value;
             
             Assert.InRange(fitScore, expectedScore - 0.001, expectedScore + 0.001);
         }
@@ -40,7 +41,7 @@ namespace GeekMDSuite.Test
             mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
             mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
             
-            var tenYearMortality = new FitTreadmillScoreInterpretation(mockTreadmillStressTest.Object, _patient).TenYearMortality;
+            var tenYearMortality = new FitTreadmillScoreClassification(mockTreadmillStressTest.Object, _patient).TenYearMortality;
             
             Assert.Equal(expectedTenYearMortality, tenYearMortality);
         }
@@ -57,7 +58,7 @@ namespace GeekMDSuite.Test
             mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
             mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
             
-            var classification = new FitTreadmillScoreInterpretation(mockTreadmillStressTest.Object, _patient).Classification;
+            var classification = new FitTreadmillScoreClassification(mockTreadmillStressTest.Object, _patient).Classification;
             
             Assert.Equal(expectedClassification, classification);
         }
@@ -65,14 +66,14 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullTreadmillStressTest_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new FitTreadmillScoreInterpretation(null, new Mock<IPatient>().Object));
+            Assert.Throws<ArgumentNullException>(() => new FitTreadmillScoreClassification(null, new Mock<IPatient>().Object));
         }
 
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new FitTreadmillScoreInterpretation(new Mock<ITreadmillExerciseStressTest>().Object, null));
+                new FitTreadmillScoreClassification(new Mock<ITreadmillExerciseStressTest>().Object, null));
         }
 
         public FitTreadmillScoreTest()

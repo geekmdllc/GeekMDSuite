@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -32,7 +33,7 @@ namespace GeekMDSuite.Test
                                 .Build();
             
             var result = audiogramSet;
-            var interp = new AudiogramDatasetInterpretation(result);
+            var interp = new AudiogramDatasetClassification(result);
             
             Assert.Equal(expectedClassification, interp.Classification);
         }
@@ -40,7 +41,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullDataset_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new AudiogramDatasetInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new AudiogramDatasetClassification(null));
         }
 
         private static int SetValueInEitherNormalRangeOrToTestValue(Random rand, int value)

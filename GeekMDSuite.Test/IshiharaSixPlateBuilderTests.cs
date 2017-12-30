@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -31,7 +32,7 @@ namespace GeekMDSuite.Test
                 .SetPlate4(IshiharaAnswerResult.NormalVision) // extra, should not be added. overwrites previous
                 .Build();
             
-            var assessment = new IshiharaSixPlateInterpretation(answerList.GetRange(0,6));
+            var assessment = new IshiharaSixPlateClassification(answerList.GetRange(0,6));
             Assert.Equal(IshiharaResultFlag.NormalVision, assessment.Classification);
             Assert.Equal(6,answerList.Count);
         }

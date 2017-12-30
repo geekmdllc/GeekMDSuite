@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.LaboratoryData.Builder;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -22,7 +23,7 @@ namespace GeekMDSuite.Test
             _patient.Gender = Gender.Build(genderIdentity);
             var test = Quantitative.Serum.TestosteroneTotal(result);
             
-            var classification = new QuantitativeLabInterpretation(test, _patient).Classification;
+            var classification = new QuantitativeLabClassification(test, _patient).Classification;
             
             Assert.Equal(expectedResult, classification);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -31,7 +32,7 @@ namespace GeekMDSuite.Test
 
             var situps = Situps.Build(distance);
             
-            var classification = new SitupsInterpretation(situps, _patient).Classification;
+            var classification = new SitupsClassification(situps, _patient).Classification;
             
             Assert.Equal(expectedFitnessClassification, classification);
         }
@@ -40,14 +41,14 @@ namespace GeekMDSuite.Test
         public void NullSitAndReach_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitupsInterpretation(null, new Mock<IPatient>().Object));
+                new SitupsClassification(null, new Mock<IPatient>().Object));
         }
         
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitupsInterpretation(new Mock<IMuscularStrengthTest>().Object, null));
+                new SitupsClassification(new Mock<IMuscularStrengthTest>().Object, null));
         }
 
         public SitupsInterpretationTests()

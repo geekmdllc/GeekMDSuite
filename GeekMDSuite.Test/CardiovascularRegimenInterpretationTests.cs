@@ -1,7 +1,8 @@
 ﻿using System;
 using GeekMDSuite.PatientActivities;
-using GeekMDSuite.Services.Interpretation.PatientActivities;
+using GeekMDSuite.Analytics.Classification.PatientActivities;
 using Xunit;
+using ExerciseRegimenClassification = GeekMDSuite.PatientActivities.ExerciseRegimenClassification;
 
 namespace GeekMDSuite.Test
 {
@@ -14,7 +15,7 @@ namespace GeekMDSuite.Test
         public void Classification_GivenIntensityAndDuration_ReturnsCorrectClassification(int sessionsPerWeek, 
             int minutesPerSession, ExerciseIntensity intensity, ExerciseRegimenClassification expectedClassification)
         {
-            var regimen = new CardiovascularRegimenInterpretation(ExerciseRegimenParameters.Build(sessionsPerWeek, minutesPerSession, intensity));
+            var regimen = new CardiovascularRegimenClassification(ExerciseRegimenParameters.Build(sessionsPerWeek, minutesPerSession, intensity));
             
             Assert.Equal(expectedClassification, regimen.Classification);
         }
@@ -33,7 +34,7 @@ namespace GeekMDSuite.Test
             double minutesPerSession, ExerciseIntensity intensity, double percentOfGoalAchieved)
         {
             var exerciseRegimenParameters = ExerciseRegimenParameters.Build(sessionsPerWeek, minutesPerSession, intensity);
-            var regimen = new CardiovascularRegimenInterpretation(exerciseRegimenParameters);
+            var regimen = new CardiovascularRegimenClassification(exerciseRegimenParameters);
             
             Assert.Equal(percentOfGoalAchieved, regimen.DurationPercentOfGoalAchieved);
         }
@@ -52,7 +53,7 @@ namespace GeekMDSuite.Test
             double minutesPerSession, ExerciseIntensity intensity, bool expectedAdequacy)
         {
             var exerciseRegimenParameters = ExerciseRegimenParameters.Build(sessionsPerWeek, minutesPerSession, intensity);
-            var regimen = new CardiovascularRegimenInterpretation(exerciseRegimenParameters);
+            var regimen = new CardiovascularRegimenClassification(exerciseRegimenParameters);
             
             Assert.Equal(expectedAdequacy, regimen.DurationIsAdequate);
         }
@@ -71,7 +72,7 @@ namespace GeekMDSuite.Test
             double minutesPerSession, ExerciseIntensity intensity, bool expectedAdequacy)
         {
             var exerciseRegimenParameters = ExerciseRegimenParameters.Build(sessionsPerWeek, minutesPerSession, intensity);
-            var regimen = new CardiovascularRegimenInterpretation(exerciseRegimenParameters);
+            var regimen = new CardiovascularRegimenClassification(exerciseRegimenParameters);
             
             Assert.Equal(expectedAdequacy, regimen.DurationIsAdequate);
         }
@@ -79,7 +80,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullExerciseRegimenParameters_ThrowsException()
         {
-            Assert.Throws<ArgumentNullException>(() => new CardiovascularRegimenInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new CardiovascularRegimenClassification(null));
         }
     }
 }

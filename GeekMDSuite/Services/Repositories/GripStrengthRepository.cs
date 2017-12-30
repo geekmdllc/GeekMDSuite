@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Services.Interpretation;
+﻿using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Tools.Generic;
 
 namespace GeekMDSuite.Services.Repositories

@@ -1,7 +1,8 @@
 ﻿using System;
 using GeekMDSuite.LaboratoryData;
 using GeekMDSuite.LaboratoryData.Builder;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -22,7 +23,7 @@ namespace GeekMDSuite.Test
 
             var test = Qualitative.HepatitisCAntibody(result);
 
-            var interp = new QualitativeLabInterpretation(test, patient);
+            var interp = new QualitativeLabClassification(test, patient);
 
             var classification = interp.Classification;
 
@@ -33,14 +34,14 @@ namespace GeekMDSuite.Test
         public void GivenNullQualitytativeTest_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new QualitativeLabInterpretation(null, new Mock<IPatient>().Object));
+                new QualitativeLabClassification(null, new Mock<IPatient>().Object));
         }
 
         [Fact]
         public void GivenNullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new QualitativeLabInterpretation(new Mock<IQualitativeLab>().Object, null));
+                new QualitativeLabClassification(new Mock<IQualitativeLab>().Object, null));
         }
     }
 }

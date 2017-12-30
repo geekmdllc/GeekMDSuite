@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -8,23 +9,23 @@ namespace GeekMDSuite.Test
     public class PeripheralVisionInterpretationTests
     {
         [Theory]
-        [InlineData(90, 90, PeripheralVisionClassification.Normal)]
-        [InlineData(55, 90, PeripheralVisionClassification.Narrow)]
-        [InlineData(90, 55, PeripheralVisionClassification.Narrow)]
-        [InlineData(55, 55, PeripheralVisionClassification.Narrow)]
+        [InlineData(90, 90, PeripheralVisionClassificationResult.Normal)]
+        [InlineData(55, 90, PeripheralVisionClassificationResult.Narrow)]
+        [InlineData(90, 55, PeripheralVisionClassificationResult.Narrow)]
+        [InlineData(55, 55, PeripheralVisionClassificationResult.Narrow)]
         public void Classification_GivenData_ReturnsCorretClassification(int left, int right, 
-            PeripheralVisionClassification expectedClassification)
+            PeripheralVisionClassificationResult expectedClassificationResult)
         {
             var pv = PeripheralVision.Build(left, right);
-            var classification = new PeripheralVisionInterpreation(pv).Classification;
+            var classification = new PeripheralVisionClassification(pv).Classification;
             
-            Assert.Equal(expectedClassification, classification);
+            Assert.Equal(expectedClassificationResult, classification);
         }
 
         [Fact]
         public void GivenNullPeripheralVision_ThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new PeripheralVisionInterpreation(null));
+            Assert.Throws<ArgumentNullException>(() => new PeripheralVisionClassification(null));
         }
     }
 }

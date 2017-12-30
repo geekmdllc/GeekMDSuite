@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -8,23 +9,23 @@ namespace GeekMDSuite.Test
     public class OcularPressureInterpretationTests
     {
         [Theory]
-        [InlineData(18, 18, OcularPressureClassification.Normal)]
-        [InlineData(25, 18, OcularPressureClassification.OcularHypertension)]
-        [InlineData(18, 25, OcularPressureClassification.OcularHypertension)]
-        [InlineData(25, 25, OcularPressureClassification.OcularHypertension)]
+        [InlineData(18, 18, OcularPressureClassificationResult.Normal)]
+        [InlineData(25, 18, OcularPressureClassificationResult.OcularHypertension)]
+        [InlineData(18, 25, OcularPressureClassificationResult.OcularHypertension)]
+        [InlineData(25, 25, OcularPressureClassificationResult.OcularHypertension)]
         public void Classify_GivenValues_ReturnsExpectedClassification(int left, int right,
-            OcularPressureClassification expectedClassification)
+            OcularPressureClassificationResult expectedClassificationResult)
         {
             var ocularPressure = OcularPressure.Build(left, right);
-            var classification = new OcularPressureInterpretation(ocularPressure).Classification;
+            var classification = new OcularPressureClassification(ocularPressure).Classification;
             
-            Assert.Equal(expectedClassification, classification);
+            Assert.Equal(expectedClassificationResult, classification);
         }
 
         [Fact]
         public void NullOcularPressure_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new OcularPressureInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new OcularPressureClassification(null));
         }
     }
 }

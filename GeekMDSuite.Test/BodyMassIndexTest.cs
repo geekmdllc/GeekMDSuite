@@ -1,6 +1,7 @@
 ﻿using System;
-using GeekMDSuite.Services.Interpretation;
-using static GeekMDSuite.Services.Interpretation.BodyMassIndexInterpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
+using static GeekMDSuite.Analytics.Classification.BodyMassIndexClassification;
 using Moq;
 using Xunit;
 
@@ -33,7 +34,7 @@ namespace GeekMDSuite.Test
             var mockPatient = new Mock<IPatient>();
             mockPatient.Setup(p => p.Race).Returns(race);
             
-            var result = new BodyMassIndexInterpretation(mockBodyComposition.Object, mockPatient.Object).Classification;
+            var result = new BodyMassIndexClassification(mockBodyComposition.Object, mockPatient.Object).Classification;
             
             Assert.Equal(expectecBodyMassIndex, result);
         }
@@ -42,14 +43,14 @@ namespace GeekMDSuite.Test
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new BodyMassIndexInterpretation(null, new Mock<IPatient>().Object).Classification);
+                new BodyMassIndexClassification(null, new Mock<IPatient>().Object).Classification);
         }
         
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new BodyMassIndexInterpretation(new Mock<IBodyComposition>().Object, null));
+                new BodyMassIndexClassification(new Mock<IBodyComposition>().Object, null));
         }
     }
 }

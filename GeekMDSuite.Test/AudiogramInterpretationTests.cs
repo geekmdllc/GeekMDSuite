@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -27,7 +28,7 @@ namespace GeekMDSuite.Test
             var rightSet = new AudiogramDatasetBuilder()
                 .Set1000HertzDataPoint(rightVal)
                 .Build();
-            var result = new AudiogramInterpretation(Audiogram.Build(leftSet, rightSet)).Classification;
+            var result = new AudiogramClassification(Audiogram.Build(leftSet, rightSet)).Classification;
             
             Assert.Equal(expectedLaterality, result.Laterality);
             Assert.Equal(expectedHearingLoss, result.Classification);
@@ -36,7 +37,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullDataSets_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new AudiogramInterpretation(null));
+            Assert.Throws<NullReferenceException>(() => new AudiogramClassification(null));
         }
     }
 }

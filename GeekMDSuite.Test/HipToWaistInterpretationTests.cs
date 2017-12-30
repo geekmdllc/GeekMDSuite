@@ -1,5 +1,6 @@
 ﻿using System;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -23,20 +24,20 @@ namespace GeekMDSuite.Test
             mockBodyComposition.Setup(b => b.Hips.Inches).Returns(1);
             mockBodyComposition.Setup(b => b.Waist.Inches).Returns(ratio);
 
-            var classification = new HipToWaistInterpretation(mockBodyComposition.Object, _patient).Classification;
+            var classification = new HipToWaistClassification(mockBodyComposition.Object, _patient).Classification;
             Assert.Equal(expectedClassifcation, classification);
         }
 
         [Fact]
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HipToWaistInterpretation(new Mock<IBodyComposition>().Object, null));
+            Assert.Throws<ArgumentNullException>(() => new HipToWaistClassification(new Mock<IBodyComposition>().Object, null));
         }
         
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HipToWaistInterpretation(null, new Mock<IPatient>().Object));
+            Assert.Throws<ArgumentNullException>(() => new HipToWaistClassification(null, new Mock<IPatient>().Object));
         }
 
         public HipToWaistInterpretationTests()

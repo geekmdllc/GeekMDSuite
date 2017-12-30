@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -23,7 +24,7 @@ namespace GeekMDSuite.Test
 
             var us = CarotidUltrasound.Build(left, right);
 
-            var result = new CarotidUltrasoundInterpretation(us);
+            var result = new CarotidUltrasoundClassification(us);
             
             Assert.Equal(Laterality.Left, result.Classification.WorseSide);
         }
@@ -43,7 +44,7 @@ namespace GeekMDSuite.Test
             
             var us = CarotidUltrasound.Build(left, right);
 
-            var result = new CarotidUltrasoundInterpretation(us);
+            var result = new CarotidUltrasoundClassification(us);
             
             Assert.Equal(Laterality.Left, result.Classification.Laterality);
         }
@@ -63,7 +64,7 @@ namespace GeekMDSuite.Test
             
             var us = CarotidUltrasound.Build(left, right);
 
-            var result = new CarotidUltrasoundInterpretation(us);
+            var result = new CarotidUltrasoundClassification(us);
             
             Assert.Equal(Laterality.Right, result.Classification.WorseSide);
         }
@@ -83,7 +84,7 @@ namespace GeekMDSuite.Test
             
             var us = CarotidUltrasound.Build(left, right);
 
-            var result = new CarotidUltrasoundInterpretation(us);
+            var result = new CarotidUltrasoundClassification(us);
             
             Assert.Equal(Laterality.Right, result.Classification.Laterality);
         }
@@ -106,7 +107,7 @@ namespace GeekMDSuite.Test
 
             var us = CarotidUltrasound.Build(left, right);
 
-            var result = new CarotidUltrasoundInterpretation(us);
+            var result = new CarotidUltrasoundClassification(us);
             
             Assert.Equal(Laterality.Bilateral, result.Classification.Laterality);
         }
@@ -130,7 +131,7 @@ namespace GeekMDSuite.Test
             
             var us = CarotidUltrasound.Build(left, right);
 
-            var result = new CarotidUltrasoundInterpretation(us);
+            var result = new CarotidUltrasoundClassification(us);
             
             Assert.Equal(Laterality.Left, result.Classification.WorseSide);
         }
@@ -138,7 +139,7 @@ namespace GeekMDSuite.Test
         [Fact]
         public void NullUltrasound_ThrowsAargumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new CarotidUltrasoundInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new CarotidUltrasoundClassification(null));
         }
     }
 }

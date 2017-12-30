@@ -1,5 +1,6 @@
 ﻿using System;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -29,7 +30,7 @@ namespace GeekMDSuite.Test
             bc.Setup(b => b.Height.Centimeters).Returns(1);
             bc.Setup(b => b.Waist.Centimeters).Returns(ratio);
             
-            var classification = new WaistToHeightRatioInterpretation(bc.Object, _patient).Classification;
+            var classification = new WaistToHeightRatioClassification(bc.Object, _patient).Classification;
             
             Assert.Equal(expectedWaistToHeightRatio, classification);
         }
@@ -38,14 +39,14 @@ namespace GeekMDSuite.Test
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new WaistToHeightRatioInterpretation(null, new Mock<IPatient>().Object));
+                new WaistToHeightRatioClassification(null, new Mock<IPatient>().Object));
         }
         
         [Fact]
         public void NullPatient_ThrowsNullReferenceException()
         {
             Assert.Throws<NullReferenceException>(() =>
-                new WaistToHeightRatioInterpretation(new Mock<IBodyComposition>().Object, null));
+                new WaistToHeightRatioClassification(new Mock<IBodyComposition>().Object, null));
         }
 
         public WaistToHeightRatioTest()

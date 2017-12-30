@@ -1,5 +1,7 @@
 ﻿using System.Linq;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Interpretation;
+using GeekMDSuite.Analytics.Interpretation.Builder;
 using Xunit;
 
 

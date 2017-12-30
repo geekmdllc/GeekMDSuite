@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
 
@@ -33,7 +34,7 @@ namespace GeekMDSuite.Test
                 DateOfBirth = DateTime.Now.AddYears(-age)
             };
 
-            var actualCategory = new CentralBloodPressureInterpretation(cbp, patient).Classification.Category;
+            var actualCategory = new CentralBloodPressureClassification(cbp, patient).Classification.Category;
 
             Assert.Equal(expectctedCategory, actualCategory);
         }

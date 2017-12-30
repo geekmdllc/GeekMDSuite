@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -15,7 +16,7 @@ namespace GeekMDSuite.Test
         public void Classification_GivenADecibalValue_ReturnsExpectedClassification(int value, HearingLoss expectedClassification)
         {
             var result = AudiogramDatapoint.Build(value);
-            var interp = new AudiogramDataPointInterpretation(result);
+            var interp = new AudiogramDataPointClassification(result);
             
             Assert.Equal(expectedClassification, interp.Classification);
         }

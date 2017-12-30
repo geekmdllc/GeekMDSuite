@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -19,7 +20,7 @@ namespace GeekMDSuite.Test
                 .SetPlate6(IshiharaAnswerResult.NormalVision)
                 .Build();
             
-            var assessment = new IshiharaSixPlateInterpretation(answerList.GetRange(0,6));
+            var assessment = new IshiharaSixPlateClassification(answerList.GetRange(0,6));
             Assert.Equal(IshiharaResultFlag.NormalVision, assessment.Classification);
         }
         [Fact]
@@ -34,7 +35,7 @@ namespace GeekMDSuite.Test
                 .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
                 .Build();
             
-            var assessment = new IshiharaSixPlateInterpretation(answerList.GetRange(0,6));
+            var assessment = new IshiharaSixPlateClassification(answerList.GetRange(0,6));
             Assert.Equal(IshiharaResultFlag.IndeterminantResult, assessment.Classification);
         }
         
@@ -50,14 +51,14 @@ namespace GeekMDSuite.Test
                 .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
                 .Build();
             
-            var assessment = new IshiharaSixPlateInterpretation(answerList.GetRange(0,6));
+            var assessment = new IshiharaSixPlateClassification(answerList.GetRange(0,6));
             Assert.Equal(IshiharaResultFlag.ColorVisionDeficit, assessment.Classification);
         }
 
         [Fact]
         public void NullAnswerList_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new IshiharaSixPlateInterpretation(null));
+            Assert.Throws<ArgumentNullException>(() => new IshiharaSixPlateClassification(null));
         }
     }
 }

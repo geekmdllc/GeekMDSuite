@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Procedures;
-using GeekMDSuite.Services.Interpretation;
+using GeekMDSuite.Analytics;
+using GeekMDSuite.Analytics.Classification;
 using Xunit;
 
 namespace GeekMDSuite.Test
@@ -7,19 +8,19 @@ namespace GeekMDSuite.Test
     public class VisualAcuityInterpretationTests
     {
         [Theory]
-        [InlineData(15, 15, 15, VisualAcuityClassification.Ideal)]
-        [InlineData(15, 20, 15, VisualAcuityClassification.Normal)]
-        [InlineData(15, 15, 30, VisualAcuityClassification.NearNormal)]
-        [InlineData(15, 15, 70, VisualAcuityClassification.ModerateLowVision)]
-        [InlineData(15, 200, 15, VisualAcuityClassification.SevereLowVision)]
-        [InlineData(500, 15, 15, VisualAcuityClassification.ProfoundLowVision)]
-        [InlineData(1500, 15, 15, VisualAcuityClassification.NearTotalBlindness)]
+        [InlineData(15, 15, 15, VisualAcuityClassificationResult.Ideal)]
+        [InlineData(15, 20, 15, VisualAcuityClassificationResult.Normal)]
+        [InlineData(15, 15, 30, VisualAcuityClassificationResult.NearNormal)]
+        [InlineData(15, 15, 70, VisualAcuityClassificationResult.ModerateLowVision)]
+        [InlineData(15, 200, 15, VisualAcuityClassificationResult.SevereLowVision)]
+        [InlineData(500, 15, 15, VisualAcuityClassificationResult.ProfoundLowVision)]
+        [InlineData(1500, 15, 15, VisualAcuityClassificationResult.NearTotalBlindness)]
         public void Classification_GivenData_ReturnsCorrectClassification(int distance, int near, int both,
-            VisualAcuityClassification expectedClassification)
+            VisualAcuityClassificationResult expectedClassificationResult)
         {
-            var classifcation = new VisualAcuityInterpretation(VisualAcuity.Build(distance, near, both)).Classification;
+            var classifcation = new VisualAcuityClassification(VisualAcuity.Build(distance, near, both)).Classification;
             
-            Assert.Equal(expectedClassification, classifcation);
+            Assert.Equal(expectedClassificationResult, classifcation);
         }
     }
 }
