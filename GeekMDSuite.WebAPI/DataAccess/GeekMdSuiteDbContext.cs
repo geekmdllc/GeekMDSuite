@@ -1,7 +1,7 @@
 ﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeekMDSuite.WebAPI.Persistence
+namespace GeekMDSuite.WebAPI.DataAccess
 {
     public class GeekMdSuiteDbContext : DbContext
     {

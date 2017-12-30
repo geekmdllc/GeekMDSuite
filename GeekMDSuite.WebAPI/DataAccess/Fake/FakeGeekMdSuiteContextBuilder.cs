@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.WebAPI.Persistence;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 

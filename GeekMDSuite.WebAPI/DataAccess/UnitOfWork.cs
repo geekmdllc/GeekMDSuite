@@ -1,7 +1,7 @@
 ﻿using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
-using GeekMDSuite.WebAPI.Persistence;
 
 namespace GeekMDSuite.WebAPI.Repositories
 {

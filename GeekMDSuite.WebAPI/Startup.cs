@@ -1,7 +1,5 @@
-﻿using System;
-using GeekMDSuite.WebAPI.Core.DataAccess;
+﻿using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess;
-using GeekMDSuite.WebAPI.Persistence;
 using GeekMDSuite.WebAPI.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,16 +21,20 @@ namespace GeekMDSuite.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddMvc();
+            services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite(connection));
             // services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
-            services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite("Data Source=context.db"));
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment()) 
+                app.UseDeveloperExceptionPage();
 
             app.UseMvc();
         }
