@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
 {
     public interface IVisitRepository : IRepository<VisitEntity>
     {
-        IEnumerable<VisitEntity> FindByPatientGuid(Guid patientGuid);
+        VisitEntity FindByPatientGuid(Guid patientGuid);
         IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn);
         IEnumerable<VisitEntity> FindByName(string name);
         IEnumerable<VisitEntity> FindByDateOfBirth(DateTime dateOfBirth);
