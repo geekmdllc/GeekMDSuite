@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public class CarotidUltrasoundsRepository : Repository<CarotidUltrasoundEntity>, ICarotidUltrasoundsRepository
+    public class CarotidUltrasoundsRepository : RepositoryAssociatedWithVisit<CarotidUltrasoundEntity>, ICarotidUltrasoundsRepository
     {
         public CarotidUltrasoundsRepository(GeekMdSuiteDbContext context) : base(context)
         {

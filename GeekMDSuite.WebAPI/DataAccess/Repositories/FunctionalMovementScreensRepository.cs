@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public class FunctionalMovementScreensRepository : Repository<FunctionalMovementScreenEntity>, IFunctionalMovementScreensRepository
+    public class FunctionalMovementScreensRepository : RepositoryAssociatedWithVisit<FunctionalMovementScreenEntity>, IFunctionalMovementScreensRepository
     {
         public FunctionalMovementScreensRepository(GeekMdSuiteDbContext context) : base (context)
         {
