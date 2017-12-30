@@ -8,9 +8,12 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         public int Id { get; set; }
         public Guid Visit { get; set; }
 
-        public BloodPressureEntity() {}
+        public BloodPressureEntity()
+        {
+            Visit = Guid.Empty;
+        }
 
-        public BloodPressureEntity(BloodPressure bloodPressure)
+        public BloodPressureEntity(BloodPressure bloodPressure) : this()
         {
             MapValues(bloodPressure);
         }

@@ -18,6 +18,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             RotaryStability = new FmsMovementSet();
             ShoulderMobility = new FmsMovementSet();
             TrunkStabilityPushup = new FmsMovementData();
+            Visit = Guid.Empty;
         }
 
         public FunctionalMovementScreenEntity(FunctionalMovementScreen functionalMovementScreen) : this()

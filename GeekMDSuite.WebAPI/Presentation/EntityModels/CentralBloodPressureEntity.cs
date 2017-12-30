@@ -21,10 +21,10 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 
         public CentralBloodPressureEntity()
         {
-            
+            Visit = Guid.Empty;
         }
 
-        public CentralBloodPressureEntity(CentralBloodPressure centralBloodPressure)
+        public CentralBloodPressureEntity(CentralBloodPressure centralBloodPressure) : this()
         {
             MapValues(centralBloodPressure);
         }
