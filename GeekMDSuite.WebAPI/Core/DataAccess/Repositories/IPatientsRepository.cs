@@ -9,5 +9,6 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
         IEnumerable<PatientEntity> FindByName(string query);
         IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query);
         IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth);
+        PatientEntity FindByGuid(Guid guid);
     }
 }

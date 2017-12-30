@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -8,28 +9,24 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<CentralBloodPressureEntity> GetCentralBloodPressureEntities()
         {
-            var cbpe = new CentralBloodPressureEntity(CentralBloodPressureBuilder.Initialize()
-                .SetAugmentedIndex(33)
-                .SetAugmentedPressure(8)
-                .SetCentralSystolicPressure(132)
-                .SetPulsePressure(44)
-                .SetPulseWaveVelocity(7.9)
-                .SetReferenceAge(44)
-                .Build());
-            
-            var cbpe2 = new CentralBloodPressureEntity(CentralBloodPressureBuilder.Initialize()
-                .SetAugmentedIndex(31)
-                .SetAugmentedPressure(11)
-                .SetCentralSystolicPressure(121)
-                .SetPulsePressure(32)
-                .SetPulseWaveVelocity(9.9)
-                .SetReferenceAge(56)
-                .Build());
-            
             return new List<CentralBloodPressureEntity>()
             {
-                cbpe,
-                cbpe2
+                new CentralBloodPressureEntity(CentralBloodPressureBuilder.Initialize()
+                    .SetAugmentedIndex(33)
+                    .SetAugmentedPressure(8)
+                    .SetCentralSystolicPressure(132)
+                    .SetPulsePressure(44)
+                    .SetPulseWaveVelocity(7.9)
+                    .SetReferenceAge(44)
+                    .Build()) { Visit = XerMajestiesVisitGuid },
+                new CentralBloodPressureEntity(CentralBloodPressureBuilder.Initialize()
+                    .SetAugmentedIndex(31)
+                    .SetAugmentedPressure(11)
+                    .SetCentralSystolicPressure(121)
+                    .SetPulsePressure(32)
+                    .SetPulseWaveVelocity(9.9)
+                    .SetReferenceAge(56)
+                    .Build()) { Visit = BruceWaynesVisitGuid }
             };
         }
     }

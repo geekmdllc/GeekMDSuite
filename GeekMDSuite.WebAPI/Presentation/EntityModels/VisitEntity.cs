@@ -24,7 +24,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         {
             Patient = subject.Patient;
             Date = subject.Date;
-            
         }
     }
 }

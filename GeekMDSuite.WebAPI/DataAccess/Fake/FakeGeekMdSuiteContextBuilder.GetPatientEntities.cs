@@ -26,8 +26,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             return new List<PatientEntity>()
             {
-                new PatientEntity(p1) { Guid = Guid.Parse("3b69bd30-7a07-4859-b536-5071e0a5f516")},
-                new PatientEntity(p2) { Guid = Guid.Parse("50345ee6-fde2-4a51-8177-8c715628e39e")}
+                new PatientEntity(p1) { Guid = BruceWayneGuid},
+                new PatientEntity(p2) { Guid = XerMajestyGuid}
             };
         }
     }

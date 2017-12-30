@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -59,8 +60,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             return new List<AudiogramEntity>()
             {
-                new AudiogramEntity(audiogram),
-                new AudiogramEntity(audiogram2)
+                new AudiogramEntity(audiogram) { Visit = XerMajestiesVisitGuid},
+                new AudiogramEntity(audiogram2) { Visit = BruceWaynesVisitGuid}
             };
         }
     }

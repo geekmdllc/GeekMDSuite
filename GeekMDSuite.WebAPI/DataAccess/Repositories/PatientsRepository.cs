@@ -22,5 +22,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth) => 
             Context.Patients.Where(p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString());
+
+        public PatientEntity FindByGuid(Guid guid) => Context.Patients.First(p => p.Guid == guid);
     }
 }

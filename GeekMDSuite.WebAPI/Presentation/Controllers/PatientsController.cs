@@ -44,13 +44,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             return Ok(found);
         }
         
-        // GET api/patients/joe
+        // GET api/patients/mrn/joe
         [HttpGet]
         [Route("mrn/{mrn}")]
         public IActionResult GetByMrn(string mrn)
         {
             var found = _unitOfWork.Patients.FindByMedicalRecordNumber(mrn);
             if (!found.Any()) return NotFound();
+            
+            return Ok(found);
+        }
+        
+        // GET api/patients/guid/guid
+        [HttpGet]
+        [Route("guid/{guid}")]
+        public IActionResult GetByMrn(Guid guid)
+        {
+            var found = _unitOfWork.Patients.FindByGuid(guid);
+            if (found == null) return NotFound();
             
             return Ok(found);
         }
