@@ -2,8 +2,8 @@
 {
     public interface IBloodPressure
     {
-        int Systolic { get; }
-        int Diastolic { get; }
-        bool OrganDamage { get; }
+        int Systolic { get; set; }
+        int Diastolic { get; set; }
+        bool OrganDamage { get; set; }
     }
 }

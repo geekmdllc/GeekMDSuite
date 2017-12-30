@@ -15,10 +15,12 @@ namespace GeekMDSuite.WebAPI.DataAccess
             CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
             CentralBloodPressures = new CentralBloodPressuresRepository(_context);
             FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
+            BloodPressures = new BloodPressuresRepository(_context);
         }
 
         public IPatientsRepository Patients { get; }
         public IAudiogramRepository Audiograms { get;  }
+        public IBloodPressuresRepository BloodPressures { get;  }
         public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         public ICentralBloodPressureRepository CentralBloodPressures { get; }
         public IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }

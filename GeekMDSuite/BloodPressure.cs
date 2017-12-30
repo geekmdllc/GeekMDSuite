@@ -2,6 +2,11 @@
 {
     public class BloodPressure : IBloodPressure
     {
+        public BloodPressure()
+        {
+            
+        }
+
         private BloodPressure(int systolic, int diastolic, bool organDamage)
         {
             Systolic = systolic;
@@ -9,9 +14,9 @@
             OrganDamage = organDamage;
         }
 
-        public int Systolic { get; }
-        public int Diastolic { get; }
-        public bool OrganDamage { get; }
+        public int Systolic { get; set; }
+        public int Diastolic { get; set; }
+        public bool OrganDamage { get; set; }
 
         public static BloodPressure Build(int systolic, int diastolic, bool organDamage = false) => 
             new BloodPressure(systolic, diastolic, organDamage);
