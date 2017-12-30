@@ -10,6 +10,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IAudiogramRepository Audiograms { get; }
         ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         ICentralBloodPressureRepository CentralBloodPressures { get; }
+        IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
         void Complete();
     }
 }

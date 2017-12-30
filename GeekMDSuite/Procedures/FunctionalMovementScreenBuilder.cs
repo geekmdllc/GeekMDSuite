@@ -61,11 +61,11 @@ namespace GeekMDSuite.Procedures
             return this;
         }
 
-        public FunctionalMovementScreenBuilder SetRotaryStability(int leftScore, bool leftPain, int rightScore, bool rightPain)
+        public FunctionalMovementScreenBuilder SetRotaryStability(int leftScore, int rightScore, bool pain)
         {
             _rotaryStability = new FmsMovementSet(
-                FmsMovementData.Build(FmsMovementPattern.RotaryStability, Laterality.Left, leftScore, ParsePainResult(leftPain)), 
-                FmsMovementData.Build(FmsMovementPattern.RotaryStability, Laterality.Right, rightScore, ParsePainResult(rightPain))
+                FmsMovementData.Build(FmsMovementPattern.RotaryStability, Laterality.Left, leftScore, ParsePainResult(pain)), 
+                FmsMovementData.Build(FmsMovementPattern.RotaryStability, Laterality.Right, rightScore, ParsePainResult(pain))
             );
             return this;
         }

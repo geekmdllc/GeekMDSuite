@@ -15,7 +15,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 3,false)
+                .SetRotaryStability(3, 3,false)
                 .SetShoulderMobility(3,true, 3,false)
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
@@ -33,7 +33,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(1)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 3,false)
+                .SetRotaryStability(3, 3,false)
                 .SetShoulderMobility(3,true, 3,false)
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
@@ -51,7 +51,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 3,false)
+                .SetRotaryStability(3, 3,false)
                 .SetShoulderMobility(3,true, 3,false)
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
@@ -70,7 +70,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 3,false)
+                .SetRotaryStability(3, 3,false)
                 .SetShoulderMobility(3,true, 3,false)
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
@@ -88,7 +88,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,true, 3,false)
+                .SetRotaryStability(3, 3,true)
                 .SetShoulderMobility(3,false, 3,false)
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
@@ -107,7 +107,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 1,false)
+                .SetRotaryStability(3, 1,false)
                 .SetShoulderMobility(3,false, 3,false)
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
@@ -125,7 +125,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 3,false)
+                .SetRotaryStability(3, 3,false)
                 .SetShoulderMobility(3,false, 3,false)
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
@@ -143,7 +143,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 3,false)
+                .SetRotaryStability(3, 3,false)
                 .SetShoulderMobility(3,false, 3,false)
                 .SetTrunkStabilityPuhsup(3,true)
                 .Build();
@@ -161,7 +161,7 @@ namespace GeekMDSuite.Test
                 .SetDeepSquat(3)
                 .SetHurdleStep(3, 3)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(3,false, 3,false)
+                .SetRotaryStability(3, 3,false)
                 .SetShoulderMobility(3,false, 3,false)
                 .SetTrunkStabilityPuhsup(1,false)
                 .Build();

@@ -154,7 +154,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .SetDeepSquat(3)
                 .SetHurdleStep(2, 2)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(2, true, 2, false)
+                .SetRotaryStability(2, 2, true)
                 .SetShoulderMobility(2, false, 2, false)
                 .SetTrunkStabilityPuhsup(2, false)
                 .Build();

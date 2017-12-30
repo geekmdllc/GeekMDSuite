@@ -2,12 +2,12 @@
 {
     public interface IFunctionalMovementScreen
     {
-        FmsMovementData DeepSquat { get; }
-        FmsMovementSet HurdleStep { get; }
-        FmsMovementSet InlineLunge { get; }
-        FmsMovementSet ShoulderMobility { get; }
-        FmsMovementSet ActiveStraightLegRaise { get; }
-        FmsMovementData TrunkStabilityPushup { get; }
-        FmsMovementSet RotaryStability { get; }
+        FmsMovementData DeepSquat { get; set; }
+        FmsMovementSet HurdleStep { get; set; }
+        FmsMovementSet InlineLunge { get; set; }
+        FmsMovementSet ShoulderMobility { get; set; }
+        FmsMovementSet ActiveStraightLegRaise { get; set; }
+        FmsMovementData TrunkStabilityPushup { get; set; }
+        FmsMovementSet RotaryStability { get; set; }
     }
 }

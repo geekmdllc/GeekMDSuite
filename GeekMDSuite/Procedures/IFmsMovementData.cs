@@ -2,9 +2,9 @@
 {
     public interface IFmsMovementData
     {
-        FmsMovementPattern MovementPattern { get; }
-        Laterality Laterality { get; }
+        FmsMovementPattern MovementPattern { get; set; }
+        Laterality Laterality { get; set; }
         int Score { get; }
-        FmsClearanceTest Clearance { get; }
+        FmsClearanceTest Clearance { get; set; }
     }
 }

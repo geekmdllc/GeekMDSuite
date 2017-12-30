@@ -12,6 +12,11 @@ namespace GeekMDSuite.Procedures
         {
             return new FmsMovementData(movementPattern, laterality, rawScore, clearance);
         }
+
+        public FmsMovementData()
+        {
+            
+        }
         
         private FmsMovementData(
             FmsMovementPattern movementPattern, 
@@ -25,12 +30,12 @@ namespace GeekMDSuite.Procedures
             Laterality = MovementHasUnilateralLaterality ? laterality : Laterality.Bilateral;
         }
 
-        public FmsMovementPattern MovementPattern { get; }
-        public Laterality Laterality { get; }
+        public FmsMovementPattern MovementPattern { get; set; }
+        public Laterality Laterality { get; set; }
         public int Score => Clearance == FmsClearanceTest.Positive ? 0 : RawScore;
-        public FmsClearanceTest Clearance { get; }
+        public FmsClearanceTest Clearance { get; set; }
         
-        private int RawScore { get; }
+        public int RawScore { get; set; }
 
         private static int ValidateAndSetRawScore(int rawScore) => rawScore >= 0 && rawScore <= 3 
             ? rawScore : throw new ArgumentOutOfRangeException("rawScore", "Must be between 0 and 3.");

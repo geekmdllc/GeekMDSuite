@@ -2,8 +2,8 @@
 {
     public interface IFmsMovementSet
     {
-        FmsMovementData Left { get; }
-        FmsMovementData Right { get; }
+        FmsMovementData Left { get; set; }
+        FmsMovementData Right { get; set; }
         int Score { get; }
     }
 }

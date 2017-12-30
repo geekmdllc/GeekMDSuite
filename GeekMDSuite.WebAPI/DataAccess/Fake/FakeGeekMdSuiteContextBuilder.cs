@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using GeekMDSuite.Procedures;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Fake
@@ -13,7 +10,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         private static GeekMdSuiteDbContext GetContextWithData()
         {
             var options = new DbContextOptionsBuilder<GeekMdSuiteDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .UseInMemoryDatabase("InMemory")
                 .Options;
             
             var context = new GeekMdSuiteDbContext(options);
@@ -22,6 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.Patients.AddRange(GetPatientEntities());
             context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
+            context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());
             
             context.SaveChanges();
  

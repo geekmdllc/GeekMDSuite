@@ -8,25 +8,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class CentralBloodPressuresController : Controller
+    public class FunctionalMovementScreensController : Controller
     {
-        public CentralBloodPressuresController(IUnitOfWork unitOfWork)
+        public FunctionalMovementScreensController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
         
-        // GET api/centralbloodpressures
+        // GET api/functionalmovementscreens
         [HttpGet]
-        public IEnumerable<CentralBloodPressureEntity> Get()
+        public IEnumerable<FunctionalMovementScreenEntity> Get()
         {
-             return _unitOfWork.CentralBloodPressures.All();
+            return _unitOfWork.FunctionalMovementScreens.All();
         }
         
         // GET api/centralbloodpressures/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var found = _unitOfWork.CentralBloodPressures.FindById(id);
+            var found = _unitOfWork.FunctionalMovementScreens.FindById(id);
             if (found == null) return NotFound();
             
             return Ok(found);
@@ -34,19 +34,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // POST api/centralbloodpressures/
         [HttpPost]
-        public void Post([FromBody] CentralBloodPressureEntity centralBloodPressure)
+        public void Post([FromBody] FunctionalMovementScreenEntity functionalMovementScreen)
         {
-            _unitOfWork.CentralBloodPressures.Add(centralBloodPressure);
+            _unitOfWork.FunctionalMovementScreens.Add(functionalMovementScreen);
             _unitOfWork.Complete();
         }
         
         // PUT api/centralbloodpressures/
         [HttpPut]
-        public ActionResult Put([FromBody] CentralBloodPressureEntity centralBloodPressure)
+        public ActionResult Put([FromBody] FunctionalMovementScreenEntity functionalMovementScreen)
         {
             try
             {
-                _unitOfWork.CentralBloodPressures.Update(centralBloodPressure);
+                _unitOfWork.FunctionalMovementScreens.Update(functionalMovementScreen);
                 _unitOfWork.Complete();
                 return Ok();
             }
@@ -62,7 +62,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                _unitOfWork.CentralBloodPressures.Delete(id);
+                _unitOfWork.FunctionalMovementScreens.Delete(id);
                 _unitOfWork.Complete();
                 return Ok();
             }
@@ -80,7 +80,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 foreach (var id in ids)
                 {
-                    _unitOfWork.CentralBloodPressures.Delete(id);
+                    _unitOfWork.FunctionalMovementScreens.Delete(id);
                 }
                 _unitOfWork.Complete();
                 return Ok();

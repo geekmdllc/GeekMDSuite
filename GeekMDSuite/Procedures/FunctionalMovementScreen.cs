@@ -20,21 +20,26 @@
             RotaryStability = rotaryStability;
         }
 
-        public FmsMovementData DeepSquat { get;  } 
+        public FmsMovementData DeepSquat { get; set; } 
 
-        public FmsMovementSet HurdleStep { get; }
+        public FmsMovementSet HurdleStep { get; set; }
 
-        public FmsMovementSet InlineLunge { get; }
+        public FmsMovementSet InlineLunge { get; set; }
 
-        public FmsMovementSet ShoulderMobility { get; }
+        public FmsMovementSet ShoulderMobility { get; set; }
 
-        public FmsMovementSet ActiveStraightLegRaise { get; }
+        public FmsMovementSet ActiveStraightLegRaise { get; set; }
 
-        public FmsMovementData TrunkStabilityPushup { get; } 
+        public FmsMovementData TrunkStabilityPushup { get; set; } 
 
-        public FmsMovementSet RotaryStability { get; }
+        public FmsMovementSet RotaryStability { get; set; }
 
         public override string ToString() => 
             $"{DeepSquat}\n{HurdleStep}\n{InlineLunge}\n{ShoulderMobility}\n{ActiveStraightLegRaise}\n{TrunkStabilityPushup}\n{RotaryStability}";
+
+        public FunctionalMovementScreen()
+        {
+            
+        }
     }
 }

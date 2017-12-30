@@ -1,7 +1,7 @@
 ﻿using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
-using GeekMDSuite.WebAPI.Repositories;
 
 namespace GeekMDSuite.WebAPI.DataAccess
 {
@@ -14,12 +14,14 @@ namespace GeekMDSuite.WebAPI.DataAccess
             Audiograms = new AudiogramRepository(_context);
             CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
             CentralBloodPressures = new CentralBloodPressuresRepository(_context);
+            FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
         }
 
         public IPatientsRepository Patients { get; }
         public IAudiogramRepository Audiograms { get;  }
         public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         public ICentralBloodPressureRepository CentralBloodPressures { get; }
+        public IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
 
         public void Complete()
         {

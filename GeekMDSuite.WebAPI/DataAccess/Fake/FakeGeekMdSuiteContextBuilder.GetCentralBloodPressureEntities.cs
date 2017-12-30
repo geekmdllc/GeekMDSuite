@@ -16,11 +16,20 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 .SetPulseWaveVelocity(7.9)
                 .SetReferenceAge(44)
                 .Build());
+            
+            var cbpe2 = new CentralBloodPressureEntity(CentralBloodPressureBuilder.Initialize()
+                .SetAugmentedIndex(31)
+                .SetAugmentedPressure(11)
+                .SetCentralSystolicPressure(121)
+                .SetPulsePressure(32)
+                .SetPulseWaveVelocity(9.9)
+                .SetReferenceAge(56)
+                .Build());
+            
             return new List<CentralBloodPressureEntity>()
             {
                 cbpe,
-                cbpe,
-                cbpe
+                cbpe2
             };
         }
     }

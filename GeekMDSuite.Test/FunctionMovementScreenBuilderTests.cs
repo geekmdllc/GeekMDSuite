@@ -19,7 +19,7 @@ namespace GeekMDSuite.Test
                 .SetActiveStraightLegRaise(2, 3)
                 .SetHurdleStep(1, 2)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(2, false, 2, true)
+                .SetRotaryStability(2, 2, false)
                 .SetShoulderMobility(1, false, 2, false)
                 .SetTrunkStabilityPuhsup(3, false);
             
@@ -32,7 +32,7 @@ namespace GeekMDSuite.Test
                 .SetActiveStraightLegRaise(2, 3)
                 .SetHurdleStep(1, 2)
                 .SetInlineLunge(3, 3)
-                .SetRotaryStability(2, false, 2, true)
+                .SetRotaryStability(2, 2, false)
                 .SetShoulderMobility(1, false, 2, false)
                 .SetTrunkStabilityPuhsup(3, false);
 

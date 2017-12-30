@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
+using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Repositories;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories

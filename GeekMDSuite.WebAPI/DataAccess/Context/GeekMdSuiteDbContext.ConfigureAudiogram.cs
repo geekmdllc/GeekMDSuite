@@ -1,24 +1,12 @@
 ﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeekMDSuite.WebAPI.DataAccess
+namespace GeekMDSuite.WebAPI.DataAccess.Context
 {
-    public class GeekMdSuiteDbContext : DbContext
+    public partial class GeekMdSuiteDbContext
     {
-        public GeekMdSuiteDbContext(DbContextOptions<GeekMdSuiteDbContext> options) : base(options)
-        {            
-        }
-
-        public GeekMdSuiteDbContext()
+        private static void ConfigureAudiogramEntity(ModelBuilder modelBuilder)
         {
-            
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<PatientEntity>().OwnsOne(p => p.Name);
-            modelBuilder.Entity<PatientEntity>().OwnsOne(p => p.Gender);
             modelBuilder.Entity<AudiogramEntity>().OwnsOne(agDataset => agDataset.Left, dataset =>
             {
                 dataset.OwnsOne(f => f.F125);
@@ -43,13 +31,6 @@ namespace GeekMDSuite.WebAPI.DataAccess
                 dataset.OwnsOne(f => f.F6000);
                 dataset.OwnsOne(f => f.F8000);
             });
-            modelBuilder.Entity<CarotidUltrasoundEntity>().OwnsOne(cu => cu.Left);
-            modelBuilder.Entity<CarotidUltrasoundEntity>().OwnsOne(cu => cu.Right);
         }
-        
-        public virtual DbSet<AudiogramEntity> Audiograms { get; set; }
-        public virtual DbSet<CarotidUltrasoundEntity> CarotidUltrasounds { get; set; }
-        public virtual DbSet<CentralBloodPressureEntity> CentralBloodPressures { get; set; }
-        public virtual DbSet<PatientEntity> Patients { get; set; }
     }
 }
