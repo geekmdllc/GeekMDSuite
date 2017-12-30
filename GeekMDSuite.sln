@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Test", "GeekMDSuite.Test\GeekMDSuite.Test.csproj", "{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite", "GeekMDSuite\GeekMDSuite.csproj", "{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.ConsoleDemo", "GeekMDSuite.ConsoleDemo\GeekMDSuite.ConsoleDemo.csproj", "{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}"
@@ -13,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.WebAPI", "GeekM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.WebAPI.UnitTests", "GeekMDSuite.WebAPI.UnitTests\GeekMDSuite.WebAPI.UnitTests.csproj", "{AD291DF8-4821-47BA-B0E4-D740CDFB0172}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.UnitTests", "GeekMDSuite.UnitTests\GeekMDSuite.UnitTests.csproj", "{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A3B2FA9-3439-461A-AAF3-FBFDB830DDE9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{AD291DF8-4821-47BA-B0E4-D740CDFB0172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD291DF8-4821-47BA-B0E4-D740CDFB0172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD291DF8-4821-47BA-B0E4-D740CDFB0172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
