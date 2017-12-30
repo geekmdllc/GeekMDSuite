@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeekMDSuite.WebAPI.Exceptions;
-using GeekMDSuite.WebAPI.Models;
+using GeekMDSuite.WebAPI.Core.Exceptions;
+using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Persistence;
+using GeekMDSuite.WebAPI.Repositories;
 
-namespace GeekMDSuite.WebAPI.Repositories
+namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : class, IEntity<T>
     {

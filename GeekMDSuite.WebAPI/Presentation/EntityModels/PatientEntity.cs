@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite.WebAPI.Models
+﻿using GeekMDSuite.WebAPI.Core.Models;
+
+namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class PatientEntity : Patient, IEntity<PatientEntity>
     {

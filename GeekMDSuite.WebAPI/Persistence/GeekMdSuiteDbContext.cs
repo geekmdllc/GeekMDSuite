@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.WebAPI.Models;
+﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.Persistence

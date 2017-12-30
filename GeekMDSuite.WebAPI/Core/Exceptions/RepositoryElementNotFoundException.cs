@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeekMDSuite.WebAPI.Exceptions
+namespace GeekMDSuite.WebAPI.Core.Exceptions
 {
     public class RepositoryElementNotFoundException : Exception
     {

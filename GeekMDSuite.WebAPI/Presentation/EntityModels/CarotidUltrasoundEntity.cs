@@ -1,7 +1,8 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
+using GeekMDSuite.WebAPI.Core.Models;
 
-namespace GeekMDSuite.WebAPI.Models
+namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class CarotidUltrasoundEntity : CarotidUltrasound, IVisitData<CarotidUltrasound>
     {

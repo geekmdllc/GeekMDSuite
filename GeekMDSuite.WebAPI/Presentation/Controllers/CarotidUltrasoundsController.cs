@@ -1,52 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeekMDSuite.WebAPI.Models;
-using GeekMDSuite.WebAPI.Repositories;
+using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GeekMDSuite.WebAPI.Controllers
+namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class AudiogramsController : Controller
+    public class CarotidUltrasoundsController : Controller
     {
-        public AudiogramsController(IUnitOfWork unitOfWork)
+        public CarotidUltrasoundsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
         
-        // GET api/audiograms
+        private readonly IUnitOfWork _unitOfWork;
+        
+        // GET api/carotidultrasounds
         [HttpGet]
-        public IEnumerable<AudiogramEntity> Get()
+        public IEnumerable<CarotidUltrasoundEntity> Get()
         {
-           return _unitOfWork.Audiograms.All();
+            return _unitOfWork.CarotidUltrasounds.All();
         }
         
-        // GET api/audiograms/5
+        // GET api/carotidultrasounds/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var found = _unitOfWork.Audiograms.FindById(id);
+            var found = _unitOfWork.CarotidUltrasounds.FindById(id);
             if (found == null) return NotFound();
             
             return Ok(found);
         }
         
-        // POST api/audiograms/
+        // POST api/carotidultrasounds
         [HttpPost]
-        public void Post([FromBody] AudiogramEntity audiogram)
+        public void Post([FromBody] CarotidUltrasoundEntity carotidUltrasound)
         {
-            _unitOfWork.Audiograms.Add(audiogram);
+            _unitOfWork.CarotidUltrasounds.Add(carotidUltrasound);
             _unitOfWork.Complete();
         }
         
-        // PUT api/audiograms/
+        // PUT api/carotidultrasounds/
         [HttpPut]
-        public ActionResult Put([FromBody] AudiogramEntity audiogram)
+        public ActionResult Put([FromBody] CarotidUltrasoundEntity carotidUltrasound)
         {
             try
             {
-                _unitOfWork.Audiograms.Update(audiogram);
+                _unitOfWork.CarotidUltrasounds.Update(carotidUltrasound);
                 _unitOfWork.Complete();
                 return Ok();
             }
@@ -56,13 +58,13 @@ namespace GeekMDSuite.WebAPI.Controllers
             }
         }
         
-        // DELETE api/audiograms/5
+        // DELETE api/carotidultrasounds/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                _unitOfWork.Audiograms.Delete(id);
+                _unitOfWork.CarotidUltrasounds.Delete(id);
                 _unitOfWork.Complete();
                 return Ok();
             }
@@ -72,7 +74,7 @@ namespace GeekMDSuite.WebAPI.Controllers
             }
         }
         
-        // DELETE/api/audiograms --> from body [1,2,3,...,n]
+        // DELETE/api/patients --> from body [1,2,3,...,n]
         [HttpDelete]
         public ActionResult Delete([FromBody] int[] ids)
         {
@@ -80,7 +82,7 @@ namespace GeekMDSuite.WebAPI.Controllers
             {
                 foreach (var id in ids)
                 {
-                    _unitOfWork.Audiograms.Delete(id);
+                    _unitOfWork.CarotidUltrasounds.Delete(id);
                 }
                 _unitOfWork.Complete();
                 return Ok();
@@ -90,7 +92,5 @@ namespace GeekMDSuite.WebAPI.Controllers
                 return NotFound();
             }
         }
-        
-        private readonly IUnitOfWork _unitOfWork;
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GeekMDSuite.WebAPI.Helpers;
-using GeekMDSuite.WebAPI.Models;
+using GeekMDSuite.WebAPI.Core.Helpers;
 using GeekMDSuite.WebAPI.Persistence;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.Repositories;
 
-namespace GeekMDSuite.WebAPI.Repositories
+namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
     public class PatientsRepository : Repository<PatientEntity>, IPatientsRepository
     {

@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.WebAPI.Helpers
+﻿namespace GeekMDSuite.WebAPI.Core.Helpers
 {
     internal static class StringHelpers
     {

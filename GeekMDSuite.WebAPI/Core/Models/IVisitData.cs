@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeekMDSuite.WebAPI.Models
+namespace GeekMDSuite.WebAPI.Core.Models
 {
     public interface IVisitData<in T> : IEntity<T>
     {

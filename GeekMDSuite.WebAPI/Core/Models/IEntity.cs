@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.WebAPI.Models
+﻿namespace GeekMDSuite.WebAPI.Core.Models
 {
     public interface IEntity<in T> : IMapProperties<T>
     {

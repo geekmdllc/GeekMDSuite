@@ -1,4 +1,6 @@
 ﻿using System;
+using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.Persistence;
 using GeekMDSuite.WebAPI.Repositories;
 using Microsoft.AspNetCore.Builder;

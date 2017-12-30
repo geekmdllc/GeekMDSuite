@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.WebAPI.Models;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Repositories
 {

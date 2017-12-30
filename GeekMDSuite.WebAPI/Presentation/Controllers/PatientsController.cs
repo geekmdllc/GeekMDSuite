@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeekMDSuite.WebAPI.Models;
-using GeekMDSuite.WebAPI.Repositories;
+using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GeekMDSuite.WebAPI.Controllers
+namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
