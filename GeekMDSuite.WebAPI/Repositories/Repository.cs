@@ -7,14 +7,8 @@ using GeekMDSuite.WebAPI.Persistence;
 
 namespace GeekMDSuite.WebAPI.Repositories
 {
-    public abstract class Repository<T> : IRepository<T> where T : class, IEntity
+    public abstract class Repository<T> : IRepository<T> where T : class, IEntity<T>
     {
-        protected readonly GeekMdSuiteDbContext Context;
-
-        public Repository()
-        {
-            
-        }
         public Repository(GeekMdSuiteDbContext context)
         {
             Context = context;
@@ -46,7 +40,16 @@ namespace GeekMDSuite.WebAPI.Repositories
             Context.Set<T>().Remove(patient);
             
         }
+       
+        public void Update(T entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            
+            FindById(entity.Id)?.MapValues(entity);
+        }
+        
+        protected readonly GeekMdSuiteDbContext Context;
 
-        public abstract void Update(T entity);
+        public Repository() { }
     }
 }

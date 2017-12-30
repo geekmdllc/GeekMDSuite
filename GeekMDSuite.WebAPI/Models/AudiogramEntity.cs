@@ -3,9 +3,10 @@ using GeekMDSuite.Procedures;
 
 namespace GeekMDSuite.WebAPI.Models
 {
-    public class AudiogramEntity :  Audiogram, IVisitData
+    public class AudiogramEntity :  Audiogram, IVisitData<AudiogramEntity>
     {
         public int Id { get; set; }
+
         public Guid Visit { get; set; }
 
         public AudiogramEntity()
@@ -16,5 +17,29 @@ namespace GeekMDSuite.WebAPI.Models
             Left = audiogram.Left;
             Right = audiogram.Right;
         }
+                
+        public void MapValues(AudiogramEntity subject)
+        {
+            Left.F125.Value = subject.Left.F125.Value;
+            Left.F250.Value = subject.Left.F250.Value;
+            Left.F500.Value = subject.Left.F500.Value;
+            Left.F1000.Value = subject.Left.F1000.Value;
+            Left.F2000.Value = subject.Left.F2000.Value;
+            Left.F3000.Value = subject.Left.F3000.Value;
+            Left.F4000.Value = subject.Left.F4000.Value;
+            Left.F6000.Value = subject.Left.F6000.Value;
+            Left.F8000.Value = subject.Left.F8000.Value;
+
+            Right.F125.Value = subject.Right.F125.Value;
+            Right.F250.Value = subject.Right.F250.Value;
+            Right.F500.Value = subject.Right.F500.Value;
+            Right.F1000.Value = subject.Right.F1000.Value;
+            Right.F2000.Value = subject.Right.F2000.Value;
+            Right.F3000.Value = subject.Right.F3000.Value;
+            Right.F4000.Value = subject.Right.F4000.Value;
+            Right.F6000.Value = subject.Right.F6000.Value;
+            Right.F8000.Value = subject.Right.F8000.Value;
+        }
+
     }
 }

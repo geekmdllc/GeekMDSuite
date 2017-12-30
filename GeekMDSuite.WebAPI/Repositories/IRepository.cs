@@ -3,7 +3,7 @@ using GeekMDSuite.WebAPI.Models;
 
 namespace GeekMDSuite.WebAPI.Repositories
 {
-    public interface IRepository<T> where T : IEntity
+    public interface IRepository<T> where T : IEntity<T>
     {
         T FindById(int id);
         IEnumerable<T> All();
