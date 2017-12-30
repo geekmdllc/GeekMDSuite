@@ -10,12 +10,17 @@
             Stenosis = stenosis;
         }
 
-        public double IntimaMediaMeasurementMillimeters { get; }
-        public CarotidIntimaMediaThicknessGrade Grade { get; }
-        public CarotidPlaqueCharacter Character { get; }
-        public CarotidPercentStenosisGrade Stenosis { get; }
+        public CarotidUltrasoundResult()
+        {
+            
+        }
 
-        internal static CarotidUltrasoundResult Build(double intimaMediaMeasurementMillimeters,
+        public double IntimaMediaMeasurementMillimeters { get; set; }
+        public CarotidIntimaMediaThicknessGrade Grade { get; set; }
+        public CarotidPlaqueCharacter Character { get; set; }
+        public CarotidPercentStenosisGrade Stenosis { get; set; }
+
+        public static CarotidUltrasoundResult Build(double intimaMediaMeasurementMillimeters,
             CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character,
             CarotidPercentStenosisGrade stenosis) => 
             new CarotidUltrasoundResult(intimaMediaMeasurementMillimeters, grade, character, stenosis);

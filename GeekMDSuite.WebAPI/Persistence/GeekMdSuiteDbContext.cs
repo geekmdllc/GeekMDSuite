@@ -43,9 +43,12 @@ namespace GeekMDSuite.WebAPI.Persistence
                 dataset.OwnsOne(f => f.F6000);
                 dataset.OwnsOne(f => f.F8000);
             });
+            modelBuilder.Entity<CarotidUltrasoundEntity>().OwnsOne(cu => cu.Left);
+            modelBuilder.Entity<CarotidUltrasoundEntity>().OwnsOne(cu => cu.Right);
         }
         
         public virtual DbSet<PatientEntity> Patients { get; set; }
         public virtual DbSet<AudiogramEntity> Audiograms { get; set; }
+        public virtual DbSet<CarotidUltrasoundEntity> CarotidUltrasounds { get; set; }
     }
 }

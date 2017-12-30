@@ -2,7 +2,7 @@
 {
     public interface ICarotidUltrasound
     {
-        CarotidUltrasoundResult Left { get; }
-        CarotidUltrasoundResult Right { get; }
+        CarotidUltrasoundResult Left { get; set; }
+        CarotidUltrasoundResult Right { get; set; }
     }
 }

@@ -22,8 +22,8 @@ namespace GeekMDSuite.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
-            // services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite("Data Source=context.db"));
+            // services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite("Data Source=context.db"));
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
         }
 

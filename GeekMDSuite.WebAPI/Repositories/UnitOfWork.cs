@@ -9,10 +9,12 @@ namespace GeekMDSuite.WebAPI.Repositories
             _context = context;
             Patients = new PatientsRepository(_context);
             Audiograms = new AudiogramRepository(_context);
+            CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
         }
 
         public IPatientsRepository Patients { get; }
         public IAudiogramRepository Audiograms { get;  }
+        public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
 
         public void Complete()
         {

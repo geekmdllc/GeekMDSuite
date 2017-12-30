@@ -8,11 +8,13 @@
             Right = right;
         }
 
-        public CarotidUltrasoundResult Left { get;}
-        public CarotidUltrasoundResult Right { get; }
+        public CarotidUltrasoundResult Left { get; set; }
+        public CarotidUltrasoundResult Right { get; set;  }
 
         public static CarotidUltrasound Build(CarotidUltrasoundResult left, CarotidUltrasoundResult right) => 
             new CarotidUltrasound(left, right);
+
+        public CarotidUltrasound() { }
 
         public override string ToString()
         {

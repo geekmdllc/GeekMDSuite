@@ -6,6 +6,7 @@ namespace GeekMDSuite.WebAPI.Repositories
     {
         IPatientsRepository Patients { get; }
         IAudiogramRepository Audiograms { get; }
+        ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         void Complete();
     }
 }

@@ -9,13 +9,9 @@ namespace GeekMDSuite.WebAPI.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : class, IEntity<T>
     {
-        public Repository(GeekMdSuiteDbContext context)
-        {
-            Context = context;
-        }
         public T FindById(int id)
         {
-            try
+            try 
             {
                 return Context.Set<T>().First(p => p.Id == id);
             }
@@ -48,8 +44,13 @@ namespace GeekMDSuite.WebAPI.Repositories
             FindById(entity.Id)?.MapValues(entity);
         }
         
-        protected readonly GeekMdSuiteDbContext Context;
+        public Repository(GeekMdSuiteDbContext context)
+        {
+            Context = context;
+        }
 
         public Repository() { }
+        
+        protected readonly GeekMdSuiteDbContext Context;
     }
 }

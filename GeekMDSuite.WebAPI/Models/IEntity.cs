@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.WebAPI.Models
 {
-    public interface IEntity<T> : IMapProperties<T>
+    public interface IEntity<in T> : IMapProperties<T>
     {
         int Id { get; set; }
     }

@@ -9,14 +9,13 @@ namespace GeekMDSuite.WebAPI.Models
 
         public Guid Visit { get; set; }
 
-        public AudiogramEntity()
-        { }
-
         public AudiogramEntity(Audiogram audiogram)
         {
             Left = audiogram.Left;
             Right = audiogram.Right;
         }
+
+        public AudiogramEntity() { }
                 
         public void MapValues(AudiogramEntity subject)
         {

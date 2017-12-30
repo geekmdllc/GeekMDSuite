@@ -2,9 +2,9 @@
 {
     public interface ICarotidUltrasoundResult
     {
-        double IntimaMediaMeasurementMillimeters { get; }
-        CarotidIntimaMediaThicknessGrade Grade { get; }
-        CarotidPlaqueCharacter Character { get; }
-        CarotidPercentStenosisGrade Stenosis { get; }
+        double IntimaMediaMeasurementMillimeters { get; set; }
+        CarotidIntimaMediaThicknessGrade Grade { get; set; }
+        CarotidPlaqueCharacter Character { get; set; }
+        CarotidPercentStenosisGrade Stenosis { get; set; }
     }
 }
