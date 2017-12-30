@@ -10,7 +10,7 @@ namespace GeekMDSuite.Analytics.Classification
         {
             _ocularPressure = pressure ?? throw new ArgumentNullException(nameof(pressure));
         }
-        public InterpretationText InterpretationText => throw new NotImplementedException();
+
         public OcularPressureClassificationResult Classification => Classify();
         public OcularPressureClassificationResult Left => ClassifyLeft();
         public OcularPressureClassificationResult Right => ClassifyRight();

@@ -14,7 +14,6 @@ namespace GeekMDSuite.Analytics.Classification
             _vo2Max = vo2Max;
         }
         
-        public InterpretationText InterpretationText => throw new NotImplementedException();
         public FitnessClassification Classification => Classify();
 
         public override string ToString() => Classification.ToString();

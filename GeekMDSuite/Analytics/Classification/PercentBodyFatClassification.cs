@@ -11,7 +11,7 @@ namespace GeekMDSuite.Analytics.Classification
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             Value = bodyCompositionExpanded.PercentBodyFat;
         }
-        public InterpretationText InterpretationText => throw new NotImplementedException();
+
         public double Value { get; }
         
         public PercentBodyFat Classification => Classify();

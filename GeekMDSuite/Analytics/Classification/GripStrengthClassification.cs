@@ -16,7 +16,6 @@ namespace GeekMDSuite.Analytics.Classification
             _ranges = GripStrengthRepository.GetRanges(patient);
         }
 
-        public InterpretationText InterpretationText => throw new NotImplementedException();
         public GripStrengthClassificationResult Classification => Classify();
 
         public IMassMeasurement LowerLimitOfNormal => _ranges.LowerLimitOfNormal;

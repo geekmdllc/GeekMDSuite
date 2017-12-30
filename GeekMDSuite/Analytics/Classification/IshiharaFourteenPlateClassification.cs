@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Analytics.Interpretation;
+﻿using System.Collections.Generic;
 using GeekMDSuite.Procedures;
 
-namespace GeekMDSuite.Analytics
+namespace GeekMDSuite.Analytics.Classification
 {
     internal class IshiharaFourteenPlateClassification : IshiharaColorVisionClassification, IClassifiable<IshiharaResultFlag>
     {
@@ -16,7 +13,6 @@ namespace GeekMDSuite.Analytics
         }
         protected sealed override IshiharaResultFlag Classify() => AssessIshiharaVisionAssessment();
 
-        public InterpretationText InterpretationText => throw new NotImplementedException();
         public IshiharaResultFlag Classification => Classify();
     }
 }

@@ -14,7 +14,6 @@ namespace GeekMDSuite.Analytics.Classification
         
         public WaistToHeightRatio Classification => Classify();
 
-        // ReSharper disable once MemberCanBePrivate.Global
         public static class LowerLimits
         {
             public static class Male

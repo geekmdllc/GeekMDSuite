@@ -11,7 +11,6 @@ namespace GeekMDSuite.Analytics.Classification
             _bodyComposition = bodyComposition ?? throw new ArgumentNullException(nameof(bodyComposition));
         }
         
-        public InterpretationText InterpretationText => throw new NotImplementedException();
         public HipToWaistRatio Classification => Classify();
         public double Ratio =>  _bodyComposition.Waist.Inches / _bodyComposition.Hips.Inches;
 

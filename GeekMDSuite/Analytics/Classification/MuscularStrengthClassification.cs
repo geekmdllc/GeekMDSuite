@@ -30,8 +30,7 @@ namespace GeekMDSuite.Analytics.Classification
         public double LowerLimitOfExcellent => _ranges.LowerLimitOfExcellent;
 
         public override string ToString() => Classification.ToString();
-
-        public InterpretationText InterpretationText => throw new NotImplementedException();
+      
         public FitnessClassification Classification => Classify();
 
         private readonly IMuscularStrengthTest _test;

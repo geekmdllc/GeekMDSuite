@@ -26,9 +26,8 @@ namespace GeekMDSuite.Analytics.Classification
                 ? IshiharaPlateSetRepository.TwentyFourPlateScreen() : IshiharaPlateSetRepository.ThirtyEightPlateScreen();
         }
 
-        // ReSharper disable once MemberCanBePrivate.Global
         public IshiharaTestType TestType { get; }
-        // ReSharper disable once MemberCanBePrivate.Global
+
         public List<IshiharaPlateAnswer> AnswerList { get; }
 
         public override string ToString() => Classify().ToString();
