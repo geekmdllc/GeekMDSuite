@@ -92,10 +92,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // GET api/audiograms/interpret/5
+        // GET api/audiograms/classify/5
         [HttpGet]
-        [Route("interpret/{id}")]
-        public IActionResult Interpret(int id)
+        [Route("classify/{id}")]
+        public IActionResult Classify(int id)
         {
             var found = _unitOfWork.Audiograms.FindById(id);
             if (found == null) return NotFound();
@@ -103,6 +103,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var interp = new AudiogramClassification(found);
             
             return Ok(interp.Classification);
+        }
+        
+        // GET api/audiograms/interpret/5
+        [HttpGet]
+        [Route("classify/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            throw new NotImplementedException();
         }
         
         private readonly IUnitOfWork _unitOfWork;

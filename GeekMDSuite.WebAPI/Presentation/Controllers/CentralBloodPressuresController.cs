@@ -91,6 +91,22 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
+        // GET api/centralbloodpressures/classify/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Classify(int id)
+        {
+            throw new NotImplementedException();
+        }
+        
+        // GET api/centralbloodpressures/interpret/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            throw new NotImplementedException();
+        }
+        
         private readonly IUnitOfWork _unitOfWork;
     }
 }

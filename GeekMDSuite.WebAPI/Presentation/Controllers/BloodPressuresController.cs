@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GeekMDSuite.Analytics;
 using GeekMDSuite.Analytics.Classification;
+using GeekMDSuite.Analytics.Interpretation;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
@@ -93,10 +94,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // GET api/bloodPressures/5
+        // GET api/bloodPressures/classify/5
         [HttpGet]
-        [Route("interpret/{id}")]
-        public IActionResult Interpret(int id)
+        [Route("classify/{id}")]
+        public IActionResult Classify(int id)
         {
             var found = _unitOfWork.BloodPressures.FindById(id);
             if (found == null) return NotFound();
@@ -104,6 +105,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var interp = new BloodPressureClassification(found);
             
             return Ok(interp.Classification);
+        }
+        
+        // GET api/bloodPressures/classify/5
+        [HttpGet]
+        [Route("intepret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            var found = _unitOfWork.BloodPressures.FindById(id);
+            if (found == null) return NotFound();
+
+            var interp = new BloodPressureInterpretation(found);
+            
+            return Ok(interp.Interpretation);
         }
         
         private readonly IUnitOfWork _unitOfWork;

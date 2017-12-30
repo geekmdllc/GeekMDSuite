@@ -2,6 +2,6 @@
 {
     public interface IInterpretable
     {
-        InterpretationText InterpretationText { get; }
+        InterpretationText Interpretation { get; }
     }
 }

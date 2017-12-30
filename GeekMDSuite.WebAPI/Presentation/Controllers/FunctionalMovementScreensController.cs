@@ -95,8 +95,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // GET api/functionalmovementscreens/5
         [HttpGet]
-        [Route("interpret/{id}")]
-        public IActionResult Interpret(int id)
+        [Route("classify/{id}")]
+        public IActionResult Classify(int id)
         {
             var found = _unitOfWork.FunctionalMovementScreens.FindById(id);
             if (found == null) return NotFound();
@@ -104,6 +104,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var fmsInterp = new FunctionalMovementScreenClassification(found);
             
             return Ok(fmsInterp.Classification);
+        }
+        
+        // GET api/functionalmovementscreens/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            throw new NotImplementedException();
         }
         
         private readonly IUnitOfWork _unitOfWork;

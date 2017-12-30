@@ -94,10 +94,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // GET api/carotidultrasounds/interpret/5
+        // GET api/carotidultrasounds/classify/5
         [HttpGet]
         [Route("interpret/{id}")]
-        public IActionResult Interpret(int id)
+        public IActionResult Classify(int id)
         {
             var cbp = _unitOfWork.CarotidUltrasounds.FindById(id);
             if (cbp == null) return NotFound();
@@ -105,6 +105,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var interp = new CarotidUltrasoundClassification(cbp);
             
             return Ok(interp.Classification);
+        }
+        
+        // GET api/carotidultrasounds/interpret/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

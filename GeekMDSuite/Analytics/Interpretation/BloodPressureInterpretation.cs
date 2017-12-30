@@ -10,7 +10,7 @@ namespace GeekMDSuite.Analytics.Interpretation
             _parameters = parameters;
             _classification = new BloodPressureClassification(_parameters).Classification;
         }
-        public InterpretationText InterpretationText => new InterpretationBuilder()
+        public InterpretationText Interpretation => new InterpretationBuilder()
             .SetTitle("Blood Pressure Classification")
             .SetSummary(BuildSummary())
             .AddSection(BuildOverviewSection())
