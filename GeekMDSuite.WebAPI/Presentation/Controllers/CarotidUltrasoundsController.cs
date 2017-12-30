@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
@@ -74,7 +75,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // DELETE/api/patients --> from body [1,2,3,...,n]
+        // DELETE/api/carotidultrasounds --> from body [1,2,3,...,n]
         [HttpDelete]
         public ActionResult Delete([FromBody] int[] ids)
         {
@@ -91,6 +92,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return NotFound();
             }
+        }
+        
+        // GET api/carotidultrasounds/interpret/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            var cbp = _unitOfWork.CarotidUltrasounds.FindById(id);
+            if (cbp == null) return NotFound();
+
+            var interp = new CarotidUltrasoundClassification(cbp);
+            
+            return Ok(interp.Classification);
         }
     }
 }

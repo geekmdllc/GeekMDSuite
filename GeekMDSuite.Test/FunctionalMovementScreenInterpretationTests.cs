@@ -97,7 +97,7 @@ namespace GeekMDSuite.Test
             
             var rotaryStability = new FunctionalMovementScreenClassification(fms).Classification.RotaryStability;
             
-            Assert.Equal(FmsScoreFlag.L0R3, rotaryStability.Score);
+            Assert.Equal(FmsScoreFlag.L0R0, rotaryStability.Score);
             Assert.Equal(FmsRecommendedAction.MedicalAttention, rotaryStability.RecommendedAction);
         }
         

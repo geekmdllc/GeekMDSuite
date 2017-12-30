@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
@@ -89,6 +90,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return NotFound();
             }
+        }
+        
+        // GET api/audiograms/interpret/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            var found = _unitOfWork.Audiograms.FindById(id);
+            if (found == null) return NotFound();
+
+            var interp = new AudiogramClassification(found);
+            
+            return Ok(interp.Classification);
         }
         
         private readonly IUnitOfWork _unitOfWork;

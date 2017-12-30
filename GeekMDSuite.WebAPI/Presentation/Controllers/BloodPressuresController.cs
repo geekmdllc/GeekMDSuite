@@ -103,7 +103,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
             var interp = new BloodPressureClassification(found);
             
-            return Ok(interp.Classification.ToString());
+            return Ok(interp.Classification);
         }
         
         private readonly IUnitOfWork _unitOfWork;
