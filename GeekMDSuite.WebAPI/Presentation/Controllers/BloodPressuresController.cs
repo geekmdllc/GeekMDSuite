@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             return _unitOfWork.BloodPressures.All();
         }
         
-        // GET api/bloodPressure/5
+        // GET api/bloodPressures/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -40,7 +41,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _unitOfWork.Complete();
         }
         
-        // PUT api/bloodPressure/
+        // PUT api/bloodPressures/
         [HttpPut]
         public ActionResult Put([FromBody] BloodPressureEntity bloodPressure)
         {
@@ -56,7 +57,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // DELETE api/bloodPressure/5
+        // DELETE api/bloodPressures/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
@@ -89,6 +90,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return NotFound();
             }
+        }
+        
+        // GET api/bloodPressures/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            var found = _unitOfWork.BloodPressures.FindById(id);
+            if (found == null) return NotFound();
+
+            var interp = new BloodPressureInterpretation(found);
+            
+            return Ok(interp.Classification.ToString());
         }
         
         private readonly IUnitOfWork _unitOfWork;

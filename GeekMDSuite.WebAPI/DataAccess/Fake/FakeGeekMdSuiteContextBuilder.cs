@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using GeekMDSuite.WebAPI.DataAccess.Context;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Fake
