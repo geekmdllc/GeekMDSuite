@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.UnitTests
 {
     public class AudiogramsRepositoryTests
     {
-        private readonly IUnitOfWork _unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWork();
         
         [Fact]
         public void Update_GivenNewValues_PersistsChanges()

@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.UnitTests
 {
     public class CarotidUltrasoundsRepositoriesTests
     {
-        private readonly IUnitOfWork _unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWork();
 
         [Fact]
         public void Update_GivenNewIntimaMediaThickness_PersistsChangesInCorrectField()

@@ -4,7 +4,6 @@ using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
-using GeekMDSuite.WebAPI.Repositories;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests
@@ -142,6 +141,6 @@ namespace GeekMDSuite.WebAPI.UnitTests
             Assert.NotEqual(raceBefore, patientAfter.Race);
         }
 
-        private readonly IUnitOfWork _unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWork();
     }
 }

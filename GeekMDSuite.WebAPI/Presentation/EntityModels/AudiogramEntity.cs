@@ -4,21 +4,23 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class AudiogramEntity :  Audiogram, IVisitData<AudiogramEntity>
+    public class AudiogramEntity :  Audiogram, IVisitData<Audiogram>
     {
         public int Id { get; set; }
-
         public Guid Visit { get; set; }
 
-        public AudiogramEntity(Audiogram audiogram)
+        public AudiogramEntity(Audiogram audiogram) : this()
         {
-            Left = audiogram.Left;
-            Right = audiogram.Right;
+            MapValues(audiogram);
         }
 
-        public AudiogramEntity() { }
+        public AudiogramEntity()
+        {
+            Left = new AudiogramDataset();
+            Right = new AudiogramDataset();
+        }
                 
-        public void MapValues(AudiogramEntity subject)
+        public void MapValues(Audiogram subject)
         {
             Left.F125.Value = subject.Left.F125.Value;
             Left.F250.Value = subject.Left.F250.Value;

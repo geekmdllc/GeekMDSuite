@@ -2,11 +2,11 @@
 {
     public interface ICentralBloodPressure
     {
-        double SystolicPressure { get; }
-        double PulsePressure { get; }
-        double AugmentedPressure { get; }
-        double AugmentedIndex { get; }
-        double ReferenceAge { get; }
-        double PulseWaveVelocity { get; }
+        double SystolicPressure { get; set; }
+        double PulsePressure { get; set; }
+        double AugmentedPressure { get; set; }
+        double AugmentedIndex { get; set; }
+        double ReferenceAge { get; set; }
+        double PulseWaveVelocity { get; set; }
     }
 }

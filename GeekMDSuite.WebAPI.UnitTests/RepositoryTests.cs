@@ -69,7 +69,7 @@ namespace GeekMDSuite.WebAPI.UnitTests
             Assert.Equal(beforeIndex - 1, afterIndex);
         }
 
-        private readonly IUnitOfWork _unitOfWork = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWork();
     }
     
 }

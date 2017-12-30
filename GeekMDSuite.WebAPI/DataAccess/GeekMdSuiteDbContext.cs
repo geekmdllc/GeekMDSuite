@@ -47,8 +47,9 @@ namespace GeekMDSuite.WebAPI.DataAccess
             modelBuilder.Entity<CarotidUltrasoundEntity>().OwnsOne(cu => cu.Right);
         }
         
-        public virtual DbSet<PatientEntity> Patients { get; set; }
         public virtual DbSet<AudiogramEntity> Audiograms { get; set; }
         public virtual DbSet<CarotidUltrasoundEntity> CarotidUltrasounds { get; set; }
+        public virtual DbSet<CentralBloodPressureEntity> CentralBloodPressures { get; set; }
+        public virtual DbSet<PatientEntity> Patients { get; set; }
     }
 }

@@ -12,12 +12,12 @@
             double pulseWaveVelocity) => 
             new CentralBloodPressure(systolicPressure, pulsePressure, augmentedPressure, augmentedIndex, referenceAge, pulseWaveVelocity);
 
-        public double SystolicPressure { get; }
-        public double PulsePressure { get; }
-        public double AugmentedPressure { get; }
-        public double AugmentedIndex { get; }
-        public double ReferenceAge { get;  }
-        public double PulseWaveVelocity { get;  }
+        public double SystolicPressure { get; set; }
+        public double PulsePressure { get; set; }
+        public double AugmentedPressure { get; set; }
+        public double AugmentedIndex { get; set; }
+        public double ReferenceAge { get; set; }
+        public double PulseWaveVelocity { get; set; }
 
         public override string ToString() => 
             $"CSP {SystolicPressure} mmHg PP {PulsePressure} mmHg AP {PulsePressure} mmHg AIx {AugmentedIndex}% Ref Age {ReferenceAge} yrs PWV {PulseWaveVelocity} m/s";
@@ -37,6 +37,11 @@
             AugmentedIndex = augmentedIndex;
             ReferenceAge = referenceAge;
             PulseWaveVelocity = pulseWaveVelocity;
+        }
+
+        public CentralBloodPressure()
+        {
+            
         }
     }
 }

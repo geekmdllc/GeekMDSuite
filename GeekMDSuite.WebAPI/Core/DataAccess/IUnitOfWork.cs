@@ -9,6 +9,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IPatientsRepository Patients { get; }
         IAudiogramRepository Audiograms { get; }
         ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
+        ICentralBloodPressureRepository CentralBloodPressures { get; }
         void Complete();
     }
 }

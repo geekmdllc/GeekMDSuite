@@ -3,7 +3,7 @@ using GeekMDSuite.WebAPI.Repositories;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
 {
-    public interface IAudiogramRepository : IRepository<AudiogramEntity>
+    public interface ICentralBloodPressureRepository : IRepository<CentralBloodPressureEntity>
     {
     }
 }
