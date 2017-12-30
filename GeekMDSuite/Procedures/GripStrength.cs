@@ -1,10 +1,8 @@
-﻿using GeekMDSuite.Tools.MeasurementUnits;
-
-namespace GeekMDSuite.Procedures
+﻿namespace GeekMDSuite.Procedures
 {
     public class GripStrength : IGripStrength
     {
-        private GripStrength(IMassMeasurement left, IMassMeasurement right)
+        private GripStrength(GripMeasurement left, GripMeasurement right)
         {
             Left = left;
             Right = right;
@@ -14,11 +12,16 @@ namespace GeekMDSuite.Procedures
             : this(GripMeasurement.Build(left), GripMeasurement.Build(right))
         {  }
 
-        public IMassMeasurement Left { get; }
-        public IMassMeasurement Right { get; }
+        public GripMeasurement Left { get; set; }
+        public GripMeasurement Right { get; set; }
 
         public static GripStrength Build(double leftPounds, double rightPounds) => new GripStrength(leftPounds, rightPounds);
 
         public override string ToString() => $"Left: {Left} Right: {Right}";
+
+        public GripStrength()
+        {
+            
+        }
     }
 }
