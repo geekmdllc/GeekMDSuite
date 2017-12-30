@@ -107,7 +107,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // GET api/audiograms/interpret/5
         [HttpGet]
-        [Route("classify/{id}")]
+        [Route("interpret/{id}")]
         public IActionResult Interpret(int id)
         {
             throw new NotImplementedException();

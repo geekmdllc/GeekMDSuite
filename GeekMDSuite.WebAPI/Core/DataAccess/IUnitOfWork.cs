@@ -11,6 +11,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         ICentralBloodPressureRepository CentralBloodPressures { get; }
         IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
         IPatientsRepository Patients { get; }
+        IVisitRepository Visits { get; }
         void Complete();
     }
 }

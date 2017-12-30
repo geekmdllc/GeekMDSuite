@@ -1,10 +1,12 @@
-﻿using GeekMDSuite.WebAPI.Core.Models;
+﻿using System;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class PatientEntity : Patient, IEntity<PatientEntity>
     {
         public int Id { get; set; }
+        public Guid Guid { get; set; }
 
         public PatientEntity()
         {

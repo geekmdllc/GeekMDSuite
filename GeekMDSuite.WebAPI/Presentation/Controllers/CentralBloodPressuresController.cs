@@ -93,7 +93,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // GET api/centralbloodpressures/classify/5
         [HttpGet]
-        [Route("interpret/{id}")]
+        [Route("classify/{id}")]
         public IActionResult Classify(int id)
         {
             throw new NotImplementedException();

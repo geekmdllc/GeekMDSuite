@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
-using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
@@ -35,6 +34,17 @@ namespace GeekMDSuite.WebAPI.UnitTests
         public void FindByMedicalRecordNumber_GivenCorrectMedicalRecordNumber_ReturnsPatientEntity(string mrn, bool expected = true)
         {
             var found = _unitOfWork.Patients.FindByMedicalRecordNumber(mrn);
+            
+            Assert.Equal(expected, found.Any());
+        }
+        
+        [Theory]
+        [InlineData(1850, 1, 1, false)]
+        [InlineData(1900, 1, 1, true)]
+        [InlineData(1990, 2, 2, true)]
+        public void FindByDateOfBirth_GivenCorrectMedicalRecordNumber_ReturnsPatientEntity(int year, int month, int day, bool expected = true)
+        {
+            var found = _unitOfWork.Patients.FindByDateOfBirth(new DateTime(year, month, day));
             
             Assert.Equal(expected, found.Any());
         }

@@ -109,7 +109,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // GET api/bloodPressures/classify/5
         [HttpGet]
-        [Route("intepret/{id}")]
+        [Route("interpret/{id}")]
         public IActionResult Interpret(int id)
         {
             var found = _unitOfWork.BloodPressures.FindById(id);

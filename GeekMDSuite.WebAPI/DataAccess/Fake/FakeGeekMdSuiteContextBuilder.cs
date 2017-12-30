@@ -16,15 +16,17 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             var context = new GeekMdSuiteDbContext(options);
 
             context.Audiograms.AddRange(GetAudiogramEntities());
-            context.Patients.AddRange(GetPatientEntities());
+            context.BloodPressures.AddRange(GetBloodPressureEntities());
             context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
             context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());
-            context.BloodPressures.AddRange(GetBloodPressureEntities());
+            context.Patients.AddRange(GetPatientEntities());
+            context.Visits.AddRange(GetVisitEntities());
             
             context.SaveChanges();
  
             return context;
         }
     }
+    
 }

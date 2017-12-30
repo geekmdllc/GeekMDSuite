@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.WebAPI.Core.Models;
 
-namespace GeekMDSuite.WebAPI.Repositories
+namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
 {
     public interface IRepository<T> where T : IEntity<T>
     {
-        T FindById(int id);
         IEnumerable<T> All();
+        T FindById(int id);
         void Add(T entity);
         void Delete(int id);
         void Update(T entity);

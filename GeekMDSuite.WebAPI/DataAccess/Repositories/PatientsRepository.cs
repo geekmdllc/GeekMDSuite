@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Helpers;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
-using GeekMDSuite.WebAPI.Repositories;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
@@ -19,5 +19,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query) => 
             Context.Patients.Where(p => StringHelpers.StringContainsQuery(query, p.MedicalRecordNumber));
+
+        public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth) => 
+            Context.Patients.Where(p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString());
     }
 }
