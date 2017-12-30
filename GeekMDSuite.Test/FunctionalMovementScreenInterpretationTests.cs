@@ -20,10 +20,11 @@ namespace GeekMDSuite.Test
                 .SetTrunkStabilityPuhsup(3,false)
                 .Build();
             
-            var deepSquat = new FunctionalMovementScreenInterpretation(fms).Classification.DeepSquat;
+            var classification = new FunctionalMovementScreenInterpretation(fms).Classification;
             
-            Assert.Equal(FmsScoreFlag.L3R3, deepSquat.Score);
-            Assert.Equal(FmsRecommendedAction.Unrestricted, deepSquat.RecommendedAction);
+            Assert.Equal(FmsScoreFlag.L3R3, classification.DeepSquat.Score);
+            Assert.Equal(FmsScoreFlag.L3R3, classification.ActiveStraightLegRaise.Score);
+            Assert.Equal(FmsRecommendedAction.Unrestricted, classification.DeepSquat.RecommendedAction);
         }
         [Fact]
         public void Classification_Given1DeepSquat_ReturnsCorrectScoreAndRecommendedAction()

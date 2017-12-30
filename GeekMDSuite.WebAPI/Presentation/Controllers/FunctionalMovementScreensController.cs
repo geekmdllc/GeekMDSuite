@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GeekMDSuite.Services.Interpretation;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             return _unitOfWork.FunctionalMovementScreens.All();
         }
         
-        // GET api/centralbloodpressures/5
+        // GET api/functionalmovementscreens/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -32,7 +33,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             return Ok(found);
         }
         
-        // POST api/centralbloodpressures/
+        // POST api/functionalmovementscreens/
         [HttpPost]
         public void Post([FromBody] FunctionalMovementScreenEntity functionalMovementScreen)
         {
@@ -40,7 +41,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _unitOfWork.Complete();
         }
         
-        // PUT api/centralbloodpressures/
+        // PUT api/functionalmovementscreens/
         [HttpPut]
         public ActionResult Put([FromBody] FunctionalMovementScreenEntity functionalMovementScreen)
         {
@@ -56,7 +57,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // DELETE api/centralbloodpressures/5
+        // DELETE api/functionalmovementscreens/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
@@ -72,7 +73,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // DELETE/api/centralbloodpressures --> from body [1,2,3,...,n]
+        // DELETE/api/functionalmovementscreens --> from body [1,2,3,...,n]
         [HttpDelete]
         public ActionResult Delete([FromBody] int[] ids)
         {
@@ -89,6 +90,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return NotFound();
             }
+        }
+        
+        // GET api/functionalmovementscreens/5
+        [HttpGet]
+        [Route("interpret/{id}")]
+        public IActionResult Interpret(int id)
+        {
+            var found = _unitOfWork.FunctionalMovementScreens.FindById(id);
+            if (found == null) return NotFound();
+
+            var fmsInterp = new FunctionalMovementScreenInterpretation(found);
+            
+            return Ok(fmsInterp.Classification);
         }
         
         private readonly IUnitOfWork _unitOfWork;

@@ -93,6 +93,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             ActiveStraightLegRaise.Right.Clearance = subject.ActiveStraightLegRaise.Right.Clearance;
             ActiveStraightLegRaise.Right.Laterality = subject.ActiveStraightLegRaise.Right.Laterality;
             ActiveStraightLegRaise.Right.MovementPattern = subject.ActiveStraightLegRaise.Right.MovementPattern;
+            ActiveStraightLegRaise.Right.RawScore = subject.ActiveStraightLegRaise.Right.RawScore;
         }
 
         private void MapDeepSquat(FunctionalMovementScreen subject)

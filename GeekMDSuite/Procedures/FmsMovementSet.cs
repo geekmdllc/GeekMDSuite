@@ -19,8 +19,8 @@
         public FmsMovementData Right { get; set; }
 
         public int Score => Left.Score < Right.Score
-            ? Right.Score
-            : Left.Score;
+            ? Left.Score
+            : Right.Score;
 
         public override string ToString() => $"{Left}\n{Right}";
     }
