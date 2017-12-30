@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using GeekMDSuite.WebAPI.DataAccess.Context;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Fake
@@ -20,6 +22,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
             context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());
+            context.BloodPressures.AddRange(GetBloodPressureEntities());
             
             context.SaveChanges();
  

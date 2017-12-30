@@ -13,6 +13,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<CentralBloodPressureEntity> CentralBloodPressures { get; set; }
         public virtual DbSet<PatientEntity> Patients { get; set; }
         public virtual DbSet<FunctionalMovementScreenEntity> FunctionalMovementScreens { get; set; }
+        public virtual DbSet<BloodPressureEntity> BloodPressures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
