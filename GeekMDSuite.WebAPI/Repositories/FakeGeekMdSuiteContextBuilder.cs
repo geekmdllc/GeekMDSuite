@@ -21,12 +21,38 @@ namespace GeekMDSuite.WebAPI.Repositories
     
                 context.Audiograms.AddRange(GetAudiogramEntities());
                 context.Patients.AddRange(GetPatientEntities());
+                context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
                 
                 context.SaveChanges();
      
                 return context;
             }
-    
+
+            private static List<CarotidUltrasoundEntity> GetCarotidUltrasoundEntities()
+            {
+                var left = CarotidUltrasoundResultBuilder.Initialize()
+                    .SetImtGrade(CarotidIntimaMediaThicknessGrade.CriticalSignificant)
+                    .SetIntimaMediaThickeness(0.655)
+                    .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan50)
+                    .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                    .Build();
+                var right  = CarotidUltrasoundResultBuilder.Initialize()
+                    .SetImtGrade(CarotidIntimaMediaThicknessGrade.CriticalSignificant)
+                    .SetIntimaMediaThickeness(0.655)
+                    .SetPercentStenosisGrade(CarotidPercentStenosisGrade.LessThan50)
+                    .SetPlaqueCharacter(CarotidPlaqueCharacter.Mixed)
+                    .Build();
+                var cu = CarotidUltrasound.Build(left, right);
+                var cue = new CarotidUltrasoundEntity(cu);
+
+                return new List<CarotidUltrasoundEntity>()
+                {
+                    cue,
+                    cue,
+                    cue
+                };
+            }
+            
             private static List<PatientEntity> GetPatientEntities()
             {
                 var p1 = PatientBuilder.Initialize()
@@ -51,6 +77,7 @@ namespace GeekMDSuite.WebAPI.Repositories
                     new PatientEntity(p2)
                 };
             }
+            
             private static List<AudiogramEntity> GetAudiogramEntities()
             {
                 var left = AudiogramDatasetBuilder.Initialize()
