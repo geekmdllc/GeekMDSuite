@@ -8,8 +8,12 @@
         public MuscularStrengthTest Type => MuscularStrengthTest.Situps;
 
         public override string ToString() => $"{Value} situps";
-        
-        private Situps(int count)
+
+        protected Situps()
+        {
+            
+        }
+        private Situps(int count) : this()
         {
             Value = count;
         }

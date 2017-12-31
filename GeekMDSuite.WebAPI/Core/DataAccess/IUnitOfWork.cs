@@ -18,6 +18,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IPatientsRepository Patients { get; }
         IPeripheralVisionsRepository PeripheralVisions { get; }
         IPushupsRepository Pushups { get; }
+        ISitAndReachesRepository SitAndReaches { get; }
+        ISitupsRepository Situps { get; }
         IVisitRepository Visits { get; }
         void Complete();
     }

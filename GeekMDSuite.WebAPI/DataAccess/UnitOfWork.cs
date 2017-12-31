@@ -20,9 +20,11 @@ namespace GeekMDSuite.WebAPI.DataAccess
             GripStrengths = new GripStrengthsRepository(_context);
             OccularPressures = new OccularPressuresRepository(_context);
             Patients = new PatientsRepository(_context);
-            Visits = new VisitsRepository(_context);
             PeripheralVisions = new PeripheralVisionsRepository(_context);
             Pushups = new PushupsRepository(_context);
+            SitAndReaches = new SitAndReachesRepository(_context);
+            Situps = new SitupsRepository(_context);
+            Visits = new VisitsRepository(_context);
         }
 
         public IRepository<T> Repository<T>() where T : class, IEntity<T> => new Repository<T>(_context);
@@ -34,8 +36,10 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public IGripStrengthsRepository GripStrengths { get;  }
         public IOccularPressuresRepository OccularPressures { get; }
         public IPatientsRepository Patients { get; }
-        public IPeripheralVisionsRepository PeripheralVisions { get; set; }
+        public IPeripheralVisionsRepository PeripheralVisions { get; }
         public IPushupsRepository Pushups { get; }
+        public ISitAndReachesRepository SitAndReaches { get; }
+        public ISitupsRepository Situps { get; set; }
         public IVisitRepository Visits { get;  }
 
         public void Complete()

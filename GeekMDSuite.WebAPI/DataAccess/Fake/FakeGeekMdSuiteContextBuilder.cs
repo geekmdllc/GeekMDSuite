@@ -10,7 +10,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     public static partial class FakeGeekMdSuiteContextBuilder
     {
         public static GeekMdSuiteDbContext Context => GetContextWithData();
-        
+
         private static GeekMdSuiteDbContext GetContextWithData()
         {
             
@@ -27,10 +27,12 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
             context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());
             context.GripStrengths.AddRange(GetGripStrengthEntities());
+            context.OcularPressures.AddRange(GetOcularPressureEntities());
             context.Patients.AddRange(GetPatientEntities());
             context.PeripheralVisions.AddRange(GetPeripheralVisionEntities());
             context.Pushups.AddRange(GetPushupsEntities());
-            context.OcularPressures.AddRange(GetOcularPressureEntities());
+            context.SitAndReaches.AddRange(GetSitAndReachEntities());
+            context.Situps.AddRange(GetSitupEntities());
             context.Visits.AddRange(GetVisitEntities());
             
             context.SaveChanges();
