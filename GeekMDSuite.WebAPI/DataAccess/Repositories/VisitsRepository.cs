@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         
         public VisitEntity FindByPatientGuid(Guid patientGuid)
         {
-            return Context.Visits.First(v => v.Patient == patientGuid);
+            return Context.Visits.First(v => v.PatientGuid == patientGuid);
         }
 
         public IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn)
@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         {
             var patients = Context.Patients.Where(p => StringHelpers.StringContainsQuery(name, p.Name.ToString()));
             foreach (var patient in patients)
-                yield return Context.Visits.First(v => v.Patient == patient.Guid);
+                yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
         }
 
         public IEnumerable<VisitEntity> FindByDateOfBirth(DateTime dateOfBirth)
@@ -40,7 +40,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
                                                        p.DateOfBirth.Month == dateOfBirth.Month &&
                                                        p.DateOfBirth.Day == dateOfBirth.Day);
             foreach (var patient in patients)
-                yield return Context.Visits.First(v => v.Patient == patient.Guid);
+                yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
         }
     }
 }

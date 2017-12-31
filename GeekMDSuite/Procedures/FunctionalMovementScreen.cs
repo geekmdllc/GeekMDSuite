@@ -37,7 +37,7 @@
         public override string ToString() => 
             $"{DeepSquat}\n{HurdleStep}\n{InlineLunge}\n{ShoulderMobility}\n{ActiveStraightLegRaise}\n{TrunkStabilityPushup}\n{RotaryStability}";
 
-        public FunctionalMovementScreen()
+        protected FunctionalMovementScreen()
         {
             
         }

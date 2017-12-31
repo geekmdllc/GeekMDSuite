@@ -20,7 +20,7 @@ namespace GeekMDSuite.Procedures
             return $"Left: {Left}\nRight:{Right}";
         }
 
-        public Audiogram()
+        protected Audiogram()
         {
             Right = new AudiogramDataset();
             Left = new AudiogramDataset();

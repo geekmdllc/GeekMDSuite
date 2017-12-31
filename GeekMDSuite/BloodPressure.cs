@@ -2,7 +2,7 @@
 {
     public class BloodPressure : IBloodPressure
     {
-        public BloodPressure()
+        protected BloodPressure()
         {
             
         }

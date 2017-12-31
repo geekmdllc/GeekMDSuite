@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public int Id { get; set; }
         public Guid Visit { get; set; }
-        public Guid Patient { get; set; }
+        public Guid PatientGuid { get; set; }
         public DateTime Date { get; set; }
 
         public VisitEntity()
@@ -15,14 +15,14 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Visit = Guid.Empty;
         }
 
-        public VisitEntity(Guid patient) : this()
+        public VisitEntity(Guid patientGuid) : this()
         {
-            Patient = patient;
+            PatientGuid = patientGuid;
         }
         
         public void MapValues(VisitEntity subject)
         {
-            Patient = subject.Patient;
+            PatientGuid = subject.PatientGuid;
             Date = subject.Date;
         }
     }
