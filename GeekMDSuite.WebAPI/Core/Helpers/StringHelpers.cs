@@ -4,7 +4,7 @@ namespace GeekMDSuite.WebAPI.Core.Helpers
 {
     internal static class StringHelpers
     {
-        internal static bool HasWordsInCommonWith(this string query, string comparison)
+        internal static bool HasStringsInCommonWith(this string query, string comparison)
         {
             var queryStringList = query.ToLower().Replace(",", "").Split();
             var comparisonString = comparison.ToLower();

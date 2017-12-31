@@ -22,14 +22,14 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn)
         {
-            var patients =  Context.Patients.Where(p => StringHelpers.HasWordsInCommonWith(mrn, p.MedicalRecordNumber.ToString()));
+            var patients =  Context.Patients.Where(p => mrn.HasStringsInCommonWith(p.MedicalRecordNumber.ToString()));
             foreach (var patient in patients)
                 yield return FindByPatientGuid(patient.Guid);
         }
 
         public IEnumerable<VisitEntity> FindByName(string name)
         {
-            var patients = Context.Patients.Where(p => StringHelpers.HasWordsInCommonWith(name, p.Name.ToString()));
+            var patients = Context.Patients.Where(p => name.HasStringsInCommonWith(p.Name.ToString()));
             foreach (var patient in patients)
                 yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
         }

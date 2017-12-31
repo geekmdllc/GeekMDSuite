@@ -2,25 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public class RepositoryAssociatedWithVisit<T> : Repository<T>, IRepositoryAssociatedWithVisit<T> where T : class, IVisitData<T>
+    public class RepositoryAssociatedWithVisit<T> : Repository<T>, IRepositoryAssociatedWithVisit<T> 
+        where T : class, IVisitData<T>
     {
         public RepositoryAssociatedWithVisit(GeekMdSuiteDbContext context) : base (context) {}
-        
-        public IEnumerable<T> FindByVisit(Guid visitGuid) => Context.Set<T>().Where(v => v.Visit == visitGuid);
+
+        public IEnumerable<T> FindByVisit(Guid visitGuid)
+        {
+            if (visitGuid == Guid.Empty) 
+                throw new ArgumentOutOfRangeException($"{nameof(visitGuid)} must not be an empty Guid.");
+            var result = Context.Set<T>().Where(v => v.Visit == visitGuid);
+            
+            if (!result.Any())
+                throw new RepositoryElementNotFoundException(visitGuid.ToString());
+
+            return result;
+        }
         
         public IEnumerable<T> FindByPatient(Guid patientGuid)
         {
+            if (patientGuid == Guid.Empty) 
+                throw new ArgumentOutOfRangeException($"{nameof(patientGuid)} must not be an empty Guid.");
+            
             var visitsList = Context.Visits.Where(v => v.PatientGuid == patientGuid).ToList();
-            var setList = new List<T>();
+            var results = new List<T>();
             foreach (var visit in visitsList)
-                setList.AddRange(FindByVisit(visit.Visit));
+                results.AddRange(FindByVisit(visit.Visit));
 
-            return setList;
+            if (!results.Any())
+                throw new RepositoryElementNotFoundException(patientGuid.ToString());
+            
+            return results;
         }
     }
 }

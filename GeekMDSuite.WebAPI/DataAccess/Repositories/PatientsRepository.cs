@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         }
         
         public IEnumerable<PatientEntity> FindByName(string query) => 
-            Context.Patients.Where(p => query.HasWordsInCommonWith(p.Name.ToString()));
+            Context.Patients.Where(p => query.HasStringsInCommonWith(p.Name.ToString()));
 
         public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query) => 
             Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber));

@@ -14,7 +14,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 new VisitEntity()
                 {
                     Date = new DateTime(2017, 1, 1),
-                    PatientGuid = BruceWayneGuid,
+                    PatientGuid = BruceWaynesGuid,
                     Visit = BruceWaynesVisitGuid,
                 },
                 new VisitEntity()

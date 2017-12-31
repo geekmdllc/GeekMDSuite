@@ -54,10 +54,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             return context;
         }
 
-        private static readonly Guid XerMajestiesVisitGuid = Guid.Parse("fef15e44-74cb-4c21-aba5-d6363c45108d");
-        private static readonly Guid XerMajestyGuid = Guid.Parse("3b69bd30-7a07-4859-b536-5071e0a5f516");
-        private static readonly Guid BruceWaynesVisitGuid = Guid.Parse("8bfb8f23-39f4-4cde-80c6-72b178068dc4");
-        private static readonly Guid BruceWayneGuid = Guid.Parse("50345ee6-fde2-4a51-8177-8c715628e39e");
+        public static readonly Guid XerMajestiesVisitGuid = Guid.Parse("fef15e44-74cb-4c21-aba5-d6363c45108d");
+        public static readonly Guid XerMajestyGuid = Guid.Parse("3b69bd30-7a07-4859-b536-5071e0a5f516");
+        public static readonly Guid BruceWaynesVisitGuid = Guid.Parse("8bfb8f23-39f4-4cde-80c6-72b178068dc4");
+        public static readonly Guid BruceWaynesGuid = Guid.Parse("50345ee6-fde2-4a51-8177-8c715628e39e");
     }
     
 }

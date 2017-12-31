@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,23 +13,41 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         protected VisitDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
-        // GET api/visits/bypatient/"guid"
+        
         [HttpGet("byvisit/{guid}")]
-        public IActionResult GetByVisit(Guid guid)
+        public IActionResult GetByVisitGuid(Guid guid)
         {
-            var found = UnitOfWork.VisitDataRepository<T>().FindByVisit(guid);
-            if (found == null) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                var result = UnitOfWork.VisitDataRepository<T>().FindByVisit(guid);
+                return Ok(result);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("An emtpy Guid was provided.");
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
-        // GET api/visits/bypatient/"guid"
+        
         [HttpGet("bypatient/{guid}")]
         public IActionResult GetByPatientGuid(Guid guid)
         {
-            var found = UnitOfWork.VisitDataRepository<T>().FindByPatient(guid);
-            if (found == null) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                var result = UnitOfWork.VisitDataRepository<T>().FindByPatient(guid);
+                return Ok(result);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("An emtpy Guid was provided.");
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

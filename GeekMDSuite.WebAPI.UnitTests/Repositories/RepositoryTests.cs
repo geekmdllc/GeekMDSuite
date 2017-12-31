@@ -37,10 +37,11 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         }
 
         [Fact]
-        public void FindById_GivenEmptySet_ReturnsNull()
+        public void FindById_GivenEmptyContext_ThrowsRepositoryElementNotFoundException()
         {
-            var result = _unitOfWorkEmpty.VisitDataRepository<AudiogramEntity>().FindById(0);
-            Assert.Null(result);
+            var repository = _unitOfWorkEmpty.VisitDataRepository<AudiogramEntity>();
+            
+            Assert.Throws<RepositoryElementNotFoundException>(() => repository.FindById(1));
         }
 
         [Fact]
