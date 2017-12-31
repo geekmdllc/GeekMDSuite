@@ -3,7 +3,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class PatientEntity : Patient, IEntity<PatientEntity>
+    public class PatientEntity : Patient, IEntity<Patient>
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }
@@ -22,7 +22,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Race = patient.Race;
         }
 
-        public void MapValues(PatientEntity subject)
+        public void MapValues(Patient subject)
         {
             DateOfBirth = subject.DateOfBirth;
             Gender.Category = subject.Gender.Category;

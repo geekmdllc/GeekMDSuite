@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Services;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +12,28 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json")]
     public class PatientsController : EntityDataController<PatientEntity>
     {
-        public PatientsController(IUnitOfWork unitOfWork) : base(unitOfWork) { }
-        
+        private readonly INewPatientService _newPatientService;
+        public PatientsController(IUnitOfWork unitOfWork, INewPatientService newPatientService) : base(unitOfWork)
+        {
+            _newPatientService = newPatientService;
+        }
+
+        [HttpPost]
+        public override ActionResult Post([FromBody] PatientEntity patient)
+        {
+            try
+            {
+                var newPatient = _newPatientService.GenerateUsing(patient);
+                UnitOfWork.Patients.Add(newPatient);
+            }
+            catch (MedicalRecordNotUniqueException exception)
+            {
+                Console.WriteLine(exception.Message);
+                return Conflict();
+            }
+            UnitOfWork.Complete();
+            return Ok();
+        }
         // GET api/patients/joe
         [HttpGet]
         [Route("name/{name}")]

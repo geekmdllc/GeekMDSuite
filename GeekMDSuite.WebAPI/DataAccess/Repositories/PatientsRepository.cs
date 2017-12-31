@@ -15,13 +15,15 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         }
         
         public IEnumerable<PatientEntity> FindByName(string query) => 
-            Context.Patients.Where(p => StringHelpers.StringContainsQuery(query, p.Name.ToString()));
+            Context.Patients.Where(p => query.HasWordsInCommonWith(p.Name.ToString()));
 
         public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query) => 
-            Context.Patients.Where(p => StringHelpers.StringContainsQuery(query, p.MedicalRecordNumber));
+            Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber));
 
         public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth) => 
             Context.Patients.Where(p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString());
+
+        public bool MedicalRecordNumberExists(string query) => FindByMedicalRecordNumber(query).Any();
 
         public PatientEntity FindByGuid(Guid guid) => Context.Patients.First(p => p.Guid == guid);
     }

@@ -32,14 +32,15 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
             ConfigureAudiogramEntity(modelBuilder);
+            ConfigureBodyCompositionEntity(modelBuilder);
+            ConfigureBodyCompositionExpandedEntity(modelBuilder);
             ConfigureCarotidUltrasoundEntity(modelBuilder);
             ConfigureFunctionalMovementScreen(modelBuilder);
             ConfigureGripStrengthEntity(modelBuilder);
             ConfigurePatientEntity(modelBuilder);
             ConfigureTreadmillExerciseStressTestEntity(modelBuilder);
             ConfigureVitalSignsEntity(modelBuilder);
-            ConfigureBodyCompositionEntity(modelBuilder);
-            ConfigureBodyCompositionExpandedEntity(modelBuilder);
+            ConfigureVisitEntities(modelBuilder);
         }
     }
 }

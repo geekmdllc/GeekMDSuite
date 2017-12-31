@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Models;
+using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -16,6 +17,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             UnitOfWork = unitOfWork;
         }
+
+        public ConflictResult Conflict() => new ConflictResult();
 
         // GET api/T
         [HttpGet]
@@ -36,10 +39,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // POST api/T/
         [HttpPost]
-        public void Post([FromBody] T entity)
+        public virtual ActionResult Post([FromBody] T entity)
         {
-            UnitOfWork.EntityDataRepository<T>().Add(entity);
-            UnitOfWork.Complete();
+            try
+            {
+                UnitOfWork.EntityDataRepository<T>().Add(entity);
+                UnitOfWork.Complete();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
         
         // PUT api/T/

@@ -1,9 +1,11 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
+using GeekMDSuite.WebAPI.DataAccess.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +32,7 @@ namespace GeekMDSuite.WebAPI
 
             services.AddMvc();
             services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite(connection));
+            services.AddSingleton<INewPatientService, NewPatientService>();
             if (Environment.IsDevelopment())
                 services.AddSingleton<IUnitOfWork, FakeUnitOfWork>(); // Bypasses Sqlite with in-memory DB
             else if (Environment.IsProduction())
