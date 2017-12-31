@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class AudiogramsController : EntityDataController<AudiogramEntity>
+    public class AudiogramsController : VisitDataController<AudiogramEntity>
     {
         public AudiogramsController(IUnitOfWork unitOfWork) : base(unitOfWork){ }
         

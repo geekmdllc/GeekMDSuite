@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class SitupsController : EntityDataController<SitupsEntity>
+    public class SitupsController : VisitDataController<SitupsEntity>
     {
         public SitupsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

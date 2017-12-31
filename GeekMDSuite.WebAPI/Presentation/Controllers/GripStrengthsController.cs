@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class GripStrengthsController : EntityDataController<GripStrengthEntity>
+    public class GripStrengthsController : VisitDataController<GripStrengthEntity>
     {
         public GripStrengthsController(IUnitOfWork unitOfWork) : base(unitOfWork) {}
         

@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class PeripheralVisionsController : EntityDataController<PeripheralVisionEntity>
+    public class PeripheralVisionsController : VisitDataController<PeripheralVisionEntity>
     {
         private readonly IUnitOfWork _unitOfWork;
 

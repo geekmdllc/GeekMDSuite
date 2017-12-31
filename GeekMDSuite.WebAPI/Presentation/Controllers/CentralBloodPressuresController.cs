@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class CentralBloodPressuresController : EntityDataController<CentralBloodPressureEntity>
+    public class CentralBloodPressuresController : VisitDataController<CentralBloodPressureEntity>
     {
         public CentralBloodPressuresController(IUnitOfWork unitOfWork) : base(unitOfWork){ }
 

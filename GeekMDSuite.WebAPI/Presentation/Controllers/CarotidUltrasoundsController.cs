@@ -9,7 +9,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class CarotidUltrasoundsController : EntityDataController<CarotidUltrasoundEntity>
+    public class CarotidUltrasoundsController : VisitDataController<CarotidUltrasoundEntity>
     {
         public CarotidUltrasoundsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

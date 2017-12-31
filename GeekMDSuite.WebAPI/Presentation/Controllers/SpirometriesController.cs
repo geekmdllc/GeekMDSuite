@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class SpirometriesController : EntityDataController<SpirometryEntity>
+    public class SpirometriesController : VisitDataController<SpirometryEntity>
     {
         public SpirometriesController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

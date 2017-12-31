@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class VisualAcuitiesController : EntityDataController<VisualAcuityEntity>
+    public class VisualAcuitiesController : VisitDataController<VisualAcuityEntity>
     {
         public VisualAcuitiesController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

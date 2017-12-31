@@ -21,14 +21,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpGet]
         public IEnumerable<T> Get()
         {
-            return UnitOfWork.Repository<T>().All();
+            return UnitOfWork.EntityDataRepository<T>().All();
         }
         
         // GET api/T/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var found = UnitOfWork.Repository<T>().FindById(id);
+            var found = UnitOfWork.EntityDataRepository<T>().FindById(id);
             if (found == null) return NotFound();
             
             return Ok(found);
@@ -38,7 +38,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpPost]
         public void Post([FromBody] T entity)
         {
-            UnitOfWork.Repository<T>().Add(entity);
+            UnitOfWork.EntityDataRepository<T>().Add(entity);
             UnitOfWork.Complete();
         }
         
@@ -48,7 +48,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                UnitOfWork.Repository<T>().Update(entity);
+                UnitOfWork.EntityDataRepository<T>().Update(entity);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -64,7 +64,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                UnitOfWork.Repository<T>().Delete(id);
+                UnitOfWork.EntityDataRepository<T>().Delete(id);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -82,7 +82,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 foreach (var id in ids)
                 {
-                    UnitOfWork.Repository<T>().Delete(id);
+                    UnitOfWork.EntityDataRepository<T>().Delete(id);
                 }
                 UnitOfWork.Complete();
                 return Ok();

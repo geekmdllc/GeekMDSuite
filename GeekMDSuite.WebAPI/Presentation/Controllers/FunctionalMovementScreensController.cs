@@ -9,7 +9,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class FunctionalMovementScreensController : EntityDataController<FunctionalMovementScreenEntity>
+    public class FunctionalMovementScreensController : VisitDataController<FunctionalMovementScreenEntity>
     {
         public FunctionalMovementScreensController(IUnitOfWork unitOfWork) : base(unitOfWork) { }
         

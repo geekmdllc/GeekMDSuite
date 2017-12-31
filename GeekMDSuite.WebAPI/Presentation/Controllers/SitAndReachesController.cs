@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class SitAndReachesController : EntityDataController<SitAndReachEntity>
+    public class SitAndReachesController : VisitDataController<SitAndReachEntity>
     {
         public SitAndReachesController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

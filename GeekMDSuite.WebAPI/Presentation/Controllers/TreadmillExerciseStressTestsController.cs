@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class TreadmillExerciseStressTestsController : EntityDataController<TreadmillExerciseStressTestEntity>
+    public class TreadmillExerciseStressTestsController : VisitDataController<TreadmillExerciseStressTestEntity>
     {
         public TreadmillExerciseStressTestsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

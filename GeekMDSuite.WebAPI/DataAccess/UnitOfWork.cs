@@ -32,7 +32,9 @@ namespace GeekMDSuite.WebAPI.DataAccess
             VitalSigns = new VitalSignsRepository(_context);
         }
 
-        public IRepository<T> Repository<T>() where T : class, IEntity<T> => new Repository<T>(_context);
+        public IRepositoryAssociatedWithVisit<T> VisitDataRepository<T>() where T : class, IVisitData<T> => new RepositoryAssociatedWithVisit<T>(_context);
+        public IRepository<T> EntityDataRepository<T>() where T : class, IEntity<T> => new Repository<T>(_context);
+
         public IAudiogramsRepository Audiograms { get;  }
         public IBloodPressuresRepository BloodPressures { get;  }
         public IBodyCompositionsRepository BodyCompositions { get; set; }

@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class OccularPressuresController : EntityDataController<OcularPressureEntity>
+    public class OccularPressuresController : VisitDataController<OcularPressureEntity>
     {
         public OccularPressuresController(IUnitOfWork unitOfWork) : base(unitOfWork) {}
     }

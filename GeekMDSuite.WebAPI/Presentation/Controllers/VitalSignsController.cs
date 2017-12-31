@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class VitalSignsController : EntityDataController<VitalSignsEntity>
+    public class VitalSignsController : VisitDataController<VitalSignsEntity>
     {
         public VitalSignsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class BodyCompositionExpandedsController : EntityDataController<BodyCompositionExpandedEntity>
+    public class BodyCompositionExpandedsController : VisitDataController<BodyCompositionExpandedEntity>
     {
         public BodyCompositionExpandedsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
