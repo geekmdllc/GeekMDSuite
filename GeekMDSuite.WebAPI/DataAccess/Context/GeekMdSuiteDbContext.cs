@@ -17,6 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<OcularPressureEntity> OcularPressures { get; set; }
         public virtual DbSet<PeripheralVisionEntity> PeripheralVisions { get; set; }
         public virtual DbSet<PatientEntity> Patients { get; set; }
+        public virtual DbSet<PushupsEntity> Pushups { get; set; }
         public virtual DbSet<VisitEntity> Visits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

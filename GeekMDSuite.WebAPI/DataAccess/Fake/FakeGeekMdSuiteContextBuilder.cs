@@ -29,6 +29,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.GripStrengths.AddRange(GetGripStrengthEntities());
             context.Patients.AddRange(GetPatientEntities());
             context.PeripheralVisions.AddRange(GetPeripheralVisionEntities());
+            context.Pushups.AddRange(GetPushupsEntities());
             context.OcularPressures.AddRange(GetOcularPressureEntities());
             context.Visits.AddRange(GetVisitEntities());
             

@@ -4,8 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public class OcularPressuresRepository : RepositoryAssociatedWithVisit<OcularPressureEntity>, IOcularPressuresRepository
+    public class OccularPressuresRepository : RepositoryAssociatedWithVisit<OcularPressureEntity>, IOccularPressuresRepository
     {
-        public OcularPressuresRepository(GeekMdSuiteDbContext context) : base(context) {}
+        public OccularPressuresRepository(GeekMdSuiteDbContext context) : base(context) {}
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
 {
-    public interface IOcularPressuresRepository : IRepositoryAssociatedWithVisit<OcularPressureEntity>
+    public interface IPushupsRepository : IRepositoryAssociatedWithVisit<PushupsEntity>
     {
         
     }

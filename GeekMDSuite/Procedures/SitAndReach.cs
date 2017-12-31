@@ -9,7 +9,7 @@
         }
         
 
-        public double Value { get; }
+        public double Value { get; set; }
         public MuscularStrengthTest Type => MuscularStrengthTest.SitAndReach;
 
         public override string ToString() => $"{Value} cm";

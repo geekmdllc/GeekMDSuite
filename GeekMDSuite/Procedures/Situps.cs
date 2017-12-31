@@ -4,7 +4,7 @@
     {
         public static Situps Build(int count) => new Situps(count);
 
-        public double Value { get; }
+        public double Value { get; set; }
         public MuscularStrengthTest Type => MuscularStrengthTest.Situps;
 
         public override string ToString() => $"{Value} situps";
