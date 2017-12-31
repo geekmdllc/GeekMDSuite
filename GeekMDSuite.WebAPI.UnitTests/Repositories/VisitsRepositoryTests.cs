@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace GeekMDSuite.WebAPI.UnitTests
+namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public class VisitsRepositoryTests
     {

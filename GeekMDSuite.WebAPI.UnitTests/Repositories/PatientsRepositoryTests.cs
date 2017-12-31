@@ -5,7 +5,7 @@ using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
-namespace GeekMDSuite.WebAPI.UnitTests
+namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public class PatientsRepositoryTests
     {
@@ -151,6 +151,6 @@ namespace GeekMDSuite.WebAPI.UnitTests
             Assert.NotEqual(raceBefore, patientAfter.Race);
         }
 
-        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWork();
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
     }
 }

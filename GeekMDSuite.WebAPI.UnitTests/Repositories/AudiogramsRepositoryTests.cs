@@ -2,16 +2,15 @@
 using System.Linq;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess;
-using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
-namespace GeekMDSuite.WebAPI.UnitTests
+namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public class AudiogramsRepositoryTests
     {
-        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWork();
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
         
         [Fact]
         public void Update_GivenNewValues_PersistsChanges()

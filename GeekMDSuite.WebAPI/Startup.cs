@@ -34,7 +34,7 @@ namespace GeekMDSuite.WebAPI
             services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite(connection));
             services.AddSingleton<INewPatientService, NewPatientService>();
             if (Environment.IsDevelopment())
-                services.AddSingleton<IUnitOfWork, FakeUnitOfWork>(); // Bypasses Sqlite with in-memory DB
+                services.AddSingleton<IUnitOfWork, FakeUnitOfWorkSeeded>(); // Bypasses Sqlite with in-memory DB
             else if (Environment.IsProduction())
                 services.AddSingleton<IUnitOfWork, UnitOfWork>();
             else 

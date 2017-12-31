@@ -11,6 +11,16 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     public static partial class FakeGeekMdSuiteContextBuilder
     {
         public static GeekMdSuiteDbContext Context => GetContextWithData();
+        public static GeekMdSuiteDbContext EmptyContext => GetContextWithoutData();
+
+        private static GeekMdSuiteDbContext GetContextWithoutData()
+        {
+            var options = new DbContextOptionsBuilder<GeekMdSuiteDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+
+            return new GeekMdSuiteDbContext(options);
+        }
 
         private static GeekMdSuiteDbContext GetContextWithData()
         {

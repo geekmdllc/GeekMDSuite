@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using Microsoft.AspNetCore.Mvc;
@@ -22,19 +23,26 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         // GET api/T
         [HttpGet]
-        public IEnumerable<T> Get()
+        public IActionResult Get()
         {
-            return UnitOfWork.EntityDataRepository<T>().All();
+            var results = UnitOfWork.EntityDataRepository<T>().All();
+            if (results.Any())
+                return Ok(results);
+            return NotFound();
         }
         
         // GET api/T/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var found = UnitOfWork.EntityDataRepository<T>().FindById(id);
-            if (found == null) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                return Ok(UnitOfWork.EntityDataRepository<T>().FindById(id));
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
         
         // POST api/T/
@@ -47,9 +55,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 UnitOfWork.Complete();
                 return Ok();
             }
-            catch (Exception)
+            catch (ArgumentNullException)
             {
-                return NotFound();
+                return BadRequest();
             }
         }
         
@@ -63,9 +71,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 UnitOfWork.Complete();
                 return Ok();
             }
-            catch (Exception)
+            catch (RepositoryElementNotFoundException)
             {
                 return NotFound();
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
             }
         }
         
@@ -79,7 +91,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 UnitOfWork.Complete();
                 return Ok();
             }
-            catch (Exception)
+            catch (RepositoryElementNotFoundException)
             {
                 return NotFound();
             }
@@ -98,7 +110,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 UnitOfWork.Complete();
                 return Ok();
             }
-            catch (Exception)
+            catch (RepositoryElementNotFoundException)
             {
                 return NotFound();
             }

@@ -6,7 +6,11 @@ namespace GeekMDSuite.WebAPI.Core.Exceptions
     {
         public RepositoryElementNotFoundException(string element)
         {
-            Message = $"{element} could not be located in the repository.";
+            Message = $"Element {element} could not be located in the repository.";
+        }
+        public RepositoryElementNotFoundException(int index)
+        {
+            Message = $"An item with index {index} could not be located in the repository.";
         }
         public override string Message { get; }
     }
