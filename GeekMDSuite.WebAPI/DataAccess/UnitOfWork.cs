@@ -13,6 +13,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
             _context = context;
             Audiograms = new AudiogramsRepository(_context);
             BloodPressures = new BloodPressuresRepository(_context);
+            BodyCompositions = new BodyCompositionsRepository(_context);
             CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
             CentralBloodPressures = new CentralBloodPressuresRepository(_context);
             FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
@@ -27,11 +28,13 @@ namespace GeekMDSuite.WebAPI.DataAccess
             TreadmillExerciseStressTests = new TreadmillExerciseStressTestsRepository(_context);
             Visits = new VisitsRepository(_context);
             VisualAcuities = new VisualAcuitiesRepository(_context);
+            VitalSigns = new VitalSignsRepository(_context);
         }
 
         public IRepository<T> Repository<T>() where T : class, IEntity<T> => new Repository<T>(_context);
         public IAudiogramsRepository Audiograms { get;  }
         public IBloodPressuresRepository BloodPressures { get;  }
+        public IBodyCompositionRepository BodyCompositions { get; set; }
         public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         public ICentralBloodPressureRepository CentralBloodPressures { get; }
         public IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
@@ -46,6 +49,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; set; }
         public IVisitRepository Visits { get;  }
         public IVisualAcuitiesRepository VisualAcuities { get; set; }
+        public IVitalSignsRepository VitalSigns { get; set; }
 
         public void Complete()
         {

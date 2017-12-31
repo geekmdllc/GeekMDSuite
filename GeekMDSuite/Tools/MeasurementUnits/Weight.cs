@@ -2,7 +2,7 @@
 {
     public class Weight : MassMeasurement
     {
-        protected internal Weight(double pounds) : base(pounds)
+        private Weight(double pounds) : base(pounds)
         {
         }
 
@@ -10,5 +10,6 @@
         {
             
         }
+        public static Weight Build(double pounds) => new Weight(pounds);
     }
 }

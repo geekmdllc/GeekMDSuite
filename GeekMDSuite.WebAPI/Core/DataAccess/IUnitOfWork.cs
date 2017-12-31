@@ -10,6 +10,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IRepository<T> Repository<T>() where T : class, IEntity<T>;
         IAudiogramsRepository Audiograms { get; }
         IBloodPressuresRepository BloodPressures { get; }
+        IBodyCompositionRepository BodyCompositions { get; }
         ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         ICentralBloodPressureRepository CentralBloodPressures { get; }
         IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
@@ -24,6 +25,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; }
         IVisitRepository Visits { get; }
         IVisualAcuitiesRepository VisualAcuities { get; }
+        IVitalSignsRepository VitalSigns { get; }
         void Complete();
     }
 }

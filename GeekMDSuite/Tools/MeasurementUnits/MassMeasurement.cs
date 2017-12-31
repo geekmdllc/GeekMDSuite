@@ -20,8 +20,6 @@ namespace GeekMDSuite.Tools.MeasurementUnits
 
         public double Grams => MassConversion.KilogramsToGrams(Kilograms);
 
-        public static MassMeasurement Build(double pounds) => new MassMeasurement(pounds);
-
         public override string ToString() => $"{Pounds} lbs";
     }
 }

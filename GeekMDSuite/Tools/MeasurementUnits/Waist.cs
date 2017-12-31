@@ -2,13 +2,11 @@
 {
     public class Waist : LengthMeasurement
     {
-        protected internal Waist(double inches) : base(inches)
-        {
-        }
+        private Waist(double inches) : base(inches)  { }
 
         protected internal Waist()
-        {
-            
-        }
+        { }
+        
+        public static Waist Build(double inches) => new Waist(inches);
     }
 }

@@ -4,11 +4,15 @@ namespace GeekMDSuite.Tools.MeasurementUnits
 {
     public class Temperature : ITemperature
     {
-        private Temperature(double temperatureFarenheight)
+        protected internal Temperature()
+        {
+            
+        }
+        private Temperature(double temperatureFarenheight) : this()
         {
             Farenheit = temperatureFarenheight;
         }
-        public double Farenheit { get; }
+        public double Farenheit { get; set; }
 
         public double Celcius => TemperatureConversion.FarenheitToCelcius(Farenheit);
         

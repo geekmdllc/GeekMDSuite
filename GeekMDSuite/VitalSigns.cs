@@ -5,7 +5,7 @@ namespace GeekMDSuite
     public class VitalSigns : IVitalSigns
     {
 
-        private VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate)
+        private VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate) : this()
         {
             BloodPressure = bloodPressure;
             Temperature = temperature;
@@ -15,7 +15,8 @@ namespace GeekMDSuite
 
         protected internal VitalSigns()
         {
-            
+            BloodPressure = new BloodPressure();
+            Temperature = new Temperature();
         }
 
         public BloodPressure BloodPressure { get; set; }

@@ -2,7 +2,7 @@
 {
     public interface ITemperature
     {
-        double Farenheit { get; }
+        double Farenheit { get; set; }
         double Celcius { get; }
     }
 }

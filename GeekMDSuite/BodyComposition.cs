@@ -4,10 +4,10 @@ namespace GeekMDSuite
 {
     public class BodyComposition : IBodyComposition
     {
-        internal BodyComposition(ILengthMeasurement heightInches, 
-            ILengthMeasurement waistInches, 
-            ILengthMeasurement hipsInches, 
-            IMassMeasurement weightPounds)
+        internal BodyComposition(Height heightInches, 
+            Waist waistInches, 
+            Hips hipsInches, 
+            Weight weightPounds) : this()
         {
             Height = heightInches;
             Waist = waistInches;
@@ -24,17 +24,14 @@ namespace GeekMDSuite
         }
 
         private BodyComposition(double heightInches, double waistInches, double hipsInches, double weightPounds) 
-            :this(LengthMeasurement.Build(heightInches), 
-                LengthMeasurement.Build(waistInches), 
-                LengthMeasurement.Build(hipsInches), 
-                MassMeasurement.Build(weightPounds))
+            :this(Height.Build(heightInches), Waist.Build(waistInches), Tools.MeasurementUnits.Hips.Build(hipsInches), Weight.Build(weightPounds) )
         {
         }
         
-        public ILengthMeasurement Height { get; set; }
-        public ILengthMeasurement Waist { get; set; }
-        public ILengthMeasurement Hips { get; set; }
-        public IMassMeasurement Weight { get; set; }
+        public Height Height { get; set; }
+        public Waist Waist { get; set; }
+        public Hips Hips { get; set; }
+        public Weight Weight { get; set; }
 
         internal static BodyComposition Build(double heightInches, double waistInches, double hipsInches,
             double weightPounds) => new BodyComposition(heightInches, waistInches, hipsInches, weightPounds);

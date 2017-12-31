@@ -22,6 +22,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             context.Audiograms.AddRange(GetAudiogramEntities());
             context.BloodPressures.AddRange(GetBloodPressureEntities());
+            context.BodyComposition.AddRange(GetBodyCompositionEntities());
             context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
             context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());
@@ -36,7 +37,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.TreadmillExerciseStressTests.AddRange(GetTreadmillExerciseStressTestEntities());
             context.Visits.AddRange(GetVisitEntities());
             context.VisualAcuities.AddRange(GetVisualAcuityEntities());
-            
+            context.VitalSigns.AddRange(GetVitalSignsEntities());
             context.SaveChanges();
  
             return context;
