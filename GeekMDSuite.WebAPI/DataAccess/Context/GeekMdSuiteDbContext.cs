@@ -10,7 +10,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
 
         public virtual DbSet<AudiogramEntity> Audiograms { get; set; }
         public virtual DbSet<BloodPressureEntity> BloodPressures { get; set; }
-        public virtual DbSet<BodyCompositionEntity> BodyComposition { get; set; }
+        public virtual DbSet<BodyCompositionEntity> BodyCompositions { get; set; }
+        public virtual DbSet<BodyCompositionExpandedEntity> BodyCompositionExpandeds { get; set; }
         public virtual DbSet<CarotidUltrasoundEntity> CarotidUltrasounds { get; set; }
         public virtual DbSet<CentralBloodPressureEntity> CentralBloodPressures { get; set; }
         public virtual DbSet<FunctionalMovementScreenEntity> FunctionalMovementScreens { get; set; }
@@ -38,6 +39,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
             ConfigureTreadmillExerciseStressTestEntity(modelBuilder);
             ConfigureVitalSignsEntity(modelBuilder);
             ConfigureBodyCompositionEntity(modelBuilder);
+            ConfigureBodyCompositionExpandedEntity(modelBuilder);
         }
     }
 }

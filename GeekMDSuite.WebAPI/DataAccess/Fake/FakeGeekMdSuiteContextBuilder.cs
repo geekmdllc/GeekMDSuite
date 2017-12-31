@@ -22,7 +22,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             context.Audiograms.AddRange(GetAudiogramEntities());
             context.BloodPressures.AddRange(GetBloodPressureEntities());
-            context.BodyComposition.AddRange(GetBodyCompositionEntities());
+            context.BodyCompositions.AddRange(GetBodyCompositionEntities());
+            context.BodyCompositionExpandeds.AddRange(GetBodyCompositionExpandedEntities());
             context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
             context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());

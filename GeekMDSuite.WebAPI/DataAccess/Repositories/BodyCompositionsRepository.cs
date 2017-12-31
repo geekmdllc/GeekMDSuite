@@ -5,7 +5,7 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
     public class BodyCompositionsRepository : RepositoryAssociatedWithVisit<BodyCompositionEntity>,
-        IBodyCompositionRepository
+        IBodyCompositionsRepository
     {
         public BodyCompositionsRepository(GeekMdSuiteDbContext context) : base(context)
         {

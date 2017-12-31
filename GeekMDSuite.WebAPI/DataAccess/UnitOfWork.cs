@@ -14,6 +14,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
             Audiograms = new AudiogramsRepository(_context);
             BloodPressures = new BloodPressuresRepository(_context);
             BodyCompositions = new BodyCompositionsRepository(_context);
+            BodyCompositionExpandeds = new BodyCompositionExpandedsRepository(_context);
             CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
             CentralBloodPressures = new CentralBloodPressuresRepository(_context);
             FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
@@ -34,7 +35,8 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public IRepository<T> Repository<T>() where T : class, IEntity<T> => new Repository<T>(_context);
         public IAudiogramsRepository Audiograms { get;  }
         public IBloodPressuresRepository BloodPressures { get;  }
-        public IBodyCompositionRepository BodyCompositions { get; set; }
+        public IBodyCompositionsRepository BodyCompositions { get; set; }
+        public IBodyCompositionExpandedsRepository BodyCompositionExpandeds { get; set; }
         public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         public ICentralBloodPressureRepository CentralBloodPressures { get; }
         public IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }

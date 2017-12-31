@@ -10,7 +10,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IRepository<T> Repository<T>() where T : class, IEntity<T>;
         IAudiogramsRepository Audiograms { get; }
         IBloodPressuresRepository BloodPressures { get; }
-        IBodyCompositionRepository BodyCompositions { get; }
+        IBodyCompositionsRepository BodyCompositions { get; }
+        IBodyCompositionExpandedsRepository BodyCompositionExpandeds { get; }
         ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         ICentralBloodPressureRepository CentralBloodPressures { get; }
         IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
