@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Models;
@@ -10,6 +11,16 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
     {
         public RepositoryAssociatedWithVisit(GeekMdSuiteDbContext context) : base (context) {}
         
-        public T FindByVisit(Guid visitGuid) => Context.Set<T>().First(v => v.Visit == visitGuid);
+        public IEnumerable<T> FindByVisit(Guid visitGuid) => Context.Set<T>().Where(v => v.Visit == visitGuid);
+        
+        public IEnumerable<T> FindByPatient(Guid patientGuid)
+        {
+            var visitsList = Context.Visits.Where(v => v.PatientGuid == patientGuid).ToList();
+            var setList = new List<T>();
+            foreach (var visit in visitsList)
+                setList.AddRange(FindByVisit(visit.Visit));
+
+            return setList;
+        }
     }
 }

@@ -21,5 +21,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             
             return Ok(found);
         }
+        // GET api/visits/bypatient/"guid"
+        [HttpGet("bypatient/{guid}")]
+        public IActionResult GetByPatientGuid(Guid guid)
+        {
+            var found = UnitOfWork.VisitDataRepository<T>().FindByPatient(guid);
+            if (found == null) return NotFound();
+            
+            return Ok(found);
+        }
     }
 }
