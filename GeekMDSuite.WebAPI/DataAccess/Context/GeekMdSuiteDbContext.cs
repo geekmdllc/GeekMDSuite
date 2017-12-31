@@ -13,9 +13,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<CarotidUltrasoundEntity> CarotidUltrasounds { get; set; }
         public virtual DbSet<CentralBloodPressureEntity> CentralBloodPressures { get; set; }
         public virtual DbSet<FunctionalMovementScreenEntity> FunctionalMovementScreens { get; set; }
+        public virtual DbSet<GripStrengthEntity> GripStrengths { get; set; }
+        public virtual DbSet<OcularPressureEntity> OcularPressures { get; set; }
+        public virtual DbSet<PeripheralVisionEntity> PeripheralVisions { get; set; }
         public virtual DbSet<PatientEntity> Patients { get; set; }
         public virtual DbSet<VisitEntity> Visits { get; set; }
-        public virtual DbSet<GripStrengthEntity> GripStrengths { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

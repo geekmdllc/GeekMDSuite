@@ -5,6 +5,7 @@ using GeekMDSuite.Analytics.Classification;
 
 namespace GeekMDSuite.Procedures
 {
+    // TODO: Refactor this. Needs a more strongly typed model to be compatible with EF.
     public class IshiharaSixPlateScreenBuilder : Builder<IshiharaSixPlateScreenBuilder, List<IshiharaPlateAnswer>>
     {
         public override List<IshiharaPlateAnswer> Build()

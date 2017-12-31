@@ -2,7 +2,7 @@
 {
     public interface IPeripheralVision
     {
-        int Left { get; }
-        int Right { get; }
+        int Left { get; set; }
+        int Right { get; set; }
     }
 }
