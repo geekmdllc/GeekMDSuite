@@ -8,7 +8,7 @@ using GeekMDSuite.WebAPI.DataAccess.Context;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public abstract class Repository<T> : IRepository<T> where T : class, IEntity<T>
+    public class Repository<T> : IRepository<T> where T : class, IEntity<T>
     {
         public T FindById(int id)
         {

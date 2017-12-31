@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 

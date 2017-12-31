@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Context;
@@ -30,7 +31,10 @@ namespace GeekMDSuite.WebAPI
             services.AddMvc();
             services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite(connection));
             if (Environment.IsDevelopment())
+            {
                 services.AddSingleton<IUnitOfWork, FakeUnitOfWork>(); // Bypasses Sqlite with in-memory DB
+            }
+                
             else if (Environment.IsProduction())
                 services.AddSingleton<IUnitOfWork, UnitOfWork>();
             else 
