@@ -10,17 +10,36 @@ namespace GeekMDSuite
             return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
         }
 
-        public PatientBuilder SetDateOfBirth(int year, int month, int day)
+        public Patient BuildWithoutModelValidation() => new Patient()
         {
-            _dateOfBirth = new DateTime(year, month, day);
+            DateOfBirth = _dateOfBirth,
+            Gender = _gender,
+            MedicalRecordNumber =  _medicalRecordNumber,
+            Name = _name,
+            Race = _race
+        };
+
+        public PatientBuilder SetDateOfBirth(int year, int month, int day) => SetDateOfBirth(new DateTime(year, month, day));
+
+        public PatientBuilder SetDateOfBirth(DateTime dateOfBirth)
+        {
+            _dateOfBirth = dateOfBirth;
             return this;
         }
 
-        public PatientBuilder SetName(string first, string last, string middle = "")
+//        public PatientBuilder BornOn(int year, int month, int day) => SetDateOfBirth(year, month, day);
+//        public PatientBuilder BornOn(DateTime dateOfBirth) => SetDateOfBirth(dateOfBirth);
+
+
+        public PatientBuilder SetName(Name name)
         {
-            _name = Name.Build(first, last, middle);
+            _name = name;
             return this;
         }
+
+        public PatientBuilder SetName(string first, string last, string middle = "") => SetName(Name.Build(first, last, middle));
+//        public PatientBuilder HasName(string first, string last, string middle = "") => SetName(first, last, middle);
+//        public PatientBuilder HasName(Name name) => SetName(name);
 
         public PatientBuilder SetMedicalRecordNumber(string medicalRecordNumber)
         {
@@ -33,6 +52,10 @@ namespace GeekMDSuite
             _gender = Gender.Build(gender);
             return this;
         }
+//        public PatientBuilder GenderIsMale() => SetGender(GenderIdentity.Male);
+//        public PatientBuilder GenderIsFemale() => SetGender(GenderIdentity.Female);
+//        public PatientBuilder GenderIsNonBinaryXy() => SetGender(GenderIdentity.NonBinaryXy);
+//        public PatientBuilder GenderIsNonBinaryXx() => SetGender(GenderIdentity.NonBinaryXx);
 
         public PatientBuilder SetRace(Race race)
         {
@@ -40,6 +63,14 @@ namespace GeekMDSuite
             _race = race;
             return this;
         }
+
+//        public PatientBuilder RaceIsAmericanOrAlaskanNative() => SetRace(Race.AmericanIndianOrAlaskaNative);
+//        public PatientBuilder RaceIsAsian() => SetRace(Race.Asian);
+//        public PatientBuilder RaceIsBlackOrAfricanAmerican() => SetRace(Race.BlackOrAfricanAmerican);
+//        public PatientBuilder RaceIsLatin() => SetRace(Race.Latin);
+//        public PatientBuilder RaceIsHawaiianOrPacificIslander() => SetRace(Race.NativeHawaiianOrOtherPacificIslander);
+//        public PatientBuilder RaceIsUnknownRace() => SetRace(Race.Unknown);
+//        public PatientBuilder RaceIsWhite() => SetRace(Race.White);
 
         private DateTime _dateOfBirth;
         private Name _name;

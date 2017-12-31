@@ -25,7 +25,11 @@
 
         public static bool IsGenotypeXy(GenderIdentity gender) => !IsGenotypeXx(gender);
 
-        public static bool IsGenotypeXy(IGender gender) => !IsGenotypeXx(gender.Category);
+        public static bool IsGenotypeXy(IGender gender)
+        {
+            var test = !IsGenotypeXx(gender.Category);
+            return test;
+        }
 
         public static Gender Build(GenderIdentity category) => new Gender(category);
 

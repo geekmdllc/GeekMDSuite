@@ -138,11 +138,10 @@ namespace GeekMDSuite.UnitTests
         public Ascvd10YearInterpretationTests()
         {
             _pooledParams = PooledCohortEquationParametersBuilder.Initialize();
-            _patient = new Patient()
-            {
-                DateOfBirth = SetDateOfBirthMinusYears(55),
-                Gender =  Gender.Build(GenderIdentity.Male)
-            };
+            _patient = PatientBuilder.Initialize()
+                .SetDateOfBirth(SetDateOfBirthMinusYears(55))
+                .SetGender(GenderIdentity.Male)
+                .BuildWithoutModelValidation();
         }
         
         public static DateTime SetDateOfBirthMinusYears(int years)

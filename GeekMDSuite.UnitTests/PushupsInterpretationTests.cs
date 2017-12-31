@@ -51,7 +51,7 @@ namespace GeekMDSuite.UnitTests
 
         public PushupsInterpretationTests()
         {
-            _patient = new Patient();
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
         }
 
         private readonly Patient _patient;

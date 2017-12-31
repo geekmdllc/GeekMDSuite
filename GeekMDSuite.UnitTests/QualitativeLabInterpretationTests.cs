@@ -16,10 +16,9 @@ namespace GeekMDSuite.UnitTests
         public void QualitativeLab_GivenResult_ReturnsCorrectClassification(
             QualitativeLabResult result, QualitativeLabResult expectedClassification)
         {
-            var patient = new Patient()
-            {
-                Gender = Gender.Build(GenderIdentity.Male)
-            };
+            var patient = PatientBuilder.Initialize()
+                .SetGender(GenderIdentity.Male)
+                .BuildWithoutModelValidation();
 
             var test = Qualitative.HepatitisCAntibody(result);
 

@@ -29,7 +29,7 @@ namespace GeekMDSuite
         internal static Patient Build(Name name, DateTime dateOfBirth, Gender gender, Race race, string medicalRecordNumber) 
             => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
         
-        public Patient()
+        protected internal Patient()
         {
             DateOfBirth = new DateTime();
             Name = new Name();

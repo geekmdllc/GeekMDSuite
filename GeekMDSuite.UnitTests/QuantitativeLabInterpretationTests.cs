@@ -30,7 +30,7 @@ namespace GeekMDSuite.UnitTests
 
         public QuantitativeLabInterpretationTests()
         {
-            _patient = new Patient();
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
         }
         private readonly Patient _patient;
     }

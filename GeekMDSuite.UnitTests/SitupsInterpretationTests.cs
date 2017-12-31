@@ -53,7 +53,7 @@ namespace GeekMDSuite.UnitTests
 
         public SitupsInterpretationTests()
         {
-            _patient = new Patient();
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
         }
         private readonly Patient _patient;
     }

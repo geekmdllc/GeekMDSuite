@@ -27,12 +27,12 @@ namespace GeekMDSuite.UnitTests
                 .SetReferenceAge(ra)
                 .SetPulseWaveVelocity(pwv)
                 .Build();
-            
-            var patient = new Patient()
-            {
-                Gender = Gender.Build(genderIdentity),
-                DateOfBirth = DateTime.Now.AddYears(-age)
-            };
+
+            var patient = PatientBuilder.Initialize()
+                .SetGender(GenderIdentity.Male)
+                .SetDateOfBirth(DateTime.Now.AddYears(-age))
+                .BuildWithoutModelValidation();
+
 
             var actualCategory = new CentralBloodPressureClassification(cbp, patient).Classification.Category;
 

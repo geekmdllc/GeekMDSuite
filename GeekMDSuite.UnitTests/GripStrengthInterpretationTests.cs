@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Procedures;
-using GeekMDSuite.Analytics;
 using GeekMDSuite.Analytics.Classification;
 using Moq;
 using Xunit;
@@ -27,6 +26,7 @@ namespace GeekMDSuite.UnitTests
         [Fact]
         public void Classification_Given40yrMale150lbsL50lbsR_ReturnsWorseSideWeakLateralityRight()
         {
+            _patient.Gender = Gender.Build(GenderIdentity.Male);
             var gs = GripStrength.Build(150, 50);
             
             var classification = new GripStrengthClassification(gs, _patient).Classification;
@@ -38,6 +38,7 @@ namespace GeekMDSuite.UnitTests
         [Fact]
         public void Classification_Given40yrMale50lbsL150lbsR_ReturnsWorseSideWeakLateralityLeft()
         {
+            _patient.Gender = Gender.Build(GenderIdentity.Male);
             var gs = GripStrength.Build(50, 150);
             
             var classification = new GripStrengthClassification(gs, _patient).Classification;
@@ -73,10 +74,10 @@ namespace GeekMDSuite.UnitTests
 
         public GripStrengthInterpretationTests()
         {
-            _patient = new Patient()
-            {
-                DateOfBirth = DateTime.Now.AddYears(-55)
-            };
+            var dateOfBirth = DateTime.Now.AddYears(-55);
+            _patient = PatientBuilder.Initialize()
+                .SetDateOfBirth(dateOfBirth.Year, dateOfBirth.Month, dateOfBirth.Day)
+                .BuildWithoutModelValidation();
         }
         private readonly Patient _patient;
     }

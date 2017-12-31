@@ -16,10 +16,10 @@ namespace GeekMDSuite.UnitTests
 
         public PooledCohortsEquationTests()
         {
-            _patient = new Patient()
-            {
-                DateOfBirth = DateTime.Now.AddYears(-55)
-            };
+            var dateOfBirth = DateTime.Now.AddYears(-55);
+            _patient = PatientBuilder.Initialize()
+                .SetDateOfBirth(dateOfBirth.Year, dateOfBirth.Month, dateOfBirth.Day)
+                .BuildWithoutModelValidation();
 
             _parametersBuilder = PooledCohortEquationParametersBuilder.Initialize()
                 .SetBloodPressure(BloodPressure.Build(120, 75))

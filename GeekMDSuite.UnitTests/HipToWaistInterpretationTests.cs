@@ -42,7 +42,7 @@ namespace GeekMDSuite.UnitTests
 
         public HipToWaistInterpretationTests()
         {
-            _patient = new Patient();
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
         }
 
         private Patient _patient;

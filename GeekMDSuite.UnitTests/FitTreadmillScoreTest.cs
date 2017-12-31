@@ -78,8 +78,8 @@ namespace GeekMDSuite.UnitTests
 
         public FitTreadmillScoreTest()
         {
-            _patient = new Patient();
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
         }
-        private Patient _patient;
+        private readonly Patient _patient;
     }
 }

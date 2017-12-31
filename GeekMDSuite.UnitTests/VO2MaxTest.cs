@@ -40,11 +40,12 @@ namespace GeekMDSuite.UnitTests
             _timeDuration = new TimeDuration(11,33);
             _protocol = TreadmillProtocol.Bruce;
             _unsupportedProtocol = TreadmillProtocol.Balke3Point0;
-            _patient = new Patient()
-            {
-                Gender = Gender.Build(GenderIdentity.Male),
-                DateOfBirth = DateTime.Now.AddYears(-45)
-            };
+
+            var dateOfBirth = DateTime.Now.AddYears(-45);
+            _patient = PatientBuilder.Initialize()
+                .SetGender(GenderIdentity.Male)
+                .SetDateOfBirth(dateOfBirth.Year, dateOfBirth.Month, dateOfBirth.Day)
+                .BuildWithoutModelValidation();
         }
         
         private readonly TimeDuration _timeDuration;

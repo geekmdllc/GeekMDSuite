@@ -49,7 +49,7 @@ namespace GeekMDSuite.UnitTests
 
         public PercentBodyFatTest()
         {
-            _patient = new Patient();
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
         }
         
         private readonly Patient _patient;
