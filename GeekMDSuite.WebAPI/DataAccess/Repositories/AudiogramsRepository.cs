@@ -4,9 +4,9 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public class AudiogramRepository : RepositoryAssociatedWithVisit<AudiogramEntity>, IAudiogramRepository
+    public class AudiogramsRepository : RepositoryAssociatedWithVisit<AudiogramEntity>, IAudiogramsRepository
     {
-        public AudiogramRepository(GeekMdSuiteDbContext context) : base (context)
+        public AudiogramsRepository(GeekMdSuiteDbContext context) : base (context)
         {
         }
     }

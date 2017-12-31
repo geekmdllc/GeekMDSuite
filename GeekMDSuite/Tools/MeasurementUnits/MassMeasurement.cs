@@ -9,7 +9,7 @@ namespace GeekMDSuite.Tools.MeasurementUnits
             Pounds = pounds;
         }
 
-        public double Pounds { get; }
+        public double Pounds { get; set;  }
 
         public double Kilograms => MassConversion.LbsToKilograms(Pounds);
 

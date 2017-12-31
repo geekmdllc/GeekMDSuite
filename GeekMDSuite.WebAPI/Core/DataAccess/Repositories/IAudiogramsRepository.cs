@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
 {
-    public interface IAudiogramRepository : IRepositoryAssociatedWithVisit<AudiogramEntity>
+    public interface IAudiogramsRepository : IRepositoryAssociatedWithVisit<AudiogramEntity>
     {
     }
 }

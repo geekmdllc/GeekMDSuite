@@ -8,16 +8,19 @@ namespace GeekMDSuite.Procedures
         private GripMeasurement(double pounds)
         {
             Pounds = pounds;
-            Kilograms = MassConversion.LbsToKilograms(Pounds);
-            Grams = MassConversion.KilogramsToGrams(Kilograms);
         }
 
-        public double Pounds { get; }
-        public double Kilograms { get; }
-        public double Grams { get; }
+        public double Pounds { get; set; }
+        public double Kilograms => MassConversion.LbsToKilograms(Pounds);
+        public double Grams => MassConversion.KilogramsToGrams(Kilograms);
 
         public static GripMeasurement Build(double pounds) => new GripMeasurement(pounds);
 
         public override string ToString() => $"{Pounds} lbs";
+
+        public GripMeasurement()
+        {
+            
+        }
     }
 }

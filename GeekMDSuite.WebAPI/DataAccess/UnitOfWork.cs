@@ -10,22 +10,24 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public UnitOfWork(GeekMdSuiteDbContext context)
         {
             _context = context;
-            Audiograms = new AudiogramRepository(_context);
+            Audiograms = new AudiogramsRepository(_context);
             BloodPressures = new BloodPressuresRepository(_context);
             CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
             CentralBloodPressures = new CentralBloodPressuresRepository(_context);
             FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
+            GripStrengths = new GripStrengthsRepository(_context);
             Patients = new PatientsRepository(_context);
             Visits = new VisitsRepository(_context);
         }
 
-        public IAudiogramRepository Audiograms { get;  }
+        public IAudiogramsRepository Audiograms { get;  }
         public IBloodPressuresRepository BloodPressures { get;  }
         public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         public ICentralBloodPressureRepository CentralBloodPressures { get; }
         public IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
+        public IGripStrengthsRepository GripStrengths { get;  }
         public IPatientsRepository Patients { get; }
-        public IVisitRepository Visits { get; set; }
+        public IVisitRepository Visits { get;  }
 
         public void Complete()
         {

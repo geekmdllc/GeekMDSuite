@@ -2,7 +2,7 @@
 {
     public interface IMassMeasurement
     {
-        double Pounds { get;  }
+        double Pounds { get; set; }
         double Kilograms { get; }
         double Grams { get; }
     }

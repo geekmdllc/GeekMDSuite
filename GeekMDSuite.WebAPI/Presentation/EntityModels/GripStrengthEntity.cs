@@ -8,7 +8,19 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public void MapValues(GripStrength subject)
         {
-            throw new NotImplementedException();
+            Left.Pounds = subject.Left.Pounds;
+            Right.Pounds = subject.Right.Pounds;
+        }
+
+        public GripStrengthEntity()
+        {
+            Left = new GripMeasurement();
+            Right = new GripMeasurement();
+        }
+
+        public GripStrengthEntity(GripStrength gripStrength) : this()
+        {
+            MapValues(gripStrength);
         }
 
         public int Id { get; set; }

@@ -15,6 +15,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<FunctionalMovementScreenEntity> FunctionalMovementScreens { get; set; }
         public virtual DbSet<PatientEntity> Patients { get; set; }
         public virtual DbSet<VisitEntity> Visits { get; set; }
+        public virtual DbSet<GripStrengthEntity> GripStrengths { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +24,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
             ConfigureCarotidUltrasoundEntity(modelBuilder);
             ConfigureFunctionalMovementScreen(modelBuilder);
             ConfigurePatientEntity(modelBuilder);
+            ConfigureGripStrengthEntity(modelBuilder);
         }
     }
 }

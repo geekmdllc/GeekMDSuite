@@ -19,9 +19,10 @@
 
         public override string ToString() => $"Left: {Left} Right: {Right}";
 
-        public GripStrength()
+        protected GripStrength()
         {
-            
+            Left = new GripMeasurement();
+            Right = new GripMeasurement();
         }
     }
 }
