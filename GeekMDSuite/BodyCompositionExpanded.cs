@@ -15,9 +15,14 @@
             PercentBodyFat = percentBodyFat;
         }
 
-        public double VisceralFat { get; }
+        protected internal BodyCompositionExpanded()
+        {
+            
+        }
 
-        public double PercentBodyFat { get; }
+        public double VisceralFat { get; set; }
+
+        public double PercentBodyFat { get; set; }
         
         internal static BodyCompositionExpanded Build(IBodyComposition bodyComposition, double visceralFat, double percentBodyFat) =>
             new BodyCompositionExpanded(bodyComposition, visceralFat, percentBodyFat);

@@ -2,8 +2,13 @@
 {
     public class Waist : LengthMeasurement
     {
-        public Waist(double inches) : base(inches)
+        protected internal Waist(double inches) : base(inches)
         {
+        }
+
+        protected internal Waist()
+        {
+            
         }
     }
 }

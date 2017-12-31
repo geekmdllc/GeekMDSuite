@@ -2,8 +2,13 @@
 {
     public class Hips : LengthMeasurement
     {
-        public Hips(double inches) : base(inches)
+        protected internal Hips(double inches) : base(inches)
         {
+        }
+
+        protected internal Hips()
+        {
+            
         }
     }
 }

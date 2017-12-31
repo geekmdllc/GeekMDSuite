@@ -10,6 +10,11 @@ namespace GeekMDSuite.Procedures
         public override List<IshiharaPlateAnswer> Build()
         {
             ValidatePreBuildState();
+            return BuildWithoutModelValidation();
+        }
+
+        public override List<IshiharaPlateAnswer> BuildWithoutModelValidation()
+        {
             return _list;
         }
 

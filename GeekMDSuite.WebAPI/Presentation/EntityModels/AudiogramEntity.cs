@@ -17,8 +17,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         public AudiogramEntity()
         {
             Visit = Guid.Empty;
-            Left = new AudiogramDataset();
-            Right = new AudiogramDataset();
         }
                 
         public void MapValues(Audiogram subject)

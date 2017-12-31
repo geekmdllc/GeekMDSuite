@@ -39,7 +39,7 @@
             PulseWaveVelocity = pulseWaveVelocity;
         }
 
-        protected CentralBloodPressure()
+        protected internal CentralBloodPressure()
         {
             
         }

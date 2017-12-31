@@ -9,9 +9,19 @@ namespace GeekMDSuite.Procedures
         public override FunctionalMovementScreen Build()
         {
             ValidatePreBuildState();
-            return new FunctionalMovementScreen(_deepSquat, _hurdleStep, _inlineLunge, _shoulderMobility, _activeStraightLegRaise,
-                _trunkStabilityPushup, _rotaryStability);
+            return BuildWithoutModelValidation();
         }
+
+        public override FunctionalMovementScreen BuildWithoutModelValidation() => new FunctionalMovementScreen()
+        {
+            DeepSquat = _deepSquat,
+            ActiveStraightLegRaise = _activeStraightLegRaise,
+            HurdleStep = _hurdleStep,
+            InlineLunge = _inlineLunge,
+            RotaryStability = _rotaryStability,
+            ShoulderMobility = _shoulderMobility,
+            TrunkStabilityPushup = _trunkStabilityPushup
+        };
 
         public FunctionalMovementScreenBuilder SetDeepSquat(int rawScore)
         {

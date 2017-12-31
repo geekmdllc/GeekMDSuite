@@ -37,7 +37,7 @@ namespace GeekMDSuite.UnitTests
         
         public Vo2MaxTest()
         {
-            _timeDuration = new TimeDuration(11,33);
+            _timeDuration =  TimeDuration.Build(11,33);
             _protocol = TreadmillProtocol.Bruce;
             _unsupportedProtocol = TreadmillProtocol.Balke3Point0;
 

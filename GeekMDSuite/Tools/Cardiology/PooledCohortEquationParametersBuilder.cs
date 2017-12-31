@@ -7,13 +7,25 @@ namespace GeekMDSuite.Tools.Cardiology
 {
     public class PooledCohortEquationParametersBuilder : IBuilder<PooledCohortEquationParameters>
     {
-        private IPatient _patient;
-        private IBloodPressure _bloodPressure;
-        private IQuantitativeLab _totalCholesterol;
-        private IQuantitativeLab _hdlCholesterol;
-        private bool _hypertensionTreatment;
-        private bool _smoker;
-        private bool _diabetic;
+        public PooledCohortEquationParameters Build()
+        {
+            VerifyPreBuildState();
+            return BuildWithoutModelValidation();
+        }
+
+        public PooledCohortEquationParameters BuildWithoutModelValidation()
+        {
+            return new PooledCohortEquationParameters()
+            {
+                BloodPressure = _bloodPressure,
+                Diabetic = _diabetic,
+                HdlCholesterol = _hdlCholesterol,
+                HypertensionTreatment = _hypertensionTreatment,
+                Patient = _patient,
+                Smoker = _smoker,
+                TotalCholesterol = _totalCholesterol
+            };
+        }
 
         public static PooledCohortEquationParametersBuilder Initialize() => new PooledCohortEquationParametersBuilder();
 
@@ -65,13 +77,14 @@ namespace GeekMDSuite.Tools.Cardiology
             return this;
         }
 
-        public PooledCohortEquationParameters Build()
-        {
-            VerifyPreBuildState();
-            return PooledCohortEquationParameters.Build(_patient, _bloodPressure, _totalCholesterol, _hdlCholesterol,
-                _hypertensionTreatment, _smoker, _diabetic);
-        }
-        
+        private IPatient _patient;
+        private IBloodPressure _bloodPressure;
+        private IQuantitativeLab _totalCholesterol;
+        private IQuantitativeLab _hdlCholesterol;
+        private bool _hypertensionTreatment;
+        private bool _smoker;
+        private bool _diabetic;
+
         private void VerifyPreBuildState()
         {
             var messages = new List<string>();

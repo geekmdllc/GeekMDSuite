@@ -15,18 +15,26 @@ namespace GeekMDSuite
             Weight = weightPounds;
         }
 
+        protected internal BodyComposition()
+        {
+            Height = new Height();
+            Waist = new Waist();
+            Hips = new Hips();
+            Weight = new Weight();
+        }
+
         private BodyComposition(double heightInches, double waistInches, double hipsInches, double weightPounds) 
-            :this(LengthMeasurement.Create(heightInches), 
-                LengthMeasurement.Create(waistInches), 
-                LengthMeasurement.Create(hipsInches), 
-                MassMeasurement.Create(weightPounds))
+            :this(LengthMeasurement.Build(heightInches), 
+                LengthMeasurement.Build(waistInches), 
+                LengthMeasurement.Build(hipsInches), 
+                MassMeasurement.Build(weightPounds))
         {
         }
         
-        public ILengthMeasurement Height { get; }
-        public ILengthMeasurement Waist { get; }
-        public ILengthMeasurement Hips { get; }
-        public IMassMeasurement Weight { get; }
+        public ILengthMeasurement Height { get; set; }
+        public ILengthMeasurement Waist { get; set; }
+        public ILengthMeasurement Hips { get; set; }
+        public IMassMeasurement Weight { get; set; }
 
         internal static BodyComposition Build(double heightInches, double waistInches, double hipsInches,
             double weightPounds) => new BodyComposition(heightInches, waistInches, hipsInches, weightPounds);

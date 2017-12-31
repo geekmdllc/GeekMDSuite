@@ -18,8 +18,13 @@ namespace GeekMDSuite.PatientActivities
             SecondsRestDurationPerSet = secondsRestDurationPerSet;
             Features = features ?? throw new ArgumentNullException(nameof(features));
         }
-        public int SecondsRestDurationPerSet { get; }
-        public List<ResistenceRegimenFeatures> Features { get; }
+
+        protected internal ResistanceRegimen()
+        {
+            
+        }
+        public int SecondsRestDurationPerSet { get; set; }
+        public List<ResistenceRegimenFeatures> Features { get; set; }
         
         public override string ToString()
         {

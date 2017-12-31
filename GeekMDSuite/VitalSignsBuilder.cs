@@ -8,7 +8,18 @@ namespace GeekMDSuite
         public override VitalSigns Build()
         {
             ValidatePreBuildState();
-            return VitalSigns.Build(_bloodPressure, _temperature, _oxygenSaturation, _pulseRate);
+            return BuildWithoutModelValidation();
+        }
+
+        public override VitalSigns BuildWithoutModelValidation()
+        {
+            return new VitalSigns()
+            {
+                BloodPressure = _bloodPressure,
+                OxygenSaturation = _oxygenSaturation,
+                PulseRate = _pulseRate,
+                Temperature = _temperature
+            };
         }
 
         public VitalSignsBuilder SetBloodPressure(int systolic, int diastolic, bool endOrganDamage)

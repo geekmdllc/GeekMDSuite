@@ -2,17 +2,22 @@
 {
     public class QuantitativeLab : IQuantitativeLab
     {
-        private QuantitativeLab(double result, QuantitativeLabType type, MeasurementSystem measurementSystem = MeasurementSystem.TraditionalUs)
+        protected internal QuantitativeLab() {}
+
+        private QuantitativeLab(
+            double result,
+            QuantitativeLabType type,
+            MeasurementSystem measurementSystem = MeasurementSystem.TraditionalUs) : this()
         {
             Result = result;
             Type = type;
             MeasurementSystem = measurementSystem;
         }
-        public double Result { get; }
-        public QuantitativeLabType Type { get; }
-        // ReSharper disable once MemberCanBePrivate.Global
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public MeasurementSystem MeasurementSystem { get; }
+        public double Result { get; set; }
+        
+        public QuantitativeLabType Type { get; set; }
+        
+        public MeasurementSystem MeasurementSystem { get; set; }
         
         public override string ToString() => $"Quantitative Lab: {Type}, Result: {Result}";
 

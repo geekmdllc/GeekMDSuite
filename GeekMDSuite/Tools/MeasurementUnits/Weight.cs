@@ -2,8 +2,13 @@
 {
     public class Weight : MassMeasurement
     {
-        public Weight(double pounds) : base(pounds)
+        protected internal Weight(double pounds) : base(pounds)
         {
+        }
+
+        protected internal Weight()
+        {
+            
         }
     }
 }

@@ -13,13 +13,18 @@ namespace GeekMDSuite
             PulseRate = pulseRate;
         }
 
-        public BloodPressure BloodPressure { get; }
+        protected internal VitalSigns()
+        {
+            
+        }
 
-        public int OxygenSaturation { get; }
+        public BloodPressure BloodPressure { get; set; }
 
-        public int PulseRate { get; }
+        public int OxygenSaturation { get; set; }
 
-        public Temperature Temperature { get; }
+        public int PulseRate { get; set; }
+
+        public Temperature Temperature { get; set; }
 
         public override string ToString()
         {

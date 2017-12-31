@@ -8,8 +8,16 @@ namespace GeekMDSuite.Procedures
         public override CarotidUltrasoundResult Build()
         {
             ValidatePreBuildState();
-            return CarotidUltrasoundResult.Build(_imtThickenssMm, _imtGrade, _plaqueCharacter, _stenosisGrade);
+            return BuildWithoutModelValidation();
         }
+
+        public override CarotidUltrasoundResult BuildWithoutModelValidation() => new CarotidUltrasoundResult()
+        {
+            IntimaMediaMeasurementMillimeters = _imtThickenssMm,
+            Grade = _imtGrade,
+            Stenosis = _stenosisGrade,
+            Character = _plaqueCharacter
+        };
 
         public CarotidUltrasoundResultBuilder SetIntimaMediaThickeness(double millimeters)
         {

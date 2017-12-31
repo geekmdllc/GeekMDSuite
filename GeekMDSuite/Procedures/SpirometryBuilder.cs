@@ -7,13 +7,18 @@ namespace GeekMDSuite.Procedures
         public override Spirometry Build()
         {
             ValidatePreBuildState();
-            return Spirometry.Build(_forcedExpiratoryVolume1Second, 
-                _forcedVitalCapacity, 
-                _peakExpiratoryFlow, 
-                _forcedExpiratoryFlow25To75, 
-                _forcedExpiratoryTime);
+            return BuildWithoutModelValidation();
         }
-        
+
+        public override Spirometry BuildWithoutModelValidation() => new Spirometry()
+        {
+            ForcedExpiratoryFlow25To75 = _forcedExpiratoryFlow25To75,
+            ForcedExpiratoryTime = _forcedExpiratoryTime,
+            ForcedExpiratoryVolume1Second = _forcedExpiratoryVolume1Second,
+            ForcedVitalCapacity = _forcedVitalCapacity,
+            PeakExpiratoryFlow = _peakExpiratoryFlow
+        };
+
         public SpirometryBuilder SetForcedExpiratoryVolume1Second(double liters)
         {
             _forcedExpiratoryVolume1Second = liters;

@@ -2,8 +2,8 @@
 {
     public interface IQuantitativeLab
     {
-        double Result { get; }
-        QuantitativeLabType Type { get; }
-        MeasurementSystem MeasurementSystem { get; }
+        double Result { get; set; }
+        QuantitativeLabType Type { get; set; }
+        MeasurementSystem MeasurementSystem { get; set; }
     }
 }

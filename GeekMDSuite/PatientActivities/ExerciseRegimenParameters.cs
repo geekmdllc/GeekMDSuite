@@ -9,11 +9,11 @@
             Intensity = intensity;
         }
 
-        public double SessionsPerWeek { get; }
+        public double SessionsPerWeek { get; set; }
 
-        public double AverageSessionDuration { get; }
+        public double AverageSessionDuration { get; set; }
 
-        public ExerciseIntensity Intensity { get; }
+        public ExerciseIntensity Intensity { get; set; }
 
         public static ExerciseRegimenParameters Build(double sessionsPerWeek, double averageSessionDuration,
             ExerciseIntensity intensity) => new ExerciseRegimenParameters(sessionsPerWeek, averageSessionDuration, intensity);

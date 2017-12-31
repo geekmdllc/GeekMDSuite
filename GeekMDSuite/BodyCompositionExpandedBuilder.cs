@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite
 {
@@ -10,8 +11,21 @@ namespace GeekMDSuite
             return BodyCompositionExpanded.Build(
                 BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds), 
                 _visceralFatCm2, _percentBodyFat);
-        } 
-        
+        }
+
+        public override BodyCompositionExpanded BuildWithoutModelValidation()
+        {
+            return new BodyCompositionExpanded()
+            {
+                Height = Height.Build(_heightInches),
+                Waist = Waist.Build(_waistInches),
+                Hips = Hips.Build(_hipsInches),
+                Weight = Weight.Build(_weightPounds),
+                VisceralFat = _visceralFatCm2,
+                PercentBodyFat = _percentBodyFat
+            };
+        }
+
         public BodyCompositionExpandedBuilder SetHeight(double inches)
         {
             _heightInches = inches;

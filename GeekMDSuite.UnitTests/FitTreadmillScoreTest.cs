@@ -22,7 +22,7 @@ namespace GeekMDSuite.UnitTests
 
             var mockTreadmillStressTest = new Mock<ITreadmillExerciseStressTest>();
             mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
-            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
+            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns( TimeDuration.Build(minutes, seconds));
             
             var fitScore = new FitTreadmillScoreClassification(mockTreadmillStressTest.Object, _patient).Value;
             
@@ -39,7 +39,7 @@ namespace GeekMDSuite.UnitTests
 
             var mockTreadmillStressTest = new Mock<ITreadmillExerciseStressTest>();
             mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
-            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
+            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(TimeDuration.Build(minutes, seconds));
             
             var tenYearMortality = new FitTreadmillScoreClassification(mockTreadmillStressTest.Object, _patient).TenYearMortality;
             
@@ -56,7 +56,7 @@ namespace GeekMDSuite.UnitTests
 
             var mockTreadmillStressTest = new Mock<ITreadmillExerciseStressTest>();
             mockTreadmillStressTest.Setup(tmst => tmst.MaximumHeartRate).Returns(maxHeartRate);
-            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns(new TimeDuration(minutes, seconds));
+            mockTreadmillStressTest.Setup(tmst => tmst.Time).Returns( TimeDuration.Build(minutes, seconds));
             
             var classification = new FitTreadmillScoreClassification(mockTreadmillStressTest.Object, _patient).Classification;
             

@@ -4,9 +4,9 @@ namespace GeekMDSuite
 {
     public interface IVitalSigns
     {
-        BloodPressure BloodPressure { get; }
-        int OxygenSaturation { get; }
-        int PulseRate { get; }
-        Temperature Temperature { get; }
+        BloodPressure BloodPressure { get; set; }
+        int OxygenSaturation { get; set; }
+        int PulseRate { get; set; }
+        Temperature Temperature { get; set; }
     }
 }

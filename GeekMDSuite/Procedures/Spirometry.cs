@@ -2,6 +2,10 @@
 {
     public class Spirometry : ISpirometry
     {
+        protected internal Spirometry()
+        {
+            
+        }
         internal static Spirometry Build(double forcedExpiratoryVolume1Second,
             double forcedVitalCapacity,
             double peakExpiratoryFlow,
@@ -23,11 +27,11 @@
             ForcedExpiratoryFlow25To75 = forcedExpiratoryFlow25To75;
             ForcedExpiratoryTime = forcedExpiratoryTime;
         }
-        public double ForcedExpiratoryVolume1Second { get;  }
-        public double ForcedVitalCapacity { get;  }
-        public double PeakExpiratoryFlow { get; }
-        public double ForcedExpiratoryFlow25To75 { get; }
-        public double ForcedExpiratoryTime { get; }
+        public double ForcedExpiratoryVolume1Second { get; set; }
+        public double ForcedVitalCapacity { get; set; }
+        public double PeakExpiratoryFlow { get; set; }
+        public double ForcedExpiratoryFlow25To75 { get; set; }
+        public double ForcedExpiratoryTime { get; set; }
         public double ForcedExpiratoryVolume1SecondToForcedVitalCapacityRatio =>
             ForcedExpiratoryVolume1Second / ForcedVitalCapacity;
 

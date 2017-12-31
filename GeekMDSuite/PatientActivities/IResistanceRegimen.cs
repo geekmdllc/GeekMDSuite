@@ -4,7 +4,7 @@ namespace GeekMDSuite.PatientActivities
 {
     public interface IResistanceRegimen : IExerciseRegimenParameters
     {
-        int SecondsRestDurationPerSet { get; }
-        List<ResistenceRegimenFeatures> Features { get; }
+        int SecondsRestDurationPerSet { get; set; }
+        List<ResistenceRegimenFeatures> Features { get; set; }
     }
 }

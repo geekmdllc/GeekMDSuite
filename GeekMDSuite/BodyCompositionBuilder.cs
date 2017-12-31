@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Tools.MeasurementUnits;
 
 namespace GeekMDSuite
 {
@@ -9,6 +10,17 @@ namespace GeekMDSuite
         {
             ValidatePreBuildState();
             return BodyComposition.Build(_heightInches, _waistInches, _hipsInches, _weightPounds);
+        }
+
+        public override BodyComposition BuildWithoutModelValidation()
+        {
+            return new BodyComposition()
+            {
+                Height = Height.Build(_heightInches),
+                Hips = Hips.Build(_hipsInches),
+                Waist = Waist.Build(_waistInches),
+                Weight = Weight.Build(_weightPounds)
+            };
         }
 
         public BodyCompositionBuilder SetHeight(double inches)

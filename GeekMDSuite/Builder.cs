@@ -4,5 +4,6 @@
     {
         public static TBuilder Initialize() => new TBuilder();
         public abstract TObj Build();
+        public abstract TObj BuildWithoutModelValidation();
     }
 }

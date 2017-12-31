@@ -4,9 +4,9 @@ namespace GeekMDSuite
 {
     public interface IBodyComposition
     {
-        ILengthMeasurement Height { get; }
-        ILengthMeasurement Waist { get; }
-        ILengthMeasurement Hips { get; }
-        IMassMeasurement Weight { get; }
+        ILengthMeasurement Height { get; set; }
+        ILengthMeasurement Waist { get; set; }
+        ILengthMeasurement Hips { get; set; }
+        IMassMeasurement Weight { get; set; }
     }
 }

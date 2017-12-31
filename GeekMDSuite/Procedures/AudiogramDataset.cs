@@ -51,7 +51,7 @@
             return $".125K {F125} .25K {F250} .5K {F500} 1K {F1000} 2K {F2000} 3K {F3000} 4K {F4000} 6K {F6000} 8K {F8000}";
         }
 
-        public AudiogramDataset()
+        protected internal AudiogramDataset()
         {
             F125 = new AudiogramDatapoint();
             F250 = new AudiogramDatapoint();

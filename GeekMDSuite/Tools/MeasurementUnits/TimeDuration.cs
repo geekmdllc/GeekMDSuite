@@ -4,21 +4,20 @@ namespace GeekMDSuite.Tools.MeasurementUnits
 {
     public class TimeDuration : ITimeDuration
     {
-        private TimeDuration(double seconds)
+        protected internal TimeDuration()
         {
-            if (seconds <= 0) throw new ArgumentOutOfRangeException(nameof(seconds));
-
-            TotalSeconds = seconds;
-            Minutes = (int)TotalSeconds / 60;
-            Seconds = (int)TotalSeconds % 60;
+            
         }
-        
-        public TimeDuration(double minutes, double seconds) : this(minutes * 60 + seconds)
-        { }
 
-        public int Minutes { get; }
-        public int Seconds { get; }
-        public double TotalSeconds { get; }
+        private TimeDuration(double minutes, double seconds) : this()
+        {
+            Minutes = minutes;
+            Seconds = seconds;
+        }
+
+        public double Minutes { get; set; }
+        public double Seconds { get; set; }
+        public double TotalSeconds => Minutes * 60 + Seconds;
         public double FractionalMinutes => TotalSeconds / 60;
 
         public static TimeDuration Build(double minutes, double seconds) => new TimeDuration(minutes, seconds);

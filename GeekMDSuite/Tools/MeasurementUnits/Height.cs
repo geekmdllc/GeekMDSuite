@@ -2,8 +2,13 @@
 {
     public class Height : LengthMeasurement
     {
-        public Height(double inches) : base(inches)
+        protected internal Height(double inches) : base(inches)
         {
+        }
+
+        protected internal Height()
+        {
+            
         }
     }
 }

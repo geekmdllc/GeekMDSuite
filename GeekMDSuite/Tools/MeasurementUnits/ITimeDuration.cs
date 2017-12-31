@@ -2,8 +2,8 @@
 {
     public interface ITimeDuration
     {
-        int Minutes { get; }
-        int Seconds { get; }
+        double Minutes { get; set; }
+        double Seconds { get; set; }
         double TotalSeconds { get; }
         double FractionalMinutes { get; }
     }

@@ -10,7 +10,7 @@ namespace GeekMDSuite
             return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
         }
 
-        public Patient BuildWithoutModelValidation() => new Patient()
+        public override Patient BuildWithoutModelValidation() => new Patient()
         {
             DateOfBirth = _dateOfBirth,
             Gender = _gender,

@@ -9,11 +9,16 @@
             Intensity = intensity;
         }
 
-        public double SessionsPerWeek { get; }
+        protected ExerciseRegimen()
+        {
+            
+        }
 
-        public double AverageSessionDuration { get; }
+        public double SessionsPerWeek { get; set; }
 
-        public ExerciseIntensity Intensity { get; }
+        public double AverageSessionDuration { get; set; }
+
+        public ExerciseIntensity Intensity { get; set; }
         
         public override string ToString() => 
             $"{SessionsPerWeek * AverageSessionDuration} minutes per week at {Intensity} intensity.";

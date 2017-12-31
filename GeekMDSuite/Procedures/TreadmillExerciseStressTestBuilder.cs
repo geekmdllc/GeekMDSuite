@@ -8,8 +8,21 @@ namespace GeekMDSuite.Procedures
         public override TreadmillExerciseStressTest Build()
         {
             ValidatePreBuildState();
-            return TreadmillExerciseStressTest.Build(_protocol, _time, _result, _supineBloodPressure, _supineHeartRate, 
-                _maximumBloodPressure, _maximumHeartRate);
+            return BuildWithoutModelValidation();
+        }
+
+        public override TreadmillExerciseStressTest BuildWithoutModelValidation()
+        {
+            return new TreadmillExerciseStressTest()
+            {
+                Time = _time,
+                MaximumBloodPressure =  _maximumBloodPressure,
+                MaximumHeartRate = _maximumHeartRate,
+                Protocol = _protocol,
+                Result = _result,
+                SupineBloodPressure = _supineBloodPressure,
+                SupineHeartRate = _supineHeartRate
+            };
         }
 
         public TreadmillExerciseStressTestBuilder SetProtocol(TreadmillProtocol protocol = TreadmillProtocol.Bruce)

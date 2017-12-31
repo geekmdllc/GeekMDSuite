@@ -2,8 +2,8 @@
 {
     public interface IExerciseRegimenParameters
     {
-        double SessionsPerWeek { get; }
-        double AverageSessionDuration { get; }
-        ExerciseIntensity Intensity { get; }
+        double SessionsPerWeek { get; set; }
+        double AverageSessionDuration { get; set; }
+        ExerciseIntensity Intensity { get; set; }
     }
 }

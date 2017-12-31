@@ -2,7 +2,7 @@
 {
     public interface IBodyCompositionExpanded : IBodyComposition
     {
-        double VisceralFat { get; }
-        double PercentBodyFat { get; }
+        double VisceralFat { get; set; }
+        double PercentBodyFat { get; set; }
     }
 }

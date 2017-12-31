@@ -7,8 +7,18 @@ namespace GeekMDSuite.Procedures
         public override CentralBloodPressure Build()
         {
             ValidatePreBuildState();
-            return CentralBloodPressure.Build(_systolicPressure, _pulsePressure, _augmentedPressure, _augmentedIndex, _referenceAge, _pulseWaveVelocity);
+            return BuildWithoutModelValidation();
         }
+
+        public override CentralBloodPressure BuildWithoutModelValidation() => new CentralBloodPressure()
+        {
+            SystolicPressure = _systolicPressure,
+            AugmentedIndex = _augmentedIndex,
+            AugmentedPressure = _augmentedPressure,
+            PulsePressure = _pulsePressure,
+            PulseWaveVelocity = _pulseWaveVelocity,
+            ReferenceAge = _referenceAge
+        };
 
         public CentralBloodPressureBuilder SetCentralSystolicPressure(double pressure)
         {

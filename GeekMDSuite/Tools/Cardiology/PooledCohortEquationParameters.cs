@@ -4,25 +4,22 @@ namespace GeekMDSuite.Tools.Cardiology
 {
     public class PooledCohortEquationParameters : IPooledCohortEquationParameters
     {
-        public IPatient Patient { get; }
-        public IBloodPressure BloodPressure { get; }
-        public IQuantitativeLab TotalCholesterol { get; }
-        public IQuantitativeLab HdlCholesterol { get; }
-        public bool HypertensionTreatment { get; }
-        public bool Smoker { get; }
-        public bool Diabetic { get;}
-
-        internal static PooledCohortEquationParameters Build(IPatient patient, IBloodPressure bloodPressure,
-            IQuantitativeLab totalCholesterol, IQuantitativeLab hdlCholesterol,
-            bool hypertensionTreatment = false, bool smoker = false, bool diabetic = false)
+        public PooledCohortEquationParameters()
         {
-            return new PooledCohortEquationParameters(patient, bloodPressure, totalCholesterol, hdlCholesterol,
-                hypertensionTreatment, smoker, diabetic);   
+            Patient = new Patient();
+            BloodPressure = new BloodPressure();
+            TotalCholesterol = new QuantitativeLab();
+            HdlCholesterol = new QuantitativeLab();
         }
 
-        private PooledCohortEquationParameters(IPatient patient, IBloodPressure bloodPressure, 
-            IQuantitativeLab totalCholesterol, IQuantitativeLab hdlCholesterol, 
-            bool hypertensionTreatment, bool smoker, bool diabetic)
+        private PooledCohortEquationParameters(
+            IPatient patient, 
+            IBloodPressure bloodPressure, 
+            IQuantitativeLab totalCholesterol, 
+            IQuantitativeLab hdlCholesterol, 
+            bool hypertensionTreatment, 
+            bool smoker, 
+            bool diabetic) : this()
         {
             Patient = patient;
             BloodPressure = bloodPressure;
@@ -31,6 +28,27 @@ namespace GeekMDSuite.Tools.Cardiology
             HypertensionTreatment = hypertensionTreatment;
             Smoker = smoker;
             Diabetic = diabetic;
+        }
+        
+        public IPatient Patient { get; set; }
+        public IBloodPressure BloodPressure { get; set; }
+        public IQuantitativeLab TotalCholesterol { get; set; }
+        public IQuantitativeLab HdlCholesterol { get; set; }
+        public bool HypertensionTreatment { get; set; }
+        public bool Smoker { get; set; }
+        public bool Diabetic { get; set; }
+
+        internal static PooledCohortEquationParameters Build(
+            IPatient patient, 
+            IBloodPressure bloodPressure,
+            IQuantitativeLab totalCholesterol, 
+            IQuantitativeLab hdlCholesterol,
+            bool hypertensionTreatment = false, 
+            bool smoker = false, 
+            bool diabetic = false)
+        {
+            return new PooledCohortEquationParameters(patient, bloodPressure, totalCholesterol, hdlCholesterol,
+                hypertensionTreatment, smoker, diabetic);   
         }
     }
 }

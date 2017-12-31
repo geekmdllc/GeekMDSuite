@@ -4,12 +4,12 @@ namespace GeekMDSuite.Procedures
 {
     public interface ITreadmillExerciseStressTest
     {
-        TreadmillProtocol Protocol { get; }
-        ITimeDuration Time { get; }
-        TmstResult Result { get; }
-        BloodPressure SupineBloodPressure { get; }
-        int SupineHeartRate { get; }
-        BloodPressure MaximumBloodPressure { get; }
-        int MaximumHeartRate { get; }
+        TreadmillProtocol Protocol { get; set; }
+        ITimeDuration Time { get; set; }
+        TmstResult Result { get; set; }
+        BloodPressure SupineBloodPressure { get; set; }
+        int SupineHeartRate { get; set; }
+        BloodPressure MaximumBloodPressure { get; set; }
+        int MaximumHeartRate { get; set; }
     }
 }

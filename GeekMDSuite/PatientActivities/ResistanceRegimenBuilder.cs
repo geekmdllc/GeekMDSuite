@@ -8,11 +8,21 @@ namespace GeekMDSuite.PatientActivities
         public override ResistanceRegimen Build()
         {
             ValidatePreBuildState();
-            return new ResistanceRegimen(
-                ExerciseRegimenParameters.Build(_sessionsPerWeek, _averageSessionDuration, _intensity),
-                _secondsRestDurationPerSet, _features);
+            return BuildWithoutModelValidation();
         }
-        
+
+        public override ResistanceRegimen BuildWithoutModelValidation()
+        {
+            return new ResistanceRegimen()
+            {
+                SecondsRestDurationPerSet = _secondsRestDurationPerSet,
+                AverageSessionDuration = _averageSessionDuration,
+                Features = _features,
+                Intensity = _intensity,
+                SessionsPerWeek = _sessionsPerWeek
+            };
+        }
+
         public ResistanceRegimenBuilder SetSessionsPerWeek(double sessionsPerWeek)
         {
             _sessionsPerWeek = sessionsPerWeek;
