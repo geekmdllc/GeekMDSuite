@@ -3,7 +3,6 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess
 {
@@ -24,6 +23,8 @@ namespace GeekMDSuite.WebAPI.DataAccess
             Pushups = new PushupsRepository(_context);
             SitAndReaches = new SitAndReachesRepository(_context);
             Situps = new SitupsRepository(_context);
+            Spirometries = new SpirometriesRepository(_context);
+            TreadmillExerciseStressTests = new TreadmillExerciseStressTestsRepository(_context);
             Visits = new VisitsRepository(_context);
         }
 
@@ -40,6 +41,8 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public IPushupsRepository Pushups { get; }
         public ISitAndReachesRepository SitAndReaches { get; }
         public ISitupsRepository Situps { get; set; }
+        public ISpirometriesRepository Spirometries { get; set; }
+        public ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; set; }
         public IVisitRepository Visits { get;  }
 
         public void Complete()

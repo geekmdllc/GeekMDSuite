@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using GeekMDSuite.Procedures;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -13,8 +14,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
         private static GeekMdSuiteDbContext GetContextWithData()
         {
-            
-            
             var options = new DbContextOptionsBuilder<GeekMdSuiteDbContext>()
                 .UseInMemoryDatabase("InMemory")
                 .Options;
@@ -33,6 +32,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.Pushups.AddRange(GetPushupsEntities());
             context.SitAndReaches.AddRange(GetSitAndReachEntities());
             context.Situps.AddRange(GetSitupEntities());
+            context.Spirometries.AddRange(GetSpirometryEntities());
+            context.TreadmillExerciseStressTests.AddRange(GetTreadmillExerciseStressTestEntities());
             context.Visits.AddRange(GetVisitEntities());
             
             context.SaveChanges();
