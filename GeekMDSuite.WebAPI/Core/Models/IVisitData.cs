@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Core.Models
 {
-    public interface IVisitData<in T> : IEntity<T>
+    public interface IVisitData<in TInherited> : IEntity<TInherited>
     {
         Guid Visit { get; set; }
     }

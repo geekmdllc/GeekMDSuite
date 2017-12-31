@@ -2,8 +2,8 @@
 {
     public interface IVisualAcuity
     {
-        int Distance { get; }
-        int Near { get; }
-        int Both { get; }
+        int Distance { get; set; }
+        int Near { get; set; }
+        int Both { get; set; }
     }
 }

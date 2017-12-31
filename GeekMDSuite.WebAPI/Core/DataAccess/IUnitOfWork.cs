@@ -23,6 +23,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         ISpirometriesRepository Spirometries { get; }
         ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; }
         IVisitRepository Visits { get; }
+        IVisualAcuitiesRepository VisualAcuities { get; }
         void Complete();
     }
 }

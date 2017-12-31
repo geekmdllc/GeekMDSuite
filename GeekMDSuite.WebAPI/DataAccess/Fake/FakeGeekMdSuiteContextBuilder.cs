@@ -35,6 +35,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.Spirometries.AddRange(GetSpirometryEntities());
             context.TreadmillExerciseStressTests.AddRange(GetTreadmillExerciseStressTestEntities());
             context.Visits.AddRange(GetVisitEntities());
+            context.VisualAcuities.AddRange(GetVisualAcuityEntities());
             
             context.SaveChanges();
  

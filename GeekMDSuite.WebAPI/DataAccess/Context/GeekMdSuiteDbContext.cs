@@ -21,8 +21,9 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<SitAndReachEntity> SitAndReaches { get; set; }
         public virtual DbSet<SitupsEntity> Situps { get; set; }
         public virtual DbSet<SpirometryEntity> Spirometries { get; set; }
-        public virtual DbSet<VisitEntity> Visits { get; set; }
         public virtual DbSet<TreadmillExerciseStressTestEntity> TreadmillExerciseStressTests { get; set; }
+        public virtual DbSet<VisitEntity> Visits { get; set; }
+        public virtual DbSet<VisualAcuityEntity> VisualAcuities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

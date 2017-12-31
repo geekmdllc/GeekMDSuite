@@ -26,6 +26,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
             Spirometries = new SpirometriesRepository(_context);
             TreadmillExerciseStressTests = new TreadmillExerciseStressTestsRepository(_context);
             Visits = new VisitsRepository(_context);
+            VisualAcuities = new VisualAcuitiesRepository(_context);
         }
 
         public IRepository<T> Repository<T>() where T : class, IEntity<T> => new Repository<T>(_context);
@@ -44,6 +45,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public ISpirometriesRepository Spirometries { get; set; }
         public ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; set; }
         public IVisitRepository Visits { get;  }
+        public IVisualAcuitiesRepository VisualAcuities { get; set; }
 
         public void Complete()
         {
