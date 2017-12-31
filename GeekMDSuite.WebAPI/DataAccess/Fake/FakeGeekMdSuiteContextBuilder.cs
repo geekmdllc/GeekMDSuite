@@ -14,6 +14,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             BruceWaynesVisitGuid = Guid.Parse("8bfb8f23-39f4-4cde-80c6-72b178068dc4");
             BruceWayneGuid = Guid.Parse("50345ee6-fde2-4a51-8177-8c715628e39e");
         }
+        
         public static GeekMdSuiteDbContext Context => GetContextWithData();
         
         private static GeekMdSuiteDbContext GetContextWithData()
@@ -31,6 +32,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
             context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());
+            context.GripStrengths.AddRange(GetGripStrengthEntities());
             context.Patients.AddRange(GetPatientEntities());
             context.Visits.AddRange(GetVisitEntities());
             
