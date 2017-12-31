@@ -1,7 +1,9 @@
 ﻿using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess
 {
@@ -9,19 +11,20 @@ namespace GeekMDSuite.WebAPI.DataAccess
     {
         public UnitOfWork(GeekMdSuiteDbContext context)
         {
-            Context = context;
-            Audiograms = new AudiogramsRepository(Context);
-            BloodPressures = new BloodPressuresRepository(Context);
-            CarotidUltrasounds = new CarotidUltrasoundsRepository(Context);
-            CentralBloodPressures = new CentralBloodPressuresRepository(Context);
-            FunctionalMovementScreens = new FunctionalMovementScreensRepository(Context);
-            GripStrengths = new GripStrengthsRepository(Context);
-            OcularPressures = new OcularPressuresRepository(Context);
-            Patients = new PatientsRepository(Context);
-            Visits = new VisitsRepository(Context);
-            PeripheralVisions = new PeripheralVisionsRepository(Context);
+            _context = context;
+            Audiograms = new AudiogramsRepository(_context);
+            BloodPressures = new BloodPressuresRepository(_context);
+            CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
+            CentralBloodPressures = new CentralBloodPressuresRepository(_context);
+            FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
+            GripStrengths = new GripStrengthsRepository(_context);
+            OcularPressures = new OcularPressuresRepository(_context);
+            Patients = new PatientsRepository(_context);
+            Visits = new VisitsRepository(_context);
+            PeripheralVisions = new PeripheralVisionsRepository(_context);
         }
 
+        public IRepository<T> Repository<T>() where T : class, IEntity<T> => new Repository<T>(_context);
         public IAudiogramsRepository Audiograms { get;  }
         public IBloodPressuresRepository BloodPressures { get;  }
         public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
@@ -35,14 +38,15 @@ namespace GeekMDSuite.WebAPI.DataAccess
 
         public void Complete()
         {
-            Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose()
         {
-            Context?.Dispose();
+            _context?.Dispose();
         }
-        
-        protected readonly GeekMdSuiteDbContext Context;
+
+
+        private readonly GeekMdSuiteDbContext _context;
     }
 }
