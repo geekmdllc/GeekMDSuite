@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Helpers;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -17,7 +18,18 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         
         public VisitEntity FindByPatientGuid(Guid patientGuid)
         {
-            return Context.Visits.First(v => v.PatientGuid == patientGuid);
+            if (patientGuid == Guid.Empty) 
+                throw new ArgumentOutOfRangeException($"{nameof(patientGuid)} must not be an empty Guid.");
+
+            try
+            {
+                return Context.Visits.First(v => v.PatientGuid == patientGuid);
+            }
+            catch
+            {
+                throw new RepositoryElementNotFoundException(patientGuid.ToString());
+            }
+            
         }
 
         public IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn)
