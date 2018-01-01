@@ -35,13 +35,25 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         public IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn)
         {
             var patients =  Context.Patients.Where(p => mrn.HasStringsInCommonWith(p.MedicalRecordNumber.ToString()));
+            if (!patients.Any())
+                throw new RepositoryElementNotFoundException($"There is no patient with medical record number {mrn}.");
+            
             foreach (var patient in patients)
                 yield return FindByPatientGuid(patient.Guid);
         }
 
         public IEnumerable<VisitEntity> FindByName(string name)
         {
-            var patients = Context.Patients.Where(p => name.HasStringsInCommonWith(p.Name.ToString()));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            IEnumerable<PatientEntity> patients;
+            try
+            {
+                patients = Context.Patients.Where(p => name.HasStringsInCommonWith(p.Name.ToString()));
+            }
+            catch
+            {
+                throw new RepositoryElementNotFoundException(name);
+            }
             foreach (var patient in patients)
                 yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
         }
