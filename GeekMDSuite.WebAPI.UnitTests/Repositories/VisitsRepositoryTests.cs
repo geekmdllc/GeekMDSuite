@@ -1,8 +1,8 @@
 ﻿using System;
+using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
-using GeekMDSuite.WebAPI.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
@@ -10,8 +10,16 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public class VisitsRepositoryTests
     {
-        private readonly IVisitRepository _emptyRepository = new VisitsRepository(FakeGeekMdSuiteContextBuilder.EmptyContext);
-        private readonly IVisitRepository _repository = new VisitsRepository(FakeGeekMdSuiteContextBuilder.Context);
+
+        public VisitsRepositoryTests()
+        {
+            _emptyRepository= _emptyUnitOfWork.Visits;
+            _repository = _unitOfWork.Visits;
+        }
+        private readonly IUnitOfWork _emptyUnitOfWork = new FakeUnitOfWorkEmpty();
+        private  readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
+        private readonly IVisitsRepository _emptyRepository;
+        private readonly IVisitsRepository _repository;
         
         [Fact]
         public void FindByPatientGuid_GivenEmptyGuid_ThrowsArgumentOutOfRangeException()
@@ -33,7 +41,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         }
 
         [Fact]
-        public void FindByName_GivenJunkString_ThrowsArgumentNullException()
+        public void FindByName_GivenEmptyString_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => _repository.FindByName(string.Empty));
         }
@@ -41,7 +49,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void FindByName_GivenNameThatDoesntExistInTheContext_ThrowsRepositoryEntryNotFoundException()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() => _repository.FindByName("Makebelieve Person"));
+            Assert.Throws<RepositoryElementNotFoundException>(() => _repository.FindByName("Jar Jar Binks"));
         }
     }
 }

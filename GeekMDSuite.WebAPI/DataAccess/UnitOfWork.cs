@@ -51,7 +51,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public ISitupsRepository Situps { get; set; }
         public ISpirometriesRepository Spirometries { get; set; }
         public ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; set; }
-        public IVisitRepository Visits { get;  }
+        public IVisitsRepository Visits { get;  }
         public IVisualAcuitiesRepository VisualAcuities { get; set; }
         public IVitalSignsRepository VitalSigns { get; set; }
 

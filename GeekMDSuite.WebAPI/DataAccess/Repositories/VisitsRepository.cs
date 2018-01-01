@@ -9,7 +9,7 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public class VisitsRepository : Repository<VisitEntity>, IVisitRepository
+    public class VisitsRepository : Repository<VisitEntity>, IVisitsRepository
     {
 
         public VisitsRepository(GeekMdSuiteDbContext context) : base (context)
@@ -44,15 +44,14 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<VisitEntity> FindByName(string name)
         {
-            IEnumerable<PatientEntity> patients;
-            try
-            {
-                patients = Context.Patients.Where(p => name.HasStringsInCommonWith(p.Name.ToString()));
-            }
-            catch
-            {
+             if (string.IsNullOrEmpty(name))
+                 throw new ArgumentNullException($"{nameof(name)} cannot be null or empty in {nameof(FindByName)}");
+            
+            var patients = Context.Patients.Where(p => name.HasStringsInCommonWith(p.Name.ToString()));
+            
+            if (!patients.Any())
                 throw new RepositoryElementNotFoundException(name);
-            }
+
             foreach (var patient in patients)
                 yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
         }
@@ -65,5 +64,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
             foreach (var patient in patients)
                 yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
         }
+        
+        public void Throw() => throw new ArgumentNullException($"From inside this cursed VisitsRepository");
     }
 }

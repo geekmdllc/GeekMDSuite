@@ -19,6 +19,6 @@
 
         public static Name Build(string first, string last, string middle = "") => new Name(first, last, middle);
 
-        public override string ToString() => string.Format($"{First} {Last}");
+        public override string ToString() => string.Format($"{First}{(string.IsNullOrEmpty(Middle) ? "" : $" {Middle}")} {Last}");
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,14 +34,23 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             return Ok(found);
         }
         
-        // GET api/visits/byname/"guid"
+        // GET api/visits/byname
         [HttpGet("byname/{name}")]
         public IActionResult GetByName(string name)
         {
-            var found = UnitOfWork.Visits.FindByName(name);
-            if (found == null) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                var result = UnitOfWork.Visits.FindByName(name);
+                return Ok(result);
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
+            }
         }
         
         // GET api/visits/bydob/"dateOfBirth"
