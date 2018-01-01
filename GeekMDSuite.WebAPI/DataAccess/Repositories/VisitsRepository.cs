@@ -44,7 +44,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<VisitEntity> FindByName(string name)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             IEnumerable<PatientEntity> patients;
             try
             {

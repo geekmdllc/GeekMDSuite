@@ -3,6 +3,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Repositories
@@ -28,17 +29,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         public void FindByPatientGuid_GivenGuidOfExistingVisit_ReturnsVisit()
         {
             var visit = _repository.FindByPatientGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid);
+            Assert.IsType<VisitEntity>(visit);
         }
 
         [Fact]
-        public void FindByName_GivenEmptyString_ThrowsArgumentNullException()
+        public void FindByName_GivenJunkString_ThrowsArgumentNullException()
         {
-            void Test()
-            {
-                throw new Exception();
-            }
-            // Assert.Throws<ArgumentNullException>(() => _repository.FindByName(string.Empty));
-            Assert.Throws<ArgumentNullException>(() => Test());
+            Assert.Throws<ArgumentNullException>(() => _repository.FindByName(string.Empty));
         }
 
         [Fact]
