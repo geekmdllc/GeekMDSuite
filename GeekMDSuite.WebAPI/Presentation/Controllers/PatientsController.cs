@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -23,48 +22,83 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var newPatient = _newPatientService.GenerateUsing(patient);
+                var newPatient = _newPatientService
+                    .WithUnitOfWork(UnitOfWork)
+                    .GenerateUsing(patient);
                 UnitOfWork.Patients.Add(newPatient);
             }
-            catch (MedicalRecordNotUniqueException exception)
+            catch (MedicalRecordNotUniqueException e)
             {
-                Console.WriteLine(exception.Message);
+                Console.WriteLine(e.Message);
                 return Conflict();
+            }
+            catch (ArgumentNullException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (FormatException e)
+            {
+                return BadRequest(e.Message);
             }
             UnitOfWork.Complete();
             return Ok();
         }
-        // GET api/patients/joe
+
         [HttpGet]
         [Route("name/{name}")]
         public IActionResult GetByName(string name)
         {
-            var found = UnitOfWork.Patients.FindByName(name);
-            if (!found.Any()) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                return Ok(UnitOfWork.Patients.FindByName(name));
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
         
-        // GET api/patients/mrn/joe
+
         [HttpGet]
         [Route("mrn/{mrn}")]
         public IActionResult GetByMrn(string mrn)
         {
-            var found = UnitOfWork.Patients.FindByMedicalRecordNumber(mrn);
-            if (!found.Any()) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                return Ok(UnitOfWork.Patients.FindByMedicalRecordNumber(mrn));
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
         
         // GET api/patients/guid/guid
         [HttpGet]
         [Route("guid/{guid}")]
-        public IActionResult GetByMrn(Guid guid)
+        public IActionResult GetByGuid(Guid guid)
         {
-            var found = UnitOfWork.Patients.FindByGuid(guid);
-            if (found == null) return NotFound();
+            try
+            {
+                return Ok(UnitOfWork.Patients.FindByGuid(guid));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest();
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
             
-            return Ok(found);
         }
     }
 }

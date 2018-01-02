@@ -17,7 +17,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 
         public abstract TObject GenerateUsing(TTemplate template);
         
-        
         protected IUnitOfWork UnitOfWork;
         private bool ContextNotLoaded => UnitOfWork == null;
 

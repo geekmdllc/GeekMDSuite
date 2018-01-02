@@ -38,7 +38,12 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public void GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
-            var newVisit = _service.WithUnitOfWork(_unitOfWork).GenerateUsing(new VisitEntity());
+            var newVisit = _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
+                new VisitEntity()
+                {
+                    PatientGuid = Guid.NewGuid()
+                });
+            
             Assert.True(newVisit != null && newVisit.Visit != Guid.Empty);
         }
         

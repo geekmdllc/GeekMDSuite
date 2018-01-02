@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Helpers;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -10,21 +11,56 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
     public class PatientsRepository : Repository<PatientEntity>, IPatientsRepository
     {
-        public PatientsRepository(GeekMdSuiteDbContext context) : base (context)
+        public PatientsRepository(GeekMdSuiteDbContext context) : base(context)
         {
         }
-        
-        public IEnumerable<PatientEntity> FindByName(string query) => 
-            Context.Patients.Where(p => query.HasStringsInCommonWith(p.Name.ToString()));
 
-        public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query) => 
-            Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber));
+        public IEnumerable<PatientEntity> FindByName(string query)
+        {
+            if (query.IsEmpty()) throw new ArgumentNullException(query);
+            var result = Context.Patients.Where(p => query.HasStringsInCommonWith(p.Name.ToString()));
+            if (!result.Any()) throw new RepositoryElementNotFoundException(query);
 
-        public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth) => 
+            return result;
+        }
+
+        public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query)
+        {
+            if (query.IsEmpty()) throw new ArgumentNullException(query);
+            var result = Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber));
+            if (!result.Any()) throw new RepositoryElementNotFoundException(query);
+
+            return result;
+        }
+
+
+        public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth) =>
             Context.Patients.Where(p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString());
 
-        public bool MedicalRecordNumberExists(string query) => FindByMedicalRecordNumber(query).Any();
+        public bool MedicalRecordNumberExists(string query)
+        {
+            try
+            {
+                return FindByMedicalRecordNumber(query).Any();
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return false;
+            }
+        }
 
-        public PatientEntity FindByGuid(Guid guid) => Context.Patients.First(p => p.Guid == guid);
+        public PatientEntity FindByGuid(Guid guid)
+        {
+            if (guid == Guid.Empty)
+                throw new ArgumentOutOfRangeException(guid.ToString());
+            try
+            {
+                return Context.Patients.First(p => p.Guid == guid);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new RepositoryElementNotFoundException(guid.ToString());
+            }
+        }
     }
 }

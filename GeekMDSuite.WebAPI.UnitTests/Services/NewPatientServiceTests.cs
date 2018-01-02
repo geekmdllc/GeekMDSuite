@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Core;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -26,7 +27,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public void GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
-            var newPatient = _service.WithUnitOfWork(_unitOfWork).GenerateUsing(new PatientEntity());
+            var newPatient = _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
+                new PatientEntity()
+                {
+                    Name = Name.Build("Joe", "Schmoe"),
+                    MedicalRecordNumber = Guid.NewGuid().ToString(),
+                    DateOfBirth = new DateTime(1985, 4, 19)
+                });
             Assert.True(newPatient != null && newPatient.Guid != Guid.Empty);
         }
         

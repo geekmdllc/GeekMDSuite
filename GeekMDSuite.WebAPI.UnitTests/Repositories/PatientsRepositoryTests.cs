@@ -2,6 +2,7 @@
 using System.Linq;
 using GeekMDSuite.Core;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
@@ -18,25 +19,38 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [InlineData("xer")]
         [InlineData("majesty")]
         [InlineData("xer majesty")]
-        [InlineData("santa clause", false)]
-        [InlineData("easter bunny", false)]
-        public void FindByName_GivenNames_ReturnsNonEmptyListIfPatientsNamesExistInDatabase(string name, bool expected = true)
+        public void FindByName_GivenNames_ReturnsNonEmptyListIfPatientsNamesExistInDatabase(string name)
         {
             var found = _unitOfWork.Patients.FindByName(name);
             
-            Assert.Equal(expected, found.Any());
+            Assert.True(found.Any());
+        }
+        
+        [Theory]
+        [InlineData("santa clause")]
+        [InlineData("easter bunny")]
+        public void FindByName_GivenInvalidNames_ThrowsRepositoryElementNotfoundException(string name, bool expected = true)
+        {
+            Assert.Throws<RepositoryElementNotFoundException>(() => _unitOfWork.Patients.FindByName(name));
         }
 
         [Theory]
         [InlineData("12345")]
         [InlineData("54321")]
-        [InlineData("99999", false)]
-        [InlineData("00000", false)]
         public void FindByMedicalRecordNumber_GivenCorrectMedicalRecordNumber_ReturnsPatientEntity(string mrn, bool expected = true)
         {
             var found = _unitOfWork.Patients.FindByMedicalRecordNumber(mrn);
             
             Assert.Equal(expected, found.Any());
+        }
+        
+        [Theory]
+        [InlineData("99999", false)]
+        [InlineData("00000", false)]
+        public void FindByMedicalRecordNumber_GivenNumbersThatDoNotExistInRepository_ThrowsRepositoryElementNotFoundException(string mrn, bool expected = true)
+        {
+            Assert.Throws(typeof(RepositoryElementNotFoundException),
+                () => _unitOfWork.Patients.FindByMedicalRecordNumber(mrn));
         }
         
         [Theory]

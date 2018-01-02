@@ -55,7 +55,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<VisitEntity> FindByDateOfBirth(DateTime dateOfBirth)
         {
-            if (dateOfBirth <= DateTime.Now.AddYears(-150) || dateOfBirth >= DateTime.Now)
+            if (dateOfBirth.IsInvalidAge())
                 throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
 
             var dobString = dateOfBirth.ToShortDateString();            

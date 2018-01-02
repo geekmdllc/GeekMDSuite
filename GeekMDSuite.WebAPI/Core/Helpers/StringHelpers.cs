@@ -4,6 +4,8 @@ namespace GeekMDSuite.WebAPI.Core.Helpers
 {
     public static class StringHelpers
     {
+        public static bool IsEmpty(this string query) => string.IsNullOrWhiteSpace(query);
+
         public static bool HasStringsInCommonWith(this string query, string comparison)
         {
             var queryStringList = query.ToLower().Replace(",", "").Split();

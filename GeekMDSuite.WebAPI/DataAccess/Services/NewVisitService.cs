@@ -9,10 +9,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
     {
         public override VisitEntity GenerateUsing(VisitEntity template)
         {
+            VerifyContextIsLoaded();
             if (template == null) throw new ArgumentNullException(nameof(template));
             if (template.PatientGuid == Guid.Empty) 
                 throw new InvalidDataException($"{nameof(GenerateUsing)} must receive a {nameof(VisitEntity)} with a valid PatientGuid.");
-            VerifyContextIsLoaded();
             return new VisitEntity(template) { Visit = Guid.NewGuid() };
         }
     }

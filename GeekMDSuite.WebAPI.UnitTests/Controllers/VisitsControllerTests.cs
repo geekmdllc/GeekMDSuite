@@ -18,7 +18,11 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var unitOfWork = new FakeUnitOfWorkEmpty();
             var controller = new VisitsController(unitOfWork, new NewVisitService());
             
-            controller.Post(new VisitEntity() { Date = visitDate });
+            controller.Post(new VisitEntity()
+            {
+                Date = visitDate,
+                PatientGuid = Guid.NewGuid()
+            });
 
             var addedVisits = unitOfWork.Visits.All().FirstOrDefault();
             
