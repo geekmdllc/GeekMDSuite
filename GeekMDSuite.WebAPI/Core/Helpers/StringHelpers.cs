@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.WebAPI.Core.Helpers
 {
-    internal static class StringHelpers
+    public static class StringHelpers
     {
-        internal static bool HasStringsInCommonWith(this string query, string comparison)
+        public static bool HasStringsInCommonWith(this string query, string comparison)
         {
             var queryStringList = query.ToLower().Replace(",", "").Split();
             var comparisonString = comparison.ToLower();
@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.Core.Helpers
             return discoverd;
         }
         
-        internal static bool IsEqualTo(this string query, string comparison) 
+        public static bool IsEqualTo(this string query, string comparison) 
             => string.Equals(query, comparison, StringComparison.OrdinalIgnoreCase);
     }
 }

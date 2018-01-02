@@ -11,10 +11,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
     public class VisitsRepository : Repository<VisitEntity>, IVisitsRepository
     {
-
-        public VisitsRepository(GeekMdSuiteDbContext context) : base (context)
-        {
-        }
+        public VisitsRepository(GeekMdSuiteDbContext context) : base (context) { }
         
         public VisitEntity FindByPatientGuid(Guid patientGuid)
         {
@@ -34,42 +31,49 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn)
         {
-            var patients =  Context.Patients.Where(p => mrn.HasStringsInCommonWith(p.MedicalRecordNumber.ToString()));
-            if (!patients.Any())
-                throw new RepositoryElementNotFoundException($"There is no patient with medical record number {mrn}.");
+            if (string.IsNullOrEmpty(mrn)) 
+                throw new ArgumentNullException(mrn);
             
-            foreach (var patient in patients)
-                yield return FindByPatientGuid(patient.Guid);
+            var patientGuids = Context.Patients.Where(p => p.MedicalRecordNumber.IsEqualTo(mrn))? .Select(p => p.Guid);
+            
+            if (!patientGuids.Any())
+                throw new RepositoryElementNotFoundException(mrn);
+
+            var visits = new List<VisitEntity>();
+            foreach (var guid in patientGuids)
+                visits.Add(FindByPatientGuid(guid));
+
+            if (!visits.Any())
+                throw new RepositoryElementNotFoundException(mrn);
+
+            return visits;
         }
 
         public IEnumerable<VisitEntity> FindByName(string name)
         {
-             if (string.IsNullOrEmpty(name))
-                 throw new ArgumentNullException($"{nameof(name)} cannot be null or empty in {nameof(FindByName)}");
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException(name);
+
+            var patientGuids = Context.Patients.Where(p => p.Name.IsSimilarTo(name))? .Select(p => p.Guid);
             
-            var patients = Context.Patients.Where(p => name.HasStringsInCommonWith(p.Name.ToString()));
-            
-            if (!patients.Any())
+            if (!patientGuids.Any())
                 throw new RepositoryElementNotFoundException(name);
 
-            foreach (var patient in patients)
-                yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
+            var visits = new List<VisitEntity>();
+            foreach (var guid in patientGuids)
+                visits.Add(FindByPatientGuid(guid));
+
+            if (!visits.Any())
+                throw new RepositoryElementNotFoundException(name);
+
+            return visits;
         }
 
         public IEnumerable<VisitEntity> FindByDateOfBirth(DateTime dateOfBirth)
         {
-            if (dateOfBirth == DateTime.Now.AddYears(-150)) 
+            if (dateOfBirth <= DateTime.Now.AddYears(-150))
                 throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
-            
-            var patients = Context.Patients.Where(p => p.DateOfBirth.Year == dateOfBirth.Year &&
-                                                       p.DateOfBirth.Month == dateOfBirth.Month &&
-                                                       p.DateOfBirth.Day == dateOfBirth.Day);
-            
-            if (!patients.Any())                 
-                throw new RepositoryElementNotFoundException(dateOfBirth.ToShortDateString());
-            
-            foreach (var patient in patients)
-                yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
+            throw new NotImplementedException();
         }
     }
 }
