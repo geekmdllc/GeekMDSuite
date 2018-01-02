@@ -9,39 +9,23 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
-    public class VisitsRepository : Repository<VisitEntity>, IVisitsRepository
+    public class VisitsRepository : RepositoryAssociatedWithVisit<VisitEntity>, IVisitsRepository
     {
         public VisitsRepository(GeekMdSuiteDbContext context) : base (context) { }
-        
-        public VisitEntity FindByPatientGuid(Guid patientGuid)
-        {
-            if (patientGuid == Guid.Empty) 
-                throw new ArgumentOutOfRangeException($"{nameof(patientGuid)} must not be an empty Guid.");
-
-            try
-            {
-                return Context.Visits.First(v => v.PatientGuid == patientGuid);
-            }
-            catch
-            {
-                throw new RepositoryElementNotFoundException(patientGuid.ToString());
-            }
-            
-        }
-
+       
         public IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn)
         {
             if (string.IsNullOrEmpty(mrn)) 
                 throw new ArgumentNullException(mrn);
             
-            var patientGuids = Context.Patients.Where(p => p.MedicalRecordNumber.IsEqualTo(mrn))? .Select(p => p.Guid);
+            var patientGuids = Context.Patients.Where(p => p.MedicalRecordNumber.IsEqualTo(mrn)) .Select(p => p.Guid);
             
             if (!patientGuids.Any())
                 throw new RepositoryElementNotFoundException(mrn);
 
             var visits = new List<VisitEntity>();
             foreach (var guid in patientGuids)
-                visits.Add(FindByPatientGuid(guid));
+                visits.AddRange(FindByPatientGuid(guid));
 
             if (!visits.Any())
                 throw new RepositoryElementNotFoundException(mrn);
@@ -54,14 +38,14 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException(name);
 
-            var patientGuids = Context.Patients.Where(p => p.Name.IsSimilarTo(name))? .Select(p => p.Guid);
+            var patientGuids = Context.Patients.Where(p => p.Name.IsSimilarTo(name)) .Select(p => p.Guid);
             
             if (!patientGuids.Any())
                 throw new RepositoryElementNotFoundException(name);
 
             var visits = new List<VisitEntity>();
             foreach (var guid in patientGuids)
-                visits.Add(FindByPatientGuid(guid));
+                visits.AddRange(FindByPatientGuid(guid));
 
             if (!visits.Any())
                 throw new RepositoryElementNotFoundException(name);
@@ -71,9 +55,23 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<VisitEntity> FindByDateOfBirth(DateTime dateOfBirth)
         {
-            if (dateOfBirth <= DateTime.Now.AddYears(-150))
+            if (dateOfBirth <= DateTime.Now.AddYears(-150) || dateOfBirth >= DateTime.Now)
                 throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
-            throw new NotImplementedException();
+
+            var dobString = dateOfBirth.ToShortDateString();            
+            var patientGuids = Context.Patients.Where(p => p.DateOfBirth.ToShortDateString().HasStringsInCommonWith(dobString)).Select(p => p.Guid);
+            
+            if (!patientGuids.Any())
+                throw new RepositoryElementNotFoundException(dobString);
+
+            var visits = new List<VisitEntity>();
+            foreach (var guid in patientGuids)
+                visits.AddRange(FindByPatientGuid(guid));
+
+            if (!visits.Any())
+                throw new RepositoryElementNotFoundException(dobString);
+
+            return visits;
         }
     }
 }

@@ -5,6 +5,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 {
@@ -17,6 +18,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         {
             if (visitGuid == Guid.Empty) 
                 throw new ArgumentOutOfRangeException($"{nameof(visitGuid)} must not be an empty Guid.");
+
             var result = Context.Set<T>().Where(v => v.Visit == visitGuid);
             
             if (!result.Any())
@@ -25,12 +27,18 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
             return result;
         }
         
-        public IEnumerable<T> FindByPatient(Guid patientGuid)
+        public IEnumerable<T> FindByPatientGuid(Guid patientGuid)
         {
             if (patientGuid == Guid.Empty) 
                 throw new ArgumentOutOfRangeException($"{nameof(patientGuid)} must not be an empty Guid.");
             
             var visitsList = Context.Visits.Where(v => v.PatientGuid == patientGuid).ToList();
+            if (!visitsList.Any())
+                throw new RepositoryElementNotFoundException(patientGuid.ToString());
+
+            if (typeof(T) == typeof(VisitEntity))
+                return visitsList as IEnumerable<T>;
+            
             var results = new List<T>();
             foreach (var visit in visitsList)
                 results.AddRange(FindByVisit(visit.Visit));

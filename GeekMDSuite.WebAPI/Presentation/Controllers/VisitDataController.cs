@@ -33,11 +33,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
         
         [HttpGet("bypatient/{guid}")]
-        public IActionResult GetByPatientGuid(Guid guid)
+        public virtual IActionResult GetByPatientGuid(Guid guid)
         {
             try
             {
-                var result = UnitOfWork.VisitDataRepository<T>().FindByPatient(guid);
+                var result = UnitOfWork.VisitDataRepository<T>().FindByPatientGuid(guid);
                 return Ok(result);
             }
             catch (ArgumentOutOfRangeException)

@@ -28,7 +28,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         public void FindByPatientGuid_GivenGuidOfExistingVisit_ReturnsVisit()
         {
             var visit = _repo.FindByPatientGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid);
-            Assert.IsType<VisitEntity>(visit);
+            Assert.IsType<VisitEntity>(visit.First());
         }
 
         [Fact]

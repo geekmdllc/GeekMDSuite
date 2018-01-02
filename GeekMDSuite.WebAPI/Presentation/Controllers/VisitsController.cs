@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -13,25 +11,23 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     public class VisitsController : VisitDataController<VisitEntity>
     {
         public VisitsController(IUnitOfWork unitOfWork) : base(unitOfWork) {}
-       
-        // GET api/visits/bypatient/"guid"
-        [HttpGet("bypatient/{guid}")]
-        public IActionResult GetByPatient(Guid guid)
-        {
-            var found = UnitOfWork.Visits.FindByPatientGuid(guid);
-            if (found == null) return NotFound();
-            
-            return Ok(found);
-        }
         
         // GET api/visits/bymrn/"guid"
         [HttpGet("bymrn/{mrn}")]
         public IActionResult GetByMedicalRecordNumber(string mrn)
         {
-            var found = UnitOfWork.Visits.FindByMedicalRecordNumber(mrn);
-            if (found == null) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                return Ok(UnitOfWork.Visits.FindByMedicalRecordNumber(mrn));
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
         
         // GET api/visits/byname
@@ -40,8 +36,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var result = UnitOfWork.Visits.FindByName(name);
-                return Ok(result);
+                return Ok(UnitOfWork.Visits.FindByName(name));
             }
             catch (RepositoryElementNotFoundException)
             {
@@ -57,11 +52,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpGet("bydob/{dateOfBirth}")]
         public IActionResult GetByDateOfBirth(string dateOfBirth)
         {
-            var parsedDob = DateTime.Parse(dateOfBirth);
-            var found = UnitOfWork.Visits.FindByDateOfBirth(parsedDob);
-            if (found == null) return NotFound();
-            
-            return Ok(found);
+            try
+            {
+                var parsedDob = DateTime.Parse(dateOfBirth);
+                return Ok(UnitOfWork.Visits.FindByDateOfBirth(parsedDob));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest();
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
