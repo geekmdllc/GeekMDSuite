@@ -15,16 +15,16 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
         public override PatientEntity GenerateUsing(Patient patient)
         {
             VerifyContextIsLoaded();
-            
-            if (patient == null) throw new ArgumentNullException(nameof(patient));
             ValidatePatientFormat(patient);
-            EnsureMedicalRecordNumberIsUnique(patient);
+            MedicalRecordNumberAlreadyExists(patient);
             
             return new PatientEntity(patient) { Guid = Guid.NewGuid() };
         }
 
         private static void ValidatePatientFormat(Patient patient)
         {
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
+            
             var message = new List<string>();
             
             if (patient.Name.IsMalformed()) 
@@ -37,10 +37,20 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             if(message.Any()) throw new FormatException(string.Join(", ", message));
         }
 
-        private void EnsureMedicalRecordNumberIsUnique(Patient patient)
+        private void MedicalRecordNumberAlreadyExists(Patient patient)
         {
-            if (UnitOfWork.Patients.MedicalRecordNumberExists(patient.MedicalRecordNumber)) 
-                throw new MedicalRecordNotUniqueException(patient.MedicalRecordNumber);
+            var mrnExists = false;
+            try
+            {
+                if (UnitOfWork.Patients.FindByMedicalRecordNumber(patient.MedicalRecordNumber).Any())
+                    mrnExists = true;
+            }
+            catch
+            {
+                mrnExists = false;
+            }
+
+            if (mrnExists) throw new MedicalRecordAlreadyExistsException(patient.MedicalRecordNumber);
         }
 
     }

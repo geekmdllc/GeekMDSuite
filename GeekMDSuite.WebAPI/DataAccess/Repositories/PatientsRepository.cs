@@ -37,17 +37,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth) =>
             Context.Patients.Where(p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString());
 
-        public bool MedicalRecordNumberExists(string query)
-        {
-            try
-            {
-                return FindByMedicalRecordNumber(query).Any();
-            }
-            catch (RepositoryElementNotFoundException)
-            {
-                return false;
-            }
-        }
+        
 
         public PatientEntity FindByGuid(Guid guid)
         {

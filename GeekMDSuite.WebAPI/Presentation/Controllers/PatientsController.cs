@@ -27,7 +27,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     .GenerateUsing(patient);
                 UnitOfWork.Patients.Add(newPatient);
             }
-            catch (MedicalRecordNotUniqueException e)
+            catch (MedicalRecordAlreadyExistsException e)
             {
                 Console.WriteLine(e.Message);
                 return Conflict();
