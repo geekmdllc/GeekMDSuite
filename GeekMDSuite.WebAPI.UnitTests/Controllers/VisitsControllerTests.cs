@@ -93,6 +93,25 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var result = _controller.GetByDateOfBirth(new DateTime(1900, 1, 1).ToShortDateString());
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
+        
+        [Fact]
+        public void Post_GivenPatientWithEmptyGuid_ReturnsBadRequestObjectResul()
+        {
+            var result = _controller.Post(new VisitEntity()
+            {
+                Visit = Guid.Empty
+            });
+            
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
+        }
+
+        [Fact]
+        public void Post_GivenNullPatient_ReturnsBadRequestObjectResult()
+        {
+            var result = _controller.Post(null);
+            
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
+        }
 
         public VisitsControllerTests()
         {

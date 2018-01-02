@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -24,13 +25,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var newVisit = _newVisitService
                     .WithUnitOfWork(UnitOfWork)
                     .GenerateUsing(visitEntity);
+
                 UnitOfWork.Visits.Add(newVisit);
                 UnitOfWork.Complete();
                 return Ok();
             }
+            catch (InvalidDataException)
+            {
+                return BadRequest("PatientGuid is empty.");
+            }
             catch (ArgumentNullException)
             {
-                return BadRequest();
+                return BadRequest($"{nameof(VisitEntity)} is malformed.");
             }
         }
         
