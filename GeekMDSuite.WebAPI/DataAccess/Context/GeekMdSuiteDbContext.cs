@@ -16,6 +16,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<CentralBloodPressureEntity> CentralBloodPressures { get; set; }
         public virtual DbSet<FunctionalMovementScreenEntity> FunctionalMovementScreens { get; set; }
         public virtual DbSet<GripStrengthEntity> GripStrengths { get; set; }
+        public virtual DbSet<IshiharaSixPlateEntity> IshiharaSixPlates { get; set; }
         public virtual DbSet<OcularPressureEntity> OcularPressures { get; set; }
         public virtual DbSet<PeripheralVisionEntity> PeripheralVisions { get; set; }
         public virtual DbSet<PatientEntity> Patients { get; set; }
@@ -37,6 +38,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
             ConfigureCarotidUltrasoundEntity(modelBuilder);
             ConfigureFunctionalMovementScreen(modelBuilder);
             ConfigureGripStrengthEntity(modelBuilder);
+            ConfigureIshiharaSixPlateEntities(modelBuilder);
             ConfigurePatientEntity(modelBuilder);
             ConfigureTreadmillExerciseStressTestEntity(modelBuilder);
             ConfigureVitalSignsEntity(modelBuilder);

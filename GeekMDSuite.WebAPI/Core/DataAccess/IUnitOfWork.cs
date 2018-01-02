@@ -16,6 +16,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         ICentralBloodPressureRepository CentralBloodPressures { get; }
         IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
         IGripStrengthsRepository GripStrengths { get; }
+        IIshiharaSixPlatesRepository IshiharaSixPlates { get; }
         IOccularPressuresRepository OccularPressures { get; }
         IPatientsRepository Patients { get; }
         IPeripheralVisionsRepository PeripheralVisions { get; }

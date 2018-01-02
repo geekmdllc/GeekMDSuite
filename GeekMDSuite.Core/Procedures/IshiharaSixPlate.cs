@@ -14,7 +14,15 @@ namespace GeekMDSuite.Core.Procedures
         public IshiharaPlateAnswer Plate5 { get; set; }
         public IshiharaPlateAnswer Plate6 { get; set; }
 
-        public IshiharaSixPlate() { }
+        public IshiharaSixPlate()
+        {
+            Plate1 = new IshiharaPlateAnswer();
+            Plate2 = new IshiharaPlateAnswer();
+            Plate3 = new IshiharaPlateAnswer();
+            Plate4 = new IshiharaPlateAnswer();
+            Plate5 = new IshiharaPlateAnswer();
+            Plate6 = new IshiharaPlateAnswer();
+        }
 
         internal IshiharaSixPlate(List<IshiharaPlateAnswer> plates)
         {

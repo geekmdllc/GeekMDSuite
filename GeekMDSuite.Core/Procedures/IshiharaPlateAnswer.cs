@@ -13,8 +13,13 @@ namespace GeekMDSuite.Core.Procedures
             PlateNumber = plateNumber;
             PlateRead = plateRead;
         }
-        public int PlateNumber { get; }
-        public IshiharaAnswerResult PlateRead { get;  }
+
+        protected internal IshiharaPlateAnswer()
+        {
+            
+        }
+        public int PlateNumber { get; set; }
+        public IshiharaAnswerResult PlateRead { get; set; }
 
         public override string ToString() => $"#{PlateNumber} - {PlateRead}";
     }
