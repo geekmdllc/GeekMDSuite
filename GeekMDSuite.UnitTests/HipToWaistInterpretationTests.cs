@@ -20,24 +20,25 @@ namespace GeekMDSuite.UnitTests
         {
             _patient.Gender = Gender.Build(genderIdentity);
             
-            var mockBodyComposition = new Mock<IBodyComposition>();
-            mockBodyComposition.Setup(b => b.Hips.Inches).Returns(1);
-            mockBodyComposition.Setup(b => b.Waist.Inches).Returns(ratio);
+            var bodyComposition = BodyCompositionBuilder.Initialize()
+                .SetHips(1)
+                .SetWaist(ratio)
+                .BuildWithoutModelValidation();
 
-            var classification = new HipToWaistClassification(mockBodyComposition.Object, _patient).Classification;
+            var classification = new HipToWaistClassification(bodyComposition, _patient).Classification;
             Assert.Equal(expectedClassifcation, classification);
         }
 
         [Fact]
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HipToWaistClassification(new Mock<IBodyComposition>().Object, null));
+            Assert.Throws<ArgumentNullException>(() => new HipToWaistClassification(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null));
         }
         
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HipToWaistClassification(null, new Mock<IPatient>().Object));
+            Assert.Throws<ArgumentNullException>(() => new HipToWaistClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
         }
 
         public HipToWaistInterpretationTests()
@@ -45,7 +46,7 @@ namespace GeekMDSuite.UnitTests
             _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
         }
 
-        private Patient _patient;
+        private readonly Patient _patient;
     }
     
     

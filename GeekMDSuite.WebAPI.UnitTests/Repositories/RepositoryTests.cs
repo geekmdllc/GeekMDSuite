@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Exceptions;
+using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
@@ -13,7 +14,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void All_ReturnsNonEmptyList()
         {
-            var found = _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().All();
+            var found = _unitOfWorkSeeded.VisitData<AudiogramEntity>().All();
             
             Assert.True(found.Any());
         }
@@ -21,7 +22,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void All_GivenEmptyContext_ReturnsEmptyList()
         {
-            var found = _unitOfWorkEmpty.VisitDataRepository<AudiogramEntity>().All();
+            var found = _unitOfWorkEmpty.VisitData<AudiogramEntity>().All();
             
             Assert.False(found.Any());
         }
@@ -29,7 +30,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void FindById_ReturnsCorrectEntity()
         {
-            var foundAudiogram = _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().FindById(1);
+            var foundAudiogram = _unitOfWorkSeeded.VisitData<AudiogramEntity>().FindById(1);
             
             Assert.Equal(1, foundAudiogram.Id);
             Assert.IsType<AudiogramEntity>(foundAudiogram);
@@ -39,7 +40,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void FindById_GivenEmptyContext_ThrowsRepositoryElementNotFoundException()
         {
-            var repository = _unitOfWorkEmpty.VisitDataRepository<AudiogramEntity>();
+            var repository = _unitOfWorkEmpty.VisitData<AudiogramEntity>();
             
             Assert.Throws<RepositoryElementNotFoundException>(() => repository.FindById(1));
         }
@@ -47,7 +48,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void FindById_GivenIndexWithoutElement_ThrowsRespositoryNotFoundException()
         {
-            var audiograms = _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>();
+            var audiograms = _unitOfWorkSeeded.VisitData<AudiogramEntity>();
 
             Assert.Throws<RepositoryElementNotFoundException>(() => audiograms.FindById(int.MaxValue));
         }
@@ -55,32 +56,38 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void Add_GivenNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().Add(null));
+            Assert.Throws<ArgumentNullException>(() => _unitOfWorkSeeded.VisitData<AudiogramEntity>().Add(null));
         }
 
         [Fact]
         public void Add_GivenOneEntity_Succeeds()
         {
-            _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().Add(new AudiogramEntity());
-            _unitOfWorkSeeded.Complete();
-            Assert.Equal(3, _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().All().Count());
+            var uow = new UnitOfWork(FakeGeekMdSuiteContextBuilder.EmptyContext);
+            uow.Audiograms.Add(new AudiogramEntity());
+            uow.Complete();
+
+            var count = uow.VisitData<AudiogramEntity>().All().Count();
+            Assert.Equal(1, count);
         }
 
         [Fact]
         public void Delete_GivenIndexOutOfRange_ThrowsRepositoryElementNotFoundException()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() => _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().Delete(int.MaxValue));
+            Assert.Throws<RepositoryElementNotFoundException>(() => _unitOfWorkSeeded.VisitData<AudiogramEntity>().Delete(int.MaxValue));
         }
         
         [Fact]
         public void Delete_GivenOneId_Succeeds()
         {
-            var beforeIndex = _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().All().Count();
-            _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().Delete(beforeIndex);
-            _unitOfWorkSeeded.Complete();
+            var uow = new UnitOfWork(FakeGeekMdSuiteContextBuilder.EmptyContext);
+            uow.Audiograms.Add(new AudiogramEntity());
+            uow.Complete();
+            
+            uow.VisitData<AudiogramEntity>().Delete(uow.Audiograms.All().First().Id);
+            uow.Complete();
 
-            var afterIndex = _unitOfWorkSeeded.VisitDataRepository<AudiogramEntity>().All().Count();
-            Assert.Equal(beforeIndex - 1, afterIndex);
+            var count = uow.VisitData<AudiogramEntity>().All().Count();
+            Assert.Equal(0, count);
         }
 
         private readonly IUnitOfWork _unitOfWorkSeeded = new FakeUnitOfWorkSeeded();

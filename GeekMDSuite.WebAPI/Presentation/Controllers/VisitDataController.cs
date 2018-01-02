@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var result = UnitOfWork.VisitDataRepository<T>().FindByVisit(guid);
+                var result = UnitOfWork.VisitData<T>().FindByVisit(guid);
                 return Ok(result);
             }
             catch (ArgumentOutOfRangeException)
@@ -37,7 +37,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var result = UnitOfWork.VisitDataRepository<T>().FindByPatientGuid(guid);
+                var result = UnitOfWork.VisitData<T>().FindByPatientGuid(guid);
                 return Ok(result);
             }
             catch (ArgumentOutOfRangeException)

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -35,7 +36,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkSeeded());
 
-            var result = controller.Get(1);
+            var result = controller.Get(new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context).Audiograms.All().First().Id);
             
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
@@ -94,7 +95,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         public void Put_GivenAppropriateElement_ReturnsOkay()
         {
             var uow = new FakeUnitOfWorkSeeded();
-            var audiogram = uow.Audiograms.FindById(1);
+            var audiogram = uow.Audiograms.All().First();
             audiogram.Left.F2000.Value = 150;
             uow.Dispose();
             

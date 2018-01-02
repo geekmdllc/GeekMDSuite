@@ -19,25 +19,25 @@ namespace GeekMDSuite.UnitTests
                 .SetDateOfBirth(dateOfBirth.Year, dateOfBirth.Month, dateOfBirth.Day)
                 .BuildWithoutModelValidation();
 
-            var mockTreadmill = new Mock<ITreadmillExerciseStressTest>();
-            mockTreadmill.Setup(t => t.Protocol).Returns(TreadmillProtocol.Bruce);
-            mockTreadmill.Setup(t => t.Time.FractionalMinutes).Returns(11.0 + 33.0 / 60.0);
+            var treadmill = TreadmillExerciseStressTestBuilder.Initialize()
+                .SetTime(11, 33)
+                .BuildWithoutModelValidation();
 
-            var result = FromTreadmillStressTest(mockTreadmill.Object, patient);
+            var result = FromTreadmillStressTest(treadmill, patient);
             Assert.InRange(result, expectedLower, expectedUpper);
         }
   
         [Fact]
         public void NullTreadmillStressTest_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => FromTreadmillStressTest(null, new Mock<IPatient>().Object));
+            Assert.Throws<NullReferenceException>(() => FromTreadmillStressTest(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
         }
 
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<NullReferenceException>(() =>
-                FromTreadmillStressTest(new Mock<ITreadmillExerciseStressTest>().Object, null));
+                FromTreadmillStressTest(TreadmillExerciseStressTestBuilder.Initialize().BuildWithoutModelValidation(), null));
         }
     }
 }

@@ -28,13 +28,16 @@ namespace GeekMDSuite.UnitTests
         public void Classification_GivenDemographicsAndBmiInfo_ReturnsCorrectBmiClassification(
             double bmi, Race race, BodyMassIndex expectecBodyMassIndex)
         {
-            var mockBodyComposition = new Mock<IBodyComposition>();
-            mockBodyComposition.Setup(bc => bc.Height.Meters).Returns(1);
-            mockBodyComposition.Setup(bc => bc.Weight.Kilograms).Returns(bmi);
-            var mockPatient = new Mock<IPatient>();
-            mockPatient.Setup(p => p.Race).Returns(race);
+            var bodyComposition = BodyCompositionBuilder.Initialize()
+                .SetHeight(Tools.MeasurementUnits.Conversion.LengthConversion.CentimetersToInches(100))
+                .SetWeight(Tools.MeasurementUnits.Conversion.MassConversion.KilogramsToLbs(bmi))
+                .BuildWithoutModelValidation();
+
+            var patient = PatientBuilder.Initialize()
+                .SetRace(race)
+                .BuildWithoutModelValidation();
             
-            var result = new BodyMassIndexClassification(mockBodyComposition.Object, mockPatient.Object).Classification;
+            var result = new BodyMassIndexClassification(bodyComposition, patient).Classification;
             
             Assert.Equal(expectecBodyMassIndex, result);
         }
@@ -43,14 +46,14 @@ namespace GeekMDSuite.UnitTests
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new BodyMassIndexClassification(null, new Mock<IPatient>().Object).Classification);
+                new BodyMassIndexClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()).Classification);
         }
         
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new BodyMassIndexClassification(new Mock<IBodyComposition>().Object, null));
+                new BodyMassIndexClassification(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null));
         }
     }
 }

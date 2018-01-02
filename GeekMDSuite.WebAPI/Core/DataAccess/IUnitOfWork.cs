@@ -6,8 +6,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepositoryAssociatedWithVisit<T> VisitDataRepository<T>() where T : class, IVisitData<T>;
-        IRepository<T> EntityDataRepository<T>() where T : class, IEntity<T>;
+        IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>;
+        IRepository<T> EntityData<T>() where T : class, IEntity<T>;
         IAudiogramsRepository Audiograms { get; }
         IBloodPressuresRepository BloodPressures { get; }
         IBodyCompositionsRepository BodyCompositions { get; }

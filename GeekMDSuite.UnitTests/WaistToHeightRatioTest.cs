@@ -26,11 +26,12 @@ namespace GeekMDSuite.UnitTests
         {
             _patient.Gender = Gender.Build(genderIdentity);
 
-            var bc = new Mock<IBodyComposition>();
-            bc.Setup(b => b.Height.Centimeters).Returns(1);
-            bc.Setup(b => b.Waist.Centimeters).Returns(ratio);
+            var bodyComposition = BodyCompositionBuilder.Initialize()
+                .SetHeight(Tools.MeasurementUnits.Conversion.LengthConversion.CentimetersToInches(1))
+                .SetWaist(Tools.MeasurementUnits.Conversion.LengthConversion.CentimetersToInches(ratio))
+                .BuildWithoutModelValidation();
             
-            var classification = new WaistToHeightRatioClassification(bc.Object, _patient).Classification;
+            var classification = new WaistToHeightRatioClassification(bodyComposition, _patient).Classification;
             
             Assert.Equal(expectedWaistToHeightRatio, classification);
         }
@@ -39,7 +40,7 @@ namespace GeekMDSuite.UnitTests
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new WaistToHeightRatioClassification(null, new Mock<IPatient>().Object));
+                new WaistToHeightRatioClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
         }
         
         [Fact]

@@ -25,7 +25,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var results = UnitOfWork.EntityDataRepository<T>().All();
+            var results = UnitOfWork.EntityData<T>().All();
             if (results.Any())
                 return Ok(results);
             return NotFound();
@@ -37,7 +37,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                return Ok(UnitOfWork.EntityDataRepository<T>().FindById(id));
+                return Ok(UnitOfWork.EntityData<T>().FindById(id));
             }
             catch (RepositoryElementNotFoundException)
             {
@@ -51,7 +51,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                UnitOfWork.EntityDataRepository<T>().Add(entity);
+                UnitOfWork.EntityData<T>().Add(entity);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -67,7 +67,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                UnitOfWork.EntityDataRepository<T>().Update(entity);
+                UnitOfWork.EntityData<T>().Update(entity);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -87,7 +87,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                UnitOfWork.EntityDataRepository<T>().Delete(id);
+                UnitOfWork.EntityData<T>().Delete(id);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -105,7 +105,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 foreach (var id in ids)
                 {
-                    UnitOfWork.EntityDataRepository<T>().Delete(id);
+                    UnitOfWork.EntityData<T>().Delete(id);
                 }
                 UnitOfWork.Complete();
                 return Ok();
