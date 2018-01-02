@@ -4,18 +4,25 @@ using GeekMDSuite.Core.Analytics.Classification;
 
 namespace GeekMDSuite.Core.Procedures
 {
-    // TODO: Refactor this. Needs a more strongly typed model to be compatible with EF.
-    public class IshiharaSixPlateScreenBuilder : Builder<IshiharaSixPlateScreenBuilder, List<IshiharaPlateAnswer>>
+    public class IshiharaSixPlateScreenBuilder : Builder<IshiharaSixPlateScreenBuilder, IshiharaSixPlate>
     {
-        public override List<IshiharaPlateAnswer> Build()
+        public override IshiharaSixPlate Build()
         {
             ValidatePreBuildState();
-            return BuildWithoutModelValidation();
+            return new IshiharaSixPlate(_list);
         }
 
-        public override List<IshiharaPlateAnswer> BuildWithoutModelValidation()
+        public override IshiharaSixPlate BuildWithoutModelValidation()
         {
-            return _list;
+            return new IshiharaSixPlate()
+            {
+                Plate1 = _list[0],
+                Plate2 = _list[1],
+                Plate3 = _list[2],
+                Plate4 = _list[3],
+                Plate5 = _list[4],
+                Plate6 = _list[5]
+            };
         }
 
         public IshiharaSixPlateScreenBuilder SetPlate1(IshiharaAnswerResult plateRead)

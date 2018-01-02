@@ -1,19 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using GeekMDSuite.Core.Procedures;
 
 namespace GeekMDSuite.Core.Analytics.Classification
 {
     public class IshiharaSixPlateClassification : IshiharaColorVisionClassification, IClassifiable<IshiharaResultFlag>
     {
-        private readonly List<IshiharaPlateAnswer> _answerList;
-
-        public IshiharaSixPlateClassification(List<IshiharaPlateAnswer> answerList) : base(answerList, IshiharaTestType.Ishihara6)
+        public IshiharaSixPlateClassification(IshiharaSixPlate ishiharaSixPlate) : base(ishiharaSixPlate.Answers, IshiharaTestType.Ishihara6)
         {
-            _answerList = answerList;
+            if (ishiharaSixPlate?.Answers == null) throw new NullReferenceException();
         }
         
-        protected sealed override IshiharaResultFlag Classify() => AssessIshiharaVisionAssessment();
-
         public IshiharaResultFlag Classification => Classify();
+        
+        protected sealed override IshiharaResultFlag Classify() => AssessIshiharaVisionAssessment();
     }
 }

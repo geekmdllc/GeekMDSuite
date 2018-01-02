@@ -20,7 +20,7 @@ namespace GeekMDSuite.Core.UnitTests
         [Fact]
         public void IshiharaSixPlateInterpretation_GivenTooManyPlatesSet_DemonstratesToleranceAndSetsLatestValue()
         {
-            var answerList = new IshiharaSixPlateScreenBuilder()
+            var ishiharaSixPlate = new IshiharaSixPlateScreenBuilder()
                 .SetPlate1(IshiharaAnswerResult.ColorVisionDefict)
                 .SetPlate2(IshiharaAnswerResult.NormalVision)
                 .SetPlate3(IshiharaAnswerResult.NormalVision)
@@ -31,9 +31,9 @@ namespace GeekMDSuite.Core.UnitTests
                 .SetPlate4(IshiharaAnswerResult.NormalVision) // extra, should not be added. overwrites previous
                 .Build();
             
-            var assessment = new IshiharaSixPlateClassification(answerList.GetRange(0,6));
+            var assessment = new IshiharaSixPlateClassification(ishiharaSixPlate);
             Assert.Equal(IshiharaResultFlag.NormalVision, assessment.Classification);
-            Assert.Equal(6,answerList.Count);
+            Assert.Equal(6,ishiharaSixPlate.Answers.Count);
         }
     }
 }

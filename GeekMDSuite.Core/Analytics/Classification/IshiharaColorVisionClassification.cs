@@ -8,13 +8,13 @@ namespace GeekMDSuite.Core.Analytics.Classification
 {
     public abstract class IshiharaColorVisionClassification
     {
-        protected IshiharaColorVisionClassification(List<IshiharaPlateAnswer> answerList, IshiharaTestType testType)
+        protected IshiharaColorVisionClassification(List<IshiharaPlateAnswer> ishiharaSixPlate, IshiharaTestType testType)
         {
             TestType = testType;
-            AnswerList = answerList ?? throw new ArgumentNullException(nameof(answerList));
+            AnswerList = ishiharaSixPlate ?? throw new ArgumentNullException(nameof(ishiharaSixPlate));
             PlateSet = GetPlateSet(testType);
-            if(answerList.Count != PlateSet.Count) 
-                throw new IndexOutOfRangeException($"{nameof(answerList)} has {answerList.Count} items and it should have {PlateSet.Count}.");
+            if(ishiharaSixPlate.Count != PlateSet.Count) 
+                throw new IndexOutOfRangeException($"{nameof(ishiharaSixPlate)} has {ishiharaSixPlate.Count} items and it should have {PlateSet.Count}.");
         }
 
         private static List<IshiharaPlateModel> GetPlateSet(IshiharaTestType testType)

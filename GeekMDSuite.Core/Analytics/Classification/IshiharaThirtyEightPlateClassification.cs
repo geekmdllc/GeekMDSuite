@@ -5,11 +5,11 @@ namespace GeekMDSuite.Core.Analytics.Classification
 {
     internal class IshiharaThirtyEightPlateClassification : IshiharaColorVisionClassification, IClassifiable<IshiharaResultFlag>
     {
-        private readonly List<IshiharaPlateAnswer> _answerList;
+        private readonly List<IshiharaPlateAnswer> _ishiharaSixPlate;
 
-        public IshiharaThirtyEightPlateClassification(List<IshiharaPlateAnswer> answerList) : base(answerList, IshiharaTestType.Ishihara38)
+        public IshiharaThirtyEightPlateClassification(List<IshiharaPlateAnswer> ishiharaSixPlate) : base(ishiharaSixPlate, IshiharaTestType.Ishihara38)
         {
-            _answerList = answerList;
+            _ishiharaSixPlate = ishiharaSixPlate;
         }
         protected sealed override IshiharaResultFlag Classify() => AssessIshiharaVisionAssessment();
 
