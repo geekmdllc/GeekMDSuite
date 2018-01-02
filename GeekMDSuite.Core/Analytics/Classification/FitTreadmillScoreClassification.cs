@@ -1,7 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Tools.Cardiology;
 using GeekMDSuite.Core.Tools.Fitness;
-using GeekMDSuite.Tools.Cardiology;
 
 namespace GeekMDSuite.Core.Analytics.Classification
 {

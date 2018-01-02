@@ -4,7 +4,7 @@ namespace GeekMDSuite.Core.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
-        public double IdealAscvd10YearRiskPercentage => new Core.Tools.Cardiology.PooledCohortsEquation(
+        public double IdealAscvd10YearRiskPercentage => new PooledCohortsEquation(
             PooledCohortEquationParametersBuilder
                 .Initialize()
                 .SetBloodPressure(110, 79)

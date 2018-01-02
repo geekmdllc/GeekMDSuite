@@ -1,8 +1,6 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Procedures;
 using static GeekMDSuite.Core.Tools.Fitness.CalculateMetabolicEquivalents;
-using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Core.UnitTests

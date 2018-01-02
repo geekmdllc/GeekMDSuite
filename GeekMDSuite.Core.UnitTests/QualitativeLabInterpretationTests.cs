@@ -15,13 +15,13 @@ namespace GeekMDSuite.Core.UnitTests
         public void QualitativeLab_GivenResult_ReturnsCorrectClassification(
             QualitativeLabResult result, QualitativeLabResult expectedClassification)
         {
-            var patient = PatientBuilder.Initialize()
+            PatientBuilder.Initialize()
                 .SetGender(GenderIdentity.Male)
                 .BuildWithoutModelValidation();
 
             var test = Qualitative.HepatitisCAntibody(result);
 
-            var interp = new QualitativeLabClassification(test, patient);
+            var interp = new QualitativeLabClassification(test);
 
             var classification = interp.Classification;
 
@@ -32,14 +32,14 @@ namespace GeekMDSuite.Core.UnitTests
         public void GivenNullQualitytativeTest_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new QualitativeLabClassification(null, new Mock<IPatient>().Object));
+                new QualitativeLabClassification(null));
         }
 
         [Fact]
         public void GivenNullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new QualitativeLabClassification(new Mock<IQualitativeLab>().Object, null));
+                new QualitativeLabClassification(new Mock<IQualitativeLab>().Object));
         }
     }
 }

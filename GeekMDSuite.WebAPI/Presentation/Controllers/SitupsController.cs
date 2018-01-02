@@ -1,7 +1,6 @@
 ﻿using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {

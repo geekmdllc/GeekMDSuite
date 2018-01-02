@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Analytics.Classification;
 using Xunit;
 using static GeekMDSuite.Core.Analytics.Classification.BloodPressureClassification.LowerLimits;

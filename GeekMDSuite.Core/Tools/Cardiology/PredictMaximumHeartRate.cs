@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Tools.Cardiology
+﻿namespace GeekMDSuite.Core.Tools.Cardiology
 {
     public static class PredictMaximumHeartRate
     {

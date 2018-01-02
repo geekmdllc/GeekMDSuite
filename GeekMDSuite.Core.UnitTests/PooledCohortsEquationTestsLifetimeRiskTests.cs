@@ -1,7 +1,4 @@
-﻿using GeekMDSuite.Core;
-using GeekMDSuite.Tools.Cardiology;
-using Moq;
-using Xunit;
+﻿using Xunit;
 using PooledCohortsEquation = GeekMDSuite.Core.Tools.Cardiology.PooledCohortsEquation;
 
 namespace GeekMDSuite.Core.UnitTests

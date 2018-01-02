@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using GeekMDSuite.Core;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;

@@ -88,15 +88,5 @@ namespace GeekMDSuite.Core.Analytics.Classification
                 {CarotidPercentStenosisGrade.LessThan50, 3},
                 {CarotidPercentStenosisGrade.MoreThan50, 4}
             };
-        
-        private static Dictionary<CarotidIntimaMediaThicknessGrade, int> ImtSeverityMapToRelativeValue =>
-            new Dictionary<CarotidIntimaMediaThicknessGrade, int>()
-            {
-                {CarotidIntimaMediaThicknessGrade.Normal, 0},
-                {CarotidIntimaMediaThicknessGrade.Mild, 1},
-                {CarotidIntimaMediaThicknessGrade.Moderate, 2},
-                {CarotidIntimaMediaThicknessGrade.Significant, 3},
-                {CarotidIntimaMediaThicknessGrade.CriticalSignificant, 4}
-            };
     }
 }

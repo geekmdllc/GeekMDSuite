@@ -8,7 +8,6 @@ using GeekMDSuite.Core.PatientActivities;
 using GeekMDSuite.Core.Procedures;
 using GeekMDSuite.Core.Tools.Cardiology;
 using GeekMDSuite.Core.Tools.Fitness;
-using GeekMDSuite.Tools.Cardiology;
 using static System.Environment;
 using PooledCohortsEquation = GeekMDSuite.Core.Tools.Cardiology.PooledCohortsEquation;
 
@@ -294,7 +293,7 @@ namespace GeekMDSuite.ConsoleDemo
             var pushupsInterp = new PushupsClassification(pushups, patient);
             Console.WriteLine($"Pushups: {pushupsInterp}{NewLine}");
             
-            var qualitativeLabInterp = new QualitativeLabClassification(qualitativeLab, patient);
+            var qualitativeLabInterp = new QualitativeLabClassification(qualitativeLab);
             Console.WriteLine($"Qualitative Lab: {qualitativeLabInterp}{NewLine}");
             
             var quantLabInterpTotalChol = new QuantitativeLabClassification(quantitativeLabChoesterol, patient);

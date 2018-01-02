@@ -1,7 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Core.PatientActivities;
 using GeekMDSuite.Core.Services.Repositories;
-using ExerciseRegimenClassification = GeekMDSuite.Core.Analytics.Classification.PatientActivities.ExerciseRegimenClassification;
 
 namespace GeekMDSuite.Core.Analytics.Classification.PatientActivities
 {

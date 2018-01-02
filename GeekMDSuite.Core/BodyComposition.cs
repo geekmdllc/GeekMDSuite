@@ -24,7 +24,7 @@ namespace GeekMDSuite.Core
         }
 
         private BodyComposition(double heightInches, double waistInches, double hipsInches, double weightPounds) 
-            :this(Height.Build(heightInches), Waist.Build(waistInches), Tools.MeasurementUnits.Hips.Build(hipsInches), Weight.Build(weightPounds) )
+            :this(Height.Build(heightInches), Waist.Build(waistInches), Hips.Build(hipsInches), Weight.Build(weightPounds) )
         {
         }
         

@@ -1,9 +1,7 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Procedures;
 using GeekMDSuite.Core.Tools.Fitness;
 using GeekMDSuite.Core.Tools.MeasurementUnits;
-using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Core.UnitTests

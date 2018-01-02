@@ -19,8 +19,8 @@
         double UpperLimitOfHighFemale { get; set; }
         double UpperLimitOfHighMale { get; set; }
         double UpperBound { get; set; }
-        string UnitsSI { get; set; }
-        string UnitsUS { get; set; }
+        string UnitsSi { get; set; }
+        string UnitsUs { get; set; }
         string Interpretation { get; set; }
         string Comments { get; set; }
     }

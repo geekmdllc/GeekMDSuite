@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Analytics.Classification;
 using GeekMDSuite.Core.LaboratoryData.Builder;
 using GeekMDSuite.Core.Tools.Cardiology;

@@ -1,8 +1,5 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Tools.Cardiology;
-using GeekMDSuite.Tools.Cardiology;
-using Moq;
 using Xunit;
 using PooledCohortsEquation = GeekMDSuite.Core.Tools.Cardiology.PooledCohortsEquation;
 

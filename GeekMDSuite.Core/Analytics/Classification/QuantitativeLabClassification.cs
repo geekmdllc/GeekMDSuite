@@ -19,7 +19,7 @@ namespace GeekMDSuite.Core.Analytics.Classification
         public QuantitativeLabResult Classification => Classify();
 
         public override string ToString() => 
-            $"Lab - {_lab.Result} {Lab.UnitsUS} ({Classification}) [{GetLowerBound()} - {GetUpperBound()} {Lab.UnitsUS}]";
+            $"Lab - {_lab.Result} {Lab.UnitsUs} ({Classification}) [{GetLowerBound()} - {GetUpperBound()} {Lab.UnitsUs}]";
 
         private double GetUpperBound() => Gender.IsGenotypeXx(_patient.Gender) 
             ? Lab.UpperLimitOfNormalFemale : Lab.UpperLimitOfNormalMale;

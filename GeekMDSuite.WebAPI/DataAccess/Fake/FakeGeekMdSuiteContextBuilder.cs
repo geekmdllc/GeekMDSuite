@@ -1,11 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Net.Sockets;
-using GeekMDSuite.Core;
-using GeekMDSuite.Core.Analytics.Classification;
-using GeekMDSuite.Core.Procedures;
 using GeekMDSuite.WebAPI.DataAccess.Context;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Fake
