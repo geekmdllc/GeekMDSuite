@@ -5,12 +5,9 @@ namespace GeekMDSuite.Core.Procedures
 {
     public class IshiharaSixPlate
     {
-        private readonly List<IshiharaPlateAnswer> _answers;
-
-        public List<IshiharaPlateAnswer> GetAnswers()
-        {
-            return _answers;
-        }
+        internal static IshiharaSixPlate Build(List<IshiharaPlateAnswer> plates) => new IshiharaSixPlate(plates);
+        
+        public List<IshiharaPlateAnswer> GetAnswers() => _answers;
 
         public IshiharaPlateAnswer Plate1 { get; set; }
         public IshiharaPlateAnswer Plate2 { get; set; }
@@ -19,7 +16,12 @@ namespace GeekMDSuite.Core.Procedures
         public IshiharaPlateAnswer Plate5 { get; set; }
         public IshiharaPlateAnswer Plate6 { get; set; }
 
-        public IshiharaSixPlate()
+        public override string ToString()
+        {
+            return string.Join("\n", GetAnswers());
+        }
+
+        protected internal IshiharaSixPlate()
         {
             Plate1 = new IshiharaPlateAnswer();
             Plate2 = new IshiharaPlateAnswer();
@@ -29,7 +31,7 @@ namespace GeekMDSuite.Core.Procedures
             Plate6 = new IshiharaPlateAnswer();
         }
 
-        internal IshiharaSixPlate(List<IshiharaPlateAnswer> plates)
+        private IshiharaSixPlate(List<IshiharaPlateAnswer> plates)
         {
             _answers = plates ?? throw new ArgumentNullException(nameof(plates));
             
@@ -41,9 +43,6 @@ namespace GeekMDSuite.Core.Procedures
             Plate6 = GetAnswers()[5];
         }
 
-        public override string ToString()
-        {
-            return string.Join("\n", GetAnswers());
-        }
+        private readonly List<IshiharaPlateAnswer> _answers;
     }
 }

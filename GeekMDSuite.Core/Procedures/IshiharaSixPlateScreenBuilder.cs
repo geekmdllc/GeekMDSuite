@@ -9,7 +9,7 @@ namespace GeekMDSuite.Core.Procedures
         public override IshiharaSixPlate Build()
         {
             ValidatePreBuildState();
-            return new IshiharaSixPlate(_list);
+            return IshiharaSixPlate.Build(_list);
         }
 
         public override IshiharaSixPlate BuildWithoutModelValidation()
