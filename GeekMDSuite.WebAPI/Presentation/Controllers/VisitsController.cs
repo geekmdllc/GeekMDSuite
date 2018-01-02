@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,26 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json")]
     public class VisitsController : VisitDataController<VisitEntity>
     {
-        public VisitsController(IUnitOfWork unitOfWork) : base(unitOfWork) {}
+
+        public VisitsController(IUnitOfWork unitOfWork, INewVisitService newVisitService) : base(unitOfWork)
+        {
+            _newVisitService = newVisitService;
+        }
+
+        public override IActionResult Post(VisitEntity visitEntity)
+        {
+            try
+            {
+                var newVisit = _newVisitService.GenerateUsing(visitEntity);
+                UnitOfWork.Visits.Add(newVisit);
+                UnitOfWork.Complete();
+                return Ok();
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
+            }
+        }
         
         // GET api/visits/bymrn/"guid"
         [HttpGet("bymrn/{mrn}")]
@@ -66,5 +86,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
+        
+        private readonly INewVisitService _newVisitService;
     }
 }

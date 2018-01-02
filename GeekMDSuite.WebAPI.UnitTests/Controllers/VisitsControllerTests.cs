@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
+using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
@@ -8,6 +13,20 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 {
     public class VisitsControllerTests
     {
+        [Fact]
+        public void Add_GivenNewVisit_CreatesAVisitWithVisitGuid()
+        {
+            var visitDate = DateTime.Now;
+            var unitOfWork = new FakeUnitOfWorkEmpty();
+            var newVisitService = new NewVisitService(unitOfWork);
+            var controller = new VisitsController(unitOfWork, newVisitService);
+            
+            controller.Post(new VisitEntity() { Date = visitDate });
+
+            var addedVisits = unitOfWork.Visits.All().FirstOrDefault();
+            
+            Assert.True(addedVisits != null && addedVisits.Visit != Guid.Empty);
+        }
         [Fact]
         public void GetByMedicalRecordNumber_GivenEmptyString_ReturnsBadRequestObjectResult()
         {
@@ -77,7 +96,14 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var result = _controller.GetByDateOfBirth(new DateTime(1900, 1, 1).ToShortDateString());
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
-        
-        private readonly VisitsController _controller = new VisitsController(new FakeUnitOfWorkSeeded());
+
+        public VisitsControllerTests()
+        {
+            var unitOfWork = new FakeUnitOfWorkSeeded();
+            var newVisitService = new NewVisitService(unitOfWork);
+            _controller = new VisitsController(unitOfWork, newVisitService);
+        }
+
+        private readonly VisitsController _controller;
     }
 }

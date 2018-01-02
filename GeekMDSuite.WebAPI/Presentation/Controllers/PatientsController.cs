@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        public override ActionResult Post([FromBody] PatientEntity patient)
+        public override IActionResult Post([FromBody] PatientEntity patient)
         {
             try
             {

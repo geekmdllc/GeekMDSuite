@@ -47,7 +47,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // POST api/T/
         [HttpPost]
-        public virtual ActionResult Post([FromBody] T entity)
+        public virtual IActionResult Post([FromBody] T entity)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // PUT api/T/
         [HttpPut]
-        public ActionResult Put([FromBody] T entity)
+        public IActionResult Put([FromBody] T entity)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // DELETE api/T/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         // DELETE/api/T --> from body [1,2,3,...,n]
         [HttpDelete]
-        public ActionResult Delete([FromBody] int[] ids)
+        public IActionResult Delete([FromBody] int[] ids)
         {
             try
             {

@@ -1,21 +1,19 @@
 ﻿using System;
 using GeekMDSuite.Core;
 using GeekMDSuite.WebAPI.Core.DataAccess;
-using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
-    public class NewPatientService :  INewPatientService
+    public class NewPatientService :  NewKeyEntityService<PatientEntity, Patient>, INewPatientService
     {
-        public NewPatientService(IUnitOfWork unitOfWork)
+        public NewPatientService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _patients = unitOfWork.Patients;
         }
-
-        public PatientEntity GenerateUsing(Patient patient)
+  
+        public override PatientEntity GenerateUsing(Patient patient)
         {
             EnsureMedicalRecordNumberIsUnique(patient.MedicalRecordNumber);
             
@@ -24,12 +22,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
                 Guid = Guid.NewGuid()  
             };
         }
-        
-        private readonly IPatientsRepository _patients;
 
         private void EnsureMedicalRecordNumberIsUnique(string mrn)
         {
-            if (_patients.MedicalRecordNumberExists(mrn)) 
+            if (UnitOfWork.Patients.MedicalRecordNumberExists(mrn)) 
                 throw new MedicalRecordNotUniqueException(mrn);
         }
 

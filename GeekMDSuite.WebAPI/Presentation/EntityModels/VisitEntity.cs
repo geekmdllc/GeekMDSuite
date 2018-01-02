@@ -15,11 +15,11 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Visit = Guid.Empty;
         }
 
-        public VisitEntity(Guid patientGuid) : this()
+        public VisitEntity(VisitEntity visitEntity) : this()
         {
-            PatientGuid = patientGuid;
+            MapValues(visitEntity);
         }
-        
+
         public void MapValues(VisitEntity subject)
         {
             PatientGuid = subject.PatientGuid;
