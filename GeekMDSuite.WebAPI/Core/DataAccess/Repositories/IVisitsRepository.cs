@@ -10,6 +10,5 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
         IEnumerable<VisitEntity> FindByMedicalRecordNumber(string mrn);
         IEnumerable<VisitEntity> FindByName(string name);
         IEnumerable<VisitEntity> FindByDateOfBirth(DateTime dateOfBirth);
-        void Throw();
     }
 }

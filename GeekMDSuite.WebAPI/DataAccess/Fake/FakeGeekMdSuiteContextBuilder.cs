@@ -58,6 +58,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         public static readonly Guid XerMajestyGuid = Guid.Parse("3b69bd30-7a07-4859-b536-5071e0a5f516");
         public static readonly Guid BruceWaynesVisitGuid = Guid.Parse("8bfb8f23-39f4-4cde-80c6-72b178068dc4");
         public static readonly Guid BruceWaynesGuid = Guid.Parse("50345ee6-fde2-4a51-8177-8c715628e39e");
+        public const string BruceWaynesMedicalRecordNumber = "12345";
+        public const string XerMajestiesMedicalRecordNumber = "54321";
     }
     
 }

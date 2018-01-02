@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             var p1 = PatientBuilder.Initialize()
                 .SetDateOfBirth(1900, 1, 1)
                 .SetGender(GenderIdentity.Male)
-                .SetMedicalRecordNumber("12345")
+                .SetMedicalRecordNumber(BruceWaynesMedicalRecordNumber)
                 .SetName("Bruce", "Wayne")
                 .SetRace(Race.White)
                 .Build();
@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             var p2 = PatientBuilder.Initialize()
                 .SetDateOfBirth(1990, 2, 2)
                 .SetGender(GenderIdentity.NonBinaryXx)
-                .SetMedicalRecordNumber("54321")
+                .SetMedicalRecordNumber(XerMajestiesMedicalRecordNumber)
                 .SetName("Xer", "Majesty")
                 .SetRace(Race.Unknown)
                 .Build();

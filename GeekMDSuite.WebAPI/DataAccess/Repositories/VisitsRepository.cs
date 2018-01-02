@@ -58,13 +58,18 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<VisitEntity> FindByDateOfBirth(DateTime dateOfBirth)
         {
+            if (dateOfBirth == DateTime.Now.AddYears(-150)) 
+                throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
+            
             var patients = Context.Patients.Where(p => p.DateOfBirth.Year == dateOfBirth.Year &&
                                                        p.DateOfBirth.Month == dateOfBirth.Month &&
                                                        p.DateOfBirth.Day == dateOfBirth.Day);
+            
+            if (!patients.Any())                 
+                throw new RepositoryElementNotFoundException(dateOfBirth.ToShortDateString());
+            
             foreach (var patient in patients)
                 yield return Context.Visits.First(v => v.PatientGuid == patient.Guid);
         }
-        
-        public void Throw() => throw new ArgumentNullException($"From inside this cursed VisitsRepository");
     }
 }
