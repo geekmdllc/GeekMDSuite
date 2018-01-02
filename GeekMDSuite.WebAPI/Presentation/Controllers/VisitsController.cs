@@ -21,7 +21,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var newVisit = _newVisitService.GenerateUsing(visitEntity);
+                var newVisit = _newVisitService
+                    .WithUnitOfWork(UnitOfWork)
+                    .GenerateUsing(visitEntity);
                 UnitOfWork.Visits.Add(newVisit);
                 UnitOfWork.Complete();
                 return Ok();

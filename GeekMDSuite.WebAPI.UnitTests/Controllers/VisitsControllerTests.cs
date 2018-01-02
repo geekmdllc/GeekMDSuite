@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
@@ -18,8 +16,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var visitDate = DateTime.Now;
             var unitOfWork = new FakeUnitOfWorkEmpty();
-            var newVisitService = new NewVisitService(unitOfWork);
-            var controller = new VisitsController(unitOfWork, newVisitService);
+            var controller = new VisitsController(unitOfWork, new NewVisitService());
             
             controller.Post(new VisitEntity() { Date = visitDate });
 
@@ -99,9 +96,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 
         public VisitsControllerTests()
         {
-            var unitOfWork = new FakeUnitOfWorkSeeded();
-            var newVisitService = new NewVisitService(unitOfWork);
-            _controller = new VisitsController(unitOfWork, newVisitService);
+            _controller = new VisitsController(new FakeUnitOfWorkSeeded(), new NewVisitService());
         }
 
         private readonly VisitsController _controller;

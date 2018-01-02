@@ -16,15 +16,15 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 
         public PatientEntity(Patient patient)
         {
-            DateOfBirth = patient.DateOfBirth;
-            Gender = patient.Gender;
-            MedicalRecordNumber = patient.MedicalRecordNumber;
-            Name = patient.Name;
-            Race = patient.Race;
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
+            
+            MapValues(patient);
         }
 
         public void MapValues(Patient subject)
         {
+            if (subject == null) throw new ArgumentNullException(nameof(subject));
+            
             DateOfBirth = subject.DateOfBirth;
             Gender.Category = subject.Gender.Category;
             MedicalRecordNumber = subject.MedicalRecordNumber;

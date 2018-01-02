@@ -9,24 +9,20 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
     public class NewPatientService :  NewKeyEntityService<PatientEntity, Patient>, INewPatientService
     {
-        public NewPatientService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-        }
   
         public override PatientEntity GenerateUsing(Patient patient)
         {
-            EnsureMedicalRecordNumberIsUnique(patient.MedicalRecordNumber);
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
             
-            return new PatientEntity(patient)
-            {
-                Guid = Guid.NewGuid()  
-            };
+            VerifyContextIsLoaded();
+            EnsureMedicalRecordNumberIsUnique(patient);
+            return new PatientEntity(patient) { Guid = Guid.NewGuid() };
         }
 
-        private void EnsureMedicalRecordNumberIsUnique(string mrn)
+        private void EnsureMedicalRecordNumberIsUnique(Patient patient)
         {
-            if (UnitOfWork.Patients.MedicalRecordNumberExists(mrn)) 
-                throw new MedicalRecordNotUniqueException(mrn);
+            if (UnitOfWork.Patients.MedicalRecordNumberExists(patient.MedicalRecordNumber)) 
+                throw new MedicalRecordNotUniqueException(patient.MedicalRecordNumber);
         }
 
     }

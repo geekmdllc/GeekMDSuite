@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services
@@ -8,14 +9,21 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
         where TObject : class, IEntity<TObject> 
         where TTemplate : class
     {
-        protected NewKeyEntityService(IUnitOfWork unitOfWork)
+        public INewKeyEntityService<TObject, TTemplate> WithUnitOfWork(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
+            return this;
         }
 
         public abstract TObject GenerateUsing(TTemplate template);
         
         
-        protected readonly IUnitOfWork UnitOfWork;
+        protected IUnitOfWork UnitOfWork;
+        private bool ContextNotLoaded => UnitOfWork == null;
+
+        protected void VerifyContextIsLoaded()
+        {
+            if (ContextNotLoaded) throw new UnitOfWorkNotLoadedException(nameof(NewVisitService));
+        }
     }
 }
