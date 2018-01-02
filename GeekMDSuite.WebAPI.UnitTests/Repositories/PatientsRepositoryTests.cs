@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using GeekMDSuite.Core;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;

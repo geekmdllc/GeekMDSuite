@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Core;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;

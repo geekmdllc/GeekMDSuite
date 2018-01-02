@@ -1,7 +1,7 @@
-GeekMDSuite/bin
-GeekMDSuite/obj
-GeekMDSuite.UnitTests/bin
-GeekMDSuite.UnitTests/obj
+GeekMDSuite.Core/bin
+GeekMDSuite.Core/obj
+GeekMDSuite.Core.UnitTests/bin
+GeekMDSuite.Core.UnitTests/obj
 GeekMDSuite.ConsoleDemo/bin
 GeekMDSuite.ConsoleDemo/obj
 .idea

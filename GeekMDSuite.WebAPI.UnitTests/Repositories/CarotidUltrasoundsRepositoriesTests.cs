@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using GeekMDSuite.Procedures;
+using GeekMDSuite.Core.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;

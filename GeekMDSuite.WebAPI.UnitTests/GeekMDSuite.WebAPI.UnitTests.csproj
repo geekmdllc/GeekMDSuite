@@ -10,6 +10,10 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeekMDSuite.Core\GeekMDSuite.Core.csproj">
+      <Project>{B9275F4E-646B-4A7C-8B91-40837B346D20}</Project>
+      <Name>GeekMDSuite.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GeekMDSuite.WebAPI\GeekMDSuite.WebAPI.csproj" />
   </ItemGroup>
   <ItemGroup>

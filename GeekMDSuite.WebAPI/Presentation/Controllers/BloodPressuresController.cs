@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Analytics.Interpretation;
+﻿using GeekMDSuite.Core.Analytics.Classification;
+using GeekMDSuite.Core.Analytics.Interpretation;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite", "GeekMDSuite\GeekMDSuite.csproj", "{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.ConsoleDemo", "GeekMDSuite.ConsoleDemo\GeekMDSuite.ConsoleDemo.csproj", "{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.WebAPI", "GeekMDSuite.WebAPI\GeekMDSuite.WebAPI.csproj", "{3DC905B0-596E-475B-83C5-DE238AAFB6C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.WebAPI.UnitTests", "GeekMDSuite.WebAPI.UnitTests\GeekMDSuite.WebAPI.UnitTests.csproj", "{AD291DF8-4821-47BA-B0E4-D740CDFB0172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.UnitTests", "GeekMDSuite.UnitTests\GeekMDSuite.UnitTests.csproj", "{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Core", "GeekMDSuite.Core\GeekMDSuite.Core.csproj", "{B9275F4E-646B-4A7C-8B91-40837B346D20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Core.UnitTests", "GeekMDSuite.Core.UnitTests\GeekMDSuite.Core.UnitTests.csproj", "{A4688A1C-4B62-42D0-A89F-5926ED2973B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D62DFB68-5D62-4618-8947-1BB2BA50D9CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A893E3B-4C03-4330-8BD2-9749BF0F00FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +31,14 @@ Global
 		{AD291DF8-4821-47BA-B0E4-D740CDFB0172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD291DF8-4821-47BA-B0E4-D740CDFB0172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD291DF8-4821-47BA-B0E4-D740CDFB0172}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66BB7B66-83D1-4CCC-9B4D-1F720392FFC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9275F4E-646B-4A7C-8B91-40837B346D20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9275F4E-646B-4A7C-8B91-40837B346D20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9275F4E-646B-4A7C-8B91-40837B346D20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9275F4E-646B-4A7C-8B91-40837B346D20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4688A1C-4B62-42D0-A89F-5926ED2973B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4688A1C-4B62-42D0-A89F-5926ED2973B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4688A1C-4B62-42D0-A89F-5926ED2973B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4688A1C-4B62-42D0-A89F-5926ED2973B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

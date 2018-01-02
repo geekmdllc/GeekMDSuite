@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite.WebAPI.Core.Helpers
+﻿using GeekMDSuite.Core;
+
+namespace GeekMDSuite.WebAPI.Core.Helpers
 {
     public static class NameHelpers
     {

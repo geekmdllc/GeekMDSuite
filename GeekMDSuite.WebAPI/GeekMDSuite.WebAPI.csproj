@@ -18,6 +18,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GeekMDSuite\GeekMDSuite.csproj" />
+    <ProjectReference Include="..\GeekMDSuite.Core\GeekMDSuite.Core.csproj" />
   </ItemGroup>
 </Project>
