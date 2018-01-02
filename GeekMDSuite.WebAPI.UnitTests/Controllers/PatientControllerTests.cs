@@ -183,6 +183,41 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
         
+        [Fact]
+        public void GetByDateOfBirth_GivenAgeGreaterThan150Years_ReturnsBadRequestObjectResult()
+        {
+            var result = _controller.GetByDateOfBirth(DateTime.Now.AddYears(-151).ToShortDateString());
+            Assert.Equal(typeof(BadRequestResult), result.GetType());
+        }
+        
+        [Fact]
+        public void GetByDateOfBirth_GivenPoorlyFormattedString_ReturnsBadRequestObjectResult()
+        {
+            var result = _controller.GetByDateOfBirth("111900");
+            Assert.Equal(typeof(BadRequestResult), result.GetType());
+        }
+        
+        [Fact]
+        public void GetByDateOfBirth_GivenAgeOfZeroOrNegative_ReturnsBadRequestObjectResult()
+        {
+            var result = _controller.GetByDateOfBirth(DateTime.Now.AddYears(1).ToShortDateString());
+            Assert.Equal(typeof(BadRequestResult), result.GetType());
+        }
+        
+        [Fact]
+        public void GetByDateOfBirth_GivenDateOfBirthNotInRepository_ReturnsNotFoundResult()
+        {
+            var result = _controller.GetByDateOfBirth(new DateTime(2000, 1, 1).ToShortDateString());
+            Assert.Equal(typeof(NotFoundResult), result.GetType());
+        }
+        
+        [Fact]
+        public void GetByDateOfBirth_GivenDateOfBirthThatExistsInContext_ReturnsOkObjectResult()
+        {
+            var result = _controller.GetByDateOfBirth(new DateTime(1900, 1, 1).ToShortDateString());
+            Assert.Equal(typeof(OkObjectResult), result.GetType());
+        }
+        
         public PatientControllerTests()
         {
             _controller = new PatientsController(

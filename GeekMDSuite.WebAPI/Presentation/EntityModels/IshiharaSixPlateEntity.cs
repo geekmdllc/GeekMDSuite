@@ -19,6 +19,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         }
         public void MapValues(IshiharaSixPlate subject)
         {
+            if (subject == null) throw new ArgumentNullException(nameof(subject));
             Plate1.PlateNumber = subject.Plate1.PlateNumber;
             Plate1.PlateRead = subject.Plate1.PlateRead;
             Plate2.PlateNumber = subject.Plate2.PlateNumber;

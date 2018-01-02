@@ -5,7 +5,12 @@ namespace GeekMDSuite.Core.Procedures
 {
     public class IshiharaSixPlate
     {
-        public List<IshiharaPlateAnswer> Answers { get; }
+        private readonly List<IshiharaPlateAnswer> _answers;
+
+        public List<IshiharaPlateAnswer> GetAnswers()
+        {
+            return _answers;
+        }
 
         public IshiharaPlateAnswer Plate1 { get; set; }
         public IshiharaPlateAnswer Plate2 { get; set; }
@@ -26,19 +31,19 @@ namespace GeekMDSuite.Core.Procedures
 
         internal IshiharaSixPlate(List<IshiharaPlateAnswer> plates)
         {
-            Answers = plates ?? throw new ArgumentNullException(nameof(plates));
+            _answers = plates ?? throw new ArgumentNullException(nameof(plates));
             
-            Plate1 = Answers[0];
-            Plate1 = Answers[1];
-            Plate1 = Answers[2];
-            Plate1 = Answers[3];
-            Plate1 = Answers[4];
-            Plate1 = Answers[5];
+            Plate1 = GetAnswers()[0];
+            Plate2 = GetAnswers()[1];
+            Plate3 = GetAnswers()[2];
+            Plate4 = GetAnswers()[3];
+            Plate5 = GetAnswers()[4];
+            Plate6 = GetAnswers()[5];
         }
 
         public override string ToString()
         {
-            return string.Join("\n", Answers);
+            return string.Join("\n", GetAnswers());
         }
     }
 }

@@ -33,7 +33,7 @@ namespace GeekMDSuite.Core.UnitTests
             
             var assessment = new IshiharaSixPlateClassification(ishiharaSixPlate);
             Assert.Equal(IshiharaResultFlag.NormalVision, assessment.Classification);
-            Assert.Equal(6,ishiharaSixPlate.Answers.Count);
+            Assert.Equal(6,ishiharaSixPlate.GetAnswers().Count);
         }
     }
 }

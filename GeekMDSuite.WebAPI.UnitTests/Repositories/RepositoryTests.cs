@@ -30,9 +30,10 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void FindById_ReturnsCorrectEntity()
         {
-            var foundAudiogram = _unitOfWorkSeeded.VisitData<AudiogramEntity>().FindById(1);
+            var firstId = _unitOfWorkSeeded.VisitData<AudiogramEntity>().All().First().Id;
+            var foundAudiogram = _unitOfWorkSeeded.VisitData<AudiogramEntity>().FindById(firstId);
             
-            Assert.Equal(1, foundAudiogram.Id);
+            Assert.Equal(firstId, foundAudiogram.Id);
             Assert.IsType<AudiogramEntity>(foundAudiogram);
             Assert.Equal(90, foundAudiogram.Left.F500.Value);
         }

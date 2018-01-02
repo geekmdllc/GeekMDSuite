@@ -89,6 +89,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return BadRequest();
             }
+            catch (FormatException)
+            {
+                return BadRequest();
+            }
             catch (RepositoryElementNotFoundException)
             {
                 return NotFound();

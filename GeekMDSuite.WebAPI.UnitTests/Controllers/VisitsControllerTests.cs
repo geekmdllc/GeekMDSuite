@@ -78,6 +78,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
         
         [Fact]
+        public void GetByDateOfBirth_GivenPoorlyFormattedString_ReturnsBadRequestObjectResult()
+        {
+            var result = _controller.GetByDateOfBirth("111900");
+            Assert.Equal(typeof(BadRequestResult), result.GetType());
+        }
+        
+        [Fact]
         public void GetByDateOfBirth_GivenAgeOfZeroOrNegative_ReturnsBadRequestObjectResult()
         {
             var result = _controller.GetByDateOfBirth(DateTime.Now.AddYears(1).ToShortDateString());

@@ -54,14 +54,29 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         }
         
         [Theory]
-        [InlineData(1850, 1, 1, false)]
-        [InlineData(1900, 1, 1, true)]
-        [InlineData(1990, 2, 2, true)]
-        public void FindByDateOfBirth_GivenCorrectMedicalRecordNumber_ReturnsPatientEntity(int year, int month, int day, bool expected = true)
+        [InlineData(1900, 1, 1)]
+        [InlineData(1990, 2, 2)]
+        public void FindByDateOfBirth_GivenValidAge_ReturnsPatientEntity(int year, int month, int day)
         {
             var found = _unitOfWork.Patients.FindByDateOfBirth(new DateTime(year, month, day));
             
-            Assert.Equal(expected, found.Any());
+            Assert.True(found.Any());
+        }
+        
+        [Fact]
+        public void FindByDateOfBirth_GivenAgeGreaterThan150_ThrowsArgumentOutOfRangeException()
+        {
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                _unitOfWork.Patients.FindByDateOfBirth(DateTime.Now.AddYears(-151)));
+        }
+        
+        [Fact]
+        public void FindByDateOfBirth_GivenAgeZeroOrYournger_ThrowsArgumentOutOfRangeException()
+        {
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                _unitOfWork.Patients.FindByDateOfBirth(DateTime.Now.AddYears(1)));
         }
 
         [Fact]

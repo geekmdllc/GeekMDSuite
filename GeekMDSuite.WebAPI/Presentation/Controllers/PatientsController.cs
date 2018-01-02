@@ -98,7 +98,29 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return NotFound();
             }
-            
+        }
+        
+        // GET api/patients/bydob/1.1.1900
+        [HttpGet("bydob/{dateOfBirth}")]
+        public IActionResult GetByDateOfBirth(string dateOfBirth)
+        {
+            try
+            {
+                var parsedDob = DateTime.Parse(dateOfBirth);
+                return Ok(UnitOfWork.Patients.FindByDateOfBirth(parsedDob));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest();
+            }
+            catch (FormatException)
+            {
+                return BadRequest();
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
