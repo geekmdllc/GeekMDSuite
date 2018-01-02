@@ -7,11 +7,11 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     public class BloodPressureEntity : BloodPressure, IVisitData<BloodPressure>
     {
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
 
         public BloodPressureEntity()
         {
-            Visit = Guid.Empty;
+            VisitId = Guid.Empty;
         }
 
         public BloodPressureEntity(BloodPressure bloodPressure) : this()

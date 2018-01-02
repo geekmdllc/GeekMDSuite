@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(treadmillExerciseStressTest);
         }
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
         
         public void MapValues(TreadmillExerciseStressTest subject)
         {

@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IVisitData<FunctionalMovementScreen>
     {
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
 
         public FunctionalMovementScreenEntity()
         {
@@ -18,7 +18,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             RotaryStability = new FmsMovementSet();
             ShoulderMobility = new FmsMovementSet();
             TrunkStabilityPushup = new FmsMovementData();
-            Visit = Guid.Empty;
+            VisitId = Guid.Empty;
         }
 
         public FunctionalMovementScreenEntity(FunctionalMovementScreen functionalMovementScreen) : this()

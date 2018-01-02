@@ -10,8 +10,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         {
             return new List<OcularPressureEntity>()
             {
-                new OcularPressureEntity(OcularPressure.Build(20, 30)) {Visit = BruceWaynesVisitGuid },
-                new OcularPressureEntity(OcularPressure.Build(15, 15)) {Visit = XerMajestiesVisitGuid }
+                new OcularPressureEntity(OcularPressure.Build(20, 30)) {VisitId = BruceWaynesVisitGuid },
+                new OcularPressureEntity(OcularPressure.Build(15, 15)) {VisitId = XerMajestiesVisitGuid }
             };
         }
     }

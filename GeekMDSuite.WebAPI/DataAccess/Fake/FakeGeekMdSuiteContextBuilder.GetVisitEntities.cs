@@ -15,13 +15,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 {
                     Date = new DateTime(2017, 1, 1),
                     PatientGuid = BruceWaynesGuid,
-                    Visit = BruceWaynesVisitGuid,
+                    VisitId = BruceWaynesVisitGuid,
                 },
                 new VisitEntity()
                 {
                     Date = new DateTime(2016, 1, 1),
                     PatientGuid = XerMajestyGuid,
-                    Visit = XerMajestiesVisitGuid
+                    VisitId = XerMajestiesVisitGuid
                 }
             };
         }

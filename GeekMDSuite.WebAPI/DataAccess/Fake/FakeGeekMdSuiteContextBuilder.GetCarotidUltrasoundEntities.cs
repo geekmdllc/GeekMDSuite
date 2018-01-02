@@ -39,8 +39,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             return new List<CarotidUltrasoundEntity>()
             {
-                new CarotidUltrasoundEntity(cu) { Visit = XerMajestiesVisitGuid },
-                new CarotidUltrasoundEntity(cu2) { Visit = BruceWaynesVisitGuid }
+                new CarotidUltrasoundEntity(cu) { VisitId = XerMajestiesVisitGuid },
+                new CarotidUltrasoundEntity(cu2) { VisitId = BruceWaynesVisitGuid }
             };
         }
     }

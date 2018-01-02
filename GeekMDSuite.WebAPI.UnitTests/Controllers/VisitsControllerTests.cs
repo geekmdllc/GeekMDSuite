@@ -26,7 +26,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 
             var addedVisits = unitOfWork.Visits.All().FirstOrDefault();
             
-            Assert.True(addedVisits != null && addedVisits.Visit != Guid.Empty);
+            Assert.True(addedVisits != null && addedVisits.VisitId != Guid.Empty);
         }
         [Fact]
         public void GetByMedicalRecordNumber_GivenEmptyString_ReturnsBadRequestObjectResult()
@@ -110,7 +110,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var result = _controller.Post(new VisitEntity()
             {
-                Visit = Guid.Empty
+                VisitId = Guid.Empty
             });
             
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());

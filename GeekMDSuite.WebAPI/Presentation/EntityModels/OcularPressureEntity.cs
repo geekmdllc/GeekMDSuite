@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     public class OcularPressureEntity : OcularPressure, IVisitData<OcularPressure>
     {
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
 
         public OcularPressureEntity() {}
 

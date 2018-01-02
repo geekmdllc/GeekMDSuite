@@ -10,8 +10,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         {
             return new List<GripStrengthEntity>()
             {
-                new GripStrengthEntity(GripStrength.Build(190, 185)) {Visit = BruceWaynesVisitGuid},
-                new GripStrengthEntity(GripStrength.Build(105, 105)) {Visit = XerMajestiesVisitGuid}
+                new GripStrengthEntity(GripStrength.Build(190, 185)) {VisitId = BruceWaynesVisitGuid},
+                new GripStrengthEntity(GripStrength.Build(105, 105)) {VisitId = XerMajestiesVisitGuid}
             };
         }
     }

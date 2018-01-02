@@ -15,13 +15,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetOxygenSaturation(98)
                     .SetPulseRate(59)
                     .SetTemperature(98.1)
-                    .Build()) {Visit = BruceWaynesVisitGuid},
+                    .Build()) {VisitId = BruceWaynesVisitGuid},
                 new VitalSignsEntity(VitalSignsBuilder.Initialize()
                     .SetBloodPressure(144, 156, false)
                     .SetOxygenSaturation(96)
                     .SetPulseRate(88)
                     .SetTemperature(99.9)
-                    .Build()) {Visit = XerMajestiesVisitGuid}
+                    .Build()) {VisitId = XerMajestiesVisitGuid}
             };
         }
     }

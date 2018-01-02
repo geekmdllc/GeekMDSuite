@@ -6,13 +6,13 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     public class VisitEntity : IVisitData<VisitEntity>
     {
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
         public Guid PatientGuid { get; set; }
         public DateTime Date { get; set; }
 
         public VisitEntity()
         {
-            Visit = Guid.Empty;
+            VisitId = Guid.Empty;
         }
 
         public VisitEntity(VisitEntity visitEntity) : this()

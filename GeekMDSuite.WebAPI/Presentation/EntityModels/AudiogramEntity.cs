@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     public class AudiogramEntity :  Audiogram, IVisitData<Audiogram>
     {
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
 
         public AudiogramEntity(Audiogram audiogram) : this()
         {
@@ -16,7 +16,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 
         public AudiogramEntity()
         {
-            Visit = Guid.Empty;
+            VisitId = Guid.Empty;
         }
                 
         public void MapValues(Audiogram subject)

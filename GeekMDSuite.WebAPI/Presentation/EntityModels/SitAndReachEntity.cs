@@ -16,6 +16,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         public void MapValues(SitAndReach subject) => Value = subject.Value;
 
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
     }
 }

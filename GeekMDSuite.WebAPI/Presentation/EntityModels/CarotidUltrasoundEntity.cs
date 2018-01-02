@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     public class CarotidUltrasoundEntity : CarotidUltrasound, IVisitData<CarotidUltrasound>
     {
         public int Id { get; set; }
-        public Guid Visit { get; set; }
+        public Guid VisitId { get; set; }
 
         public CarotidUltrasoundEntity(CarotidUltrasound carotidUltrasound) : this()
         {
@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         {
             Left = new CarotidUltrasoundResult();
             Right = new CarotidUltrasoundResult();
-            Visit = Guid.Empty;
+            VisitId = Guid.Empty;
         }
         
         public void MapValues(CarotidUltrasound subject)

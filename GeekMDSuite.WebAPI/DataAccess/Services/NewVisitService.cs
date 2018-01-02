@@ -13,7 +13,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             if (template == null) throw new ArgumentNullException(nameof(template));
             if (template.PatientGuid == Guid.Empty) 
                 throw new InvalidDataException($"{nameof(GenerateUsing)} must receive a {nameof(VisitEntity)} with a valid PatientGuid.");
-            return new VisitEntity(template) { Visit = Guid.NewGuid() };
+            return new VisitEntity(template) { VisitId = Guid.NewGuid() };
         }
     }
 }
