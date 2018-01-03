@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using GeekMDSuite.Analytics.Interpretation;
+﻿using System;
+using System.Collections.Generic;
 using GeekMDSuite.Analytics.Interpretation.Builder;
 using Xunit;
 
@@ -8,67 +8,31 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
     public class InterpretationSectionTests
     {
         [Fact]
-        public void InterpretationSectionBuilder_InterpreationSectionWithFourSections_ReturnsParagraphsInOrder()
+        public void Build_GivenEmptyTitle_ThrowsArgumentOutOfRangeException()
         {
-            var stringFound = BuildInterpretation(BuildSection1(), BuildSection2())
-                .Sections
-                .ElementAt(IndexFromPosition(1))?
-                .Paragraphs
-                .ElementAt(IndexFromPosition(4))
-                .ToLower()
-                .Contains("fourth");
-
-            Assert.True(stringFound);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => InterpretationSection.Build(string.Empty, new List<string>{ "Paragraph 1"}));
         }
-
-        [Fact]
-        public void InterpretationSectionBuilder_InterpretationSectionWithThreeParagraphs_ReturnsParagraphsInOrder()
-        {          
-            var stringFound = BuildInterpretation(BuildSection1(), BuildSection2())
-                .Sections
-                .ElementAt(IndexFromPosition(2))?
-                .Paragraphs
-                .ElementAt(IndexFromPosition(3))
-                .ToLower()
-                .Contains("third");
-            
-            Assert.True(stringFound);
-        }
-
-        private static int IndexFromPosition(int position) => position > 0 ? position - 1 : 0;
         
-        private static InterpretationText BuildInterpretation(InterpretationSection section1, InterpretationSection section2)
+        [Fact]
+        public void Build_GivenWhitespaceTitle_ThrowsArgumentOutOfRangeException()
         {
-            var interp = new InterpretationBuilder()
-                .SetTitle("Classification Title")
-                .SetSummary("Summary of interpretation")
-                .AddSection(section1)
-                .AddSection(section2)
-                .Build();
-            return interp;
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => InterpretationSection.Build(" ", new List<string>{ "Paragraph 1"}));
         }
-
-        private static InterpretationSection BuildSection2()
+        
+        [Fact]
+        public void Build_GivenEmptyParagraphsList_ThrowsArgumentOutOfRangeException()
         {
-            var section2 = new InterpretationSectionBuilder()
-                .SetTitle("Second Section Title")
-                .AddParagraph("First paragraph of the second section.")
-                .AddParagraph("Second paragraph of the second section.")
-                .AddParagraph("Third paragraph of the second section.")
-                .Build();
-            return section2;
+            Assert.Throws<ArgumentException>(
+                () => InterpretationSection.Build("Title", new List<string>( )));
         }
-
-        private static InterpretationSection BuildSection1()
+        
+        [Fact]
+        public void Build_GivenNullParagraphsList_ThrowsArgumentNullException()
         {
-            var section1 = new InterpretationSectionBuilder()
-                .SetTitle("First Section Title")
-                .AddParagraph("First paragraph of the first section.")
-                .AddParagraph("Second paragraph of the first section.")
-                .AddParagraph("Third paragraph of the first section.")
-                .AddParagraph("Fourth paragraph of the first section.")
-                .Build();
-            return section1;
+            Assert.Throws<ArgumentNullException>(
+                () => InterpretationSection.Build("Title", null));
         }
     }
 }
