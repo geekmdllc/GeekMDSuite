@@ -1,7 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core;
-using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification

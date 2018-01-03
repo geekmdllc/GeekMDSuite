@@ -12,11 +12,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services.ClassificationService
         protected TClassifier Classifier;
         protected readonly IUnitOfWork UnitOfWork;
 
-        private ClassificationService()
-        {
-            
-        }
-
         protected ClassificationService(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;

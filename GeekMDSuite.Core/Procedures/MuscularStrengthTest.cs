@@ -6,7 +6,5 @@
         public StrengthTest Type { get; set; }
 
         public override string ToString() => $"{Value} {Type.ToString().ToLower()}";
-        
-        protected MuscularStrengthTest() {}
     }
 }

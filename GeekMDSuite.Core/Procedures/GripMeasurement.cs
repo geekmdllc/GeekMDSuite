@@ -1,5 +1,4 @@
 ﻿using GeekMDSuite.Core.Tools.MeasurementUnits;
-using GeekMDSuite.Core.Tools.MeasurementUnits.Conversion;
 
 namespace GeekMDSuite.Core.Procedures
 {

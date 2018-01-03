@@ -2,8 +2,6 @@
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core;
 using GeekMDSuite.Core.Procedures;
-using GeekMDSuite.Core.Tools.MeasurementUnits;
-using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification

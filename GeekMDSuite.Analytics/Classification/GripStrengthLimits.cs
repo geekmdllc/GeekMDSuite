@@ -14,7 +14,7 @@ namespace GeekMDSuite.Analytics.Classification
             => new GripStrengthLimits(lower, upper);
 
         private GripStrengthLimits(double lowerPounds, double upperPounds)
-            : this((MassMeasurement) GripMeasurement.Build(lowerPounds), GripMeasurement.Build(upperPounds))
+            : this(GripMeasurement.Build(lowerPounds), GripMeasurement.Build(upperPounds))
         {
         }
         

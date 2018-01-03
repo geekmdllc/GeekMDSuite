@@ -1,9 +1,7 @@
 ﻿using GeekMDSuite.WebAPI.Core.DataAccess;
-using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService.CompositeScores;
-using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.DataAccess.Services.ClassificationService;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
