@@ -1,11 +1,13 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

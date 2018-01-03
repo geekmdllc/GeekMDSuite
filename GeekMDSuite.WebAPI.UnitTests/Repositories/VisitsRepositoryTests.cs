@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 

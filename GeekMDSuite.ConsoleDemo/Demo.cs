@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Core;
 using GeekMDSuite.Core.Analytics.Classification;
+using GeekMDSuite.Core.Analytics.Classification.CompositeScores;
 using GeekMDSuite.Core.Analytics.Classification.PatientActivities;
 using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.LaboratoryData.Builder;
@@ -340,12 +341,9 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine($"ASCVD 10yr-Risk%: {pooledCohortsEquation.Ascvd10YearRiskPercentage}{NewLine}");
             Console.WriteLine($"ASCVD Lifetime Risk%: {pooledCohortsEquation.AscvdLifetimeRiskPercentage}{NewLine}");
             
-            var ascvd10YrInterp = new Ascvd10YearClassification(pooledCohortParams, quantitativeLabLdlC, true);
+            var ascvd10YrInterp = new AscvdClassification(pooledCohortParams, quantitativeLabLdlC, true);
 
             Console.WriteLine($"ASCVD 10-Year Risk Classification{NewLine}{ascvd10YrInterp.Classification}{NewLine}");
-            
-            var ascvdLifetimeInterp = new AscvdLifetimeClassification(pooledCohortsEquation.Ascvd10YearRiskPercentage, patient).Classification;
-            Console.WriteLine($"ASCVD Lifetime Classification: {ascvdLifetimeInterp}{NewLine}");
         }
     }
 }
