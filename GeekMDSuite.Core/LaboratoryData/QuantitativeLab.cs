@@ -2,7 +2,7 @@
 {
     public class QuantitativeLab : IQuantitativeLab
     {
-        protected internal QuantitativeLab() {}
+        public QuantitativeLab() {}
 
         private QuantitativeLab(
             double result,

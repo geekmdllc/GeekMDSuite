@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeekMDSuite.Core\GeekMDSuite.Core.csproj">
+      <Project>{B9275F4E-646B-4A7C-8B91-40837B346D20}</Project>
+      <Name>GeekMDSuite.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="_assets\quantitative_labs.json" />
+    <EmbeddedResource Include="_assets\qualitative_labs.json" />
+  </ItemGroup>
+</Project>

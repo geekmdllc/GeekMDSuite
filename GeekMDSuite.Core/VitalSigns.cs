@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core
 {
-    public class VitalSigns : IVitalSigns
+    public class VitalSigns
     {
 
         private VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate) : this()

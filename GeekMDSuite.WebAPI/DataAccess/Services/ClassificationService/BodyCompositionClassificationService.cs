@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using GeekMDSuite.Core.Analytics.Classification;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService;
 

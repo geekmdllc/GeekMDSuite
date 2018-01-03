@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core
 {
-    public class Gender : IGender
+    public class Gender
     {
         public Gender()
         {
@@ -21,11 +21,11 @@
         public static bool IsGenotypeXx(GenderIdentity gender) => 
             gender == GenderIdentity.Female || gender == GenderIdentity.NonBinaryXx;
 
-        public static bool IsGenotypeXx(IGender gender) => IsGenotypeXx(gender.Category);
+        public static bool IsGenotypeXx(Gender gender) => IsGenotypeXx(gender.Category);
 
         public static bool IsGenotypeXy(GenderIdentity gender) => !IsGenotypeXx(gender);
 
-        public static bool IsGenotypeXy(IGender gender)
+        public static bool IsGenotypeXy(Gender gender)
         {
             var test = !IsGenotypeXx(gender.Category);
             return test;

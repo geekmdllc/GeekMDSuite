@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeekMDSuite.Core.Analytics.Classification;
 
 namespace GeekMDSuite.Core.Procedures
 {

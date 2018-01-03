@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.Core.Extensions
 {
-    internal static class EnumExtension<T> where T : struct, IConvertible
+    public static class EnumExtension<T> where T : struct, IConvertible
     {
-        internal static int Count
+        public static int Count
         {
             get
             {

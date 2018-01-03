@@ -11,6 +11,10 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeekMDSuite.Analytics\GeekMDSuite.Analytics.csproj">
+      <Project>{FCBDC7BB-A98E-4506-B68B-3EE56130EE8C}</Project>
+      <Name>GeekMDSuite.Analytics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GeekMDSuite.Core\GeekMDSuite.Core.csproj" />
   </ItemGroup>
 </Project>

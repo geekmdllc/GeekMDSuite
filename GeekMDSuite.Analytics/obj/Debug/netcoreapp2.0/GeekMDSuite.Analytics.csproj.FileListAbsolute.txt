@@ -1,0 +1,10 @@
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/bin/Debug/netcoreapp2.0/GeekMDSuite.Analytics.deps.json
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/bin/Debug/netcoreapp2.0/GeekMDSuite.Analytics.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/bin/Debug/netcoreapp2.0/GeekMDSuite.Analytics.pdb
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/bin/Debug/netcoreapp2.0/GeekMDSuite.Core.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/bin/Debug/netcoreapp2.0/GeekMDSuite.Core.pdb
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/obj/Debug/netcoreapp2.0/GeekMDSuite.Analytics.csproj.CoreCompileInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/obj/Debug/netcoreapp2.0/GeekMDSuite.Analytics.AssemblyInfoInputs.cache
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/obj/Debug/netcoreapp2.0/GeekMDSuite.Analytics.AssemblyInfo.cs
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/obj/Debug/netcoreapp2.0/GeekMDSuite.Analytics.dll
+/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Analytics/obj/Debug/netcoreapp2.0/GeekMDSuite.Analytics.pdb

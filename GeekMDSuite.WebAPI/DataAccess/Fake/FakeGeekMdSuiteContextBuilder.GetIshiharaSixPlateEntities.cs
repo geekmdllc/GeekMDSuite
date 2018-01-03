@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GeekMDSuite.Core.Analytics.Classification;
 using GeekMDSuite.Core.Procedures;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 

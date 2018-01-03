@@ -1,16 +1,15 @@
 ﻿using System;
+using GeekMDSuite.Analytics.Classification;
+using GeekMDSuite.Analytics.Classification.CompositeScores;
+using GeekMDSuite.Analytics.Classification.PatientActivities;
+using GeekMDSuite.Analytics.Tools.Cardiology;
+using GeekMDSuite.Analytics.Tools.Fitness;
 using GeekMDSuite.Core;
-using GeekMDSuite.Core.Analytics.Classification;
-using GeekMDSuite.Core.Analytics.Classification.CompositeScores;
-using GeekMDSuite.Core.Analytics.Classification.PatientActivities;
 using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.LaboratoryData.Builder;
 using GeekMDSuite.Core.PatientActivities;
 using GeekMDSuite.Core.Procedures;
-using GeekMDSuite.Core.Tools.Cardiology;
-using GeekMDSuite.Core.Tools.Fitness;
 using static System.Environment;
-using PooledCohortsEquation = GeekMDSuite.Core.Tools.Cardiology.PooledCohortsEquation;
 
 namespace GeekMDSuite.ConsoleDemo
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using GeekMDSuite.Core.Analytics.Classification.CompositeScores;
+using GeekMDSuite.Analytics.Classification.CompositeScores;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService.CompositeScores;
 
