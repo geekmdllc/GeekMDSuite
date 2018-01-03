@@ -11,8 +11,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         {
             Audiograms = new AudiogramClassificationService(unitOfWork);
             BloodPressures = new BloodPressureClassificationService(unitOfWork);
+            CarotidUltrasounds = new CarotidUltrasoundClassificationService(unitOfWork);
         }
         public IAudiogramClassificationService Audiograms { get; set; }
         public IBloodPressureClassificationService BloodPressures { get; set; }
+        public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; set; }
     }
 }

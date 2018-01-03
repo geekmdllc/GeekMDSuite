@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +10,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json")]
     public class CarotidUltrasoundsController : AnalyzablePatientDataController<CarotidUltrasoundEntity>
     {
-        public CarotidUltrasoundsController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IClassificationRepository _classifications;
+
+        public CarotidUltrasoundsController(IUnitOfWork unitOfWork, IClassificationRepository classifications) : base(unitOfWork)
         {
+            _classifications = classifications;
         }
 
         public override IActionResult Interpret(int id)
@@ -20,7 +24,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
         public override IActionResult Classify(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(_classifications.CarotidUltrasounds.InitializeWith(id).Classify);
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
     }
 }

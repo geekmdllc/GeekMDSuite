@@ -6,7 +6,10 @@ namespace GeekMDSuite.Core.Analytics.Classification
 {
     public class CarotidUltrasoundClassification : IClassifiable<CarotidUltrasoundClassificationResult>
     {
-        public CarotidUltrasoundClassification(ICarotidUltrasound carotidUltrasound)
+        public CarotidUltrasoundClassification()
+        {
+        }
+        public CarotidUltrasoundClassification(CarotidUltrasound carotidUltrasound)
         {
             _carotidUltrasound = carotidUltrasound ?? throw new ArgumentNullException(nameof(carotidUltrasound));
         }
@@ -15,11 +18,12 @@ namespace GeekMDSuite.Core.Analytics.Classification
 
         public override string ToString() => Classification.ToString();
 
-        private readonly ICarotidUltrasound _carotidUltrasound;
+        private readonly CarotidUltrasound _carotidUltrasound;
         
         private CarotidUltrasoundClassificationResult ClassifyCarotidUltrasound()
         {
             return new CarotidUltrasoundClassificationResult(
+                _carotidUltrasound,
                 GetLateralityOfSidesAffected(), 
                 GetWorseSideBasedOnStenosis(), 
                 GetStenosisGradeFromWorseSide(),

@@ -36,7 +36,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth)
         {
-            if (dateOfBirth.IsInvalidAge())
+            if (dateOfBirth.IsOutOfRange())
                 throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
 
             var found = Context.Patients.Where(

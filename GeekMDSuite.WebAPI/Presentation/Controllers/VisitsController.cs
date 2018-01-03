@@ -85,11 +85,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var parsedDob = DateTime.Parse(dateOfBirth);
                 return Ok(UnitOfWork.Visits.FindByDateOfBirth(parsedDob));
             }
-            catch (ArgumentOutOfRangeException)
+            catch (FormatException)
             {
                 return BadRequest();
             }
-            catch (FormatException)
+            catch (ArgumentOutOfRangeException)
             {
                 return BadRequest();
             }
