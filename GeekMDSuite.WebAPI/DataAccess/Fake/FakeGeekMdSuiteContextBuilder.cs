@@ -21,7 +21,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         private static GeekMdSuiteDbContext GetContextWithData()
         {
             var options = new DbContextOptionsBuilder<GeekMdSuiteDbContext>()
-                .UseInMemoryDatabase("InMemory")
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             
             var context = new GeekMdSuiteDbContext(options);

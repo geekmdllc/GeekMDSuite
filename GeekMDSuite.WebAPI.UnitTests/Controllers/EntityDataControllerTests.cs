@@ -34,9 +34,11 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void GetId_GivenIdInSeededUnitOfWorkContext_ReturnsOkObjectResult()
         {
-            var controller = new FakeEntityDataController(new FakeUnitOfWorkSeeded());
+            var uow = new FakeUnitOfWorkSeeded();
+            var controller = new FakeEntityDataController(uow);
+            var ag = uow.Audiograms.All().First();
 
-            var result = controller.Get(new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context).Audiograms.All().First().Id);
+            var result = controller.Get(ag.Id);
             
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
@@ -97,9 +99,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var uow = new FakeUnitOfWorkSeeded();
             var audiogram = uow.Audiograms.All().First();
             audiogram.Left.F2000.Value = 150;
-            uow.Dispose();
             
-            var controller = new FakeEntityDataController(new FakeUnitOfWorkSeeded());
+            var controller = new FakeEntityDataController(uow);
 
             var result = controller.Put(audiogram);
             
@@ -122,7 +123,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var uow = new FakeUnitOfWorkSeeded();
             var audiogramId = uow.Audiograms.All().First().Id;
             
-            var controller = new FakeEntityDataController(new FakeUnitOfWorkSeeded());
+            var controller = new FakeEntityDataController(uow);
 
             var result = controller.Delete(audiogramId);
             
