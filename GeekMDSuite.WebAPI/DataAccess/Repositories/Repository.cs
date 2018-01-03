@@ -16,15 +16,22 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
             Context = context;
         }
         
-        public IEnumerable<T> All() => Context.Set<T>();
-
+        public IEnumerable<T> All()
+        {
+            var results =  Context.Set<T>();
+            if (!results.Any())
+                throw new RepositoryElementNotFoundException();
+            
+            return results;
+        }
+        
         public T FindById(int id)
         {
             try
             {
                 return All().First(p => p.Id == id);
             }
-            catch (Exception)
+            catch
             {
                 throw new RepositoryElementNotFoundException(id);
             }
@@ -41,6 +48,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
             Context.Set<T>().Add(entity);
         }
 
+        
         public void Delete(int id)
         {
             var entity = FindById(id);
@@ -48,14 +56,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
             Context.Set<T>().Remove(entity);
         }
        
+        
         public void Update(T entity)
         {
             if (entity == null) 
                 throw new ArgumentNullException(nameof(entity));            
             FindById(entity.Id)?.MapValues(entity);
         }
-        
-        
 
         protected readonly GeekMdSuiteDbContext Context;
     }

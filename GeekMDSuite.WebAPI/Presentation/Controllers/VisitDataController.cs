@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,17 +11,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json")]
     public abstract class VisitDataController<T> : EntityDataController<T> where T : class, IVisitData<T>
     {
-        protected VisitDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-        }
-        
         [HttpGet("byvisit/{guid}")]
         public IActionResult GetByVisitGuid(Guid guid)
         {
             try
             {
-                var result = UnitOfWork.VisitData<T>().FindByVisit(guid);
-                return Ok(result);
+                return Ok(_repo.FindByVisit(guid));
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -33,12 +29,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
         
         [HttpGet("bypatient/{guid}")]
-        public virtual IActionResult GetByPatientGuid(Guid guid)
+        public IActionResult GetByPatientGuid(Guid guid)
         {
             try
             {
-                var result = UnitOfWork.VisitData<T>().FindByPatientGuid(guid);
-                return Ok(result);
+                return Ok(_repo.FindByPatientGuid(guid));
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -49,5 +44,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
+        
+        protected VisitDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+            _repo = UnitOfWork.VisitData<T>();
+        }
+        
+        private readonly IRepositoryAssociatedWithVisit<T> _repo;
+        
     }
 }

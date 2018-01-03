@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
@@ -12,32 +12,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json")]
     public abstract class EntityDataController<T> : Controller where T : class, IEntity<T>
     {
-        protected readonly IUnitOfWork UnitOfWork;
-
-        protected EntityDataController(IUnitOfWork unitOfWork)
-        {
-            UnitOfWork = unitOfWork;
-        }
-
-        public ConflictResult Conflict() => new ConflictResult();
-
-        // GET api/T
         [HttpGet]
         public IActionResult Get()
         {
-            var results = UnitOfWork.EntityData<T>().All();
-            if (results.Any())
-                return Ok(results);
-            return NotFound();
-        }
-        
-        // GET api/T/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
             try
             {
-                return Ok(UnitOfWork.EntityData<T>().FindById(id));
+                return Ok(_repo.All());
             }
             catch (RepositoryElementNotFoundException)
             {
@@ -45,13 +25,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // POST api/T/
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                return Ok(_repo.FindById(id));
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+        
         [HttpPost]
         public virtual IActionResult Post([FromBody] T entity)
         {
             try
             {
-                UnitOfWork.EntityData<T>().Add(entity);
+                _repo.Add(entity);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -65,13 +57,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // PUT api/T/
         [HttpPut]
         public IActionResult Put([FromBody] T entity)
         {
             try
             {
-                UnitOfWork.EntityData<T>().Update(entity);
+                _repo.Update(entity);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -85,13 +76,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // DELETE api/T/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
-                UnitOfWork.EntityData<T>().Delete(id);
+                _repo.Delete(id);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -101,7 +91,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        // DELETE/api/T --> from body [1,2,3,...,n]
         [HttpDelete]
         public IActionResult Delete([FromBody] int[] ids)
         {
@@ -109,7 +98,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 foreach (var id in ids)
                 {
-                    UnitOfWork.EntityData<T>().Delete(id);
+                    _repo.Delete(id);
                 }
                 UnitOfWork.Complete();
                 return Ok();
@@ -119,5 +108,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
+        
+        public ConflictResult Conflict() => new ConflictResult();
+
+        protected EntityDataController(IUnitOfWork unitOfWork)
+        {
+            UnitOfWork = unitOfWork;
+            _repo = UnitOfWork.EntityData<T>();
+        }
+        
+        protected readonly IUnitOfWork UnitOfWork;
+
+        private readonly IRepository<T> _repo;
     }
 }
