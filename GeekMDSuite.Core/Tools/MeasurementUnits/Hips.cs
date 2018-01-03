@@ -2,7 +2,7 @@
 {
     public class Hips : LengthMeasurement
     {
-        protected internal Hips(double inches) : base(inches)
+        private Hips(double inches) : base(inches)
         {
         }
 

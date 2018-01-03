@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core
 {
-    public class BodyComposition : IBodyComposition
+    public class BodyComposition
     {
         internal BodyComposition(Height heightInches, 
             Waist waistInches, 

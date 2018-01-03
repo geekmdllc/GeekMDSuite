@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class OcularPressure : IOcularPressure
+    public class OcularPressure 
     {
         protected OcularPressure() { }
 

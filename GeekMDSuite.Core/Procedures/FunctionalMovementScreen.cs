@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class FunctionalMovementScreen : IFunctionalMovementScreen
+    public class FunctionalMovementScreen 
     {
         internal FunctionalMovementScreen(
             FmsMovementData deepSquat, 

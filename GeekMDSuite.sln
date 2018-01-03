@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Core", "GeekMDS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Core.UnitTests", "GeekMDSuite.Core.UnitTests\GeekMDSuite.Core.UnitTests.csproj", "{A4688A1C-4B62-42D0-A89F-5926ED2973B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Analytics", "GeekMDSuite.Analytics\GeekMDSuite.Analytics.csproj", "{FCBDC7BB-A98E-4506-B68B-3EE56130EE8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekMDSuite.Analytics.UnitTests", "GeekMDSuite.Analytics.UnitTests\GeekMDSuite.Analytics.UnitTests.csproj", "{4F91D4AD-8C3F-43EE-ACA1-18BD71585DC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{A4688A1C-4B62-42D0-A89F-5926ED2973B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4688A1C-4B62-42D0-A89F-5926ED2973B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4688A1C-4B62-42D0-A89F-5926ED2973B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBDC7BB-A98E-4506-B68B-3EE56130EE8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBDC7BB-A98E-4506-B68B-3EE56130EE8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBDC7BB-A98E-4506-B68B-3EE56130EE8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBDC7BB-A98E-4506-B68B-3EE56130EE8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F91D4AD-8C3F-43EE-ACA1-18BD71585DC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F91D4AD-8C3F-43EE-ACA1-18BD71585DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F91D4AD-8C3F-43EE-ACA1-18BD71585DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F91D4AD-8C3F-43EE-ACA1-18BD71585DC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

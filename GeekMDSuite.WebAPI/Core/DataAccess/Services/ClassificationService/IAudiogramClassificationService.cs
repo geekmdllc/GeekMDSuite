@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Core.Analytics.Classification;
+﻿using GeekMDSuite.Analytics.Classification;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService
 {

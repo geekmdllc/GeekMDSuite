@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class AudiogramDatapoint : IAudiogramDatapoint
+    public class AudiogramDatapoint 
     {
         public static AudiogramDatapoint Build(int value) => new AudiogramDatapoint(value);
         

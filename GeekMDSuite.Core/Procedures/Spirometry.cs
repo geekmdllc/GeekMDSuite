@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class Spirometry : ISpirometry
+    public class Spirometry 
     {
         protected internal Spirometry()
         {

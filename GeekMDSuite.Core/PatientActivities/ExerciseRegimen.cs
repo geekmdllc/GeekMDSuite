@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.PatientActivities
 {
-    public abstract class ExerciseRegimen : IExerciseRegimenParameters
+    public abstract class ExerciseRegimen 
     {
         protected ExerciseRegimen(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
         {

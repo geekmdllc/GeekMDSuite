@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core
 {
-    public class Name : IName
+    public class Name
     {
         public Name()
         {

@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class FmsMovementSet : IFmsMovementSet
+    public class FmsMovementSet 
     {
         public FmsMovementSet()
         {

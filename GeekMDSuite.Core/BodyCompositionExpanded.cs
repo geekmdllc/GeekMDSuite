@@ -1,9 +1,9 @@
 ﻿namespace GeekMDSuite.Core
 {
-    public class BodyCompositionExpanded : BodyComposition, IBodyCompositionExpanded
+    public class BodyCompositionExpanded : BodyComposition
     {
         private BodyCompositionExpanded(
-            IBodyComposition bodyComposition, 
+            BodyComposition bodyComposition, 
             double visceralFat, 
             double percentBodyFat) : base(
                 bodyComposition.Height, 
@@ -24,7 +24,7 @@
 
         public double PercentBodyFat { get; set; }
         
-        internal static BodyCompositionExpanded Build(IBodyComposition bodyComposition, double visceralFat, double percentBodyFat) =>
+        internal static BodyCompositionExpanded Build(BodyComposition bodyComposition, double visceralFat, double percentBodyFat) =>
             new BodyCompositionExpanded(bodyComposition, visceralFat, percentBodyFat);
 
         public override string ToString() => 

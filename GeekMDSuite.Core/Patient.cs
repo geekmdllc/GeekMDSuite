@@ -3,7 +3,7 @@ using GeekMDSuite.Core.Extensions;
 
 namespace GeekMDSuite.Core
 {
-    public class Patient : IPatient
+    public class Patient 
     {
         public Patient(Name name, DateTime dateOfBirth, Gender gender, Race race, string medicalRecordNumber)
         {
@@ -29,7 +29,7 @@ namespace GeekMDSuite.Core
         internal static Patient Build(Name name, DateTime dateOfBirth, Gender gender, Race race, string medicalRecordNumber) 
             => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
         
-        protected internal Patient()
+        public Patient()
         {
             DateOfBirth = new DateTime();
             Name = new Name();

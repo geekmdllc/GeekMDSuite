@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace GeekMDSuite.Core.PatientActivities
 {
-    public class ResistanceRegimen : ExerciseRegimen, IResistanceRegimen
+    public class ResistanceRegimen : ExerciseRegimen
     {
         internal ResistanceRegimen(
-            IExerciseRegimenParameters regimen, 
+            ExerciseRegimenParameters regimen, 
             int secondsRestDurationPerSet, 
             List<ResistenceRegimenFeatures> features) 
             : base(regimen.SessionsPerWeek, 

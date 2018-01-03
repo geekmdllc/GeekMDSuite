@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class GripStrength : IGripStrength
+    public class GripStrength 
     {
         public GripMeasurement Left { get; set; }
         public GripMeasurement Right { get; set; }

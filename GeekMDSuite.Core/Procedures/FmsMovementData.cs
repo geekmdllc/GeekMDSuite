@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core.Procedures
 {
-    public class FmsMovementData : IFmsMovementData
+    public class FmsMovementData 
     {
         public static FmsMovementData Build (
             FmsMovementPattern movementPattern, 

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeekMDSuite.Analytics\GeekMDSuite.Analytics.csproj">
+      <Project>{FCBDC7BB-A98E-4506-B68B-3EE56130EE8C}</Project>
+      <Name>GeekMDSuite.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeekMDSuite.Core\GeekMDSuite.Core.csproj">
+      <Project>{B9275F4E-646B-4A7C-8B91-40837B346D20}</Project>
+      <Name>GeekMDSuite.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920">
+      <HintPath>..\..\..\..\.nuget\packages\moq\4.8.0\lib\netstandard1.3\Moq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

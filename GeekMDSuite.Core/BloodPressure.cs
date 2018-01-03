@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core
 {
-    public class BloodPressure : IBloodPressure
+    public class BloodPressure
     {
         protected BloodPressure(int systolic, int diastolic, bool organDamage) : this()
         {
@@ -9,7 +9,7 @@
             OrganDamage = organDamage;
         }
 
-        protected internal BloodPressure()
+        public BloodPressure()
         {
         }
 
