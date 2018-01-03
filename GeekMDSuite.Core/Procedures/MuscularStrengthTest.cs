@@ -1,9 +1,12 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public enum MuscularStrengthTest
+    public abstract class MuscularStrengthTest
     {
-        Situps,
-        Pushups, 
-        SitAndReach
+        public double Value { get; set; }
+        public StrengthTest Type { get; set; }
+
+        public override string ToString() => $"{Value} {Type.ToString().ToLower()}";
+        
+        protected MuscularStrengthTest() {}
     }
 }

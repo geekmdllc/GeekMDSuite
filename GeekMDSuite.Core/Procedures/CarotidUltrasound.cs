@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class CarotidUltrasound : ICarotidUltrasound
+    public class CarotidUltrasound 
     {
         private CarotidUltrasound(CarotidUltrasoundResult left, CarotidUltrasoundResult right)
         {

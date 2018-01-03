@@ -5,7 +5,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class FunctionalMovementScreenClassification : IClassifiable<FunctionalMovementScreenClassificationResult>
     {
-        public FunctionalMovementScreenClassification(IFunctionalMovementScreen fms)
+        public FunctionalMovementScreenClassification(FunctionalMovementScreen fms)
         {
             _fms = fms ?? throw new ArgumentNullException(nameof(fms));
         }
@@ -14,7 +14,7 @@ namespace GeekMDSuite.Analytics.Classification
 
         public override string ToString() => Classification.ToString();
 
-        private readonly IFunctionalMovementScreen _fms;
+        private readonly FunctionalMovementScreen _fms;
         private FunctionalMovementScreenClassificationResult Classify()
         {
             return new FunctionalMovementScreenClassificationResult(_fms);

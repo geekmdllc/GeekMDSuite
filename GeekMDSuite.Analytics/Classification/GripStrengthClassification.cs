@@ -6,10 +6,10 @@ using GeekMDSuite.Core.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-    public class GripStrengthClassification : IClassifiable<GripStrengthClassificationResult>, IGripStrengthLimits
+    public class GripStrengthClassification : IClassifiable<GripStrengthClassificationResult>
     {
 
-        public GripStrengthClassification(IGripStrength gripStrength, Patient patient)
+        public GripStrengthClassification(GripStrength gripStrength, Patient patient)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
             _gripStrength = gripStrength;
@@ -18,12 +18,12 @@ namespace GeekMDSuite.Analytics.Classification
 
         public GripStrengthClassificationResult Classification => Classify();
 
-        public IMassMeasurement LowerLimitOfNormal => _ranges.LowerLimitOfNormal;
-        public IMassMeasurement UpperLimitOfNormal => _ranges.UpperLimitOfNormal;
+        public MassMeasurement LowerLimitOfNormal => _ranges.LowerLimitOfNormal;
+        public MassMeasurement UpperLimitOfNormal => _ranges.UpperLimitOfNormal;
 
         public override string ToString() => Classification.ToString();
 
-        private readonly IGripStrength _gripStrength;
+        private readonly GripStrength _gripStrength;
         private readonly GripStrengthLimits _ranges;
 
         private GripStrengthClassificationResult Classify() => 
@@ -33,7 +33,7 @@ namespace GeekMDSuite.Analytics.Classification
 
         private GripStrengthScore ClassifyLeft() => ClassifySide(_gripStrength.Left);
 
-        private GripStrengthScore ClassifySide(IMassMeasurement gripStrength)
+        private GripStrengthScore ClassifySide(MassMeasurement gripStrength)
         {
             if(gripStrength.Kilograms < LowerLimitOfNormal.Kilograms) 
                 return GripStrengthScore.Weak;

@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core.Tools.MeasurementUnits
 {
-    public class MassMeasurement : IMassMeasurement
+    public class MassMeasurement 
     {
         protected MassMeasurement(double pounds)
         {

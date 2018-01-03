@@ -6,7 +6,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class AudiogramDataPointClassification : IClassifiable<HearingLoss>
     {
-        public AudiogramDataPointClassification(IAudiogramDatapoint datapoint)
+        public AudiogramDataPointClassification(AudiogramDatapoint datapoint)
         {
             _datapoint = datapoint ?? throw new ArgumentNullException(nameof(datapoint));
         }
@@ -30,6 +30,6 @@ namespace GeekMDSuite.Analytics.Classification
             public static int UnderWeight { get; set; }
         }
         
-        private readonly IAudiogramDatapoint _datapoint;
+        private readonly AudiogramDatapoint _datapoint;
     }
 }

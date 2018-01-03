@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class VisualAcuity : IVisualAcuity
+    public class VisualAcuity 
     {
         public static VisualAcuity Build(int distance, int near, int both) => new VisualAcuity(distance, near, both);
 

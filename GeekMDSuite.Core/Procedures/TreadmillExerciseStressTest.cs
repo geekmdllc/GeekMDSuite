@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core.Procedures
 {
-    public class TreadmillExerciseStressTest : ITreadmillExerciseStressTest
+    public class TreadmillExerciseStressTest 
     {
         public TreadmillProtocol Protocol { get; set; }
         public TimeDuration Time { get; set; }

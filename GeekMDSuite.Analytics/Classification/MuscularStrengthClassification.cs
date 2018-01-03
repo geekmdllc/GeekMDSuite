@@ -7,16 +7,16 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public abstract class MuscularStrengthClassification : IClassifiable<FitnessClassification>, IStrengthTestRanges
     {
-        protected MuscularStrengthClassification(IMuscularStrengthTest test, Patient patient)
+        protected MuscularStrengthClassification(MuscularStrengthTest test, Patient patient)
         {
             var patient1 = patient ?? throw new ArgumentNullException(nameof(patient));
             _test = test ?? throw new ArgumentNullException(nameof(test));
 
-            if (_test.Type == MuscularStrengthTest.Pushups)
+            if (_test.Type == StrengthTest.Pushups)
                 _ranges = PushupsRepository.GetRanges(patient1);
-            else if (_test.Type == MuscularStrengthTest.Situps)
+            else if (_test.Type == StrengthTest.Situps)
                 _ranges = SitupsRepository.GetRanges(patient1);
-            else if (_test.Type == MuscularStrengthTest.SitAndReach)
+            else if (_test.Type == StrengthTest.SitAndReach)
                 _ranges = SitAndReachRepository.GetRanges(patient1);
             else 
                 throw new NotImplementedException(nameof(_test.Type));
@@ -33,7 +33,7 @@ namespace GeekMDSuite.Analytics.Classification
       
         public FitnessClassification Classification => Classify();
 
-        private readonly IMuscularStrengthTest _test;
+        private readonly MuscularStrengthTest _test;
         private readonly IStrengthTestRanges _ranges;
 
         private FitnessClassification Classify()

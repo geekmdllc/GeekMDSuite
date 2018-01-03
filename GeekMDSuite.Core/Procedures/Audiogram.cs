@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core.Procedures
 {
-    public class Audiogram : IAudiogram
+    public class Audiogram 
     {
         private Audiogram (AudiogramDataset left, AudiogramDataset right)
         {

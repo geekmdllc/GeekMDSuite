@@ -16,7 +16,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
         {
             
         }
-        public AscvdClassification(IPooledCohortEquationParameters equationParams, IQuantitativeLab ldlCholesterol, bool clinicialAscvdPresent = false)
+        public AscvdClassification(PooledCohortEquationParameters equationParams, QuantitativeLab ldlCholesterol, bool clinicialAscvdPresent = false)
         {
             _smoker = equationParams.Smoker;
             _cholesterolHdlC = equationParams.HdlCholesterol ?? throw new ArgumentNullException(nameof(equationParams.HdlCholesterol));
@@ -43,12 +43,12 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
 
         private readonly double _riskPercentage;
         private readonly Patient _patient;
-        private readonly IQuantitativeLab _ldlCholesterol;
+        private readonly QuantitativeLab _ldlCholesterol;
         private readonly bool _clinicialAscvdPresent;
         private readonly bool _isDiabetic;
         private readonly BloodPressure _bloodPressure;
-        private readonly IQuantitativeLab _cholesterolTotal;
-        private readonly IQuantitativeLab _cholesterolHdlC;
+        private readonly QuantitativeLab _cholesterolTotal;
+        private readonly QuantitativeLab _cholesterolHdlC;
         private readonly bool _smoker;
 
         private AscvdRiskClassification Ascvd10YrRisk()

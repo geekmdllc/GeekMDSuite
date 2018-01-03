@@ -8,7 +8,7 @@ namespace GeekMDSuite.Analytics.Classification
     public class QuantitativeLabClassification : IClassifiable<QuantitativeLabResult>
     {
 
-        public QuantitativeLabClassification(IQuantitativeLab lab, Patient patient)
+        public QuantitativeLabClassification(QuantitativeLab lab, Patient patient)
         {
             _lab = lab ?? throw new ArgumentNullException(nameof(lab));
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -66,7 +66,7 @@ namespace GeekMDSuite.Analytics.Classification
                         return QuantitativeLabResult.InvalidResult;
             }
         }
-        private readonly IQuantitativeLab _lab;
+        private readonly QuantitativeLab _lab;
         private readonly Patient _patient;
     }
 }

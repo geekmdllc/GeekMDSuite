@@ -7,7 +7,7 @@ namespace GeekMDSuite.Analytics.Classification
     public class FunctionalMovementScreenClassificationResult
     {
         public FunctionalMovementScreenClassificationResult(
-            IFunctionalMovementScreen functionalMovementScreen)
+            FunctionalMovementScreen functionalMovementScreen)
         {
             if (functionalMovementScreen == null) throw new ArgumentNullException(nameof(functionalMovementScreen));
             DeepSquat = ClassifyMovement(functionalMovementScreen.DeepSquat);
@@ -42,7 +42,7 @@ namespace GeekMDSuite.Analytics.Classification
                    $"Score: {Score}";
         }
 
-        private static int GetTotalScore(IFunctionalMovementScreen functionalMovementScreen)
+        private static int GetTotalScore(FunctionalMovementScreen functionalMovementScreen)
         {
             return functionalMovementScreen.ActiveStraightLegRaise.Score +
                    functionalMovementScreen.DeepSquat.Score +
@@ -53,7 +53,7 @@ namespace GeekMDSuite.Analytics.Classification
                    functionalMovementScreen.TrunkStabilityPushup.Score;
         }
         
-        private static FmsMovementClassificationResult ClassifyMovement(IFmsMovementSet movementSet)
+        private static FmsMovementClassificationResult ClassifyMovement(FmsMovementSet movementSet)
         {
             return new FmsMovementClassificationResult(
                 MovementSetClassification.CalculateFlag(movementSet),
@@ -61,7 +61,7 @@ namespace GeekMDSuite.Analytics.Classification
             );
         }
         
-        private static FmsMovementClassificationResult ClassifyMovement(IFmsMovementData movementSet)
+        private static FmsMovementClassificationResult ClassifyMovement(FmsMovementData movementSet)
         {
             return new FmsMovementClassificationResult(
                 MovementClassification.CalculateFlag(movementSet),
@@ -71,7 +71,7 @@ namespace GeekMDSuite.Analytics.Classification
 
         private static class MovementClassification
         {
-            public static FmsScoreFlag CalculateFlag(IFmsMovementData movement)
+            public static FmsScoreFlag CalculateFlag(FmsMovementData movement)
             {
                 var score = movement.Score;
                 
@@ -86,7 +86,7 @@ namespace GeekMDSuite.Analytics.Classification
                 throw new ArgumentOutOfRangeException(nameof(score));
             }
 
-            public static FmsRecommendedAction RecommendedAction(IFmsMovementData movement)
+            public static FmsRecommendedAction RecommendedAction(FmsMovementData movement)
             {
                 var flag = CalculateFlag(movement);
                 
@@ -102,7 +102,7 @@ namespace GeekMDSuite.Analytics.Classification
 
         private static class MovementSetClassification
         {
-            public static FmsScoreFlag CalculateFlag(IFmsMovementSet set)
+            public static FmsScoreFlag CalculateFlag(FmsMovementSet set)
             {
                 var left = set.Left;
                 var right = set.Right;
@@ -158,7 +158,7 @@ namespace GeekMDSuite.Analytics.Classification
         // calculated score only contributes to the total score
         // and if the total score is below a threshold a flag is 
         // thrown. But, assymetry also has importance.
-        public static FmsRecommendedAction RecommendedAction(IFmsMovementSet fmsMovementSet)
+        public static FmsRecommendedAction RecommendedAction(FmsMovementSet fmsMovementSet)
         {
             var flag = CalculateFlag(fmsMovementSet);
             switch (flag) {

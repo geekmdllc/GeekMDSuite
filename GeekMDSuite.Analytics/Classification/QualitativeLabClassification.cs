@@ -6,7 +6,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class QualitativeLabClassification : IClassifiable<QualitativeLabResult>
     {
-        public QualitativeLabClassification(IQualitativeLab lab)
+        public QualitativeLabClassification(QualitativeLab lab)
         {
             _lab = lab ?? throw new ArgumentNullException(nameof(lab));
             Lab = QualitativeLabRepository.GetLab(lab);
@@ -14,7 +14,7 @@ namespace GeekMDSuite.Analytics.Classification
 
         public QualitativeLabClassificationModel Lab { get; set; }
 
-        private readonly IQualitativeLab _lab;
+        private readonly QualitativeLab _lab;
 
         public QualitativeLabResult Classification => _lab.Result;
 

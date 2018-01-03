@@ -6,9 +6,9 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
 {
     public class CardiovascularRegimenClassification : ExerciseRegimenClassification
     {
-        public CardiovascularRegimenClassification(IExerciseRegimenParameters parameters) : base(parameters)
+        public CardiovascularRegimenClassification(ExerciseRegimen regimen) : base(regimen)
         {
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+            if (regimen == null) throw new ArgumentNullException(nameof(regimen));
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular);
         }
 

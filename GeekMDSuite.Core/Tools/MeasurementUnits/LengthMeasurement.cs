@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core.Tools.MeasurementUnits
 {
-    public class LengthMeasurement : ILengthMeasurement
+    public class LengthMeasurement
     {
         protected LengthMeasurement(double inches)
         {

@@ -7,14 +7,14 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
-        public static PooledCohortsEquation Initialize(IPooledCohortEquationParameters parameters)
+        public static PooledCohortsEquation Initialize(PooledCohortEquationParameters parameters)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
             
             return new PooledCohortsEquation(parameters);
         }
         
-        private PooledCohortsEquation(IPooledCohortEquationParameters parameters)
+        private PooledCohortsEquation(PooledCohortEquationParameters parameters)
         {
             _hdlCholesterol = parameters.HdlCholesterol ?? throw new ArgumentNullException(nameof(parameters.HdlCholesterol));
             _totalCholesterol = parameters.TotalCholesterol ?? throw new ArgumentNullException(nameof(parameters.TotalCholesterol));
@@ -32,8 +32,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
                 
         private readonly Patient _patient;
         private readonly BloodPressure _bloodPressure;
-        private readonly IQuantitativeLab _totalCholesterol;
-        private readonly IQuantitativeLab _hdlCholesterol;
+        private readonly QuantitativeLab _totalCholesterol;
+        private readonly QuantitativeLab _hdlCholesterol;
         private readonly bool _hypertensionTreatment;
         private readonly bool _smoker;
         private readonly bool _diabetic;

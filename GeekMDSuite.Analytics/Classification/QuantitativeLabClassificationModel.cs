@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Analytics.Classification
 {
-    public class QuantitativeLabClassificationModel : IQuantitativeLabInterpretationModel
+    public class QuantitativeLabClassificationModel 
     {
         public string LabName { get; set; }
         public string LabNameFull { get; set; }

@@ -1,19 +1,18 @@
 ﻿namespace GeekMDSuite.Core.Procedures
 {
-    public class Pushups : IMuscularStrengthTest
+    public class Pushups : MuscularStrengthTest
     {
-        protected Pushups() {}
-
         public static Pushups Build(int count) => new Pushups(count);
-        
-        public double Value { get; set; }
-        public MuscularStrengthTest Type => MuscularStrengthTest.Pushups;
-        
-        public override string ToString() => $"{Value} pushups";
-        
+
+        protected Pushups()
+        {
+            Type = StrengthTest.Pushups;
+        }
+
         private Pushups(int count) : this()
         {
             Value = count;
         }
+
     }
 }

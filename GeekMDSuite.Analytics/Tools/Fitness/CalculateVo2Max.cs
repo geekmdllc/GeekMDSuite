@@ -7,17 +7,17 @@ namespace GeekMDSuite.Analytics.Tools.Fitness
 {
     public static class CalculateVo2Max
     {
-        public static double FromTreadmillStressTest(TreadmillProtocol protocol, ITimeDuration time, Patient patient)
+        public static double FromTreadmillStressTest(TreadmillProtocol protocol, TimeDuration time, Patient patient)
         {
             return ResultByProtocol(protocol, time, patient);
         }
 
-        public static double FromTreadmillStressTest(ITreadmillExerciseStressTest stressTest, Patient patient)
+        public static double FromTreadmillStressTest(TreadmillExerciseStressTest stressTest, Patient patient)
         {
             return ResultByProtocol(stressTest.Protocol, stressTest.Time, patient);
         }
 
-        private static double ResultByProtocol(TreadmillProtocol protocol, ITimeDuration time, Patient patient)
+        private static double ResultByProtocol(TreadmillProtocol protocol, TimeDuration time, Patient patient)
         {
             switch (protocol)
             {

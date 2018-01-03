@@ -18,7 +18,7 @@ namespace GeekMDSuite.Analytics.Repositories
             return JsonConvert.DeserializeObject<List<QualitativeLabClassificationModel>>(jsonFile);
         }
 
-        public static QualitativeLabClassificationModel GetLab(IQualitativeLab lab) => 
+        public static QualitativeLabClassificationModel GetLab(QualitativeLab lab) => 
             GetAllLabs().First(l => string.Equals(l.LabName.ToString(), lab.Type.ToString(), StringComparison.CurrentCultureIgnoreCase));
     }
 }

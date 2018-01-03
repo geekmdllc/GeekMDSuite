@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.LaboratoryData
 {
-    public class QualitativeLab : IQualitativeLab
+    public class QualitativeLab 
     {
         private QualitativeLab(QualitativeLabType type, QualitativeLabResult result)
         {

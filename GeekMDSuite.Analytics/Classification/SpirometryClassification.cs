@@ -7,7 +7,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class SpirometryClassification : IClassifiable<SpirometryClassificationResult>
     {
-        public SpirometryClassification(ISpirometry spirometry, Patient patient, BodyComposition bodyComposition)
+        public SpirometryClassification(Spirometry spirometry, Patient patient, BodyComposition bodyComposition)
         {
             _spirometry = spirometry ?? throw new ArgumentNullException(nameof(spirometry));
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -31,7 +31,7 @@ namespace GeekMDSuite.Analytics.Classification
             $"FEV1:FVC: {_spirometry.ForcedExpiratoryVolume1SecondToForcedVitalCapacityRatio}, " + 
             $"Classification: {Classification.ToString()}";
 
-        private readonly ISpirometry _spirometry;
+        private readonly Spirometry _spirometry;
         private readonly Patient _patient;
         private readonly BodyComposition _bodyComposition;
         

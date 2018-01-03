@@ -80,8 +80,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
 
         private Patient _patient;
         private BloodPressure _bloodPressure;
-        private IQuantitativeLab _totalCholesterol;
-        private IQuantitativeLab _hdlCholesterol;
+        private QuantitativeLab _totalCholesterol;
+        private QuantitativeLab _hdlCholesterol;
         private bool _hypertensionTreatment;
         private bool _smoker;
         private bool _diabetic;

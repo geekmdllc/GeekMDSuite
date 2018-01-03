@@ -4,14 +4,14 @@ using GeekMDSuite.Core.PatientActivities;
 
 namespace GeekMDSuite.Analytics.Classification.PatientActivities
 {
-    public abstract class ExerciseRegimenClassification : IExerciseRegimenClassification, IClassifiable<Core.PatientActivities.ExerciseRegimenClassification>
+    public abstract class ExerciseRegimenClassification : IClassifiable<Core.PatientActivities.ExerciseRegimenClassification>
     {
-        protected ExerciseRegimenClassification (IExerciseRegimenParameters parameters)
+        protected ExerciseRegimenClassification (ExerciseRegimen regimen)
         {
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-            SessionsPerWeek = parameters.SessionsPerWeek;
-            AverageSessionDuration = parameters.AverageSessionDuration;
-            Intensity = parameters.Intensity;
+            if (regimen == null) throw new ArgumentNullException(nameof(regimen));
+            SessionsPerWeek = regimen.SessionsPerWeek;
+            AverageSessionDuration = regimen.AverageSessionDuration;
+            Intensity = regimen.Intensity;
         }
         public abstract ExerciseDurationGoals Goals { get; }
 

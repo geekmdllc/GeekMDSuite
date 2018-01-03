@@ -8,7 +8,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class FitTreadmillScoreClassification : IClassifiable<FitTreadmillScoreMortality>
     {
-        public FitTreadmillScoreClassification(ITreadmillExerciseStressTest treadmillExerciseStressTest,
+        public FitTreadmillScoreClassification(TreadmillExerciseStressTest treadmillExerciseStressTest,
             Patient patient)
         {
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -19,7 +19,7 @@ namespace GeekMDSuite.Analytics.Classification
         public FitTreadmillScoreMortality Classification =>  ParseTenYearMortalityRisk();
         public int TenYearMortality => GetTenYearMortality();
 
-        private readonly ITreadmillExerciseStressTest _treadmillExerciseStressTest;
+        private readonly TreadmillExerciseStressTest _treadmillExerciseStressTest;
         private readonly Patient _patient;
         
         // ReSharper disable once MemberCanBePrivate.Global

@@ -7,7 +7,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class VisualAcuityClassification : IClassifiable<VisualAcuityClassificationResult>
     {
-        public VisualAcuityClassification(IVisualAcuity visualAcuity)
+        public VisualAcuityClassification(VisualAcuity visualAcuity)
         {
             _visualAcuity = visualAcuity ?? throw new ArgumentNullException(nameof(visualAcuity));
         }
@@ -30,7 +30,7 @@ namespace GeekMDSuite.Analytics.Classification
             public static readonly int NearTotalBlindness = 1000;
         }
         
-        private IVisualAcuity _visualAcuity;
+        private VisualAcuity _visualAcuity;
 
         private VisualAcuityClassificationResult ClassifyByPoorestVision()
         {

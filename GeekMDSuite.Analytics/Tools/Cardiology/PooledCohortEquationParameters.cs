@@ -3,7 +3,7 @@ using GeekMDSuite.Core.LaboratoryData;
 
 namespace GeekMDSuite.Analytics.Tools.Cardiology
 {
-    public class PooledCohortEquationParameters : IPooledCohortEquationParameters
+    public class PooledCohortEquationParameters
     {
         public PooledCohortEquationParameters()
         {
@@ -16,8 +16,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
         private PooledCohortEquationParameters(
             Patient patient, 
             BloodPressure bloodPressure, 
-            IQuantitativeLab totalCholesterol, 
-            IQuantitativeLab hdlCholesterol, 
+            QuantitativeLab totalCholesterol, 
+            QuantitativeLab hdlCholesterol, 
             bool hypertensionTreatment, 
             bool smoker, 
             bool diabetic) : this()
@@ -33,8 +33,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
         
         public Patient Patient { get; set; }
         public BloodPressure BloodPressure { get; set; }
-        public IQuantitativeLab TotalCholesterol { get; set; }
-        public IQuantitativeLab HdlCholesterol { get; set; }
+        public QuantitativeLab TotalCholesterol { get; set; }
+        public QuantitativeLab HdlCholesterol { get; set; }
         public bool HypertensionTreatment { get; set; }
         public bool Smoker { get; set; }
         public bool Diabetic { get; set; }
@@ -42,8 +42,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
         internal static PooledCohortEquationParameters Build(
             Patient patient, 
             BloodPressure bloodPressure,
-            IQuantitativeLab totalCholesterol, 
-            IQuantitativeLab hdlCholesterol,
+            QuantitativeLab totalCholesterol, 
+            QuantitativeLab hdlCholesterol,
             bool hypertensionTreatment = false, 
             bool smoker = false, 
             bool diabetic = false)

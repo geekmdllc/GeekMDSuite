@@ -5,7 +5,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class AudiogramClassification : IClassifiable<AudiogramClassificationResult>
     {
-        public AudiogramClassification(IAudiogram audiogram)
+        public AudiogramClassification(Audiogram audiogram)
         {
             _left = audiogram.Left;
             _right = audiogram.Right;
@@ -16,8 +16,8 @@ namespace GeekMDSuite.Analytics.Classification
             
         }
 
-        private readonly IAudiogramDataset _left;
-        private readonly IAudiogramDataset _right;
+        private readonly AudiogramDataset _left;
+        private readonly AudiogramDataset _right;
         
         public AudiogramClassificationResult Classification => new AudiogramClassificationResult(
                 GetClassification(),

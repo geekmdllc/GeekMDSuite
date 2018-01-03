@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core.Tools.MeasurementUnits
 {
-    public class Temperature : ITemperature
+    public class Temperature 
     {
         protected internal Temperature()
         {

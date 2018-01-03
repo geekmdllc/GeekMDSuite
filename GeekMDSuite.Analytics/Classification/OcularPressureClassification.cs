@@ -5,7 +5,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class OcularPressureClassification : IClassifiable<OcularPressureClassificationResult>
     {
-        public OcularPressureClassification(IOcularPressure pressure)
+        public OcularPressureClassification(OcularPressure pressure)
         {
             _ocularPressure = pressure ?? throw new ArgumentNullException(nameof(pressure));
         }
@@ -29,6 +29,6 @@ namespace GeekMDSuite.Analytics.Classification
             ? OcularPressureClassificationResult.Normal
             : OcularPressureClassificationResult.OcularHypertension;
 
-        private readonly IOcularPressure _ocularPressure;
+        private readonly OcularPressure _ocularPressure;
     }
 }

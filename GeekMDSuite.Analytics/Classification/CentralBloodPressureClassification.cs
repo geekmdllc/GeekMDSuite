@@ -9,7 +9,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class CentralBloodPressureClassification : IClassifiable<CentralBloodPressureClassificationResult>
     {
-        public CentralBloodPressureClassification(ICentralBloodPressure centralBloodPressure, Patient patient)
+        public CentralBloodPressureClassification(CentralBloodPressure centralBloodPressure, Patient patient)
         {
             _centralBloodPressure = centralBloodPressure ?? throw new ArgumentNullException(nameof(centralBloodPressure));
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -19,7 +19,7 @@ namespace GeekMDSuite.Analytics.Classification
 
         public override string ToString() => Classification.ToString();
 
-        private readonly ICentralBloodPressure _centralBloodPressure;
+        private readonly CentralBloodPressure _centralBloodPressure;
         private readonly Patient _patient;
 
         private CentralBloodPressureClassificationResult ClassifyBasedOnWorstResult()
