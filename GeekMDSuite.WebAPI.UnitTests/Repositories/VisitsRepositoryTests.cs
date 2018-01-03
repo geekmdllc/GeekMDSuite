@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories;
+using GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
@@ -67,6 +69,34 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         public void FindByName_GivenNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
         {
             var found = _repo.FindByName("Bruce Wayne");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
+        public void FindByName_GivenFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("Bruce");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
+        public void FindByName_GivenPartialFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("Br");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
+        public void FindByName_GivenLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("Wayne");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
+        public void FindByName_GivenPartialLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("ayne");
             Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
         
