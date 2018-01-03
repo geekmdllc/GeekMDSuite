@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
                 message.Add("Name");
             if (patient.MedicalRecordNumber.IsEmpty()) 
                 message.Add("MedicalRecordNumber");
-            if (patient.DateOfBirth.IsInvalidAge()) 
+            if (patient.DateOfBirth.IsOutOfRange()) 
                 message.Add("DateOfBirth");
             
             if(message.Any()) throw new FormatException(string.Join(", ", message));

@@ -1,7 +1,6 @@
 ﻿using GeekMDSuite.Core.Analytics.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
-using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
@@ -12,6 +11,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
     {
         protected TClassifier Classifier;
         protected readonly IUnitOfWork UnitOfWork;
+
+        protected ClassificationService()
+        {
+            
+        }
 
         protected ClassificationService(IUnitOfWork unitOfWork)
         {

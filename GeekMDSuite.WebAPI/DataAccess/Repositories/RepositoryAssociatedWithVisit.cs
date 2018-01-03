@@ -85,7 +85,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
 
         public IEnumerable<T> FindByDateOfBirth(DateTime dateOfBirth)
         {
-            if (dateOfBirth.IsInvalidAge())
+            if (dateOfBirth.IsOutOfRange())
                 throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
 
             var dobString = dateOfBirth.ToShortDateString();            

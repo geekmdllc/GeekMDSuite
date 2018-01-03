@@ -4,18 +4,22 @@ namespace GeekMDSuite.Core.Analytics.Classification
 {
     public class CarotidUltrasoundClassificationResult
     {
+
         public CarotidUltrasoundClassificationResult(
+            CarotidUltrasound carotidUltrasound,
             Laterality laterality, 
             Laterality worseSide, 
             CarotidPercentStenosisGrade grade, 
             CarotidPlaqueCharacter character)
         {
+            CarotidUltrasound = carotidUltrasound;
             WorseSide = worseSide;
             Grade = grade;
             Character = character;
             Laterality = laterality;
         }
 
+        public CarotidUltrasound CarotidUltrasound { get; }
         public Laterality WorseSide { get; }
         public Laterality Laterality { get; }
         public CarotidPercentStenosisGrade Grade { get; }

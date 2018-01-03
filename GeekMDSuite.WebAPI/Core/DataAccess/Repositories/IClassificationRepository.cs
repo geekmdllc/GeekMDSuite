@@ -6,6 +6,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories
     {
         IAudiogramClassificationService Audiograms { get; }
         IBloodPressureClassificationService BloodPressures { get; }
+        ICarotidUltrasoundClassificationService CarotidUltrasounds { get; }
         
     }
 }
