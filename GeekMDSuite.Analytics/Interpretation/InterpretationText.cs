@@ -27,7 +27,7 @@ namespace GeekMDSuite.Analytics.Interpretation
 
         private static string BuildSectionParagraphs(InterpretationSection section)
         {
-            return Enumerable.Aggregate<string, string>(section.Paragraphs, string.Empty, (current, parapraph) => $"{current}{parapraph}\n\n");
+            return section.Paragraphs.Aggregate(string.Empty, (current, parapraph) => $"{current}{parapraph}\n\n");
         }
     }
 }
