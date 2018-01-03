@@ -10,6 +10,11 @@ namespace GeekMDSuite.Core.Analytics.Classification
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
         }
 
+        public BodyCompositionBaseClassification()
+        {
+            
+        }
+
         public HipToWaistRatio HipToWaistRatio => new HipToWaistClassification(_bodyComposition, _patient).Classification;
         public WaistToHeightRatio WaistToHeightRatio => new WaistToHeightRatioClassification(_bodyComposition, _patient).Classification;
         public BodyMassIndex BodyMassIndex => new BodyMassIndexClassification(_bodyComposition, _patient).Classification;
@@ -17,14 +22,14 @@ namespace GeekMDSuite.Core.Analytics.Classification
         private readonly IBodyComposition _bodyComposition;
         private readonly IPatient _patient;
         
-        protected virtual BodyCompositionResult Classify()
+        protected virtual BodyCompositionClassificationResult Classify()
         {
             if (ThinAndLean()) 
-                return BodyCompositionResult.ThinAndLean;
+                return BodyCompositionClassificationResult.Build(BodyCompositionResult.ThinAndLean);
             if (SkinnyFat()) 
-                return BodyCompositionResult.SkinnyFat;
-            return OverWeightButLean() ? BodyCompositionResult.OverweightSuspectMuscular 
-                : BodyCompositionResult.OverweightOverFat;
+                return BodyCompositionClassificationResult.Build(BodyCompositionResult.SkinnyFat);
+            return OverWeightButLean() ? BodyCompositionClassificationResult.Build(BodyCompositionResult.OverweightSuspectMuscular) 
+                : BodyCompositionClassificationResult.Build(BodyCompositionResult.OverweightOverFat);
         }
 
         protected bool OverWeightButLean()

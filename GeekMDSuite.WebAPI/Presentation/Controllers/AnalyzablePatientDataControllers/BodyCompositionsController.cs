@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +9,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json")]
     public class BodyCompositionsController : AnalyzablePatientDataController<BodyCompositionEntity>
     {
-        public BodyCompositionsController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public BodyCompositionsController(IUnitOfWork unitOfWork, IClassificationRepository classifications) : base(unitOfWork)
         {
+            _classifications = classifications;
         }
 
         public override IActionResult Interpret(int id)
@@ -19,7 +21,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
         public override IActionResult Classify(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return Ok(_classifications.BodyCompositions.InitializeWith(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
+        
+        private readonly IClassificationRepository _classifications;
+
     }
 }
