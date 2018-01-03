@@ -12,3 +12,7 @@ GeekMDSuite.WebAPI/context.db
 GeekMDSuite.WebAPI/Migrations
 GeekMDSuite.WebAPI.UnitTests/bin
 GeekMDSuite.WebAPI.UnitTests/obj
+GeekMDSuite.Analytics/bin
+GeekMDSuite.Analytics/obj
+GeekMDSuite.Analytics.UnitTests/obj
+GeekMDSuite.Analytics.UnitTests/bin
