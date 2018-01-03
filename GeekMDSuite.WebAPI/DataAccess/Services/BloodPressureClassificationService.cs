@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Core.Analytics.Classification;
+﻿using GeekMDSuite.Core;
+using GeekMDSuite.Core.Analytics.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 

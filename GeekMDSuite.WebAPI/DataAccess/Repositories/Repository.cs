@@ -34,6 +34,9 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories
         {
             if (entity == null) 
                 throw new ArgumentNullException(nameof(entity));
+
+            if (Context.Set<T>().Find(entity.Id) != null)
+                throw new EntityNotUniqeException(entity.Id);
             
             Context.Set<T>().Add(entity);
         }

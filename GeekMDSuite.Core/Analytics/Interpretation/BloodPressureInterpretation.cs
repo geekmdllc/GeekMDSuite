@@ -5,7 +5,7 @@ namespace GeekMDSuite.Core.Analytics.Interpretation
 {
     public class BloodPressureInterpretation : IInterpretable
     {
-        public BloodPressureInterpretation(IBloodPressure parameters)
+        public BloodPressureInterpretation(BloodPressure parameters)
         {
             _parameters = parameters;
             _stage = new BloodPressureClassification(_parameters).Classification.Stage;
@@ -116,7 +116,7 @@ namespace GeekMDSuite.Core.Analytics.Interpretation
             return section.Build();
         }
         
-        private readonly IBloodPressure _parameters;
+        private readonly BloodPressure _parameters;
 
         private readonly BloodPressureStage _stage;
     }

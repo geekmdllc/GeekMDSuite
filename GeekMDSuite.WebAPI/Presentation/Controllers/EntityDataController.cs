@@ -55,6 +55,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 UnitOfWork.Complete();
                 return Ok();
             }
+            catch (EntityNotUniqeException)
+            {
+                return Conflict();
+            }
             catch (ArgumentNullException)
             {
                 return BadRequest();
