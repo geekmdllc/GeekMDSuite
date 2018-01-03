@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
     public class RepositoryTests
     {
         [Fact]
-        public void All_ReturnsNonEmptyList()
+        public void All_GivenSeededContext_ReturnsNonEmptyList()
         {
             var found = _unitOfWorkSeeded.VisitData<AudiogramEntity>().All();
             
@@ -29,13 +29,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public void FindById_ReturnsCorrectEntity()
         {
-            var uow = new FakeUnitOfWorkSeeded();
-            var firstId = uow.VisitData<AudiogramEntity>().All().First().Id;
-            var foundAudiogram = uow.VisitData<AudiogramEntity>().FindById(firstId);
-            
-            Assert.Equal(firstId, foundAudiogram.Id);
-            Assert.IsType<AudiogramEntity>(foundAudiogram);
-            Assert.Equal(90, foundAudiogram.Left.F500.Value);
+            var firstEntity = _unitOfWorkSeeded.EntityData<AudiogramEntity>().All().First();
+            var foundEntity = _unitOfWorkSeeded.EntityData<AudiogramEntity>().FindById(firstEntity.Id);
+            Assert.Equal(firstEntity, foundEntity);
         }
 
         [Fact]
