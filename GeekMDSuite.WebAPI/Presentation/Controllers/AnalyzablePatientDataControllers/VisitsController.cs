@@ -6,7 +6,7 @@ using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GeekMDSuite.WebAPI.Presentation.Controllers
+namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]

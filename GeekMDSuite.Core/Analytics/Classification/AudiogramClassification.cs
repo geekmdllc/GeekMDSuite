@@ -11,6 +11,11 @@ namespace GeekMDSuite.Core.Analytics.Classification
             _right = audiogram.Right;
         }
 
+        public AudiogramClassification()
+        {
+            
+        }
+
         private readonly IAudiogramDataset _left;
         private readonly IAudiogramDataset _right;
         

@@ -2,18 +2,27 @@ using System;
 
 namespace GeekMDSuite.Core.Analytics.Classification
 {
-    public class BloodPressureClassification : IClassifiable<BloodPressureStage>
+    public class BloodPressureClassification : IClassifiable<BloodPressureClassificationResult>
     {
-        public BloodPressureClassification(IBloodPressure parameters)
+        public BloodPressureClassification(BloodPressure parameters) : this()
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
 
-        public BloodPressureStage Classification => Classify();
+        public BloodPressureClassificationResult Classification => new BloodPressureClassificationResult()
+        {
+            Stage = Classify(),
+            Pressure = _parameters
+        };
 
         public override string ToString() => Classification.ToString();
         
-        private readonly IBloodPressure _parameters;
+        private readonly BloodPressure _parameters;
+
+        public BloodPressureClassification()
+        {
+            
+        }
 
         public static class LowerLimits
         {

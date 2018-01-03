@@ -3,26 +3,20 @@ using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GeekMDSuite.WebAPI.Presentation.Controllers
+namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class GripStrengthsController : VisitDataController<GripStrengthEntity>
+    public class GripStrengthsController : AnalyzablePatientDataController<GripStrengthEntity>
     {
         public GripStrengthsController(IUnitOfWork unitOfWork) : base(unitOfWork) {}
-        
-        // GET api/gripstrengths/classify/5
-        [HttpGet]
-        [Route("classify/{id}")]
-        public IActionResult Classify(int id)
+
+        public override IActionResult Interpret(int id)
         {
             throw new NotImplementedException();
         }
-        
-        // GET api/gripstrengths/interpret/5
-        [HttpGet]
-        [Route("interpret/{id}")]
-        public IActionResult Interpret(int id)
+
+        public override IActionResult Classify(int id)
         {
             throw new NotImplementedException();
         }

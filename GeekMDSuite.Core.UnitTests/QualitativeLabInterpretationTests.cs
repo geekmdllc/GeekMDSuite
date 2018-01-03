@@ -2,7 +2,6 @@
 using GeekMDSuite.Core.Analytics.Classification;
 using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.LaboratoryData.Builder;
-using Moq;
 using Xunit;
 
 namespace GeekMDSuite.Core.UnitTests
