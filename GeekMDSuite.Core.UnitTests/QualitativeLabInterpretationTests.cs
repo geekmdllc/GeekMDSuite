@@ -34,12 +34,5 @@ namespace GeekMDSuite.Core.UnitTests
             Assert.Throws<ArgumentNullException>(() =>
                 new QualitativeLabClassification(null));
         }
-
-        [Fact]
-        public void GivenNullPatient_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-                new QualitativeLabClassification(new Mock<IQualitativeLab>().Object));
-        }
     }
 }
