@@ -37,9 +37,9 @@ namespace GeekMDSuite.Core.UnitTests
         {
             var bloodPressure = BloodPressure.Build(systolic, diastolic, organDamagePresent);
                 
-            var bpStage = new BloodPressureClassification(bloodPressure).Classification;
+            var bpClassification = new BloodPressureClassification(bloodPressure).Classification;
             
-            Assert.Equal(expectedStage, bpStage);
+            Assert.Equal(expectedStage, bpClassification.Stage);
         }
     
         [Fact]

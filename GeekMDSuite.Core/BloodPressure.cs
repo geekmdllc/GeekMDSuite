@@ -2,16 +2,15 @@
 {
     public class BloodPressure : IBloodPressure
     {
-        protected internal BloodPressure()
-        {
-            
-        }
-
-        private BloodPressure(int systolic, int diastolic, bool organDamage)
+        protected BloodPressure(int systolic, int diastolic, bool organDamage) : this()
         {
             Systolic = systolic;
             Diastolic = diastolic;
             OrganDamage = organDamage;
+        }
+
+        protected internal BloodPressure()
+        {
         }
 
         public int Systolic { get; set; }
