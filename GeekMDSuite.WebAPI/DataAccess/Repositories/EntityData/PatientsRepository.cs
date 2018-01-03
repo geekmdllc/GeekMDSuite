@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeekMDSuite.WebAPI.Core.DataAccess.Repositories;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Helpers;
@@ -19,7 +18,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         public IEnumerable<PatientEntity> FindByName(string query)
         {
             if (query.IsEmpty()) throw new ArgumentNullException(query);
-            var result = Context.Patients.Where(p => query.HasStringsInCommonWith(p.Name.ToString()));
+            var result = Context.Patients.Where(p => p.Name.IsSimilarTo(query));
             if (!result.Any()) throw new RepositoryElementNotFoundException(query);
 
             return result;

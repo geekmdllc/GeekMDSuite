@@ -73,6 +73,34 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         }
         
         [Fact]
+        public void FindByName_GivenFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("Bruce");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
+        public void FindByName_GivenPartialFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("Br");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
+        public void FindByName_GivenLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("Wayne");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
+        public void FindByName_GivenPartialLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        {
+            var found = _repo.FindByName("ayne");
+            Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
+        }
+        
+        [Fact]
         public void FindByDateOfBirth_GivenDateInRepository_ReturnsProperIEnumerableOfVisitEntities()
         {
             var list = _repo.FindByDateOfBirth(new DateTime(1900, 1, 1));
