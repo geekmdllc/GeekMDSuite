@@ -13,7 +13,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
         protected TClassifier Classifier;
         protected readonly IUnitOfWork UnitOfWork;
 
-        protected ClassificationService()
+        private ClassificationService()
         {
             
         }

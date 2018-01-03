@@ -15,6 +15,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             AscvdScores = new AscvdClassificationService(unitOfWork);
             Audiograms = new AudiogramClassificationService(unitOfWork);
             BloodPressures = new BloodPressureClassificationService(unitOfWork);
+            BodyCompositions = new BodyCompositionClassificationService(unitOfWork);
             CarotidUltrasounds = new CarotidUltrasoundClassificationService(unitOfWork);
             
         }
@@ -22,6 +23,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
         public IAscvdClassificationService AscvdScores { get; set; }
         public IAudiogramClassificationService Audiograms { get; set; }
         public IBloodPressureClassificationService BloodPressures { get; set; }
+        public IBodyCompositionClassificationService BodyCompositions { get; set; }
         public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; set; }
     }
 }

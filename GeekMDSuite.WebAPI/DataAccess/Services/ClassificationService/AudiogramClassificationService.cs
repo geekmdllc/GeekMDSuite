@@ -1,5 +1,4 @@
 ﻿using GeekMDSuite.Core.Analytics.Classification;
-using GeekMDSuite.Core.Tools.Cardiology;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService;
 
