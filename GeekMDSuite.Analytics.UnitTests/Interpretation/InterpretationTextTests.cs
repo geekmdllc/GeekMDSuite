@@ -41,7 +41,8 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
                 .AddSection(section)
                 .Build();
             
-            Assert.Contains("Title", interp.Title);
+            Assert.Contains("Title", interp.ToString());
         }
+        
     }
 }
