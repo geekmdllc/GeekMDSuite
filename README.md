@@ -15,7 +15,7 @@ The backend RESTful service providing front end developers access to the objects
 A simple console application for demonstrating the use of GeekMD.Core.
 
 ```cs
-var ishiharaSix = IshiharaSixPlateScreenBuilder
+var test = IshiharaSixPlateScreenBuilder
                 .Initialize()
                 .SetPlate1(IshiharaAnswerResult.NormalVision)
                 .SetPlate2(IshiharaAnswerResult.ColorVisionDefict)
@@ -25,8 +25,8 @@ var ishiharaSix = IshiharaSixPlateScreenBuilder
                 .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
                 .Build();
 
-var ishiharaSixInterp = new IshiharaSixPlateClassification(ishiharaSix);
-Console.WriteLine(ishiharaSixInterp);
+var classification = new IshiharaSixPlateClassification(test);
+Console.WriteLine(classification);
 ```
 
 [build_status]: http://teamcity.zapto.org:8080/app/rest/builds/buildType:(id:GeekMDApplicationSuite_Build)/statusIcon.svg
