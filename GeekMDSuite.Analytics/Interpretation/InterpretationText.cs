@@ -8,14 +8,24 @@ namespace GeekMDSuite.Analytics.Interpretation
 {
     public class InterpretationText
     {
-        public string Title { get; }
-        public string Summary { get; }
-        public List<InterpretationSection> Sections { get; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public List<InterpretationSection> Sections { get; set; }
 
-        public InterpretationText(string title, string summary, List<InterpretationSection> sections)
+        internal InterpretationText()
+        {
+            Sections = new List<InterpretationSection>();
+        }
+
+        public static InterpretationText Build(string title, string summary, List<InterpretationSection> sections)
+        {
+            return new InterpretationText(title, summary, sections);
+        }
+
+        internal InterpretationText(string title, string summary, List<InterpretationSection> sections)
         {
             if (string.IsNullOrWhiteSpace(title))
-                throw new ArgumentOutOfRangeException("A title must be given.");
+                throw new ArgumentOutOfRangeException(nameof(title));
 
             Title = title; 
             Summary = summary;
@@ -36,12 +46,14 @@ namespace GeekMDSuite.Analytics.Interpretation
 
         private static string GetSectionsText(IEnumerable<InterpretationSection> sections)
         {
-            return sections.Aggregate(string.Empty, (current, section) => current + $"{section.Title}\n\n{GetParagraphsText(section)}");
+            return sections.Aggregate(string.Empty, (current, section) 
+                => current + section.Title + Environment.NewLine + Environment.NewLine + GetParagraphsText(section));
         }
 
         private static string GetParagraphsText(InterpretationSection section)
         {
-            return section.Paragraphs.Aggregate(string.Empty, (current, parapraph) => $"{current}{parapraph}\n\n");
+            return section.Paragraphs.Aggregate(string.Empty, (current, parapraph) 
+                => current + parapraph + Environment.NewLine + Environment.NewLine);
         }
     }
 }
