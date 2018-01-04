@@ -37,15 +37,15 @@ namespace GeekMDSuite.Analytics.Classification
                 : BodyCompositionClassificationResult.Build(BodyCompositionResult.OverweightOverFat);
         }
 
-        protected bool MuscularAndLean() => BmiIsOverweightOrHigher() && BodyFatIsLean() && VisceralFatIsLean();
+        private bool MuscularAndLean() => BmiIsOverweightOrHigher() && BodyFatIsLean() && VisceralFatIsLean();
 
         protected override bool ThinAndLean() => BodyFatIsLean() && VisceralFatIsLean() && base.ThinAndLean();
 
-        protected bool BodyFatIsLean() => PercentBodyFat == PercentBodyFat.Fitness ||
+        private bool BodyFatIsLean() => PercentBodyFat == PercentBodyFat.Fitness ||
                                           PercentBodyFat == PercentBodyFat.Athletic ||
                                           PercentBodyFat == PercentBodyFat.UnderFat;
 
-        protected bool VisceralFatIsLean() => VisceralFat == VisceralFat.Excellent || 
+        private bool VisceralFatIsLean() => VisceralFat == VisceralFat.Excellent || 
                                               VisceralFat == VisceralFat.Acceptable;
     }
 }

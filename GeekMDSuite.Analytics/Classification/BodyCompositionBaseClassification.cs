@@ -44,26 +44,26 @@ namespace GeekMDSuite.Analytics.Classification
                                                 HipToWaistRatioIsNormal() &&
                                                 WaistToHeightRatioIsHealthyOrSlimmer();
 
-        protected bool BodyProportionsAreLean() => WaistToHeightRatioIsHealthyOrSlimmer() && HipToWaistRatioIsNormal();
+        private bool BodyProportionsAreLean() => WaistToHeightRatioIsHealthyOrSlimmer() && HipToWaistRatioIsNormal();
 
-        protected bool WaistToHeightRatioIsHealthyOrSlimmer() => (WaistToHeightRatio == WaistToHeightRatio.Healthy || 
+        private bool WaistToHeightRatioIsHealthyOrSlimmer() => (WaistToHeightRatio == WaistToHeightRatio.Healthy || 
                                                                   WaistToHeightRatio == WaistToHeightRatio.Slim ||
                                                                   WaistToHeightRatio == WaistToHeightRatio.ExtremelySlim);
 
-        protected bool HipToWaistRatioIsNormal() => (HipToWaistRatio == HipToWaistRatio.Normal);
+        private bool HipToWaistRatioIsNormal() => (HipToWaistRatio == HipToWaistRatio.Normal);
 
         protected bool SkinnyFat() => (HipToWaistRatioSuggestsOverweightOrObese() || WaistToHeightRatioSuggestsOverweightOrObese())
                                       && BmiIsNormalOrLower();
 
-        protected bool BmiIsNormalOrLower() => (BodyMassIndex == BodyMassIndex.NormalWeight
+        private bool BmiIsNormalOrLower() => (BodyMassIndex == BodyMassIndex.NormalWeight
                                                 || BodyMassIndex == BodyMassIndex.Underweight
                                                 || BodyMassIndex == BodyMassIndex.SeverelyUnderweight);
 
-        protected bool WaistToHeightRatioSuggestsOverweightOrObese() => WaistToHeightRatio == WaistToHeightRatio.Overweight
+        private bool WaistToHeightRatioSuggestsOverweightOrObese() => WaistToHeightRatio == WaistToHeightRatio.Overweight
                                                                         || WaistToHeightRatio == WaistToHeightRatio.VeryOverweight
                                                                         || WaistToHeightRatio == WaistToHeightRatio.MorbidlyObese;
 
-        protected bool HipToWaistRatioSuggestsOverweightOrObese() => HipToWaistRatio == HipToWaistRatio.Obese
+        private bool HipToWaistRatioSuggestsOverweightOrObese() => HipToWaistRatio == HipToWaistRatio.Obese
                                                                      || HipToWaistRatio == HipToWaistRatio.Overweight;
     }
 }

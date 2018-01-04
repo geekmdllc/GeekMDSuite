@@ -1,11 +1,12 @@
-﻿using GeekMDSuite.Core;
+﻿using System;
+using GeekMDSuite.Core;
 using GeekMDSuite.Core.LaboratoryData;
 
 namespace GeekMDSuite.Analytics.Tools.Cardiology
 {
     public class PooledCohortEquationParameters
     {
-        public PooledCohortEquationParameters()
+        internal PooledCohortEquationParameters()
         {
             Patient = new Patient();
             BloodPressure = new BloodPressure();
@@ -22,10 +23,10 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             bool smoker, 
             bool diabetic) : this()
         {
-            Patient = patient;
-            BloodPressure = bloodPressure;
-            TotalCholesterol = totalCholesterol;
-            HdlCholesterol = hdlCholesterol;
+            Patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            BloodPressure = bloodPressure ?? throw new ArgumentNullException(nameof(bloodPressure));
+            TotalCholesterol = totalCholesterol ?? throw new ArgumentNullException(nameof(totalCholesterol));
+            HdlCholesterol = hdlCholesterol ?? throw new ArgumentNullException(nameof(hdlCholesterol));
             HypertensionTreatment = hypertensionTreatment;
             Smoker = smoker;
             Diabetic = diabetic;
