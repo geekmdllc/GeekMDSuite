@@ -135,6 +135,24 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             
             Assert.Equal(expected, ascvdClassification.StatinCandidacy);
         }
+
+        [Fact]
+        public void ToString_ReturnsNonEmptyString()
+        {
+            _pooledParams
+                .SetBloodPressure(130, 75)
+                .SetHdlCholesterol(50)
+                .SetPatient(_patient)
+                .SetTotalCholesterol(213)
+                .ConfirmDiabetic()
+                .ConfirmSmoker();
+
+            var riskFactors = new AscvdClassification(_pooledParams.Build(),
+                Quantitative.Serum.LowDensityLipoprotein(195));
+            
+            Assert.NotEmpty(riskFactors.ToString());
+        }
+        
         public Ascvd10YearClassificationTests()
         {
             _pooledParams = PooledCohortEquationParametersBuilder.Initialize();
