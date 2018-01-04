@@ -5,7 +5,8 @@ A suite of medical software objects and tools designed to compliment preventativ
 ## GeekMD.Core
 The objects and tests which serve as the basis of the GeekMDSuite.
 
-### TODO: Refactor, removing analytics.
+## GeekMD.Analytics
+Input objects, get out useful information and clinical decision support.
 
 ## GeekMD.WebAPI
 The backend RESTful service providing front end developers access to the objects and their respective analytics.
