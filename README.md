@@ -11,3 +11,7 @@ The backend RESTful service providing front end developers access to the objects
 
 ## GeekMD.ConsoleDemo
 A simple console application for demonstrating the use of GeekMD.Core.
+
+Build Status:  ![Build Status][build_status]
+
+[build_status]: http://teamcity.zapto.org:8080/app/rest/builds/buildType:(id:GeekMDApplicationSuite_Build)/statusIcon.svg
