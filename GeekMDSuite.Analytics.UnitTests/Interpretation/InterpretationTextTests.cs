@@ -12,31 +12,30 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
         public void GivenNullOrEmptySection_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new InterpretationText("Title", string.Empty, null));
+                InterpretationText.Build("Title", string.Empty, null));
         }
         
         [Fact]
         public void GivenNullOrEmptyTitle_ThrowsArgumentOutOfRangeException()
         {
-            var section = new InterpretationSectionBuilder()
+            var section = InterpretationSectionBuilder.Initialize()
                 .SetTitle(string.Empty)
                 .AddParagraph(string.Empty)
-                .Build();
+                .BuildWithoutModelValidation();
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new InterpretationText(string.Empty, string.Empty, new List<InterpretationSection> {section}));
+                InterpretationText.Build(string.Empty, string.Empty, new List<InterpretationSection> {section}));
         }
-        
         
         [Fact]
         public void ToString_ContainsTitle()
         {
-            var section = new InterpretationSectionBuilder()
+            var section = InterpretationSectionBuilder.Initialize()
                 .AddParagraph(string.Empty)
                 .SetTitle(string.Empty)
-                .Build();
+                .BuildWithoutModelValidation();
 
-            var interp = new InterpretationBuilder()
+            var interp = new InterpretationTextBuilder()
                 .SetTitle("Title")
                 .SetSummary(string.Empty)
                 .AddSection(section)
