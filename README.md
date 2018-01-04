@@ -1,4 +1,5 @@
-# GeekMDSuite
+# GeekMDSuite ![Build Status][build_status]
+
 A suite of medical software objects and tools designed to compliment preventative medicine practices or practices that employ technologies common to those practices. This is a second version of multiple class libraries, consolidated into a suite and with the concerns more adequately separated for future extensibility.
 
 ## GeekMD.Core
@@ -11,3 +12,5 @@ The backend RESTful service providing front end developers access to the objects
 
 ## GeekMD.ConsoleDemo
 A simple console application for demonstrating the use of GeekMD.Core.
+
+[build_status]: http://teamcity.zapto.org:8080/app/rest/builds/buildType:(id:GeekMDApplicationSuite_Build)/statusIcon.svg
