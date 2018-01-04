@@ -65,7 +65,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenEntity_ReturnsOkayResult()
         {
-            // Comment to detele
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
             var result = controller.Post(new AudiogramEntity());
