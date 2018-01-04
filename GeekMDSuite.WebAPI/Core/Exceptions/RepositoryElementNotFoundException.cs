@@ -4,18 +4,16 @@ namespace GeekMDSuite.WebAPI.Core.Exceptions
 {
     public class RepositoryElementNotFoundException : Exception
     {
-        public RepositoryElementNotFoundException()
+        public RepositoryElementNotFoundException() : base("Element(s) not located in the repository")
         {
-            Message = "Element(s) not located in the repository";
         }
-        public RepositoryElementNotFoundException(string element)
+        public RepositoryElementNotFoundException(string element) 
+            :base($"{element} could not be located in the repository.")
         {
-            Message = $"{element} could not be located in the repository.";
         }
         public RepositoryElementNotFoundException(int index)
+            :base($"An item with index {index} could not be located in the repository.")
         {
-            Message = $"An item with index {index} could not be located in the repository.";
         }
-        public override string Message { get; }
     }
 }

@@ -4,11 +4,9 @@ namespace GeekMDSuite.WebAPI.Core.Exceptions
 {
     public class EntityNotUniqeException : Exception
     {
-        public EntityNotUniqeException(int id)
+        public EntityNotUniqeException(int id) 
+            : base($"Entity with id {id} already exists.")
         {
-            Message = $"Entity with id {id} already exists.";
         }
-
-        public override string Message { get; }
     }
 }

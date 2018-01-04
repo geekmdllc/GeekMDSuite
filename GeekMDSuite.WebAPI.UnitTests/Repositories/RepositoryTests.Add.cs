@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -24,6 +26,15 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 
             var count = uow.VisitData<AudiogramEntity>().All().Count();
             Assert.Equal(1, count);
+        }
+
+        [Fact]
+        public void Add_GivenAlreadyExistingEntity_ThrowsEntityNotUniqueExcetion()
+        {
+            var uow = new FakeUnitOfWorkSeeded();
+            var audiogram = uow.Audiograms.All().First();
+            
+            Assert.Throws<EntityNotUniqeException>(() => uow.EntityData<AudiogramEntity>().Add(audiogram));
         }
     }
 }

@@ -5,9 +5,8 @@ namespace GeekMDSuite.WebAPI.Core.Exceptions
     public class MedicalRecordAlreadyExistsException : Exception
     {
         public MedicalRecordAlreadyExistsException(string mrn)
+            : base($"{mrn} is not unique. Please verify before resubmitting request")
         {
-            Message = $"{mrn} is not unique. Please verify before resubmitting request";
         }
-        public override string Message { get; }
     }
 }
