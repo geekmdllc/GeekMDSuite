@@ -22,7 +22,19 @@ namespace GeekMDSuite.Analytics.Interpretation
             return new InterpretationText(title, summary, sections);
         }
 
-        internal InterpretationText(string title, string summary, List<InterpretationSection> sections)
+        public override string ToString()
+        {
+            var spacer = Environment.NewLine + Environment.NewLine;
+            var stringBuilder = new StringBuilder();
+            stringBuilder
+                .Append(Title).Append(spacer)
+                .Append(string.IsNullOrWhiteSpace(Summary) ? string.Empty : Summary + spacer)
+                .Append(GetSectionsText(Sections));
+            
+            return stringBuilder.ToString();
+        }
+
+        private InterpretationText(string title, string summary, List<InterpretationSection> sections)
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentOutOfRangeException(nameof(title));
@@ -30,18 +42,6 @@ namespace GeekMDSuite.Analytics.Interpretation
             Title = title; 
             Summary = summary;
             Sections = sections ?? throw new ArgumentNullException(nameof(sections));
-        }
-
-        public override string ToString()
-        {
-            var spacer = Environment.NewLine + Environment.NewLine;
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(Title)
-                .Append(spacer)
-                .Append(string.IsNullOrWhiteSpace(Summary) ? string.Empty : Summary + spacer)
-                .Append(GetSectionsText(Sections));
-            
-            return stringBuilder.ToString();
         }
 
         private static string GetSectionsText(IEnumerable<InterpretationSection> sections)

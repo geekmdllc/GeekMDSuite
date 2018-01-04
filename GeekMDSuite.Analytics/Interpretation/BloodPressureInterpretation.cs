@@ -1,17 +1,19 @@
+using System;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Analytics.Interpretation.Builder;
 using GeekMDSuite.Core;
 
 namespace GeekMDSuite.Analytics.Interpretation
 {
-    public class BloodPressureInterpretation : IInterpretable
+    public class BloodPressureInterpretation : Interpretable
     {
         public BloodPressureInterpretation(BloodPressure parameters)
         {
-            _parameters = parameters;
+            _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
             _stage = new BloodPressureClassification(_parameters).Classification.Stage;
         }
-        public InterpretationText Interpretation => new InterpretationTextBuilder()
+        public override InterpretationText Interpretation => InterpretationTextBuilder
+            .Initialize()
             .SetTitle("Blood Pressure Classification")
             .SetSummary(BuildSummary())
             .AddSection(BuildOverviewSection())
