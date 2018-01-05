@@ -1,5 +1,4 @@
-﻿using System;
-using GeekMDSuite.Analytics.Classification;
+﻿using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core;
 using GeekMDSuite.Core.Procedures;
 using Xunit;

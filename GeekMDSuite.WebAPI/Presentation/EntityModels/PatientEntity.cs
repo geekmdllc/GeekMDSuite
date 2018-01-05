@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GeekMDSuite.Core;
 using GeekMDSuite.WebAPI.Core.Models;
 
@@ -8,13 +9,14 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }
+        public new List<ComorbidityEntity> Comorbidities { get; set; }
 
         public PatientEntity()
         {
-            
+            Comorbidities = new List<ComorbidityEntity>();
         }
 
-        public PatientEntity(Patient patient)
+        public PatientEntity(Patient patient) : this()
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
             

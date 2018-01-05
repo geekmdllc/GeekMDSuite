@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace GeekMDSuite.Core
 {
@@ -30,9 +29,9 @@ namespace GeekMDSuite.Core
             return this;
         }
 
-        public PatientBuilder AddComorbidity(Comorbidity comorbidity)
+        public PatientBuilder AddComorbidity(Comorbidity illness)
         {
-            _comorbidities.Add(comorbidity);
+            _comorbidities.Add(illness);
             return this;
         }
 

@@ -11,6 +11,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
             modelBuilder.Entity<PatientEntity>().OwnsOne(p => p.Gender);
             modelBuilder.Entity<PatientEntity>().HasIndex(p => p.Guid).IsUnique();
             modelBuilder.Entity<PatientEntity>().HasIndex(p => p.MedicalRecordNumber).IsUnique();
+            modelBuilder.Entity<PatientEntity>().Property(p => p.Comorbidities);
         }
     }
 }

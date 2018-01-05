@@ -4,16 +4,15 @@ using GeekMDSuite.Core.Extensions;
 
 namespace GeekMDSuite.Core
 {
-    public enum Comorbidity
-    {
-        Diabetes,
-        Hypertension,
-        Hyperlipidemia,
-        DiagnosedCardiovascularDisease
-    }
     public class Patient 
     {
-        public Patient(Name name, DateTime dateOfBirth, Gender gender, Race race, string medicalRecordNumber, List<Comorbidity> comorbidities)
+        private Patient(
+            Name name, 
+            DateTime dateOfBirth, 
+            Gender gender, 
+            Race race, 
+            string medicalRecordNumber, 
+            List<Comorbidity> comorbidities)
         {
             DateOfBirth = dateOfBirth;
             Name = name;
@@ -36,7 +35,13 @@ namespace GeekMDSuite.Core
             return string.Format($@"{Name} ({Age} yr {Race} {Gender}) MRN: {MedicalRecordNumber}");
         }
 
-        internal static Patient Build(Name name, DateTime dateOfBirth, Gender gender, Race race, string medicalRecordNumber, List<Comorbidity> comorbidities) 
+        internal static Patient Build(
+            Name name, 
+            DateTime dateOfBirth, 
+            Gender gender, 
+            Race race, 
+            string medicalRecordNumber, 
+            List<Comorbidity> comorbidities) 
             => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber, comorbidities);
         
         public Patient()
