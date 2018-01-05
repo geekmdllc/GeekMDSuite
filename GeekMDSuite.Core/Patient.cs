@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GeekMDSuite.Core.Extensions;
 
 namespace GeekMDSuite.Core
@@ -11,15 +10,13 @@ namespace GeekMDSuite.Core
             DateTime dateOfBirth, 
             Gender gender, 
             Race race, 
-            string medicalRecordNumber, 
-            List<Comorbidity> comorbidities)
+            string medicalRecordNumber)
         {
             DateOfBirth = dateOfBirth;
             Name = name;
             MedicalRecordNumber = medicalRecordNumber;
             Gender = gender;
             Race = race;
-            Comorbidities = comorbidities;
         }
 
         public DateTime DateOfBirth { get; set; }
@@ -28,7 +25,6 @@ namespace GeekMDSuite.Core
         public string MedicalRecordNumber { get; set; }
         public Gender Gender { get; set; }
         public Race Race { get; set; }
-        public List<Comorbidity> Comorbidities { get; set; }
 
         public override string ToString()
         {
@@ -40,16 +36,14 @@ namespace GeekMDSuite.Core
             DateTime dateOfBirth, 
             Gender gender, 
             Race race, 
-            string medicalRecordNumber, 
-            List<Comorbidity> comorbidities) 
-            => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber, comorbidities);
+            string medicalRecordNumber) 
+            => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
         
         public Patient()
         {
             DateOfBirth = new DateTime();
             Name = new Name();
             Gender = new Gender();
-            Comorbidities = new List<Comorbidity>();
         }
     }
 }

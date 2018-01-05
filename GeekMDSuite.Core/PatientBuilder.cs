@@ -8,7 +8,7 @@ namespace GeekMDSuite.Core
         public override Patient Build()
         {
             ValidatePreBuildState();
-            return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber,_comorbidities);
+            return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
         }
 
         public override Patient BuildWithoutModelValidation() => new Patient()
@@ -17,8 +17,7 @@ namespace GeekMDSuite.Core
             Gender = _gender,
             MedicalRecordNumber =  _medicalRecordNumber,
             Name = _name,
-            Race = _race,
-            Comorbidities = _comorbidities
+            Race = _race
         };
 
         public PatientBuilder SetDateOfBirth(int year, int month, int day) => SetDateOfBirth(new DateTime(year, month, day));
@@ -26,18 +25,6 @@ namespace GeekMDSuite.Core
         public PatientBuilder SetDateOfBirth(DateTime dateOfBirth)
         {
             _dateOfBirth = dateOfBirth;
-            return this;
-        }
-
-        public PatientBuilder AddComorbidity(Comorbidity illness)
-        {
-            _comorbidities.Add(illness);
-            return this;
-        }
-
-        public PatientBuilder AddComorbidity(List<Comorbidity> comorbidities)
-        {
-            _comorbidities.AddRange(comorbidities);
             return this;
         }
 
@@ -73,7 +60,6 @@ namespace GeekMDSuite.Core
         private string _medicalRecordNumber;
         private Gender _gender;
         private Race _race;
-        private readonly List<Comorbidity> _comorbidities = new List<Comorbidity>();
         private bool _raceIsSet;
 
         private void ValidatePreBuildState()
