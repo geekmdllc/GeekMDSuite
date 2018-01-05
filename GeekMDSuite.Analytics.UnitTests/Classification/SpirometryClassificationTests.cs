@@ -196,13 +196,12 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             
             Assert.Equal(SpirometryClassificationResult.RestrictionVerySevere, result.Classification);
         }
-        
-        private readonly Patient _patient = new Patient(
-            Name.Build("Jim", "Bob", "Joe"), 
-            new DateTime(1980, 11, 23), 
-            Gender.Build(GenderIdentity.Male), 
-            Race.BlackOrAfricanAmerican, 
-            "1234" );
+
+        private readonly Patient _patient = PatientBuilder.Initialize()
+            .SetDateOfBirth(1980, 11, 23)
+            .SetGender(GenderIdentity.Male)
+            .SetRace(Race.BlackOrAfricanAmerican)
+            .BuildWithoutModelValidation();
 
         private readonly BodyComposition _bodyComposition = new BodyCompositionBuilder()
             .SetHeight(71)
