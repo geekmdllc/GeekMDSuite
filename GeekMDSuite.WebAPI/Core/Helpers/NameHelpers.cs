@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Core.Helpers
 {

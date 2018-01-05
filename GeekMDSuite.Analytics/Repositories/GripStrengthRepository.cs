@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Tools.Generic;
 
 namespace GeekMDSuite.Analytics.Repositories

@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using PooledCohortsEquation = GeekMDSuite.Analytics.Tools.Cardiology.PooledCohortsEquation;
 
 namespace GeekMDSuite.Analytics.Classification.CompositeScores

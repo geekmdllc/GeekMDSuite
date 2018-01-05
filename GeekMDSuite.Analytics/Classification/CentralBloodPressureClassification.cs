@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Core;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.Procedures;
 using MathNet.Numerics.Distributions;
 
 namespace GeekMDSuite.Analytics.Classification

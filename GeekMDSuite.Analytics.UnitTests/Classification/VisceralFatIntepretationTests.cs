@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification

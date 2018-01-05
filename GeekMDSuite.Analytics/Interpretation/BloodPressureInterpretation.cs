@@ -2,6 +2,7 @@ using System;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Analytics.Interpretation.Builder;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Interpretation
 {

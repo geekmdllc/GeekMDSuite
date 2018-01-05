@@ -1,6 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
-using GeekMDSuite.Core.PatientActivities;
+using GeekMDSuite.Core.Models.PatientActivities;
 
 namespace GeekMDSuite.Analytics.Classification.PatientActivities
 {

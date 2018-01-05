@@ -15,4 +15,7 @@
       <HintPath>..\GeekMDSuite.Core.UnitTests\bin\Debug\netcoreapp2.0\GeekMDSuite.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\PatientActivities" />
+  </ItemGroup>
 </Project>

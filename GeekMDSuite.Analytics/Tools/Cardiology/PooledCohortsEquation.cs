@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using GeekMDSuite.Core;
 using GeekMDSuite.Core.LaboratoryData;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Tools.Cardiology
 {

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using GeekMDSuite.Core.Procedures;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;

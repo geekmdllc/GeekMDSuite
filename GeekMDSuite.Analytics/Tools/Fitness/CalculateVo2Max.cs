@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Core;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.Core.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Analytics.Tools.Fitness

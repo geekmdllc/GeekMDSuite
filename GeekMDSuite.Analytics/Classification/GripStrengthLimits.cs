@@ -1,5 +1,5 @@
 ﻿using System;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.Core.Tools.MeasurementUnits;
 using GeekMDSuite.Core.Tools.MeasurementUnits.Conversion;
 

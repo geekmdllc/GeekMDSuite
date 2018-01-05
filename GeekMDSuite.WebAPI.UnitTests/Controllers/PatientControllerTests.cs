@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Presentation.Controllers;

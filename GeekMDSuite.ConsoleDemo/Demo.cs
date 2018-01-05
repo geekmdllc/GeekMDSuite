@@ -5,10 +5,13 @@ using GeekMDSuite.Analytics.Classification.PatientActivities;
 using GeekMDSuite.Analytics.Tools.Cardiology;
 using GeekMDSuite.Analytics.Tools.Fitness;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Builders;
+using GeekMDSuite.Core.Builders.LaboratoryData;
+using GeekMDSuite.Core.Builders.PatientActivities;
 using GeekMDSuite.Core.LaboratoryData;
-using GeekMDSuite.Core.LaboratoryData.Builder;
-using GeekMDSuite.Core.PatientActivities;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.PatientActivities;
+using GeekMDSuite.Core.Models.Procedures;
 using static System.Environment;
 
 namespace GeekMDSuite.ConsoleDemo
