@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Helpers;
@@ -104,12 +105,12 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             return entities;
         }
 
-        private PatientEntity GetPatient(Guid patientGuid)
+        private Patient GetPatient(Guid patientGuid)
         {
             if (patientGuid == Guid.Empty)
                 throw new ArgumentOutOfRangeException($"{nameof(patientGuid)} must not be an empty Guid.");
 
-            PatientEntity patient;
+            Patient patient;
             try
             {
                 patient = Context.Patients.First(p => p.Guid == patientGuid);
@@ -134,7 +135,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             return entities;
         }
 
-        private IQueryable<VisitEntity> GetVisitsAssociatedWithPatient(PatientEntity patient)
+        private IQueryable<VisitEntity> GetVisitsAssociatedWithPatient(Patient patient)
         {
             var patientVisits = Context.Visits.Where(v => v.PatientGuid == patient.Guid);
 

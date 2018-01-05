@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 {
     public static partial class FakeGeekMdSuiteContextBuilder
     {
-        private static List<PatientEntity> GetPatientEntities()
+        private static List<Patient> GetPatientEntities()
         {
             var p1 = PatientBuilder.Initialize()
                 .SetDateOfBirth(1900, 1, 1)
@@ -17,6 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 .SetName("Bruce", "Wayne")
                 .SetRace(Race.White)
                 .Build();
+            p1.Guid = BruceWaynesGuid;
 
             var p2 = PatientBuilder.Initialize()
                 .SetDateOfBirth(1990, 2, 2)
@@ -25,12 +26,9 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 .SetName("Xer", "Majesty")
                 .SetRace(Race.Unknown)
                 .Build();
+            p2.Guid = XerMajestyGuid;
 
-            return new List<PatientEntity>()
-            {
-                new PatientEntity(p1) { Guid = BruceWaynesGuid},
-                new PatientEntity(p2) { Guid = XerMajestyGuid}
-            };
+            return new List<Patient>() { p1 , p2 };
         }
     }
 }

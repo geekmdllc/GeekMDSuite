@@ -3,8 +3,17 @@ using GeekMDSuite.Core.Extensions;
 
 namespace GeekMDSuite.Core.Models
 {
-    public class Patient 
+    public class Patient : IEntity<Patient>
     {
+        
+        public Patient()
+        {
+            DateOfBirth = new DateTime();
+            Name = new Name();
+            Gender = new Gender();
+            Guid = Guid.Empty;
+        }
+
         private Patient(
             Name name, 
             DateTime dateOfBirth, 
@@ -19,6 +28,8 @@ namespace GeekMDSuite.Core.Models
             Race = race;
         }
 
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Age => DateOfBirth.ElapsedYears();
         public Name Name { get; set; }
@@ -26,10 +37,18 @@ namespace GeekMDSuite.Core.Models
         public Gender Gender { get; set; }
         public Race Race { get; set; }
 
-        public override string ToString()
+        public void MapValues(Patient subject)
         {
-            return string.Format($@"{Name} ({Age} yr {Race} {Gender}) MRN: {MedicalRecordNumber}");
+            DateOfBirth = subject.DateOfBirth;
+            Name.First = subject.Name.First;
+            Name.Middle = subject.Name.Middle;
+            Name.Last = subject.Name.Last;
+            MedicalRecordNumber = MedicalRecordNumber;
+            Gender.Category = subject.Gender.Category;
+            Race = subject.Race;
         }
+
+        public override string ToString() => $@"{Name} ({Age} yr {Race} {Gender}) MRN: {MedicalRecordNumber}";
 
         internal static Patient Build(
             Name name, 
@@ -38,12 +57,5 @@ namespace GeekMDSuite.Core.Models
             Race race, 
             string medicalRecordNumber) 
             => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
-        
-        public Patient()
-        {
-            DateOfBirth = new DateTime();
-            Name = new Name();
-            Gender = new Gender();
-        }
     }
 }

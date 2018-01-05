@@ -16,7 +16,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenMedicalRecordThatAlreadyExistsInRepository_ReturnsConflictRequest()
         {
-            var result = _controller.Post(new PatientEntity()
+            var result = _controller.Post(new Patient()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -29,7 +29,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenEmptyMedicalRecord_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new PatientEntity()
+            var result = _controller.Post(new Patient()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -42,7 +42,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_EmptyFirstName_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new PatientEntity()
+            var result = _controller.Post(new Patient()
             {
                 Name = Name.Build(string.Empty, "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -55,7 +55,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenEmptyLastName_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new PatientEntity()
+            var result = _controller.Post(new Patient()
             {
                 Name = Name.Build("Joe", string.Empty),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -68,7 +68,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenDateTooOld_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new PatientEntity()
+            var result = _controller.Post(new Patient()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = DateTime.Now.AddYears(-151),
@@ -81,7 +81,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenDateTooNew_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new PatientEntity()
+            var result = _controller.Post(new Patient()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = DateTime.Now.AddYears(1),
@@ -102,7 +102,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenProperlyPreparedPatient_ReturnsOkRequest()
         {
-            var result = _controller.Post(new PatientEntity()
+            var result = _controller.Post(new Patient()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),

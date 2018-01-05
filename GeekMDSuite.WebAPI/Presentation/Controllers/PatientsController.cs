@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -9,7 +10,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class PatientsController : EntityDataController<PatientEntity>
+    public class PatientsController : EntityDataController<Patient>
     {
         private readonly INewPatientService _newPatientService;
         public PatientsController(IUnitOfWork unitOfWork, INewPatientService newPatientService) : base(unitOfWork)
@@ -18,7 +19,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        public override IActionResult Post([FromBody] PatientEntity patient)
+        public override IActionResult Post([FromBody] Patient patient)
         {
             try
             {

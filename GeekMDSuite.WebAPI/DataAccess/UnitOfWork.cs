@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess;
+﻿using GeekMDSuite.Core.Models;
+using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;

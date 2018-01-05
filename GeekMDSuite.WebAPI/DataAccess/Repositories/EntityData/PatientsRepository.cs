@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Helpers;
@@ -9,13 +10,13 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class PatientsRepository : Repository<PatientEntity>, IPatientsRepository
+    public class PatientsRepository : Repository<Patient>, IPatientsRepository
     {
         public PatientsRepository(GeekMdSuiteDbContext context) : base(context)
         {
         }
 
-        public IEnumerable<PatientEntity> FindByName(string query)
+        public IEnumerable<Patient> FindByName(string query)
         {
             if (query.IsEmpty()) throw new ArgumentNullException(query);
             var result = Context.Patients.Where(p => p.Name.IsSimilarTo(query));
@@ -24,7 +25,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             return result;
         }
 
-        public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query)
+        public IEnumerable<Patient> FindByMedicalRecordNumber(string query)
         {
             if (query.IsEmpty()) throw new ArgumentNullException(query);
             var result = Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber));
@@ -34,7 +35,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         }
 
 
-        public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth)
+        public IEnumerable<Patient> FindByDateOfBirth(DateTime dateOfBirth)
         {
             if (dateOfBirth.IsOutOfRange())
                 throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
@@ -48,7 +49,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             return found;
         }
 
-        public PatientEntity FindByGuid(Guid guid)
+        public Patient FindByGuid(Guid guid)
         {
             if (guid == Guid.Empty)
                 throw new ArgumentOutOfRangeException(guid.ToString());
