@@ -7,17 +7,15 @@ using GeekMDSuite.Core.Builders;
 
 namespace GeekMDSuite.Analytics.Interpretation.Builder
 {
-    public class InterpretationSectionBuilder : IBuilder<InterpretationSection>
+    public class InterpretationSectionBuilder : Builder<InterpretationSectionBuilder,InterpretationSection>
     {
-        public static InterpretationSectionBuilder Initialize() => new InterpretationSectionBuilder();
-        
-        public InterpretationSection Build()
+        public override InterpretationSection Build()
         {
             ValidatePreBuildState();
             return BuildWithoutModelValidation();
         }
 
-        public InterpretationSection BuildWithoutModelValidation() => new InterpretationSection()
+        public override InterpretationSection BuildWithoutModelValidation() => new InterpretationSection()
         {
             Paragraphs = _paragraphs,
             Title = _title

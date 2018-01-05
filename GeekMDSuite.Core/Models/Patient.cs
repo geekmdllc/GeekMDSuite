@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GeekMDSuite.Core.Extensions;
 
 namespace GeekMDSuite.Core.Models
@@ -12,6 +13,7 @@ namespace GeekMDSuite.Core.Models
             Name = new Name();
             Gender = new Gender();
             Guid = Guid.Empty;
+            Comorbidities = new List<ChronicDisease>();
         }
 
         private Patient(
@@ -19,13 +21,15 @@ namespace GeekMDSuite.Core.Models
             DateTime dateOfBirth, 
             Gender gender, 
             Race race, 
-            string medicalRecordNumber)
+            string medicalRecordNumber,
+            List<ChronicDisease> comorbidities) : this()
         {
             DateOfBirth = dateOfBirth;
             Name = name;
             MedicalRecordNumber = medicalRecordNumber;
             Gender = gender;
             Race = race;
+            Comorbidities = comorbidities;
         }
 
         public int Id { get; set; }
@@ -36,14 +40,18 @@ namespace GeekMDSuite.Core.Models
         public string MedicalRecordNumber { get; set; }
         public Gender Gender { get; set; }
         public Race Race { get; set; }
+        public List<ChronicDisease> Comorbidities { get; set; }
 
         public void MapValues(Patient subject)
         {
+            Comorbidities.Clear();
+            Comorbidities.AddRange(subject.Comorbidities);
+            Guid = subject.Guid;
             DateOfBirth = subject.DateOfBirth;
             Name.First = subject.Name.First;
             Name.Middle = subject.Name.Middle;
             Name.Last = subject.Name.Last;
-            MedicalRecordNumber = MedicalRecordNumber;
+            MedicalRecordNumber = subject.MedicalRecordNumber;
             Gender.Category = subject.Gender.Category;
             Race = subject.Race;
         }
@@ -55,7 +63,8 @@ namespace GeekMDSuite.Core.Models
             DateTime dateOfBirth, 
             Gender gender, 
             Race race, 
-            string medicalRecordNumber) 
-            => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber);
+            string medicalRecordNumber,
+            List<ChronicDisease> comorbidities) 
+            => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber, comorbidities);
     }
 }

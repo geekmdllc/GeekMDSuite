@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Core.Builders;
 
 namespace GeekMDSuite.Core.Models.Procedures
 {

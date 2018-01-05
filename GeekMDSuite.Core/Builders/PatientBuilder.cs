@@ -1,26 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Core.Builders
 {
     public class PatientBuilder : Builder<PatientBuilder,Patient>
     {
+        
         public override Patient Build()
         {
             ValidatePreBuildState();
-            return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber);
+            return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber, _comorbidities);
         }
 
+        
         public override Patient BuildWithoutModelValidation() => new Patient()
         {
             DateOfBirth = _dateOfBirth,
             Gender = _gender,
             MedicalRecordNumber =  _medicalRecordNumber,
             Name = _name,
-            Race = _race
+            Race = _race,
+            Comorbidities = _comorbidities
         };
 
-        public PatientBuilder SetDateOfBirth(int year, int month, int day) => SetDateOfBirth(new DateTime(year, month, day));
 
         public PatientBuilder SetDateOfBirth(DateTime dateOfBirth)
         {
@@ -28,13 +31,17 @@ namespace GeekMDSuite.Core.Builders
             return this;
         }
 
+        public PatientBuilder SetDateOfBirth(int year, int month, int day) 
+            => SetDateOfBirth(new DateTime(year, month, day));
+        
         public PatientBuilder SetName(Name name)
         {
             _name = name;
             return this;
         }
 
-        public PatientBuilder SetName(string first, string last, string middle = "") => SetName(Name.Build(first, last, middle));
+        public PatientBuilder SetName(string first, string last, string middle = "") 
+            => SetName(Name.Build(first, last, middle));
 
         public PatientBuilder SetMedicalRecordNumber(string medicalRecordNumber)
         {
@@ -48,10 +55,25 @@ namespace GeekMDSuite.Core.Builders
             return this;
         }
 
+        public PatientBuilder SetGender(Gender gender) 
+            => SetGender(gender.Category);
+
         public PatientBuilder SetRace(Race race)
         {
             _raceIsSet = true;
             _race = race;
+            return this;
+        }
+
+        public PatientBuilder AddComorbidity(ChronicDisease comorbidity)
+        {
+            _comorbidities.Add(comorbidity);
+            return this;
+        }
+
+        public PatientBuilder AddComorbidities(IEnumerable<ChronicDisease> comorbidities)
+        {
+            _comorbidities.AddRange(comorbidities);
             return this;
         }
 
@@ -61,6 +83,7 @@ namespace GeekMDSuite.Core.Builders
         private Gender _gender;
         private Race _race;
         private bool _raceIsSet;
+        private readonly List<ChronicDisease> _comorbidities = new List<ChronicDisease>();
 
         private void ValidatePreBuildState()
         {

@@ -53,7 +53,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
                 .ConfirmOnAntiHypertensiveMedication(hypertensionTreatment)
                 .ConfirmSmoker(smoker);
 
-            var ascvd = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).Ascvd10YearRiskPercentage;
+            var ascvd = new PooledCohortsEquation(_parametersBuilder.Build()).Ascvd10YearRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(ascvd, expected - tolerance, expected + tolerance);
@@ -76,7 +76,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
                 .SetTotalCholesterol(default(int))
                 .SetHdlCholesterol(default(int));
 
-            var idealAscvd = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).IdealAscvd10YearRiskPercentage;
+            var idealAscvd = new PooledCohortsEquation(_parametersBuilder.Build()).IdealAscvd10YearRiskPercentage;
 
             const double tolerance = 0.31; // Tolerance necessary because expected values are estimates.
             Assert.InRange(idealAscvd, expected - tolerance, expected + tolerance);

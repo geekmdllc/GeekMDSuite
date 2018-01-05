@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Fake
 {
@@ -25,6 +23,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 .SetMedicalRecordNumber(XerMajestiesMedicalRecordNumber)
                 .SetName("Xer", "Majesty")
                 .SetRace(Race.Unknown)
+                .AddComorbidity(ChronicDisease.Diabetes)
+                .AddComorbidities(new List<ChronicDisease>(){ChronicDisease.Hyperlipidemia, ChronicDisease.HypertensionTreated})
                 .Build();
             p2.Guid = XerMajestyGuid;
 

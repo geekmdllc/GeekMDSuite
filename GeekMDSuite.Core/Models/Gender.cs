@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite.Core.Models
+﻿using System;
+
+namespace GeekMDSuite.Core.Models
 {
     public class Gender
     {
@@ -27,8 +29,8 @@
 
         public static bool IsGenotypeXy(Gender gender)
         {
-            var test = !IsGenotypeXx(gender.Category);
-            return test;
+            if (gender == null) throw new ArgumentNullException(nameof(gender));
+            return !IsGenotypeXx(gender.Category);
         }
 
         public static Gender Build(GenderIdentity category) => new Gender(category);

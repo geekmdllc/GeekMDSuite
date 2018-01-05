@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.Models;
 
@@ -19,18 +18,15 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             Patient patient, 
             BloodPressure bloodPressure, 
             QuantitativeLab totalCholesterol, 
-            QuantitativeLab hdlCholesterol, 
-            bool hypertensionTreatment, 
-            bool smoker, 
-            bool diabetic) : this()
+            QuantitativeLab hdlCholesterol) : this()
         {
             Patient = patient ?? throw new ArgumentNullException(nameof(patient));
             BloodPressure = bloodPressure ?? throw new ArgumentNullException(nameof(bloodPressure));
             TotalCholesterol = totalCholesterol ?? throw new ArgumentNullException(nameof(totalCholesterol));
             HdlCholesterol = hdlCholesterol ?? throw new ArgumentNullException(nameof(hdlCholesterol));
-            HypertensionTreatment = hypertensionTreatment;
-            Smoker = smoker;
-            Diabetic = diabetic;
+            HypertensionTreatment = patient.Comorbidities.Contains(ChronicDisease.HypertensionTreated);
+            Smoker = patient.Comorbidities.Contains(ChronicDisease.TobaccoSmoker);
+            Diabetic = patient.Comorbidities.Contains(ChronicDisease.Diabetes);
         }
         
         public Patient Patient { get; set; }
@@ -45,13 +41,9 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             Patient patient, 
             BloodPressure bloodPressure,
             QuantitativeLab totalCholesterol, 
-            QuantitativeLab hdlCholesterol,
-            bool hypertensionTreatment = false, 
-            bool smoker = false, 
-            bool diabetic = false)
+            QuantitativeLab hdlCholesterol)
         {
-            return new PooledCohortEquationParameters(patient, bloodPressure, totalCholesterol, hdlCholesterol,
-                hypertensionTreatment, smoker, diabetic);   
+            return new PooledCohortEquationParameters(patient, bloodPressure, totalCholesterol, hdlCholesterol);   
         }
     }
 }

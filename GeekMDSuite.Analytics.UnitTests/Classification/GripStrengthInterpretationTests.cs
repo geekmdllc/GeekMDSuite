@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
@@ -62,9 +61,14 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         }
 
         [Fact]
-        public void NullGripStrength_ThrowsNullReferenceException()
+        public void NullGripStrength_ThrowsArgumentNullException()
         {
-            Assert.Throws<NullReferenceException>(() => new GripStrengthClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
+            Assert.Throws<ArgumentNullException>(() => new GripStrengthClassification(
+                null, 
+                PatientBuilder.Initialize()
+                    .SetGender(GenderIdentity.Male)
+                    .BuildWithoutModelValidation())
+            );
         }
 
         [Fact]

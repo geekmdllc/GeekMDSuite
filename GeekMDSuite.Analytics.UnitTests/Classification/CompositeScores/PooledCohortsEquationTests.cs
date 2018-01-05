@@ -13,7 +13,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
         public void NullParameters_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                PooledCohortsEquation.Initialize(null));
+                new PooledCohortsEquation(null));
         }
 
         public PooledCohortsEquationTests()

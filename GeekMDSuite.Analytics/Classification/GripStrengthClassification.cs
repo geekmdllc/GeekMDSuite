@@ -13,7 +13,7 @@ namespace GeekMDSuite.Analytics.Classification
         public GripStrengthClassification(GripStrength gripStrength, Patient patient)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
-            _gripStrength = gripStrength;
+            _gripStrength = gripStrength ?? throw new ArgumentNullException(nameof(gripStrength));
             _ranges = GripStrengthRepository.GetRanges(patient);
         }
 

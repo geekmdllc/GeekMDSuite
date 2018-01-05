@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GeekMDSuite.Core.Builders;
 
 namespace GeekMDSuite.Core.Models.Procedures
 {

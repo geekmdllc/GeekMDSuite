@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Repositories
@@ -180,6 +178,30 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             
             Assert.Equal(newRace, patientAfter.Race);
             Assert.NotEqual(raceBefore, patientAfter.Race);
+        }
+
+        [Fact]
+        public void Update_GivenNewComorbidit_PersistsChanges()
+        {
+            var patientBefore = _unitOfWork.Patients.All().First();
+            patientBefore.Comorbidities.Add(ChronicDisease.Asthma);
+            _unitOfWork.Complete();
+
+            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            
+            Assert.Contains(ChronicDisease.Asthma, patientAfter.Comorbidities);
+        }
+
+        [Fact]
+        public void Update_GivenDeletionOfComorbidity_PersistsChanges()
+        {
+            var patientBefore = _unitOfWork.Patients.FindByGuid(FakeGeekMdSuiteContextBuilder.XerMajestyGuid);
+            patientBefore.Comorbidities.RemoveAll(c => c == ChronicDisease.Diabetes);
+            _unitOfWork.Complete();
+
+            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            
+            Assert.DoesNotContain(ChronicDisease.Diabetes, patientAfter.Comorbidities);
         }
 
         private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
