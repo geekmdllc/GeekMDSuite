@@ -1,7 +1,5 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
@@ -10,12 +8,9 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         public int Id { get; set; }
         public Guid Guid { get; set; }
 
-        public PatientEntity()
-        {
-            
-        }
+        public PatientEntity() { }
 
-        public PatientEntity(Patient patient)
+        public PatientEntity(Patient patient) : this()
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
             
@@ -33,6 +28,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Name.Middle = subject.Name.Middle;
             Name.Last = subject.Name.Last;
             Race = subject.Race;
+            Comorbidities.Clear();
+            Comorbidities.AddRange(subject.Comorbidities);
         }
     }
 }
