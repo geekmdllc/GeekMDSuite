@@ -1,4 +1,6 @@
-﻿using GeekMDSuite.Core.LaboratoryData;
+﻿using System;
+using System.ComponentModel;
+using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification.CompositeScores
@@ -19,11 +21,18 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             QuantitativeLab ldlCholesterol, 
             QuantitativeLab hdlCholesterol)
         {
-            Patient = patient;
-            BloodPressure = bloodPressure;
-            TotalCholesterol = totalCholesterol;
-            LdlCholesterol = ldlCholesterol;
-            HdlCholesterol = hdlCholesterol;
+            Patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            BloodPressure = bloodPressure ?? throw new ArgumentNullException(nameof(bloodPressure));
+            TotalCholesterol = totalCholesterol ?? throw new ArgumentNullException(nameof(totalCholesterol));
+            LdlCholesterol = ldlCholesterol ?? throw new ArgumentNullException(nameof(ldlCholesterol));
+            HdlCholesterol = hdlCholesterol ?? throw new ArgumentNullException(nameof(hdlCholesterol));
+            
+            if (totalCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
+                throw new InvalidEnumArgumentException($"{nameof(totalCholesterol.Type)}. Should be {nameof(QuantitativeLabType.CholesterolTotalSerum)}");
+            if (ldlCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
+                throw new InvalidEnumArgumentException($"{nameof(ldlCholesterol.Type)}. Should be {nameof(QuantitativeLabType.LowDensityLipoproteinSerum)}");
+            if (hdlCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
+                throw new InvalidEnumArgumentException($"{nameof(hdlCholesterol.Type)}. Should be {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}");
         }
 
         internal AscvdParameters()

@@ -28,6 +28,8 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             _ldlCholesterol = ascvdParameters.LdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.LdlCholesterol));
             _riskPercentage = new PooledCohortsEquation(equationParams).Ascvd10YearRiskPercentage;
         }
+
+        public AscvdClassification() {}
         
         public AscvdClassificationResult Classification => Classify();
 

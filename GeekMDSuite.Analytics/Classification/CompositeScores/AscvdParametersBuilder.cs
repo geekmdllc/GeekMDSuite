@@ -41,24 +41,18 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
 
         public AscvdParametersBuilder SetTotalCholesterol(QuantitativeLab totalCholesterol)
         {
-            if (totalCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
-                throw new InvalidEnumArgumentException($"{nameof(totalCholesterol.Type)}. Should be {nameof(QuantitativeLabType.CholesterolTotalSerum)}");
             _totalCholesterol = totalCholesterol;
             return this;
         }
 
         public AscvdParametersBuilder SetLdlCholesterol(QuantitativeLab ldlCholesterol)
         {
-            if (ldlCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
-                throw new InvalidEnumArgumentException($"{nameof(ldlCholesterol.Type)}. Should be {nameof(QuantitativeLabType.LowDensityLipoproteinSerum)}");
             _ldlCholesterol = ldlCholesterol;
             return this;
         }
 
         public AscvdParametersBuilder SetHdlCholesterol(QuantitativeLab hdlCholesterol)
         {
-            if (hdlCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
-                throw new InvalidEnumArgumentException($"{nameof(hdlCholesterol.Type)}. Should be {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}");
             _hdlCholesterol = hdlCholesterol;
             return this;
         }
