@@ -10,16 +10,16 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
-    public class NewPatientService :  NewKeyEntityService<Patient, Patient>, INewPatientService
+    public class NewPatientService :  NewKeyEntityService<PatientEntity, Patient>, INewPatientService
     {
   
-        public override Patient GenerateUsing(Patient patient)
+        public override PatientEntity GenerateUsing(Patient patient)
         {
             VerifyContextIsLoaded();
             ValidatePatientFormat(patient);
             MedicalRecordNumberAlreadyExists(patient);
             
-            var newPatient = new Patient();
+            var newPatient = new PatientEntity();
             newPatient.MapValues(patient);
             newPatient.Guid = Guid.NewGuid();
 

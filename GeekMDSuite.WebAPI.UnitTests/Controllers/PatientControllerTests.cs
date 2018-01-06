@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
@@ -11,12 +10,12 @@ using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 {
-    public class PatientControllerTests
+    public class PatientEntityControllerTests
     {
         [Fact]
         public void Post_GivenMedicalRecordThatAlreadyExistsInRepository_ReturnsConflictRequest()
         {
-            var result = _controller.Post(new Patient()
+            var result = _controller.Post(new PatientEntity()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -29,7 +28,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenEmptyMedicalRecord_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new Patient()
+            var result = _controller.Post(new PatientEntity()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -42,7 +41,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_EmptyFirstName_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new Patient()
+            var result = _controller.Post(new PatientEntity()
             {
                 Name = Name.Build(string.Empty, "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -55,7 +54,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenEmptyLastName_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new Patient()
+            var result = _controller.Post(new PatientEntity()
             {
                 Name = Name.Build("Joe", string.Empty),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -68,7 +67,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenDateTooOld_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new Patient()
+            var result = _controller.Post(new PatientEntity()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = DateTime.Now.AddYears(-151),
@@ -81,7 +80,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public void Post_GivenDateTooNew_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(new Patient()
+            var result = _controller.Post(new PatientEntity()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = DateTime.Now.AddYears(1),
@@ -92,7 +91,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_GivenNullPatient_ReturnsBadREquestObjectResult()
+        public void Post_GivenNullPatientEntity_ReturnsBadREquestObjectResult()
         {
             var result = _controller.Post(null);
             
@@ -100,9 +99,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
         
         [Fact]
-        public void Post_GivenProperlyPreparedPatient_ReturnsOkRequest()
+        public void Post_GivenProperlyPreparedPatientEntity_ReturnsOkRequest()
         {
-            var result = _controller.Post(new Patient()
+            var result = _controller.Post(new PatientEntity()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -219,7 +218,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
         
-        public PatientControllerTests()
+        public PatientEntityControllerTests()
         {
             _controller = new PatientsController(
                 new FakeUnitOfWorkSeeded(), 

@@ -4,6 +4,7 @@ using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Repositories
@@ -100,7 +101,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         {
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var genderBefore = Gender.Build(patientBefore.Gender.Category);
-            var updatedPatient = new Patient()
+            var updatedPatient = new PatientEntity()
             {
                 Id = patientBefore.Id,
                 Gender = Gender.Build(GenderIdentity.NonBinaryXy)
@@ -121,7 +122,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         {
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var mrnBefore = patientBefore.MedicalRecordNumber;
-            var updatedPatient = new Patient()
+            var updatedPatient = new PatientEntity()
             {
                 Id = patientBefore.Id,
                 MedicalRecordNumber = "23456"
@@ -142,7 +143,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var nameBefore = Name.Build(patientBefore.Name.First, patientBefore.Name.Last, patientBefore.Name.Middle);
             var newName = Name.Build(nameBefore.First, nameBefore.Last, "Robert");
-            var updatedPatient = new Patient()
+            var updatedPatient = new PatientEntity()
             {
                 Id = patientBefore.Id,
                 Name =  newName
@@ -165,7 +166,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var raceBefore = patientBefore.Race;
             var newRace = Race.Asian;
-            var updatedPatient = new Patient()
+            var updatedPatient = new PatientEntity()
             {
                 Id = patientBefore.Id,
                 Race = newRace

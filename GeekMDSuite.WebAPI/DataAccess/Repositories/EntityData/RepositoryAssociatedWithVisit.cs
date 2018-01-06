@@ -105,12 +105,12 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             return entities;
         }
 
-        private Patient GetPatient(Guid patientGuid)
+        private PatientEntity GetPatient(Guid patientGuid)
         {
             if (patientGuid == Guid.Empty)
                 throw new ArgumentOutOfRangeException($"{nameof(patientGuid)} must not be an empty Guid.");
 
-            Patient patient;
+            PatientEntity patient;
             try
             {
                 patient = Context.Patients.First(p => p.Guid == patientGuid);
@@ -135,7 +135,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             return entities;
         }
 
-        private IQueryable<VisitEntity> GetVisitsAssociatedWithPatient(Patient patient)
+        private IQueryable<VisitEntity> GetVisitsAssociatedWithPatient(PatientEntity patient)
         {
             var patientVisits = Context.Visits.Where(v => v.PatientGuid == patient.Guid);
 
