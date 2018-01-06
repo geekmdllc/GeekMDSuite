@@ -15,12 +15,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
         public void Classfication_GivenParams_ReturnsCorrectListOfRiskFactors()
         {
             _patient.Comorbidities.AddRange(new List<ChronicDisease>(){ChronicDisease.Diabetes, ChronicDisease.TobaccoSmoker });
-            var ascvd = new AscvdClassification(
-                _patient, 
-                BloodPressure.Build(130, 75),
-                Quantitative.Serum.CholesterolTotal(213),
-                Quantitative.Serum.LowDensityLipoprotein(195), 
-                Quantitative.Serum.HighDensityLipoprotein(50));
+            var ascvd = new AscvdClassification(AscvdParameters.Build(_patient, BloodPressure.Build(130, 75), Quantitative.Serum.CholesterolTotal(213), Quantitative.Serum.LowDensityLipoprotein(195), Quantitative.Serum.HighDensityLipoprotein(50)));
 
             var riskFactors = ascvd.Classification.RiskFactors;
                 
@@ -51,12 +46,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             if (smoker) _patient.Comorbidities.Add(ChronicDisease.TobaccoSmoker);
             if (ascvdPresent) _patient.Comorbidities.Add(ChronicDisease.DiagnosedCardiovascularDisease);
             
-            var ascvdClassification = new AscvdClassification(
-                _patient, 
-                BloodPressure.Build(systolic, 75),
-                Quantitative.Serum.CholesterolTotal(totalCholesterol),
-                Quantitative.Serum.LowDensityLipoprotein(ldl), 
-                Quantitative.Serum.HighDensityLipoprotein(hdl));
+            var ascvdClassification = new AscvdClassification(AscvdParameters.Build(_patient, BloodPressure.Build(systolic, 75), Quantitative.Serum.CholesterolTotal(totalCholesterol), Quantitative.Serum.LowDensityLipoprotein(ldl), Quantitative.Serum.HighDensityLipoprotein(hdl)));
             
             Assert.Equal(expected, ascvdClassification.Classification.StatinRecommendation);
          }
@@ -75,12 +65,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             if (smoker) _patient.Comorbidities.Add(ChronicDisease.TobaccoSmoker);
             if (ascvdPresent) _patient.Comorbidities.Add(ChronicDisease.DiagnosedCardiovascularDisease);
             
-            var ascvdClassification = new AscvdClassification(
-                _patient, 
-                BloodPressure.Build(systolic, 75),
-                Quantitative.Serum.CholesterolTotal(totalCholesterol),
-                Quantitative.Serum.LowDensityLipoprotein(ldl), 
-                Quantitative.Serum.HighDensityLipoprotein(hdl));
+            var ascvdClassification = new AscvdClassification(AscvdParameters.Build(_patient, BloodPressure.Build(systolic, 75), Quantitative.Serum.CholesterolTotal(totalCholesterol), Quantitative.Serum.LowDensityLipoprotein(ldl), Quantitative.Serum.HighDensityLipoprotein(hdl)));
             
             Assert.Equal(expected, ascvdClassification.Classification.RiskClassification);
         }
@@ -102,12 +87,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             if (smoker) _patient.Comorbidities.Add(ChronicDisease.TobaccoSmoker);
             if (ascvdPresent) _patient.Comorbidities.Add(ChronicDisease.DiagnosedCardiovascularDisease);
             
-            var ascvdClassification = new AscvdClassification(
-                _patient, 
-                BloodPressure.Build(systolic, 75),
-                Quantitative.Serum.CholesterolTotal(totalCholesterol),
-                Quantitative.Serum.LowDensityLipoprotein(ldl), 
-                Quantitative.Serum.HighDensityLipoprotein(hdl));
+            var ascvdClassification = new AscvdClassification(AscvdParameters.Build(_patient, BloodPressure.Build(systolic, 75), Quantitative.Serum.CholesterolTotal(totalCholesterol), Quantitative.Serum.LowDensityLipoprotein(ldl), Quantitative.Serum.HighDensityLipoprotein(hdl)));
 
             
             Assert.Equal(expected, ascvdClassification.Classification.AspirinRecommendation);
@@ -128,12 +108,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             if (smoker) _patient.Comorbidities.Add(ChronicDisease.TobaccoSmoker);
             if (ascvdPresent) _patient.Comorbidities.Add(ChronicDisease.DiagnosedCardiovascularDisease);
             
-            var ascvdClassification = new AscvdClassification(
-                _patient, 
-                BloodPressure.Build(systolic, 75),
-                Quantitative.Serum.CholesterolTotal(totalCholesterol),
-                Quantitative.Serum.LowDensityLipoprotein(ldl), 
-                Quantitative.Serum.HighDensityLipoprotein(hdl));
+            var ascvdClassification = new AscvdClassification(AscvdParameters.Build(_patient, BloodPressure.Build(systolic, 75), Quantitative.Serum.CholesterolTotal(totalCholesterol), Quantitative.Serum.LowDensityLipoprotein(ldl), Quantitative.Serum.HighDensityLipoprotein(hdl)));
             
             Assert.Equal(expected, ascvdClassification.Classification.StatinCandidacy);
         }
@@ -141,13 +116,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
         [Fact]
         public void ToString_ReturnsNonEmptyString()
         {
-            var riskFactors = new AscvdClassification(
-                PatientBuilder.Initialize().SetGender(GenderIdentity.Male).BuildWithoutModelValidation(),
-                BloodPressure.Build(0, 0),
-                Quantitative.Serum.CholesterolTotal(0),
-                Quantitative.Serum.LowDensityLipoprotein(0),
-                Quantitative.Serum.HighDensityLipoprotein(0)
-            );
+            var riskFactors = new AscvdClassification(AscvdParameters.Build(PatientBuilder.Initialize().SetGender(GenderIdentity.Male).BuildWithoutModelValidation(), BloodPressure.Build(0, 0), Quantitative.Serum.CholesterolTotal(0), Quantitative.Serum.LowDensityLipoprotein(0), Quantitative.Serum.HighDensityLipoprotein(0)));
             
             Assert.NotEmpty(riskFactors.ToString());
         }

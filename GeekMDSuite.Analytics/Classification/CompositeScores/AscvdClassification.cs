@@ -10,26 +10,22 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
     // https://www.uspreventiveservicestaskforce.org/Page/Document/UpdateSummaryFinal/aspirin-to-prevent-cardiovascular-disease-and-cancer
     // Assumes 10+ yr longevity, no bleeding risk, no prior heart attack or stroke
     // 2013 ACC/AHA
+
     public class AscvdClassification : IClassifiable<AscvdClassificationResult>
     {
-        public AscvdClassification()
+        public AscvdClassification(AscvdParameters ascvdParameters)
         {
+            _cholesterolHdlC = ascvdParameters.HdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.HdlCholesterol));
+            _cholesterolTotal = ascvdParameters.TotalCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.TotalCholesterol));
+            _bloodPressure = ascvdParameters.BloodPressure ?? throw new ArgumentNullException(nameof(ascvdParameters.BloodPressure));
             
-        }
-        public AscvdClassification(Patient patient, BloodPressure bloodPressure, QuantitativeLab totalCholesterol,
-            QuantitativeLab ldlCholesterol, QuantitativeLab hdlCholesterol)
-        {
-            _cholesterolHdlC = hdlCholesterol ?? throw new ArgumentNullException(nameof(hdlCholesterol));
-            _cholesterolTotal = totalCholesterol ?? throw new ArgumentNullException(nameof(totalCholesterol));
-            _bloodPressure = bloodPressure ?? throw new ArgumentNullException(nameof(bloodPressure));
-            
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            _patient = ascvdParameters.Patient ?? throw new ArgumentNullException(nameof(ascvdParameters.Patient));
             _smoker = _patient.Comorbidities.Contains(ChronicDisease.TobaccoSmoker);
             _isDiabetic = _patient.Comorbidities.Contains(ChronicDisease.Diabetes);
             _clinicialAscvdPresent = _patient.Comorbidities.Contains(ChronicDisease.DiagnosedCardiovascularDisease);
             
             var equationParams = PooledCohortEquationParameters.Build(_patient, _bloodPressure, _cholesterolTotal, _cholesterolHdlC);
-            _ldlCholesterol = ldlCholesterol ?? throw new ArgumentNullException(nameof(ldlCholesterol));
+            _ldlCholesterol = ascvdParameters.LdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.LdlCholesterol));
             _riskPercentage = new PooledCohortsEquation(equationParams).Ascvd10YearRiskPercentage;
         }
         
