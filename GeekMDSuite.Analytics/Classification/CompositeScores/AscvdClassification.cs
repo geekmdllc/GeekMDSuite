@@ -7,51 +7,49 @@ using GeekMDSuite.Core.Tools.Generic;
 
 namespace GeekMDSuite.Analytics.Classification.CompositeScores
 {
-    // https://www.uspreventiveservicestaskforce.org/Page/Document/UpdateSummaryFinal/aspirin-to-prevent-cardiovascular-disease-and-cancer
-    // Assumes 10+ yr longevity, no bleeding risk, no prior heart attack or stroke
-    // 2013 ACC/AHA
-
     public class AscvdClassification : IClassifiable<AscvdClassificationResult>
     {
-        public AscvdClassification(AscvdParameters ascvdParameters)
+        public AscvdClassification() { }
+
+        public AscvdClassification(AscvdParameters ascvdParameters) 
         {
-            _cholesterolHdlC = ascvdParameters.HdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.HdlCholesterol));
-            _cholesterolTotal = ascvdParameters.TotalCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.TotalCholesterol));
-            _ldlCholesterol = ascvdParameters.LdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.LdlCholesterol));
-            _bloodPressure = ascvdParameters.BloodPressure ?? throw new ArgumentNullException(nameof(ascvdParameters.BloodPressure));
-            
-            _patient = ascvdParameters.Patient ?? throw new ArgumentNullException(nameof(ascvdParameters.Patient));
+            CheckForNullParameters(ascvdParameters);
+
             _smoker = _patient.Comorbidities.Contains(ChronicDisease.TobaccoSmoker);
             _isDiabetic = _patient.Comorbidities.Contains(ChronicDisease.Diabetes);
             _clinicialAscvdPresent = _patient.Comorbidities.Contains(ChronicDisease.DiagnosedCardiovascularDisease);
-            
-            var equationParams = PooledCohortEquationParameters.Build(_patient, _bloodPressure, _cholesterolTotal, _cholesterolHdlC);
-            _pooledCohortsEquation = new PooledCohortsEquation(equationParams);
+            _pooledCohortsEquation = new PooledCohortsEquation(
+                PooledCohortEquationParameters.Build(_patient, _bloodPressure, _cholesterolTotal, _cholesterolHdlC));
         }
 
-        public AscvdClassification() {}
-        
         public AscvdClassificationResult Classification => Classify();
-
-        private AscvdClassificationResult Classify() => 
-            AscvdClassificationResult.Build(_pooledCohortsEquation, Ascvd10YrRiskClassification(), StatinCandidacy(), StatinRecommendation(), AspirinCandidacy(), GetRiskFactors(), AscvdLifetimeRisk() );
-
-        private AscvdRiskClassification AscvdLifetimeRisk()
-        {
-            return new AscvdLifetimeClassification(_pooledCohortsEquation.AscvdLifetimeRiskPercentage, _patient).Classification;
-        }
 
         public override string ToString() => $"{Classify()}";
 
         private readonly PooledCohortsEquation _pooledCohortsEquation;
-        private readonly Patient _patient;
-        private readonly QuantitativeLab _ldlCholesterol;
+        private Patient _patient;
+        private QuantitativeLab _ldlCholesterol;
         private readonly bool _clinicialAscvdPresent;
         private readonly bool _isDiabetic;
-        private readonly BloodPressure _bloodPressure;
-        private readonly QuantitativeLab _cholesterolTotal;
-        private readonly QuantitativeLab _cholesterolHdlC;
+        private BloodPressure _bloodPressure;
+        private QuantitativeLab _cholesterolTotal;
+        private QuantitativeLab _cholesterolHdlC;
         private readonly bool _smoker;
+        
+        private AscvdClassificationResult Classify() =>
+            AscvdClassificationResultBuilder.Initialize()
+                .SetPooledCohortsEquation(_pooledCohortsEquation)
+                .SetTenYearRiskClassification(Ascvd10YrRiskClassification())
+                .SetLifetimeRiskClassification(AscvdLifetimeRiskClassification())
+                .SetAspirinRecommendation(AspirinRecommendation())
+                .SetStatinCandidacy(StatinCandidacy())
+                .SetStatinRecommendations(StatinRecommendation())
+                .SetRiskFactors(RiskFactors())
+                .Build();
+
+        private AscvdRiskClassification AscvdLifetimeRiskClassification() => 
+            new AscvdLifetimeClassification(_pooledCohortsEquation.AscvdLifetimeRiskPercentage, _patient).Classification;
+
 
         private AscvdRiskClassification Ascvd10YrRiskClassification()
         {
@@ -60,7 +58,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
                 : AscvdRiskClassification.Elevated;
         }
 
-        private AscvdAspirinRecommendation AspirinCandidacy()
+        private AscvdAspirinRecommendation AspirinRecommendation()
         {
             if (Interval<int>.Create(50, 59).ContainsClosed(_patient.Age) && _pooledCohortsEquation.Ascvd10YearRiskPercentage >= 10)
                 return AscvdAspirinRecommendation.Beneficial;
@@ -95,16 +93,13 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
                 : AscvdStatinRecommendation.LikelyNotBeneficial;
         }
 
-        private bool IsPossibleStatinCandidate
-        {
-            get { return StatinCandidacy() == AscvdStatinCandidacy.PossibleCandidate; }
-        }
+        private bool IsPossibleStatinCandidate => StatinCandidacy() == AscvdStatinCandidacy.PossibleCandidate;
 
         private bool IsStatinCandidate => StatinCandidacy() == AscvdStatinCandidacy.Candidate;
 
         private bool PatientIsInTreatmentAgeGroup => Interval<int>.Create(40,75).ContainsClosed(_patient.Age);
         
-        private List<AscvdModifiableRiskFactors> GetRiskFactors()
+        private List<AscvdModifiableRiskFactors> RiskFactors()
         {
             var riskFactors = new List<AscvdModifiableRiskFactors>();
             
@@ -117,6 +112,19 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             if (_smoker) riskFactors.Add(AscvdModifiableRiskFactors.Smoker);
 
             return riskFactors;
+        }
+        
+        private void CheckForNullParameters(AscvdParameters ascvdParameters)
+        {
+            _cholesterolHdlC = ascvdParameters.HdlCholesterol ??
+                               throw new ArgumentNullException(nameof(ascvdParameters.HdlCholesterol));
+            _cholesterolTotal = ascvdParameters.TotalCholesterol ??
+                                throw new ArgumentNullException(nameof(ascvdParameters.TotalCholesterol));
+            _ldlCholesterol = ascvdParameters.LdlCholesterol ??
+                              throw new ArgumentNullException(nameof(ascvdParameters.LdlCholesterol));
+            _bloodPressure = ascvdParameters.BloodPressure ??
+                             throw new ArgumentNullException(nameof(ascvdParameters.BloodPressure));
+            _patient = ascvdParameters.Patient ?? throw new ArgumentNullException(nameof(ascvdParameters.Patient));
         }
     }
 }

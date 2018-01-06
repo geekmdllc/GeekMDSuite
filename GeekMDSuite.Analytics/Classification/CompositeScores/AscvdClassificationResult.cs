@@ -6,8 +6,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
 {
     public class AscvdClassificationResult
     {
-
-        public static AscvdClassificationResult Build(
+        internal static AscvdClassificationResult Build(
             PooledCohortsEquation pooledCohortsEquation,
             AscvdRiskClassification tenYearRiskClassification,
             AscvdStatinCandidacy statinCandidacy,
@@ -24,16 +23,16 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
                 riskFactors, 
                 lifetime);
 
-        public double TenYearRiskPercentage => _pooledCohortsEquation.Ascvd10YearRiskPercentage;
-        public double IdealTenYearRiskPercentage => _pooledCohortsEquation.IdealAscvd10YearRiskPercentage;
-        public AscvdRiskClassification TenYearRiskClassification { get; }
-        public double LifetimeRiskPercentage => _pooledCohortsEquation.AscvdLifetimeRiskPercentage;
-        public double IdealLifetimeRiskPercentage => _pooledCohortsEquation.IdealAscvdLifetimeRiskPercentage;
-        public AscvdRiskClassification LifetimeRiskClassification { get; }
-        public AscvdStatinCandidacy StatinCandidacy { get; }
-        public AscvdStatinRecommendation StatinRecommendation { get; }
-        public AscvdAspirinRecommendation AspirinRecommendation { get; }
-        public List<AscvdModifiableRiskFactors> RiskFactors { get; }
+        public double TenYearRiskPercentage => PooledCohortsEquation.Ascvd10YearRiskPercentage;
+        public double IdealTenYearRiskPercentage => PooledCohortsEquation.IdealAscvd10YearRiskPercentage;
+        public AscvdRiskClassification TenYearRiskClassification { get; set; }
+        public double LifetimeRiskPercentage => PooledCohortsEquation.AscvdLifetimeRiskPercentage;
+        public double IdealLifetimeRiskPercentage => PooledCohortsEquation.IdealAscvdLifetimeRiskPercentage;
+        public AscvdRiskClassification LifetimeRiskClassification { get; set; }
+        public AscvdStatinCandidacy StatinCandidacy { get; set; }
+        public AscvdStatinRecommendation StatinRecommendation { get; set; }
+        public AscvdAspirinRecommendation AspirinRecommendation { get; set; }
+        public List<AscvdModifiableRiskFactors> RiskFactors { get; set; }
 
         public override string ToString() => $"10-yr Risk: {TenYearRiskPercentage}% ({TenYearRiskClassification} | " +
                                              $"ideal: {IdealTenYearRiskPercentage}%), Statin Candidacy: {StatinCandidacy}, " +
@@ -43,6 +42,13 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
                                              $"Lifetime Risk: {LifetimeRiskPercentage}% ({LifetimeRiskClassification} | " +
                                              $"ideal: {IdealLifetimeRiskPercentage}%)";
         
+        internal PooledCohortsEquation PooledCohortsEquation { get; set; }
+        
+        internal AscvdClassificationResult()
+        {
+            RiskFactors = new List<AscvdModifiableRiskFactors>();
+        }
+        
         private AscvdClassificationResult(
             PooledCohortsEquation pooledCohortsEquation,
             AscvdRiskClassification tenYearTenYearRiskClassification,
@@ -50,9 +56,9 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             AscvdStatinRecommendation statinRecommendation,
             AscvdAspirinRecommendation aspirinRecommendation,
             List<AscvdModifiableRiskFactors> riskFactors,
-            AscvdRiskClassification lifetimeRiskClassification)
+            AscvdRiskClassification lifetimeRiskClassification) : this()
         {
-            _pooledCohortsEquation = pooledCohortsEquation;
+            PooledCohortsEquation = pooledCohortsEquation;
             LifetimeRiskClassification = lifetimeRiskClassification;
             TenYearRiskClassification = tenYearTenYearRiskClassification;
             StatinCandidacy = statinCandidacy;
@@ -62,6 +68,5 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
         }
         
         
-        private readonly PooledCohortsEquation _pooledCohortsEquation;
     }
 }
