@@ -1,6 +1,8 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Tools.Cardiology;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Builders;
+using GeekMDSuite.Core.Models;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
@@ -11,7 +13,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
         public void NullParameters_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                PooledCohortsEquation.Initialize(null));
+                new PooledCohortsEquation(null));
         }
 
         public PooledCohortsEquationTests()

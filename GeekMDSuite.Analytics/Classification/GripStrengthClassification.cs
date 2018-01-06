@@ -1,7 +1,8 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
 using GeekMDSuite.Core;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.Core.Tools.MeasurementUnits;
 
 namespace GeekMDSuite.Analytics.Classification
@@ -12,7 +13,7 @@ namespace GeekMDSuite.Analytics.Classification
         public GripStrengthClassification(GripStrength gripStrength, Patient patient)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
-            _gripStrength = gripStrength;
+            _gripStrength = gripStrength ?? throw new ArgumentNullException(nameof(gripStrength));
             _ranges = GripStrengthRepository.GetRanges(patient);
         }
 

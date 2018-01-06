@@ -2,6 +2,7 @@
 using GeekMDSuite.Analytics.Repositories;
 using GeekMDSuite.Core;
 using GeekMDSuite.Core.LaboratoryData;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {

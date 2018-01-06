@@ -1,7 +1,9 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Tools.Fitness;
 using GeekMDSuite.Core;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Builders;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.Core.Tools.MeasurementUnits;
 using Xunit;
 

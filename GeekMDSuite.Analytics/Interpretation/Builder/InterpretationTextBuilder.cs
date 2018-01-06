@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GeekMDSuite.Core;
+using GeekMDSuite.Core.Builders;
 
 namespace GeekMDSuite.Analytics.Interpretation.Builder
 {
-    public class InterpretationTextBuilder : IBuilder<InterpretationText>
+    public class InterpretationTextBuilder : Builder<InterpretationTextBuilder, InterpretationText>
     {
-        public static InterpretationTextBuilder Initialize() => new InterpretationTextBuilder();
-
-        public InterpretationText BuildWithoutModelValidation()
+        public override InterpretationText BuildWithoutModelValidation()
         {
             return new InterpretationText()
             {
@@ -20,7 +18,7 @@ namespace GeekMDSuite.Analytics.Interpretation.Builder
             };
         }
 
-        public InterpretationText Build()
+        public override InterpretationText Build()
         {
             ValidatePreBuildState();
             return BuildWithoutModelValidation();

@@ -1,5 +1,5 @@
 ﻿using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Models.Procedures;
 using Xunit;
 
 namespace GeekMDSuite.Core.UnitTests

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Fake

@@ -2,20 +2,16 @@
 using System.ComponentModel;
 using GeekMDSuite.Core;
 using GeekMDSuite.Core.LaboratoryData;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Tools.Cardiology
 {
     public partial class PooledCohortsEquation
     {
-        public static PooledCohortsEquation Initialize(PooledCohortEquationParameters parameters)
+       
+        public PooledCohortsEquation(PooledCohortEquationParameters parameters)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-            
-            return new PooledCohortsEquation(parameters);
-        }
-        
-        private PooledCohortsEquation(PooledCohortEquationParameters parameters)
-        {
             _hdlCholesterol = parameters.HdlCholesterol ?? throw new ArgumentNullException(nameof(parameters.HdlCholesterol));
             _totalCholesterol = parameters.TotalCholesterol ?? throw new ArgumentNullException(nameof(parameters.TotalCholesterol));
             _bloodPressure = parameters.BloodPressure ?? throw new ArgumentNullException(nameof(parameters.BloodPressure));

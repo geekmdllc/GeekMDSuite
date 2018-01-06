@@ -5,10 +5,13 @@ using GeekMDSuite.Analytics.Classification.PatientActivities;
 using GeekMDSuite.Analytics.Tools.Cardiology;
 using GeekMDSuite.Analytics.Tools.Fitness;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Builders;
+using GeekMDSuite.Core.Builders.LaboratoryData;
+using GeekMDSuite.Core.Builders.PatientActivities;
 using GeekMDSuite.Core.LaboratoryData;
-using GeekMDSuite.Core.LaboratoryData.Builder;
-using GeekMDSuite.Core.PatientActivities;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.PatientActivities;
+using GeekMDSuite.Core.Models.Procedures;
 using static System.Environment;
 
 namespace GeekMDSuite.ConsoleDemo
@@ -336,11 +339,11 @@ namespace GeekMDSuite.ConsoleDemo
                 .ConfirmSmoker()
                 .Build();
             
-            var pooledCohortsEquation = PooledCohortsEquation.Initialize(pooledCohortParams);
+            var pooledCohortsEquation = new PooledCohortsEquation(pooledCohortParams);
             Console.WriteLine($"ASCVD 10yr-Risk%: {pooledCohortsEquation.Ascvd10YearRiskPercentage}{NewLine}");
             Console.WriteLine($"ASCVD Lifetime Risk%: {pooledCohortsEquation.AscvdLifetimeRiskPercentage}{NewLine}");
             
-            var ascvd10YrInterp = new AscvdClassification(pooledCohortParams, quantitativeLabLdlC, true);
+            var ascvd10YrInterp = new AscvdClassification(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabLdlC, quantitativeLabHdlC);
 
             Console.WriteLine($"ASCVD 10-Year Risk Classification{NewLine}{ascvd10YrInterp.Classification}{NewLine}");
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Tools.BodyComposition;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {

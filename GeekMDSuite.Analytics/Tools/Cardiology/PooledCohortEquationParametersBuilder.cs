@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Builders;
+using GeekMDSuite.Core.Builders.LaboratoryData;
 using GeekMDSuite.Core.LaboratoryData;
-using GeekMDSuite.Core.LaboratoryData.Builder;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Tools.Cardiology
 {

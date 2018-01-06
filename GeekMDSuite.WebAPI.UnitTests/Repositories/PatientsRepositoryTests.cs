@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
@@ -37,7 +37,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Theory]
         [InlineData("12345")]
         [InlineData("54321")]
-        public void FindByMedicalRecordNumber_GivenCorrectMedicalRecordNumber_ReturnsPatientEntity(string mrn, bool expected = true)
+        public void FindByMedicalRecordNumber_GivenCorrectMedicalRecordNumber_ReturnsPatient(string mrn, bool expected = true)
         {
             var found = _unitOfWork.Patients.FindByMedicalRecordNumber(mrn);
             
@@ -56,7 +56,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Theory]
         [InlineData(1900, 1, 1)]
         [InlineData(1990, 2, 2)]
-        public void FindByDateOfBirth_GivenValidAge_ReturnsPatientEntity(int year, int month, int day)
+        public void FindByDateOfBirth_GivenValidAge_ReturnsPatient(int year, int month, int day)
         {
             var found = _unitOfWork.Patients.FindByDateOfBirth(new DateTime(year, month, day));
             
@@ -179,6 +179,30 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             
             Assert.Equal(newRace, patientAfter.Race);
             Assert.NotEqual(raceBefore, patientAfter.Race);
+        }
+
+        [Fact]
+        public void Update_GivenNewComorbidit_PersistsChanges()
+        {
+            var patientBefore = _unitOfWork.Patients.All().First();
+            patientBefore.Comorbidities.Add(ChronicDisease.Asthma);
+            _unitOfWork.Complete();
+
+            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            
+            Assert.Contains(ChronicDisease.Asthma, patientAfter.Comorbidities);
+        }
+
+        [Fact]
+        public void Update_GivenDeletionOfComorbidity_PersistsChanges()
+        {
+            var patientBefore = _unitOfWork.Patients.FindByGuid(FakeGeekMdSuiteContextBuilder.XerMajestyGuid);
+            patientBefore.Comorbidities.RemoveAll(c => c == ChronicDisease.Diabetes);
+            _unitOfWork.Complete();
+
+            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            
+            Assert.DoesNotContain(ChronicDisease.Diabetes, patientAfter.Comorbidities);
         }
 
         private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();

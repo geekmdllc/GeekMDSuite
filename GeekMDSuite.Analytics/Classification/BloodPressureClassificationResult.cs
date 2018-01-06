@@ -1,5 +1,6 @@
 using GeekMDSuite.Core;
 using GeekMDSuite.Core.Helpers;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {

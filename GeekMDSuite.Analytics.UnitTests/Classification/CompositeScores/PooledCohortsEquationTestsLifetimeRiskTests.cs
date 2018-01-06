@@ -1,6 +1,6 @@
-﻿using GeekMDSuite.Core;
+﻿using GeekMDSuite.Core.Models;
+using GeekMDSuite.Analytics.Tools.Cardiology;
 using Xunit;
-using PooledCohortsEquation = GeekMDSuite.Analytics.Tools.Cardiology.PooledCohortsEquation;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
 {
@@ -33,7 +33,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
                 .ConfirmOnAntiHypertensiveMedication(hypertensionTreatment)
                 .ConfirmSmoker(smoker);
 
-            var lifetime = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).AscvdLifetimeRiskPercentage;
+            var lifetime = new PooledCohortsEquation(_parametersBuilder.Build()).AscvdLifetimeRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(lifetime, expected - tolerance, expected + tolerance);
@@ -52,7 +52,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
                 .SetTotalCholesterol(default(int))
                 .SetHdlCholesterol(default(int));
 
-            var idealAscvdLifetimeRisk = PooledCohortsEquation.Initialize(_parametersBuilder.Build()).IdealAscvdLifetimeRiskPercentage;
+            var idealAscvdLifetimeRisk = new PooledCohortsEquation(_parametersBuilder.Build()).IdealAscvdLifetimeRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(idealAscvdLifetimeRisk, expectedRisk - tolerance, expectedRisk + tolerance);

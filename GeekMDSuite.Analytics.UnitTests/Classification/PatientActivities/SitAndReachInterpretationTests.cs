@@ -1,7 +1,9 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core;
-using GeekMDSuite.Core.Procedures;
+using GeekMDSuite.Core.Builders;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.Procedures;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities

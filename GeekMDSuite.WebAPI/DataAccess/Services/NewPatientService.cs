@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Helpers;
@@ -18,7 +19,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             ValidatePatientFormat(patient);
             MedicalRecordNumberAlreadyExists(patient);
             
-            return new PatientEntity(patient) { Guid = Guid.NewGuid() };
+            var newPatient = new PatientEntity();
+            newPatient.MapValues(patient);
+            newPatient.Guid = Guid.NewGuid();
+
+            return newPatient;
         }
 
         private static void ValidatePatientFormat(Patient patient)

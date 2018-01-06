@@ -1,5 +1,5 @@
 ﻿using System;
-using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 {
-    public class PatientControllerTests
+    public class PatientEntityControllerTests
     {
         [Fact]
         public void Post_GivenMedicalRecordThatAlreadyExistsInRepository_ReturnsConflictRequest()
@@ -91,7 +91,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_GivenNullPatient_ReturnsBadREquestObjectResult()
+        public void Post_GivenNullPatientEntity_ReturnsBadREquestObjectResult()
         {
             var result = _controller.Post(null);
             
@@ -99,7 +99,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
         
         [Fact]
-        public void Post_GivenProperlyPreparedPatient_ReturnsOkRequest()
+        public void Post_GivenProperlyPreparedPatientEntity_ReturnsOkRequest()
         {
             var result = _controller.Post(new PatientEntity()
             {
@@ -218,7 +218,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
         
-        public PatientControllerTests()
+        public PatientEntityControllerTests()
         {
             _controller = new PatientsController(
                 new FakeUnitOfWorkSeeded(), 

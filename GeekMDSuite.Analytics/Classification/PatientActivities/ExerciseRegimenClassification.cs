@@ -1,10 +1,10 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
-using GeekMDSuite.Core.PatientActivities;
+using GeekMDSuite.Core.Models.PatientActivities;
 
 namespace GeekMDSuite.Analytics.Classification.PatientActivities
 {
-    public abstract class ExerciseRegimenClassification : IClassifiable<Core.PatientActivities.ExerciseRegimenClassification>
+    public abstract class ExerciseRegimenClassification : IClassifiable<Core.Models.PatientActivities.ExerciseRegimenClassification>
     {
         protected ExerciseRegimenClassification (ExerciseRegimen regimen)
         {
@@ -15,14 +15,14 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
         }
         public abstract ExerciseDurationGoals Goals { get; }
 
-        public virtual Core.PatientActivities.ExerciseRegimenClassification Classification
+        public virtual Core.Models.PatientActivities.ExerciseRegimenClassification Classification
         {
             get
             {
                 if (  RegimenIsAdequate && TimeAspirationalOrHigher)
-                    return Core.PatientActivities.ExerciseRegimenClassification.Aspirational;
-                return RegimenIsAdequate ? Core.PatientActivities.ExerciseRegimenClassification.Adequate 
-                    : Core.PatientActivities.ExerciseRegimenClassification.Insufficient;
+                    return Core.Models.PatientActivities.ExerciseRegimenClassification.Aspirational;
+                return RegimenIsAdequate ? Core.Models.PatientActivities.ExerciseRegimenClassification.Adequate 
+                    : Core.Models.PatientActivities.ExerciseRegimenClassification.Insufficient;
             }
         }
 

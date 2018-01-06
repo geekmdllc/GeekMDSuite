@@ -1,6 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Interpretation;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using Xunit;
 using Xunit.Sdk;
 

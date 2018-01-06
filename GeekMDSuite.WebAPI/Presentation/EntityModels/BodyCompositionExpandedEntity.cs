@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels

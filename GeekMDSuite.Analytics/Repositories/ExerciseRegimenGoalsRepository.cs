@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Core.PatientActivities;
+﻿using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Core.Tools.Generic;
 
 namespace GeekMDSuite.Analytics.Repositories

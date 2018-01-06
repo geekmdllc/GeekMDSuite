@@ -1,4 +1,6 @@
-﻿namespace GeekMDSuite.Core.LaboratoryData
+﻿using GeekMDSuite.Core.Models;
+
+namespace GeekMDSuite.Core.LaboratoryData
 {
     public class QuantitativeLab 
     {

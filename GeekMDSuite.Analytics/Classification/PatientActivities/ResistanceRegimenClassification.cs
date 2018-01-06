@@ -1,7 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
 using GeekMDSuite.Core.Extensions;
-using GeekMDSuite.Core.PatientActivities;
+using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Core.Tools.Generic;
 
 namespace GeekMDSuite.Analytics.Classification.PatientActivities
@@ -21,13 +21,13 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
                                      && FeaturesOfRegimenAreIdeal                                                
                                      && RestIntervalGoalRange.ContainsOpen(_regimen.SecondsRestDurationPerSet);
 
-        public override Core.PatientActivities.ExerciseRegimenClassification Classification
+        public override Core.Models.PatientActivities.ExerciseRegimenClassification Classification
         {
             get
             {
                 if (  RegimenIsAdequate && TimeAspirationalOrHigher)
-                    return Core.PatientActivities.ExerciseRegimenClassification.Aspirational;
-                return RegimenIsAdequate ? Core.PatientActivities.ExerciseRegimenClassification.Adequate : Core.PatientActivities.ExerciseRegimenClassification.Insufficient;
+                    return Core.Models.PatientActivities.ExerciseRegimenClassification.Aspirational;
+                return RegimenIsAdequate ? Core.Models.PatientActivities.ExerciseRegimenClassification.Adequate : Core.Models.PatientActivities.ExerciseRegimenClassification.Insufficient;
             }
         }
 

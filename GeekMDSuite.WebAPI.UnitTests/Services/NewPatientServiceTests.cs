@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -15,7 +16,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public void GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
         {
-            Assert.Throws<UnitOfWorkNotLoadedException>(() => _service.GenerateUsing(new PatientEntity()));
+            Assert.Throws<UnitOfWorkNotLoadedException>(() => _service.GenerateUsing(new Patient()));
         }
 
         [Fact]
@@ -28,7 +29,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         public void GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
             var newPatient = _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
-                new PatientEntity()
+                new Patient()
                 {
                     Name = Name.Build("Joe", "Schmoe"),
                     MedicalRecordNumber = Guid.NewGuid().ToString(),

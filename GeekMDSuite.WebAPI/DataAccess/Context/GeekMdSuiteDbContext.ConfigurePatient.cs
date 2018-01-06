@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
+﻿using GeekMDSuite.Core.Models;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Context
@@ -9,6 +10,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         {
             modelBuilder.Entity<PatientEntity>().OwnsOne(p => p.Name);
             modelBuilder.Entity<PatientEntity>().OwnsOne(p => p.Gender);
+            modelBuilder.Entity<PatientEntity>().OwnsOne(p => p.Comorbidities);
             modelBuilder.Entity<PatientEntity>().HasIndex(p => p.Guid).IsUnique();
             modelBuilder.Entity<PatientEntity>().HasIndex(p => p.MedicalRecordNumber).IsUnique();
         }

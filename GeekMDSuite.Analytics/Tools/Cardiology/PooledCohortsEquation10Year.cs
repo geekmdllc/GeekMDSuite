@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Tools.Cardiology
 {

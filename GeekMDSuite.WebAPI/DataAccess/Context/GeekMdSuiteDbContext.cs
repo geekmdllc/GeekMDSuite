@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
+﻿using GeekMDSuite.Core.Models;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Context
@@ -18,8 +19,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<GripStrengthEntity> GripStrengths { get; set; }
         public virtual DbSet<IshiharaSixPlateEntity> IshiharaSixPlates { get; set; }
         public virtual DbSet<OcularPressureEntity> OcularPressures { get; set; }
-        public virtual DbSet<PeripheralVisionEntity> PeripheralVisions { get; set; }
         public virtual DbSet<PatientEntity> Patients { get; set; }
+        public virtual DbSet<PeripheralVisionEntity> PeripheralVisions { get; set; }
         public virtual DbSet<PushupsEntity> Pushups { get; set; }
         public virtual DbSet<SitAndReachEntity> SitAndReaches { get; set; }
         public virtual DbSet<SitupsEntity> Situps { get; set; }

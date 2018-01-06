@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Core.Procedures;
+﻿using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.Analytics.Classification
 {

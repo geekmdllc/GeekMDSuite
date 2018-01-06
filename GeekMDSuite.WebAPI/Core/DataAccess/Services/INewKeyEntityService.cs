@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Core.Models;
+﻿using GeekMDSuite.Core.Models;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification.PatientActivities;
-using GeekMDSuite.Core.PatientActivities;
+using GeekMDSuite.Core.Models.PatientActivities;
 using Xunit;
-using ExerciseRegimenClassification = GeekMDSuite.Core.PatientActivities.ExerciseRegimenClassification;
+using ExerciseRegimenClassification = GeekMDSuite.Core.Models.PatientActivities.ExerciseRegimenClassification;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
 {

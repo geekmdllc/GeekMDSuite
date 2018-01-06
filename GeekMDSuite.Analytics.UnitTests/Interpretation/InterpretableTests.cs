@@ -1,6 +1,7 @@
 ﻿using GeekMDSuite.Analytics.Interpretation;
 using GeekMDSuite.Analytics.Interpretation.Builder;
 using GeekMDSuite.Core;
+using GeekMDSuite.Core.Models;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Interpretation
