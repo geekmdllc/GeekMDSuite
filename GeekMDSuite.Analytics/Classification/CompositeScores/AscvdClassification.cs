@@ -17,6 +17,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
         {
             _cholesterolHdlC = ascvdParameters.HdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.HdlCholesterol));
             _cholesterolTotal = ascvdParameters.TotalCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.TotalCholesterol));
+            _ldlCholesterol = ascvdParameters.LdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.LdlCholesterol));
             _bloodPressure = ascvdParameters.BloodPressure ?? throw new ArgumentNullException(nameof(ascvdParameters.BloodPressure));
             
             _patient = ascvdParameters.Patient ?? throw new ArgumentNullException(nameof(ascvdParameters.Patient));
@@ -25,8 +26,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             _clinicialAscvdPresent = _patient.Comorbidities.Contains(ChronicDisease.DiagnosedCardiovascularDisease);
             
             var equationParams = PooledCohortEquationParameters.Build(_patient, _bloodPressure, _cholesterolTotal, _cholesterolHdlC);
-            _ldlCholesterol = ascvdParameters.LdlCholesterol ?? throw new ArgumentNullException(nameof(ascvdParameters.LdlCholesterol));
-            _riskPercentage = new PooledCohortsEquation(equationParams).Ascvd10YearRiskPercentage;
+            _pooledCohortsEquation = new PooledCohortsEquation(equationParams);
         }
 
         public AscvdClassification() {}
@@ -34,16 +34,16 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
         public AscvdClassificationResult Classification => Classify();
 
         private AscvdClassificationResult Classify() => 
-            AscvdClassificationResult.Build(Ascvd10YrRisk(), StatinCandidacy(), StatinRecommendation(), AspirinCandidacy(), GetRiskFactors(), AscvdLifetimeRisk() );
+            AscvdClassificationResult.Build(_pooledCohortsEquation, Ascvd10YrRiskClassification(), StatinCandidacy(), StatinRecommendation(), AspirinCandidacy(), GetRiskFactors(), AscvdLifetimeRisk() );
 
         private AscvdRiskClassification AscvdLifetimeRisk()
         {
-            return new AscvdLifetimeClassification(_riskPercentage, _patient).Classification;
+            return new AscvdLifetimeClassification(_pooledCohortsEquation.AscvdLifetimeRiskPercentage, _patient).Classification;
         }
 
         public override string ToString() => $"{Classify()}";
 
-        private readonly double _riskPercentage;
+        private readonly PooledCohortsEquation _pooledCohortsEquation;
         private readonly Patient _patient;
         private readonly QuantitativeLab _ldlCholesterol;
         private readonly bool _clinicialAscvdPresent;
@@ -53,27 +53,27 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
         private readonly QuantitativeLab _cholesterolHdlC;
         private readonly bool _smoker;
 
-        private AscvdRiskClassification Ascvd10YrRisk()
+        private AscvdRiskClassification Ascvd10YrRiskClassification()
         {
-            if (_riskPercentage < 5.0) return AscvdRiskClassification.Low;
-            return _riskPercentage < 7.5 ? AscvdRiskClassification.Borderline 
+            if (_pooledCohortsEquation.Ascvd10YearRiskPercentage < 5.0) return AscvdRiskClassification.Low;
+            return _pooledCohortsEquation.Ascvd10YearRiskPercentage < 7.5 ? AscvdRiskClassification.Borderline 
                 : AscvdRiskClassification.Elevated;
         }
 
         private AscvdAspirinRecommendation AspirinCandidacy()
         {
-            if (Interval<int>.Create(50, 59).ContainsClosed(_patient.Age) && _riskPercentage >= 10)
+            if (Interval<int>.Create(50, 59).ContainsClosed(_patient.Age) && _pooledCohortsEquation.Ascvd10YearRiskPercentage >= 10)
                 return AscvdAspirinRecommendation.Beneficial;
-            if (Interval<int>.Create(60, 69).ContainsClosed(_patient.Age) && _riskPercentage >= 10)
+            if (Interval<int>.Create(60, 69).ContainsClosed(_patient.Age) && _pooledCohortsEquation.Ascvd10YearRiskPercentage >= 10)
                 return AscvdAspirinRecommendation.BeneficialWithReservation;
-            return _riskPercentage >= 10 ? AscvdAspirinRecommendation.InsufficientEvidenceLikelyBeneficial 
+            return _pooledCohortsEquation.Ascvd10YearRiskPercentage >= 10 ? AscvdAspirinRecommendation.InsufficientEvidenceLikelyBeneficial 
                 : AscvdAspirinRecommendation.InsufficientEvidenceLikelyNotBeneficial;
         }
 
         private AscvdStatinCandidacy StatinCandidacy()
         {
-            if (_riskPercentage >= 7.5) return AscvdStatinCandidacy.Candidate;
-            return _riskPercentage >= 5.0 ? AscvdStatinCandidacy.PossibleCandidate 
+            if (_pooledCohortsEquation.Ascvd10YearRiskPercentage >= 7.5) return AscvdStatinCandidacy.Candidate;
+            return _pooledCohortsEquation.Ascvd10YearRiskPercentage >= 5.0 ? AscvdStatinCandidacy.PossibleCandidate 
                 : AscvdStatinCandidacy.LikelyNotCandidate;
         }
 

@@ -67,7 +67,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             
             var ascvdClassification = new AscvdClassification(AscvdParameters.Build(_patient, BloodPressure.Build(systolic, 75), Quantitative.Serum.CholesterolTotal(totalCholesterol), Quantitative.Serum.LowDensityLipoprotein(ldl), Quantitative.Serum.HighDensityLipoprotein(hdl)));
             
-            Assert.Equal(expected, ascvdClassification.Classification.RiskClassification);
+            Assert.Equal(expected, ascvdClassification.Classification.TenYearRiskClassification);
         }
         
         [Theory]

@@ -35,9 +35,13 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
                 throw new InvalidEnumArgumentException($"{nameof(hdlCholesterol.Type)}. Should be {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}");
         }
 
-        internal AscvdParameters()
+        public AscvdParameters()
         {
-            
+            Patient = new Patient();
+            BloodPressure = new BloodPressure();
+            TotalCholesterol = new QuantitativeLab() { Type = QuantitativeLabType.CholesterolTotalSerum};
+            HdlCholesterol = new QuantitativeLab() { Type = QuantitativeLabType.HighDensityLipoproteinSerum};
+            LdlCholesterol = new QuantitativeLab() { Type = QuantitativeLabType.LowDensityLipoproteinSerum };
         }
 
         public Patient Patient { get; set; }

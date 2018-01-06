@@ -15,9 +15,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
                 .SetPatient(_patient)
                 .Build()).Ascvd10YearRiskPercentage;
 
-        public double Ascvd10YearRiskPercentage => 100 *
-                                   (1 - Math.Pow(BaselineSurvival,
-                                        Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientValueProduct)));
+        public double Ascvd10YearRiskPercentage => 100 * (1 - Math.Pow(BaselineSurvival,
+                             Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientValueProduct)));
 
         private double BaselineSurvival => GetBaselineSurvival();
         private double SumCoefficientValueProduct => GetSumOfCoefficientAndValueProduct();
