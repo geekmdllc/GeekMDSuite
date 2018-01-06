@@ -36,8 +36,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
         private QuantitativeLab _cholesterolHdlC;
         private readonly bool _smoker;
         
-        private AscvdClassificationResult Classify() =>
-            AscvdClassificationResultBuilder.Initialize()
+        private AscvdClassificationResult Classify() => AscvdClassificationResultBuilder.Initialize()
                 .SetPooledCohortsEquation(_pooledCohortsEquation)
                 .SetTenYearRiskClassification(Ascvd10YrRiskClassification())
                 .SetLifetimeRiskClassification(AscvdLifetimeRiskClassification())
@@ -47,16 +46,15 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
                 .SetRiskFactors(RiskFactors())
                 .Build();
 
-        private AscvdRiskClassification AscvdLifetimeRiskClassification() => 
-            new AscvdLifetimeClassification(_pooledCohortsEquation.AscvdLifetimeRiskPercentage, _patient).Classification;
-
-
         private AscvdRiskClassification Ascvd10YrRiskClassification()
         {
             if (_pooledCohortsEquation.Ascvd10YearRiskPercentage < 5.0) return AscvdRiskClassification.Low;
             return _pooledCohortsEquation.Ascvd10YearRiskPercentage < 7.5 ? AscvdRiskClassification.Borderline 
                 : AscvdRiskClassification.Elevated;
         }
+        
+        private AscvdRiskClassification AscvdLifetimeRiskClassification() => 
+            new AscvdLifetimeClassification(_pooledCohortsEquation.AscvdLifetimeRiskPercentage, _patient).Classification;
 
         private AscvdAspirinRecommendation AspirinRecommendation()
         {
