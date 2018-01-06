@@ -9,7 +9,7 @@ using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
 {
-    public class AscvdParamtersTests
+    public class AscvdParametersTests
     {
         [Fact]
         public void Build_GivenNullPatient_ThrowsArgumentNullException()
@@ -55,7 +55,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
                 () => AscvdParameters.Build(_patient, _bloodPressure, _totalCholesterol, _ldlCholesterol,
                     _hdlCholesterol));
         }
-        //
+
         [Fact]
         public void Build_GivenTotalCholesterolWithWrongLabtype_ThrowsInvalidEnumArgumentException()
         {
@@ -83,7 +83,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
                     _hdlCholesterol));
         }
 
-        public AscvdParamtersTests()
+        public AscvdParametersTests()
         {
             _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
             _bloodPressure = BloodPressure.Build(0, 0);
