@@ -19,7 +19,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        [Route("example/")]
+        public IActionResult GetExample()
         {
             var bp = BloodPressure.Build(115, 69);
             var hdl = Quantitative.Serum.HighDensityLipoprotein(60);
