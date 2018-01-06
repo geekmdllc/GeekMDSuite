@@ -73,7 +73,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             if (_totalCholesterol == null) builder.Append(nameof(SetTotalCholesterol));
 
             var message = builder.ToString();
-            if (string.IsNullOrWhiteSpace(message))
+            if (!string.IsNullOrWhiteSpace(message))
                 throw new MissingMethodException(message);
         }
     }
