@@ -29,9 +29,9 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             
             if (totalCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
                 throw new InvalidEnumArgumentException($"{nameof(totalCholesterol.Type)}. Should be {nameof(QuantitativeLabType.CholesterolTotalSerum)}");
-            if (ldlCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
+            if (ldlCholesterol.Type != QuantitativeLabType.LowDensityLipoproteinSerum)
                 throw new InvalidEnumArgumentException($"{nameof(ldlCholesterol.Type)}. Should be {nameof(QuantitativeLabType.LowDensityLipoproteinSerum)}");
-            if (hdlCholesterol.Type != QuantitativeLabType.CholesterolTotalSerum)
+            if (hdlCholesterol.Type != QuantitativeLabType.HighDensityLipoproteinSerum)
                 throw new InvalidEnumArgumentException($"{nameof(hdlCholesterol.Type)}. Should be {nameof(QuantitativeLabType.HighDensityLipoproteinSerum)}");
         }
 
