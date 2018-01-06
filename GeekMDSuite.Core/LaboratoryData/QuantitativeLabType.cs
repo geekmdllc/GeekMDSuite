@@ -5,7 +5,7 @@
         AlanineTransaminaseSerum,
         AlbuminSerum,
         AlkalinePhosphataseSerum,
-        ApolipoproteinBSerum, 
+        ApolipoproteinBSerum,
         AspartateTransaminaseSerum,
         BasophilsSerum,
         BicarbonateSerum,
@@ -69,6 +69,6 @@
         VitaminB12Serum,
         VitaminD25HydroxySerum,
         WhiteBloodCellsSerum,
-        WhiteBloodCellsUrine       
+        WhiteBloodCellsUrine
     }
 }

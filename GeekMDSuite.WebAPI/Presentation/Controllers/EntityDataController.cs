@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -13,6 +12,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json")]
     public abstract class EntityDataController<T> : Controller where T : class, IEntity<T>
     {
+        private readonly IRepository<T> _repo;
+
+        protected readonly IUnitOfWork UnitOfWork;
+
+        protected EntityDataController(IUnitOfWork unitOfWork)
+        {
+            UnitOfWork = unitOfWork;
+            _repo = UnitOfWork.EntityData<T>();
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -25,7 +34,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -38,7 +47,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
         [HttpPost]
         public virtual IActionResult Post([FromBody] T entity)
         {
@@ -57,7 +66,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest();
             }
         }
-        
+
         [HttpPut]
         public IActionResult Put([FromBody] T entity)
         {
@@ -76,7 +85,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest();
             }
         }
-        
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -91,16 +100,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
         [HttpDelete]
         public IActionResult Delete([FromBody] int[] ids)
         {
             try
             {
-                foreach (var id in ids)
-                {
-                    _repo.Delete(id);
-                }
+                foreach (var id in ids) _repo.Delete(id);
                 UnitOfWork.Complete();
                 return Ok();
             }
@@ -109,17 +115,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
-        public ConflictResult Conflict() => new ConflictResult();
 
-        protected EntityDataController(IUnitOfWork unitOfWork)
+        public ConflictResult Conflict()
         {
-            UnitOfWork = unitOfWork;
-            _repo = UnitOfWork.EntityData<T>();
+            return new ConflictResult();
         }
-        
-        protected readonly IUnitOfWork UnitOfWork;
-
-        private readonly IRepository<T> _repo;
     }
 }

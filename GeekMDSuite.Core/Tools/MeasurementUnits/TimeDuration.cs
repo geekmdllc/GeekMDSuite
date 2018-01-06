@@ -4,7 +4,6 @@
     {
         protected internal TimeDuration()
         {
-            
         }
 
         private TimeDuration(double minutes, double seconds) : this()
@@ -18,8 +17,14 @@
         public double TotalSeconds => Minutes * 60 + Seconds;
         public double FractionalMinutes => TotalSeconds / 60;
 
-        public static TimeDuration Build(double minutes, double seconds) => new TimeDuration(minutes, seconds);
+        public static TimeDuration Build(double minutes, double seconds)
+        {
+            return new TimeDuration(minutes, seconds);
+        }
 
-        public override string ToString() => $"{Minutes}'{Seconds}\"";
+        public override string ToString()
+        {
+            return $"{Minutes}'{Seconds}\"";
+        }
     }
 }

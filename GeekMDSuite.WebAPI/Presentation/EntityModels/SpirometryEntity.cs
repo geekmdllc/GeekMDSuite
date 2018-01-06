@@ -8,14 +8,13 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public SpirometryEntity()
         {
-            
         }
 
         public SpirometryEntity(Spirometry spirometry)
         {
             MapValues(spirometry);
         }
-        
+
         public void MapValues(Spirometry subject)
         {
             ForcedExpiratoryFlow25To75 = subject.ForcedExpiratoryFlow25To75;

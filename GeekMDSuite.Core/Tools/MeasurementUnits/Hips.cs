@@ -9,7 +9,10 @@
         protected internal Hips()
         {
         }
-        
-        public static Hips Build(double inches) => new Hips(inches);
+
+        public static Hips Build(double inches)
+        {
+            return new Hips(inches);
+        }
     }
 }

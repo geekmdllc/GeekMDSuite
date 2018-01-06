@@ -12,11 +12,12 @@ namespace GeekMDSuite.Core.UnitTests
         [InlineData(55, HearingLoss.Moderate)]
         [InlineData(75, HearingLoss.Severe)]
         [InlineData(95, HearingLoss.Profound)]
-        public void Classification_GivenADecibalValue_ReturnsExpectedClassification(int value, HearingLoss expectedClassification)
+        public void Classification_GivenADecibalValue_ReturnsExpectedClassification(int value,
+            HearingLoss expectedClassification)
         {
             var result = AudiogramDatapoint.Build(value);
             var interp = new AudiogramDataPointClassification(result);
-            
+
             Assert.Equal(expectedClassification, interp.Classification);
         }
     }

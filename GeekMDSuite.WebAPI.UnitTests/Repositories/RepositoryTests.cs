@@ -5,8 +5,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public partial class RepositoryTests
     {
-        private readonly IUnitOfWork _unitOfWorkSeeded = new FakeUnitOfWorkSeeded();
         private readonly IUnitOfWork _unitOfWorkEmpty = new FakeUnitOfWorkEmpty();
+        private readonly IUnitOfWork _unitOfWorkSeeded = new FakeUnitOfWorkSeeded();
     }
-    
 }

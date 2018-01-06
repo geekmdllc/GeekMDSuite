@@ -4,11 +4,11 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class FunctionalMovementScreensRepository : RepositoryAssociatedWithVisit<FunctionalMovementScreenEntity>, IFunctionalMovementScreensRepository
+    public class FunctionalMovementScreensRepository : RepositoryAssociatedWithVisit<FunctionalMovementScreenEntity>,
+        IFunctionalMovementScreensRepository
     {
-        public FunctionalMovementScreensRepository(GeekMdSuiteDbContext context) : base (context)
+        public FunctionalMovementScreensRepository(GeekMdSuiteDbContext context) : base(context)
         {
-            
         }
     }
 }

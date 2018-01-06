@@ -9,7 +9,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json")]
     public class CentralBloodPressuresController : AnalyzablePatientDataController<CentralBloodPressureEntity>
     {
-        public CentralBloodPressuresController(IUnitOfWork unitOfWork) : base(unitOfWork){ }
+        public CentralBloodPressuresController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+
         public override IActionResult Interpret(int id)
         {
             throw new NotImplementedException();

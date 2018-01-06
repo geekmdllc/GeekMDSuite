@@ -8,12 +8,13 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public PeripheralVisionEntity()
         {
-            
         }
+
         public PeripheralVisionEntity(PeripheralVision peripheralVision)
         {
             MapValues(peripheralVision);
         }
+
         public void MapValues(PeripheralVision subject)
         {
             Left = subject.Left;

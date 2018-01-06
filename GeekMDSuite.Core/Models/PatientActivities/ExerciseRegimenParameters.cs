@@ -1,8 +1,9 @@
 ﻿namespace GeekMDSuite.Core.Models.PatientActivities
 {
-    public class ExerciseRegimenParameters 
+    public class ExerciseRegimenParameters
     {
-        private ExerciseRegimenParameters(double sessionsPerWeek, double averageSessionDuration, ExerciseIntensity intensity)
+        private ExerciseRegimenParameters(double sessionsPerWeek, double averageSessionDuration,
+            ExerciseIntensity intensity)
         {
             SessionsPerWeek = sessionsPerWeek;
             AverageSessionDuration = averageSessionDuration;
@@ -16,6 +17,9 @@
         public ExerciseIntensity Intensity { get; set; }
 
         public static ExerciseRegimenParameters Build(double sessionsPerWeek, double averageSessionDuration,
-            ExerciseIntensity intensity) => new ExerciseRegimenParameters(sessionsPerWeek, averageSessionDuration, intensity);
+            ExerciseIntensity intensity)
+        {
+            return new ExerciseRegimenParameters(sessionsPerWeek, averageSessionDuration, intensity);
+        }
     }
 }

@@ -40,15 +40,14 @@ namespace GeekMDSuite.WebAPI
                 services.AddSingleton<IUnitOfWork, FakeUnitOfWorkSeeded>(); // Bypasses Sqlite with in-memory DB
             else if (Environment.IsProduction())
                 services.AddSingleton<IUnitOfWork, UnitOfWork>();
-            else 
+            else
                 throw new NotImplementedException();
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment()) 
+            if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
             app.UseMvc();

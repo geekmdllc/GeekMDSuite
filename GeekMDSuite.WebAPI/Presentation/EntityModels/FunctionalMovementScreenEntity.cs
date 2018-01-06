@@ -6,9 +6,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IVisitData<FunctionalMovementScreen>
     {
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
-
         public FunctionalMovementScreenEntity()
         {
             ActiveStraightLegRaise = new FmsMovementSet();
@@ -25,7 +22,10 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         {
             MapValues(functionalMovementScreen);
         }
-        
+
+        public int Id { get; set; }
+        public Guid VisitId { get; set; }
+
         public void MapValues(FunctionalMovementScreen subject)
         {
             MapTrunkStability(subject);

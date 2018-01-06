@@ -14,7 +14,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
             Assert.Throws<ArgumentNullException>(() =>
                 InterpretationText.Build("Title", string.Empty, null));
         }
-        
+
         [Fact]
         public void GivenNullOrEmptyTitle_ThrowsArgumentOutOfRangeException()
         {
@@ -26,7 +26,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 InterpretationText.Build(string.Empty, string.Empty, new List<InterpretationSection> {section}));
         }
-        
+
         [Fact]
         public void ToString_ContainsTitle()
         {
@@ -40,9 +40,8 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
                 .SetSummary(string.Empty)
                 .AddSection(section)
                 .Build();
-            
+
             Assert.Contains("Title", interp.ToString());
         }
-        
     }
 }

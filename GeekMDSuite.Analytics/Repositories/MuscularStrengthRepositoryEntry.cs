@@ -6,12 +6,12 @@ namespace GeekMDSuite.Analytics.Repositories
     internal class MuscularStrengthRepositoryEntry : IStrengthTestRanges
     {
         public MuscularStrengthRepositoryEntry(
-            Interval<int> ageRange, 
-            double lowerLimitOfPoor, 
-            double lowerLimitOfBelowAverage, 
-            double lowerLimitOfAverage, 
-            double lowerLimitOfAboveAverage, 
-            double lowerLimitOfGood, 
+            Interval<int> ageRange,
+            double lowerLimitOfPoor,
+            double lowerLimitOfBelowAverage,
+            double lowerLimitOfAverage,
+            double lowerLimitOfAboveAverage,
+            double lowerLimitOfGood,
             double lowerLimitOfExcellent)
         {
             AgeRange = ageRange;

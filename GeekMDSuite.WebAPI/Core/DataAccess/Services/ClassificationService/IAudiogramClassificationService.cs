@@ -2,9 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService
 {
-    public interface IAudiogramClassificationService 
+    public interface IAudiogramClassificationService
         : IClassificationService<AudiogramClassification, AudiogramClassificationResult>
     {
-        
     }
 }

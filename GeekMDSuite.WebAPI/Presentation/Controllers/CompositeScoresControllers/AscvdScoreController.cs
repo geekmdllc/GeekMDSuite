@@ -34,7 +34,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers
                 .SetRace(Race.Latin)
                 .AddComorbidity(ChronicDisease.Diabetes)
                 .Build();
-                
+
             var ascvdParameters = AscvdParametersBuilder.Initialize()
                 .SetBloodPressure(bp)
                 .SetHdlCholesterol(hdl)
@@ -42,10 +42,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers
                 .SetPatient(patient)
                 .SetTotalCholesterol(total)
                 .Build();
-            
+
             return Ok(ascvdParameters);
         }
-        
+
         [HttpPost]
         public IActionResult Post([FromBody] AscvdParameters parameters)
         {

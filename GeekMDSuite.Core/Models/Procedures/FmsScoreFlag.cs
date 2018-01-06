@@ -1,6 +1,7 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public enum FmsScoreFlag {
+    public enum FmsScoreFlag
+    {
         L0R0,
         L0R1,
         L0R2,

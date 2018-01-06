@@ -11,7 +11,6 @@ namespace GeekMDSuite.Core.Tools.MeasurementUnits
 
         protected LengthMeasurement()
         {
-            
         }
 
         public double Inches { get; set; }
@@ -20,6 +19,9 @@ namespace GeekMDSuite.Core.Tools.MeasurementUnits
 
         public double Meters => LengthConversion.CentimetersToMeters(Centimeters);
 
-        public override string ToString() => $"{Inches} in";
+        public override string ToString()
+        {
+            return $"{Inches} in";
+        }
     }
 }

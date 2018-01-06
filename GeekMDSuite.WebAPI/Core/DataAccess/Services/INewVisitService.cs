@@ -4,6 +4,5 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Services
 {
     public interface INewVisitService : INewKeyEntityService<VisitEntity, VisitEntity>
     {
-        
     }
 }

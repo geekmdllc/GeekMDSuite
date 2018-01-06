@@ -12,7 +12,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services.ClassificationService
         {
         }
 
-        public override ClassificationService<CarotidUltrasoundClassification, CarotidUltrasoundClassificationResult> InitializeWith(int id)
+        public override ClassificationService<CarotidUltrasoundClassification, CarotidUltrasoundClassificationResult>
+            InitializeWith(int id)
         {
             Classifier = new CarotidUltrasoundClassification(UnitOfWork.CarotidUltrasounds.FindById(id));
             return this;

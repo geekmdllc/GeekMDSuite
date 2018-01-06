@@ -15,9 +15,9 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
         }
 
         private PooledCohortEquationParameters(
-            Patient patient, 
-            BloodPressure bloodPressure, 
-            QuantitativeLab totalCholesterol, 
+            Patient patient,
+            BloodPressure bloodPressure,
+            QuantitativeLab totalCholesterol,
             QuantitativeLab hdlCholesterol) : this()
         {
             Patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -28,7 +28,7 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             Smoker = patient.Comorbidities.Contains(ChronicDisease.TobaccoSmoker);
             Diabetic = patient.Comorbidities.Contains(ChronicDisease.Diabetes);
         }
-        
+
         public Patient Patient { get; set; }
         public BloodPressure BloodPressure { get; set; }
         public QuantitativeLab TotalCholesterol { get; set; }
@@ -38,12 +38,12 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
         public bool Diabetic { get; set; }
 
         internal static PooledCohortEquationParameters Build(
-            Patient patient, 
+            Patient patient,
             BloodPressure bloodPressure,
-            QuantitativeLab totalCholesterol, 
+            QuantitativeLab totalCholesterol,
             QuantitativeLab hdlCholesterol)
         {
-            return new PooledCohortEquationParameters(patient, bloodPressure, totalCholesterol, hdlCholesterol);   
+            return new PooledCohortEquationParameters(patient, bloodPressure, totalCholesterol, hdlCholesterol);
         }
     }
 }

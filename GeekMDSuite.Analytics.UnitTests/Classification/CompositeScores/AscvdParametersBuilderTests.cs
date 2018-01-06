@@ -9,54 +9,6 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
 {
     public class AscvdParametersBuilderTests
     {
-        [Fact]
-        public void Build_GivenValidParameters_Succeeds()
-        {
-            Assert.IsType<AscvdParameters>(_builder.Build());
-        }
-        
-        [Fact]
-        public void BuildWithoutModelValidation_GivenInvalidParameters_Succeeds()
-        {
-            _builder.SetBloodPressure(null);
-            Assert.IsType<AscvdParameters>(_builder.BuildWithoutModelValidation());
-        }
-        
-        [Fact]
-        public void Build_GivenNullBloodPressure_ThrowsMissingMethodException()
-        {
-            _builder.SetBloodPressure(null);
-            Assert.Throws<MissingMethodException>(() => _builder.Build());
-        }
-        
-        [Fact]
-        public void Build_GivenNullTotalCholesterol_ThrowsMissingMethodException()
-        {
-            _builder.SetTotalCholesterol(null);
-            Assert.Throws<MissingMethodException>(() => _builder.Build());
-        }
-        
-        [Fact]
-        public void Build_GivenNullLdlCholesterol_ThrowsMissingMethodException()
-        {
-            _builder.SetLdlCholesterol(null);
-            Assert.Throws<MissingMethodException>(() => _builder.Build());
-        }
-        
-        [Fact]
-        public void Build_GivenNulHLdlCholesterol_ThrowsMissingMethodException()
-        {
-            _builder.SetHdlCholesterol(null);
-            Assert.Throws<MissingMethodException>(() => _builder.Build());
-        }
-        
-        [Fact]
-        public void Build_GivenNullPatient_ThrowsMissingMethodException()
-        {
-            _builder.SetPatient(null);
-            Assert.Throws<MissingMethodException>(() => _builder.Build());
-        }
-
         public AscvdParametersBuilderTests()
         {
             var bloodPressure = BloodPressure.Build(0, 0);
@@ -73,5 +25,53 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
         }
 
         private readonly AscvdParametersBuilder _builder;
+
+        [Fact]
+        public void Build_GivenNulHLdlCholesterol_ThrowsMissingMethodException()
+        {
+            _builder.SetHdlCholesterol(null);
+            Assert.Throws<MissingMethodException>(() => _builder.Build());
+        }
+
+        [Fact]
+        public void Build_GivenNullBloodPressure_ThrowsMissingMethodException()
+        {
+            _builder.SetBloodPressure(null);
+            Assert.Throws<MissingMethodException>(() => _builder.Build());
+        }
+
+        [Fact]
+        public void Build_GivenNullLdlCholesterol_ThrowsMissingMethodException()
+        {
+            _builder.SetLdlCholesterol(null);
+            Assert.Throws<MissingMethodException>(() => _builder.Build());
+        }
+
+        [Fact]
+        public void Build_GivenNullPatient_ThrowsMissingMethodException()
+        {
+            _builder.SetPatient(null);
+            Assert.Throws<MissingMethodException>(() => _builder.Build());
+        }
+
+        [Fact]
+        public void Build_GivenNullTotalCholesterol_ThrowsMissingMethodException()
+        {
+            _builder.SetTotalCholesterol(null);
+            Assert.Throws<MissingMethodException>(() => _builder.Build());
+        }
+
+        [Fact]
+        public void Build_GivenValidParameters_Succeeds()
+        {
+            Assert.IsType<AscvdParameters>(_builder.Build());
+        }
+
+        [Fact]
+        public void BuildWithoutModelValidation_GivenInvalidParameters_Succeeds()
+        {
+            _builder.SetBloodPressure(null);
+            Assert.IsType<AscvdParameters>(_builder.BuildWithoutModelValidation());
+        }
     }
 }

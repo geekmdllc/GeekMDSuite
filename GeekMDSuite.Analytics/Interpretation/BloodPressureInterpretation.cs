@@ -1,18 +1,22 @@
 using System;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Analytics.Interpretation.Builder;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Interpretation
 {
     public class BloodPressureInterpretation : Interpretable
     {
+        private readonly BloodPressure _parameters;
+
+        private readonly BloodPressureStage _stage;
+
         public BloodPressureInterpretation(BloodPressure parameters)
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
             _stage = new BloodPressureClassification(_parameters).Classification.Stage;
         }
+
         public override InterpretationText Interpretation => InterpretationTextBuilder
             .Initialize()
             .SetTitle("Blood Pressure Classification")
@@ -29,9 +33,9 @@ namespace GeekMDSuite.Analytics.Interpretation
                    "There " + (bloodPressure.OrganDamage ? "is " : "is not ") + "evidence of current end-organ " +
                    "damage. ";
         }
-        
 
-        private  InterpretationSection BuildOverviewSection()
+
+        private InterpretationSection BuildOverviewSection()
         {
             return new InterpretationSectionBuilder()
                 .SetTitle("Overview")
@@ -50,13 +54,14 @@ namespace GeekMDSuite.Analytics.Interpretation
                               $"{BloodPressureClassification.LowerLimits.Systolic.Elevated}/<{BloodPressureClassification.LowerLimits.Diastolic.Stage1Hypertension} mmHg. These values are generally " +
                               "considered to be the least likely to be associated with other chronic " +
                               "disease states.")
-                .AddParagraph($"Pre-hypertension is defined as {BloodPressureClassification.LowerLimits.Systolic.Elevated}-" +
-                              $"{BloodPressureClassification.LowerLimits.Systolic.Stage1Hypertension}/<{BloodPressureClassification.LowerLimits.Diastolic.Stage1Hypertension} mmHg. "+
-                              "The term 'pre-hypertension' is " +
-                              "used here, however it's important to note that this does not mean that there" +
-                              "is no detriment associated with these blood pressures levels. There is. " +
-                              "even mild levels of blood pressure elevation are associated with increased " +
-                              "risk of heart attack, stroke, and more.")
+                .AddParagraph(
+                    $"Pre-hypertension is defined as {BloodPressureClassification.LowerLimits.Systolic.Elevated}-" +
+                    $"{BloodPressureClassification.LowerLimits.Systolic.Stage1Hypertension}/<{BloodPressureClassification.LowerLimits.Diastolic.Stage1Hypertension} mmHg. " +
+                    "The term 'pre-hypertension' is " +
+                    "used here, however it's important to note that this does not mean that there" +
+                    "is no detriment associated with these blood pressures levels. There is. " +
+                    "even mild levels of blood pressure elevation are associated with increased " +
+                    "risk of heart attack, stroke, and more.")
                 .AddParagraph("From here, hypertension is formally staged. Each stage is successively " +
                               "worse when compared to the previous stage. Stage 1 Hypertension is " +
                               $"{BloodPressureClassification.LowerLimits.Systolic.Stage1Hypertension}-{BloodPressureClassification.LowerLimits.Systolic.Stage2Hypertension}/" +
@@ -72,8 +77,8 @@ namespace GeekMDSuite.Analytics.Interpretation
                               "associated with them.")
                 .Build();
         }
-        
-        private  InterpretationSection BuildMakingChangesSection()
+
+        private InterpretationSection BuildMakingChangesSection()
         {
             var section = new InterpretationSectionBuilder()
                 .SetTitle("Making Changes")
@@ -89,21 +94,24 @@ namespace GeekMDSuite.Analytics.Interpretation
                                             "your overall state of health with your clinician.").Build();
 
             if (_stage == BloodPressureStage.Elevated)
-                return section.AddParagraph("Your blood pressure is elevated to a range that is most often addressable " +
-                                            "via lifestyle change. Some combination of bodyfat reduction, exercise, and " +
-                                            "dietary changes such as those described in the DASH diet, will likely " +
-                                            "remedy this.").Build();
+                return section.AddParagraph(
+                    "Your blood pressure is elevated to a range that is most often addressable " +
+                    "via lifestyle change. Some combination of bodyfat reduction, exercise, and " +
+                    "dietary changes such as those described in the DASH diet, will likely " +
+                    "remedy this.").Build();
             if (_stage == BloodPressureStage.Stage1Hypertension)
-                return section.AddParagraph("Your blood pressure is elevated to a range that is sometimes addressable " +
-                                            "by lifestyle change, but often requires medication. It's reasonable to " +
-                                            "have a discussion with your clinician on whether or not lifestyle change " +
-                                            "is a good option for your before adding medication, or if both are " +
-                                            "necessary at this point.").Build();
+                return section.AddParagraph(
+                    "Your blood pressure is elevated to a range that is sometimes addressable " +
+                    "by lifestyle change, but often requires medication. It's reasonable to " +
+                    "have a discussion with your clinician on whether or not lifestyle change " +
+                    "is a good option for your before adding medication, or if both are " +
+                    "necessary at this point.").Build();
             if (_stage == BloodPressureStage.Stage2Hypertension)
-                return section.AddParagraph("Your blood pressure is elevated to a range that requires medical management. " +
-                                            "It is still possible to reduce the blood pressure via lifestyle to a degree that the " +
-                                            "medication can be stopped. However, while this is a possibility, the " +
-                                            "current levels are such that they should be addressed. ").Build();
+                return section.AddParagraph(
+                    "Your blood pressure is elevated to a range that requires medical management. " +
+                    "It is still possible to reduce the blood pressure via lifestyle to a degree that the " +
+                    "medication can be stopped. However, while this is a possibility, the " +
+                    "current levels are such that they should be addressed. ").Build();
             if (_stage == BloodPressureStage.HypertensiveUrgency)
                 return section.AddParagraph("Your blood pressure is elevated to such a degree that action is urgent. " +
                                             "Medications are required, and it often takes as many as three medications " +
@@ -112,16 +120,13 @@ namespace GeekMDSuite.Analytics.Interpretation
                                             "and working closely with your clinician to accomplish this in a relatively " +
                                             "short period of time is strongly encouraged.").Build();
             if (_stage == BloodPressureStage.HypertensiveEmergency)
-                return section.AddParagraph("Your blood pressure needs to be addressed emergently. There is evidence to " +
-                                            "suggest that the blood pressure elevation is causing acute, dangerous " +
-                                            "damage to organs of your body. This cannot be delayed. ").Build();
-            
+                return section.AddParagraph(
+                    "Your blood pressure needs to be addressed emergently. There is evidence to " +
+                    "suggest that the blood pressure elevation is causing acute, dangerous " +
+                    "damage to organs of your body. This cannot be delayed. ").Build();
+
 
             return section.Build();
         }
-        
-        private readonly BloodPressure _parameters;
-
-        private readonly BloodPressureStage _stage;
     }
 }

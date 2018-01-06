@@ -1,6 +1,7 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public enum FmsClearanceTest {
+    public enum FmsClearanceTest
+    {
         Negative,
         Positive,
         NotApplicable

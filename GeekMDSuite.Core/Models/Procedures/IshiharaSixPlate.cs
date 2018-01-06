@@ -5,21 +5,7 @@ namespace GeekMDSuite.Core.Models.Procedures
 {
     public class IshiharaSixPlate
     {
-        internal static IshiharaSixPlate Build(List<IshiharaPlateAnswer> plates) => new IshiharaSixPlate(plates);
-        
-        public List<IshiharaPlateAnswer> GetAnswers() => _answers;
-
-        public IshiharaPlateAnswer Plate1 { get; set; }
-        public IshiharaPlateAnswer Plate2 { get; set; }
-        public IshiharaPlateAnswer Plate3 { get; set; }
-        public IshiharaPlateAnswer Plate4 { get; set; }
-        public IshiharaPlateAnswer Plate5 { get; set; }
-        public IshiharaPlateAnswer Plate6 { get; set; }
-
-        public override string ToString()
-        {
-            return string.Join("\n", GetAnswers());
-        }
+        private readonly List<IshiharaPlateAnswer> _answers;
 
         protected internal IshiharaSixPlate()
         {
@@ -34,7 +20,7 @@ namespace GeekMDSuite.Core.Models.Procedures
         private IshiharaSixPlate(List<IshiharaPlateAnswer> plates)
         {
             _answers = plates ?? throw new ArgumentNullException(nameof(plates));
-            
+
             Plate1 = GetAnswers()[0];
             Plate2 = GetAnswers()[1];
             Plate3 = GetAnswers()[2];
@@ -43,6 +29,26 @@ namespace GeekMDSuite.Core.Models.Procedures
             Plate6 = GetAnswers()[5];
         }
 
-        private readonly List<IshiharaPlateAnswer> _answers;
+        public IshiharaPlateAnswer Plate1 { get; set; }
+        public IshiharaPlateAnswer Plate2 { get; set; }
+        public IshiharaPlateAnswer Plate3 { get; set; }
+        public IshiharaPlateAnswer Plate4 { get; set; }
+        public IshiharaPlateAnswer Plate5 { get; set; }
+        public IshiharaPlateAnswer Plate6 { get; set; }
+
+        internal static IshiharaSixPlate Build(List<IshiharaPlateAnswer> plates)
+        {
+            return new IshiharaSixPlate(plates);
+        }
+
+        public List<IshiharaPlateAnswer> GetAnswers()
+        {
+            return _answers;
+        }
+
+        public override string ToString()
+        {
+            return string.Join("\n", GetAnswers());
+        }
     }
 }

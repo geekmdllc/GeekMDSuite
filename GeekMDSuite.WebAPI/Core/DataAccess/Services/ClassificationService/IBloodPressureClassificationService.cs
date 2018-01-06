@@ -2,9 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService
 {
-    public interface IBloodPressureClassificationService 
+    public interface IBloodPressureClassificationService
         : IClassificationService<BloodPressureClassification, BloodPressureClassificationResult>
     {
-        
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -13,6 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     public class PatientsController : EntityDataController<PatientEntity>
     {
         private readonly INewPatientService _newPatientService;
+
         public PatientsController(IUnitOfWork unitOfWork, INewPatientService newPatientService) : base(unitOfWork)
         {
             _newPatientService = newPatientService;
@@ -41,6 +41,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return BadRequest(e.Message);
             }
+
             UnitOfWork.Complete();
             return Ok();
         }
@@ -62,7 +63,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
 
         [HttpGet]
         [Route("mrn/{mrn}")]
@@ -81,7 +82,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
         // GET api/patients/guid/guid
         [HttpGet]
         [Route("guid/{guid}")]
@@ -100,7 +101,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
         // GET api/patients/bydob/1.1.1900
         [HttpGet("bydob/{dateOfBirth}")]
         public IActionResult GetByDateOfBirth(string dateOfBirth)

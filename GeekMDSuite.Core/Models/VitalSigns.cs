@@ -4,8 +4,8 @@ namespace GeekMDSuite.Core.Models
 {
     public class VitalSigns
     {
-
-        private VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation, int pulseRate) : this()
+        private VitalSigns(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation,
+            int pulseRate) : this()
         {
             BloodPressure = bloodPressure;
             Temperature = temperature;
@@ -31,9 +31,12 @@ namespace GeekMDSuite.Core.Models
         {
             return string.Format($"{BloodPressure} {Temperature} {OxygenSaturation}% {PulseRate} bpm");
         }
-        
-        
+
+
         internal static VitalSigns Build(BloodPressure bloodPressure, Temperature temperature, int oxygenSaturation,
-            int pulseRate) => new VitalSigns(bloodPressure, temperature, oxygenSaturation, pulseRate);
+            int pulseRate)
+        {
+            return new VitalSigns(bloodPressure, temperature, oxygenSaturation, pulseRate);
+        }
     }
 }

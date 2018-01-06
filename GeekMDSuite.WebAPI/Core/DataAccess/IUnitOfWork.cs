@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Models;
 
@@ -7,8 +6,6 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>;
-        IRepository<T> EntityData<T>() where T : class, IEntity<T>;
         IAudiogramsRepository Audiograms { get; }
         IBloodPressuresRepository BloodPressures { get; }
         IBodyCompositionsRepository BodyCompositions { get; }
@@ -29,6 +26,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IVisitsRepository Visits { get; }
         IVisualAcuitiesRepository VisualAcuities { get; }
         IVitalSignsRepository VitalSigns { get; }
+        IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>;
+        IRepository<T> EntityData<T>() where T : class, IEntity<T>;
         void Complete();
     }
 }

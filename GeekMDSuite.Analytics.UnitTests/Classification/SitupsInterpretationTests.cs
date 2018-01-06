@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
@@ -10,6 +9,11 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
 {
     public class SitupsInterpretationTests
     {
+        public SitupsInterpretationTests()
+        {
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
+        }
+
         [Theory]
         [InlineData(16, 32, GenderIdentity.Male, FitnessClassification.VeryPoor)]
         [InlineData(22, 32, GenderIdentity.Male, FitnessClassification.Poor)]
@@ -32,10 +36,19 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             _patient.Gender = Gender.Build(genderIdentity);
 
             var situps = Situps.Build(distance);
-            
+
             var classification = new SitupsClassification(situps, _patient).Classification;
-            
+
             Assert.Equal(expectedFitnessClassification, classification);
+        }
+
+        private readonly Patient _patient;
+
+        [Fact]
+        public void NullPatient_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new SitupsClassification(Situps.Build(0), null));
         }
 
         [Fact]
@@ -44,18 +57,5 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             Assert.Throws<ArgumentNullException>(() =>
                 new SitupsClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
         }
-        
-        [Fact]
-        public void NullPatient_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-                new SitupsClassification(Situps.Build(0), null));
-        }
-
-        public SitupsInterpretationTests()
-        {
-            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
-        }
-        private readonly Patient _patient;
     }
 }

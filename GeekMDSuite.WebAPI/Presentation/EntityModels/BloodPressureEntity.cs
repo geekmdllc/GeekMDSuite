@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.Models;
 
@@ -7,9 +6,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class BloodPressureEntity : BloodPressure, IVisitData<BloodPressure>
     {
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
-
         public BloodPressureEntity()
         {
             VisitId = Guid.Empty;
@@ -19,7 +15,10 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         {
             MapValues(bloodPressure);
         }
-        
+
+        public int Id { get; set; }
+        public Guid VisitId { get; set; }
+
         public void MapValues(BloodPressure subject)
         {
             Diastolic = subject.Diastolic;

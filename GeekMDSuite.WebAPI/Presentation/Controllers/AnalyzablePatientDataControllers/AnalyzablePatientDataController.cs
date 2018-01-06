@@ -6,7 +6,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 {
     public abstract class AnalyzablePatientDataController<T> : VisitDataController<T> where T : class, IVisitData<T>
     {
-        protected AnalyzablePatientDataController(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+        protected AnalyzablePatientDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
 
         [HttpGet("interpret/{id}")]
         public abstract IActionResult Interpret(int id);

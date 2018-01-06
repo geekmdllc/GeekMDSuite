@@ -2,8 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService.CompositeScores
 {
-    public interface IAscvdClassificationService : IClassificationService<AscvdClassification, AscvdClassificationResult>
+    public interface
+        IAscvdClassificationService : IClassificationService<AscvdClassification, AscvdClassificationResult>
     {
-        
     }
 }

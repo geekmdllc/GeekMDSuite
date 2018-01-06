@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
@@ -7,20 +6,23 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 {
     public static partial class FakeGeekMdSuiteContextBuilder
     {
-        private static List<BodyCompositionEntity> GetBodyCompositionEntities() => new List<BodyCompositionEntity>()
+        private static List<BodyCompositionEntity> GetBodyCompositionEntities()
         {
-            new BodyCompositionEntity(BodyCompositionBuilder.Initialize()
-                .SetHeight(72)
-                .SetHips(40)
-                .SetWaist(34)
-                .SetWeight(210)
-                .Build()) {VisitId = BruceWaynesVisitGuid},
-            new BodyCompositionEntity(BodyCompositionBuilder.Initialize()
-                .SetHeight(66)
-                .SetHips(39)
-                .SetWaist(23)
-                .SetWeight(132)
-                .Build()) {VisitId = XerMajestiesVisitGuid}
-        };
+            return new List<BodyCompositionEntity>
+            {
+                new BodyCompositionEntity(BodyCompositionBuilder.Initialize()
+                    .SetHeight(72)
+                    .SetHips(40)
+                    .SetWaist(34)
+                    .SetWeight(210)
+                    .Build()) {VisitId = BruceWaynesVisitGuid},
+                new BodyCompositionEntity(BodyCompositionBuilder.Initialize()
+                    .SetHeight(66)
+                    .SetHips(39)
+                    .SetWaist(23)
+                    .SetWeight(132)
+                    .Build()) {VisitId = XerMajestiesVisitGuid}
+            };
+        }
     }
 }

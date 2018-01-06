@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData

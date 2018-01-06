@@ -6,12 +6,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class GripStrengthEntity : GripStrength, IVisitData<GripStrength>
     {
-        public void MapValues(GripStrength subject)
-        {
-            Left.Pounds = subject.Left.Pounds;
-            Right.Pounds = subject.Right.Pounds;
-        }
-
         public GripStrengthEntity()
         {
             Left = new GripMeasurement();
@@ -21,6 +15,12 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         public GripStrengthEntity(GripStrength gripStrength) : this()
         {
             MapValues(gripStrength);
+        }
+
+        public void MapValues(GripStrength subject)
+        {
+            Left.Pounds = subject.Left.Pounds;
+            Right.Pounds = subject.Right.Pounds;
         }
 
         public int Id { get; set; }

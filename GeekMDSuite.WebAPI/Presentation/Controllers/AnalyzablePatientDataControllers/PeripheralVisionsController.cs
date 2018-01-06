@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess;
+﻿using System;
+using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,18 +9,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json")]
     public class PeripheralVisionsController : AnalyzablePatientDataController<PeripheralVisionEntity>
     {
-        public PeripheralVisionsController(IUnitOfWork unitOfWork) : base (unitOfWork)
+        public PeripheralVisionsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
         public override IActionResult Interpret(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override IActionResult Classify(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

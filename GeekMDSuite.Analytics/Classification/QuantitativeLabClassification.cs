@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.Models;
 
@@ -8,6 +7,8 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class QuantitativeLabClassification : IClassifiable<QuantitativeLabResult>
     {
+        private readonly QuantitativeLab _lab;
+        private readonly Patient _patient;
 
         public QuantitativeLabClassification(QuantitativeLab lab, Patient patient)
         {
@@ -15,19 +16,30 @@ namespace GeekMDSuite.Analytics.Classification
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             Lab = QuantitativeLabRepository.GetLab(lab);
         }
-        
+
         public QuantitativeLabClassificationModel Lab { get; }
 
         public QuantitativeLabResult Classification => Classify();
 
-        public override string ToString() => 
-            $"Lab - {_lab.Result} {Lab.UnitsUs} ({Classification}) [{GetLowerBound()} - {GetUpperBound()} {Lab.UnitsUs}]";
+        public override string ToString()
+        {
+            return
+                $"Lab - {_lab.Result} {Lab.UnitsUs} ({Classification}) [{GetLowerBound()} - {GetUpperBound()} {Lab.UnitsUs}]";
+        }
 
-        private double GetUpperBound() => Gender.IsGenotypeXx(_patient.Gender) 
-            ? Lab.UpperLimitOfNormalFemale : Lab.UpperLimitOfNormalMale;
+        private double GetUpperBound()
+        {
+            return Gender.IsGenotypeXx(_patient.Gender)
+                ? Lab.UpperLimitOfNormalFemale
+                : Lab.UpperLimitOfNormalMale;
+        }
 
-        private double GetLowerBound() => Gender.IsGenotypeXx(_patient.Gender)
-            ? Lab.LowerLimitOfNormalFemale : Lab.LowerLimitOfNormalMale;
+        private double GetLowerBound()
+        {
+            return Gender.IsGenotypeXx(_patient.Gender)
+                ? Lab.LowerLimitOfNormalFemale
+                : Lab.LowerLimitOfNormalMale;
+        }
 
         private QuantitativeLabResult Classify()
         {
@@ -67,7 +79,5 @@ namespace GeekMDSuite.Analytics.Classification
                         return QuantitativeLabResult.InvalidResult;
             }
         }
-        private readonly QuantitativeLab _lab;
-        private readonly Patient _patient;
     }
 }

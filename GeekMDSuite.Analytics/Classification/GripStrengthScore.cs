@@ -3,7 +3,7 @@
     public enum GripStrengthScore
     {
         Weak,
-        Normal, 
+        Normal,
         Strong
     }
 }

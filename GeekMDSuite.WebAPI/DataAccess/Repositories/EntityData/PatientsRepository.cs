@@ -41,7 +41,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 
             var found = Context.Patients.Where(
                 p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString());
-            
+
             if (!found.Any())
                 throw new RepositoryElementNotFoundException(dateOfBirth.ToShortDateString());
 

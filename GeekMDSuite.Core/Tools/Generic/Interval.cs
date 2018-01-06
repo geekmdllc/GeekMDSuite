@@ -14,16 +14,49 @@ namespace GeekMDSuite.Core.Tools.Generic
         public T Upper { get; }
         public T Lower { get; }
 
-        public static Interval<T> Create(T lower, T upper) => new Interval<T>(lower, upper);
+        public static Interval<T> Create(T lower, T upper)
+        {
+            return new Interval<T>(lower, upper);
+        }
 
-        public bool ContainsClosed(T val) => ( GreaterThanOrEqualToLowerBound(val) && LowerThanOrEqualToUpperBound(val) );
-        public bool ContainsOpen(T val) => ( GreaterThanLowerBound(val) && LessThanUpperBound(val) );
-        public bool ContainsRightOpen(T val) => ( GreaterThanOrEqualToLowerBound(val) && LessThanUpperBound(val) );
-        public bool ContainsLeftOpen(T val) => ( GreaterThanLowerBound(val) && LowerThanOrEqualToUpperBound(val) );
-        
-        private bool GreaterThanOrEqualToLowerBound(T val) => Lower.CompareTo(val) <= 0;
-        private bool LowerThanOrEqualToUpperBound(T val) => Upper.CompareTo(val) >= 0;
-        private bool GreaterThanLowerBound(T val) => Lower.CompareTo(val) < 0;
-        private bool LessThanUpperBound(T val) => Upper.CompareTo(val) > 0;
+        public bool ContainsClosed(T val)
+        {
+            return GreaterThanOrEqualToLowerBound(val) && LowerThanOrEqualToUpperBound(val);
+        }
+
+        public bool ContainsOpen(T val)
+        {
+            return GreaterThanLowerBound(val) && LessThanUpperBound(val);
+        }
+
+        public bool ContainsRightOpen(T val)
+        {
+            return GreaterThanOrEqualToLowerBound(val) && LessThanUpperBound(val);
+        }
+
+        public bool ContainsLeftOpen(T val)
+        {
+            return GreaterThanLowerBound(val) && LowerThanOrEqualToUpperBound(val);
+        }
+
+        private bool GreaterThanOrEqualToLowerBound(T val)
+        {
+            return Lower.CompareTo(val) <= 0;
+        }
+
+        private bool LowerThanOrEqualToUpperBound(T val)
+        {
+            return Upper.CompareTo(val) >= 0;
+        }
+
+        private bool GreaterThanLowerBound(T val)
+        {
+            return Lower.CompareTo(val) < 0;
+        }
+
+        private bool LessThanUpperBound(T val)
+        {
+            return Upper.CompareTo(val) > 0;
+        }
     }
 }

@@ -11,10 +11,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     public class AudiogramsController : AnalyzablePatientDataController<AudiogramEntity>
     {
         private readonly IClassificationRepository _classifications;
-        public AudiogramsController(IUnitOfWork unitOfWork, IClassificationRepository classifications) : base(unitOfWork)
+
+        public AudiogramsController(IUnitOfWork unitOfWork, IClassificationRepository classifications) : base(
+            unitOfWork)
         {
             _classifications = classifications;
         }
+
         public override IActionResult Interpret(int id)
         {
             throw new NotImplementedException();

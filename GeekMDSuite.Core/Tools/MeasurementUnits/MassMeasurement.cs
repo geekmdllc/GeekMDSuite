@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.Core.Tools.MeasurementUnits
 {
-    public class MassMeasurement 
+    public class MassMeasurement
     {
         protected MassMeasurement(double pounds)
         {
@@ -11,15 +11,17 @@ namespace GeekMDSuite.Core.Tools.MeasurementUnits
 
         protected MassMeasurement()
         {
-            
         }
 
-        public double Pounds { get; set;  }
+        public double Pounds { get; set; }
 
         public double Kilograms => MassConversion.LbsToKilograms(Pounds);
 
         public double Grams => MassConversion.KilogramsToGrams(Kilograms);
 
-        public override string ToString() => $"{Pounds} lbs";
+        public override string ToString()
+        {
+            return $"{Pounds} lbs";
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.Core;
-using GeekMDSuite.Core.Models;
+﻿using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.Analytics.Classification

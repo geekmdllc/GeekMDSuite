@@ -2,17 +2,16 @@
 {
     public class BodyCompositionClassificationResult
     {
-        public BodyCompositionResult BodyComposition { get; }
-
         public BodyCompositionClassificationResult()
         {
-            
         }
 
         public BodyCompositionClassificationResult(BodyCompositionResult bodyComposition)
         {
             BodyComposition = bodyComposition;
         }
+
+        public BodyCompositionResult BodyComposition { get; }
 
         public static BodyCompositionClassificationResult Build(BodyCompositionResult bodyCompositionResult)
         {

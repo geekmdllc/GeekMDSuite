@@ -5,6 +5,9 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class AudiogramClassification : IClassifiable<AudiogramClassificationResult>
     {
+        private readonly AudiogramDataset _left;
+        private readonly AudiogramDataset _right;
+
         public AudiogramClassification(Audiogram audiogram)
         {
             _left = audiogram.Left;
@@ -13,18 +16,17 @@ namespace GeekMDSuite.Analytics.Classification
 
         public AudiogramClassification()
         {
-            
         }
 
-        private readonly AudiogramDataset _left;
-        private readonly AudiogramDataset _right;
-        
         public AudiogramClassificationResult Classification => new AudiogramClassificationResult(
-                GetClassification(),
-                GetLaterality(),
-                WorseSide());
+            GetClassification(),
+            GetLaterality(),
+            WorseSide());
 
-        public override string ToString() => Classification.ToString();
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
 
         private Laterality GetLaterality()
         {
@@ -39,7 +41,8 @@ namespace GeekMDSuite.Analytics.Classification
 
         private bool LeftIsWorseThanRight()
         {
-            return AudiogramDatasetClassification.HighestDatapoint(_left) >  AudiogramDatasetClassification.HighestDatapoint(_right);
+            return AudiogramDatasetClassification.HighestDatapoint(_left) >
+                   AudiogramDatasetClassification.HighestDatapoint(_right);
         }
 
         private bool LeftAndRightSideAreEqual()
@@ -54,10 +57,11 @@ namespace GeekMDSuite.Analytics.Classification
                 ? new AudiogramDatasetClassification(_left).Classification
                 : new AudiogramDatasetClassification(_right).Classification;
         }
+
         private bool DifferenceLessThan10dB()
         {
-            return Math.Abs(AudiogramDatasetClassification.HighestDatapoint(_left) - AudiogramDatasetClassification.HighestDatapoint(_right)) < 10.0f;
+            return Math.Abs(AudiogramDatasetClassification.HighestDatapoint(_left) -
+                            AudiogramDatasetClassification.HighestDatapoint(_right)) < 10.0f;
         }
-
     }
 }

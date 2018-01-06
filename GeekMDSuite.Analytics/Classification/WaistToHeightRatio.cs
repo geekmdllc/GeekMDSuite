@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Analytics.Classification
 {
-    public enum WaistToHeightRatio 
+    public enum WaistToHeightRatio
     {
         ExtremelySlim = 1,
         Slim = 2,

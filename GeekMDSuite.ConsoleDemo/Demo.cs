@@ -65,23 +65,23 @@ namespace GeekMDSuite.ConsoleDemo
 
             var quantitativeLabChoesterol = Quantitative.Serum.CholesterolTotal(300);
             Console.WriteLine($"Quantitative Lab: {quantitativeLabChoesterol}.{NewLine}");
-            
+
             var quantitativeLabHdlC = Quantitative.Serum.HighDensityLipoprotein(35);
             Console.WriteLine($"Quantitative Lab: {quantitativeLabHdlC}.{NewLine}");
 
             var quantitativeLabLdlC = Quantitative.Serum.LowDensityLipoprotein(173);
             Console.WriteLine($"Quantitative Lab: {quantitativeLabLdlC}.{NewLine}");
-            
+
             var qualitativeLab = Qualitative.HepatitisCAntibody(QualitativeLabResult.Negative);
             Console.WriteLine($"Qualitative Lab: {qualitativeLab.Type}, Result: {qualitativeLab.Result}{NewLine}");
 
             var cardioRegimen = CardiovascularRegimen.Build(3, 98.5, ExerciseIntensity.Moderate);
             Console.WriteLine($"Cardio regimen: {cardioRegimen}{NewLine}");
-            
+
             var stretchRegimen = StretchingRegimen.Build(1, 10, ExerciseIntensity.Low);
             Console.WriteLine($"Stretching regimen: {stretchRegimen}{NewLine}");
-            
-            var resistanceRegimen =  ResistanceRegimenBuilder
+
+            var resistanceRegimen = ResistanceRegimenBuilder
                 .Initialize()
                 .SetAverageSessionDuration(120)
                 .SetIntensity(ExerciseIntensity.Moderate)
@@ -106,7 +106,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .Set6000HertzDataPoint(50)
                 .Set8000HertzDataPoint(70)
                 .Build();
-            
+
             var audiogramDataRight = AudiogramDatasetBuilder
                 .Initialize()
                 .Set125HertzDataPoint(10)
@@ -119,7 +119,7 @@ namespace GeekMDSuite.ConsoleDemo
                 .Set6000HertzDataPoint(50)
                 .Set8000HertzDataPoint(90)
                 .Build();
-            
+
             var audiogram = Audiogram.Build(audiogramDataLeft, audiogramDataRight);
             Console.WriteLine($"Audiogram{NewLine}{audiogram}{NewLine}");
 
@@ -240,91 +240,91 @@ namespace GeekMDSuite.ConsoleDemo
 
             var cardioIniterp = new CardiovascularRegimenClassification(cardioRegimen);
             Console.WriteLine($"Cardio Regimen: {cardioIniterp}{NewLine}");
-            
+
             var resistanceInterp = new ResistanceRegimenClassification(resistanceRegimen);
             Console.WriteLine($"Resistance Regimen: {resistanceInterp}{NewLine}");
 
             var stretchingInterp = new StretchingRegimenClassification(stretchRegimen);
             Console.WriteLine($"Stretching Regimen: {stretchingInterp}{NewLine}");
-            
+
             var audiogramInterpretation = new AudiogramClassification(audiogram);
             Console.WriteLine($"Audiogram Classification: {audiogramInterpretation}{NewLine}");
-            
+
             var bpInterpretation = new BloodPressureClassification(vitals.BloodPressure);
             Console.WriteLine($"BP Classification: {bpInterpretation}{NewLine}");
-            
+
             var bodyCompInterp = new BodyCompositionClassification(bodyCompositionExpanded, patient);
             Console.WriteLine($"Body comp: {bodyCompInterp}{NewLine}");
-            
+
             var bodyCompExpandedInterp = new BodyCompositionExpandedClassification(bodyCompositionExpanded, patient);
             Console.WriteLine($"Body comp expanded: {bodyCompExpandedInterp}{NewLine}");
-            
+
             var bmiInterp = new BodyMassIndexClassification(bodyComposition, patient);
             Console.WriteLine($"BMI: {bmiInterp}{NewLine}");
-            
+
             var carotidUsInterp = new CarotidUltrasoundClassification(carotidUs);
             Console.WriteLine($"Carotid US: {carotidUsInterp}{NewLine}");
-            
+
             var centralBpInterp = new CentralBloodPressureClassification(centralBp, patient);
             Console.WriteLine($"Central BP: {centralBpInterp}{NewLine}");
-            
+
             var fitScoreInterp = new FitTreadmillScoreClassification(treadmillStressTest, patient);
             Console.WriteLine($"FIT Score: {fitScoreInterp}{NewLine}");
-            
+
             var fmsInterpretation = new FunctionalMovementScreenClassification(functionalMovementScreen);
             Console.WriteLine($"FMS{NewLine}{fmsInterpretation}{NewLine}");
-            
+
             var gripInterp = new GripStrengthClassification(gripStrength, patient);
             Console.WriteLine($"Grip strength: {gripInterp}{NewLine}");
-            
+
             var hipToWaistInterp = new HipToWaistClassification(bodyCompositionExpanded, patient);
             Console.WriteLine($"Hip to Waist: {hipToWaistInterp}{NewLine}");
-            
+
             var ishiharaSixInterp = new IshiharaSixPlateClassification(ishiharaSix);
             Console.WriteLine($"Ishihara 6 Plate: {ishiharaSixInterp}{NewLine}");
-            
+
             var ocularPressureInterp = new OcularPressureClassification(ocularPressure);
             Console.WriteLine($"Ocular Pressure: {ocularPressureInterp}{NewLine}");
-            
+
             var percentBodyFatInterp = new PercentBodyFatClassification(bodyCompositionExpanded, patient);
             Console.WriteLine($"Percent BF: {percentBodyFatInterp}{NewLine}");
 
             var peripheralVisionInterp = new PeripheralVisionClassification(peripheralVision);
             Console.WriteLine($"Peripheral Vision: {peripheralVisionInterp}{NewLine}");
-            
+
             var pushupsInterp = new PushupsClassification(pushups, patient);
             Console.WriteLine($"Pushups: {pushupsInterp}{NewLine}");
-            
+
             var qualitativeLabInterp = new QualitativeLabClassification(qualitativeLab);
             Console.WriteLine($"Qualitative Lab: {qualitativeLabInterp}{NewLine}");
-            
+
             var quantLabInterpTotalChol = new QuantitativeLabClassification(quantitativeLabChoesterol, patient);
             Console.WriteLine($"Quantitative Lab: {quantLabInterpTotalChol}{NewLine}");
-            
+
             var quantLabInterpHdlC = new QuantitativeLabClassification(quantitativeLabHdlC, patient);
             Console.WriteLine($"Quantitative Lab: {quantLabInterpHdlC}{NewLine}");
-            
+
             var quantLabInterpLdlC = new QuantitativeLabClassification(quantitativeLabLdlC, patient);
             Console.WriteLine($"Quantitative Lab: {quantLabInterpLdlC}{NewLine}");
-            
+
             var sitAndReachInterp = new SitAndReachClassification(sitAndReach, patient);
             Console.WriteLine($"Sit & Reach: {sitAndReachInterp}{NewLine}");
-            
+
             var situpsInterp = new SitupsClassification(situps, patient);
             Console.WriteLine($"Situps: {situpsInterp}{NewLine}");
-            
+
             var spirometryInterp = new SpirometryClassification(spirometry, patient, bodyComposition);
             Console.WriteLine($"Spirometry: {spirometryInterp}{NewLine}");
-            
+
             var visceralFatInterp = new VisceralFatClassification(bodyCompositionExpanded);
             Console.WriteLine($"Visceral fat: {visceralFatInterp}{NewLine}");
-            
+
             var visualAcuityInterp = new VisualAcuityClassification(visualAcuity);
             Console.WriteLine($"Visual Acuity: {visualAcuityInterp}{NewLine}");
-            
+
             var vo2MaxInterp = new Vo2MaxClassification(vo2Max, patient);
             Console.WriteLine($"VO2 Max: {vo2MaxInterp}{NewLine}");
-            
+
             var waistToHeightInterp = new WaistToHeightRatioClassification(bodyComposition, patient);
             Console.WriteLine($"Waist to Height: {waistToHeightInterp}{NewLine}");
 
@@ -337,12 +337,13 @@ namespace GeekMDSuite.ConsoleDemo
                 .ConfirmOnAntiHypertensiveMedication()
                 .ConfirmSmoker()
                 .Build();
-            
+
             var pooledCohortsEquation = new PooledCohortsEquation(pooledCohortParams);
             Console.WriteLine($"ASCVD 10yr-Risk%: {pooledCohortsEquation.Ascvd10YearRiskPercentage}{NewLine}");
             Console.WriteLine($"ASCVD Lifetime Risk%: {pooledCohortsEquation.AscvdLifetimeRiskPercentage}{NewLine}");
-            
-            var ascvd10YrInterp = new AscvdClassification(AscvdParameters.Build(patient, vitals.BloodPressure, quantitativeLabChoesterol, quantitativeLabLdlC, quantitativeLabHdlC));
+
+            var ascvd10YrInterp = new AscvdClassification(AscvdParameters.Build(patient, vitals.BloodPressure,
+                quantitativeLabChoesterol, quantitativeLabLdlC, quantitativeLabHdlC));
 
             Console.WriteLine($"ASCVD 10-Year Risk Classification{NewLine}{ascvd10YrInterp.Classification}{NewLine}");
         }

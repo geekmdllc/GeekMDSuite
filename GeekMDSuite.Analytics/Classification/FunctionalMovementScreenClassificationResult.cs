@@ -6,6 +6,8 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class FunctionalMovementScreenClassificationResult
     {
+        public readonly int Score;
+
         public FunctionalMovementScreenClassificationResult(
             FunctionalMovementScreen functionalMovementScreen)
         {
@@ -28,17 +30,16 @@ namespace GeekMDSuite.Analytics.Classification
         public FmsMovementClassificationResult ActiveStraightLegRaise { get; }
         public FmsMovementClassificationResult TrunkStabilityPushup { get; }
         public FmsMovementClassificationResult RotaryStability { get; }
-        public readonly int Score;
 
         public override string ToString()
         {
-            return $"Deep Squat: {DeepSquat}{Environment.NewLine}"+
-                   $"Hurdle Step: {HurdleStep}{Environment.NewLine}"+
+            return $"Deep Squat: {DeepSquat}{Environment.NewLine}" +
+                   $"Hurdle Step: {HurdleStep}{Environment.NewLine}" +
                    $"Shoulder Mobility: {ShoulderMobility}{Environment.NewLine}" +
                    $"Inline Lunge: {InlineLunge}{Environment.NewLine}" +
                    $"Active Straight Leg Raise: {ActiveStraightLegRaise}{Environment.NewLine}" +
-                   $"Trunk Stability Pushup: {TrunkStabilityPushup}{Environment.NewLine}"+
-                   $"Rotary Stability: {RotaryStability}{Environment.NewLine}"+ 
+                   $"Trunk Stability Pushup: {TrunkStabilityPushup}{Environment.NewLine}" +
+                   $"Rotary Stability: {RotaryStability}{Environment.NewLine}" +
                    $"Score: {Score}";
         }
 
@@ -52,7 +53,7 @@ namespace GeekMDSuite.Analytics.Classification
                    functionalMovementScreen.ShoulderMobility.Score +
                    functionalMovementScreen.TrunkStabilityPushup.Score;
         }
-        
+
         private static FmsMovementClassificationResult ClassifyMovement(FmsMovementSet movementSet)
         {
             return new FmsMovementClassificationResult(
@@ -60,7 +61,7 @@ namespace GeekMDSuite.Analytics.Classification
                 MovementSetClassification.RecommendedAction(movementSet)
             );
         }
-        
+
         private static FmsMovementClassificationResult ClassifyMovement(FmsMovementData movementSet)
         {
             return new FmsMovementClassificationResult(
@@ -74,7 +75,7 @@ namespace GeekMDSuite.Analytics.Classification
             public static FmsScoreFlag CalculateFlag(FmsMovementData movement)
             {
                 var score = movement.Score;
-                
+
                 if (score == 0)
                     return FmsScoreFlag.L0R0;
                 if (score == 1)
@@ -89,7 +90,7 @@ namespace GeekMDSuite.Analytics.Classification
             public static FmsRecommendedAction RecommendedAction(FmsMovementData movement)
             {
                 var flag = CalculateFlag(movement);
-                
+
                 if (flag == FmsScoreFlag.L0R0)
                     return FmsRecommendedAction.MedicalAttention;
                 if (flag == FmsScoreFlag.L1R1)
@@ -106,10 +107,12 @@ namespace GeekMDSuite.Analytics.Classification
             {
                 var left = set.Left;
                 var right = set.Right;
-                
-                switch(left.Score) {
+
+                switch (left.Score)
+                {
                     default:
-                        switch(right.Score) {
+                        switch (right.Score)
+                        {
                             default:
                                 return FmsScoreFlag.L0R0;
                             case 1:
@@ -120,7 +123,8 @@ namespace GeekMDSuite.Analytics.Classification
                                 return FmsScoreFlag.L0R3;
                         }
                     case 1:
-                        switch(right.Score) {
+                        switch (right.Score)
+                        {
                             default:
                                 return FmsScoreFlag.L1R0;
                             case 1:
@@ -131,7 +135,8 @@ namespace GeekMDSuite.Analytics.Classification
                                 return FmsScoreFlag.L1R3;
                         }
                     case 2:
-                        switch(right.Score) {
+                        switch (right.Score)
+                        {
                             default:
                                 return FmsScoreFlag.L2R0;
                             case 1:
@@ -142,7 +147,8 @@ namespace GeekMDSuite.Analytics.Classification
                                 return FmsScoreFlag.L2R3;
                         }
                     case 3:
-                        switch(right.Score) {
+                        switch (right.Score)
+                        {
                             default:
                                 return FmsScoreFlag.L3R0;
                             case 1:
@@ -151,44 +157,45 @@ namespace GeekMDSuite.Analytics.Classification
                                 return FmsScoreFlag.L3R2;
                             case 3:
                                 return FmsScoreFlag.L3R3;
-                    }
+                        }
+                }
             }
-        }
-        // Recommended actions to take include laterality. The 
-        // calculated score only contributes to the total score
-        // and if the total score is below a threshold a flag is 
-        // thrown. But, assymetry also has importance.
-        public static FmsRecommendedAction RecommendedAction(FmsMovementSet fmsMovementSet)
-        {
-            var flag = CalculateFlag(fmsMovementSet);
-            switch (flag) {
-                // Zero scores anywhere require medical attention
-                case FmsScoreFlag.L0R0:
-                case FmsScoreFlag.L0R1:
-                case FmsScoreFlag.L0R2:
-                case FmsScoreFlag.L0R3:
-                case FmsScoreFlag.L1R0:
-                case FmsScoreFlag.L2R0:
-                case FmsScoreFlag.L3R0:
-                    return FmsRecommendedAction.MedicalAttention;
-                // 1s or assymetry require caution (restricted)
-                case FmsScoreFlag.L1R1:
-                case FmsScoreFlag.L1R2:
-                case FmsScoreFlag.L1R3:
-                case FmsScoreFlag.L2R1:
-                case FmsScoreFlag.L2R3:
-                case FmsScoreFlag.L3R1:
-                case FmsScoreFlag.L3R2:
-                    return FmsRecommendedAction.Restricted;
-                // Symmetric 2's and 3's do not require significant supervision.
-                case FmsScoreFlag.L2R2:
-                case FmsScoreFlag.L3R3:
-                    return FmsRecommendedAction.Unrestricted;
-                default:
-                    throw new InvalidEnumArgumentException(nameof(flag));
-                
+
+            // Recommended actions to take include laterality. The 
+            // calculated score only contributes to the total score
+            // and if the total score is below a threshold a flag is 
+            // thrown. But, assymetry also has importance.
+            public static FmsRecommendedAction RecommendedAction(FmsMovementSet fmsMovementSet)
+            {
+                var flag = CalculateFlag(fmsMovementSet);
+                switch (flag)
+                {
+                    // Zero scores anywhere require medical attention
+                    case FmsScoreFlag.L0R0:
+                    case FmsScoreFlag.L0R1:
+                    case FmsScoreFlag.L0R2:
+                    case FmsScoreFlag.L0R3:
+                    case FmsScoreFlag.L1R0:
+                    case FmsScoreFlag.L2R0:
+                    case FmsScoreFlag.L3R0:
+                        return FmsRecommendedAction.MedicalAttention;
+                    // 1s or assymetry require caution (restricted)
+                    case FmsScoreFlag.L1R1:
+                    case FmsScoreFlag.L1R2:
+                    case FmsScoreFlag.L1R3:
+                    case FmsScoreFlag.L2R1:
+                    case FmsScoreFlag.L2R3:
+                    case FmsScoreFlag.L3R1:
+                    case FmsScoreFlag.L3R2:
+                        return FmsRecommendedAction.Restricted;
+                    // Symmetric 2's and 3's do not require significant supervision.
+                    case FmsScoreFlag.L2R2:
+                    case FmsScoreFlag.L3R3:
+                        return FmsRecommendedAction.Unrestricted;
+                    default:
+                        throw new InvalidEnumArgumentException(nameof(flag));
+                }
             }
-        }
         }
     }
 }

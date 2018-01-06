@@ -4,6 +4,8 @@ namespace GeekMDSuite.WebAPI.Presentation.StatusCodeResults
 {
     public class ConflictResult : StatusCodeResult
     {
-        public ConflictResult() : base(409) { }
+        public ConflictResult() : base(409)
+        {
+        }
     }
 }

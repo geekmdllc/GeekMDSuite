@@ -6,10 +6,7 @@ namespace GeekMDSuite.Core.Helpers
         {
             var i = 0;
             var newString = string.Empty;
-            foreach (var c in str)
-            {
-                newString += $"{(char.IsUpper(c) && i++ > 0 ? $" {c}" : $"{c}")}";
-            }
+            foreach (var c in str) newString += $"{(char.IsUpper(c) && i++ > 0 ? $" {c}" : $"{c}")}";
 
             return newString;
         }

@@ -18,22 +18,22 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             var beforeImtLeft = cueBefore.Left.IntimaMediaMeasurementMillimeters;
             var beforeImtRight = cueBefore.Right.IntimaMediaMeasurementMillimeters;
 
-            var newCu = new CarotidUltrasoundEntity()
+            var newCu = new CarotidUltrasoundEntity
             {
                 Id = cueBefore.Id,
-                Left = (CarotidUltrasoundResultBuilder.Initialize()
+                Left = CarotidUltrasoundResultBuilder.Initialize()
                     .SetIntimaMediaThickeness(0.802)
-                    .Build()),
-                Right = (CarotidUltrasoundResultBuilder.Initialize()
+                    .Build(),
+                Right = CarotidUltrasoundResultBuilder.Initialize()
                     .SetIntimaMediaThickeness(0.801)
-                    .Build())
+                    .Build()
             };
-            
+
             _unitOfWork.CarotidUltrasounds.Update(newCu);
             _unitOfWork.Complete();
 
             var cueAfter = _unitOfWork.CarotidUltrasounds.FindById(cueBefore.Id);
-            
+
             Assert.NotEqual(beforeImtRight, cueAfter.Right.IntimaMediaMeasurementMillimeters);
             Assert.NotEqual(beforeImtLeft, cueAfter.Left.IntimaMediaMeasurementMillimeters);
             Assert.Equal(0.801, cueAfter.Right.IntimaMediaMeasurementMillimeters);

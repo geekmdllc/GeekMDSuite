@@ -12,7 +12,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     {
         private readonly IClassificationRepository _classifications;
 
-        public CarotidUltrasoundsController(IUnitOfWork unitOfWork, IClassificationRepository classifications) : base(unitOfWork)
+        public CarotidUltrasoundsController(IUnitOfWork unitOfWork, IClassificationRepository classifications) :
+            base(unitOfWork)
         {
             _classifications = classifications;
         }

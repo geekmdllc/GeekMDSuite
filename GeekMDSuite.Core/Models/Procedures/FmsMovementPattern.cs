@@ -1,6 +1,7 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public enum FmsMovementPattern {
+    public enum FmsMovementPattern
+    {
         DeepSquat,
         HurdleStep,
         InlineLunge,

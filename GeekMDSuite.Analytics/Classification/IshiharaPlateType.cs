@@ -1,8 +1,9 @@
 ﻿namespace GeekMDSuite.Analytics.Classification
 {
-    public enum IshiharaPlateType {
+    public enum IshiharaPlateType
+    {
         Numeral,
         NumeralProtanDuetan,
-        Traceable,
+        Traceable
     }
 }

@@ -4,8 +4,8 @@
     {
         public Name()
         {
-            
         }
+
         private Name(string first, string last, string middle = "")
         {
             First = first;
@@ -17,8 +17,14 @@
         public string Middle { get; set; }
         public string Last { get; set; }
 
-        public static Name Build(string first, string last, string middle = "") => new Name(first, last, middle);
+        public static Name Build(string first, string last, string middle = "")
+        {
+            return new Name(first, last, middle);
+        }
 
-        public override string ToString() => string.Format($"{First}{(string.IsNullOrEmpty(Middle) ? "" : $" {Middle}")} {Last}");
+        public override string ToString()
+        {
+            return string.Format($"{First}{(string.IsNullOrEmpty(Middle) ? "" : $" {Middle}")} {Last}");
+        }
     }
 }

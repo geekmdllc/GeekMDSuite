@@ -1,30 +1,33 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
     public class Vo2MaxClassification : IClassifiable<FitnessClassification>
     {
-        private readonly double _vo2Max;
         private readonly Patient _patient;
+        private readonly double _vo2Max;
 
         public Vo2MaxClassification(double vo2Max, Patient patient)
         {
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             _vo2Max = vo2Max;
         }
-        
+
         public FitnessClassification Classification => Classify();
 
-        public override string ToString() => Classification.ToString();
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
 
         private FitnessClassification Classify()
         {
             if (_patient.Age < 13) throw new ArgumentException("Age must be 13 or greater.");
-            
-            return Gender.IsGenotypeXx(_patient.Gender) 
-                ? GetFemaleClassification(_vo2Max, _patient.Age) : GetMaleClassification(_vo2Max, _patient.Age);
+
+            return Gender.IsGenotypeXx(_patient.Gender)
+                ? GetFemaleClassification(_vo2Max, _patient.Age)
+                : GetMaleClassification(_vo2Max, _patient.Age);
         }
 
         private static FitnessClassification GetMaleClassification(double vo2Max, double ageInYears)
@@ -39,7 +42,7 @@ namespace GeekMDSuite.Analytics.Classification
                 return MaleUnder55Classification(vo2Max);
             return ageInYears <= 65 ? MaleUnder65Classification(vo2Max) : MaleOver65Classification(vo2Max);
         }
-        
+
         private static FitnessClassification GetFemaleClassification(double vo2Max, double ageInYears)
         {
             if (ageInYears <= 25)
@@ -142,7 +145,7 @@ namespace GeekMDSuite.Analytics.Classification
                 return FitnessClassification.BelowAverage;
             return vo2Max >= 30 ? FitnessClassification.Poor : FitnessClassification.VeryPoor;
         }
-        
+
         private static FitnessClassification FemaleOver65Classification(double vo2Max)
         {
             if (vo2Max > 32)

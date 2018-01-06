@@ -6,6 +6,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
     public class VisitsRepository : RepositoryAssociatedWithVisit<VisitEntity>, IVisitsRepository
     {
-        public VisitsRepository(GeekMdSuiteDbContext context) : base (context) { }
-     }
+        public VisitsRepository(GeekMdSuiteDbContext context) : base(context)
+        {
+        }
+    }
 }

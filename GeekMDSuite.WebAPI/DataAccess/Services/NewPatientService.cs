@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -10,15 +9,14 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
-    public class NewPatientService :  NewKeyEntityService<PatientEntity, Patient>, INewPatientService
+    public class NewPatientService : NewKeyEntityService<PatientEntity, Patient>, INewPatientService
     {
-  
         public override PatientEntity GenerateUsing(Patient patient)
         {
             VerifyContextIsLoaded();
             ValidatePatientFormat(patient);
             MedicalRecordNumberAlreadyExists(patient);
-            
+
             var newPatient = new PatientEntity();
             newPatient.MapValues(patient);
             newPatient.Guid = Guid.NewGuid();
@@ -29,17 +27,17 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
         private static void ValidatePatientFormat(Patient patient)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
-            
+
             var message = new List<string>();
-            
-            if (patient.Name.IsMalformed()) 
+
+            if (patient.Name.IsMalformed())
                 message.Add("Name");
-            if (patient.MedicalRecordNumber.IsEmpty()) 
+            if (patient.MedicalRecordNumber.IsEmpty())
                 message.Add("MedicalRecordNumber");
-            if (patient.DateOfBirth.IsOutOfRange()) 
+            if (patient.DateOfBirth.IsOutOfRange())
                 message.Add("DateOfBirth");
-            
-            if(message.Any()) throw new FormatException(string.Join(", ", message));
+
+            if (message.Any()) throw new FormatException(string.Join(", ", message));
         }
 
         private void MedicalRecordNumberAlreadyExists(Patient patient)
@@ -57,6 +55,5 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 
             if (mrnExists) throw new MedicalRecordAlreadyExistsException(patient.MedicalRecordNumber);
         }
-
     }
 }

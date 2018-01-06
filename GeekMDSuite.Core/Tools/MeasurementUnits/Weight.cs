@@ -8,8 +8,11 @@
 
         protected internal Weight()
         {
-            
         }
-        public static Weight Build(double pounds) => new Weight(pounds);
+
+        public static Weight Build(double pounds)
+        {
+            return new Weight(pounds);
+        }
     }
 }

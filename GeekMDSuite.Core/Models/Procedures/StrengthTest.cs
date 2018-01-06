@@ -3,7 +3,7 @@
     public enum StrengthTest
     {
         Situps,
-        Pushups, 
+        Pushups,
         SitAndReach
     }
 }

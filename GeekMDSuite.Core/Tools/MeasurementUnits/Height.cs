@@ -8,9 +8,11 @@
 
         protected internal Height()
         {
-            
         }
-        
-        public static Height Build(double inches) => new Height(inches);
+
+        public static Height Build(double inches)
+        {
+            return new Height(inches);
+        }
     }
 }

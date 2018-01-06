@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.Core.Tools.MeasurementUnits;
@@ -65,9 +64,9 @@ namespace GeekMDSuite.Analytics.Tools.Fitness
         {
             if (Gender.IsGenotypeXx(patient.Gender))
                 return 4.38 * fractionalMinutes - 3.9;
-            return 14.8 - (1.379 * fractionalMinutes) +
-                   (0.451 * Math.Pow(fractionalMinutes, 2)) -
-                   (0.012 * Math.Pow(fractionalMinutes, 3));
+            return 14.8 - 1.379 * fractionalMinutes +
+                   0.451 * Math.Pow(fractionalMinutes, 2) -
+                   0.012 * Math.Pow(fractionalMinutes, 3);
         }
 
         private static string NotImplementedMessage(TreadmillProtocol protocol)

@@ -1,14 +1,16 @@
-﻿using GeekMDSuite.Core;
-using GeekMDSuite.Core.Models;
+﻿using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Tools.Generic;
 
 namespace GeekMDSuite.Analytics.Repositories
 {
     internal static class SitAndReachRepository
     {
-        
-        public static MuscularStrengthRepositoryEntry GetRanges(Patient patient) => 
-            Gender.IsGenotypeXy(patient.Gender) ? Male.Ranges : Female.Ranges;
+        private static Interval<int> AgeRange => Interval<int>.Create(0, 999);
+
+        public static MuscularStrengthRepositoryEntry GetRanges(Patient patient)
+        {
+            return Gender.IsGenotypeXy(patient.Gender) ? Male.Ranges : Female.Ranges;
+        }
 
         private static class Male
         {
@@ -21,7 +23,5 @@ namespace GeekMDSuite.Analytics.Repositories
             public static MuscularStrengthRepositoryEntry Ranges =>
                 new MuscularStrengthRepositoryEntry(AgeRange, -15, -7, 1, 11, 21, 30);
         }
-        
-        private static Interval<int> AgeRange => Interval<int>.Create(0,999);
     }
 }

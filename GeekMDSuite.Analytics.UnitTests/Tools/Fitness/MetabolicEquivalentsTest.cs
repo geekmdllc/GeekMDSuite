@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Tools.Fitness;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
@@ -13,7 +12,8 @@ namespace GeekMDSuite.Analytics.UnitTests.Tools.Fitness
         [Theory]
         [InlineData(45, GenderIdentity.Male, 11, 12)]
         [InlineData(45, GenderIdentity.Female, 13, 14)]
-        public void GivenPatientAndTreamill_ReturnsCorrectResult(int age, GenderIdentity genderIdentity, int expectedLower, int expectedUpper)
+        public void GivenPatientAndTreamill_ReturnsCorrectResult(int age, GenderIdentity genderIdentity,
+            int expectedLower, int expectedUpper)
         {
             var dateOfBirth = DateTime.Now.AddYears(-age);
             var patient = PatientBuilder.Initialize()
@@ -28,18 +28,21 @@ namespace GeekMDSuite.Analytics.UnitTests.Tools.Fitness
             var result = CalculateMetabolicEquivalents.FromTreadmillStressTest(treadmill, patient);
             Assert.InRange(result, expectedLower, expectedUpper);
         }
-  
-        [Fact]
-        public void NullTreadmillStressTest_ThrowsNullReferenceException()
-        {
-            Assert.Throws<NullReferenceException>(() => CalculateMetabolicEquivalents.FromTreadmillStressTest(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
-        }
 
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<NullReferenceException>(() =>
-                CalculateMetabolicEquivalents.FromTreadmillStressTest(TreadmillExerciseStressTestBuilder.Initialize().BuildWithoutModelValidation(), null));
+                CalculateMetabolicEquivalents.FromTreadmillStressTest(
+                    TreadmillExerciseStressTestBuilder.Initialize().BuildWithoutModelValidation(), null));
+        }
+
+        [Fact]
+        public void NullTreadmillStressTest_ThrowsNullReferenceException()
+        {
+            Assert.Throws<NullReferenceException>(() =>
+                CalculateMetabolicEquivalents.FromTreadmillStressTest(null,
+                    PatientBuilder.Initialize().BuildWithoutModelValidation()));
         }
     }
 }

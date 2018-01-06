@@ -1,8 +1,10 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public class CarotidUltrasoundResult 
+    public class CarotidUltrasoundResult
     {
-        private CarotidUltrasoundResult(double intimaMediaMeasurementMillimeters, CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character, CarotidPercentStenosisGrade stenosis)
+        private CarotidUltrasoundResult(double intimaMediaMeasurementMillimeters,
+            CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character,
+            CarotidPercentStenosisGrade stenosis)
         {
             IntimaMediaMeasurementMillimeters = intimaMediaMeasurementMillimeters;
             Grade = grade;
@@ -12,7 +14,6 @@
 
         public CarotidUltrasoundResult()
         {
-            
         }
 
         public double IntimaMediaMeasurementMillimeters { get; set; }
@@ -22,10 +23,15 @@
 
         public static CarotidUltrasoundResult Build(double intimaMediaMeasurementMillimeters,
             CarotidIntimaMediaThicknessGrade grade, CarotidPlaqueCharacter character,
-            CarotidPercentStenosisGrade stenosis) => 
-            new CarotidUltrasoundResult(intimaMediaMeasurementMillimeters, grade, character, stenosis);
+            CarotidPercentStenosisGrade stenosis)
+        {
+            return new CarotidUltrasoundResult(intimaMediaMeasurementMillimeters, grade, character, stenosis);
+        }
 
-        public override string ToString() => 
-            $"{IntimaMediaMeasurementMillimeters}mm {Grade} IMT thickening {Stenosis} stenosis {Character} character";
+        public override string ToString()
+        {
+            return
+                $"{IntimaMediaMeasurementMillimeters}mm {Grade} IMT thickening {Stenosis} stenosis {Character} character";
+        }
     }
 }

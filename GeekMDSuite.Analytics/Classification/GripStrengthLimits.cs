@@ -7,17 +7,11 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class GripStrengthLimits
     {
-        internal static GripStrengthLimits BuildFromKilogramsInput(double lower, double upper) 
-            => BuildFromPoundsInput(MassConversion.KilogramsToLbs(lower), MassConversion.KilogramsToLbs(upper));
-
-        private static GripStrengthLimits BuildFromPoundsInput(double lower, double upper) 
-            => new GripStrengthLimits(lower, upper);
-
         private GripStrengthLimits(double lowerPounds, double upperPounds)
             : this(GripMeasurement.Build(lowerPounds), GripMeasurement.Build(upperPounds))
         {
         }
-        
+
         private GripStrengthLimits(MassMeasurement lower, MassMeasurement upper)
         {
             LowerLimitOfNormal = lower ?? throw new ArgumentNullException(nameof(lower));
@@ -26,5 +20,15 @@ namespace GeekMDSuite.Analytics.Classification
 
         public MassMeasurement LowerLimitOfNormal { get; }
         public MassMeasurement UpperLimitOfNormal { get; }
+
+        internal static GripStrengthLimits BuildFromKilogramsInput(double lower, double upper)
+        {
+            return BuildFromPoundsInput(MassConversion.KilogramsToLbs(lower), MassConversion.KilogramsToLbs(upper));
+        }
+
+        private static GripStrengthLimits BuildFromPoundsInput(double lower, double upper)
+        {
+            return new GripStrengthLimits(lower, upper);
+        }
     }
 }

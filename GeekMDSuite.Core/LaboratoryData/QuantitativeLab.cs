@@ -2,9 +2,11 @@
 
 namespace GeekMDSuite.Core.LaboratoryData
 {
-    public class QuantitativeLab 
+    public class QuantitativeLab
     {
-        public QuantitativeLab() {}
+        public QuantitativeLab()
+        {
+        }
 
         private QuantitativeLab(
             double result,
@@ -15,14 +17,21 @@ namespace GeekMDSuite.Core.LaboratoryData
             Type = type;
             MeasurementSystem = measurementSystem;
         }
-        public double Result { get; set; }
-        
-        public QuantitativeLabType Type { get; set; }
-        
-        public MeasurementSystem MeasurementSystem { get; set; }
-        
-        public override string ToString() => $"Quantitative Lab: {Type}, Result: {Result}";
 
-        internal static QuantitativeLab Create(double result, QuantitativeLabType type) => new QuantitativeLab(result, type);
+        public double Result { get; set; }
+
+        public QuantitativeLabType Type { get; set; }
+
+        public MeasurementSystem MeasurementSystem { get; set; }
+
+        public override string ToString()
+        {
+            return $"Quantitative Lab: {Type}, Result: {Result}";
+        }
+
+        internal static QuantitativeLab Create(double result, QuantitativeLabType type)
+        {
+            return new QuantitativeLab(result, type);
+        }
     }
 }

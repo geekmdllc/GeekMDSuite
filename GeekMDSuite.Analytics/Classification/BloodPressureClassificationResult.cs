@@ -1,4 +1,3 @@
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Helpers;
 using GeekMDSuite.Core.Models;
 
@@ -6,14 +5,14 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class BloodPressureClassificationResult
     {
-        public BloodPressureStage Stage { get; set; }
-        public string Description => Stage.ToString().SplitAtCapitalization();
-        public BloodPressure Pressure { get; set; }
-
         public BloodPressureClassificationResult()
         {
             Pressure = new BloodPressure();
         }
+
+        public BloodPressureStage Stage { get; set; }
+        public string Description => Stage.ToString().SplitAtCapitalization();
+        public BloodPressure Pressure { get; set; }
 
         public BloodPressureClassificationResult Build(BloodPressure bloodPressure, BloodPressureStage stage)
         {
@@ -22,6 +21,9 @@ namespace GeekMDSuite.Analytics.Classification
             return this;
         }
 
-        public override string ToString() => Description;
+        public override string ToString()
+        {
+            return Description;
+        }
     }
 }

@@ -6,25 +6,42 @@ using GeekMDSuite.Core.Builders;
 
 namespace GeekMDSuite.Analytics.Classification.CompositeScores
 {
-    internal class AscvdClassificationResultBuilder : Builder<AscvdClassificationResultBuilder, AscvdClassificationResult>
+    internal class
+        AscvdClassificationResultBuilder : Builder<AscvdClassificationResultBuilder, AscvdClassificationResult>
     {
+        private AscvdAspirinRecommendation _aspirinRecommendation;
+        private bool _aspirinRecommendationIsSet;
+        private AscvdRiskClassification _lifetimeRiskClassification;
+        private bool _lifetimeRiskClassificationIsSet;
+
+
+        private PooledCohortsEquation _pooledCohortsEquation;
+        private List<AscvdModifiableRiskFactors> _riskFactors = new List<AscvdModifiableRiskFactors>();
+        private bool _riskFactorsAreSet;
+        private AscvdStatinCandidacy _statinCandidacy;
+        private bool _statinCandidacyIsSet;
+        private AscvdStatinRecommendation _statinRecommendation;
+        private bool _statinRecommendationIsSet;
+        private AscvdRiskClassification _tenYearRiskClassification;
+        private bool _tenYearRiskClassificationIsSet;
+
         public override AscvdClassificationResult Build()
         {
             ValidatePreBuildState();
             return AscvdClassificationResult.Build(
-                    _pooledCohortsEquation,
-                    _tenYearRiskClassification,
-                    _statinCandidacy,
-                    _statinRecommendation,
-                    _aspirinRecommendation,
-                    _riskFactors,
-                    _lifetimeRiskClassification
-                );
+                _pooledCohortsEquation,
+                _tenYearRiskClassification,
+                _statinCandidacy,
+                _statinRecommendation,
+                _aspirinRecommendation,
+                _riskFactors,
+                _lifetimeRiskClassification
+            );
         }
 
         public override AscvdClassificationResult BuildWithoutModelValidation()
         {
-            return new AscvdClassificationResult()
+            return new AscvdClassificationResult
             {
                 PooledCohortsEquation = _pooledCohortsEquation,
                 RiskFactors = _riskFactors,
@@ -41,60 +58,53 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             _pooledCohortsEquation = pooledCohortsEquation;
             return this;
         }
-        public AscvdClassificationResultBuilder SetTenYearRiskClassification(AscvdRiskClassification tenYearRiskClassification)
+
+        public AscvdClassificationResultBuilder SetTenYearRiskClassification(
+            AscvdRiskClassification tenYearRiskClassification)
         {
             _tenYearRiskClassificationIsSet = true;
             _tenYearRiskClassification = tenYearRiskClassification;
             return this;
         }
-        
-        public AscvdClassificationResultBuilder SetLifetimeRiskClassification(AscvdRiskClassification lifetimeRiskClassification)
+
+        public AscvdClassificationResultBuilder SetLifetimeRiskClassification(
+            AscvdRiskClassification lifetimeRiskClassification)
         {
             _lifetimeRiskClassificationIsSet = true;
             _lifetimeRiskClassification = lifetimeRiskClassification;
             return this;
         }
+
         public AscvdClassificationResultBuilder SetStatinCandidacy(AscvdStatinCandidacy statinCandidacy)
         {
             _statinCandidacyIsSet = true;
             _statinCandidacy = statinCandidacy;
             return this;
         }
+
         public AscvdClassificationResultBuilder SetStatinRecommendations(AscvdStatinRecommendation statinRecommendation)
         {
             _statinRecommendationIsSet = true;
             _statinRecommendation = statinRecommendation;
             return this;
         }
-        public AscvdClassificationResultBuilder SetAspirinRecommendation(AscvdAspirinRecommendation aspirinRecommendation)
+
+        public AscvdClassificationResultBuilder SetAspirinRecommendation(
+            AscvdAspirinRecommendation aspirinRecommendation)
         {
             _aspirinRecommendationIsSet = true;
             _aspirinRecommendation = aspirinRecommendation;
             return this;
         }
+
         public AscvdClassificationResultBuilder SetRiskFactors(List<AscvdModifiableRiskFactors> riskFactors)
         {
             _riskFactorsAreSet = true;
             _riskFactors = riskFactors;
             return this;
         }
-        
-        
-        private PooledCohortsEquation _pooledCohortsEquation;
-        private bool _tenYearRiskClassificationIsSet;
-        private AscvdRiskClassification _tenYearRiskClassification;
-        private bool _lifetimeRiskClassificationIsSet;
-        private AscvdRiskClassification _lifetimeRiskClassification;
-        private bool _statinCandidacyIsSet;
-        private AscvdStatinCandidacy _statinCandidacy;
-        private bool _statinRecommendationIsSet;
-        private AscvdStatinRecommendation _statinRecommendation;
-        private bool _aspirinRecommendationIsSet;
-        private AscvdAspirinRecommendation _aspirinRecommendation;
-        private bool _riskFactorsAreSet;
-        private List<AscvdModifiableRiskFactors> _riskFactors = new List<AscvdModifiableRiskFactors>();
-        
-        
+
+
         private void ValidatePreBuildState()
         {
             var builder = new StringBuilder();
@@ -107,7 +117,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             if (!_riskFactorsAreSet) builder.Append(nameof(SetRiskFactors));
 
             var message = builder.ToString();
-            if(!string.IsNullOrWhiteSpace(message))
+            if (!string.IsNullOrWhiteSpace(message))
                 throw new MissingMethodException(message);
         }
     }

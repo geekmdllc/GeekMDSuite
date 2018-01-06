@@ -12,6 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json")]
     public class VisitsController : VisitDataController<VisitEntity>
     {
+        private readonly INewVisitService _newVisitService;
 
         public VisitsController(IUnitOfWork unitOfWork, INewVisitService newVisitService) : base(unitOfWork)
         {
@@ -39,7 +40,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest($"{nameof(VisitEntity)} is malformed.");
             }
         }
-        
+
         // GET api/visits/bymrn/"guid"
         [HttpGet("bymrn/{mrn}")]
         public IActionResult GetByMedicalRecordNumber(string mrn)
@@ -57,7 +58,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
         // GET api/visits/byname
         [HttpGet("byname/{name}")]
         public IActionResult GetByName(string name)
@@ -75,7 +76,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest();
             }
         }
-        
+
         // GET api/visits/bydob/"dateOfBirth"
         [HttpGet("bydob/{dateOfBirth}")]
         public IActionResult GetByDateOfBirth(string dateOfBirth)
@@ -98,7 +99,5 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
-        private readonly INewVisitService _newVisitService;
     }
 }

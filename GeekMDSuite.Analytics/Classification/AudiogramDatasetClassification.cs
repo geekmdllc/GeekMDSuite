@@ -7,12 +7,16 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class AudiogramDatasetClassification : IClassifiable<HearingLoss>
     {
+        private readonly AudiogramDataset _audiogramDataset;
 
-        public AudiogramDatasetClassification(AudiogramDataset dataset) 
+        public AudiogramDatasetClassification(AudiogramDataset dataset)
         {
             _audiogramDataset = dataset ?? throw new ArgumentNullException(nameof(dataset));
         }
-        public HearingLoss Classification => AudiogramDataPointClassification.Classify(HighestDatapoint(_audiogramDataset));
+
+        public HearingLoss Classification =>
+            AudiogramDataPointClassification.Classify(HighestDatapoint(_audiogramDataset));
+
         public static int HighestDatapoint(AudiogramDataset audiogramDataset)
         {
             var list = new List<int>
@@ -29,7 +33,5 @@ namespace GeekMDSuite.Analytics.Classification
             };
             return list.Max();
         }
-        
-        private readonly AudiogramDataset _audiogramDataset;
     }
 }

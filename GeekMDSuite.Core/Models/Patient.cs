@@ -15,10 +15,10 @@ namespace GeekMDSuite.Core.Models
         }
 
         private Patient(
-            Name name, 
-            DateTime dateOfBirth, 
-            Gender gender, 
-            Race race, 
+            Name name,
+            DateTime dateOfBirth,
+            Gender gender,
+            Race race,
             string medicalRecordNumber,
             List<ChronicDisease> comorbidities) : this()
         {
@@ -29,6 +29,7 @@ namespace GeekMDSuite.Core.Models
             Race = race;
             Comorbidities = comorbidities;
         }
+
         public DateTime DateOfBirth { get; set; }
         public int Age => DateOfBirth.ElapsedYears();
         public Name Name { get; set; }
@@ -37,15 +38,20 @@ namespace GeekMDSuite.Core.Models
         public Race Race { get; set; }
         public List<ChronicDisease> Comorbidities { get; set; }
 
-        public override string ToString() => $@"{Name} ({Age} yr {Race} {Gender}) MRN: {MedicalRecordNumber}";
+        public override string ToString()
+        {
+            return $@"{Name} ({Age} yr {Race} {Gender}) MRN: {MedicalRecordNumber}";
+        }
 
         internal static Patient Build(
-            Name name, 
-            DateTime dateOfBirth, 
-            Gender gender, 
-            Race race, 
+            Name name,
+            DateTime dateOfBirth,
+            Gender gender,
+            Race race,
             string medicalRecordNumber,
-            List<ChronicDisease> comorbidities) 
-            => new Patient(name, dateOfBirth, gender, race, medicalRecordNumber, comorbidities);
+            List<ChronicDisease> comorbidities)
+        {
+            return new Patient(name, dateOfBirth, gender, race, medicalRecordNumber, comorbidities);
+        }
     }
 }

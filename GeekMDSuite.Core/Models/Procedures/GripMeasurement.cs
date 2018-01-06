@@ -11,9 +11,11 @@ namespace GeekMDSuite.Core.Models.Procedures
 
         public GripMeasurement()
         {
-            
         }
 
-        public static GripMeasurement Build(double pounds) => new GripMeasurement(pounds);
+        public static GripMeasurement Build(double pounds)
+        {
+            return new GripMeasurement(pounds);
+        }
     }
 }

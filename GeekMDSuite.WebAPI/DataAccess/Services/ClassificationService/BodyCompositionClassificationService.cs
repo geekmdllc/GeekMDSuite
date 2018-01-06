@@ -12,20 +12,20 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services.ClassificationService
     {
         public BodyCompositionClassificationService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            
         }
-        
-        public override ClassificationService<BodyCompositionClassification, BodyCompositionClassificationResult> InitializeWith(int id)
+
+        public override ClassificationService<BodyCompositionClassification, BodyCompositionClassificationResult>
+            InitializeWith(int id)
         {
             var bodyComposition = UnitOfWork.BodyCompositions.FindById(id);
             var visits = UnitOfWork.Visits.FindByVisit(bodyComposition.VisitId).FirstOrDefault();
-            if (visits == null) 
+            if (visits == null)
                 throw new NullReferenceException();
-            
+
             var patient = UnitOfWork.Patients.FindByGuid(visits.PatientGuid);
-            
+
             Classifier = new BodyCompositionClassification(bodyComposition, patient);
-            
+
             return this;
         }
     }

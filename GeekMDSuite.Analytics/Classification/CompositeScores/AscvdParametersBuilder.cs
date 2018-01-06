@@ -8,6 +8,13 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
 {
     public class AscvdParametersBuilder : Builder<AscvdParametersBuilder, AscvdParameters>
     {
+        private BloodPressure _bloodPressure;
+        private QuantitativeLab _hdlCholesterol;
+        private QuantitativeLab _ldlCholesterol;
+
+        private Patient _patient;
+        private QuantitativeLab _totalCholesterol;
+
         public override AscvdParameters Build()
         {
             ValidatePreBuildState();
@@ -16,7 +23,7 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
 
         public override AscvdParameters BuildWithoutModelValidation()
         {
-            return new AscvdParameters()
+            return new AscvdParameters
             {
                 Patient = _patient,
                 BloodPressure = _bloodPressure,
@@ -55,14 +62,8 @@ namespace GeekMDSuite.Analytics.Classification.CompositeScores
             _hdlCholesterol = hdlCholesterol;
             return this;
         }
-        
-        private Patient _patient;
-        private BloodPressure _bloodPressure;
-        private QuantitativeLab _totalCholesterol;
-        private QuantitativeLab _ldlCholesterol;
-        private QuantitativeLab _hdlCholesterol;
-        
-        
+
+
         private void ValidatePreBuildState()
         {
             var builder = new StringBuilder();

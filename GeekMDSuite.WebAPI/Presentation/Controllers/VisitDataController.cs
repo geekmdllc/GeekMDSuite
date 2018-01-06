@@ -11,6 +11,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json")]
     public abstract class VisitDataController<T> : EntityDataController<T> where T : class, IVisitData<T>
     {
+        private readonly IRepositoryAssociatedWithVisit<T> _repo;
+
+        protected VisitDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+            _repo = UnitOfWork.VisitData<T>();
+        }
+
         [HttpGet("byvisit/{guid}")]
         public IActionResult GetByVisitGuid(Guid guid)
         {
@@ -27,7 +34,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
+
         [HttpGet("bypatient/{guid}")]
         public IActionResult GetByPatientGuid(Guid guid)
         {
@@ -44,13 +51,5 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound();
             }
         }
-        
-        protected VisitDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-            _repo = UnitOfWork.VisitData<T>();
-        }
-        
-        private readonly IRepositoryAssociatedWithVisit<T> _repo;
-        
     }
 }

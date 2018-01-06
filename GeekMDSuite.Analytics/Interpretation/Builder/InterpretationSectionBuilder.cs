@@ -2,28 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 
 namespace GeekMDSuite.Analytics.Interpretation.Builder
 {
-    public class InterpretationSectionBuilder : Builder<InterpretationSectionBuilder,InterpretationSection>
+    public class InterpretationSectionBuilder : Builder<InterpretationSectionBuilder, InterpretationSection>
     {
+        private readonly List<string> _paragraphs;
+
+        private string _title;
+
+        public InterpretationSectionBuilder()
+        {
+            _paragraphs = new List<string>();
+        }
+
         public override InterpretationSection Build()
         {
             ValidatePreBuildState();
             return BuildWithoutModelValidation();
         }
 
-        public override InterpretationSection BuildWithoutModelValidation() => new InterpretationSection()
+        public override InterpretationSection BuildWithoutModelValidation()
         {
-            Paragraphs = _paragraphs,
-            Title = _title
-        };
-
-        public InterpretationSectionBuilder()
-        {
-            _paragraphs = new List<string>();
+            return new InterpretationSection
+            {
+                Paragraphs = _paragraphs,
+                Title = _title
+            };
         }
 
         public InterpretationSectionBuilder SetTitle(string title)
@@ -31,7 +37,7 @@ namespace GeekMDSuite.Analytics.Interpretation.Builder
             _title = title;
             return this;
         }
-        
+
         public InterpretationSectionBuilder AddParagraph(string paragraph)
         {
             _paragraphs.Add(paragraph);
@@ -50,8 +56,5 @@ namespace GeekMDSuite.Analytics.Interpretation.Builder
             if (!string.IsNullOrEmpty(message))
                 throw new MissingMethodException(message);
         }
-        
-        private string _title;
-        private readonly List<string> _paragraphs;
     }
 }

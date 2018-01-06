@@ -9,7 +9,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json")]
     public class GripStrengthsController : AnalyzablePatientDataController<GripStrengthEntity>
     {
-        public GripStrengthsController(IUnitOfWork unitOfWork) : base(unitOfWork) {}
+        public GripStrengthsController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
 
         public override IActionResult Interpret(int id)
         {

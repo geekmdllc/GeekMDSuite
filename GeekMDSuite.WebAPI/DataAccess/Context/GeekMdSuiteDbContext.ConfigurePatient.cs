@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
+﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Context

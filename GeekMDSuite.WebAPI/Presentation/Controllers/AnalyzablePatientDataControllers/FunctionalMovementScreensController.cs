@@ -9,7 +9,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json")]
     public class FunctionalMovementScreensController : AnalyzablePatientDataController<FunctionalMovementScreenEntity>
     {
-        public FunctionalMovementScreensController(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+        public FunctionalMovementScreensController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
 
         public override IActionResult Interpret(int id)
         {

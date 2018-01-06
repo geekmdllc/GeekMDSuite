@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
@@ -9,10 +8,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<BloodPressureEntity> GetBloodPressureEntities()
         {
-            return new List<BloodPressureEntity>()
+            return new List<BloodPressureEntity>
             {
-                new BloodPressureEntity(BloodPressure.Build(115, 75)) { VisitId = XerMajestiesVisitGuid },
-                new BloodPressureEntity(BloodPressure.Build(190, 110, true)) { VisitId = BruceWaynesVisitGuid },
+                new BloodPressureEntity(BloodPressure.Build(115, 75)) {VisitId = XerMajestiesVisitGuid},
+                new BloodPressureEntity(BloodPressure.Build(190, 110, true)) {VisitId = BruceWaynesVisitGuid}
             };
         }
     }

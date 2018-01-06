@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Models
 {
-    public enum BloodPressureStage 
+    public enum BloodPressureStage
     {
         Low = 1,
         Normal = 2,

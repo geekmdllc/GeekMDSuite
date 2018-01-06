@@ -8,11 +8,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services.ClassificationService
     public class AscvdClassificationService :
         ClassificationService<AscvdClassification, AscvdClassificationResult>, IAscvdClassificationService
     {
-
         public AscvdClassificationService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            
         }
+
         public override ClassificationService<AscvdClassification, AscvdClassificationResult> InitializeWith(int id)
         {
             throw new NotImplementedException();

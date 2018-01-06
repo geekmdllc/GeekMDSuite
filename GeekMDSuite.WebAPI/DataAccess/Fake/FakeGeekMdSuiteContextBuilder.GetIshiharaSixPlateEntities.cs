@@ -26,7 +26,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 .SetPlate6(IshiharaAnswerResult.NormalVision)
                 .Build();
 
-            return new List<IshiharaSixPlateEntity>()
+            return new List<IshiharaSixPlateEntity>
             {
                 new IshiharaSixPlateEntity(set1) {VisitId = BruceWaynesVisitGuid},
                 new IshiharaSixPlateEntity(set2) {VisitId = XerMajestyGuid}

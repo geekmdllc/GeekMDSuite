@@ -11,7 +11,8 @@ namespace GeekMDSuite.Analytics.Helpers
         {
             var assembly = Assembly.GetExecutingAssembly();
             var names = assembly.GetManifestResourceNames();
-            var resourceStream = assembly.GetManifestResourceStream(names.First( n => n.Contains(fileName)));
-            return new StreamReader(resourceStream, Encoding.UTF8).ReadToEnd();}
+            var resourceStream = assembly.GetManifestResourceStream(names.First(n => n.Contains(fileName)));
+            return new StreamReader(resourceStream, Encoding.UTF8).ReadToEnd();
+        }
     }
 }

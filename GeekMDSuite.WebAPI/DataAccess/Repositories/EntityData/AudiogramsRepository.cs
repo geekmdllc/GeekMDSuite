@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
     public class AudiogramsRepository : RepositoryAssociatedWithVisit<AudiogramEntity>, IAudiogramsRepository
     {
-        public AudiogramsRepository(GeekMdSuiteDbContext context) : base (context)
+        public AudiogramsRepository(GeekMdSuiteDbContext context) : base(context)
         {
         }
     }

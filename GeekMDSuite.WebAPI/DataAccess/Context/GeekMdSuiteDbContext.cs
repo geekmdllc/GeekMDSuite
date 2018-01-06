@@ -1,13 +1,17 @@
-﻿using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
+﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Context
 {
     public partial class GeekMdSuiteDbContext : DbContext
     {
-        public GeekMdSuiteDbContext() {}
-        public GeekMdSuiteDbContext(DbContextOptions<GeekMdSuiteDbContext> options) : base(options) {}
+        public GeekMdSuiteDbContext()
+        {
+        }
+
+        public GeekMdSuiteDbContext(DbContextOptions<GeekMdSuiteDbContext> options) : base(options)
+        {
+        }
 
         public virtual DbSet<AudiogramEntity> Audiograms { get; set; }
         public virtual DbSet<BloodPressureEntity> BloodPressures { get; set; }

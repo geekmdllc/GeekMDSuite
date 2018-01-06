@@ -1,6 +1,7 @@
 ﻿namespace GeekMDSuite.Core.Models
 {
-    public enum MeasurementSystem {
+    public enum MeasurementSystem
+    {
         TraditionalUs,
         Metric
     }

@@ -1,21 +1,28 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public class PeripheralVision 
+    public class PeripheralVision
     {
-        public static PeripheralVision Build(int leftDegrees, int rightDegrees) 
-            => new PeripheralVision(leftDegrees, rightDegrees);
-
-        public int Left { get; set; }
-        public int Right { get; set; }
-
-        public override string ToString() => $"Left: {Left} degrees, Right: {Right} degrees";
-        
         private PeripheralVision(int left, int right) : this()
         {
             Left = left;
             Right = right;
         }
 
-        protected PeripheralVision() {} 
+        protected PeripheralVision()
+        {
+        }
+
+        public int Left { get; set; }
+        public int Right { get; set; }
+
+        public static PeripheralVision Build(int leftDegrees, int rightDegrees)
+        {
+            return new PeripheralVision(leftDegrees, rightDegrees);
+        }
+
+        public override string ToString()
+        {
+            return $"Left: {Left} degrees, Right: {Right} degrees";
+        }
     }
 }

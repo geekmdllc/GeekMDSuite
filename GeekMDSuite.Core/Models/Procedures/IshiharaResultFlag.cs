@@ -1,6 +1,7 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public enum IshiharaResultFlag {
+    public enum IshiharaResultFlag
+    {
         NormalVision,
         IndeterminantResult,
         ColorVisionDeficit

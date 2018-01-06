@@ -57,10 +57,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             var audiogram2 = Audiogram.Build(left2, right2);
 
-            return new List<AudiogramEntity>()
+            return new List<AudiogramEntity>
             {
-                new AudiogramEntity(audiogram) { VisitId = XerMajestiesVisitGuid},
-                new AudiogramEntity(audiogram2) { VisitId = BruceWaynesVisitGuid}
+                new AudiogramEntity(audiogram) {VisitId = XerMajestiesVisitGuid},
+                new AudiogramEntity(audiogram2) {VisitId = BruceWaynesVisitGuid}
             };
         }
     }
