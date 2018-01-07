@@ -7,11 +7,11 @@ namespace GeekMDSuite.Utilities.Helpers
 {
     public static class ReflectionHelper
     {
-        public static string GetAssetFromExecutingAssembly(string fileName)
+        public static string LoadFileFromCallingAssembly(string fileName)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var names = assembly.GetManifestResourceNames();
-            var resourceStream = assembly.GetManifestResourceStream(names.First(n => n.Contains(fileName)));
+            var callingAssembly = Assembly.GetCallingAssembly();
+            var names = callingAssembly.GetManifestResourceNames();
+            var resourceStream = callingAssembly.GetManifestResourceStream(names.First(n => n.Contains(fileName)));
             return new StreamReader(resourceStream, Encoding.UTF8).ReadToEnd();
         }
     }
