@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Core.Models;
+using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
-using GeekMDSuite.WebAPI.Core.Helpers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services

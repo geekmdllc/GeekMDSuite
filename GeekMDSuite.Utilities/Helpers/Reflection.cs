@@ -3,9 +3,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace GeekMDSuite.Analytics.Helpers
+namespace GeekMDSuite.Utilities.Helpers
 {
-    internal static class Reflection
+    public static class Reflection
     {
         public static string GetAssetFromExecutingAssembly(string fileName)
         {

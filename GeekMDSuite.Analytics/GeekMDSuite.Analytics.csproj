@@ -7,6 +7,10 @@
       <Project>{B9275F4E-646B-4A7C-8B91-40837B346D20}</Project>
       <Name>GeekMDSuite.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GeekMDSuite.Utilities\GeekMDSuite.Utilities.csproj">
+      <Project>{657BBCDC-AD9B-41A2-8C04-E1ACB68D13D8}</Project>
+      <Name>GeekMDSuite.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="_assets\quantitative_labs.json" />

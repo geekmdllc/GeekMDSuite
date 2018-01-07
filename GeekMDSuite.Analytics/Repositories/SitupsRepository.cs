@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Tools.Generic;
+using GeekMDSuite.Utilities.Generic;
 
 namespace GeekMDSuite.Analytics.Repositories
 {

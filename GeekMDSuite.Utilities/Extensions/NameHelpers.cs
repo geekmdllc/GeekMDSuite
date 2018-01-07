@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.Core.Models;
 
-namespace GeekMDSuite.WebAPI.Core.Helpers
+namespace GeekMDSuite.Utilities.Extensions
 {
     public static class NameHelpers
     {

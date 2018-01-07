@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeekMDSuite.Core.Tools.Generic
+namespace GeekMDSuite.Utilities.Generic
 {
     public class Interval<T> where T : struct, IComparable
     {

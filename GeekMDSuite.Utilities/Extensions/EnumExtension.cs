@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace GeekMDSuite.Core.Extensions
+namespace GeekMDSuite.Utilities.Extensions
 {
     public static class EnumExtension<T> where T : struct, IConvertible
     {
-        public static int Count
+        public static int CountElements
         {
             get
             {

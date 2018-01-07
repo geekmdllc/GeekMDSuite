@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeekMDSuite.Core.Extensions;
+using GeekMDSuite.Utilities.Extensions;
 
 namespace GeekMDSuite.Core.Models
 {

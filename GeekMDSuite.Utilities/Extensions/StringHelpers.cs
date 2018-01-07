@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace GeekMDSuite.WebAPI.Core.Helpers
+namespace GeekMDSuite.Utilities.Extensions
 {
     public static class StringHelpers
     {
@@ -26,6 +26,15 @@ namespace GeekMDSuite.WebAPI.Core.Helpers
         public static bool IsEqualTo(this string query, string comparison)
         {
             return string.Equals(query, comparison, StringComparison.OrdinalIgnoreCase);
+        }
+        
+        public static string SplitAtCapitalization(this string str)
+        {
+            var i = 0;
+            var newString = string.Empty;
+            foreach (var c in str) newString += $"{(char.IsUpper(c) && i++ > 0 ? $" {c}" : $"{c}")}";
+
+            return newString;
         }
     }
 }

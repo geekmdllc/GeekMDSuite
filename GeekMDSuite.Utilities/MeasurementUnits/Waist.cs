@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Core.Tools.MeasurementUnits
+﻿namespace GeekMDSuite.Utilities.MeasurementUnits
 {
     public class Waist : LengthMeasurement
     {
@@ -6,7 +6,7 @@
         {
         }
 
-        protected internal Waist()
+        public Waist()
         {
         }
 

@@ -2,7 +2,7 @@
 using GeekMDSuite.Analytics.Repositories;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
-using GeekMDSuite.Core.Tools.MeasurementUnits;
+using GeekMDSuite.Utilities.MeasurementUnits;
 
 namespace GeekMDSuite.Analytics.Classification
 {

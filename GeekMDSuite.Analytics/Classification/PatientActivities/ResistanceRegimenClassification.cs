@@ -1,8 +1,8 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
-using GeekMDSuite.Core.Extensions;
 using GeekMDSuite.Core.Models.PatientActivities;
-using GeekMDSuite.Core.Tools.Generic;
+using GeekMDSuite.Utilities.Extensions;
+using GeekMDSuite.Utilities.Generic;
 
 namespace GeekMDSuite.Analytics.Classification.PatientActivities
 {
@@ -51,7 +51,7 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.PushingMovementsPerformed)) presentFeatures++;
                 if (_regimen.Features.Contains(ResistenceRegimenFeatures.RepetitionsToNearFailure)) presentFeatures++;
 
-                return presentFeatures == EnumExtension<ResistenceRegimenFeatures>.Count;
+                return presentFeatures == EnumExtension<ResistenceRegimenFeatures>.CountElements;
             }
         }
     }

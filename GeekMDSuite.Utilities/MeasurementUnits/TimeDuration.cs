@@ -1,8 +1,8 @@
-﻿namespace GeekMDSuite.Core.Tools.MeasurementUnits
+﻿namespace GeekMDSuite.Utilities.MeasurementUnits
 {
     public class TimeDuration
     {
-        protected internal TimeDuration()
+        public TimeDuration()
         {
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeekMDSuite.Core.Extensions
+namespace GeekMDSuite.Utilities.Extensions
 {
     public static class DateTimeExtension
     {
@@ -16,6 +16,11 @@ namespace GeekMDSuite.Core.Extensions
                 || currentDate.Month < originalDate.Month)
                 return --years;
             return years;
+        }
+
+        public static bool IsOutOfRange(this DateTime date)
+        {
+            return date <= DateTime.Now.AddYears(-150) || date >= DateTime.Now;
         }
     }
 }

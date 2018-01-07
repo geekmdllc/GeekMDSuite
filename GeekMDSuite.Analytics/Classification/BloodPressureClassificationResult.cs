@@ -1,5 +1,5 @@
-using GeekMDSuite.Core.Helpers;
 using GeekMDSuite.Core.Models;
+using GeekMDSuite.Utilities.Extensions;
 
 namespace GeekMDSuite.Analytics.Classification
 {

@@ -1,5 +1,5 @@
 ﻿using GeekMDSuite.Core.Models.PatientActivities;
-using GeekMDSuite.Core.Tools.Generic;
+using GeekMDSuite.Utilities.Generic;
 
 namespace GeekMDSuite.Analytics.Repositories
 {

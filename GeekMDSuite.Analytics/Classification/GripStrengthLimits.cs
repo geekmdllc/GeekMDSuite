@@ -1,7 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Core.Models.Procedures;
-using GeekMDSuite.Core.Tools.MeasurementUnits;
-using GeekMDSuite.Core.Tools.MeasurementUnits.Conversion;
+using GeekMDSuite.Utilities.MeasurementUnits;
+using GeekMDSuite.Utilities.MeasurementUnits.Conversion;
 
 namespace GeekMDSuite.Analytics.Classification
 {

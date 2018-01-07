@@ -2,7 +2,7 @@
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Tools.MeasurementUnits.Conversion;
+using GeekMDSuite.Utilities.MeasurementUnits.Conversion;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification

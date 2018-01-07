@@ -1,5 +1,5 @@
 ﻿using System;
-using GeekMDSuite.Core.Extensions;
+using GeekMDSuite.Utilities.Extensions;
 using Xunit;
 
 namespace GeekMDSuite.Core.UnitTests

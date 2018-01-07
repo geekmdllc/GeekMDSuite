@@ -1,6 +1,6 @@
-﻿using GeekMDSuite.Core.Tools.MeasurementUnits.Conversion;
+﻿using GeekMDSuite.Utilities.MeasurementUnits.Conversion;
 
-namespace GeekMDSuite.Core.Tools.MeasurementUnits
+namespace GeekMDSuite.Utilities.MeasurementUnits
 {
     public class LengthMeasurement
     {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeekMDSuite.Core.Models;
+using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
-using GeekMDSuite.WebAPI.Core.Helpers;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -70,7 +71,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException(name);
 
-            var patientGuids = Context.Patients.Where(patient => patient.Name.IsSimilarTo(name)).Select(p => p.Guid);
+            var patientGuids = Context.Patients.Where(patient => NameHelpers.IsSimilarTo((Name) patient.Name, name)).Select(p => p.Guid);
 
             if (!patientGuids.Any())
                 throw new RepositoryElementNotFoundException(name);

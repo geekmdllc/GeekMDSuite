@@ -1,4 +1,4 @@
-﻿using GeekMDSuite.Core.Tools.Generic;
+﻿using GeekMDSuite.Utilities.Generic;
 using Xunit;
 
 namespace GeekMDSuite.Core.UnitTests

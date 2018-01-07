@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.Core.Tools.MeasurementUnits
+﻿namespace GeekMDSuite.Utilities.MeasurementUnits
 {
     public class Weight : MassMeasurement
     {
@@ -6,7 +6,7 @@
         {
         }
 
-        protected internal Weight()
+        public Weight()
         {
         }
 
