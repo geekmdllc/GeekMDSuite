@@ -71,7 +71,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException(name);
 
-            var patientGuids = Context.Patients.Where(patient => NameHelpers.IsSimilarTo((Name) patient.Name, name)).Select(p => p.Guid);
+            var patientGuids = Context.Patients.Where(patient => patient.Name.IsSimilarTo(name)).Select(p => p.Guid);
 
             if (!patientGuids.Any())
                 throw new RepositoryElementNotFoundException(name);

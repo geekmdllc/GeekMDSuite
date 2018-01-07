@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GeekMDSuite.Utilities.Helpers
 {
-    public static class Reflection
+    public static class ReflectionHelper
     {
         public static string GetAssetFromExecutingAssembly(string fileName)
         {

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace GeekMDSuite.Utilities.Extensions
+namespace GeekMDSuite.Utilities.Helpers
 {
-    public static class EnumExtension<T> where T : struct, IConvertible
+    public static class EnumHelper<T> where T : struct, IConvertible
     {
         public static int CountElements
         {

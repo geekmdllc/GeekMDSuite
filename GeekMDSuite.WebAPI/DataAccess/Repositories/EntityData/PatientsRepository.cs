@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         public IEnumerable<PatientEntity> FindByName(string query)
         {
             if (query.IsEmpty()) throw new ArgumentNullException(query);
-            var result = Context.Patients.Where(p => NameHelpers.IsSimilarTo((Name) p.Name, query));
+            var result = Context.Patients.Where(p => p.Name.IsSimilarTo(query));
             if (!result.Any()) throw new RepositoryElementNotFoundException(query);
 
             return result;

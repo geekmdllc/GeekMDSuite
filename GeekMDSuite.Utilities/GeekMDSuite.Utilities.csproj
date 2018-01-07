@@ -2,7 +2,4 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GeekMDSuite.Core\GeekMDSuite.Core.csproj" />
-  </ItemGroup>
 </Project>

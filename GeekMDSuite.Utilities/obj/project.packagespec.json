@@ -14,11 +14,7 @@
     ],
     "frameworks": {
       "netcoreapp2.0": {
-        "projectReferences": {
-          "/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Core/GeekMDSuite.Core.csproj": {
-            "projectPath": "/Users/tnesbit/Documents/Projects/GeekMDSuite/GeekMDSuite.Core/GeekMDSuite.Core.csproj"
-          }
-        }
+        "projectReferences": {}
       }
     },
     "warningProperties": {

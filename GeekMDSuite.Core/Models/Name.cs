@@ -1,4 +1,7 @@
-﻿namespace GeekMDSuite.Core.Models
+﻿using System;
+using GeekMDSuite.Utilities.Extensions;
+
+namespace GeekMDSuite.Core.Models
 {
     public class Name
     {
@@ -11,6 +14,9 @@
             First = first;
             Middle = middle;
             Last = last;
+            
+            if (IsMalformed)
+                throw new ArgumentOutOfRangeException($"{nameof(first)} and {nameof(last)} cannot be empty or white space.");
         }
 
         public string First { get; set; }
@@ -26,5 +32,22 @@
         {
             return string.Format($"{First}{(string.IsNullOrEmpty(Middle) ? "" : $" {Middle}")} {Last}");
         }
+        
+        public bool IsSimilarTo(string comparison)
+        {
+            return ToString().HasStringsInCommonWith(comparison);
+        }
+
+        public bool IsSimilarTo(Name comparison)
+        {
+            return ToString().HasStringsInCommonWith(comparison.ToString());
+        }
+
+        public bool IsSameAs(string comparison)
+        {
+            return ToString().IsEqualTo(comparison);
+        }
+
+        public bool IsMalformed => First.IsEmpty() || Last.IsEmpty();
     }
 }

@@ -30,7 +30,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 
             var message = new List<string>();
 
-            if (patient.Name.IsMalformed())
+            if (patient.Name.IsMalformed)
                 message.Add("Name");
             if (patient.MedicalRecordNumber.IsEmpty())
                 message.Add("MedicalRecordNumber");

@@ -13,7 +13,7 @@ namespace GeekMDSuite.Analytics.Repositories
         // ReSharper disable once MemberCanBePrivate.Global
         public static IEnumerable<QuantitativeLabClassificationModel> GetAllLabs()
         {
-            var jsonFile = Reflection.GetAssetFromExecutingAssembly("quantitative_labs.json");
+            var jsonFile = ReflectionHelper.GetAssetFromExecutingAssembly("quantitative_labs.json");
             return JsonConvert.DeserializeObject<List<QuantitativeLabClassificationModel>>(jsonFile);
         }
 
