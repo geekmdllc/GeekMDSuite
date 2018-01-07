@@ -2,7 +2,7 @@
 using GeekMDSuite.Utilities.Extensions;
 using Xunit;
 
-namespace GeekMDSuite.Core.UnitTests
+namespace GeekMDSuite.Utilities.UnitTests
 {
     public class DateTimeExtensionsTests
     {
