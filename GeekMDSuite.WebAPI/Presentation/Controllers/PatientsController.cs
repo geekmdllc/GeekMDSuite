@@ -41,6 +41,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return BadRequest(e.Message);
             }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return BadRequest(e.Message);
+            }
 
             UnitOfWork.Complete();
             return Ok();

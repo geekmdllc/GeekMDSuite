@@ -133,7 +133,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var result = _controller.Post(new PatientEntity
             {
-                Name = Name.Build(string.Empty, "Johson"),
+                Name = new Name(){ First = string.Empty, Last = "Last"},
                 DateOfBirth = new DateTime(1977, 3, 2),
                 MedicalRecordNumber = "12345"
             });
@@ -172,7 +172,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var result = _controller.Post(new PatientEntity
             {
-                Name = Name.Build("Joe", string.Empty),
+                Name = new Name() { First = "First", Last = string.Empty },
                 DateOfBirth = new DateTime(1977, 3, 2),
                 MedicalRecordNumber = "12345"
             });
