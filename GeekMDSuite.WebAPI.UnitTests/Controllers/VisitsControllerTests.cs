@@ -13,17 +13,17 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
     {
         public VisitsControllerTests()
         {
-            _controller = new VisitsController(new FakeUnitOfWorkSeeded(), new NewVisitService());
+            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService());
         }
 
-        private readonly VisitsController _controller;
+        private readonly VisitController _controller;
 
         [Fact]
         public void Add_GivenNewVisit_CreatesAVisitWithVisitGuid()
         {
             var visitDate = DateTime.Now;
             var unitOfWork = new FakeUnitOfWorkEmpty();
-            var controller = new VisitsController(unitOfWork, new NewVisitService());
+            var controller = new VisitController(unitOfWork, new NewVisitService());
 
             controller.Post(new VisitEntity
             {

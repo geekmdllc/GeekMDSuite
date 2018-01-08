@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
+    [Produces("application/json", "application/xml")]
     public class SitupsController : AnalyzablePatientDataController<SitupsEntity>
     {
         public SitupsController(IUnitOfWork unitOfWork) : base(unitOfWork)

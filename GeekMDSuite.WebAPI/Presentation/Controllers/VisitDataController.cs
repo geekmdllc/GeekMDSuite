@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
+    [Produces("application/json", "application/xml")]
     public abstract class VisitDataController<T> : EntityDataController<T> where T : class, IVisitData<T>
     {
         private readonly IRepositoryAssociatedWithVisit<T> _repo;

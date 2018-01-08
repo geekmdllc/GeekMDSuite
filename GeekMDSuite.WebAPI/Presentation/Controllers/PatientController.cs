@@ -7,13 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    public class PatientsController : EntityDataController<PatientEntity>
+    [Produces("application/json", "application/xml")]
+    public class PatientController : EntityDataController<PatientEntity>
     {
         private readonly INewPatientService _newPatientService;
 
-        public PatientsController(IUnitOfWork unitOfWork, INewPatientService newPatientService) : base(unitOfWork)
+        public PatientController(IUnitOfWork unitOfWork, INewPatientService newPatientService) : base(unitOfWork)
         {
             _newPatientService = newPatientService;
         }
@@ -30,8 +29,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
             catch (MedicalRecordAlreadyExistsException e)
             {
-                Console.WriteLine(e.Message);
-                return Conflict();
+                return Conflict(e.Message);
             }
             catch (ArgumentNullException e)
             {
@@ -60,11 +58,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
             catch (ArgumentNullException)
             {
-                return BadRequest();
+                return BadRequest("A null string was provided in place of a name.");
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryElementNotFoundException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -79,11 +77,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
             catch (ArgumentNullException)
             {
-                return BadRequest();
+                return BadRequest("A null string was provided in place of a medical record number.");
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryElementNotFoundException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -98,11 +96,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
             catch (ArgumentOutOfRangeException)
             {
-                return BadRequest();
+                return BadRequest("An empty Guid was provided.");
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryElementNotFoundException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -115,17 +113,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var parsedDob = DateTime.Parse(dateOfBirth);
                 return Ok(UnitOfWork.Patients.FindByDateOfBirth(parsedDob));
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             catch (ArgumentOutOfRangeException)
             {
-                return BadRequest();
+                return BadRequest($"{dateOfBirth} is out of range the allowable dates of birth.");
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryElementNotFoundException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
     }

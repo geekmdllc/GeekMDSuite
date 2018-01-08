@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    public class BodyCompositionsController : AnalyzablePatientDataController<BodyCompositionEntity>
+    [Produces("application/json", "application/xml")]
+    public class AudiogramController : AnalyzablePatientDataController<AudiogramEntity>
     {
         private readonly IClassificationRepository _classifications;
 
-        public BodyCompositionsController(IUnitOfWork unitOfWork, IClassificationRepository classifications) :
-            base(unitOfWork)
+        public AudiogramController(IUnitOfWork unitOfWork, IClassificationRepository classifications) : base(
+            unitOfWork)
         {
             _classifications = classifications;
         }
@@ -27,7 +26,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                return Ok(_classifications.BodyCompositions.InitializeWith(id));
+                return Ok(_classifications.Audiograms.InitializeWith(id).Classify);
             }
             catch
             {

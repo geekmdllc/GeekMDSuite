@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    public class IshiharaSixPlatesController : AnalyzablePatientDataController<IshiharaSixPlateEntity>
+    [Produces("application/json", "application/xml")]
+    public class FunctionalMovementScreenController : AnalyzablePatientDataController<FunctionalMovementScreenEntity>
     {
-        public IshiharaSixPlatesController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public FunctionalMovementScreenController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 

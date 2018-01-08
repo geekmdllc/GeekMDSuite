@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    public class PeripheralVisionsController : AnalyzablePatientDataController<PeripheralVisionEntity>
+    [Produces("application/json", "application/xml")]
+    public class TreadmillExerciseStressTestController : AnalyzablePatientDataController<TreadmillExerciseStressTestEntity>
     {
-        public PeripheralVisionsController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public TreadmillExerciseStressTestController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 

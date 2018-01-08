@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    public class BloodPressuresController : AnalyzablePatientDataController<BloodPressureEntity>
+    [Produces("application/json", "application/xml")]
+    public class CarotidUltrasoundController : AnalyzablePatientDataController<CarotidUltrasoundEntity>
     {
         private readonly IClassificationRepository _classifications;
 
-        public BloodPressuresController(IUnitOfWork unitOfWork, IClassificationRepository classifications) :
+        public CarotidUltrasoundController(IUnitOfWork unitOfWork, IClassificationRepository classifications) :
             base(unitOfWork)
         {
             _classifications = classifications;
@@ -27,7 +26,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                return Ok(_classifications.BloodPressures.InitializeWith(id).Classify);
+                return Ok(_classifications.CarotidUltrasounds.InitializeWith(id).Classify);
             }
             catch
             {

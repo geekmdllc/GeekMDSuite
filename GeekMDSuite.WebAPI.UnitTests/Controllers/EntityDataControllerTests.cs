@@ -45,7 +45,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
-            var result = controller.Get();
+            var result = controller.GetAll();
 
             Assert.Same(typeof(NotFoundResult), result.GetType());
         }
@@ -55,7 +55,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkSeeded());
 
-            var result = controller.Get();
+            var result = controller.GetAll();
 
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
@@ -65,7 +65,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
-            var result = controller.Get(1);
+            var result = controller.GetByEntityId(1);
 
             Assert.Equal(typeof(NotFoundResult), result.GetType());
         }
@@ -77,7 +77,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var controller = new FakeEntityDataController(uow);
             var ag = uow.Audiograms.All().First();
 
-            var result = controller.Get(ag.Id);
+            var result = controller.GetByEntityId(ag.Id);
 
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }

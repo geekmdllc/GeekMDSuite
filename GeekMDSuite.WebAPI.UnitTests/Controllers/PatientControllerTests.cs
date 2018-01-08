@@ -14,12 +14,12 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
     {
         public PatientEntityControllerTests()
         {
-            _controller = new PatientsController(
+            _controller = new PatientController(
                 new FakeUnitOfWorkSeeded(),
                 new NewPatientService());
         }
 
-        private readonly PatientsController _controller;
+        private readonly PatientController _controller;
 
         [Fact]
         public void GetByDateOfBirth_GivenAgeGreaterThan150Years_ReturnsBadRequestObjectResult()

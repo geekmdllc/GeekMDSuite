@@ -8,13 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    public class VisitsController : VisitDataController<VisitEntity>
+    [Produces("application/json", "application/xml")]
+    public class VisitController : VisitDataController<VisitEntity>
     {
         private readonly INewVisitService _newVisitService;
 
-        public VisitsController(IUnitOfWork unitOfWork, INewVisitService newVisitService) : base(unitOfWork)
+        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService) : base(unitOfWork)
         {
             _newVisitService = newVisitService;
         }
@@ -51,11 +50,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
             catch (ArgumentNullException)
             {
-                return BadRequest();
+                return BadRequest("An empty medical record number was provided.");
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryElementNotFoundException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -67,13 +66,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return Ok(UnitOfWork.Visits.FindByName(name));
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryElementNotFoundException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
             catch (ArgumentNullException)
             {
-                return BadRequest();
+                return BadRequest("An empty name was provided.");
             }
         }
 
@@ -86,17 +85,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var parsedDob = DateTime.Parse(dateOfBirth);
                 return Ok(UnitOfWork.Visits.FindByDateOfBirth(parsedDob));
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
-            catch (ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryElementNotFoundException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
     }

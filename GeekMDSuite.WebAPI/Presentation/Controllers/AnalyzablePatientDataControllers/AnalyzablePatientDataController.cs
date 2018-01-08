@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
+    [Produces("application/json", "application/xml")]
     public abstract class AnalyzablePatientDataController<T> : VisitDataController<T> where T : class, IVisitData<T>
     {
         protected AnalyzablePatientDataController(IUnitOfWork unitOfWork) : base(unitOfWork)

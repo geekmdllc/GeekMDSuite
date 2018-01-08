@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers
 {
-    [Route("api/compositescores/[controller]")]
-    [Produces("application/json")]
+    [Produces("application/json", "application/xml")]
     public class AscvdScoreController : Controller
     {
         private readonly IClassificationRepository _classifications;
