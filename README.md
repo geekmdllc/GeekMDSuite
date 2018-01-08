@@ -8,12 +8,35 @@ A fluent API with objects and tests which serve as the basis of the GeekMDSuite.
 ## GeekMD.Analytics
 A fluent API where one can input objects and receive useful information and clinical decision support.
 
+
+## GeekMD.ConsoleDemo
+A simple console application for demonstrating the use of GeekMD.Core. Utilizes core and analytics.
+
+```cs
+var test = IshiharaSixPlateScreenBuilder
+                .Initialize()
+                .SetPlate1(IshiharaAnswerResult.NormalVision)
+                .SetPlate2(IshiharaAnswerResult.ColorVisionDefict)
+                .SetPlate3(IshiharaAnswerResult.NormalVision)
+                .SetPlate4(IshiharaAnswerResult.NormalVision)
+                .SetPlate5(IshiharaAnswerResult.NormalVision)
+                .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
+                .Build();
+
+var classification = new IshiharaSixPlateClassification(test);
+Console.WriteLine(classification);
+```
+Result:
+```text
+Ishihara 6 Plate: ColorVisionDeficit
+```
+
 ## GeekMD.WebAPI
 The backend RESTful service providing front end developers access to the objects and their respective analytics.
 
 Example API endpoint:
 ```text
-http://localhost:5000/app/rest/classify/composite/ascvd/
+http://v1.afabricatedurl.com/app/rest/classify/composite/ascvd/
 ```
 POST
 ```json
@@ -81,22 +104,5 @@ REPLY
 }
 ```
 
-## GeekMD.ConsoleDemo
-A simple console application for demonstrating the use of GeekMD.Core.
-
-```cs
-var test = IshiharaSixPlateScreenBuilder
-                .Initialize()
-                .SetPlate1(IshiharaAnswerResult.NormalVision)
-                .SetPlate2(IshiharaAnswerResult.ColorVisionDefict)
-                .SetPlate3(IshiharaAnswerResult.NormalVision)
-                .SetPlate4(IshiharaAnswerResult.NormalVision)
-                .SetPlate5(IshiharaAnswerResult.NormalVision)
-                .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
-                .Build();
-
-var classification = new IshiharaSixPlateClassification(test);
-Console.WriteLine(classification);
-```
 
 [build_status]: http://teamcity.zapto.org:8080/app/rest/builds/buildType:(id:GeekMDApplicationSuite_Build)/statusIcon.svg
