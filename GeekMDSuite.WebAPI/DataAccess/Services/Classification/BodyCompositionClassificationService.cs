@@ -9,10 +9,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification
 {
     public class BodyCompositionClassificationService : IBodyCompositionClassificationService
     {
-        public BodyCompositionClassificationResult Classify(BodyComposition obj)
+        public BodyCompositionClassificationResult Classify(BodyCompositionClassificationParameters obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            throw new NotImplementedException();
+            return new BodyCompositionClassification(obj).Classification;
         }
     }
 }

@@ -14,13 +14,17 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             Audiograms = new AudiogramClassificationService();
             BloodPressures = new BloodPressureClassificationService();
             BodyCompositions = new BodyCompositionClassificationService();
+            BodyCompositionsExpanded = new BodyCompositionsExpandedClassificationService();
             CarotidUltrasounds = new CarotidUltrasoundClassificationService();
+            ResistanceRegimens = new ResistanceRegimenClassificationServiceService();
         }
 
         public IAscvdClassificationService AscvdScores { get; set; }
         public IAudiogramClassificationService Audiograms { get; set; }
         public IBloodPressureClassificationService BloodPressures { get; set; }
         public IBodyCompositionClassificationService BodyCompositions { get; set; }
+        public IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
         public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; set; }
+        public IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

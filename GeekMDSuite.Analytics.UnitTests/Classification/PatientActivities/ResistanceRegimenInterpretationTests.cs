@@ -3,24 +3,23 @@ using GeekMDSuite.Analytics.Classification.PatientActivities;
 using GeekMDSuite.Core.Builders.PatientActivities;
 using GeekMDSuite.Core.Models.PatientActivities;
 using Xunit;
-using ExerciseRegimenClassification = GeekMDSuite.Core.Models.PatientActivities.ExerciseRegimenClassification;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
 {
     public class ResistanceRegimenInterpretationTests
     {
         [Theory]
-        [InlineData(45, 120, 2, ExerciseIntensity.Low, ExerciseRegimenClassification.Insufficient)]
-        [InlineData(45, 120, 2, ExerciseIntensity.Moderate, ExerciseRegimenClassification.Insufficient)]
-        [InlineData(45, 120, 1, ExerciseIntensity.High, ExerciseRegimenClassification.Insufficient)]
-        [InlineData(44, 120, 2, ExerciseIntensity.Low, ExerciseRegimenClassification.Insufficient)]
-        [InlineData(45, 75, 3, ExerciseIntensity.Moderate, ExerciseRegimenClassification.Adequate)]
-        [InlineData(75, 90, 2, ExerciseIntensity.Moderate, ExerciseRegimenClassification.Adequate)]
-        [InlineData(90, 90, 2, ExerciseIntensity.High, ExerciseRegimenClassification.Aspirational)]
-        [InlineData(120, 90, 2, ExerciseIntensity.Moderate, ExerciseRegimenClassification.Aspirational)]
+        [InlineData(45, 120, 2, ExerciseIntensity.Low, ExericiseRegimen.Insufficient)]
+        [InlineData(45, 120, 2, ExerciseIntensity.Moderate, ExericiseRegimen.Insufficient)]
+        [InlineData(45, 120, 1, ExerciseIntensity.High, ExericiseRegimen.Insufficient)]
+        [InlineData(44, 120, 2, ExerciseIntensity.Low, ExericiseRegimen.Insufficient)]
+        [InlineData(45, 75, 3, ExerciseIntensity.Moderate, ExericiseRegimen.Adequate)]
+        [InlineData(75, 90, 2, ExerciseIntensity.Moderate, ExericiseRegimen.Adequate)]
+        [InlineData(90, 90, 2, ExerciseIntensity.High, ExericiseRegimen.Aspirational)]
+        [InlineData(120, 90, 2, ExerciseIntensity.Moderate, ExericiseRegimen.Aspirational)]
         public void Classification_GivenSatisfactoryFeaturesAndDifferentValues_ReturnsCorrectClassification(
             int sessionDuration, int secondsRest,
-            int sessionsPerWeek, ExerciseIntensity intensity, ExerciseRegimenClassification expectedClassification)
+            int sessionsPerWeek, ExerciseIntensity intensity, ExericiseRegimen expectedClassification)
         {
             var regimen = ResistanceRegimenBuilder
                 .Initialize()
@@ -56,7 +55,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
 
             var result = new ResistanceRegimenClassification(regimen).Classification;
 
-            Assert.Equal(ExerciseRegimenClassification.Insufficient, result);
+            Assert.Equal(ExericiseRegimen.Insufficient, result);
         }
 
         [Fact]

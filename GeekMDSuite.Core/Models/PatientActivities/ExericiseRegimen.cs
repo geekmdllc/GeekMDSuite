@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Models.PatientActivities
 {
-    public enum ExerciseRegimenClassification
+    public enum ExericiseRegimen
     {
         Insufficient = 0,
         Adequate = 1,

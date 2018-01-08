@@ -1,9 +1,8 @@
-﻿using System;
+﻿using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
 {
@@ -47,11 +46,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
 
         [HttpPost]
         [Route("bodycomposition")]
-        public IActionResult BodyComposition([FromBody] BodyComposition bodyComposition)
+        public IActionResult BodyComposition([FromBody] BodyCompositionClassificationParameters bodyComposition)
         {
             try
             {
                 return Ok(_classifications.BodyCompositions.Classify(bodyComposition));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        
+        [HttpPost]
+        [Route("bodycompositionexpanded")]
+        public IActionResult BodyCompositionExpanded([FromBody] BodyCompositionExpandedClassificationParameters bodyComposition)
+        {
+            try
+            {
+                return Ok(_classifications.BodyCompositionsExpanded.Classify(bodyComposition));
             }
             catch
             {

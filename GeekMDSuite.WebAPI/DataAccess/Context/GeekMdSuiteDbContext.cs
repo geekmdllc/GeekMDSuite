@@ -1,5 +1,7 @@
 ﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.WindowsAzure.Storage.Blob.Protocol;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Context
 {
@@ -33,6 +35,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<VisitEntity> Visits { get; set; }
         public virtual DbSet<VisualAcuityEntity> VisualAcuities { get; set; }
         public virtual DbSet<VitalSignsEntity> VitalSigns { get; set; }
+        
+        public virtual DbSet<ResistanceRegimenEntity> ResistanceRegimens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,6 +52,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
             ConfigureTreadmillExerciseStressTestEntity(modelBuilder);
             ConfigureVitalSignsEntity(modelBuilder);
             ConfigureVisitEntities(modelBuilder);
+
+            modelBuilder.Entity<ResistanceRegimenEntity>().OwnsOne(e => e.Features);
         }
     }
 }

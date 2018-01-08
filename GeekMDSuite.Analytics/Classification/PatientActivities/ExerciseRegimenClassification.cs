@@ -5,7 +5,7 @@ using GeekMDSuite.Core.Models.PatientActivities;
 namespace GeekMDSuite.Analytics.Classification.PatientActivities
 {
     public abstract class
-        ExerciseRegimenClassification : IClassifiable<Core.Models.PatientActivities.ExerciseRegimenClassification>
+        ExerciseRegimenClassification : IClassifiable<ExericiseRegimen>
     {
         protected ExerciseRegimenClassification(ExerciseRegimen regimen)
         {
@@ -14,43 +14,43 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
             AverageSessionDuration = regimen.AverageSessionDuration;
             Intensity = regimen.Intensity;
         }
+        
+        public virtual ExericiseRegimen Classification
+        {
+            get
+            {
+                if (RegimenIsAdequate && TimeAspirationalOrHigher)
+                    return ExericiseRegimen.Aspirational;
+                return RegimenIsAdequate
+                    ? ExericiseRegimen.Adequate
+                    : ExericiseRegimen.Insufficient;
+            }
+        }
 
-        public abstract ExerciseDurationGoals Goals { get; }
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
+
 
         public virtual bool RegimenIsAdequate => DurationAndIntensityAreAdequate;
 
         public double TotalMinutes => SessionsPerWeek * AverageSessionDuration;
 
-        public static double GoalMinutesHighIntensity =>
-            ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular)
-                .HighIntensity;
-
-        public static double GoalMinutesModerateIntensity =>
-            ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular)
-                .ModerateIntensity;
-
+        public double DurationPercentOfGoalAchieved =>
+            GoalMinutes > 0 ? 100 * TotalMinutes / GoalMinutes : 0;
+        
         public bool IntensityIsAdequate => IsHighIntensity || IsModerateIntensity;
 
         public bool DurationIsAdequate => IntensityIsAdequate && TimeGoalOrHigher;
-
-        public double DurationPercentOfGoalAchieved =>
-            GoalMinutes > 0 ? 100 * TotalMinutes / GoalMinutes : 0;
-
-        protected bool DurationAndIntensityAreAdequate => DurationIsAdequate && IntensityIsAdequate;
-
-        protected bool TimeGoalOrHigher => TotalMinutes >= GoalMinutes;
-
-        protected bool TimeAspirationalOrHigher => TotalMinutes >= GoalMinutes * 2;
-
-        private double SessionsPerWeek { get; }
-        private double AverageSessionDuration { get; }
-        private ExerciseIntensity Intensity { get; }
-
-        private bool IsModerateIntensity => Intensity == ExerciseIntensity.Moderate;
-
-        private bool IsHighIntensity => Intensity == ExerciseIntensity.High || Intensity == ExerciseIntensity.Vigorous;
-
-        private double GoalMinutes
+        
+        public double SessionsPerWeek { get; }
+        
+        public double AverageSessionDuration { get; }
+        
+        public ExerciseIntensity Intensity { get; }
+        
+        public double GoalMinutes
         {
             get
             {
@@ -59,22 +59,26 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
                 return IsModerateIntensity ? Goals.ModerateIntensity : 0;
             }
         }
+        
+        protected abstract ExerciseDurationGoals Goals { get; }
+        
+        protected static double GoalMinutesHighIntensity =>
+            ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular)
+                .HighIntensity;
 
-        public virtual Core.Models.PatientActivities.ExerciseRegimenClassification Classification
-        {
-            get
-            {
-                if (RegimenIsAdequate && TimeAspirationalOrHigher)
-                    return Core.Models.PatientActivities.ExerciseRegimenClassification.Aspirational;
-                return RegimenIsAdequate
-                    ? Core.Models.PatientActivities.ExerciseRegimenClassification.Adequate
-                    : Core.Models.PatientActivities.ExerciseRegimenClassification.Insufficient;
-            }
-        }
+        protected static double GoalMinutesModerateIntensity =>
+            ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular)
+                .ModerateIntensity;
 
-        public override string ToString()
-        {
-            return Classification.ToString();
-        }
+        protected bool DurationAndIntensityAreAdequate => DurationIsAdequate && IntensityIsAdequate;
+
+        protected bool TimeGoalOrHigher => TotalMinutes >= GoalMinutes;
+
+        protected bool TimeAspirationalOrHigher => TotalMinutes >= GoalMinutes * 2;
+
+        protected bool IsModerateIntensity => Intensity == ExerciseIntensity.Moderate;
+
+        protected bool IsHighIntensity => Intensity == ExerciseIntensity.High || Intensity == ExerciseIntensity.Vigorous;
+
     }
 }

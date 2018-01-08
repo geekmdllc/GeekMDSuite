@@ -21,6 +21,7 @@ namespace GeekMDSuite.Core.Models.PatientActivities
 
         protected internal ResistanceRegimen()
         {
+            Features = new List<ResistenceRegimenFeatures>();
         }
 
         public int SecondsRestDurationPerSet { get; set; }

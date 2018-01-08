@@ -9,6 +9,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         IAudiogramClassificationService Audiograms { get; }
         IBloodPressureClassificationService BloodPressures { get; }
         IBodyCompositionClassificationService BodyCompositions { get; }
+        IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
         ICarotidUltrasoundClassificationService CarotidUltrasounds { get; }
+        IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

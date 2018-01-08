@@ -1,20 +1,19 @@
 ﻿using GeekMDSuite.Analytics.Classification.PatientActivities;
 using GeekMDSuite.Core.Models.PatientActivities;
 using Xunit;
-using ExerciseRegimenClassification = GeekMDSuite.Core.Models.PatientActivities.ExerciseRegimenClassification;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
 {
     public class StretchingRegimenInterpretationTests
     {
         [Theory]
-        [InlineData(3, 10, ExerciseIntensity.Low, ExerciseRegimenClassification.Insufficient)]
-        [InlineData(3, 10, ExerciseIntensity.Moderate, ExerciseRegimenClassification.Adequate)]
-        [InlineData(3, 20, ExerciseIntensity.High, ExerciseRegimenClassification.Aspirational)]
-        [InlineData(3, 50, ExerciseIntensity.Low, ExerciseRegimenClassification.Insufficient)]
+        [InlineData(3, 10, ExerciseIntensity.Low, ExericiseRegimen.Insufficient)]
+        [InlineData(3, 10, ExerciseIntensity.Moderate, ExericiseRegimen.Adequate)]
+        [InlineData(3, 20, ExerciseIntensity.High, ExericiseRegimen.Aspirational)]
+        [InlineData(3, 50, ExerciseIntensity.Low, ExericiseRegimen.Insufficient)]
         public void Classification_GivenValues_ReturnsCorrectClassification(double sessionsPerWeek,
             double minutesPerSession,
-            ExerciseIntensity intensity, ExerciseRegimenClassification expectedExerciseRegimenClassification)
+            ExerciseIntensity intensity, ExericiseRegimen expectedExerciseRegimenClassification)
         {
             var classification = new StretchingRegimenClassification(
                 StretchingRegimen.Build(sessionsPerWeek, minutesPerSession, intensity)).Classification;

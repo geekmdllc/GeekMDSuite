@@ -12,6 +12,6 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Stretching);
         }
 
-        public override ExerciseDurationGoals Goals { get; }
+        protected override ExerciseDurationGoals Goals { get; }
     }
 }

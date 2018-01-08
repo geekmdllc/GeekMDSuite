@@ -26,6 +26,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
             Patients = new PatientsRepository(_context);
             PeripheralVisions = new PeripheralVisionsRepository(_context);
             Pushups = new PushupsRepository(_context);
+            ResistanceRegimens = new ResistanceRegimenRepostory(_context);
             SitAndReaches = new SitAndReachesRepository(_context);
             Situps = new SitupsRepository(_context);
             Spirometries = new SpirometriesRepository(_context);
@@ -34,6 +35,8 @@ namespace GeekMDSuite.WebAPI.DataAccess
             VisualAcuities = new VisualAcuitiesRepository(_context);
             VitalSigns = new VitalSignsRepository(_context);
         }
+
+        public IResistanceRegimenRepository ResistanceRegimens { get; }
 
         public IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>
         {

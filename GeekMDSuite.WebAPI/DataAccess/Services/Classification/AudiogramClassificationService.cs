@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification
         public AudiogramClassificationResult Classify(Audiogram obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            throw new System.NotImplementedException();
+            return new AudiogramClassification(obj).Classification;
         }
     }
 }

@@ -3,7 +3,7 @@ using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification
 {
-    public interface IBodyCompositionClassificationService : IClassificationService<BodyComposition, BodyCompositionClassificationResult>
+    public interface IBodyCompositionClassificationService : IClassificationService<BodyCompositionClassificationParameters, BodyCompositionClassificationResult>
     {
     }
 }

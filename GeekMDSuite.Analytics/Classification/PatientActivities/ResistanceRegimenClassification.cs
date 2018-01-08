@@ -16,28 +16,27 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Resistance);
         }
 
-
-        public sealed override ExerciseDurationGoals Goals { get; }
-
         public sealed override bool RegimenIsAdequate => base.RegimenIsAdequate
                                                          && FeaturesOfRegimenAreIdeal
                                                          && RestIntervalGoalRange.ContainsOpen(_regimen
                                                              .SecondsRestDurationPerSet);
 
-        public override Core.Models.PatientActivities.ExerciseRegimenClassification Classification
+        public override ExericiseRegimen Classification
         {
             get
             {
                 if (RegimenIsAdequate && TimeAspirationalOrHigher)
-                    return Core.Models.PatientActivities.ExerciseRegimenClassification.Aspirational;
+                    return ExericiseRegimen.Aspirational;
                 return RegimenIsAdequate
-                    ? Core.Models.PatientActivities.ExerciseRegimenClassification.Adequate
-                    : Core.Models.PatientActivities.ExerciseRegimenClassification.Insufficient;
+                    ? ExericiseRegimen.Adequate
+                    : ExericiseRegimen.Insufficient;
             }
         }
 
         public static Interval<int> RestIntervalGoalRange =>
             ExerciseRegimenGoalsRepository.GetResistanceRestIntervalGoals();
+        
+        protected sealed override ExerciseDurationGoals Goals { get; }
 
         private bool FeaturesOfRegimenAreIdeal
         {

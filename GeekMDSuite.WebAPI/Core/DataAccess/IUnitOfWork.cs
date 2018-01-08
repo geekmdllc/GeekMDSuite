@@ -26,6 +26,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IVisitsRepository Visits { get; }
         IVisualAcuitiesRepository VisualAcuities { get; }
         IVitalSignsRepository VitalSigns { get; }
+        IResistanceRegimenRepository ResistanceRegimens { get; }
+        
         IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>;
         IRepository<T> EntityData<T>() where T : class, IEntity<T>;
         void Complete();

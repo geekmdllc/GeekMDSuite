@@ -70,6 +70,7 @@ namespace GeekMDSuite.WebAPI
                 routes.Get(baseUri + "visit/", route => route.ToController<VisitController>());
                 ConfigureDataRoutes(baseUri, routes);
                 ConfigureAnalyticsRoutes(baseUri, routes);
+                routes.Get(baseUri + "data/patientactivities/resistanceregimen", route => route.ToController<ResistanceRegimenController>());
             };
         }
 
@@ -101,6 +102,7 @@ namespace GeekMDSuite.WebAPI
             routes.Get(dataUri + "treadmill/", route => route.ToController<TreadmillExerciseStressTestController>());
             routes.Get(dataUri + "visualacuity/", route => route.ToController<VisualAcuityController>());
             routes.Get(dataUri + "vitals/", route => route.ToController<VitalSignsController>());
+            
         }
     }
 }
