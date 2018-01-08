@@ -9,8 +9,9 @@ using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
+using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers;
+using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.CompositeScores;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
-using GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,15 @@ namespace GeekMDSuite.WebAPI
                 throw new NotImplementedException();
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+
+            app.UseMvc();
+        }
+
         private static Action<ITypedRouteBuilder> RoutesConfiguration(string baseUri)
         {
             return routes =>
@@ -65,8 +75,9 @@ namespace GeekMDSuite.WebAPI
 
         private static void ConfigureAnalyticsRoutes(string baseUri, ITypedRouteBuilder routes)
         {
-            var classifyUri = baseUri + "classify/";
-            routes.Get(classifyUri + "ascvd/", route => route.ToController<AscvdScoreController>());
+            var classifyUri = baseUri + "classify/"; 
+            routes.Get(classifyUri, route => route.ToController<ClassifiyController>());
+            routes.Get(classifyUri + "composite/", route => route.ToController<CompositeScoresController>());
         }
 
         private static void ConfigureDataRoutes(string baseUri, ITypedRouteBuilder routes)
@@ -90,15 +101,6 @@ namespace GeekMDSuite.WebAPI
             routes.Get(dataUri + "treadmill/", route => route.ToController<TreadmillExerciseStressTestController>());
             routes.Get(dataUri + "visualacuity/", route => route.ToController<VisualAcuityController>());
             routes.Get(dataUri + "vitals/", route => route.ToController<VitalSignsController>());
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
-            app.UseMvc();
         }
     }
 }

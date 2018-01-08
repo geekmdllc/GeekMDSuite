@@ -6,20 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class SpirometryController : AnalyzablePatientDataController<SpirometryEntity>
+    public class SpirometryController : VisitDataController<SpirometryEntity>
     {
         public SpirometryController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override IActionResult Interpret(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IActionResult Classify(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

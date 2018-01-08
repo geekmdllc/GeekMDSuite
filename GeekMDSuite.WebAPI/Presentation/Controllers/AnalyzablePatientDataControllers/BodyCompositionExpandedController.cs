@@ -6,20 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class BodyCompositionExpandedController : AnalyzablePatientDataController<BodyCompositionExpandedEntity>
+    public class BodyCompositionExpandedController : VisitDataController<BodyCompositionExpandedEntity>
     {
         public BodyCompositionExpandedController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override IActionResult Interpret(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IActionResult Classify(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

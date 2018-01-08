@@ -7,31 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class BloodPressureController : AnalyzablePatientDataController<BloodPressureEntity>
+    public class BloodPressureController : VisitDataController<BloodPressureEntity>
     {
-        private readonly IClassificationRepository _classifications;
 
-        public BloodPressureController(IUnitOfWork unitOfWork, IClassificationRepository classifications) :
-            base(unitOfWork)
+        public BloodPressureController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _classifications = classifications;
-        }
-
-        public override IActionResult Interpret(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IActionResult Classify(int id)
-        {
-            try
-            {
-                return Ok(_classifications.BloodPressures.InitializeWith(id).Classify);
-            }
-            catch
-            {
-                return NotFound();
-            }
         }
     }
 }

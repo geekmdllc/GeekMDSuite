@@ -7,20 +7,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 {
     [Produces("application/json", "application/xml")]
     public class
-        TreadmillExerciseStressTestController : AnalyzablePatientDataController<TreadmillExerciseStressTestEntity>
+        TreadmillExerciseStressTestController : VisitDataController<TreadmillExerciseStressTestEntity>
     {
         public TreadmillExerciseStressTestController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override IActionResult Interpret(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IActionResult Classify(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

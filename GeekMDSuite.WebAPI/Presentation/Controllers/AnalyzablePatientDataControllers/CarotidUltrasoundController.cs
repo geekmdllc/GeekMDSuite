@@ -7,31 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class CarotidUltrasoundController : AnalyzablePatientDataController<CarotidUltrasoundEntity>
+    public class CarotidUltrasoundController : VisitDataController<CarotidUltrasoundEntity>
     {
-        private readonly IClassificationRepository _classifications;
 
-        public CarotidUltrasoundController(IUnitOfWork unitOfWork, IClassificationRepository classifications) :
+        public CarotidUltrasoundController(IUnitOfWork unitOfWork) :
             base(unitOfWork)
         {
-            _classifications = classifications;
-        }
 
-        public override IActionResult Interpret(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IActionResult Classify(int id)
-        {
-            try
-            {
-                return Ok(_classifications.CarotidUltrasounds.InitializeWith(id).Classify);
-            }
-            catch
-            {
-                return NotFound();
-            }
         }
     }
 }

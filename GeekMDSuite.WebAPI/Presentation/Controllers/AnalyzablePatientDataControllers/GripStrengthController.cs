@@ -6,20 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class GripStrengthController : AnalyzablePatientDataController<GripStrengthEntity>
+    public class GripStrengthController : VisitDataController<GripStrengthEntity>
     {
         public GripStrengthController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override IActionResult Interpret(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IActionResult Classify(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }
