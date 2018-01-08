@@ -40,21 +40,21 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         public void GetByDateOfBirth_GivenAgeGreaterThan150Years_ReturnsBadRequestObjectResult()
         {
             var result = _controller.GetByDateOfBirth(DateTime.Now.AddYears(-151).ToShortDateString());
-            Assert.Equal(typeof(BadRequestResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
         public void GetByDateOfBirth_GivenAgeOfZeroOrNegative_ReturnsBadRequestObjectResult()
         {
             var result = _controller.GetByDateOfBirth(DateTime.Now.AddYears(1).ToShortDateString());
-            Assert.Equal(typeof(BadRequestResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByDateOfBirth_GivenDateOfBirthNotInRepository_ReturnsNotFoundResult()
+        public void GetByDateOfBirth_GivenDateOfBirthNotInRepository_ReturnsNotFoundObjectResult()
         {
             var result = _controller.GetByDateOfBirth(new DateTime(2000, 1, 1).ToShortDateString());
-            Assert.Equal(typeof(NotFoundResult), result.GetType());
+            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
@@ -68,14 +68,14 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         public void GetByDateOfBirth_GivenPoorlyFormattedString_ReturnsBadRequestObjectResult()
         {
             var result = _controller.GetByDateOfBirth("111900");
-            Assert.Equal(typeof(BadRequestResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
         public void GetByMedicalRecordNumber_GivenEmptyString_ReturnsBadRequestObjectResult()
         {
             var result = _controller.GetByMedicalRecordNumber(string.Empty);
-            Assert.Equal(typeof(BadRequestResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
@@ -87,17 +87,17 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetByMedicalRecordNumber_GivenRandomString_ReturnsNotFoundResult()
+        public void GetByMedicalRecordNumber_GivenRandomString_ReturnsNotFoundObjectResult()
         {
             var result = _controller.GetByMedicalRecordNumber(Guid.NewGuid().ToString());
-            Assert.Equal(typeof(NotFoundResult), result.GetType());
+            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
         public void GetByName_GivenEmptyString_ReturnsBadRequestObjectResult()
         {
             var result = _controller.GetByName(string.Empty);
-            Assert.Equal(typeof(BadRequestResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
@@ -108,10 +108,10 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetByName_GivenRandomString_ReturnsNotFoundResult()
+        public void GetByName_GivenRandomString_ReturnsNotFoundObjectResult()
         {
             var result = _controller.GetByName(Guid.NewGuid().ToString());
-            Assert.Equal(typeof(NotFoundResult), result.GetType());
+            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]

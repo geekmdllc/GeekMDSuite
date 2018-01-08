@@ -37,17 +37,17 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 
             var result = controller.Delete(int.MaxValue);
 
-            Assert.Equal(typeof(NotFoundResult), result.GetType());
+            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
-        public void Get_GivenEmptyUnitOfwork_ReturnsNotFoundResult()
+        public void Get_GivenEmptyUnitOfwork_ReturnsNotFoundObjectResult()
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
             var result = controller.GetAll();
 
-            Assert.Same(typeof(NotFoundResult), result.GetType());
+            Assert.Same(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
@@ -61,13 +61,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetId_GivenIdInEmtpyUnitOfWorkContext_ReturnsNotFoundResult()
+        public void GetId_GivenIdInEmtpyUnitOfWorkContext_ReturnsNotFoundObjectResult()
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
             var result = controller.GetByEntityId(1);
 
-            Assert.Equal(typeof(NotFoundResult), result.GetType());
+            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
@@ -93,13 +93,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_GivenNull_ReturnsNotFoundResult()
+        public void Post_GivenNull_ReturnsNotFoundObjectResult()
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
             var result = controller.Post(null);
 
-            Assert.Equal(typeof(BadRequestResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 
             var result = controller.Put(new AudiogramEntity {Id = int.MaxValue});
 
-            Assert.Equal(typeof(NotFoundResult), result.GetType());
+            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 
             var result = controller.Put(null);
 
-            Assert.Equal(typeof(BadRequestResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
     }
 }
