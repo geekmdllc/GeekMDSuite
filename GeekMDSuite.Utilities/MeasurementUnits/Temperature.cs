@@ -17,8 +17,14 @@ namespace GeekMDSuite.Utilities.MeasurementUnits
 
         public double Celcius => TemperatureConversion.FarenheitToCelcius(Farenheit);
 
-        public static Temperature Create(double temperatureFarenheight) => new Temperature(temperatureFarenheight);
+        public static Temperature Create(double temperatureFarenheight)
+        {
+            return new Temperature(temperatureFarenheight);
+        }
 
-        public override string ToString() => $"{Farenheit} F";
+        public override string ToString()
+        {
+            return $"{Farenheit} F";
+        }
     }
 }

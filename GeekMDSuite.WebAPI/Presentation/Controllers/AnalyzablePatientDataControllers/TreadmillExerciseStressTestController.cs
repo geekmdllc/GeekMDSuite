@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class TreadmillExerciseStressTestController : AnalyzablePatientDataController<TreadmillExerciseStressTestEntity>
+    public class
+        TreadmillExerciseStressTestController : AnalyzablePatientDataController<TreadmillExerciseStressTestEntity>
     {
         public TreadmillExerciseStressTestController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

@@ -1,4 +1,0 @@
-namespace GeekMDSuite.Core.Helpers
-{
-
-}

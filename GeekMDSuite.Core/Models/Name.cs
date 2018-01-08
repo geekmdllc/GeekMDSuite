@@ -14,14 +14,17 @@ namespace GeekMDSuite.Core.Models
             First = first;
             Middle = middle;
             Last = last;
-            
+
             if (IsMalformed)
-                throw new ArgumentOutOfRangeException($"{nameof(first)} and {nameof(last)} cannot be empty or white space.");
+                throw new ArgumentOutOfRangeException(
+                    $"{nameof(first)} and {nameof(last)} cannot be empty or white space.");
         }
 
         public string First { get; set; }
         public string Middle { get; set; }
         public string Last { get; set; }
+
+        public bool IsMalformed => First.IsEmpty() || Last.IsEmpty();
 
         public static Name Build(string first, string last, string middle = "")
         {
@@ -32,7 +35,7 @@ namespace GeekMDSuite.Core.Models
         {
             return string.Format($"{First}{(string.IsNullOrEmpty(Middle) ? "" : $" {Middle}")} {Last}");
         }
-        
+
         public bool IsSimilarTo(string comparison)
         {
             return ToString().HasStringsInCommonWith(comparison);
@@ -47,7 +50,5 @@ namespace GeekMDSuite.Core.Models
         {
             return ToString().IsEqualTo(comparison);
         }
-
-        public bool IsMalformed => First.IsEmpty() || Last.IsEmpty();
     }
 }

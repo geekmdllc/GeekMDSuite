@@ -5,7 +5,10 @@ namespace GeekMDSuite.Utilities.Extensions
 {
     public static class StringExtensions
     {
-        public static bool IsEmpty(this string query) => string.IsNullOrWhiteSpace(query);
+        public static bool IsEmpty(this string query)
+        {
+            return string.IsNullOrWhiteSpace(query);
+        }
 
         public static bool HasStringsInCommonWith(this string self, string comparison)
         {
@@ -20,8 +23,10 @@ namespace GeekMDSuite.Utilities.Extensions
             return discoverd;
         }
 
-        public static bool IsEqualTo(this string query, string comparison) => 
-            string.Equals(query, comparison, StringComparison.OrdinalIgnoreCase);
+        public static bool IsEqualTo(this string query, string comparison)
+        {
+            return string.Equals(query, comparison, StringComparison.OrdinalIgnoreCase);
+        }
 
         public static string SplitAtCapitalization(this string str)
         {

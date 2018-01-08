@@ -27,7 +27,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             return NotFound("Not an API endpoint. Please see the documentation.");
         }
-        
+
         [HttpGet]
         [Route("all/")]
         public IActionResult GetAll()
@@ -84,7 +84,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 UnitOfWork.Complete();
                 return Ok();
             }
-            catch (RepositoryElementNotFoundException e )
+            catch (RepositoryElementNotFoundException e)
             {
                 return NotFound(e.Message);
             }
@@ -116,7 +116,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             if (ids == null || ids.Length <= 0)
                 return new BadRequestResult();
-            
+
             try
             {
                 foreach (var id in ids) _repo.Delete(id);
@@ -128,7 +128,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound(e.Message);
             }
         }
-        
+
         public ConflictResult Conflict(string message)
         {
             return new ConflictResult(message);
