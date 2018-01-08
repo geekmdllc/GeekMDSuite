@@ -1,6 +1,6 @@
 # GeekMDSuite ![Build Status][build_status]
 
-A suite of medical software objects and tools designed to compliment preventative medicine practices or practices that employ technologies common to those practices. This is a second version of multiple class libraries, consolidated into a suite and with the concerns more adequately separated for future extensibility.
+A software suite designed to compliment preventative medicine practices or practices that employ technologies common to those practices. Core and Analytics API users will find complex object creation to be simple. The web API is robust, serves XML and JSON, provides API endpoints for persistence of core objects, and analytics modules which can be extended to web API users who do not have patient data in our persistence infrastructure. 
 
 ## GeekMD.Core
 A fluent API with objects and tests which serve as the basis of the GeekMDSuite.
