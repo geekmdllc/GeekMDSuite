@@ -17,14 +17,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers
             _classifications = classifications;
         }
 
+        [HttpPost]
+        public IActionResult Post([FromBody] AscvdParameters parameters)
+        {
+            return Ok(new AscvdClassification(parameters).Classification);
+        }
+
         [HttpGet]
         [Route("example/")]
         public IActionResult GetExample()
         {
-            var bp = BloodPressure.Build(115, 69);
-            var hdl = Quantitative.Serum.HighDensityLipoprotein(60);
-            var ldl = Quantitative.Serum.LowDensityLipoprotein(95);
-            var total = Quantitative.Serum.CholesterolTotal(160);
+            var bp = BloodPressure.Build(155, 90);
+            var hdl = Quantitative.Serum.HighDensityLipoprotein(35);
+            var ldl = Quantitative.Serum.LowDensityLipoprotein(153);
+            var total = Quantitative.Serum.CholesterolTotal(263);
             var patient = PatientBuilder.Initialize()
                 .SetDateOfBirth(1990, 1, 1)
                 .SetGender(GenderIdentity.Female)
@@ -32,6 +38,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers
                 .SetName("Test", "Patient")
                 .SetRace(Race.Latin)
                 .AddComorbidity(ChronicDisease.Diabetes)
+                .AddComorbidity(ChronicDisease.HypertensionTreated)
                 .Build();
 
             var ascvdParameters = AscvdParametersBuilder.Initialize()
@@ -43,12 +50,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.CompositeScoresControllers
                 .Build();
 
             return Ok(ascvdParameters);
-        }
-
-        [HttpPost]
-        public IActionResult Post([FromBody] AscvdParameters parameters)
-        {
-            return Ok(new AscvdClassification(parameters).Classification);
         }
     }
 }
