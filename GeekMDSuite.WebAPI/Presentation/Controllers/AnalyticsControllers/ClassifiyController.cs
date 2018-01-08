@@ -21,10 +21,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         [Route("audiogram/")]
         public IActionResult Audiogram([FromBody] Audiogram audiogram)
         {
-            
             try
             {
-                throw new NotImplementedException();
+                return Ok(_classifications.Audiograms.Classify(audiogram));
             }
             catch
             {
@@ -52,7 +51,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         {
             try
             {
-                throw new NotImplementedException();
+                return Ok(_classifications.BodyCompositions.Classify(bodyComposition));
             }
             catch
             {
