@@ -4,14 +4,6 @@ A suite of medical software objects and tools designed to compliment preventativ
 
 ## GeekMD.Core
 A fluent API with objects and tests which serve as the basis of the GeekMDSuite.
-
-## GeekMD.Analytics
-A fluent API where one can input objects and receive useful information and clinical decision support.
-
-
-## GeekMD.ConsoleDemo
-A simple console application for demonstrating the use of GeekMD.Core. Utilizes core and analytics.
-
 ```cs
 var test = IshiharaSixPlateScreenBuilder
                 .Initialize()
@@ -22,8 +14,17 @@ var test = IshiharaSixPlateScreenBuilder
                 .SetPlate5(IshiharaAnswerResult.NormalVision)
                 .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
                 .Build();
+```
 
+## GeekMD.Analytics
+A fluent API where one can input objects and receive useful information and clinical decision support.
+```cs
 var classification = new IshiharaSixPlateClassification(test);
+```
+
+## GeekMD.ConsoleDemo
+A simple console application for demonstrating the use of GeekMD.Core. Utilizes core and analytics.
+```cs
 Console.WriteLine(classification);
 ```
 Result:
