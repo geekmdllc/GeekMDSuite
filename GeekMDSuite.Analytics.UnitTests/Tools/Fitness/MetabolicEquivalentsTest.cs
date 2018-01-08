@@ -9,7 +9,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Tools.Fitness
 {
     public class MetabolicEquivalentsTest
     {
-        [Theory]
+        [Theory] 
         [InlineData(45, GenderIdentity.Male, 11, 12)]
         [InlineData(45, GenderIdentity.Female, 13, 14)]
         public void GivenPatientAndTreamill_ReturnsCorrectResult(int age, GenderIdentity genderIdentity,
@@ -21,6 +21,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Tools.Fitness
                 .SetDateOfBirth(dateOfBirth.Year, dateOfBirth.Month, dateOfBirth.Day)
                 .BuildWithoutModelValidation();
 
+            
             var treadmill = TreadmillExerciseStressTestBuilder.Initialize()
                 .SetTime(11, 33)
                 .BuildWithoutModelValidation();
