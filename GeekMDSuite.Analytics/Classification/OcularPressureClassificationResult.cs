@@ -2,7 +2,7 @@
 {
     public enum OcularPressureClassificationResult
     {
-        Normal,
-        OcularHypertension
+        Normal = 0,
+        OcularHypertension = 1
     }
 }

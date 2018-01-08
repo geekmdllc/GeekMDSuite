@@ -2,10 +2,10 @@
 {
     public enum CarotidIntimaMediaThicknessGrade
     {
-        Normal,
-        Mild,
-        Moderate,
-        Significant,
-        CriticalSignificant
+        Normal = 0,
+        Mild = 1,
+        Moderate = 2,
+        Significant = 3,
+        CriticalSignificant = 4
     }
 }

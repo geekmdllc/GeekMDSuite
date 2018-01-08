@@ -2,12 +2,12 @@
 {
     public enum FitnessClassification
     {
-        VeryPoor = 1,
-        Poor = 2,
-        BelowAverage = 3,
-        Average = 4,
-        AboveAverage = 5,
-        Good = 6,
-        Excellent = 7
+        VeryPoor = 0,
+        Poor = 1,
+        BelowAverage = 2,
+        Average = 3,
+        AboveAverage = 4,
+        Good = 5,
+        Excellent = 6
     }
 }

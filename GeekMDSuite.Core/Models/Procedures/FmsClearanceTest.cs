@@ -2,8 +2,8 @@
 {
     public enum FmsClearanceTest
     {
-        Negative,
-        Positive,
-        NotApplicable
+        Negative = 0,
+        Positive = 1,
+        NotApplicable = 2
     }
 }

@@ -2,10 +2,10 @@
 {
     public enum ResistenceRegimenFeatures
     {
-        UpperBodyTrained = 1,
-        LowerBodyTrained = 2,
-        PushingMovementsPerformed = 3,
-        PullingMovementsPerformed = 4,
-        RepetitionsToNearFailure = 5
+        UpperBodyTrained = 0,
+        LowerBodyTrained = 1,
+        PushingMovementsPerformed = 2,
+        PullingMovementsPerformed = 3,
+        RepetitionsToNearFailure = 4
     }
 }

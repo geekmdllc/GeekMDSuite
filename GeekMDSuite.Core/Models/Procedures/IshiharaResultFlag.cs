@@ -2,8 +2,8 @@
 {
     public enum IshiharaResultFlag
     {
-        NormalVision,
-        IndeterminantResult,
-        ColorVisionDeficit
+        NormalVision = 0,
+        IndeterminantResult = 1,
+        ColorVisionDeficit = 2
     }
 }

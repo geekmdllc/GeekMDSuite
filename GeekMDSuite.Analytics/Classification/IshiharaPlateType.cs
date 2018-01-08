@@ -2,8 +2,8 @@
 {
     public enum IshiharaPlateType
     {
-        Numeral,
-        NumeralProtanDuetan,
-        Traceable
+        Numeral = 0,
+        NumeralProtanDuetan = 1,
+        Traceable = 2
     }
 }

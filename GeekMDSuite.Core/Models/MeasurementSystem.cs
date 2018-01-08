@@ -2,7 +2,7 @@
 {
     public enum MeasurementSystem
     {
-        TraditionalUs,
-        Metric
+        TraditionalUs = 0,
+        Metric = 1
     }
 }

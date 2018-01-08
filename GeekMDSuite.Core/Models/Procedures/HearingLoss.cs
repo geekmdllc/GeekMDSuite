@@ -2,10 +2,10 @@
 {
     public enum HearingLoss
     {
-        None,
-        Mild,
-        Moderate,
-        Severe,
-        Profound
+        None = 0,
+        Mild = 1,
+        Moderate = 2,
+        Severe = 3,
+        Profound = 4
     }
 }

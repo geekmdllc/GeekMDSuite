@@ -2,12 +2,12 @@
 {
     public enum BloodPressureStage
     {
-        Low = 1,
-        Normal = 2,
-        Elevated = 3,
-        Stage1Hypertension = 4,
-        Stage2Hypertension = 5,
-        HypertensiveUrgency = 6,
-        HypertensiveEmergency = 7
+        Low = 0,
+        Normal = 1,
+        Elevated = 2,
+        Stage1Hypertension = 3,
+        Stage2Hypertension = 4,
+        HypertensiveUrgency = 5,
+        HypertensiveEmergency = 6
     }
 }

@@ -2,9 +2,9 @@
 {
     public enum VisceralFat
     {
-        Excellent = 1,
-        Acceptable = 2,
-        Elevated = 3,
-        VeryElevated = 4
+        Excellent = 0,
+        Acceptable = 1,
+        Elevated = 2,
+        VeryElevated = 3
     }
 }

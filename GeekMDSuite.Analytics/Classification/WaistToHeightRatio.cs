@@ -2,11 +2,11 @@
 {
     public enum WaistToHeightRatio
     {
-        ExtremelySlim = 1,
-        Slim = 2,
-        Healthy = 3,
-        Overweight = 4,
-        VeryOverweight = 5,
-        MorbidlyObese = 6
+        ExtremelySlim = 0,
+        Slim = 1,
+        Healthy = 2,
+        Overweight = 3,
+        VeryOverweight = 4,
+        MorbidlyObese = 5
     }
 }

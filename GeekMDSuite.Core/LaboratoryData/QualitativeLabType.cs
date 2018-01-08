@@ -2,8 +2,8 @@
 {
     public enum QualitativeLabType
     {
-        Hiv,
-        LdlSubclassPhenotype,
-        HepatitisC
+        Hiv = 0,
+        LdlSubclassPhenotype = 1,
+        HepatitisC = 2
     }
 }

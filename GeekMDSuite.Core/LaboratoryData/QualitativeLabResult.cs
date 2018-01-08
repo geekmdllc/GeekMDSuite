@@ -2,11 +2,11 @@
 {
     public enum QualitativeLabResult
     {
-        Negative,
-        Positive,
-        Borderline,
-        Abnormal,
-        Indeterminant,
-        InvalidResult
+        Negative = 0,
+        Positive = 1,
+        Borderline = 2,
+        Abnormal = 3,
+        Indeterminant = 4,
+        InvalidResult = 5
     }
 }

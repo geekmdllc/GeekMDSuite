@@ -2,10 +2,10 @@
 {
     public enum PercentBodyFat
     {
-        UnderFat = 1,
-        Athletic = 2,
-        Fitness = 3,
-        Acceptable = 4,
-        OverFat = 5
+        UnderFat = 0,
+        Athletic = 1,
+        Fitness = 2,
+        Acceptable = 3,
+        OverFat = 4
     }
 }

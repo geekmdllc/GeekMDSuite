@@ -2,10 +2,10 @@
 {
     public enum AscvdStatinRecommendation
     {
-        HighIntensity,
-        ModerateIntensity,
-        ModerateToHighIntensity,
-        PossiblyBeneficial,
-        LikelyNotBeneficial
+        HighIntensity = 0,
+        ModerateIntensity = 1,
+        ModerateToHighIntensity = 2,
+        PossiblyBeneficial = 3,
+        LikelyNotBeneficial = 4
     }
 }

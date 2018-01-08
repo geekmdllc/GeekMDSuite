@@ -2,12 +2,12 @@
 {
     public enum FmsMovementPattern
     {
-        DeepSquat,
-        HurdleStep,
-        InlineLunge,
-        ShoulderMobility,
-        ActiveStraightLegRaise,
-        TrunkStability,
-        RotaryStability
+        DeepSquat = 0,
+        HurdleStep = 1,
+        InlineLunge = 2,
+        ShoulderMobility = 3,
+        ActiveStraightLegRaise = 4,
+        TrunkStability = 5,
+        RotaryStability = 6
     }
 }

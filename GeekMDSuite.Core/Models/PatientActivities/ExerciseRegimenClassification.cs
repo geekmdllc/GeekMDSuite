@@ -2,8 +2,8 @@
 {
     public enum ExerciseRegimenClassification
     {
-        Insufficient = 1,
-        Adequate = 2,
-        Aspirational = 3
+        Insufficient = 0,
+        Adequate = 1,
+        Aspirational = 2
     }
 }
