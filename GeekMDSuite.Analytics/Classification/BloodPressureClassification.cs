@@ -5,16 +5,13 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class BloodPressureClassification : IClassifiable<BloodPressureClassificationResult>
     {
-        private readonly BloodPressure _parameters;
 
-        public BloodPressureClassification(BloodPressure parameters) : this()
+        public BloodPressureClassification(BloodPressure parameters)
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
 
-        public BloodPressureClassification()
-        {
-        }
+        private readonly BloodPressure _parameters;
 
         private bool IsLow => _parameters.Systolic < LowerLimits.Systolic.Normal &&
                               _parameters.Diastolic < LowerLimits.Diastolic.Normal;

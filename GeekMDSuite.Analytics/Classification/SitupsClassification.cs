@@ -4,12 +4,13 @@ using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.Analytics.Classification
 {
+
     public class SitupsClassification : MuscularStrengthClassification
     {
-        public SitupsClassification(Situps test, Patient patient) : base(test, patient)
+        public SitupsClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test, parameters.Patient)
         {
-            if (test == null) throw new ArgumentNullException(nameof(test));
-            if (patient == null) throw new ArgumentNullException(nameof(patient));
+            if (parameters.Test == null) throw new ArgumentNullException(nameof(parameters.Test));
+            if (parameters.Patient == null) throw new ArgumentNullException(nameof(parameters.Patient));
         }
     }
 }

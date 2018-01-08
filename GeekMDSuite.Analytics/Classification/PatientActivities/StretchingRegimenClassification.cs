@@ -6,7 +6,7 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
 {
     public class StretchingRegimenClassification : ExerciseRegimenClassification
     {
-        public StretchingRegimenClassification(ExerciseRegimen regimen) : base(regimen)
+        public StretchingRegimenClassification(StretchingRegimen regimen) : base(regimen)
         {
             if (regimen == null) throw new ArgumentNullException(nameof(regimen));
             Goals = ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Stretching);

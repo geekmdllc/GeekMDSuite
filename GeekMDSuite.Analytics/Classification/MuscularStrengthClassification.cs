@@ -13,15 +13,15 @@ namespace GeekMDSuite.Analytics.Classification
 
         protected MuscularStrengthClassification(MuscularStrengthTest test, Patient patient)
         {
-            var patient1 = patient ?? throw new ArgumentNullException(nameof(patient));
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
             _test = test ?? throw new ArgumentNullException(nameof(test));
-
+            
             if (_test.Type == StrengthTest.Pushups)
-                _ranges = PushupsRepository.GetRanges(patient1);
+                _ranges = PushupsRepository.GetRanges(patient);
             else if (_test.Type == StrengthTest.Situps)
-                _ranges = SitupsRepository.GetRanges(patient1);
+                _ranges = SitupsRepository.GetRanges(patient);
             else if (_test.Type == StrengthTest.SitAndReach)
-                _ranges = SitAndReachRepository.GetRanges(patient1);
+                _ranges = SitAndReachRepository.GetRanges(patient);
             else
                 throw new NotImplementedException(nameof(_test.Type));
         }

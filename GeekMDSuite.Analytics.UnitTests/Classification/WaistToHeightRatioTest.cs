@@ -37,7 +37,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetWaist(LengthConversion.CentimetersToInches(ratio))
                 .BuildWithoutModelValidation();
 
-            var classification = new WaistToHeightRatioClassification(bodyComposition, _patient).Classification;
+            var classification = new WaistToHeightRatioClassification(new BodyCompositionClassificationParameters(bodyComposition, _patient)).Classification;
 
             Assert.Equal(expectedWaistToHeightRatio, classification);
         }
@@ -48,15 +48,14 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new WaistToHeightRatioClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
+                new WaistToHeightRatioClassification(new BodyCompositionClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
 
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new WaistToHeightRatioClassification(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(),
-                    null));
+                new WaistToHeightRatioClassification(new BodyCompositionClassificationParameters(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null)));
         }
     }
 }

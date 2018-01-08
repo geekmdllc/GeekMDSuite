@@ -28,7 +28,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             _patient.Gender = Gender.Build(gender);
             var gs = GripStrength.Build(left, right);
 
-            var classification = new GripStrengthClassification(gs, _patient).Classification;
+            var classification = new GripStrengthClassification(new GripStrengthClassificationParameters(gs, _patient)).Classification;
 
             Assert.Equal(expected, classification.WorseSide);
         }
@@ -41,7 +41,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             _patient.Gender = Gender.Build(GenderIdentity.Female);
             var gs = GripStrength.Build(33, 66);
 
-            var classification = new GripStrengthClassification(gs, _patient).Classification;
+            var classification = new GripStrengthClassification(new GripStrengthClassificationParameters(gs, _patient)).Classification;
 
             Assert.Equal(GripStrengthScore.Weak, classification.WorseSide);
             Assert.Equal(Laterality.Left, classification.Laterality);
@@ -53,7 +53,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             _patient.Gender = Gender.Build(GenderIdentity.Male);
             var gs = GripStrength.Build(150, 50);
 
-            var classification = new GripStrengthClassification(gs, _patient).Classification;
+            var classification = new GripStrengthClassification(new GripStrengthClassificationParameters(gs, _patient)).Classification;
 
             Assert.Equal(GripStrengthScore.Weak, classification.WorseSide);
             Assert.Equal(Laterality.Right, classification.Laterality);
@@ -65,7 +65,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             _patient.Gender = Gender.Build(GenderIdentity.Male);
             var gs = GripStrength.Build(50, 150);
 
-            var classification = new GripStrengthClassification(gs, _patient).Classification;
+            var classification = new GripStrengthClassification(new GripStrengthClassificationParameters(gs, _patient)).Classification;
 
             Assert.Equal(GripStrengthScore.Weak, classification.WorseSide);
             Assert.Equal(Laterality.Left, classification.Laterality);
@@ -74,11 +74,9 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         [Fact]
         public void NullGripStrength_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new GripStrengthClassification(
-                null,
-                PatientBuilder.Initialize()
-                    .SetGender(GenderIdentity.Male)
-                    .BuildWithoutModelValidation())
+            Assert.Throws<ArgumentNullException>(() => new GripStrengthClassification(new GripStrengthClassificationParameters(null, PatientBuilder.Initialize()
+                .SetGender(GenderIdentity.Male)
+                .BuildWithoutModelValidation()))
             );
         }
 
@@ -86,7 +84,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GripStrengthClassification(GripStrength.Build(0, 0), null));
+                new GripStrengthClassification(new GripStrengthClassificationParameters(GripStrength.Build(0, 0), null)));
         }
     }
 }

@@ -12,11 +12,11 @@ namespace GeekMDSuite.Analytics.Classification
 
         private readonly Spirometry _spirometry;
 
-        public SpirometryClassification(Spirometry spirometry, Patient patient, BodyComposition bodyComposition)
+        public SpirometryClassification(SpirometryClassificationParameters parameters)
         {
-            _spirometry = spirometry ?? throw new ArgumentNullException(nameof(spirometry));
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
-            _bodyComposition = bodyComposition ?? throw new ArgumentNullException(nameof(bodyComposition));
+            _spirometry = parameters.Spirometry ?? throw new ArgumentNullException(nameof(parameters.Spirometry));
+            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
+            _bodyComposition = parameters.BodyComposition ?? throw new ArgumentNullException(nameof(parameters.BodyComposition));
         }
 
         public double PredictedForcedExpiratoryVolume1Second => Gender.IsGenotypeXy(_patient.Gender)

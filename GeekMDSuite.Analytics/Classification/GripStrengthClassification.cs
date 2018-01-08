@@ -6,16 +6,28 @@ using GeekMDSuite.Utilities.MeasurementUnits;
 
 namespace GeekMDSuite.Analytics.Classification
 {
+    public class GripStrengthClassificationParameters
+    {
+        public GripStrengthClassificationParameters(GripStrength gripStrength, Patient patient)
+        {
+            GripStrength = gripStrength;
+            Patient = patient;
+        }
+
+        public GripStrength GripStrength { get; private set; }
+        public Patient Patient { get; private set; }
+    }
+
     public class GripStrengthClassification : IClassifiable<GripStrengthClassificationResult>
     {
         private readonly GripStrength _gripStrength;
         private readonly GripStrengthLimits _ranges;
 
-        public GripStrengthClassification(GripStrength gripStrength, Patient patient)
+        public GripStrengthClassification(GripStrengthClassificationParameters parameters)
         {
-            if (patient == null) throw new ArgumentNullException(nameof(patient));
-            _gripStrength = gripStrength ?? throw new ArgumentNullException(nameof(gripStrength));
-            _ranges = GripStrengthRepository.GetRanges(patient);
+            if (parameters.Patient == null) throw new ArgumentNullException(nameof(parameters.Patient));
+            _gripStrength = parameters.GripStrength ?? throw new ArgumentNullException(nameof(parameters.GripStrength));
+            _ranges = GripStrengthRepository.GetRanges(parameters.Patient);
         }
 
         public MassMeasurement LowerLimitOfNormal => _ranges.LowerLimitOfNormal;

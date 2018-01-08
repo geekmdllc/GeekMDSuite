@@ -41,7 +41,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetRace(race)
                 .BuildWithoutModelValidation();
 
-            var result = new BodyMassIndexClassification(bodyComposition, patient).Classification;
+            var result = new BodyMassIndexClassification(new BodyCompositionClassificationParameters(bodyComposition, patient)).Classification;
 
             Assert.Equal(expectecBodyMassIndex, result);
         }
@@ -50,7 +50,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new BodyMassIndexClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation())
+                new BodyMassIndexClassification(new BodyCompositionClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation()))
                     .Classification);
         }
 
@@ -58,8 +58,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new BodyMassIndexClassification(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(),
-                    null));
+                new BodyMassIndexClassification(new BodyCompositionClassificationParameters(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null)));
         }
     }
 }

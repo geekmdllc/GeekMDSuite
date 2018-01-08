@@ -40,7 +40,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetBodyFatPercentage(percentBodyFat)
                 .BuildWithoutModelValidation();
 
-            var classification = new PercentBodyFatClassification(bce, _patient).Classification;
+            var classification = new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(bce, _patient)).Classification;
 
             Assert.Equal(expectedClassification, classification);
         }
@@ -51,15 +51,14 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void GivenNullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PercentBodyFatClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
+                new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
 
         [Fact]
         public void GivenNullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PercentBodyFatClassification(
-                    BodyCompositionExpandedBuilder.Initialize().BuildWithoutModelValidation(), null));
+                new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(BodyCompositionExpandedBuilder.Initialize().BuildWithoutModelValidation(), null)));
         }
     }
 }

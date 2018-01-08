@@ -35,7 +35,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .BuildWithoutModelValidation();
 
 
-            var actualCategory = new CentralBloodPressureClassification(cbp, patient).Classification.Category;
+            var actualCategory = new CentralBloodPressureClassification(new CentralBloodPressureParameters(cbp, patient)).Classification.Category;
 
             Assert.Equal(expectctedCategory, actualCategory);
         }

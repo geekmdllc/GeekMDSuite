@@ -3,17 +3,18 @@ using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
+
     public class WaistToHeightRatioClassification : IClassifiable<WaistToHeightRatio>
     {
         private readonly Patient _patient;
 
         private readonly double _waistToHeighRatio;
 
-        public WaistToHeightRatioClassification(BodyComposition bodyComposition, Patient patient)
+        public WaistToHeightRatioClassification(BodyCompositionClassificationParameters bodyCompositionClassificationParameters)
         {
-            if (bodyComposition == null) throw new ArgumentNullException(nameof(bodyComposition));
-            _waistToHeighRatio = Calculate(bodyComposition);
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            if (bodyCompositionClassificationParameters.BodyComposition == null) throw new ArgumentNullException(nameof(bodyCompositionClassificationParameters.BodyComposition));
+            _waistToHeighRatio = Calculate(bodyCompositionClassificationParameters.BodyComposition);
+            _patient = bodyCompositionClassificationParameters.Patient ?? throw new ArgumentNullException(nameof(bodyCompositionClassificationParameters.Patient));
         }
 
         public WaistToHeightRatio Classification => Classify();

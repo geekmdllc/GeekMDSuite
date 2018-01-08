@@ -7,8 +7,28 @@ using MathNet.Numerics.Distributions;
 
 namespace GeekMDSuite.Analytics.Classification
 {
+    public class CentralBloodPressureParameters
+    {
+        public CentralBloodPressureParameters(CentralBloodPressure centralBloodPressure, Patient patient)
+        {
+            CentralBloodPressure = centralBloodPressure;
+            Patient = patient;
+        }
+
+        public CentralBloodPressure CentralBloodPressure { get; private set; }
+        public Patient Patient { get; private set; }
+    }
+
     public class CentralBloodPressureClassification : IClassifiable<CentralBloodPressureClassificationResult>
     {
+
+        public CentralBloodPressureClassification(CentralBloodPressureParameters parameters)
+        {
+            _centralBloodPressure =
+                parameters.CentralBloodPressure ?? throw new ArgumentNullException(nameof(parameters.CentralBloodPressure));
+            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
+        }
+        
         private static readonly Dictionary<CentralBloodPressureCategory, int> CategoryValueMap =
             new Dictionary<CentralBloodPressureCategory, int>
             {
@@ -21,13 +41,6 @@ namespace GeekMDSuite.Analytics.Classification
 
         private readonly CentralBloodPressure _centralBloodPressure;
         private readonly Patient _patient;
-
-        public CentralBloodPressureClassification(CentralBloodPressure centralBloodPressure, Patient patient)
-        {
-            _centralBloodPressure =
-                centralBloodPressure ?? throw new ArgumentNullException(nameof(centralBloodPressure));
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
-        }
 
         private int AgeReferenceGroupUpperLimit
         {

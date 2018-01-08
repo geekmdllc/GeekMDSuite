@@ -1,4 +1,5 @@
 ﻿using System;
+using GeekMDSuite.Analytics.Tools.Fitness;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
@@ -8,10 +9,17 @@ namespace GeekMDSuite.Analytics.Classification
         private readonly Patient _patient;
         private readonly double _vo2Max;
 
-        public Vo2MaxClassification(double vo2Max, Patient patient)
+        private Vo2MaxClassification(double vo2Max, Patient patient)
         {
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             _vo2Max = vo2Max;
+        }
+        
+        public Vo2MaxClassification(Vo2MaxClassificationParameters parameters) 
+            : this(CalculateVo2Max.FromTreadmillStressTest(parameters.TreadmillExerciseTest, parameters.Patient), parameters.Patient)
+        {
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+            if (parameters.TreadmillExerciseTest == null) throw new ArgumentNullException(nameof(parameters.TreadmillExerciseTest));
         }
 
         public FitnessClassification Classification => Classify();
