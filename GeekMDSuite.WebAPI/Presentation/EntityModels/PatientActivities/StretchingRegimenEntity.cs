@@ -4,22 +4,22 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
-    public class CardiovascularRegimenEntity : CardiovascularRegimen, IVisitData<CardiovascularRegimen>
+    public class StretchingRegimenEntity : StretchingRegimen, IVisitData<StretchingRegimen>
     {
         public int Id { get; set; }
         public Guid VisitId { get; set; }
 
-        public CardiovascularRegimenEntity()
+        public StretchingRegimenEntity()
         {
             
         }
 
-        public CardiovascularRegimenEntity(CardiovascularRegimen regimen)
+        public StretchingRegimenEntity(StretchingRegimen regimen)
         {
             MapValues(regimen);
         }
 
-        public void MapValues(CardiovascularRegimen subject)
+        public void MapValues(StretchingRegimen subject)
         {
             AverageSessionDuration = subject.AverageSessionDuration;
             Intensity = subject.Intensity;

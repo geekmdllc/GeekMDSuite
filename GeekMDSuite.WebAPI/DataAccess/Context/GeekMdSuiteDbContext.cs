@@ -38,6 +38,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         
         public virtual DbSet<ResistanceRegimenEntity> ResistanceRegimens { get; set; }
         public virtual DbSet<CardiovascularRegimenEntity> CardiovascularRegimens { get; set; }
+        public virtual DbSet<StretchingRegimenEntity> StretchingRegimens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -113,9 +113,10 @@ namespace GeekMDSuite.WebAPI
             routes.Add(dataUri + "visualacuity/", route => route.ToController<VisualAcuityController>());
             routes.Add(dataUri + "vitals/", route => route.ToController<VitalSignsController>());
 
-            var patientActivitiesUri = dataUri + "patientactivities/";
-            routes.Add(patientActivitiesUri + "resistanceregimen", route => route.ToController<ResistanceRegimenController>());
-            routes.Add(patientActivitiesUri + "cardiovascularregimen", route => route.ToController<CardiovascularRegimenController>());
+            var patientActivitiesUri = dataUri + "activities/";
+            routes.Add(patientActivitiesUri + "resistance", route => route.ToController<ResistanceRegimenController>());
+            routes.Add(patientActivitiesUri + "cardio", route => route.ToController<CardiovascularRegimenController>());
+            routes.Add(patientActivitiesUri + "stretching", route => route.ToController<StretchingRegimenController>());
             
        }
     }

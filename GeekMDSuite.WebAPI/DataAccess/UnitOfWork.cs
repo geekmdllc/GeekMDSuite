@@ -30,6 +30,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
             ResistanceRegimens = new ResistanceRegimenRepostory(_context);
             SitAndReaches = new SitAndReachesRepository(_context);
             Situps = new SitupsRepository(_context);
+            StretchingRegimens = new StretchingRegimenRepository(_context);
             Spirometries = new SpirometriesRepository(_context);
             TreadmillExerciseStressTests = new TreadmillExerciseStressTestsRepository(_context);
             Visits = new VisitsRepository(_context);
@@ -37,8 +38,6 @@ namespace GeekMDSuite.WebAPI.DataAccess
             VitalSigns = new VitalSignsRepository(_context);
         }
 
-        public IResistanceRegimenRepository ResistanceRegimens { get; }
-        public ICardiovascularRegimenRepository CardiovascularRegimens { get; set; }
 
         public IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>
         {
@@ -54,18 +53,21 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public IBloodPressuresRepository BloodPressures { get; }
         public IBodyCompositionsRepository BodyCompositions { get; set; }
         public IBodyCompositionExpandedsRepository BodyCompositionExpandeds { get; set; }
+        public ICardiovascularRegimenRepository CardiovascularRegimens { get; set; }
         public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
         public ICentralBloodPressureRepository CentralBloodPressures { get; }
         public IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
         public IGripStrengthsRepository GripStrengths { get; }
         public IIshiharaSixPlatesRepository IshiharaSixPlates { get; set; }
         public IOccularPressuresRepository OccularPressures { get; }
+        public IResistanceRegimenRepository ResistanceRegimens { get; }
         public IPatientsRepository Patients { get; }
         public IPeripheralVisionsRepository PeripheralVisions { get; }
         public IPushupsRepository Pushups { get; }
         public ISitAndReachesRepository SitAndReaches { get; }
         public ISitupsRepository Situps { get; set; }
         public ISpirometriesRepository Spirometries { get; set; }
+        public IStretchingRegimenRepository StretchingRegimens { get; set; }
         public ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; set; }
         public IVisitsRepository Visits { get; }
         public IVisualAcuitiesRepository VisualAcuities { get; set; }

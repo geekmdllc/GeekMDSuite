@@ -56,6 +56,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.SitAndReaches.AddRange(GetSitAndReachEntities());
             context.Situps.AddRange(GetSitupEntities());
             context.Spirometries.AddRange(GetSpirometryEntities());
+            context.StretchingRegimens.AddRange(GetStretchingRegimenEntities());
             context.TreadmillExerciseStressTests.AddRange(GetTreadmillExerciseStressTestEntities());
             context.Visits.AddRange(GetVisitEntities());
             context.VisualAcuities.AddRange(GetVisualAcuityEntities());
