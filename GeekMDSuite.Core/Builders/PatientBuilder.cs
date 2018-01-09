@@ -4,25 +4,36 @@ using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Core.Builders
 {
-    public class PatientBuilder : Builder<PatientBuilder,Patient>
+    public class PatientBuilder : Builder<PatientBuilder, Patient>
     {
-        
+        private readonly List<ChronicDisease> _comorbidities = new List<ChronicDisease>();
+
+        private DateTime _dateOfBirth;
+        private Gender _gender;
+        private string _medicalRecordNumber;
+        private Name _name;
+        private Race _race;
+        private bool _raceIsSet;
+
         public override Patient Build()
         {
             ValidatePreBuildState();
             return Patient.Build(_name, _dateOfBirth, _gender, _race, _medicalRecordNumber, _comorbidities);
         }
 
-        
-        public override Patient BuildWithoutModelValidation() => new Patient()
+
+        public override Patient BuildWithoutModelValidation()
         {
-            DateOfBirth = _dateOfBirth,
-            Gender = _gender,
-            MedicalRecordNumber =  _medicalRecordNumber,
-            Name = _name,
-            Race = _race,
-            Comorbidities = _comorbidities
-        };
+            return new Patient
+            {
+                DateOfBirth = _dateOfBirth,
+                Gender = _gender,
+                MedicalRecordNumber = _medicalRecordNumber,
+                Name = _name,
+                Race = _race,
+                Comorbidities = _comorbidities
+            };
+        }
 
 
         public PatientBuilder SetDateOfBirth(DateTime dateOfBirth)
@@ -31,17 +42,21 @@ namespace GeekMDSuite.Core.Builders
             return this;
         }
 
-        public PatientBuilder SetDateOfBirth(int year, int month, int day) 
-            => SetDateOfBirth(new DateTime(year, month, day));
-        
+        public PatientBuilder SetDateOfBirth(int year, int month, int day)
+        {
+            return SetDateOfBirth(new DateTime(year, month, day));
+        }
+
         public PatientBuilder SetName(Name name)
         {
             _name = name;
             return this;
         }
 
-        public PatientBuilder SetName(string first, string last, string middle = "") 
-            => SetName(Name.Build(first, last, middle));
+        public PatientBuilder SetName(string first, string last, string middle = "")
+        {
+            return SetName(Name.Build(first, last, middle));
+        }
 
         public PatientBuilder SetMedicalRecordNumber(string medicalRecordNumber)
         {
@@ -55,8 +70,10 @@ namespace GeekMDSuite.Core.Builders
             return this;
         }
 
-        public PatientBuilder SetGender(Gender gender) 
-            => SetGender(gender.Category);
+        public PatientBuilder SetGender(Gender gender)
+        {
+            return SetGender(gender.Category);
+        }
 
         public PatientBuilder SetRace(Race race)
         {
@@ -76,14 +93,6 @@ namespace GeekMDSuite.Core.Builders
             _comorbidities.AddRange(comorbidities);
             return this;
         }
-
-        private DateTime _dateOfBirth;
-        private Name _name;
-        private string _medicalRecordNumber;
-        private Gender _gender;
-        private Race _race;
-        private bool _raceIsSet;
-        private readonly List<ChronicDisease> _comorbidities = new List<ChronicDisease>();
 
         private void ValidatePreBuildState()
         {

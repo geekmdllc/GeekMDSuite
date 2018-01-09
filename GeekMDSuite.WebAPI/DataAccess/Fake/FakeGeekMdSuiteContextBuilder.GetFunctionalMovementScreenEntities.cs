@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<FunctionalMovementScreenEntity> GetFunctionalMovementScreenEntities()
         {
-            return new List<FunctionalMovementScreenEntity>()
+            return new List<FunctionalMovementScreenEntity>
             {
                 new FunctionalMovementScreenEntity(FunctionalMovementScreenBuilder.Initialize()
                     .SetActiveStraightLegRaise(2, 3)
@@ -18,7 +18,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetRotaryStability(2, 2, false)
                     .SetShoulderMobility(2, true, 1, true)
                     .SetTrunkStabilityPuhsup(2, false)
-                    .Build()) { VisitId = XerMajestiesVisitGuid },
+                    .Build()) {VisitId = XerMajestiesVisitGuid},
                 new FunctionalMovementScreenEntity(FunctionalMovementScreenBuilder.Initialize()
                     .SetActiveStraightLegRaise(3, 3)
                     .SetDeepSquat(3)
@@ -27,7 +27,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetRotaryStability(3, 3, false)
                     .SetShoulderMobility(3, false, 3, false)
                     .SetTrunkStabilityPuhsup(3, false)
-                    .Build()) { VisitId = BruceWaynesVisitGuid }
+                    .Build()) {VisitId = BruceWaynesVisitGuid}
             };
         }
     }

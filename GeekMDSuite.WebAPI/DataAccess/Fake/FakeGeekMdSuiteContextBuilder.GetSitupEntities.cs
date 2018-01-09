@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<SitupsEntity> GetSitupEntities()
         {
-            return new List<SitupsEntity>()
+            return new List<SitupsEntity>
             {
                 new SitupsEntity(Situps.Build(190)) {VisitId = BruceWaynesVisitGuid},
                 new SitupsEntity(Situps.Build(23)) {VisitId = XerMajestiesVisitGuid}

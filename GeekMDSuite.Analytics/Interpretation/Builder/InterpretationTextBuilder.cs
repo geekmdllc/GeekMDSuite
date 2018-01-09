@@ -8,9 +8,15 @@ namespace GeekMDSuite.Analytics.Interpretation.Builder
 {
     public class InterpretationTextBuilder : Builder<InterpretationTextBuilder, InterpretationText>
     {
+        private readonly List<InterpretationSection> _sections = new List<InterpretationSection>();
+        private string _summary;
+
+
+        private string _title;
+
         public override InterpretationText BuildWithoutModelValidation()
         {
-            return new InterpretationText()
+            return new InterpretationText
             {
                 Sections = _sections,
                 Summary = _summary,
@@ -23,7 +29,7 @@ namespace GeekMDSuite.Analytics.Interpretation.Builder
             ValidatePreBuildState();
             return BuildWithoutModelValidation();
         }
-        
+
         public InterpretationTextBuilder SetTitle(string title)
         {
             _title = title;
@@ -41,13 +47,6 @@ namespace GeekMDSuite.Analytics.Interpretation.Builder
             _sections.Add(section);
             return this;
         }
-
-
-        
-        
-        private string _title;
-        private string _summary;
-        private readonly List<InterpretationSection> _sections = new List<InterpretationSection>();
 
         private void ValidatePreBuildState()
         {

@@ -2,13 +2,13 @@
 {
     public enum Race
     {
-        White,
-        BlackOrAfricanAmerican,
-        AmericanIndianOrAlaskaNative,
-        Asian,
-        NativeHawaiianOrOtherPacificIslander,
-        Unknown,
-        Latin,
-        DeclineToState
+        White = 0,
+        BlackOrAfricanAmerican = 1,
+        AmericanIndianOrAlaskaNative = 2,
+        Asian = 3,
+        NativeHawaiianOrOtherPacificIslander = 4,
+        Unknown = 5,
+        Latin = 6,
+        DeclineToState = 7
     }
 }

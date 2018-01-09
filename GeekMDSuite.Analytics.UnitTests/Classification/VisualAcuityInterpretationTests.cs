@@ -18,7 +18,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             VisualAcuityClassificationResult expectedClassificationResult)
         {
             var classifcation = new VisualAcuityClassification(VisualAcuity.Build(distance, near, both)).Classification;
-            
+
             Assert.Equal(expectedClassificationResult, classifcation);
         }
     }

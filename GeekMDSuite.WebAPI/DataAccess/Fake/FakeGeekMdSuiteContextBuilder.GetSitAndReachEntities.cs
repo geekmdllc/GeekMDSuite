@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         public static List<SitAndReachEntity> GetSitAndReachEntities()
         {
-            return new List<SitAndReachEntity>()
+            return new List<SitAndReachEntity>
             {
                 new SitAndReachEntity(SitAndReach.Build(12)) {VisitId = BruceWaynesVisitGuid},
                 new SitAndReachEntity(SitAndReach.Build(25)) {VisitId = XerMajestiesVisitGuid}

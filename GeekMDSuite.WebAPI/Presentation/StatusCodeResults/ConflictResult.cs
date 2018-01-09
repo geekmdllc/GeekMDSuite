@@ -2,8 +2,11 @@
 
 namespace GeekMDSuite.WebAPI.Presentation.StatusCodeResults
 {
-    public class ConflictResult : StatusCodeResult
+    public class ConflictResult : ObjectResult
     {
-        public ConflictResult() : base(409) { }
+        public ConflictResult(object obj) : base(obj)
+        {
+            StatusCode = 409;
+        }
     }
 }

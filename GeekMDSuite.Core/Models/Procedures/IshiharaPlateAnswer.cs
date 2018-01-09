@@ -1,11 +1,7 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public class IshiharaPlateAnswer 
+    public class IshiharaPlateAnswer
     {
-
-        internal static IshiharaPlateAnswer Build(int plateNumber, IshiharaAnswerResult plateRead) => 
-            new IshiharaPlateAnswer(plateNumber, plateRead);
-
         private IshiharaPlateAnswer(int plateNumber, IshiharaAnswerResult plateRead)
         {
             PlateNumber = plateNumber;
@@ -14,11 +10,19 @@
 
         protected internal IshiharaPlateAnswer()
         {
-            
         }
+
         public int PlateNumber { get; set; }
         public IshiharaAnswerResult PlateRead { get; set; }
 
-        public override string ToString() => $"#{PlateNumber} - {PlateRead}";
+        internal static IshiharaPlateAnswer Build(int plateNumber, IshiharaAnswerResult plateRead)
+        {
+            return new IshiharaPlateAnswer(plateNumber, plateRead);
+        }
+
+        public override string ToString()
+        {
+            return $"#{PlateNumber} - {PlateRead}";
+        }
     }
 }

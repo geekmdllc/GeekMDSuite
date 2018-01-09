@@ -2,9 +2,9 @@
 {
     public enum GenderIdentity
     {
-        Male = 1,
-        Female = 2,
-        NonBinaryXy = 3,
-        NonBinaryXx = 4
+        Male = 0,
+        Female = 1,
+        NonBinaryXy = 2,
+        NonBinaryXx = 3
     }
 }

@@ -6,6 +6,8 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class QualitativeLabClassification : IClassifiable<QualitativeLabResult>
     {
+        private readonly QualitativeLab _lab;
+
         public QualitativeLabClassification(QualitativeLab lab)
         {
             _lab = lab ?? throw new ArgumentNullException(nameof(lab));
@@ -14,10 +16,11 @@ namespace GeekMDSuite.Analytics.Classification
 
         public QualitativeLabClassificationModel Lab { get; set; }
 
-        private readonly QualitativeLab _lab;
-
         public QualitativeLabResult Classification => _lab.Result;
 
-        public override string ToString() => Lab + " - " + Classification.ToString();
+        public override string ToString()
+        {
+            return Lab + " - " + Classification;
+        }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
@@ -8,7 +7,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     public static partial class FakeGeekMdSuiteContextBuilder
     {
         private static List<BodyCompositionExpandedEntity> GetBodyCompositionExpandedEntities()
-            => new List<BodyCompositionExpandedEntity>()
+        {
+            return new List<BodyCompositionExpandedEntity>
             {
                 new BodyCompositionExpandedEntity(BodyCompositionExpandedBuilder.Initialize()
                     .SetBodyFatPercentage(13)
@@ -27,5 +27,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetWeight(135)
                     .Build()) {VisitId = XerMajestiesVisitGuid}
             };
+        }
     }
 }

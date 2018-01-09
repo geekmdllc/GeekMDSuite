@@ -1,29 +1,54 @@
 using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
     public class BloodPressureClassification : IClassifiable<BloodPressureClassificationResult>
     {
-        public BloodPressureClassification(BloodPressure parameters) : this()
+
+        public BloodPressureClassification(BloodPressure parameters)
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
 
-        public BloodPressureClassificationResult Classification => new BloodPressureClassificationResult()
+        private readonly BloodPressure _parameters;
+
+        private bool IsLow => _parameters.Systolic < LowerLimits.Systolic.Normal &&
+                              _parameters.Diastolic < LowerLimits.Diastolic.Normal;
+
+        private bool IsNormal => !IsLow && _parameters.Systolic < LowerLimits.Systolic.Elevated &&
+                                 _parameters.Diastolic < LowerLimits.Diastolic.Stage1Hypertension;
+
+        private bool IsElevated => !IsNormal && _parameters.Systolic < LowerLimits.Systolic.Stage1Hypertension &&
+                                   _parameters.Diastolic < LowerLimits.Diastolic.Stage1Hypertension;
+
+        private bool IsStage1Htn => !IsElevated && _parameters.Systolic < LowerLimits.Systolic.Stage2Hypertension &&
+                                    _parameters.Diastolic < LowerLimits.Diastolic.Stage2Hypertension;
+
+        private bool IsStage2Htn => !IsStage1Htn && _parameters.Systolic < LowerLimits.Systolic.HypertensiveUrgency &&
+                                    _parameters.Diastolic < LowerLimits.Diastolic.HypertensiveUrgency;
+
+        private bool IsUrgency => !IsStage2Htn && !_parameters.OrganDamage;
+
+        public BloodPressureClassificationResult Classification => new BloodPressureClassificationResult
         {
             Stage = Classify(),
             Pressure = _parameters
         };
 
-        public override string ToString() => Classification.ToString();
-        
-        private readonly BloodPressure _parameters;
-
-        public BloodPressureClassification()
+        public override string ToString()
         {
-            
+            return Classification.ToString();
+        }
+
+        private BloodPressureStage Classify()
+        {
+            if (IsLow) return BloodPressureStage.Low;
+            if (IsNormal) return BloodPressureStage.Normal;
+            if (IsElevated) return BloodPressureStage.Elevated;
+            if (IsStage1Htn) return BloodPressureStage.Stage1Hypertension;
+            if (IsStage2Htn) return BloodPressureStage.Stage2Hypertension;
+            return IsUrgency ? BloodPressureStage.HypertensiveUrgency : BloodPressureStage.HypertensiveEmergency;
         }
 
         public static class LowerLimits
@@ -45,34 +70,5 @@ namespace GeekMDSuite.Analytics.Classification
                 public const int HypertensiveUrgency = 180;
             }
         }
-        
-        private BloodPressureStage Classify()
-        {
-            if (IsLow) return BloodPressureStage.Low;
-            if (IsNormal) return BloodPressureStage.Normal;
-            if (IsElevated) return BloodPressureStage.Elevated;
-            if (IsStage1Htn) return BloodPressureStage.Stage1Hypertension;
-            if (IsStage2Htn) return BloodPressureStage.Stage2Hypertension;
-            return IsUrgency ? BloodPressureStage.HypertensiveUrgency : BloodPressureStage.HypertensiveEmergency;
-        }
-
-        private bool IsLow => _parameters.Systolic < LowerLimits.Systolic.Normal && _parameters.Diastolic < LowerLimits.Diastolic.Normal;
-
-        private bool IsNormal => !IsLow && _parameters.Systolic < LowerLimits.Systolic.Elevated &&
-                                 _parameters.Diastolic < LowerLimits.Diastolic.Stage1Hypertension;
-
-        private bool IsElevated => !IsNormal && _parameters.Systolic < LowerLimits.Systolic.Stage1Hypertension &&
-                                   _parameters.Diastolic < LowerLimits.Diastolic.Stage1Hypertension;
-
-        private bool IsStage1Htn => !IsElevated && _parameters.Systolic < LowerLimits.Systolic.Stage2Hypertension &&
-                                    _parameters.Diastolic < LowerLimits.Diastolic.Stage2Hypertension;
-
-        private bool IsStage2Htn => !IsStage1Htn && _parameters.Systolic < LowerLimits.Systolic.HypertensiveUrgency &&
-                                    _parameters.Diastolic < LowerLimits.Diastolic.HypertensiveUrgency;
-
-        private bool IsUrgency => !IsStage2Htn && !_parameters.OrganDamage;
-                
-       
-        
     }
 }

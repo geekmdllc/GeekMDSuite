@@ -2,7 +2,7 @@
 {
     public enum PeripheralVisionClassificationResult
     {
-        Normal,
-        Narrow
+        Normal = 0,
+        Narrow = 1
     }
 }

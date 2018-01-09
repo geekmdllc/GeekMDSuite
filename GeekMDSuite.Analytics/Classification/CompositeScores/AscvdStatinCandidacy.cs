@@ -2,8 +2,8 @@
 {
     public enum AscvdStatinCandidacy
     {
-        LikelyNotCandidate,
-        PossibleCandidate,
-        Candidate
+        LikelyNotCandidate = 0,
+        PossibleCandidate = 1,
+        Candidate = 2
     }
 }

@@ -4,12 +4,11 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class CentralBloodPressuresRepository : RepositoryAssociatedWithVisit<CentralBloodPressureEntity>, ICentralBloodPressureRepository
+    public class CentralBloodPressuresRepository : RepositoryAssociatedWithVisit<CentralBloodPressureEntity>,
+        ICentralBloodPressureRepository
     {
-        public CentralBloodPressuresRepository( GeekMdSuiteDbContext context) : base (context)
+        public CentralBloodPressuresRepository(GeekMdSuiteDbContext context) : base(context)
         {
-            
         }
-        
     }
 }

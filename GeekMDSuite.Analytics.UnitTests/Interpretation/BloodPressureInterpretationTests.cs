@@ -1,9 +1,7 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Interpretation;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using Xunit;
-using Xunit.Sdk;
 
 namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 {
@@ -14,7 +12,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
         {
             Assert.Throws<ArgumentNullException>(() => new BloodPressureInterpretation(null));
         }
-        
+
         [Fact]
         public void GivenProperBloodPressure_ReturnsCorrectType()
         {
@@ -22,7 +20,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 
             Assert.IsType<BloodPressureInterpretation>(bpInterp);
         }
-        
+
         [Fact]
         public void GivenProperBloodPressure_ReturnsNonEmptyString()
         {
@@ -30,6 +28,5 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 
             Assert.NotEmpty(bpInterp.ToString());
         }
-
     }
 }

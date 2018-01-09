@@ -2,9 +2,9 @@
 {
     public enum AscvdAspirinRecommendation
     {
-        Beneficial,
-        BeneficialWithReservation,
-        InsufficientEvidenceLikelyBeneficial,
-        InsufficientEvidenceLikelyNotBeneficial
+        Beneficial = 0,
+        BeneficialWithReservation = 1,
+        InsufficientEvidenceLikelyBeneficial = 2,
+        InsufficientEvidenceLikelyNotBeneficial = 3
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.Models;
 
@@ -9,14 +8,13 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public BodyCompositionEntity()
         {
-            
         }
 
         public BodyCompositionEntity(BodyComposition bodyComposition)
         {
             MapValues(bodyComposition);
         }
-        
+
         public void MapValues(BodyComposition subject)
         {
             Height.Inches = subject.Height.Inches;

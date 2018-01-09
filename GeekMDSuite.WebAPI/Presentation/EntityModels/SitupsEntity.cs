@@ -6,18 +6,20 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class SitupsEntity : Situps, IVisitData<Situps>
     {
-        public void MapValues(Situps subject) => Value = subject.Value;
-
         public SitupsEntity()
         {
-            
         }
 
-        public SitupsEntity( Situps situps) : this()
+        public SitupsEntity(Situps situps) : this()
         {
             MapValues(situps);
         }
-        
+
+        public void MapValues(Situps subject)
+        {
+            Value = subject.Value;
+        }
+
         public int Id { get; set; }
         public Guid VisitId { get; set; }
     }

@@ -6,10 +6,13 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class AudiogramDataPointClassification : IClassifiable<HearingLoss>
     {
+        private readonly AudiogramDatapoint _datapoint;
+
         public AudiogramDataPointClassification(AudiogramDatapoint datapoint)
         {
             _datapoint = datapoint ?? throw new ArgumentNullException(nameof(datapoint));
         }
+
         public HearingLoss Classification => Classify(_datapoint.Value);
 
         public static HearingLoss Classify(int value)
@@ -24,12 +27,16 @@ namespace GeekMDSuite.Analytics.Classification
         {
             public static readonly int Normal = HearingLossClassificationRepository.GetRange(HearingLoss.None).Lower;
             public static readonly int Mild = HearingLossClassificationRepository.GetRange(HearingLoss.Mild).Lower;
-            public static readonly int Moderate = HearingLossClassificationRepository.GetRange(HearingLoss.Moderate).Lower;
+
+            public static readonly int Moderate =
+                HearingLossClassificationRepository.GetRange(HearingLoss.Moderate).Lower;
+
             public static readonly int Severe = HearingLossClassificationRepository.GetRange(HearingLoss.Severe).Lower;
-            public static readonly int Profound = HearingLossClassificationRepository.GetRange(HearingLoss.Profound).Lower;
+
+            public static readonly int Profound =
+                HearingLossClassificationRepository.GetRange(HearingLoss.Profound).Lower;
+
             public static int UnderWeight { get; set; }
         }
-        
-        private readonly AudiogramDatapoint _datapoint;
     }
 }

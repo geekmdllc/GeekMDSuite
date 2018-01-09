@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class TreadmillExerciseStressTestEntity : TreadmillExerciseStressTest, IVisitData<TreadmillExerciseStressTest>
+    public class TreadmillExerciseStressTestEntity : TreadmillExerciseStressTest,
+        IVisitData<TreadmillExerciseStressTest>
     {
         public TreadmillExerciseStressTestEntity()
         {
@@ -14,9 +15,10 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         {
             MapValues(treadmillExerciseStressTest);
         }
+
         public int Id { get; set; }
         public Guid VisitId { get; set; }
-        
+
         public void MapValues(TreadmillExerciseStressTest subject)
         {
             MaximumBloodPressure.Diastolic = subject.MaximumBloodPressure.Diastolic;

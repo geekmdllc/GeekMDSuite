@@ -2,8 +2,8 @@
 {
     public enum ExerciseClassification
     {
-        Cardiovascular,
-        Resistance,
-        Stretching
+        Cardiovascular = 0,
+        Resistance = 1,
+        Stretching = 2
     }
 }

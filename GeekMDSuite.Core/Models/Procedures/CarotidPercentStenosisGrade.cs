@@ -2,10 +2,10 @@
 {
     public enum CarotidPercentStenosisGrade
     {
-        None,
-        Nominal,
-        LessThan30,
-        LessThan50,
-        MoreThan50
+        None = 0,
+        Nominal = 1,
+        LessThan30 = 2,
+        LessThan50 = 3,
+        MoreThan50 = 4
     }
 }

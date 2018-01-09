@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.LaboratoryData
 {
-    public class QualitativeLab 
+    public class QualitativeLab
     {
         private QualitativeLab(QualitativeLabType type, QualitativeLabResult result)
         {
@@ -11,9 +11,14 @@
         public QualitativeLabType Type { get; }
         public QualitativeLabResult Result { get; }
 
-        public static QualitativeLab Create(QualitativeLabType type, QualitativeLabResult result) 
-            => new QualitativeLab(type, result);
+        public static QualitativeLab Create(QualitativeLabType type, QualitativeLabResult result)
+        {
+            return new QualitativeLab(type, result);
+        }
 
-        public override string ToString() => Result.ToString();
+        public override string ToString()
+        {
+            return Result.ToString();
+        }
     }
 }

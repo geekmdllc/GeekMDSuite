@@ -1,15 +1,19 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Tools.MeasurementUnits.Conversion;
+using GeekMDSuite.Utilities.MeasurementUnits.Conversion;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification
 {
     public class WaistToHeightRatioTest
     {
+        public WaistToHeightRatioTest()
+        {
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
+        }
+
         [Theory]
         [InlineData(0.33, GenderIdentity.Male, WaistToHeightRatio.ExtremelySlim)]
         [InlineData(0.42, GenderIdentity.Male, WaistToHeightRatio.Slim)]
@@ -32,30 +36,26 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetHeight(LengthConversion.CentimetersToInches(1))
                 .SetWaist(LengthConversion.CentimetersToInches(ratio))
                 .BuildWithoutModelValidation();
-            
-            var classification = new WaistToHeightRatioClassification(bodyComposition, _patient).Classification;
-            
+
+            var classification = new WaistToHeightRatioClassification(new BodyCompositionClassificationParameters(bodyComposition, _patient)).Classification;
+
             Assert.Equal(expectedWaistToHeightRatio, classification);
         }
+
+        private readonly Patient _patient;
 
         [Fact]
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new WaistToHeightRatioClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
+                new WaistToHeightRatioClassification(new BodyCompositionClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
-        
+
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new WaistToHeightRatioClassification(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null));
+                new WaistToHeightRatioClassification(new BodyCompositionClassificationParameters(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null)));
         }
-
-        public WaistToHeightRatioTest()
-        {
-            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
-        }
-        private readonly Patient _patient;
     }
 }

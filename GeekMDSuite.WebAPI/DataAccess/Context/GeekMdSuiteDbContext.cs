@@ -1,13 +1,19 @@
-﻿using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
+﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.WindowsAzure.Storage.Blob.Protocol;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Context
 {
     public partial class GeekMdSuiteDbContext : DbContext
     {
-        public GeekMdSuiteDbContext() {}
-        public GeekMdSuiteDbContext(DbContextOptions<GeekMdSuiteDbContext> options) : base(options) {}
+        public GeekMdSuiteDbContext()
+        {
+        }
+
+        public GeekMdSuiteDbContext(DbContextOptions<GeekMdSuiteDbContext> options) : base(options)
+        {
+        }
 
         public virtual DbSet<AudiogramEntity> Audiograms { get; set; }
         public virtual DbSet<BloodPressureEntity> BloodPressures { get; set; }
@@ -29,6 +35,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<VisitEntity> Visits { get; set; }
         public virtual DbSet<VisualAcuityEntity> VisualAcuities { get; set; }
         public virtual DbSet<VitalSignsEntity> VitalSigns { get; set; }
+        
+        public virtual DbSet<ResistanceRegimenEntity> ResistanceRegimens { get; set; }
+        public virtual DbSet<CardiovascularRegimenEntity> CardiovascularRegimens { get; set; }
+        public virtual DbSet<StretchingRegimenEntity> StretchingRegimens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +54,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
             ConfigureTreadmillExerciseStressTestEntity(modelBuilder);
             ConfigureVitalSignsEntity(modelBuilder);
             ConfigureVisitEntities(modelBuilder);
+
+            modelBuilder.Entity<ResistanceRegimenEntity>().OwnsOne(e => e.Features);
         }
     }
 }

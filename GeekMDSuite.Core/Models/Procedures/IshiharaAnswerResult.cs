@@ -1,9 +1,9 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public enum IshiharaAnswerResult 
+    public enum IshiharaAnswerResult
     {
-        NormalVision,
-        ColorVisionDefict,
-        UnableToRead
+        NormalVision = 0,
+        ColorVisionDefict = 1,
+        UnableToRead = 2
     }
 }

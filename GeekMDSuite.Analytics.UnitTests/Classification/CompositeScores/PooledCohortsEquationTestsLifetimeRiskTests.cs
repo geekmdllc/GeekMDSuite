@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.Core.Models;
-using GeekMDSuite.Analytics.Tools.Cardiology;
+﻿using GeekMDSuite.Analytics.Tools.Cardiology;
+using GeekMDSuite.Core.Models;
 using Xunit;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
@@ -52,7 +52,8 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
                 .SetTotalCholesterol(default(int))
                 .SetHdlCholesterol(default(int));
 
-            var idealAscvdLifetimeRisk = new PooledCohortsEquation(_parametersBuilder.Build()).IdealAscvdLifetimeRiskPercentage;
+            var idealAscvdLifetimeRisk =
+                new PooledCohortsEquation(_parametersBuilder.Build()).IdealAscvdLifetimeRiskPercentage;
 
             const double tolerance = 0.1;
             Assert.InRange(idealAscvdLifetimeRisk, expectedRisk - tolerance, expectedRisk + tolerance);

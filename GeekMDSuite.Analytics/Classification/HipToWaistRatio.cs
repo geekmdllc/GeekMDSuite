@@ -2,8 +2,8 @@
 {
     public enum HipToWaistRatio
     {
-        Normal,
-        Overweight,
-        Obese
+        Normal = 0,
+        Overweight = 1,
+        Obese = 2
     }
 }

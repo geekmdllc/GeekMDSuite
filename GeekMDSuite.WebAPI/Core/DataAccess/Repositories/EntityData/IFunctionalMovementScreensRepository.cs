@@ -2,8 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface IFunctionalMovementScreensRepository : IRepositoryAssociatedWithVisit<FunctionalMovementScreenEntity>
+    public interface
+        IFunctionalMovementScreensRepository : IRepositoryAssociatedWithVisit<FunctionalMovementScreenEntity>
     {
-        
     }
 }

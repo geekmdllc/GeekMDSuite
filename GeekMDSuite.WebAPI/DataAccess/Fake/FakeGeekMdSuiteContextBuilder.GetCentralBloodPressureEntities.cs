@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<CentralBloodPressureEntity> GetCentralBloodPressureEntities()
         {
-            return new List<CentralBloodPressureEntity>()
+            return new List<CentralBloodPressureEntity>
             {
                 new CentralBloodPressureEntity(CentralBloodPressureBuilder.Initialize()
                     .SetAugmentedIndex(33)
@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetPulsePressure(44)
                     .SetPulseWaveVelocity(7.9)
                     .SetReferenceAge(44)
-                    .Build()) { VisitId = XerMajestiesVisitGuid },
+                    .Build()) {VisitId = XerMajestiesVisitGuid},
                 new CentralBloodPressureEntity(CentralBloodPressureBuilder.Initialize()
                     .SetAugmentedIndex(31)
                     .SetAugmentedPressure(11)
@@ -25,7 +25,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetPulsePressure(32)
                     .SetPulseWaveVelocity(9.9)
                     .SetReferenceAge(56)
-                    .Build()) { VisitId = BruceWaynesVisitGuid }
+                    .Build()) {VisitId = BruceWaynesVisitGuid}
             };
         }
     }

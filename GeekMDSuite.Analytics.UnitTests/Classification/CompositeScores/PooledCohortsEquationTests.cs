@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Tools.Cardiology;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
 using Xunit;
@@ -9,13 +8,6 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
 {
     public partial class PooledCohortsEquationTests
     {
-        [Fact]
-        public void NullParameters_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-                new PooledCohortsEquation(null));
-        }
-
         public PooledCohortsEquationTests()
         {
             var dateOfBirth = DateTime.Now.AddYears(-55);
@@ -31,5 +23,12 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
 
         private readonly Patient _patient;
         private readonly PooledCohortEquationParametersBuilder _parametersBuilder;
+
+        [Fact]
+        public void NullParameters_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new PooledCohortsEquation(null));
+        }
     }
 }

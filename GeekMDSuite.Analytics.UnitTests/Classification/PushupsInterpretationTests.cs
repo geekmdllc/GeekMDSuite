@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
@@ -10,6 +9,11 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
 {
     public class PushupsInterpretationTests
     {
+        public PushupsInterpretationTests()
+        {
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
+        }
+
         [Theory]
         [InlineData(0, GenderIdentity.Male, 40, FitnessClassification.VeryPoor)]
         [InlineData(5, GenderIdentity.Male, 40, FitnessClassification.Poor)]
@@ -25,36 +29,32 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         [InlineData(24, GenderIdentity.Female, 40, FitnessClassification.AboveAverage)]
         [InlineData(30, GenderIdentity.Female, 40, FitnessClassification.Good)]
         [InlineData(33, GenderIdentity.Female, 40, FitnessClassification.Excellent)]
-        public void Classification_GivenPushupCountAndPatient_ReturnsCorrectClassification(int count, 
+        public void Classification_GivenPushupCountAndPatient_ReturnsCorrectClassification(int count,
             GenderIdentity genderIdentity, int age, FitnessClassification expectedClassification)
         {
             var pushups = Pushups.Build(count);
             _patient.Gender = Gender.Build(genderIdentity);
             _patient.DateOfBirth = DateTime.Now.AddYears(-age);
 
-            var classification = new PushupsClassification(pushups, _patient).Classification;
+            var classification = new PushupsClassification(new MuscularStrengthClassificationParameters(pushups, _patient)).Classification;
 
             Assert.Equal(expectedClassification, classification);
         }
 
-        [Fact]
-        public void GivenNullPushups_ThrowsArgumentNullError()
-        {
-            Assert.Throws<ArgumentNullException>(() => new PushupsClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
-        }
+        private readonly Patient _patient;
 
         [Fact]
         public void GivenNullPatient_ThrowsArguemntNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PushupsClassification(Pushups.Build(0), null));
+                new PushupsClassification(new MuscularStrengthClassificationParameters(Pushups.Build(0), null)));
         }
 
-        public PushupsInterpretationTests()
+        [Fact]
+        public void GivenNullPushups_ThrowsArgumentNullError()
         {
-            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
+            Assert.Throws<ArgumentNullException>(() =>
+                new PushupsClassification(new MuscularStrengthClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
-
-        private readonly Patient _patient;
     }
 }

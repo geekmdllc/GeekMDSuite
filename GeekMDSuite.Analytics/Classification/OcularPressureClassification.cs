@@ -5,30 +5,47 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class OcularPressureClassification : IClassifiable<OcularPressureClassificationResult>
     {
+        public static readonly int UpperLimitOfNormal = 21;
+
+        private readonly OcularPressure _ocularPressure;
+
         public OcularPressureClassification(OcularPressure pressure)
         {
             _ocularPressure = pressure ?? throw new ArgumentNullException(nameof(pressure));
         }
 
-        public OcularPressureClassificationResult Classification => Classify();
         public OcularPressureClassificationResult Left => ClassifyLeft();
         public OcularPressureClassificationResult Right => ClassifyRight();
-        
-        public static readonly int UpperLimitOfNormal = 21;
 
-        public override string ToString() => Classification.ToString();
+        public OcularPressureClassificationResult Classification => Classify();
 
-        private OcularPressureClassificationResult Classify() => _ocularPressure.Left > _ocularPressure.Right 
-            ? ClassifyLeft() : ClassifyRight();
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
 
-        private OcularPressureClassificationResult ClassifyLeft() => ClassifySide(_ocularPressure.Left);
+        private OcularPressureClassificationResult Classify()
+        {
+            return _ocularPressure.Left > _ocularPressure.Right
+                ? ClassifyLeft()
+                : ClassifyRight();
+        }
 
-        private OcularPressureClassificationResult ClassifyRight() => ClassifySide(_ocularPressure.Right);
-        
-        private static OcularPressureClassificationResult ClassifySide(int side) => side <= UpperLimitOfNormal
-            ? OcularPressureClassificationResult.Normal
-            : OcularPressureClassificationResult.OcularHypertension;
+        private OcularPressureClassificationResult ClassifyLeft()
+        {
+            return ClassifySide(_ocularPressure.Left);
+        }
 
-        private readonly OcularPressure _ocularPressure;
+        private OcularPressureClassificationResult ClassifyRight()
+        {
+            return ClassifySide(_ocularPressure.Right);
+        }
+
+        private static OcularPressureClassificationResult ClassifySide(int side)
+        {
+            return side <= UpperLimitOfNormal
+                ? OcularPressureClassificationResult.Normal
+                : OcularPressureClassificationResult.OcularHypertension;
+        }
     }
 }

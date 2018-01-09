@@ -1,32 +1,40 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
+
     public class HipToWaistClassification : IClassifiable<HipToWaistRatio>
     {
-        public HipToWaistClassification(BodyComposition bodyComposition, Patient patient)
-        {
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
-            _bodyComposition = bodyComposition ?? throw new ArgumentNullException(nameof(bodyComposition));
-        }
-        
-        public HipToWaistRatio Classification => Classify();
-        public double Ratio =>  _bodyComposition.Waist.Inches / _bodyComposition.Hips.Inches;
+        private readonly BodyComposition _bodyComposition;
+        private readonly Patient _patient;
 
-        public override string ToString() => Classification.ToString();
+        public HipToWaistClassification(BodyCompositionClassificationParameters parameters)
+        {
+            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
+            _bodyComposition = parameters.BodyComposition ?? throw new ArgumentNullException(nameof(parameters.BodyComposition));
+        }
+
+        public double Ratio => _bodyComposition.Waist.Inches / _bodyComposition.Hips.Inches;
+
+        public HipToWaistRatio Classification => Classify();
+
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
 
         private HipToWaistRatio Classify()
         {
             var lowerLimits = GetLimits();
-            
-            if (Ratio < lowerLimits.Normal) 
+
+            if (Ratio < lowerLimits.Normal)
                 throw new ArgumentOutOfRangeException(nameof(Ratio));
-            if (Ratio < lowerLimits.Overweight) 
+            if (Ratio < lowerLimits.Overweight)
                 return HipToWaistRatio.Normal;
-            return Ratio < lowerLimits.Obese 
-                ? HipToWaistRatio.Overweight : HipToWaistRatio.Obese;
+            return Ratio < lowerLimits.Obese
+                ? HipToWaistRatio.Overweight
+                : HipToWaistRatio.Obese;
         }
 
         private HipToWaistLowerLimits GetLimits()
@@ -36,13 +44,14 @@ namespace GeekMDSuite.Analytics.Classification
                     LowerLimits.Male.Normal,
                     LowerLimits.Male.Overweight,
                     LowerLimits.Male.Obese);
-            
+
             return new HipToWaistLowerLimits(
                 LowerLimits.Female.Normal,
                 LowerLimits.Female.Overweight,
                 LowerLimits.Female.Obese
             );
         }
+
         private class HipToWaistLowerLimits
         {
             public HipToWaistLowerLimits(double normal, double overweight, double obese)
@@ -52,9 +61,9 @@ namespace GeekMDSuite.Analytics.Classification
                 Obese = obese;
             }
 
-            public double Normal { get;}
-            public double Overweight { get;}
-            public double Obese { get;}
+            public double Normal { get; }
+            public double Overweight { get; }
+            public double Obese { get; }
         }
 
         public static class LowerLimits
@@ -73,8 +82,5 @@ namespace GeekMDSuite.Analytics.Classification
                 public const double Obese = 1.0;
             }
         }
-        
-        private readonly BodyComposition _bodyComposition;
-        private readonly Patient _patient;
     }
 }

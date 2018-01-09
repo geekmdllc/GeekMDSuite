@@ -5,6 +5,11 @@ namespace GeekMDSuite.Core.Models.Procedures
 {
     public class CarotidUltrasoundResultBuilder : Builder<CarotidUltrasoundResultBuilder, CarotidUltrasoundResult>
     {
+        private CarotidIntimaMediaThicknessGrade _imtGrade = CarotidIntimaMediaThicknessGrade.Normal;
+
+        private double _imtThickenssMm;
+        private CarotidPlaqueCharacter _plaqueCharacter = CarotidPlaqueCharacter.None;
+        private CarotidPercentStenosisGrade _stenosisGrade = CarotidPercentStenosisGrade.None;
 
         public override CarotidUltrasoundResult Build()
         {
@@ -12,13 +17,16 @@ namespace GeekMDSuite.Core.Models.Procedures
             return BuildWithoutModelValidation();
         }
 
-        public override CarotidUltrasoundResult BuildWithoutModelValidation() => new CarotidUltrasoundResult()
+        public override CarotidUltrasoundResult BuildWithoutModelValidation()
         {
-            IntimaMediaMeasurementMillimeters = _imtThickenssMm,
-            Grade = _imtGrade,
-            Stenosis = _stenosisGrade,
-            Character = _plaqueCharacter
-        };
+            return new CarotidUltrasoundResult
+            {
+                IntimaMediaMeasurementMillimeters = _imtThickenssMm,
+                Grade = _imtGrade,
+                Stenosis = _stenosisGrade,
+                Character = _plaqueCharacter
+            };
+        }
 
         public CarotidUltrasoundResultBuilder SetIntimaMediaThickeness(double millimeters)
         {
@@ -31,24 +39,19 @@ namespace GeekMDSuite.Core.Models.Procedures
             _stenosisGrade = grade;
             return this;
         }
-        
+
         public CarotidUltrasoundResultBuilder SetPlaqueCharacter(CarotidPlaqueCharacter character)
         {
             _plaqueCharacter = character;
             return this;
         }
-        
+
         public CarotidUltrasoundResultBuilder SetImtGrade(CarotidIntimaMediaThicknessGrade grade)
         {
             _imtGrade = grade;
             return this;
         }
-        
-        private double _imtThickenssMm;
-        private CarotidPercentStenosisGrade _stenosisGrade = CarotidPercentStenosisGrade.None;
-        private CarotidPlaqueCharacter _plaqueCharacter = CarotidPlaqueCharacter.None;
-        private CarotidIntimaMediaThicknessGrade _imtGrade = CarotidIntimaMediaThicknessGrade.Normal;
-        
+
         private void ValidatePreBuildState()
         {
             if (Math.Abs(_imtThickenssMm - default(double)) < 0.001)

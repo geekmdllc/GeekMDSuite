@@ -5,21 +5,32 @@ namespace GeekMDSuite.Core.Models.Procedures
 {
     public class CentralBloodPressureBuilder : Builder<CentralBloodPressureBuilder, CentralBloodPressure>
     {
+        private double _augmentedIndex = double.MinValue;
+        private double _augmentedPressure = double.MinValue;
+        private double _pulsePressure = double.MinValue;
+        private double _pulseWaveVelocity = double.MinValue;
+        private double _referenceAge = double.MinValue;
+
+        private double _systolicPressure = double.MinValue;
+
         public override CentralBloodPressure Build()
         {
             ValidatePreBuildState();
             return BuildWithoutModelValidation();
         }
 
-        public override CentralBloodPressure BuildWithoutModelValidation() => new CentralBloodPressure()
+        public override CentralBloodPressure BuildWithoutModelValidation()
         {
-            SystolicPressure = _systolicPressure,
-            AugmentedIndex = _augmentedIndex,
-            AugmentedPressure = _augmentedPressure,
-            PulsePressure = _pulsePressure,
-            PulseWaveVelocity = _pulseWaveVelocity,
-            ReferenceAge = _referenceAge
-        };
+            return new CentralBloodPressure
+            {
+                SystolicPressure = _systolicPressure,
+                AugmentedIndex = _augmentedIndex,
+                AugmentedPressure = _augmentedPressure,
+                PulsePressure = _pulsePressure,
+                PulseWaveVelocity = _pulseWaveVelocity,
+                ReferenceAge = _referenceAge
+            };
+        }
 
         public CentralBloodPressureBuilder SetCentralSystolicPressure(double pressure)
         {
@@ -56,14 +67,7 @@ namespace GeekMDSuite.Core.Models.Procedures
             _pulseWaveVelocity = velocity;
             return this;
         }
-        
-        private double _systolicPressure = double.MinValue;
-        private double _pulsePressure = double.MinValue;
-        private double _augmentedPressure = double.MinValue;
-        private double _augmentedIndex = double.MinValue;
-        private double _referenceAge = double.MinValue;
-        private double _pulseWaveVelocity = double.MinValue;
-        
+
         private void ValidatePreBuildState()
         {
             var message = string.Empty;
@@ -73,7 +77,7 @@ namespace GeekMDSuite.Core.Models.Procedures
             if (IsEffectivelyZero(_augmentedIndex)) message += $"{nameof(SetAugmentedIndex)} ";
             if (IsEffectivelyZero(_referenceAge)) message += $"{nameof(SetReferenceAge)} ";
             if (IsEffectivelyZero(_pulseWaveVelocity)) message += $"{nameof(SetPulseWaveVelocity)} ";
-            
+
             if (!string.IsNullOrEmpty(message)) throw new MissingMethodException(message + "need to be set");
         }
 
@@ -81,6 +85,5 @@ namespace GeekMDSuite.Core.Models.Procedures
         {
             return Math.Abs(value - double.MinValue) < 0.001;
         }
-
     }
 }

@@ -7,11 +7,11 @@ namespace GeekMDSuite.Core.Models.PatientActivities
     public class ResistanceRegimen : ExerciseRegimen
     {
         internal ResistanceRegimen(
-            ExerciseRegimenParameters regimen, 
-            int secondsRestDurationPerSet, 
-            List<ResistenceRegimenFeatures> features) 
-            : base(regimen.SessionsPerWeek, 
-                regimen.AverageSessionDuration, 
+            ExerciseRegimenParameters regimen,
+            int secondsRestDurationPerSet,
+            List<ResistenceRegimenFeatures> features)
+            : base(regimen.SessionsPerWeek,
+                regimen.AverageSessionDuration,
                 regimen.Intensity)
         {
             if (regimen == null) throw new ArgumentNullException(nameof(regimen));
@@ -21,17 +21,20 @@ namespace GeekMDSuite.Core.Models.PatientActivities
 
         protected internal ResistanceRegimen()
         {
-            
+            Features = new List<ResistenceRegimenFeatures>();
         }
+
         public int SecondsRestDurationPerSet { get; set; }
         public List<ResistenceRegimenFeatures> Features { get; set; }
-        
+
         public override string ToString()
         {
             return base.ToString() + " " + ListFeatures();
         }
 
-        private string ListFeatures() => 
-            Features.Aggregate(string.Empty, (current, feature) => current + $"{feature} ");
+        private string ListFeatures()
+        {
+            return Features.Aggregate(string.Empty, (current, feature) => current + $"{feature} ");
+        }
     }
 }

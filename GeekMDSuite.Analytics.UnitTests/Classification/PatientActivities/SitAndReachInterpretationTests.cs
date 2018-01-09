@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
@@ -10,6 +9,11 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
 {
     public class SitAndReachInterpretationTests
     {
+        public SitAndReachInterpretationTests()
+        {
+            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
+        }
+
         [Theory]
         [InlineData(-21, 32, GenderIdentity.Male, FitnessClassification.VeryPoor)]
         [InlineData(-9, 32, GenderIdentity.Male, FitnessClassification.Poor)]
@@ -31,30 +35,26 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
             _patient.DateOfBirth = DateTime.Now.AddYears(-age);
             _patient.Gender = Gender.Build(genderIdentity);
             var sitAndReach = SitAndReach.Build(distance);
-            
-            var classification = new SitAndReachClassification(sitAndReach, _patient).Classification;
-            
+
+            var classification = new SitAndReachClassification(new MuscularStrengthClassificationParameters(sitAndReach, _patient)).Classification;
+
             Assert.Equal(expectedFitnessClassification, classification);
+        }
+
+        private readonly Patient _patient;
+
+        [Fact]
+        public void NullPatient_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new SitAndReachClassification(new MuscularStrengthClassificationParameters(SitAndReach.Build(0), null)));
         }
 
         [Fact]
         public void NullSitAndReach_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitAndReachClassification(null, PatientBuilder.Initialize().BuildWithoutModelValidation()));
+                new SitAndReachClassification(new MuscularStrengthClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
-        
-        [Fact]
-        public void NullPatient_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-                new SitAndReachClassification(SitAndReach.Build(0), null));
-        }
-
-        public SitAndReachInterpretationTests()
-        {
-            _patient = PatientBuilder.Initialize().BuildWithoutModelValidation();
-        }
-        private readonly Patient _patient;
     }
 }

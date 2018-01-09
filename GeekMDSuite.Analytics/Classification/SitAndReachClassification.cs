@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
 
@@ -7,10 +6,11 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class SitAndReachClassification : MuscularStrengthClassification
     {
-        public SitAndReachClassification(SitAndReach test, Patient patient) : base(test, patient)
+        public SitAndReachClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test, parameters.Patient)
         {
-            if (test == null) throw new ArgumentNullException(nameof(test));
-            if (patient == null) throw new ArgumentNullException(nameof(patient));
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+            if (parameters.Test == null) throw new ArgumentNullException(nameof(parameters.Test));
+            if (parameters.Patient == null) throw new ArgumentNullException(nameof(parameters.Patient));
         }
     }
 }

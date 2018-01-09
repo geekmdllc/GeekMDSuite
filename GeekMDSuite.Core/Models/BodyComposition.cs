@@ -1,12 +1,12 @@
-﻿using GeekMDSuite.Core.Tools.MeasurementUnits;
+﻿using GeekMDSuite.Utilities.MeasurementUnits;
 
 namespace GeekMDSuite.Core.Models
 {
     public class BodyComposition
     {
-        internal BodyComposition(Height heightInches, 
-            Waist waistInches, 
-            Hips hipsInches, 
+        internal BodyComposition(Height heightInches,
+            Waist waistInches,
+            Hips hipsInches,
             Weight weightPounds) : this()
         {
             Height = heightInches;
@@ -23,19 +23,26 @@ namespace GeekMDSuite.Core.Models
             Weight = new Weight();
         }
 
-        private BodyComposition(double heightInches, double waistInches, double hipsInches, double weightPounds) 
-            :this(Height.Build(heightInches), Waist.Build(waistInches), Hips.Build(hipsInches), Weight.Build(weightPounds) )
+        private BodyComposition(double heightInches, double waistInches, double hipsInches, double weightPounds)
+            : this(Height.Build(heightInches), Waist.Build(waistInches), Hips.Build(hipsInches),
+                Weight.Build(weightPounds))
         {
         }
-        
+
         public Height Height { get; set; }
         public Waist Waist { get; set; }
         public Hips Hips { get; set; }
         public Weight Weight { get; set; }
 
         internal static BodyComposition Build(double heightInches, double waistInches, double hipsInches,
-            double weightPounds) => new BodyComposition(heightInches, waistInches, hipsInches, weightPounds);
+            double weightPounds)
+        {
+            return new BodyComposition(heightInches, waistInches, hipsInches, weightPounds);
+        }
 
-        public override string ToString() => $"Height: {Height} Waist: {Waist} Hips: {Hips} Weight: {Weight}";
+        public override string ToString()
+        {
+            return $"Height: {Height} Waist: {Waist} Hips: {Hips} Weight: {Weight}";
+        }
     }
 }

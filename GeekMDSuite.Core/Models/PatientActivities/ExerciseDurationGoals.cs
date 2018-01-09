@@ -7,8 +7,8 @@
             ModerateIntensity = moderateIntensity;
             HighIntensity = highIntensity;
         }
-        public double ModerateIntensity { get;  }
-        public double HighIntensity { get;  }
-        
+
+        public double ModerateIntensity { get; }
+        public double HighIntensity { get; }
     }
 }

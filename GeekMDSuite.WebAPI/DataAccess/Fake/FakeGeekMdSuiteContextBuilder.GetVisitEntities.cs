@@ -10,14 +10,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         {
             return new List<VisitEntity>
             {
-                
-                new VisitEntity()
+                new VisitEntity
                 {
                     Date = new DateTime(2017, 1, 1),
                     PatientGuid = BruceWaynesGuid,
-                    VisitId = BruceWaynesVisitGuid,
+                    VisitId = BruceWaynesVisitGuid
                 },
-                new VisitEntity()
+                new VisitEntity
                 {
                     Date = new DateTime(2016, 1, 1),
                     PatientGuid = XerMajestyGuid,

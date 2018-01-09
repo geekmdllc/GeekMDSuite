@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
@@ -17,8 +16,9 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         [InlineData(116, 28, 0, 0, 19, 8.1, GenderIdentity.Male, 19, CentralBloodPressureCategory.HighNormal)]
         [InlineData(120, 28, 0, 0, 19, 8.1, GenderIdentity.Male, 19, CentralBloodPressureCategory.High)]
         //TODO: Cover PP, AP, AIx, RA, PWV
-        public void Classification_GivenCentralSystolicValues_ReturnsCorrectCategory(int csp, int pp, int ap, 
-            int aix, int ra, double pwv, GenderIdentity genderIdentity, int age, CentralBloodPressureCategory expectctedCategory)
+        public void Classification_GivenCentralSystolicValues_ReturnsCorrectCategory(int csp, int pp, int ap,
+            int aix, int ra, double pwv, GenderIdentity genderIdentity, int age,
+            CentralBloodPressureCategory expectctedCategory)
         {
             var cbp = new CentralBloodPressureBuilder()
                 .SetCentralSystolicPressure(csp)
@@ -35,7 +35,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .BuildWithoutModelValidation();
 
 
-            var actualCategory = new CentralBloodPressureClassification(cbp, patient).Classification.Category;
+            var actualCategory = new CentralBloodPressureClassification(new CentralBloodPressureParameters(cbp, patient)).Classification.Category;
 
             Assert.Equal(expectctedCategory, actualCategory);
         }

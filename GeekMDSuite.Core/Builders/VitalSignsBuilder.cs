@@ -1,11 +1,16 @@
 ﻿using System;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Tools.MeasurementUnits;
+using GeekMDSuite.Utilities.MeasurementUnits;
 
 namespace GeekMDSuite.Core.Builders
 {
     public class VitalSignsBuilder : Builder<VitalSignsBuilder, VitalSigns>
     {
+        private BloodPressure _bloodPressure;
+        private int _oxygenSaturation;
+        private int _pulseRate;
+        private Temperature _temperature;
+
         public override VitalSigns Build()
         {
             ValidatePreBuildState();
@@ -14,7 +19,7 @@ namespace GeekMDSuite.Core.Builders
 
         public override VitalSigns BuildWithoutModelValidation()
         {
-            return new VitalSigns()
+            return new VitalSigns
             {
                 BloodPressure = _bloodPressure,
                 OxygenSaturation = _oxygenSaturation,
@@ -34,23 +39,19 @@ namespace GeekMDSuite.Core.Builders
             _temperature = Temperature.Create(temperatureFarenheight);
             return this;
         }
-        
+
         public VitalSignsBuilder SetOxygenSaturation(int oxygenSaturation)
         {
             _oxygenSaturation = oxygenSaturation;
             return this;
         }
+
         public VitalSignsBuilder SetPulseRate(int pulseRate)
         {
             _pulseRate = pulseRate;
             return this;
         }
-        
-        private BloodPressure _bloodPressure;
-        private Temperature _temperature;
-        private int _oxygenSaturation;
-        private int _pulseRate;
-        
+
         private void ValidatePreBuildState()
         {
             var message = string.Empty;
@@ -60,6 +61,5 @@ namespace GeekMDSuite.Core.Builders
             if (_pulseRate == default(int)) message += $"{nameof(SetPulseRate)} ";
             if (!string.IsNullOrEmpty(message)) throw new MissingMethodException(message + " should be set");
         }
-
     }
 }

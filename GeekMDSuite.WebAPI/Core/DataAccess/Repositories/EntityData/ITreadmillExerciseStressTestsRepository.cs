@@ -2,8 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface ITreadmillExerciseStressTestsRepository : IRepositoryAssociatedWithVisit<TreadmillExerciseStressTestEntity>
+    public interface
+        ITreadmillExerciseStressTestsRepository : IRepositoryAssociatedWithVisit<TreadmillExerciseStressTestEntity>
     {
-        
     }
 }

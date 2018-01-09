@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
 
@@ -8,20 +7,26 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public abstract class MuscularStrengthClassification : IClassifiable<FitnessClassification>, IStrengthTestRanges
     {
+        private readonly IStrengthTestRanges _ranges;
+
+        private readonly MuscularStrengthTest _test;
+
         protected MuscularStrengthClassification(MuscularStrengthTest test, Patient patient)
         {
-            var patient1 = patient ?? throw new ArgumentNullException(nameof(patient));
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
             _test = test ?? throw new ArgumentNullException(nameof(test));
-
+            
             if (_test.Type == StrengthTest.Pushups)
-                _ranges = PushupsRepository.GetRanges(patient1);
+                _ranges = PushupsRepository.GetRanges(patient);
             else if (_test.Type == StrengthTest.Situps)
-                _ranges = SitupsRepository.GetRanges(patient1);
+                _ranges = SitupsRepository.GetRanges(patient);
             else if (_test.Type == StrengthTest.SitAndReach)
-                _ranges = SitAndReachRepository.GetRanges(patient1);
-            else 
+                _ranges = SitAndReachRepository.GetRanges(patient);
+            else
                 throw new NotImplementedException(nameof(_test.Type));
         }
+
+        public FitnessClassification Classification => Classify();
 
         public double LowerLimitOfPoor => _ranges.LowerLimitOfPoor;
         public double LowerLimitOfBelowAverage => _ranges.LowerLimitOfBelowAverage;
@@ -30,12 +35,10 @@ namespace GeekMDSuite.Analytics.Classification
         public double LowerLimitOfGood => _ranges.LowerLimitOfGood;
         public double LowerLimitOfExcellent => _ranges.LowerLimitOfExcellent;
 
-        public override string ToString() => Classification.ToString();
-      
-        public FitnessClassification Classification => Classify();
-
-        private readonly MuscularStrengthTest _test;
-        private readonly IStrengthTestRanges _ranges;
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
 
         private FitnessClassification Classify()
         {
@@ -46,29 +49,31 @@ namespace GeekMDSuite.Analytics.Classification
                 LowerLimitOfAboveAverage,
                 LowerLimitOfGood,
                 LowerLimitOfExcellent);
-            
+
             return ParseCountToFitnessClassification(limits);
         }
-  
-        private FitnessClassification ParseCountToFitnessClassification(IStrengthTestRanges lowerLimits) 
+
+        private FitnessClassification ParseCountToFitnessClassification(IStrengthTestRanges lowerLimits)
         {
-            if (_test.Value < lowerLimits.LowerLimitOfPoor) 
+            if (_test.Value < lowerLimits.LowerLimitOfPoor)
                 return FitnessClassification.VeryPoor;
-            if (_test.Value < lowerLimits.LowerLimitOfBelowAverage) 
+            if (_test.Value < lowerLimits.LowerLimitOfBelowAverage)
                 return FitnessClassification.Poor;
-            if (_test.Value < lowerLimits.LowerLimitOfAverage) 
+            if (_test.Value < lowerLimits.LowerLimitOfAverage)
                 return FitnessClassification.BelowAverage;
-            if (_test.Value < lowerLimits.LowerLimitOfAboveAverage) 
+            if (_test.Value < lowerLimits.LowerLimitOfAboveAverage)
                 return FitnessClassification.Average;
-            if (_test.Value < lowerLimits.LowerLimitOfGood) 
+            if (_test.Value < lowerLimits.LowerLimitOfGood)
                 return FitnessClassification.AboveAverage;
-            return _test.Value < lowerLimits.LowerLimitOfExcellent ? FitnessClassification.Good 
+            return _test.Value < lowerLimits.LowerLimitOfExcellent
+                ? FitnessClassification.Good
                 : FitnessClassification.Excellent;
         }
 
         private class StrengthTestLowerLimits : IStrengthTestRanges
         {
-            public StrengthTestLowerLimits(double poor, double belowAvg, double average, double aboveAvg, double good, double excellent)
+            public StrengthTestLowerLimits(double poor, double belowAvg, double average, double aboveAvg, double good,
+                double excellent)
             {
                 LowerLimitOfPoor = poor;
                 LowerLimitOfBelowAverage = belowAvg;

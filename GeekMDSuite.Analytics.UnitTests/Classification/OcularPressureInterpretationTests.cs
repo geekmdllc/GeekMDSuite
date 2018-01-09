@@ -17,7 +17,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         {
             var ocularPressure = OcularPressure.Build(left, right);
             var classification = new OcularPressureClassification(ocularPressure).Classification;
-            
+
             Assert.Equal(expectedClassificationResult, classification);
         }
 

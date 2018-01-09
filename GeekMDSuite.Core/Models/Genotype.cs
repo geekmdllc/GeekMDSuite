@@ -2,7 +2,7 @@
 {
     public enum Genotype
     {
-        Xx,
-        Xy
+        Xx = 0,
+        Xy = 1
     }
 }

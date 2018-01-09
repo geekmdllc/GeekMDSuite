@@ -9,6 +9,9 @@
         public string Interpretation { get; set; }
         public string Comments { get; set; }
 
-        public override string ToString() => $"{LabNameShort}({Specimen})";
+        public override string ToString()
+        {
+            return $"{LabNameShort}({Specimen})";
+        }
     }
 }

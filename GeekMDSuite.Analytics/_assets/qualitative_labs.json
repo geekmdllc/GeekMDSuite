@@ -2,28 +2,28 @@
 // Do not change the order of the lab fields.
 // These values are entered in US values, the conversion to SI is automatic.
 [
-  {
-    "LabName":"hiv",
-    "LabNameFull":"HIV, Rapid, Serum",
-    "LabNameShort": "HIV",
-    "Specimen": "Serum",
-    "Interpretation":"This is the interpretation of the TestQualLab.",
-    "Comments":"These are additional comments for the TestQualLab."
-  },
-  {
-    "LabName":"ldlSubclassPhenotype",
-    "LabNameFull":"LDL Subclass Phenotype",
-    "LabNameShort": "LDL Phenotype",
-    "Specimen": "Serum",
-    "Interpretation":"This is the interpretation of the TestQualLab.",
-    "Comments":"These are additional comments for the TestQualLab."
-  },
-  {
-    "LabName":"hepatitisC",
-    "LabNameFull":"Heptatits C Antibody, Serum",
-    "LabNameShort": "HCV Ab",
-    "Specimen": "Serum",
-    "Interpretation":"This is the interpretation of the TestQualLab.",
-    "Comments":"These are additional comments for the TestQualLab."
-  }
+    {
+        "LabName": "hiv",
+        "LabNameFull": "HIV, Rapid, Serum",
+        "LabNameShort": "HIV",
+        "Specimen": "Serum",
+        "Interpretation": "This is the interpretation of the TestQualLab.",
+        "Comments": "These are additional comments for the TestQualLab."
+    },
+    {
+        "LabName": "ldlSubclassPhenotype",
+        "LabNameFull": "LDL Subclass Phenotype",
+        "LabNameShort": "LDL Phenotype",
+        "Specimen": "Serum",
+        "Interpretation": "This is the interpretation of the TestQualLab.",
+        "Comments": "These are additional comments for the TestQualLab."
+    },
+    {
+        "LabName": "hepatitisC",
+        "LabNameFull": "Heptatits C Antibody, Serum",
+        "LabNameShort": "HCV Ab",
+        "Specimen": "Serum",
+        "Interpretation": "This is the interpretation of the TestQualLab.",
+        "Comments": "These are additional comments for the TestQualLab."
+    }
 ]

@@ -4,12 +4,11 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class CarotidUltrasoundClassificationResult
     {
-
         public CarotidUltrasoundClassificationResult(
             CarotidUltrasound carotidUltrasound,
-            Laterality laterality, 
-            Laterality worseSide, 
-            CarotidPercentStenosisGrade grade, 
+            Laterality laterality,
+            Laterality worseSide,
+            CarotidPercentStenosisGrade grade,
             CarotidPlaqueCharacter character)
         {
             CarotidUltrasound = carotidUltrasound;
@@ -25,7 +24,10 @@ namespace GeekMDSuite.Analytics.Classification
         public CarotidPercentStenosisGrade Grade { get; }
         public CarotidPlaqueCharacter Character { get; }
 
-        public override string ToString() 
-            => $"Laterality: {Laterality}, Worse: {WorseSide}, Stenosis Grade: {Grade}, PlaqueCharacter: {Character}";
+        public override string ToString()
+        {
+            return
+                $"Laterality: {Laterality}, Worse: {WorseSide}, Stenosis Grade: {Grade}, PlaqueCharacter: {Character}";
+        }
     }
 }

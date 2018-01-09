@@ -24,13 +24,17 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 .SetName("Xer", "Majesty")
                 .SetRace(Race.Unknown)
                 .AddComorbidity(ChronicDisease.Diabetes)
-                .AddComorbidities(new List<ChronicDisease>(){ChronicDisease.Hyperlipidemia, ChronicDisease.HypertensionTreated})
+                .AddComorbidities(new List<ChronicDisease>
+                {
+                    ChronicDisease.Hyperlipidemia,
+                    ChronicDisease.HypertensionTreated
+                })
                 .Build();
 
-            return new List<PatientEntity>()
+            return new List<PatientEntity>
             {
-                new PatientEntity(p1) { Guid = BruceWaynesGuid },
-                new PatientEntity(p2) { Guid = XerMajestyGuid }
+                new PatientEntity(p1) {Guid = BruceWaynesGuid},
+                new PatientEntity(p2) {Guid = XerMajestyGuid}
             };
         }
     }

@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<TreadmillExerciseStressTestEntity> GetTreadmillExerciseStressTestEntities()
         {
-            return new List<TreadmillExerciseStressTestEntity>()
+            return new List<TreadmillExerciseStressTestEntity>
             {
                 new TreadmillExerciseStressTestEntity(TreadmillExerciseStressTestBuilder.Initialize()
                     .SetMaximumBloodPressure(195, 93)

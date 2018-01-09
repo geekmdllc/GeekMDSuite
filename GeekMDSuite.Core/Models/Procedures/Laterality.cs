@@ -2,8 +2,8 @@
 {
     public enum Laterality
     {
-        Left,
-        Right,
-        Bilateral
+        Left = 0,
+        Right = 1,
+        Bilateral = 2
     }
 }

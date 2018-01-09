@@ -6,12 +6,15 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class PushupsEntity : Pushups, IVisitData<Pushups>
     {
-        public PushupsEntity() {}
+        public PushupsEntity()
+        {
+        }
 
         public PushupsEntity(Pushups pushups)
         {
             MapValues(pushups);
         }
+
         public void MapValues(Pushups subject)
         {
             Value = subject.Value;

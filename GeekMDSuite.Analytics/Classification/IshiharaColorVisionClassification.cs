@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using GeekMDSuite.Analytics.Repositories;
@@ -10,31 +8,37 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public abstract class IshiharaColorVisionClassification
     {
-        protected IshiharaColorVisionClassification(List<IshiharaPlateAnswer> ishiharaSixPlate, IshiharaTestType testType)
+        protected IshiharaColorVisionClassification(List<IshiharaPlateAnswer> ishiharaSixPlate,
+            IshiharaTestType testType)
         {
             TestType = testType;
             AnswerList = ishiharaSixPlate ?? throw new ArgumentNullException(nameof(ishiharaSixPlate));
             PlateSet = GetPlateSet(testType);
-            if(ishiharaSixPlate.Count != PlateSet.Count) 
-                throw new IndexOutOfRangeException($"{nameof(ishiharaSixPlate)} has {ishiharaSixPlate.Count} items and it should have {PlateSet.Count}.");
-        }
-
-        private static List<IshiharaPlateModel> GetPlateSet(IshiharaTestType testType)
-        {
-            if (testType == IshiharaTestType.Ishihara6) return IshiharaPlateSetRepository.SixPlateScreen();
-            if (testType == IshiharaTestType.Ishihara10) return IshiharaPlateSetRepository.SixPlateScreen();
-            if (testType == IshiharaTestType.Ishihara14) return IshiharaPlateSetRepository.FourteenPlateScreen();
-            return testType == IshiharaTestType.Ishihara24 
-                ? IshiharaPlateSetRepository.TwentyFourPlateScreen() : IshiharaPlateSetRepository.ThirtyEightPlateScreen();
+            if (ishiharaSixPlate.Count != PlateSet.Count)
+                throw new IndexOutOfRangeException(
+                    $"{nameof(ishiharaSixPlate)} has {ishiharaSixPlate.Count} items and it should have {PlateSet.Count}.");
         }
 
         public IshiharaTestType TestType { get; }
 
         public List<IshiharaPlateAnswer> AnswerList { get; }
 
-        public override string ToString() => Classify().ToString();
+        private List<IshiharaPlateModel> PlateSet { get; }
 
-        private List<IshiharaPlateModel> PlateSet { get; set; }
+        private static List<IshiharaPlateModel> GetPlateSet(IshiharaTestType testType)
+        {
+            if (testType == IshiharaTestType.Ishihara6) return IshiharaPlateSetRepository.SixPlateScreen();
+            if (testType == IshiharaTestType.Ishihara10) return IshiharaPlateSetRepository.SixPlateScreen();
+            if (testType == IshiharaTestType.Ishihara14) return IshiharaPlateSetRepository.FourteenPlateScreen();
+            return testType == IshiharaTestType.Ishihara24
+                ? IshiharaPlateSetRepository.TwentyFourPlateScreen()
+                : IshiharaPlateSetRepository.ThirtyEightPlateScreen();
+        }
+
+        public override string ToString()
+        {
+            return Classify().ToString();
+        }
 
         protected abstract IshiharaResultFlag Classify();
 
@@ -46,24 +50,27 @@ namespace GeekMDSuite.Analytics.Classification
                 throw new NotImplementedException();
             if (TestType == IshiharaTestType.Ishihara14)
                 return EvaluatePlateAnswers(new IshiharaPlateReadLimits(IshiharaTestType.Ishihara14));
-            return EvaluatePlateAnswers(TestType == IshiharaTestType.Ishihara24 
-                ? new IshiharaPlateReadLimits(IshiharaTestType.Ishihara24) 
+            return EvaluatePlateAnswers(TestType == IshiharaTestType.Ishihara24
+                ? new IshiharaPlateReadLimits(IshiharaTestType.Ishihara24)
                 : new IshiharaPlateReadLimits(IshiharaTestType.Ishihara38));
-            
         }
 
         private IshiharaResultFlag EvaluatePlateAnswers(IshiharaPlateReadLimits limits)
         {
             var count = AnswerList.Count(CompareNormalPlateReadCountToLimits(limits));
             if (count >= limits.LowerLimitOfPass) return IshiharaResultFlag.NormalVision;
-            return count <= limits.UpperLimitOfFail ? IshiharaResultFlag.ColorVisionDeficit : IshiharaResultFlag.IndeterminantResult;
+            return count <= limits.UpperLimitOfFail
+                ? IshiharaResultFlag.ColorVisionDeficit
+                : IshiharaResultFlag.IndeterminantResult;
         }
 
-        private static Func<IshiharaPlateAnswer, bool> CompareNormalPlateReadCountToLimits(IshiharaPlateReadLimits ishiharaPlateReadLimits)
+        private static Func<IshiharaPlateAnswer, bool> CompareNormalPlateReadCountToLimits(
+            IshiharaPlateReadLimits ishiharaPlateReadLimits)
         {
-            return answer => answer.PlateRead == IshiharaAnswerResult.NormalVision && answer.PlateNumber <= ishiharaPlateReadLimits.SlidesToEvaluate;
+            return answer => answer.PlateRead == IshiharaAnswerResult.NormalVision &&
+                             answer.PlateNumber <= ishiharaPlateReadLimits.SlidesToEvaluate;
         }
-        
+
         private class IshiharaPlateReadLimits
         {
             public IshiharaPlateReadLimits(IshiharaTestType testType)
@@ -76,7 +83,7 @@ namespace GeekMDSuite.Analytics.Classification
             public int UpperLimitOfFail { get; }
             public int LowerLimitOfPass { get; }
             public int SlidesToEvaluate { get; }
-        
+
             private static int DetermineNumberOfSlidesToEvaluate(IshiharaTestType testType)
             {
                 if (testType == IshiharaTestType.Ishihara6) return 6;
@@ -84,6 +91,7 @@ namespace GeekMDSuite.Analytics.Classification
                 if (testType == IshiharaTestType.Ishihara14) return 14;
                 return testType == IshiharaTestType.Ishihara24 ? 24 : 38;
             }
+
             private static int DetermineUpperLimitOfFail(IshiharaTestType testType)
             {
                 if (testType == IshiharaTestType.Ishihara6) return 4;
@@ -91,6 +99,7 @@ namespace GeekMDSuite.Analytics.Classification
                 if (testType == IshiharaTestType.Ishihara14) return 7;
                 return testType == IshiharaTestType.Ishihara24 ? 9 : 13;
             }
+
             private static int DetermineLowerLimitOfPass(IshiharaTestType testType)
             {
                 if (testType == IshiharaTestType.Ishihara6) return 6;
@@ -100,7 +109,7 @@ namespace GeekMDSuite.Analytics.Classification
             }
         }
     }
-    
+
 // Ishihara Test
 // 06 plate interpretation: 6/6 to pass
 // 10 plate interpretation: looking for details??? Not implemnnted

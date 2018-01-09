@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         public static List<PeripheralVisionEntity> GetPeripheralVisionEntities()
         {
-            return new List<PeripheralVisionEntity>()
+            return new List<PeripheralVisionEntity>
             {
                 new PeripheralVisionEntity(PeripheralVision.Build(90, 55)) {VisitId = BruceWaynesVisitGuid},
                 new PeripheralVisionEntity(PeripheralVision.Build(85, 85)) {VisitId = XerMajestiesVisitGuid}

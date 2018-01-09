@@ -17,6 +17,7 @@ namespace GeekMDSuite.Core.UnitTests
 
             Assert.Throws<IndexOutOfRangeException>(() => builder.Build());
         }
+
         [Fact]
         public void IshiharaSixPlateInterpretation_GivenTooManyPlatesSet_DemonstratesToleranceAndSetsLatestValue()
         {
@@ -30,10 +31,10 @@ namespace GeekMDSuite.Core.UnitTests
                 .SetPlate1(IshiharaAnswerResult.NormalVision) // extra, should not be added. overwrites previous
                 .SetPlate4(IshiharaAnswerResult.NormalVision) // extra, should not be added. overwrites previous
                 .Build();
-            
+
             var assessment = new IshiharaSixPlateClassification(ishiharaSixPlate);
             Assert.Equal(IshiharaResultFlag.NormalVision, assessment.Classification);
-            Assert.Equal(6,ishiharaSixPlate.GetAnswers().Count);
+            Assert.Equal(6, ishiharaSixPlate.GetAnswers().Count);
         }
     }
 }

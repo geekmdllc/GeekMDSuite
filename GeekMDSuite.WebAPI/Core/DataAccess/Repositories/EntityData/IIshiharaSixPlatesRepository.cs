@@ -4,6 +4,5 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
     public interface IIshiharaSixPlatesRepository : IRepositoryAssociatedWithVisit<IshiharaSixPlateEntity>
     {
-        
     }
 }

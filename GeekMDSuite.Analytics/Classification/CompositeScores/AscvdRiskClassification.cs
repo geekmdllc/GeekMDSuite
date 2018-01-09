@@ -2,8 +2,8 @@
 {
     public enum AscvdRiskClassification
     {
-        Low,
-        Borderline,
-        Elevated
+        Low = 0,
+        Borderline = 1,
+        Elevated = 2
     }
 }

@@ -18,10 +18,11 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetPlate5(IshiharaAnswerResult.NormalVision)
                 .SetPlate6(IshiharaAnswerResult.NormalVision)
                 .Build();
-            
+
             var assessment = new IshiharaSixPlateClassification(ishiharaSixPlate);
             Assert.Equal(IshiharaResultFlag.NormalVision, assessment.Classification);
         }
+
         [Fact]
         public void IshiharaSixPlateInterpretation_GivenOneAbnormal_ReturnsIndeterminantResult()
         {
@@ -33,11 +34,11 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetPlate5(IshiharaAnswerResult.NormalVision)
                 .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
                 .Build();
-            
+
             var assessment = new IshiharaSixPlateClassification(ishiharaSixPlate);
             Assert.Equal(IshiharaResultFlag.IndeterminantResult, assessment.Classification);
         }
-        
+
         [Fact]
         public void IshiharaSixPlateInterpretation_GivenTwoAbnormal_ReturnsColorVisionDeficit()
         {
@@ -49,7 +50,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetPlate5(IshiharaAnswerResult.ColorVisionDefict)
                 .SetPlate6(IshiharaAnswerResult.ColorVisionDefict)
                 .Build();
-            
+
             var assessment = new IshiharaSixPlateClassification(ishiharaSixPlate);
             Assert.Equal(IshiharaResultFlag.ColorVisionDeficit, assessment.Classification);
         }

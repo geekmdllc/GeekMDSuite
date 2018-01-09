@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
@@ -9,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<VitalSignsEntity> GetVitalSignsEntities()
         {
-            return new List<VitalSignsEntity>()
+            return new List<VitalSignsEntity>
             {
                 new VitalSignsEntity(VitalSignsBuilder.Initialize()
                     .SetBloodPressure(115, 65, false)

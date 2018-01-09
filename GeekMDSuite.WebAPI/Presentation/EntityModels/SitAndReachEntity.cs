@@ -6,14 +6,19 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class SitAndReachEntity : SitAndReach, IVisitData<SitAndReach>
     {
-        public SitAndReachEntity() {}
+        public SitAndReachEntity()
+        {
+        }
 
         public SitAndReachEntity(SitAndReach sitAndReach)
         {
             MapValues(sitAndReach);
         }
-        
-        public void MapValues(SitAndReach subject) => Value = subject.Value;
+
+        public void MapValues(SitAndReach subject)
+        {
+            Value = subject.Value;
+        }
 
         public int Id { get; set; }
         public Guid VisitId { get; set; }

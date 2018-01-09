@@ -2,10 +2,10 @@
 {
     public enum ExerciseIntensity
     {
-        Low,
-        Moderate,
-        High,
-        Vigorous,
-        None
+        Low = 0,
+        Moderate = 1,
+        High = 2,
+        Vigorous = 3,
+        None = 4
     }
 }

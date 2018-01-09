@@ -2,8 +2,6 @@
 {
     public class Pushups : MuscularStrengthTest
     {
-        public static Pushups Build(int count) => new Pushups(count);
-
         protected Pushups()
         {
             Type = StrengthTest.Pushups;
@@ -14,5 +12,9 @@
             Value = count;
         }
 
+        public static Pushups Build(int count)
+        {
+            return new Pushups(count);
+        }
     }
 }

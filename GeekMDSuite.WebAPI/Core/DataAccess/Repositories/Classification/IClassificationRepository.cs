@@ -1,5 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService;
-using GeekMDSuite.WebAPI.Core.DataAccess.Services.ClassificationService.CompositeScores;
+﻿using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
+using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification.CompositeScores;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
 {
@@ -9,6 +9,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         IAudiogramClassificationService Audiograms { get; }
         IBloodPressureClassificationService BloodPressures { get; }
         IBodyCompositionClassificationService BodyCompositions { get; }
+        IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
         ICarotidUltrasoundClassificationService CarotidUltrasounds { get; }
+        IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

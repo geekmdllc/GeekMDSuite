@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Core.Builders.LaboratoryData;
 using GeekMDSuite.Core.LaboratoryData;
@@ -10,6 +9,15 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
 {
     public class PooledCohortEquationParametersBuilder : IBuilder<PooledCohortEquationParameters>
     {
+        private BloodPressure _bloodPressure;
+        private bool _diabetic;
+        private QuantitativeLab _hdlCholesterol;
+        private bool _hypertensionTreatment;
+
+        private Patient _patient;
+        private bool _smoker;
+        private QuantitativeLab _totalCholesterol;
+
         public PooledCohortEquationParameters Build()
         {
             VerifyPreBuildState();
@@ -18,7 +26,7 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
 
         public PooledCohortEquationParameters BuildWithoutModelValidation()
         {
-            return new PooledCohortEquationParameters()
+            return new PooledCohortEquationParameters
             {
                 BloodPressure = _bloodPressure,
                 Diabetic = _diabetic,
@@ -30,7 +38,10 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             };
         }
 
-        public static PooledCohortEquationParametersBuilder Initialize() => new PooledCohortEquationParametersBuilder();
+        public static PooledCohortEquationParametersBuilder Initialize()
+        {
+            return new PooledCohortEquationParametersBuilder();
+        }
 
         public PooledCohortEquationParametersBuilder SetPatient(Patient patient)
         {
@@ -55,7 +66,7 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             _totalCholesterol = Quantitative.Serum.CholesterolTotal(result);
             return this;
         }
-        
+
         public PooledCohortEquationParametersBuilder SetHdlCholesterol(double result)
         {
             _hdlCholesterol = Quantitative.Serum.HighDensityLipoprotein(result);
@@ -67,26 +78,18 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             _hypertensionTreatment = confirm;
             return this;
         }
-        
+
         public PooledCohortEquationParametersBuilder ConfirmDiabetic(bool confirm = true)
         {
             _diabetic = confirm;
             return this;
         }
-        
+
         public PooledCohortEquationParametersBuilder ConfirmSmoker(bool confirm = true)
         {
             _smoker = confirm;
             return this;
         }
-
-        private Patient _patient;
-        private BloodPressure _bloodPressure;
-        private QuantitativeLab _totalCholesterol;
-        private QuantitativeLab _hdlCholesterol;
-        private bool _hypertensionTreatment;
-        private bool _smoker;
-        private bool _diabetic;
 
         private void VerifyPreBuildState()
         {
@@ -95,7 +98,7 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             if (_bloodPressure == null) messages.Add(nameof(SetBloodPressure));
             if (_totalCholesterol == null) messages.Add(nameof(SetTotalCholesterol));
             if (_hdlCholesterol == null) messages.Add(nameof(SetHdlCholesterol));
-            
+
             if (messages.Count > 0) throw new MissingMethodException(string.Join(", ", messages));
         }
     }

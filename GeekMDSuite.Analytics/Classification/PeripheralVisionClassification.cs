@@ -5,6 +5,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class PeripheralVisionClassification : IClassifiable<PeripheralVisionClassificationResult>
     {
+        public const int LowerLimitOfNormal = 70;
         private readonly PeripheralVision _peripheralVision;
 
         public PeripheralVisionClassification(PeripheralVision peripheralVision)
@@ -12,21 +13,37 @@ namespace GeekMDSuite.Analytics.Classification
             _peripheralVision = peripheralVision ?? throw new ArgumentNullException(nameof(peripheralVision));
         }
 
-        public const int LowerLimitOfNormal = 70;
-        public PeripheralVisionClassificationResult Classification => Classify();
         public PeripheralVisionClassificationResult Left => ClassifyLeft();
         public PeripheralVisionClassificationResult Right => ClassifyRight();
+        public PeripheralVisionClassificationResult Classification => Classify();
 
-        public override string ToString() => Classification.ToString();
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
 
-        private PeripheralVisionClassificationResult Classify() => _peripheralVision.Left < _peripheralVision.Right 
-            ? ClassifyLeft() : ClassifyRight();
+        private PeripheralVisionClassificationResult Classify()
+        {
+            return _peripheralVision.Left < _peripheralVision.Right
+                ? ClassifyLeft()
+                : ClassifyRight();
+        }
 
-        private PeripheralVisionClassificationResult ClassifyLeft() => ClassifySide(_peripheralVision.Left);
+        private PeripheralVisionClassificationResult ClassifyLeft()
+        {
+            return ClassifySide(_peripheralVision.Left);
+        }
 
-        private PeripheralVisionClassificationResult ClassifyRight() => ClassifySide(_peripheralVision.Right);
+        private PeripheralVisionClassificationResult ClassifyRight()
+        {
+            return ClassifySide(_peripheralVision.Right);
+        }
 
-        private static PeripheralVisionClassificationResult ClassifySide(int side) => side >= LowerLimitOfNormal
-            ? PeripheralVisionClassificationResult.Normal : PeripheralVisionClassificationResult.Narrow;
+        private static PeripheralVisionClassificationResult ClassifySide(int side)
+        {
+            return side >= LowerLimitOfNormal
+                ? PeripheralVisionClassificationResult.Normal
+                : PeripheralVisionClassificationResult.Narrow;
+        }
     }
 }

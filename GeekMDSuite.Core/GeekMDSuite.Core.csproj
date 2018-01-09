@@ -18,4 +18,10 @@
   <ItemGroup>
     <Folder Include="Models\PatientActivities" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeekMDSuite.Utilities\GeekMDSuite.Utilities.csproj">
+      <Project>{657BBCDC-AD9B-41A2-8C04-E1ACB68D13D8}</Project>
+      <Name>GeekMDSuite.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

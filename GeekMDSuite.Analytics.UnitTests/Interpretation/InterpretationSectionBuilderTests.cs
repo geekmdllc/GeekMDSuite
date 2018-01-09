@@ -7,26 +7,6 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 {
     public class InterpretationSectionBuilderTests
     {
-
-        [Fact]
-        public void GivenEmptyTitle_ThrowsMissingMethodException()
-        {
-            var section = new InterpretationSectionBuilder()
-                .SetTitle(string.Empty)
-                .AddParagraph(string.Empty);
-
-            Assert.Throws<MissingMethodException>(() => section.Build());
-        }
-        
-        [Fact]
-        public void GivenNoParagraphs_ThrowsMissingMethodException()
-        {
-            var section = new InterpretationSectionBuilder()
-                .SetTitle(string.Empty);
-
-            Assert.Throws<MissingMethodException>(() => section.Build());
-        }
-
         [Fact]
         public void BuildWithoutPreBuildValidation_GivenEmptyTitle_Succeeds()
         {
@@ -37,7 +17,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 
             Assert.IsType<InterpretationSection>(section);
         }
-        
+
         [Fact]
         public void BuildWithoutPreBuildValidation_GivenNoParagraphs_Succeeds()
         {
@@ -47,7 +27,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 
             Assert.IsType<InterpretationSection>(section);
         }
-        
+
         [Fact]
         public void BuildWithoutPreBuildValidation_GivenNoTitleOrParagraphs_Succeeds()
         {
@@ -56,7 +36,26 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 
             Assert.IsType<InterpretationSection>(section);
         }
-        
+
+        [Fact]
+        public void GivenEmptyTitle_ThrowsMissingMethodException()
+        {
+            var section = new InterpretationSectionBuilder()
+                .SetTitle(string.Empty)
+                .AddParagraph(string.Empty);
+
+            Assert.Throws<MissingMethodException>(() => section.Build());
+        }
+
+        [Fact]
+        public void GivenNoParagraphs_ThrowsMissingMethodException()
+        {
+            var section = new InterpretationSectionBuilder()
+                .SetTitle(string.Empty);
+
+            Assert.Throws<MissingMethodException>(() => section.Build());
+        }
+
         [Fact]
         public void InterpreationSectionWithFourSections_ReturnsParagraphsInOrder()
         {
@@ -69,7 +68,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
                 .Build();
 
             var paragraphOfInterest = section.Paragraphs.Where(p => p.Contains("four"));
-                
+
 
             Assert.True(paragraphOfInterest.Any());
             Assert.Equal(4, section.Paragraphs.Count);
@@ -77,7 +76,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
 
         [Fact]
         public void InterpretationSectionWithThreeParagraphs_ReturnsParagraphsInOrder()
-        {          
+        {
             var section = new InterpretationSectionBuilder()
                 .SetTitle("Title")
                 .AddParagraph("one")
@@ -86,7 +85,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Interpretation
                 .Build();
 
             var paragraphOfInterest = section.Paragraphs.Where(p => p.Contains("three"));
-                
+
 
             Assert.True(paragraphOfInterest.Any());
             Assert.Equal(3, section.Paragraphs.Count);

@@ -2,5 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface IBodyCompositionsRepository : IRepositoryAssociatedWithVisit<BodyCompositionEntity> { }
+    public interface IBodyCompositionsRepository : IRepositoryAssociatedWithVisit<BodyCompositionEntity>
+    {
+    }
 }

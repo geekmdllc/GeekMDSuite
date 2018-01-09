@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<GripStrengthEntity> GetGripStrengthEntities()
         {
-            return new List<GripStrengthEntity>()
+            return new List<GripStrengthEntity>
             {
                 new GripStrengthEntity(GripStrength.Build(190, 185)) {VisitId = BruceWaynesVisitGuid},
                 new GripStrengthEntity(GripStrength.Build(105, 105)) {VisitId = XerMajestiesVisitGuid}

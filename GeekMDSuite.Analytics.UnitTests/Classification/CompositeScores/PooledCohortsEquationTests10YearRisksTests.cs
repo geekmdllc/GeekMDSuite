@@ -1,7 +1,6 @@
-﻿using GeekMDSuite.Core;
+﻿using GeekMDSuite.Analytics.Tools.Cardiology;
 using GeekMDSuite.Core.Models;
 using Xunit;
-using PooledCohortsEquation = GeekMDSuite.Analytics.Tools.Cardiology.PooledCohortsEquation;
 
 namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
 {
@@ -58,7 +57,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             const double tolerance = 0.1;
             Assert.InRange(ascvd, expected - tolerance, expected + tolerance);
         }
-        
+
         [Theory]
         [InlineData(Race.White, GenderIdentity.Female, 1.1)]
         [InlineData(Race.White, GenderIdentity.Male, 3.0)]
@@ -81,6 +80,5 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.CompositeScores
             const double tolerance = 0.31; // Tolerance necessary because expected values are estimates.
             Assert.InRange(idealAscvd, expected - tolerance, expected + tolerance);
         }
-        
     }
 }

@@ -2,8 +2,8 @@
 {
     public enum StrengthTest
     {
-        Situps,
-        Pushups, 
-        SitAndReach
+        Situps = 0,
+        Pushups = 1,
+        SitAndReach = 2
     }
 }

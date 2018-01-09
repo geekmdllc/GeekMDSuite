@@ -2,10 +2,10 @@
 {
     public enum CentralBloodPressureCategory
     {
-        Low,
-        LowNormal,
-        Normal,
-        HighNormal,
-        High
+        Low = 0,
+        LowNormal = 1,
+        Normal = 2,
+        HighNormal = 3,
+        High = 4
     }
 }

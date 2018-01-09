@@ -2,5 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface ISitupsRepository : IRepositoryAssociatedWithVisit<SitupsEntity> { }
+    public interface ISitupsRepository : IRepositoryAssociatedWithVisit<SitupsEntity>
+    {
+    }
 }

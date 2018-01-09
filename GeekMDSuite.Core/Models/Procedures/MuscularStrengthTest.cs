@@ -5,6 +5,9 @@
         public double Value { get; set; }
         public StrengthTest Type { get; set; }
 
-        public override string ToString() => $"{Value} {Type.ToString().ToLower()}";
+        public override string ToString()
+        {
+            return $"{Value} {Type.ToString().ToLower()}";
+        }
     }
 }

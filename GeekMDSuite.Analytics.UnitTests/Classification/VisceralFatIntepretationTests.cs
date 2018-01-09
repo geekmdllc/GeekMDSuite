@@ -1,6 +1,5 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 using Xunit;
 
@@ -13,14 +12,15 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         [InlineData(99, VisceralFat.Acceptable)]
         [InlineData(149, VisceralFat.Elevated)]
         [InlineData(150, VisceralFat.VeryElevated)]
-        public void Classification_GivenData_ReturnsCorrectClassification(double visceralFat, VisceralFat expectedVisceralFat)
+        public void Classification_GivenData_ReturnsCorrectClassification(double visceralFat,
+            VisceralFat expectedVisceralFat)
         {
             var bce = BodyCompositionExpandedBuilder.Initialize()
                 .SetVisceralFat(visceralFat)
                 .BuildWithoutModelValidation();
-            
+
             var classification = new VisceralFatClassification(bce).Classification;
-            
+
             Assert.Equal(expectedVisceralFat, classification);
         }
 

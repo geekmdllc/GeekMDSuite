@@ -5,11 +5,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class VisitEntity : IVisitData<VisitEntity>
     {
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
-        public Guid PatientGuid { get; set; }
-        public DateTime Date { get; set; }
-
         public VisitEntity()
         {
             VisitId = Guid.Empty;
@@ -19,6 +14,11 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         {
             MapValues(visitEntity);
         }
+
+        public Guid PatientGuid { get; set; }
+        public DateTime Date { get; set; }
+        public int Id { get; set; }
+        public Guid VisitId { get; set; }
 
         public void MapValues(VisitEntity subject)
         {

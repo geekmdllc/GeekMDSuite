@@ -10,12 +10,16 @@ namespace GeekMDSuite.Analytics.Classification
             Laterality = laterality;
             WorseSide = worseSide;
         }
+
         public HearingLoss Classification { get; }
         public Laterality Laterality { get; }
         public Laterality WorseSide { get; }
 
-        public override string ToString() => $"Classification: {Classification} " +
-                                     (Laterality == Laterality.Bilateral ? string.Empty : $"Laterality: {Laterality} ") +
-                                     (WorseSide == Laterality.Bilateral ? string.Empty : $"Worse Side: {WorseSide}");
+        public override string ToString()
+        {
+            return $"Classification: {Classification} " +
+                   (Laterality == Laterality.Bilateral ? string.Empty : $"Laterality: {Laterality} ") +
+                   (WorseSide == Laterality.Bilateral ? string.Empty : $"Worse Side: {WorseSide}");
+        }
     }
 }

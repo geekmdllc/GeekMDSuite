@@ -1,14 +1,14 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public class FunctionalMovementScreen 
+    public class FunctionalMovementScreen
     {
         internal FunctionalMovementScreen(
-            FmsMovementData deepSquat, 
-            FmsMovementSet hurdleStep, 
-            FmsMovementSet inlineLunge, 
-            FmsMovementSet shoulderMobility, 
-            FmsMovementSet activeStraightLegRaise, 
-            FmsMovementData trunkStabilityPushup, 
+            FmsMovementData deepSquat,
+            FmsMovementSet hurdleStep,
+            FmsMovementSet inlineLunge,
+            FmsMovementSet shoulderMobility,
+            FmsMovementSet activeStraightLegRaise,
+            FmsMovementData trunkStabilityPushup,
             FmsMovementSet rotaryStability)
         {
             DeepSquat = deepSquat;
@@ -20,7 +20,11 @@
             RotaryStability = rotaryStability;
         }
 
-        public FmsMovementData DeepSquat { get; set; } 
+        protected internal FunctionalMovementScreen()
+        {
+        }
+
+        public FmsMovementData DeepSquat { get; set; }
 
         public FmsMovementSet HurdleStep { get; set; }
 
@@ -30,16 +34,14 @@
 
         public FmsMovementSet ActiveStraightLegRaise { get; set; }
 
-        public FmsMovementData TrunkStabilityPushup { get; set; } 
+        public FmsMovementData TrunkStabilityPushup { get; set; }
 
         public FmsMovementSet RotaryStability { get; set; }
 
-        public override string ToString() => 
-            $"{DeepSquat}\n{HurdleStep}\n{InlineLunge}\n{ShoulderMobility}\n{ActiveStraightLegRaise}\n{TrunkStabilityPushup}\n{RotaryStability}";
-
-        protected internal FunctionalMovementScreen()
+        public override string ToString()
         {
-            
+            return
+                $"{DeepSquat}\n{HurdleStep}\n{InlineLunge}\n{ShoulderMobility}\n{ActiveStraightLegRaise}\n{TrunkStabilityPushup}\n{RotaryStability}";
         }
     }
 }

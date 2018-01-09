@@ -1,5 +1,4 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Tools.Cardiology
@@ -15,9 +14,9 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
                 .SetPatient(_patient)
                 .Build()).Ascvd10YearRiskPercentage;
 
-        public double Ascvd10YearRiskPercentage => 100 *
-                                   (1 - Math.Pow(BaselineSurvival,
-                                        Math.Exp(SumCoefficientValueProduct - MeanSumCoefficientValueProduct)));
+        public double Ascvd10YearRiskPercentage => 100 * (1 - Math.Pow(BaselineSurvival,
+                                                              Math.Exp(SumCoefficientValueProduct -
+                                                                       MeanSumCoefficientValueProduct)));
 
         private double BaselineSurvival => GetBaselineSurvival();
         private double SumCoefficientValueProduct => GetSumOfCoefficientAndValueProduct();
@@ -67,7 +66,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             var lnAgelnTotalChol = Ln(_patient.Age) * Ln(_totalCholesterol.Result) *
                                    Coefficients.Xx.NonAfricanAmerican.AgeTimesCholesterol;
             var lnHdlC = Ln(_hdlCholesterol.Result) * Coefficients.Xx.NonAfricanAmerican.HdlC;
-            var lnAgelnHdlC = Ln(_patient.Age) * Ln(_hdlCholesterol.Result) * Coefficients.Xx.NonAfricanAmerican.AgeTimesHdlC;
+            var lnAgelnHdlC = Ln(_patient.Age) * Ln(_hdlCholesterol.Result) *
+                              Coefficients.Xx.NonAfricanAmerican.AgeTimesHdlC;
             var logSbp = Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                              ? Coefficients.Xx.NonAfricanAmerican.TreatedSystolicBp
                              : Coefficients.Xx.NonAfricanAmerican.UntreatedSystolicBp);
@@ -85,7 +85,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             var lnAge = Ln(_patient.Age) * Coefficients.Xx.AfricanAmerican.Age;
             var lnTotalChol = Ln(_totalCholesterol.Result) * Coefficients.Xx.AfricanAmerican.TotalCholesterol;
             var lnHdlC = Ln(_hdlCholesterol.Result) * Coefficients.Xx.AfricanAmerican.HdlC;
-            var lnAgelnHdlC = Ln(_patient.Age) * Ln(_hdlCholesterol.Result) * Coefficients.Xx.AfricanAmerican.AgeTimesHdlC;
+            var lnAgelnHdlC = Ln(_patient.Age) * Ln(_hdlCholesterol.Result) *
+                              Coefficients.Xx.AfricanAmerican.AgeTimesHdlC;
             var logSbp = Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                              ? Coefficients.Xx.AfricanAmerican.TreatedSystolicBp
                              : Coefficients.Xx.AfricanAmerican.UntreatedSystolicBp);
@@ -105,7 +106,8 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             var lnAgelnTotalChol = Ln(_patient.Age) * Ln(_totalCholesterol.Result) *
                                    Coefficients.Xy.NonAfricanAmerican.AgeTimesTotalCholesterol;
             var lnHdlC = Ln(_hdlCholesterol.Result) * Coefficients.Xy.NonAfricanAmerican.HdlC;
-            var lnAgelnHdlC = Ln(_patient.Age) * Ln(_hdlCholesterol.Result) * Coefficients.Xy.NonAfricanAmerican.AgeTimesHdlC;
+            var lnAgelnHdlC = Ln(_patient.Age) * Ln(_hdlCholesterol.Result) *
+                              Coefficients.Xy.NonAfricanAmerican.AgeTimesHdlC;
             var logSbp = Ln(_bloodPressure.Systolic) * (_hypertensionTreatment
                              ? Coefficients.Xy.NonAfricanAmerican.TreatedSystolicBp
                              : Coefficients.Xy.NonAfricanAmerican.UntreatedSystolicBp);
@@ -132,10 +134,25 @@ namespace GeekMDSuite.Analytics.Tools.Cardiology
             return lnAge + lnTotalChol + lnHdlC + logSbp + currentSmoker + diabetes;
         }
 
-        private int SmokerFactor() => (_smoker ? 1 : 0);
-        private int DiabeticFactor() => (_diabetic ? 1 : 0);
-        private static double Ln(double value) => Math.Log(value, Math.E);
-        private static double Square(double value) => Math.Pow(value, 2);
+        private int SmokerFactor()
+        {
+            return _smoker ? 1 : 0;
+        }
+
+        private int DiabeticFactor()
+        {
+            return _diabetic ? 1 : 0;
+        }
+
+        private static double Ln(double value)
+        {
+            return Math.Log(value, Math.E);
+        }
+
+        private static double Square(double value)
+        {
+            return Math.Pow(value, 2);
+        }
 
         private static class MeanCoefficientTimesValue
         {

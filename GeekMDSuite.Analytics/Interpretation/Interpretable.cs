@@ -4,6 +4,9 @@
     {
         public abstract InterpretationText Interpretation { get; }
 
-        public override string ToString() => Interpretation.ToString();
+        public override string ToString()
+        {
+            return Interpretation.ToString();
+        }
     }
 }

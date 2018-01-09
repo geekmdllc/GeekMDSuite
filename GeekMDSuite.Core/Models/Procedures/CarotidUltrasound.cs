@@ -1,6 +1,6 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public class CarotidUltrasound 
+    public class CarotidUltrasound
     {
         private CarotidUltrasound(CarotidUltrasoundResult left, CarotidUltrasoundResult right)
         {
@@ -8,13 +8,17 @@
             Right = right;
         }
 
+        protected CarotidUltrasound()
+        {
+        }
+
         public CarotidUltrasoundResult Left { get; set; }
-        public CarotidUltrasoundResult Right { get; set;  }
+        public CarotidUltrasoundResult Right { get; set; }
 
-        public static CarotidUltrasound Build(CarotidUltrasoundResult left, CarotidUltrasoundResult right) => 
-            new CarotidUltrasound(left, right);
-
-        protected CarotidUltrasound() { }
+        public static CarotidUltrasound Build(CarotidUltrasoundResult left, CarotidUltrasoundResult right)
+        {
+            return new CarotidUltrasound(left, right);
+        }
 
         public override string ToString()
         {

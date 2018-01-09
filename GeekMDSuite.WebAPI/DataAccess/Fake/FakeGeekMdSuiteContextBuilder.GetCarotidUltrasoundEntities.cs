@@ -36,10 +36,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 .Build();
             var cu2 = CarotidUltrasound.Build(left2, right2);
 
-            return new List<CarotidUltrasoundEntity>()
+            return new List<CarotidUltrasoundEntity>
             {
-                new CarotidUltrasoundEntity(cu) { VisitId = XerMajestiesVisitGuid },
-                new CarotidUltrasoundEntity(cu2) { VisitId = BruceWaynesVisitGuid }
+                new CarotidUltrasoundEntity(cu) {VisitId = XerMajestiesVisitGuid},
+                new CarotidUltrasoundEntity(cu2) {VisitId = BruceWaynesVisitGuid}
             };
         }
     }

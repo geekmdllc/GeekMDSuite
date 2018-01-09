@@ -1,29 +1,34 @@
 ﻿using System;
-using GeekMDSuite.Core;
 using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
     public class BodyCompositionExpandedClassification : BodyCompositionBaseClassification, IClassifiable<BodyCompositionClassificationResult>
     {
-        public BodyCompositionExpandedClassification( 
-            BodyCompositionExpanded bodyCompositionExpanded, Patient patient) 
-            : base(bodyCompositionExpanded, patient)
+        public BodyCompositionExpandedClassification(BodyCompositionExpandedClassificationParameters parameters)
+            : base(parameters.BodyCompositionExpanded, parameters.Patient)
         {
-            _bodyCompositionExpanded = bodyCompositionExpanded ?? throw new ArgumentNullException(nameof(bodyCompositionExpanded));
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
+            _parameters = parameters.BodyCompositionExpanded ??
+                                       throw new ArgumentNullException(nameof(parameters.BodyCompositionExpanded));
+            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
         }
 
-        public BodyCompositionClassificationResult Classification => Classify();
         public PercentBodyFat PercentBodyFat =>
-            new PercentBodyFatClassification(_bodyCompositionExpanded, _patient).Classification;
-        public VisceralFat VisceralFat =>
-            new VisceralFatClassification(_bodyCompositionExpanded).Classification;
+            new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(_parameters, _patient)).Classification;
 
-        public override string ToString() => Classification.ToString();
+        public VisceralFat VisceralFat =>
+            new VisceralFatClassification(_parameters).Classification;
+
+        public BodyCompositionClassificationResult Classification => Classify();
+
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
         
-        private readonly BodyCompositionExpanded _bodyCompositionExpanded;
+        private readonly BodyCompositionExpanded _parameters;
         private readonly Patient _patient;
+
 
         protected override BodyCompositionClassificationResult Classify()
         {
@@ -31,22 +36,34 @@ namespace GeekMDSuite.Analytics.Classification
                 return BodyCompositionClassificationResult.Build(BodyCompositionResult.ThinAndLean);
             if (MuscularAndLean())
                 return BodyCompositionClassificationResult.Build(BodyCompositionResult.MuscularAndLean);
-            if (SkinnyFat()) 
+            if (SkinnyFat())
                 return BodyCompositionClassificationResult.Build(BodyCompositionResult.SkinnyFat);
-            return OverWeightButLean() 
-                ? BodyCompositionClassificationResult.Build(BodyCompositionResult.OverweightSuspectMuscular) 
+            return OverWeightButLean()
+                ? BodyCompositionClassificationResult.Build(BodyCompositionResult.OverweightSuspectMuscular)
                 : BodyCompositionClassificationResult.Build(BodyCompositionResult.OverweightOverFat);
         }
 
-        private bool MuscularAndLean() => BmiIsOverweightOrHigher() && BodyFatIsLean() && VisceralFatIsLean();
+        private bool MuscularAndLean()
+        {
+            return BmiIsOverweightOrHigher() && BodyFatIsLean() && VisceralFatIsLean();
+        }
 
-        protected override bool ThinAndLean() => BodyFatIsLean() && VisceralFatIsLean() && base.ThinAndLean();
+        protected override bool ThinAndLean()
+        {
+            return BodyFatIsLean() && VisceralFatIsLean() && base.ThinAndLean();
+        }
 
-        private bool BodyFatIsLean() => PercentBodyFat == PercentBodyFat.Fitness ||
-                                          PercentBodyFat == PercentBodyFat.Athletic ||
-                                          PercentBodyFat == PercentBodyFat.UnderFat;
+        private bool BodyFatIsLean()
+        {
+            return PercentBodyFat == PercentBodyFat.Fitness ||
+                   PercentBodyFat == PercentBodyFat.Athletic ||
+                   PercentBodyFat == PercentBodyFat.UnderFat;
+        }
 
-        private bool VisceralFatIsLean() => VisceralFat == VisceralFat.Excellent || 
-                                              VisceralFat == VisceralFat.Acceptable;
+        private bool VisceralFatIsLean()
+        {
+            return VisceralFat == VisceralFat.Excellent ||
+                   VisceralFat == VisceralFat.Acceptable;
+        }
     }
 }
