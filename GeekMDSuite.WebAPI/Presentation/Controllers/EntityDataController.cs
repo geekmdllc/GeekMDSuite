@@ -76,7 +76,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPut]
-        [Route("update/")]
         public async Task<IActionResult> Put([FromBody] T entity)
         {
             try
@@ -95,8 +94,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
