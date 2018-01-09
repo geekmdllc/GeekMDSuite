@@ -16,12 +16,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.Compo
         {
             _classifications = classifications;
         }
-
+       
         [HttpPost]
         [Route("ascvd")]
         public IActionResult AscvdScore([FromBody] AscvdParameters parameters)
         {
-            return Ok(new AscvdClassification(parameters).Classification);
+            try
+            {
+                return Ok(new AscvdClassification(parameters).Classification);
+            }
+            catch
+            {
+                return BadRequest(parameters);
+            }
         }
 
         [HttpGet]

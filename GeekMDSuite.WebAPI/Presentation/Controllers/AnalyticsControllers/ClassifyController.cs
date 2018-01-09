@@ -24,7 +24,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return NotFound();
+                return BadRequest(audiogram);
             }
         }
 
@@ -37,7 +37,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return NotFound();
+                return BadRequest(bloodPressure);
             }
         }
 
@@ -50,20 +50,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return NotFound();
+                return BadRequest(bodyComposition);
             }
         }
         
         [HttpPost]
-        public IActionResult PostToBodyCompositionExpanded([FromBody] BodyCompositionExpandedClassificationParameters bodyComposition)
+        public IActionResult PostToBodyCompositionExpanded([FromBody] BodyCompositionExpandedClassificationParameters bodyCompositionExpanded)
         {
             try
             {
-                return Ok(_classifications.BodyCompositionsExpanded.Classify(bodyComposition));
+                return Ok(_classifications.BodyCompositionsExpanded.Classify(bodyCompositionExpanded));
             }
             catch
             {
-                return NotFound();
+                return BadRequest(bodyCompositionExpanded);
             }
         }
     }
