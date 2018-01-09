@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
@@ -21,20 +23,20 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             Context = context;
         }
 
-        public IEnumerable<T> All()
+        public async Task<IEnumerable<T>> All()
         {
-            var results = Context.Set<T>();
+            var results = await Context.Set<T>().ToListAsync();
             if (!results.Any())
                 throw new RepositoryElementNotFoundException();
 
             return results;
         }
 
-        public T FindById(int id)
+        public async Task<T> FindById(int id)
         {
             try
             {
-                return All().First(p => p.Id == id);
+                return await Context.Set<T>().Where(p => p.Id == id).FirstAsync();
             }
             catch
             {
@@ -42,7 +44,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             }
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -50,23 +52,24 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             if (Context.Set<T>().Find(entity.Id) != null)
                 throw new EntityNotUniqeException(entity.Id);
 
-            Context.Set<T>().Add(entity);
+            await Context.Set<T>().AddAsync(entity);
         }
 
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var entity = FindById(id);
+            var entity = await FindById(id);
 
             Context.Set<T>().Remove(entity);
         }
 
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-            FindById(entity.Id)?.MapValues(entity);
+
+            (await FindById(entity.Id)).MapValues(entity);
         }
     }
 }
