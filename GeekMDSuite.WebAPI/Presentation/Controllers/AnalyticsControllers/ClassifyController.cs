@@ -7,18 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
 {
     [Produces("application/json", "application/xml")]
-    public class ClassifiyController : Controller
+    public class ClassifyController : Controller
     {
         private readonly IClassificationRepository _classifications;
 
-        public ClassifiyController(IClassificationRepository classifications)
+        public ClassifyController(IClassificationRepository classifications)
         {
             _classifications = classifications;
         }
 
-        [HttpPost]
-        [Route("audiogram/")]
-        public IActionResult Audiogram([FromBody] Audiogram audiogram)
+        public IActionResult PostToAudiogram([FromBody] Audiogram audiogram)
         {
             try
             {
@@ -31,8 +29,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         }
 
         [HttpPost]
-        [Route("bloodpressure")]
-        public IActionResult BloodPressure([FromBody] BloodPressure bloodPressure)
+        public IActionResult PostToBloodPressure([FromBody] BloodPressure bloodPressure)
         {
             try
             {
@@ -45,8 +42,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         }
 
         [HttpPost]
-        [Route("bodycomposition")]
-        public IActionResult BodyComposition([FromBody] BodyCompositionClassificationParameters bodyComposition)
+        public IActionResult PostToBodyComposition([FromBody] BodyCompositionClassificationParameters bodyComposition)
         {
             try
             {
@@ -59,8 +55,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         }
         
         [HttpPost]
-        [Route("bodycompositionexpanded")]
-        public IActionResult BodyCompositionExpanded([FromBody] BodyCompositionExpandedClassificationParameters bodyComposition)
+        public IActionResult PostToBodyCompositionExpanded([FromBody] BodyCompositionExpandedClassificationParameters bodyComposition)
         {
             try
             {

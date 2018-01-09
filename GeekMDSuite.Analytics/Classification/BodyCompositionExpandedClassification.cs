@@ -3,34 +3,21 @@ using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-    public class BodyCompositionExpandedClassificationParameters
+    public class BodyCompositionExpandedClassification : BodyCompositionBaseClassification, IClassifiable<BodyCompositionClassificationResult>
     {
-        public BodyCompositionExpandedClassificationParameters(BodyCompositionExpanded bodyCompositionExpanded, Patient patient)
+        public BodyCompositionExpandedClassification(BodyCompositionExpandedClassificationParameters parameters)
+            : base(parameters.BodyCompositionExpanded, parameters.Patient)
         {
-            BodyCompositionExpanded = bodyCompositionExpanded;
-            Patient = patient;
-        }
-
-        public BodyCompositionExpanded BodyCompositionExpanded { get; private set; }
-        public Patient Patient { get; private set; }
-    }
-
-    public class BodyCompositionExpandedClassification : BodyCompositionBaseClassification,
-        IClassifiable<BodyCompositionClassificationResult>
-    {
-        public BodyCompositionExpandedClassification(BodyCompositionExpandedClassificationParameters bodyCompositionExpandedClassificationParameters)
-            : base(bodyCompositionExpandedClassificationParameters.BodyCompositionExpanded, bodyCompositionExpandedClassificationParameters.Patient)
-        {
-            _bodyCompositionExpanded = bodyCompositionExpandedClassificationParameters.BodyCompositionExpanded ??
-                                       throw new ArgumentNullException(nameof(bodyCompositionExpandedClassificationParameters.BodyCompositionExpanded));
-            _patient = bodyCompositionExpandedClassificationParameters.Patient ?? throw new ArgumentNullException(nameof(bodyCompositionExpandedClassificationParameters.Patient));
+            _parameters = parameters.BodyCompositionExpanded ??
+                                       throw new ArgumentNullException(nameof(parameters.BodyCompositionExpanded));
+            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
         }
 
         public PercentBodyFat PercentBodyFat =>
-            new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(_bodyCompositionExpanded, _patient)).Classification;
+            new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(_parameters, _patient)).Classification;
 
         public VisceralFat VisceralFat =>
-            new VisceralFatClassification(_bodyCompositionExpanded).Classification;
+            new VisceralFatClassification(_parameters).Classification;
 
         public BodyCompositionClassificationResult Classification => Classify();
 
@@ -39,7 +26,7 @@ namespace GeekMDSuite.Analytics.Classification
             return Classification.ToString();
         }
         
-        private readonly BodyCompositionExpanded _bodyCompositionExpanded;
+        private readonly BodyCompositionExpanded _parameters;
         private readonly Patient _patient;
 
 

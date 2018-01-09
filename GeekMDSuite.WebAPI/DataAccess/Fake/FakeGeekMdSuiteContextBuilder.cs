@@ -20,33 +20,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         public static GeekMdSuiteDbContext Context => GetContextWithData();
         public static GeekMdSuiteDbContext EmptyContext => GetContextWithoutData();
 
-        private static IEnumerable<ResistanceRegimenEntity> GetResistanceRegimenEntities()
-        {
-            return new List<ResistanceRegimenEntity>()
-            {
-                new ResistanceRegimenEntity(ResistanceRegimenBuilder.Initialize()
-                    .ConfirmLowerBodyTrained()
-                    .ConfirmPullingMovementsPerformed()
-                    .ConfirmRepetitionsToNearFailure()
-                    .ConfirmUpperBodyTrained()
-                    .SetSecondsRestDurationPerSet(150)
-                    .SetAverageSessionDuration(90)
-                    .SetIntensity(ExerciseIntensity.High)
-                    .SetSessionsPerWeek(4)
-                    .Build()) { VisitId = BruceWaynesVisitGuid },
-                new ResistanceRegimenEntity(ResistanceRegimenBuilder.Initialize()
-                    .ConfirmLowerBodyTrained()
-                    .ConfirmPullingMovementsPerformed()
-                    .ConfirmPushingMovementsPerformed()
-                    .ConfirmRepetitionsToNearFailure()
-                    .ConfirmUpperBodyTrained()
-                    .SetSecondsRestDurationPerSet(76)
-                    .SetAverageSessionDuration(90)
-                    .SetIntensity(ExerciseIntensity.High)
-                    .SetSessionsPerWeek(4)
-                    .Build()) { VisitId = XerMajestiesVisitGuid },
-            };
-        }
         private static GeekMdSuiteDbContext GetContextWithoutData()
         {
             var options = new DbContextOptionsBuilder<GeekMdSuiteDbContext>()
@@ -77,6 +50,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.Patients.AddRange(GetPatientEntities());
             context.PeripheralVisions.AddRange(GetPeripheralVisionEntities());
             context.Pushups.AddRange(GetPushupsEntities());
+            context.ResistanceRegimens.AddRange(GetResistanceRegimenEntities());
             context.SitAndReaches.AddRange(GetSitAndReachEntities());
             context.Situps.AddRange(GetSitupEntities());
             context.Spirometries.AddRange(GetSpirometryEntities());
