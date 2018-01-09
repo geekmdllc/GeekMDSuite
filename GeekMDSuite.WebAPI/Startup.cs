@@ -115,6 +115,7 @@ namespace GeekMDSuite.WebAPI
 
             var patientActivitiesUri = dataUri + "patientactivities/";
             routes.Add(patientActivitiesUri + "resistanceregimen", route => route.ToController<ResistanceRegimenController>());
+            routes.Add(patientActivitiesUri + "cardiovascularregimen", route => route.ToController<CardiovascularRegimenController>());
             
        }
     }

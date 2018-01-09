@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GeekMDSuite.Core.Builders.PatientActivities;
 using GeekMDSuite.Core.Models.PatientActivities;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             context.BloodPressures.AddRange(GetBloodPressureEntities());
             context.BodyCompositions.AddRange(GetBodyCompositionEntities());
             context.BodyCompositionExpandeds.AddRange(GetBodyCompositionExpandedEntities());
+            context.CardiovascularRegimens.AddRange(GetCardiovascularRegimenEntities());
             context.CarotidUltrasounds.AddRange(GetCarotidUltrasoundEntities());
             context.CentralBloodPressures.AddRange(GetCentralBloodPressureEntities());
             context.FunctionalMovementScreens.AddRange(GetFunctionalMovementScreenEntities());

@@ -19,6 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
             BodyCompositionExpandeds = new BodyCompositionExpandedsRepository(_context);
             CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
             CentralBloodPressures = new CentralBloodPressuresRepository(_context);
+            CardiovascularRegimens = new CardiovascularRegimenRepository(_context);
             FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
             GripStrengths = new GripStrengthsRepository(_context);
             IshiharaSixPlates = new IshiharaSixPlatesRepository(_context);
@@ -37,6 +38,7 @@ namespace GeekMDSuite.WebAPI.DataAccess
         }
 
         public IResistanceRegimenRepository ResistanceRegimens { get; }
+        public ICardiovascularRegimenRepository CardiovascularRegimens { get; set; }
 
         public IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>
         {
