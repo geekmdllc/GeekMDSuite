@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -30,11 +31,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         [HttpGet]
         [Route("all/")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                return Ok(_repo.All());
+                return Ok(await _repo.All());
             }
             catch (RepositoryElementNotFoundException)
             {
@@ -43,11 +44,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetByEntityId(int id)
+        public async Task<IActionResult> GetByEntityId(int id)
         {
             try
             {
-                return Ok(_repo.FindById(id));
+                return Ok(await _repo.FindById(id));
             }
             catch (RepositoryElementNotFoundException)
             {
@@ -56,12 +57,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        public virtual IActionResult Post([FromBody] T entity)
+        public virtual async Task<IActionResult> Post([FromBody] T entity)
         {
             try
             {
-                _repo.Add(entity);
-                UnitOfWork.Complete();
+                await _repo.Add(entity);
+                await UnitOfWork.Complete();
                 return Ok();
             }
             catch (EntityNotUniqeException e)
@@ -76,12 +77,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         [HttpPut]
         [Route("update/")]
-        public IActionResult Put([FromBody] T entity)
+        public async Task<IActionResult> Put([FromBody] T entity)
         {
             try
             {
-                _repo.Update(entity);
-                UnitOfWork.Complete();
+                await _repo.Update(entity);
+                await UnitOfWork.Complete();
                 return Ok();
             }
             catch (RepositoryElementNotFoundException e)
@@ -96,12 +97,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         [HttpDelete]
         [Route("delete/{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                _repo.Delete(id);
-                UnitOfWork.Complete();
+                await _repo.Delete(id);
+                await UnitOfWork.Complete();
                 return Ok();
             }
             catch (RepositoryElementNotFoundException e)
@@ -112,15 +113,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         [HttpDelete]
         //TODO: Remove this method
-        public IActionResult Delete([FromBody] int[] ids)
+        public async Task<IActionResult> Delete([FromBody] int[] ids)
         {
             if (ids == null || ids.Length <= 0)
                 return new BadRequestResult();
 
             try
             {
-                foreach (var id in ids) _repo.Delete(id);
-                UnitOfWork.Complete();
+                foreach (var id in ids) await _repo.Delete(id);
+                await UnitOfWork.Complete();
                 return Ok();
             }
             catch (RepositoryElementNotFoundException e)

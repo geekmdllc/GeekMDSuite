@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -16,9 +17,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
 
         [Fact]
-        public void GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
+        public async Task GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
-            var newVisit = _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
+            var newVisit = await _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
                 new VisitEntity
                 {
                     PatientGuid = Guid.NewGuid()
@@ -28,15 +29,15 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         }
 
         [Fact]
-        public void GenerateUsing_WhenProperlyLoadedAndGivenNullPatient_ThrowsArgumentNullException()
+        public async Task GenerateUsing_WhenProperlyLoadedAndGivenNullPatient_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).GenerateUsing(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).GenerateUsing(null));
         }
 
         [Fact]
-        public void GenerateUsing_WhenProperlyLoadedAndGivenPatientWithEmptyGuid_ThrowsInvalidDataException()
+        public async Task GenerateUsing_WhenProperlyLoadedAndGivenPatientWithEmptyGuid_ThrowsInvalidDataException()
         {
-            Assert.Throws<InvalidDataException>(() => _service
+            await Assert.ThrowsAsync<InvalidDataException>(() => _service
                 .WithUnitOfWork(_unitOfWork)
                 .GenerateUsing(new VisitEntity
                 {
@@ -45,9 +46,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         }
 
         [Fact]
-        public void GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
+        public async Task GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
         {
-            Assert.Throws<UnitOfWorkNotLoadedException>(() => _service.GenerateUsing(new VisitEntity()));
+            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.GenerateUsing(new VisitEntity()));
         }
     }
 }

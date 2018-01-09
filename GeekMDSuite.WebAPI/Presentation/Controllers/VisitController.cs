@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -18,16 +19,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _newVisitService = newVisitService;
         }
 
-        public override IActionResult Post(VisitEntity visitEntity)
+        public override async Task<IActionResult> Post(VisitEntity visitEntity)
         {
             try
             {
-                var newVisit = _newVisitService
+                var newVisit = await _newVisitService
                     .WithUnitOfWork(UnitOfWork)
                     .GenerateUsing(visitEntity);
 
-                UnitOfWork.Visits.Add(newVisit);
-                UnitOfWork.Complete();
+                await UnitOfWork.Visits.Add(newVisit);
+                await UnitOfWork.Complete();
                 return Ok();
             }
             catch (InvalidDataException)
@@ -42,11 +43,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         // GET api/visits/bymrn/"guid"
         [HttpGet("bymrn/{mrn}")]
-        public IActionResult GetByMedicalRecordNumber(string mrn)
+        public async Task<IActionResult> GetByMedicalRecordNumber(string mrn)
         {
             try
             {
-                return Ok(UnitOfWork.Visits.FindByMedicalRecordNumber(mrn));
+                return Ok(await UnitOfWork.Visits.FindByMedicalRecordNumber(mrn));
             }
             catch (ArgumentNullException)
             {
@@ -60,11 +61,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         // GET api/visits/byname
         [HttpGet("byname/{name}")]
-        public IActionResult GetByName(string name)
+        public async Task<IActionResult> GetByName(string name)
         {
             try
             {
-                return Ok(UnitOfWork.Visits.FindByName(name));
+                return Ok(await UnitOfWork.Visits.FindByName(name));
             }
             catch (RepositoryElementNotFoundException e)
             {
@@ -78,12 +79,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         // GET api/visits/bydob/"dateOfBirth"
         [HttpGet("bydob/{dateOfBirth}")]
-        public IActionResult GetByDateOfBirth(string dateOfBirth)
+        public async Task<IActionResult> GetByDateOfBirth(string dateOfBirth)
         {
             try
             {
                 var parsedDob = DateTime.Parse(dateOfBirth);
-                return Ok(UnitOfWork.Visits.FindByDateOfBirth(parsedDob));
+                return Ok(await UnitOfWork.Visits.FindByDateOfBirth(parsedDob));
             }
             catch (FormatException e)
             {

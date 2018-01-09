@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -18,14 +19,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        public override IActionResult Post([FromBody] PatientEntity patient)
+        public override async Task<IActionResult> Post([FromBody] PatientEntity patient)
         {
             try
             {
-                var newPatient = _newPatientService
+                var newPatient = await _newPatientService
                     .WithUnitOfWork(UnitOfWork)
                     .GenerateUsing(patient);
-                UnitOfWork.Patients.Add(newPatient);
+                
+                await UnitOfWork.Patients.Add(newPatient);
+                await UnitOfWork.Complete();
+                return Ok();
             }
             catch (MedicalRecordAlreadyExistsException e)
             {
@@ -43,18 +47,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return BadRequest(e.Message);
             }
-
-            UnitOfWork.Complete();
-            return Ok();
         }
 
         [HttpGet]
         [Route("name/{name}")]
-        public IActionResult GetByName(string name)
+        public async Task<IActionResult> GetByName(string name)
         {
             try
             {
-                return Ok(UnitOfWork.Patients.FindByName(name));
+                return Ok(await UnitOfWork.Patients.FindByName(name));
             }
             catch (ArgumentNullException)
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
@@ -11,11 +12,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
     public class NewPatientService : NewKeyEntityService<PatientEntity, Patient>, INewPatientService
     {
-        public override PatientEntity GenerateUsing(Patient patient)
+        public override async Task<PatientEntity> GenerateUsing(Patient patient)
         {
             VerifyContextIsLoaded();
             ValidatePatientFormat(patient);
-            MedicalRecordNumberAlreadyExists(patient);
+            await MedicalRecordNumberAlreadyExists(patient);
 
             var newPatient = new PatientEntity();
             newPatient.MapValues(patient);
@@ -40,12 +41,12 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             if (message.Any()) throw new FormatException(string.Join(", ", message));
         }
 
-        private void MedicalRecordNumberAlreadyExists(Patient patient)
+        private async Task MedicalRecordNumberAlreadyExists(Patient patient)
         {
             var mrnExists = false;
             try
             {
-                if (UnitOfWork.Patients.FindByMedicalRecordNumber(patient.MedicalRecordNumber).Any())
+                if ((await UnitOfWork.Patients.FindByMedicalRecordNumber(patient.MedicalRecordNumber)).Any())
                     mrnExists = true;
             }
             catch

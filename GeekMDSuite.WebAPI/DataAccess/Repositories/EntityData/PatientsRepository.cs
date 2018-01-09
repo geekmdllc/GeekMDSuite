@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
@@ -15,32 +17,34 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         {
         }
 
-        public IEnumerable<PatientEntity> FindByName(string query)
+        public async Task<IEnumerable<PatientEntity>> FindByName(string query)
         {
             if (query.IsEmpty()) throw new ArgumentNullException(query);
-            var result = Context.Patients.Where(p => p.Name.IsSimilarTo(query));
+            
+            var result = await Context.Patients.Where(p => p.Name.IsSimilarTo(query)).ToListAsync();
             if (!result.Any()) throw new RepositoryElementNotFoundException(query);
 
             return result;
         }
 
-        public IEnumerable<PatientEntity> FindByMedicalRecordNumber(string query)
+        public async Task<IEnumerable<PatientEntity>> FindByMedicalRecordNumber(string query)
         {
             if (query.IsEmpty()) throw new ArgumentNullException(query);
-            var result = Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber));
+            
+            var result = await Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber)).ToListAsync();
             if (!result.Any()) throw new RepositoryElementNotFoundException(query);
 
             return result;
         }
 
 
-        public IEnumerable<PatientEntity> FindByDateOfBirth(DateTime dateOfBirth)
+        public async Task<IEnumerable<PatientEntity>> FindByDateOfBirth(DateTime dateOfBirth)
         {
             if (dateOfBirth.IsOutOfRange())
                 throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
 
-            var found = Context.Patients.Where(
-                p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString());
+            var found = await Context.Patients.Where(
+                p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString()).ToListAsync();
 
             if (!found.Any())
                 throw new RepositoryElementNotFoundException(dateOfBirth.ToShortDateString());
@@ -48,13 +52,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             return found;
         }
 
-        public PatientEntity FindByGuid(Guid guid)
+        public async Task<PatientEntity> FindByGuid(Guid guid)
         {
             if (guid == Guid.Empty)
                 throw new ArgumentOutOfRangeException(guid.ToString());
             try
             {
-                return Context.Patients.First(p => p.Guid == guid);
+                return await Context.Patients.FirstAsync(p => p.Guid == guid);
             }
             catch (InvalidOperationException)
             {

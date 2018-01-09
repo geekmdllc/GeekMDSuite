@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
@@ -7,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
     public class NewVisitService : NewKeyEntityService<VisitEntity, VisitEntity>, INewVisitService
     {
-        public override VisitEntity GenerateUsing(VisitEntity template)
+        public override async Task<VisitEntity> GenerateUsing(VisitEntity template)
         {
             VerifyContextIsLoaded();
             if (template == null) throw new ArgumentNullException(nameof(template));

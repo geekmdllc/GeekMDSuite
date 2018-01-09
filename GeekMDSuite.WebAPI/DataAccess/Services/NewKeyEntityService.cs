@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess;
+﻿using System.Threading.Tasks;
+using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
@@ -18,7 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             return this;
         }
 
-        public abstract TObject GenerateUsing(TTemplate template);
+        public abstract Task<TObject> GenerateUsing(TTemplate template);
 
         protected void VerifyContextIsLoaded()
         {

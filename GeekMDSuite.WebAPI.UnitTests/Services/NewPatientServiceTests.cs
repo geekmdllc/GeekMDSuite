@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
@@ -15,9 +16,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
 
         [Fact]
-        public void GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
+        public async Task GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
-            var newPatient = _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
+            var newPatient = await _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
                 new Patient
                 {
                     Name = Name.Build("Joe", "Schmoe"),
@@ -28,15 +29,15 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         }
 
         [Fact]
-        public void GenerateUsing_WhenProperlyLoadedAndGivenNullPatient_ThrowsArgumentNullException()
+        public async Task GenerateUsing_WhenProperlyLoadedAndGivenNullPatient_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).GenerateUsing(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).GenerateUsing(null));
         }
 
         [Fact]
-        public void GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
+        public async Task GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
         {
-            Assert.Throws<UnitOfWorkNotLoadedException>(() => _service.GenerateUsing(new Patient()));
+            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.GenerateUsing(new Patient()));
         }
     }
 }

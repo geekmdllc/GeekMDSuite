@@ -1,12 +1,13 @@
-﻿using GeekMDSuite.WebAPI.Core.Models;
+﻿using System.Threading.Tasks;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services
 {
-    public interface INewKeyEntityService<out TObject, in TTemplate>
+    public interface INewKeyEntityService<TObject, TTemplate>
         where TObject : class, IEntity<TObject>
         where TTemplate : class
     {
         INewKeyEntityService<TObject, TTemplate> WithUnitOfWork(IUnitOfWork unitOfWork);
-        TObject GenerateUsing(TTemplate visit);
+        Task<TObject> GenerateUsing(TTemplate visit);
     }
 }
