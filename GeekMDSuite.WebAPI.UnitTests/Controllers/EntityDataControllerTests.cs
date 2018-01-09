@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
@@ -18,10 +20,10 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void Delete_GivenAppropriateElement_ReturnsOkay()
+        public async Task Delete_GivenAppropriateElement_ReturnsOkay()
         {
             var uow = new FakeUnitOfWorkSeeded();
-            var audiogramId = uow.Audiograms.All().First().Id;
+            var audiogramId = (await uow.Audiograms.All()).First().Id;
 
             var controller = new FakeEntityDataController(uow);
 
@@ -71,13 +73,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetId_GivenIdInSeededUnitOfWorkContext_ReturnsOkObjectResult()
+        public async Task GetId_GivenIdInSeededUnitOfWorkContext_ReturnsOkObjectResult()
         {
             var uow = new FakeUnitOfWorkSeeded();
             var controller = new FakeEntityDataController(uow);
-            var ag = uow.Audiograms.All().First();
+            var found = (await (uow.Audiograms.All())).First();
 
-            var result = controller.GetByEntityId(ag.Id);
+            var result = controller.GetByEntityId(found.Id);
 
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
@@ -103,10 +105,10 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void Put_GivenAppropriateElement_ReturnsOkay()
+        public async Task Put_GivenAppropriateElement_ReturnsOkay()
         {
             var uow = new FakeUnitOfWorkSeeded();
-            var audiogram = uow.Audiograms.All().First();
+            var audiogram = (await uow.Audiograms.All()).First();
             audiogram.Left.F2000.Value = 150;
 
             var controller = new FakeEntityDataController(uow);

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
@@ -8,16 +9,16 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
     public partial class RepositoryTests
     {
         [Fact]
-        public void All_GivenEmptyContext_ThrowsRepositoryElementNotFoundException()
+        public async Task All_GivenEmptyContext_ThrowsRepositoryElementNotFoundException()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
                 _unitOfWorkEmpty.VisitData<AudiogramEntity>().All());
         }
 
         [Fact]
-        public void All_GivenSeededContext_ReturnsNonEmptyList()
+        public async Task All_GivenSeededContext_ReturnsNonEmptyList()
         {
-            var found = _unitOfWorkSeeded.VisitData<AudiogramEntity>().All();
+            var found = await _unitOfWorkSeeded.VisitData<AudiogramEntity>().All();
 
             Assert.True(found.Any());
         }

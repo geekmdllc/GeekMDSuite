@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
@@ -12,9 +13,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
 
         [Fact]
-        public void Update_GivenNewIntimaMediaThickness_PersistsChangesInCorrectField()
+        public async Task Update_GivenNewIntimaMediaThickness_PersistsChangesInCorrectField()
         {
-            var cueBefore = _unitOfWork.CarotidUltrasounds.All().First();
+            var cueBefore = (await _unitOfWork.CarotidUltrasounds.All()).First();
             var beforeImtLeft = cueBefore.Left.IntimaMediaMeasurementMillimeters;
             var beforeImtRight = cueBefore.Right.IntimaMediaMeasurementMillimeters;
 
@@ -29,10 +30,10 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
                     .Build()
             };
 
-            _unitOfWork.CarotidUltrasounds.Update(newCu);
-            _unitOfWork.Complete();
+            await _unitOfWork.CarotidUltrasounds.Update(newCu);
+            await _unitOfWork.Complete();
 
-            var cueAfter = _unitOfWork.CarotidUltrasounds.FindById(cueBefore.Id);
+            var cueAfter = await _unitOfWork.CarotidUltrasounds.FindById(cueBefore.Id);
 
             Assert.NotEqual(beforeImtRight, cueAfter.Right.IntimaMediaMeasurementMillimeters);
             Assert.NotEqual(beforeImtLeft, cueAfter.Left.IntimaMediaMeasurementMillimeters);

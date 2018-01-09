@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Models;
 
@@ -32,6 +33,6 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         
         IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>;
         IRepository<T> EntityData<T>() where T : class, IEntity<T>;
-        void Complete();
+        Task Complete();
     }
 }

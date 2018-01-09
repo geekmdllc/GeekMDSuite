@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
@@ -10,7 +11,27 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public class AudiogramsRepositoryTests
     {
-        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
+
+
+        [Fact]
+        public async Task Update_GivenNewValues_PersistsChanges()
+        {
+            var audiogramBefore = (await _unitOfWork.Audiograms.All()).First();
+            var audiogramBeforeString = audiogramBefore.ToString();
+            var index = audiogramBefore.Id;
+            var newAudiogramEntity = NewAudiogramEntity(index);
+
+            await _unitOfWork.Audiograms.Update(newAudiogramEntity);
+            _unitOfWork.Complete();
+
+            var audiogramAfter = await _unitOfWork.Audiograms.FindById(index);
+
+            Assert.Equal(newAudiogramEntity.ToString(), audiogramAfter.ToString());
+            Assert.NotEqual(audiogramBeforeString, audiogramAfter.ToString());
+            VerifyAudiogramContents(audiogramAfter);
+        }
+        
+                private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
 
         private static void VerifyAudiogramContents(AudiogramEntity audiogramAfter)
         {
@@ -63,24 +84,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             );
             newAudiogramEntity.Id = index;
             return newAudiogramEntity;
-        }
-
-        [Fact]
-        public void Update_GivenNewValues_PersistsChanges()
-        {
-            var audiogramBefore = _unitOfWork.Audiograms.All().First();
-            var audiogramBeforeString = audiogramBefore.ToString();
-            var index = audiogramBefore.Id;
-            var newAudiogramEntity = NewAudiogramEntity(index);
-
-            _unitOfWork.Audiograms.Update(newAudiogramEntity);
-            _unitOfWork.Complete();
-
-            var audiogramAfter = _unitOfWork.Audiograms.FindById(index);
-
-            Assert.Equal(newAudiogramEntity.ToString(), audiogramAfter.ToString());
-            Assert.NotEqual(audiogramBeforeString, audiogramAfter.ToString());
-            VerifyAudiogramContents(audiogramAfter);
         }
     }
 }

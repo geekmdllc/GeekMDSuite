@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
@@ -14,108 +15,108 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         private readonly IVisitsRepository _repo = new VisitsRepository(FakeGeekMdSuiteContextBuilder.Context);
 
         [Fact]
-        public void FindByDateOfBirth_GivenDateInRepository_ReturnsProperIEnumerableOfVisitEntities()
+        public async Task FindByDateOfBirth_GivenDateInRepository_ReturnsProperIEnumerableOfVisitEntities()
         {
-            var list = _repo.FindByDateOfBirth(new DateTime(1900, 1, 1));
+            var list = await _repo.FindByDateOfBirth(new DateTime(1900, 1, 1));
             Assert.True(list.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
 
         [Fact]
-        public void FindByDateOfBirth_GivenDateNotInRepository_ThrowsRepositoryElementNotFoundException()
+        public async Task FindByDateOfBirth_GivenDateNotInRepository_ThrowsRepositoryElementNotFoundException()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() => _repo.FindByDateOfBirth(DateTime.Now));
+            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() => _repo.FindByDateOfBirth(DateTime.Now));
         }
 
         [Fact]
-        public void FindByDateOfBirth_GivenPatientAgeGreaterThan150Years_ThrowsArgumentOutOfRangeException()
+        public async Task FindByDateOfBirth_GivenPatientAgeGreaterThan150Years_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _repo.FindByDateOfBirth(DateTime.Now.AddYears(-151)));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => _repo.FindByDateOfBirth(DateTime.Now.AddYears(-151)));
         }
 
         [Fact]
-        public void FindByMedicalRecordNumber_GivenEmptyString_ThrowsArgumentNullException()
+        public async Task FindByMedicalRecordNumber_GivenEmptyString_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _repo.FindByMedicalRecordNumber(string.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _repo.FindByMedicalRecordNumber(string.Empty));
         }
 
         [Fact]
-        public void FindByMedicalRecordNumber_GivenMedicalRecordNumberThatExists_ReturnsCorrectIEnumerable()
+        public async Task FindByMedicalRecordNumber_GivenMedicalRecordNumberThatExists_ReturnsCorrectIEnumerable()
         {
-            var found = _repo.FindByMedicalRecordNumber(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber);
+            var found = await _repo.FindByMedicalRecordNumber(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber);
             Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
 
         [Fact]
-        public void FindByMedicalRecordNumber_GivenRandomString_ThrowsRepositoryElementNotFoundException()
+        public async Task FindByMedicalRecordNumber_GivenRandomString_ThrowsRepositoryElementNotFoundException()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
                 _repo.FindByMedicalRecordNumber(Guid.NewGuid().ToString()));
         }
 
         [Fact]
-        public void FindByName_GivenEmptyString_ThrowsArgumentNullException()
+        public async Task FindByName_GivenEmptyString_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _repo.FindByName(string.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _repo.FindByName(string.Empty));
         }
 
         [Fact]
-        public void FindByName_GivenFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        public async Task FindByName_GivenFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
         {
-            var found = _repo.FindByName("Bruce");
+            var found = await _repo.FindByName("Bruce");
             Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
 
         [Fact]
-        public void FindByName_GivenLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        public async Task FindByName_GivenLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
         {
-            var found = _repo.FindByName("Wayne");
+            var found = await _repo.FindByName("Wayne");
             Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
 
         [Fact]
-        public void FindByName_GivenNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        public async Task FindByName_GivenNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
         {
-            var found = _repo.FindByName("Bruce Wayne");
+            var found = await _repo.FindByName("Bruce Wayne");
             Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
 
         [Fact]
-        public void FindByName_GivenNameThatDoesntExistInTheContext_ThrowsRepositoryEntryNotFoundException()
+        public async Task FindByName_GivenNameThatDoesntExistInTheContext_ThrowsRepositoryEntryNotFoundException()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() => _repo.FindByName("Jar Jar Binks"));
+            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() => _repo.FindByName("Jar Jar Binks"));
         }
 
         [Fact]
-        public void FindByName_GivenPartialFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        public async Task FindByName_GivenPartialFirstNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
         {
-            var found = _repo.FindByName("Br");
+            var found = await _repo.FindByName("Br");
             Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
 
         [Fact]
-        public void FindByName_GivenPartialLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
+        public async Task FindByName_GivenPartialLastNameThatDoesExistInTheContext_ReturnsCorrectIEnumerable()
         {
-            var found = _repo.FindByName("ayne");
+            var found = await _repo.FindByName("ayne");
             Assert.True(found.Any(v => v.PatientGuid == FakeGeekMdSuiteContextBuilder.BruceWaynesGuid));
         }
 
         [Fact]
-        public void FindByPatientGuid_GivenEmptyGuid_ThrowsArgumentOutOfRangeException()
+        public async Task FindByPatientGuid_GivenEmptyGuid_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _repo.FindByPatientGuid(Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => _repo.FindByPatientGuid(Guid.Empty));
         }
 
         [Fact]
-        public void FindByPatientGuid_GivenGuidOfExistingVisit_ReturnsVisit()
+        public async Task FindByPatientGuid_GivenGuidOfExistingVisit_ReturnsVisit()
         {
-            var visit = _repo.FindByPatientGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid);
+            var visit = await _repo.FindByPatientGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid);
             Assert.IsType<VisitEntity>(visit.First());
         }
 
         [Fact]
-        public void FindByPatientGuid_GivenRandomGuid_ThrowsRepositoryElementNotFoundExcpetion()
+        public async Task FindByPatientGuid_GivenRandomGuid_ThrowsRepositoryElementNotFoundExcpetion()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() => _repo.FindByPatientGuid(Guid.NewGuid()));
+            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() => _repo.FindByPatientGuid(Guid.NewGuid()));
         }
     }
 }

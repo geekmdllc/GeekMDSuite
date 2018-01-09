@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
@@ -10,24 +11,25 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
     public partial class RepositoryTests
     {
         [Fact]
-        public void Delete_GivenId_Succeeds()
+        public async Task Delete_GivenId_Succeeds()
         {
             var uow = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            var audiogram = uow.Audiograms
-                .FindByPatientGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid)
+            var audiogram = (await uow.Audiograms
+                .FindByPatientGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid))
                 .First();
+                
 
-            uow.Audiograms.Delete(audiogram.Id);
-            uow.Complete();
+            await uow.Audiograms.Delete(audiogram.Id);
+            await uow.Complete();
 
-            Assert.Throws<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
                 uow.Audiograms.FindById(audiogram.Id));
         }
 
         [Fact]
-        public void Delete_GivenIndexOutOfRange_ThrowsRepositoryElementNotFoundException()
+        public async Task Delete_GivenIndexOutOfRange_ThrowsRepositoryElementNotFoundException()
         {
-            Assert.Throws<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
                 _unitOfWorkSeeded.VisitData<AudiogramEntity>().Delete(int.MaxValue));
         }
     }

@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess;
+﻿using System.Threading.Tasks;
+using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Context;
@@ -73,9 +74,9 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public IVisualAcuitiesRepository VisualAcuities { get; set; }
         public IVitalSignsRepository VitalSigns { get; set; }
 
-        public void Complete()
+        public async Task Complete()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()

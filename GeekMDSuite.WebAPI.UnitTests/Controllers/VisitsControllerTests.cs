@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
@@ -19,7 +20,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         private readonly VisitController _controller;
 
         [Fact]
-        public void Add_GivenNewVisit_CreatesAVisitWithVisitGuid()
+        public async Task Add_GivenNewVisit_CreatesAVisitWithVisitGuid()
         {
             var visitDate = DateTime.Now;
             var unitOfWork = new FakeUnitOfWorkEmpty();
@@ -31,7 +32,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
                 PatientGuid = Guid.NewGuid()
             });
 
-            var addedVisits = unitOfWork.Visits.All().FirstOrDefault();
+            var addedVisits = (await unitOfWork.Visits.All()).FirstOrDefault();
 
             Assert.True(addedVisits != null && addedVisits.VisitId != Guid.Empty);
         }

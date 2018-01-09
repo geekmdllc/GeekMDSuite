@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -84,48 +85,48 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         }
 
         [Fact]
-        public void Update_GivenDeletionOfComorbidity_PersistsChanges()
+        public async Task Update_GivenDeletionOfComorbidity_PersistsChanges()
         {
             var patientBefore = _unitOfWork.Patients.FindByGuid(FakeGeekMdSuiteContextBuilder.XerMajestyGuid);
             patientBefore.Comorbidities.RemoveAll(c => c == ChronicDisease.Diabetes);
-            _unitOfWork.Complete();
+            await _unitOfWork.Complete();
 
-            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            var patientAfter = await _unitOfWork.Patients.FindById(patientBefore.Id);
 
             Assert.DoesNotContain(ChronicDisease.Diabetes, patientAfter.Comorbidities);
         }
 
         [Fact]
-        public void Update_GivenNewComorbidit_PersistsChanges()
+        public async Task Update_GivenNewComorbidit_PersistsChanges()
         {
-            var patientBefore = _unitOfWork.Patients.All().First();
+            var patientBefore = (await _unitOfWork.Patients.All()).First();
             patientBefore.Comorbidities.Add(ChronicDisease.Asthma);
-            _unitOfWork.Complete();
+            await _unitOfWork.Complete();
 
-            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            var patientAfter = await _unitOfWork.Patients.FindById(patientBefore.Id);
 
             Assert.Contains(ChronicDisease.Asthma, patientAfter.Comorbidities);
         }
 
         [Fact]
-        public void Update_GivenNewDateOfBirth_PersistsChanges()
+        public async Task Update_GivenNewDateOfBirth_PersistsChanges()
         {
             var found = _unitOfWork.Patients.FindByName("bruce").First();
             var originalBirthDate = found.DateOfBirth;
             var newBirthDate = new DateTime(1955, 5, 5);
             found.DateOfBirth = newBirthDate;
 
-            _unitOfWork.Patients.Update(found);
-            _unitOfWork.Complete();
+            await _unitOfWork.Patients.Update(found);
+            await _unitOfWork.Complete();
 
-            var foundAgain = _unitOfWork.Patients.FindById(found.Id);
+            var foundAgain = await _unitOfWork.Patients.FindById(found.Id);
 
             Assert.NotEqual(originalBirthDate, foundAgain.DateOfBirth);
             Assert.Equal(newBirthDate, foundAgain.DateOfBirth);
         }
 
         [Fact]
-        public void Update_GivenNewGender_PersistsChanges()
+        public async Task Update_GivenNewGender_PersistsChanges()
         {
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var genderBefore = Gender.Build(patientBefore.Gender.Category);
@@ -135,10 +136,10 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
                 Gender = Gender.Build(GenderIdentity.NonBinaryXy)
             };
 
-            _unitOfWork.Patients.Update(updatedPatient);
-            _unitOfWork.Complete();
+            await _unitOfWork.Patients.Update(updatedPatient);
+            await _unitOfWork.Complete();
 
-            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            var patientAfter = await _unitOfWork.Patients.FindById(patientBefore.Id);
 
             Assert.NotEqual(genderBefore.Category, patientAfter.Gender.Category);
             Assert.Equal(updatedPatient.Gender.Category, patientAfter.Gender.Category);
@@ -146,7 +147,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         }
 
         [Fact]
-        public void Update_GivenNewMedicalRecordNumber_PersistsChanges()
+        public async Task Update_GivenNewMedicalRecordNumber_PersistsChanges()
         {
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var mrnBefore = patientBefore.MedicalRecordNumber;
@@ -156,17 +157,17 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
                 MedicalRecordNumber = "23456"
             };
 
-            _unitOfWork.Patients.Update(updatedPatient);
-            _unitOfWork.Complete();
+            await _unitOfWork.Patients.Update(updatedPatient);
+            await _unitOfWork.Complete();
 
-            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            var patientAfter = await _unitOfWork.Patients.FindById(patientBefore.Id);
 
             Assert.Equal("23456", patientAfter.MedicalRecordNumber);
             Assert.NotEqual(mrnBefore, "23456");
         }
 
         [Fact]
-        public void Update_GivenNewName_PersistsChanges()
+        public async Task Update_GivenNewName_PersistsChanges()
         {
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var nameBefore = Name.Build(patientBefore.Name.First, patientBefore.Name.Last, patientBefore.Name.Middle);
@@ -177,10 +178,10 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
                 Name = newName
             };
 
-            _unitOfWork.Patients.Update(updatedPatient);
-            _unitOfWork.Complete();
+            await _unitOfWork.Patients.Update(updatedPatient);
+            await _unitOfWork.Complete();
 
-            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            var patientAfter = await _unitOfWork.Patients.FindById(patientBefore.Id);
 
             Assert.Equal(newName.First, patientAfter.Name.First);
             Assert.Equal(newName.Middle, patientAfter.Name.Middle);
@@ -189,21 +190,21 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         }
 
         [Fact]
-        public void Update_GivenNewRace_PersistsChanges()
+        public async Task Update_GivenNewRace_PersistsChanges()
         {
             var patientBefore = _unitOfWork.Patients.FindByMedicalRecordNumber("12345").First();
             var raceBefore = patientBefore.Race;
-            var newRace = Race.Asian;
+            const Race newRace = Race.Asian;
             var updatedPatient = new PatientEntity
             {
                 Id = patientBefore.Id,
                 Race = newRace
             };
 
-            _unitOfWork.Patients.Update(updatedPatient);
-            _unitOfWork.Complete();
+            await _unitOfWork.Patients.Update(updatedPatient);
+            await _unitOfWork.Complete();
 
-            var patientAfter = _unitOfWork.Patients.FindById(patientBefore.Id);
+            var patientAfter = await _unitOfWork.Patients.FindById(patientBefore.Id);
 
             Assert.Equal(newRace, patientAfter.Race);
             Assert.NotEqual(raceBefore, patientAfter.Race);
