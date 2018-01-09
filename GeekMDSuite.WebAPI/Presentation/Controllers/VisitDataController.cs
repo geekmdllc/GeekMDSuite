@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -18,11 +19,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpGet("byvisit/{guid}")]
-        public IActionResult GetByVisitGuid(Guid guid)
+        public async Task<IActionResult> GetByVisitGuid(Guid guid)
         {
             try
             {
-                return Ok(_repo.FindByVisit(guid));
+                return Ok(await _repo.FindByVisit(guid));
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -35,11 +36,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpGet("bypatient/{guid}")]
-        public IActionResult GetByPatientGuid(Guid guid)
+        public async Task<IActionResult> GetByPatientGuid(Guid guid)
         {
             try
             {
-                return Ok(_repo.FindByPatientGuid(guid));
+                return Ok(await _repo.FindByPatientGuid(guid));
             }
             catch (ArgumentOutOfRangeException)
             {

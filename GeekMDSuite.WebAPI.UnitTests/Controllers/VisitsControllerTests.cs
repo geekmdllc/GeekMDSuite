@@ -26,7 +26,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var unitOfWork = new FakeUnitOfWorkEmpty();
             var controller = new VisitController(unitOfWork, new NewVisitService());
 
-            controller.Post(new VisitEntity
+            await controller.Post(new VisitEntity
             {
                 Date = visitDate,
                 PatientGuid = Guid.NewGuid()
@@ -38,95 +38,94 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetByDateOfBirth_GivenAgeGreaterThan150Years_ReturnsBadRequestObjectResult()
+        public async Task GetByDateOfBirth_GivenAgeGreaterThan150Years_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.GetByDateOfBirth(DateTime.Now.AddYears(-151).ToShortDateString());
+            var result = await _controller.GetByDateOfBirth(DateTime.Now.AddYears(-151).ToShortDateString());
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByDateOfBirth_GivenAgeOfZeroOrNegative_ReturnsBadRequestObjectResult()
+        public async Task GetByDateOfBirth_GivenAgeOfZeroOrNegative_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.GetByDateOfBirth(DateTime.Now.AddYears(1).ToShortDateString());
+            var result = await _controller.GetByDateOfBirth(DateTime.Now.AddYears(1).ToShortDateString());
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByDateOfBirth_GivenDateOfBirthNotInRepository_ReturnsNotFoundObjectResult()
+        public async Task GetByDateOfBirth_GivenDateOfBirthNotInRepository_ReturnsNotFoundObjectResult()
         {
-            var result = _controller.GetByDateOfBirth(new DateTime(2000, 1, 1).ToShortDateString());
+            var result = await _controller.GetByDateOfBirth(new DateTime(2000, 1, 1).ToShortDateString());
             Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByDateOfBirth_GivenDateOfBirthThatExistsInContext_ReturnsOkObjectResult()
+        public async Task GetByDateOfBirth_GivenDateOfBirthThatExistsInContext_ReturnsOkObjectResult()
         {
-            var result = _controller.GetByDateOfBirth(new DateTime(1900, 1, 1).ToShortDateString());
+            var result = await _controller.GetByDateOfBirth(new DateTime(1900, 1, 1).ToShortDateString());
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByDateOfBirth_GivenPoorlyFormattedString_ReturnsBadRequestObjectResult()
+        public async Task GetByDateOfBirth_GivenPoorlyFormattedString_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.GetByDateOfBirth("111900");
+            var result = await _controller.GetByDateOfBirth("111900");
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByMedicalRecordNumber_GivenEmptyString_ReturnsBadRequestObjectResult()
+        public async Task GetByMedicalRecordNumber_GivenEmptyString_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.GetByMedicalRecordNumber(string.Empty);
+            var result = await _controller.GetByMedicalRecordNumber(string.Empty);
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByMedicalRecordNumber_GivenMedicalNumberThatExistsInContext_ReturnsOkObjectResult()
+        public async Task GetByMedicalRecordNumber_GivenMedicalNumberThatExistsInContext_ReturnsOkObjectResult()
         {
-            var result =
-                _controller.GetByMedicalRecordNumber(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber);
+            var result = await _controller.GetByMedicalRecordNumber(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber);
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByMedicalRecordNumber_GivenRandomString_ReturnsNotFoundObjectResult()
+        public async Task GetByMedicalRecordNumber_GivenRandomString_ReturnsNotFoundObjectResult()
         {
-            var result = _controller.GetByMedicalRecordNumber(Guid.NewGuid().ToString());
+            var result = await _controller.GetByMedicalRecordNumber(Guid.NewGuid().ToString());
             Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByName_GivenEmptyString_ReturnsBadRequestObjectResult()
+        public async Task GetByName_GivenEmptyString_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.GetByName(string.Empty);
+            var result = await _controller.GetByName(string.Empty);
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByName_GivenMedicalNumberThatExistsInContext_ReturnsOkObjectResult()
+        public async Task GetByName_GivenMedicalNumberThatExistsInContext_ReturnsOkObjectResult()
         {
-            var result = _controller.GetByName("Bruce Wayne");
+            var result = await _controller.GetByName("Bruce Wayne");
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
 
         [Fact]
-        public void GetByName_GivenRandomString_ReturnsNotFoundObjectResult()
+        public async Task GetByName_GivenRandomString_ReturnsNotFoundObjectResult()
         {
-            var result = _controller.GetByName(Guid.NewGuid().ToString());
+            var result = await _controller.GetByName(Guid.NewGuid().ToString());
             Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]
-        public void Post_GivenNullPatient_ReturnsBadRequestObjectResult()
+        public async Task Post_GivenNullPatient_ReturnsBadRequestObjectResult()
         {
-            var result = _controller.Post(null);
+            var result = await _controller.Post(null);
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
-        public void Post_GivenPatientWithEmptyGuid_ReturnsBadRequestObjectResul()
+        public async Task Post_GivenPatientWithEmptyGuid_ReturnsBadRequestObjectResul()
         {
-            var result = _controller.Post(new VisitEntity
+            var result = await _controller.Post(new VisitEntity
             {
                 VisitId = Guid.Empty
             });

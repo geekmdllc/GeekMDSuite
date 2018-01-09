@@ -70,11 +70,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         [HttpGet]
         [Route("mrn/{mrn}")]
-        public IActionResult GetByMrn(string mrn)
+        public async Task<IActionResult> GetByMrn(string mrn)
         {
             try
             {
-                return Ok(UnitOfWork.Patients.FindByMedicalRecordNumber(mrn));
+                return Ok(await UnitOfWork.Patients.FindByMedicalRecordNumber(mrn));
             }
             catch (ArgumentNullException)
             {
@@ -89,11 +89,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         // GET api/patients/guid/guid
         [HttpGet]
         [Route("guid/{guid}")]
-        public IActionResult GetByGuid(Guid guid)
+        public async Task<IActionResult> GetByGuid(Guid guid)
         {
             try
             {
-                return Ok(UnitOfWork.Patients.FindByGuid(guid));
+                return Ok(await UnitOfWork.Patients.FindByGuid(guid));
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -107,12 +107,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         // GET api/patients/bydob/1.1.1900
         [HttpGet("bydob/{dateOfBirth}")]
-        public IActionResult GetByDateOfBirth(string dateOfBirth)
+        public async Task<IActionResult> GetByDateOfBirth(string dateOfBirth)
         {
             try
             {
                 var parsedDob = DateTime.Parse(dateOfBirth);
-                return Ok(UnitOfWork.Patients.FindByDateOfBirth(parsedDob));
+                return Ok(await UnitOfWork.Patients.FindByDateOfBirth(parsedDob));
             }
             catch (FormatException e)
             {
