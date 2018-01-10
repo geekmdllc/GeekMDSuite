@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
+using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,6 +49,23 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+        
+        [HttpGet]
+        [Route("{id}/visits")]
+        public async Task<IActionResult> Visits(int id)
+        {
+            
+            var patient = await UnitOfWork.Patients.FindById(id);
+            return Ok(await UnitOfWork.Visits.FindByPatientGuid(patient.Guid));
+        }
+        
+        [HttpGet]
+        [Route("{guid}/visits")]
+        public async Task<IActionResult> Visits(Guid guid)
+        {                      
+            var patient = await UnitOfWork.Patients.FindByGuid(guid);
+            return Ok(await UnitOfWork.Visits.FindByPatientGuid(patient.Guid));
         }
 
         [HttpGet]

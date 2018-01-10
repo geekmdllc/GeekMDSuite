@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
+using GeekMDSuite.WebAPI.Core.Presentation;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
@@ -15,32 +19,37 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly IRepository<T> _repo;
 
         protected readonly IUnitOfWork UnitOfWork;
+        protected readonly List<ErrorPayload> ErrorPayloads;
 
         protected EntityDataController(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
+            ErrorPayloads = new List<ErrorPayload>();
             _repo = UnitOfWork.EntityData<T>();
-        }
-
-        [HttpGet]
-        [Route("")]
-        public IActionResult Get()
-        {
-            return NotFound("Not an API endpoint. Please see the documentation.");
         }
 
         [HttpGet]
         [Route("all/")]
         public async Task<IActionResult> GetAll()
         {
+            
             try
             {
                 return Ok(await _repo.All());
             }
             catch (RepositoryElementNotFoundException)
             {
-                return NotFound("Empty repository.");
+                const ErrorPayloadCode error = ErrorPayloadCode.RepositoryEntityNotFound;
+                ErrorPayloads.Add(new ErrorPayload()
+                {
+                    ErrorCode = error,
+                    InternalMessage = $"ERROR: {error}. Empty repository for entities of type ${typeof(T)}.",
+                    MoreInfo = $"https://docs.geekmd.io/phs/{error.Value()}",
+                    UserMessage = "We are unable to find any entries."
+                });
             }
+            
+            return NotFound(ErrorPayloads);
         }
 
         [HttpGet("{id}")]

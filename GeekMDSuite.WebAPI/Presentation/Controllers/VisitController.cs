@@ -78,12 +78,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         // GET api/visits/bydob/"dateOfBirth"
-        [HttpGet("bydob/{dateOfBirth}")]
-        public async Task<IActionResult> GetByDateOfBirth(string dateOfBirth)
+        [HttpGet("bydob/{dob}")]
+        public async Task<IActionResult> GetByDateOfBirth(string dob)
         {
             try
             {
-                var parsedDob = DateTime.Parse(dateOfBirth);
+                var parsedDob = DateTime.Parse(dob);
                 return Ok(await UnitOfWork.Visits.FindByDateOfBirth(parsedDob));
             }
             catch (FormatException e)
