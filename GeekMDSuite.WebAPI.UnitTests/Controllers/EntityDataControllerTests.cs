@@ -67,7 +67,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
-            var result = await controller.GetByEntityId(1);
+            var result = await controller.GetByPrimaryKey(1);
 
             Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
@@ -79,7 +79,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var controller = new FakeEntityDataController(uow);
             var found = (await (uow.Audiograms.All())).First();
 
-            var result = await controller.GetByEntityId(found.Id);
+            var result = await controller.GetByPrimaryKey(found.Id);
 
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }

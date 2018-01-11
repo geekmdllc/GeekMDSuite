@@ -41,9 +41,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        // GET api/visits/bymrn/"guid"
-        [HttpGet("bymrn/{mrn}")]
-        public async Task<IActionResult> GetByMedicalRecordNumber(string mrn)
+        public async Task<IActionResult> GetByMrn(string mrn)
         {
             try
             {
@@ -59,8 +57,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        // GET api/visits/byname
-        [HttpGet("byname/{name}")]
         public async Task<IActionResult> GetByName(string name)
         {
             try
@@ -77,8 +73,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        // GET api/visits/bydob/"dateOfBirth"
-        [HttpGet("bydob/{dob}")]
         public async Task<IActionResult> GetByDateOfBirth(string dob)
         {
             try

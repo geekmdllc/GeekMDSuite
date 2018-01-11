@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
-using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,25 +49,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
         
-        [HttpGet]
-        [Route("{id}/visits")]
-        public async Task<IActionResult> Visits(int id)
-        {
-            
-            var patient = await UnitOfWork.Patients.FindById(id);
-            return Ok(await UnitOfWork.Visits.FindByPatientGuid(patient.Guid));
-        }
-        
-        [HttpGet]
-        [Route("{guid}/visits")]
         public async Task<IActionResult> Visits(Guid guid)
         {                      
             var patient = await UnitOfWork.Patients.FindByGuid(guid);
             return Ok(await UnitOfWork.Visits.FindByPatientGuid(patient.Guid));
         }
 
-        [HttpGet]
-        [Route("name/{name}")]
         public async Task<IActionResult> GetByName(string name)
         {
             try
@@ -86,9 +71,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-
-        [HttpGet]
-        [Route("mrn/{mrn}")]
         public async Task<IActionResult> GetByMrn(string mrn)
         {
             try
@@ -105,9 +87,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        // GET api/patients/guid/guid
-        [HttpGet]
-        [Route("guid/{guid}")]
+        [HttpGet("find/byguid/{guid}")]
         public async Task<IActionResult> GetByGuid(Guid guid)
         {
             try
@@ -124,8 +104,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        // GET api/patients/bydob/1.1.1900
-        [HttpGet("bydob/{dateOfBirth}")]
+        [HttpGet("find/bydob/{dateOfBirth}")]
         public async Task<IActionResult> GetByDateOfBirth(string dateOfBirth)
         {
             try

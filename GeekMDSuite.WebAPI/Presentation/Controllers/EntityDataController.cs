@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
-using GeekMDSuite.WebAPI.Core.Presentation;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
@@ -26,7 +22,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _repo = UnitOfWork.EntityData<T>();
         }
         [HttpGet]
-        [Route("all/")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -41,7 +36,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByEntityId(int id)
+        public async Task<IActionResult> GetByPrimaryKey(int id)
         {
             try
             {

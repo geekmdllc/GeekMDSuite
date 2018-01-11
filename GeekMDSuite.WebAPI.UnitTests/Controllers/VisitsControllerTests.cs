@@ -75,21 +75,21 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task GetByMedicalRecordNumber_GivenEmptyString_ReturnsBadRequestObjectResult()
         {
-            var result = await _controller.GetByMedicalRecordNumber(string.Empty);
+            var result = await _controller.GetByMrn(string.Empty);
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]
         public async Task GetByMedicalRecordNumber_GivenMedicalNumberThatExistsInContext_ReturnsOkObjectResult()
         {
-            var result = await _controller.GetByMedicalRecordNumber(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber);
+            var result = await _controller.GetByMrn(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber);
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
 
         [Fact]
         public async Task GetByMedicalRecordNumber_GivenRandomString_ReturnsNotFoundObjectResult()
         {
-            var result = await _controller.GetByMedicalRecordNumber(Guid.NewGuid().ToString());
+            var result = await _controller.GetByMrn(Guid.NewGuid().ToString());
             Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
