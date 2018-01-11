@@ -23,41 +23,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         private readonly PatientController _controller;
 
         [Fact]
-        public async Task GetByDateOfBirth_GivenAgeGreaterThan150Years_ReturnsBadRequestObjectResult()
-        {
-            var result = await _controller.GetByDateOfBirth(DateTime.Now.AddYears(-151).ToShortDateString());
-            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByDateOfBirth_GivenAgeOfZeroOrNegative_ReturnsBadRequestObjectResult()
-        {
-            var result = await _controller.GetByDateOfBirth(DateTime.Now.AddYears(1).ToShortDateString());
-            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByDateOfBirth_GivenDateOfBirthNotInRepository_ReturnsNotFoundObjectResult()
-        {
-            var result = await _controller.GetByDateOfBirth(new DateTime(2000, 1, 1).ToShortDateString());
-            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByDateOfBirth_GivenDateOfBirthThatExistsInContext_ReturnsOkObjectResult()
-        {
-            var result = await _controller.GetByDateOfBirth(new DateTime(1900, 1, 1).ToShortDateString());
-            Assert.Equal(typeof(OkObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByDateOfBirth_GivenPoorlyFormattedString_ReturnsBadRequestObjectResult()
-        {
-            var result = await _controller.GetByDateOfBirth("111900");
-            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
-        }
-
-        [Fact]
         public async Task GetByGuid_GivenEmptyGuid_ReturnsBadRequest()
         {
             var result = await _controller.GetByGuid(Guid.Empty);
@@ -79,54 +44,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var result = await _controller.GetByGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid);
 
             Assert.Equal(typeof(OkObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByMrn_GivenEmptyString_ReturnsBadRequst()
-        {
-            var result = await _controller.GetByMrn(string.Empty);
-
-            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByMrn_GivenMrnInRepository_ReturnsOkObjectResult()
-        {
-            var result = await _controller.GetByMrn("12345");
-
-            Assert.Equal(typeof(OkObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByMrn_GivenMrnNotInRepository_ReturnsNotfound()
-        {
-            var result = await _controller.GetByMrn(Guid.NewGuid().ToString());
-
-            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByName_GivenEmptyString_ReturnsBadRequest()
-        {
-            var result = await _controller.GetByName(string.Empty);
-
-            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByName_GivenNameInRepository_ReturnsOkObjectResult()
-        {
-            var result = await _controller.GetByName("Bruce Wayne");
-
-            Assert.Equal(typeof(OkObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetByName_GivenNameNotInRepository_ReturnsNotfound()
-        {
-            var result = await _controller.GetByName("Jar Jar Binks");
-
-            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }
 
         [Fact]

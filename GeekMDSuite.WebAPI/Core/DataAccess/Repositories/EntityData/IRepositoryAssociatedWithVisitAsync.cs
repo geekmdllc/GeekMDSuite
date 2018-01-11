@@ -8,9 +8,5 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
     public interface IRepositoryAssociatedWithVisitAsync<T> : IRepositoryAsync<T> where T : class, IVisitData<T>
     {
         Task<IEnumerable<T>> FindByVisit(Guid visitGuid);
-        Task<IEnumerable<T>> FindByPatientGuid(Guid patientGuid);
-        Task<IEnumerable<T>> FindByMedicalRecordNumber(string mrn);
-        Task<IEnumerable<T>> FindByName(string name);
-        Task<IEnumerable<T>> FindByDateOfBirth(DateTime dateOfBirth);
     }
 }

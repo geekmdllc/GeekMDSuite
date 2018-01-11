@@ -35,7 +35,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             
         }
 
-        [HttpGet("{id}")]
         public async Task<IActionResult> GetByPrimaryKey(int id)
         {
             try
@@ -48,7 +47,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        [HttpPost]
         public virtual async Task<IActionResult> Post([FromBody] T entity)
         {
             try
@@ -67,7 +65,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        [HttpPut]
         public async Task<IActionResult> Put([FromBody] T entity)
         {
             try
@@ -86,31 +83,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
                 await _repo.Delete(id);
-                await UnitOfWork.Complete();
-                return Ok();
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-        }
-
-        [HttpDelete]
-        //TODO: Remove this method
-        public async Task<IActionResult> Delete([FromBody] int[] ids)
-        {
-            if (ids == null || ids.Length <= 0)
-                return new BadRequestResult();
-
-            try
-            {
-                foreach (var id in ids) await _repo.Delete(id);
                 await UnitOfWork.Complete();
                 return Ok();
             }

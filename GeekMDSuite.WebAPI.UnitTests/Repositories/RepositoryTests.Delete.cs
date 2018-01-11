@@ -14,9 +14,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         public async Task Delete_GivenId_Succeeds()
         {
             var uow = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
-            var audiogram = (await uow.Audiograms
-                .FindByPatientGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid))
-                .First();
+            var audiogram = (await uow.Audiograms.All()).First();
                 
 
             await uow.Audiograms.Delete(audiogram.Id);

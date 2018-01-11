@@ -46,7 +46,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             var mrnExists = false;
             try
             {
-                if ((await UnitOfWork.Patients.FindByMedicalRecordNumber(patient.MedicalRecordNumber)).Any())
+                var patients = await UnitOfWork.Patients.All();
+                if (patients.Any(p => p.MedicalRecordNumber == patient.MedicalRecordNumber))
                     mrnExists = true;
             }
             catch

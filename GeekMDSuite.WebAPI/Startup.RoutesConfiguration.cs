@@ -3,6 +3,7 @@ using AspNet.Mvc.TypedRouting.Routing;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.CompositeScores;
@@ -29,15 +30,12 @@ namespace GeekMDSuite.WebAPI
         private static void ConfigurePatientControllerRoutes(string baseUrl, string findUrlComponent,
             ITypedRouteBuilder routes)
         {
-            routes.Add(baseUrl + "patient/", route => route.ToController<PatientController>());
+            routes.Add(baseUrl + "patient/", 
+                route => route.ToController<PatientController>());
+            routes.Get("search", 
+                route => route.ToAction<PatientController>(a => a.Search(With.Any<PatientDataSearchFilter>())));
             routes.Get("{guid}/visits",
                 route => route.ToAction<PatientController>(a => a.Visits(With.Any<Guid>())));
-            routes.Get(findUrlComponent + "byname/{name}",
-                route => route.ToAction<PatientController>(a => a.GetByName(With.Any<string>())));
-            routes.Get(findUrlComponent + "bymrn/{mrn}",
-                route => route.ToAction<PatientController>(a => a.GetByMrn(With.Any<string>())));
-            routes.Get(findUrlComponent + "bydob/{dob}",
-                route => route.ToAction<PatientController>(a => a.GetByDateOfBirth(With.Any<string>())));
             routes.Get(findUrlComponent + "byguid/{guid}",
                 route => route.ToAction<PatientController>(a => a.GetByGuid(With.Any<Guid>())));
         }
@@ -45,13 +43,10 @@ namespace GeekMDSuite.WebAPI
         private static void ConfigureVisitControllerRoutes(string baseUrl, string findUrlComponent,
             ITypedRouteBuilder routes)
         {
-            routes.Add(baseUrl + "visit/", route => route.ToController<VisitController>());
-            routes.Get(findUrlComponent + "byname/{name}",
-                route => route.ToAction<VisitController>(a => a.GetByName(With.Any<string>())));
-            routes.Get(findUrlComponent + "bymrn/{mrn}",
-                route => route.ToAction<VisitController>(a => a.GetByMrn(With.Any<string>())));
-            routes.Get(findUrlComponent + "bydob/{dob}",
-                route => route.ToAction<VisitController>(a => a.GetByDateOfBirth(With.Any<string>())));
+            routes.Add(baseUrl + "visit/", 
+                route => route.ToController<VisitController>());
+            routes.Get("search", 
+                route => route.ToAction<VisitController>(a => a.Search(With.Any<VisitDataSearchFilter>())));
         }
 
         private static void ConfigureAnalyticsRoutes(string baseUrl, ITypedRouteBuilder routes)

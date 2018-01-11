@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -15,41 +16,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
     {
         public PatientsRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {
-        }
-
-        public async Task<IEnumerable<PatientEntity>> FindByName(string query)
-        {
-            if (query.IsEmpty()) throw new ArgumentNullException(query);
-            
-            var result = await Context.Patients.Where(p => p.Name.IsSimilarTo(query)).ToListAsync();
-            if (!result.Any()) throw new RepositoryElementNotFoundException(query);
-
-            return result;
-        }
-
-        public async Task<IEnumerable<PatientEntity>> FindByMedicalRecordNumber(string query)
-        {
-            if (query.IsEmpty()) throw new ArgumentNullException(query);
-            
-            var result = await Context.Patients.Where(p => query.IsEqualTo(p.MedicalRecordNumber)).ToListAsync();
-            if (!result.Any()) throw new RepositoryElementNotFoundException(query);
-
-            return result;
-        }
-
-
-        public async Task<IEnumerable<PatientEntity>> FindByDateOfBirth(DateTime dateOfBirth)
-        {
-            if (dateOfBirth.IsOutOfRange())
-                throw new ArgumentOutOfRangeException(dateOfBirth.ToShortDateString());
-
-            var found = await Context.Patients.Where(
-                p => p.DateOfBirth.ToShortDateString() == dateOfBirth.ToShortDateString()).ToListAsync();
-
-            if (!found.Any())
-                throw new RepositoryElementNotFoundException(dateOfBirth.ToShortDateString());
-
-            return found;
         }
 
         public async Task<PatientEntity> FindByGuid(Guid guid)
@@ -64,6 +30,27 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             {
                 throw new RepositoryElementNotFoundException(guid.ToString());
             }
+        }
+
+        public async Task<IEnumerable<PatientEntity>> Search(PatientDataSearchFilter filter)
+        {
+            var patients = await Context.Patients.ToListAsync();
+
+            if (filter.BirthDay != null)
+                patients.RemoveAll(p => p.DateOfBirth.Day != filter.BirthDay);
+            if (filter.BirthMonth != null)
+                patients.RemoveAll(p => p.DateOfBirth.Month != filter.BirthMonth);
+            if (filter.BirthYear != null)
+                patients.RemoveAll(p => p.DateOfBirth.Year != filter.BirthYear);
+            if (!string.IsNullOrEmpty(filter.Name))
+                patients.RemoveAll(p => !p.Name.IsSimilarTo(filter.Name));
+            if (!string.IsNullOrEmpty(filter.MedicalRecordNumber))
+                patients.RemoveAll(p => !p.MedicalRecordNumber.HasStringsInCommonWith(filter.Name));
+
+            if (filter.SortOrder == null) return patients;
+            return filter.SortOrder == SortOrder.Ascending
+                ? patients.OrderBy(p => p.Name.Last)
+                : patients.OrderByDescending(p => p.Name.Last);
         }
     }
 }

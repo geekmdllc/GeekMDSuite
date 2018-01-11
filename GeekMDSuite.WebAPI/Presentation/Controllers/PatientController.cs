@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -18,7 +20,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _newPatientService = newPatientService;
         }
 
-        [HttpPost]
         public override async Task<IActionResult> Post([FromBody] PatientEntity patient)
         {
             try
@@ -52,42 +53,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         public async Task<IActionResult> Visits(Guid guid)
         {                      
             var patient = await UnitOfWork.Patients.FindByGuid(guid);
-            return Ok(await UnitOfWork.Visits.FindByPatientGuid(patient.Guid));
+            return Ok((await UnitOfWork.Visits.All()).Where( v => v.PatientGuid == guid));
         }
 
-        public async Task<IActionResult> GetByName(string name)
-        {
-            try
-            {
-                return Ok(await UnitOfWork.Patients.FindByName(name));
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest("A null string was provided in place of a name.");
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-        }
-
-        public async Task<IActionResult> GetByMrn(string mrn)
-        {
-            try
-            {
-                return Ok(await UnitOfWork.Patients.FindByMedicalRecordNumber(mrn));
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest("A null string was provided in place of a medical record number.");
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-        }
-
-        [HttpGet("find/byguid/{guid}")]
         public async Task<IActionResult> GetByGuid(Guid guid)
         {
             try
@@ -104,26 +72,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        [HttpGet("find/bydob/{dateOfBirth}")]
-        public async Task<IActionResult> GetByDateOfBirth(string dateOfBirth)
+        public async Task<IActionResult> Search(PatientDataSearchFilter filter)
         {
-            try
-            {
-                var parsedDob = DateTime.Parse(dateOfBirth);
-                return Ok(await UnitOfWork.Patients.FindByDateOfBirth(parsedDob));
-            }
-            catch (FormatException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return BadRequest($"{dateOfBirth} is out of range the allowable dates of birth.");
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            return Ok(await UnitOfWork.Patients.Search(filter));
         }
     }
 }

@@ -19,29 +19,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _repo = UnitOfWork.VisitData<T>();
         }
 
-        [HttpGet("byvisit/{guid}")]
         public async Task<IActionResult> GetByVisitGuid(Guid guid)
         {
             try
             {
                 return Ok(await _repo.FindByVisit(guid));
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return BadRequest("An emtpy Guid was provided.");
-            }
-            catch (RepositoryElementNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-
-        [HttpGet("bypatient/{guid}")]
-        public async Task<IActionResult> GetByPatientGuid(Guid guid)
-        {
-            try
-            {
-                return Ok(await _repo.FindByPatientGuid(guid));
             }
             catch (ArgumentOutOfRangeException)
             {

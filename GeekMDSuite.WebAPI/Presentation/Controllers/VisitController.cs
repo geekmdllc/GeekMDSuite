@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
+using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -19,7 +21,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _newVisitService = newVisitService;
         }
 
-        public override async Task<IActionResult> Post(VisitEntity visitEntity)
+        public override async Task<IActionResult> Post([FromBody] VisitEntity visitEntity)
         {
             try
             {
@@ -41,57 +43,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        public async Task<IActionResult> GetByMrn(string mrn)
+        public async Task<IActionResult> Search(VisitDataSearchFilter filter)
         {
-            try
-            {
-                return Ok(await UnitOfWork.Visits.FindByMedicalRecordNumber(mrn));
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest("An empty medical record number was provided.");
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-        }
-
-        public async Task<IActionResult> GetByName(string name)
-        {
-            try
-            {
-                return Ok(await UnitOfWork.Visits.FindByName(name));
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest("An empty name was provided.");
-            }
-        }
-
-        public async Task<IActionResult> GetByDateOfBirth(string dob)
-        {
-            try
-            {
-                var parsedDob = DateTime.Parse(dob);
-                return Ok(await UnitOfWork.Visits.FindByDateOfBirth(parsedDob));
-            }
-            catch (FormatException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            return Ok(await UnitOfWork.Visits.Search(filter));
         }
     }
 }
