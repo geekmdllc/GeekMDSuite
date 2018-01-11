@@ -14,65 +14,65 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public UnitOfWork(GeekMdSuiteDbContext context)
         {
             _context = context;
-            Audiograms = new AudiogramsRepository(_context);
-            BloodPressures = new BloodPressuresRepository(_context);
-            BodyCompositions = new BodyCompositionsRepository(_context);
-            BodyCompositionExpandeds = new BodyCompositionExpandedsRepository(_context);
-            CarotidUltrasounds = new CarotidUltrasoundsRepository(_context);
-            CentralBloodPressures = new CentralBloodPressuresRepository(_context);
-            CardiovascularRegimens = new CardiovascularRegimenRepository(_context);
-            FunctionalMovementScreens = new FunctionalMovementScreensRepository(_context);
-            GripStrengths = new GripStrengthsRepository(_context);
-            IshiharaSixPlates = new IshiharaSixPlatesRepository(_context);
-            OccularPressures = new OccularPressuresRepository(_context);
-            Patients = new PatientsRepository(_context);
-            PeripheralVisions = new PeripheralVisionsRepository(_context);
-            Pushups = new PushupsRepository(_context);
-            ResistanceRegimens = new ResistanceRegimenRepostory(_context);
-            SitAndReaches = new SitAndReachesRepository(_context);
-            Situps = new SitupsRepository(_context);
-            StretchingRegimens = new StretchingRegimenRepository(_context);
-            Spirometries = new SpirometriesRepository(_context);
-            TreadmillExerciseStressTests = new TreadmillExerciseStressTestsRepository(_context);
-            Visits = new VisitsRepository(_context);
-            VisualAcuities = new VisualAcuitiesRepository(_context);
-            VitalSigns = new VitalSignsRepository(_context);
+            Audiograms = new AudiogramsRepositoryAsync(_context);
+            BloodPressures = new BloodPressuresRepositoryAsync(_context);
+            BodyCompositions = new BodyCompositionsRepositoryAsync(_context);
+            BodyCompositionExpandeds = new BodyCompositionExpandedsRepositoryAsync(_context);
+            CarotidUltrasounds = new CarotidUltrasoundsRepositoryAsync(_context);
+            CentralBloodPressures = new CentralBloodPressuresRepositoryAsync(_context);
+            CardiovascularRegimens = new CardiovascularRegimenRepositoryAsync(_context);
+            FunctionalMovementScreens = new FunctionalMovementScreensRepositoryAsync(_context);
+            GripStrengths = new GripStrengthsRepositoryAsync(_context);
+            IshiharaSixPlates = new IshiharaSixPlatesRepositoryAsync(_context);
+            OccularPressures = new OccularPressuresRepositoryAsync(_context);
+            Patients = new PatientsRepositoryAsync(_context);
+            PeripheralVisions = new PeripheralVisionsRepositoryAsync(_context);
+            Pushups = new PushupsRepositoryAsync(_context);
+            ResistanceRegimens = new ResistanceRegimenRepostoryAsync(_context);
+            SitAndReaches = new SitAndReachesRepositoryAsync(_context);
+            Situps = new SitupsRepositoryAsync(_context);
+            StretchingRegimens = new StretchingRegimenRepositoryAsync(_context);
+            Spirometries = new SpirometriesRepositoryAsync(_context);
+            TreadmillExerciseStressTests = new TreadmillExerciseStressTestsRepositoryAsync(_context);
+            Visits = new VisitsRepositoryAsync(_context);
+            VisualAcuities = new VisualAcuitiesRepositoryAsync(_context);
+            VitalSigns = new VitalSignsRepositoryAsync(_context);
         }
 
 
-        public IRepositoryAssociatedWithVisit<T> VisitData<T>() where T : class, IVisitData<T>
+        public IRepositoryAssociatedWithVisitAsync<T> VisitData<T>() where T : class, IVisitData<T>
         {
-            return new RepositoryAssociatedWithVisit<T>(_context);
+            return new RepositoryAssociatedWithVisitAsync<T>(_context);
         }
 
-        public IRepository<T> EntityData<T>() where T : class, IEntity<T>
+        public IRepositoryAsync<T> EntityData<T>() where T : class, IEntity<T>
         {
-            return new Repository<T>(_context);
+            return new RepositoryAsync<T>(_context);
         }
 
-        public IAudiogramsRepository Audiograms { get; }
-        public IBloodPressuresRepository BloodPressures { get; }
-        public IBodyCompositionsRepository BodyCompositions { get; set; }
-        public IBodyCompositionExpandedsRepository BodyCompositionExpandeds { get; set; }
-        public ICardiovascularRegimenRepository CardiovascularRegimens { get; set; }
-        public ICarotidUltrasoundsRepository CarotidUltrasounds { get; }
-        public ICentralBloodPressureRepository CentralBloodPressures { get; }
-        public IFunctionalMovementScreensRepository FunctionalMovementScreens { get; }
-        public IGripStrengthsRepository GripStrengths { get; }
-        public IIshiharaSixPlatesRepository IshiharaSixPlates { get; set; }
-        public IOccularPressuresRepository OccularPressures { get; }
-        public IResistanceRegimenRepository ResistanceRegimens { get; }
-        public IPatientsRepository Patients { get; }
-        public IPeripheralVisionsRepository PeripheralVisions { get; }
-        public IPushupsRepository Pushups { get; }
-        public ISitAndReachesRepository SitAndReaches { get; }
-        public ISitupsRepository Situps { get; set; }
-        public ISpirometriesRepository Spirometries { get; set; }
-        public IStretchingRegimenRepository StretchingRegimens { get; set; }
-        public ITreadmillExerciseStressTestsRepository TreadmillExerciseStressTests { get; set; }
-        public IVisitsRepository Visits { get; }
-        public IVisualAcuitiesRepository VisualAcuities { get; set; }
-        public IVitalSignsRepository VitalSigns { get; set; }
+        public IAudiogramsRepositoryAsync Audiograms { get; }
+        public IBloodPressuresRepositoryAsync BloodPressures { get; }
+        public IBodyCompositionsRepositoryAsync BodyCompositions { get; set; }
+        public IBodyCompositionExpandedsRepositoryAsync BodyCompositionExpandeds { get; set; }
+        public ICardiovascularRegimenRepositoryAsync CardiovascularRegimens { get; set; }
+        public ICarotidUltrasoundsRepositoryAsync CarotidUltrasounds { get; }
+        public ICentralBloodPressureRepositoryAsync CentralBloodPressures { get; }
+        public IFunctionalMovementScreensRepositoryAsync FunctionalMovementScreens { get; }
+        public IGripStrengthsRepositoryAsync GripStrengths { get; }
+        public IIshiharaSixPlatesRepositoryAsync IshiharaSixPlates { get; set; }
+        public IOccularPressuresRepositoryAsync OccularPressures { get; }
+        public IResistanceRegimenRepositoryAsync ResistanceRegimens { get; }
+        public IPatientsRepositoryAsync Patients { get; }
+        public IPeripheralVisionsRepositoryAsync PeripheralVisions { get; }
+        public IPushupsRepositoryAsync Pushups { get; }
+        public ISitAndReachesRepositoryAsync SitAndReaches { get; }
+        public ISitupsRepositoryAsync Situps { get; set; }
+        public ISpirometriesRepositoryAsync Spirometries { get; set; }
+        public IStretchingRegimenRepositoryAsync StretchingRegimens { get; set; }
+        public ITreadmillExerciseStressTestsRepositoryAsync TreadmillExerciseStressTests { get; set; }
+        public IVisitsRepositoryAsync Visits { get; }
+        public IVisualAcuitiesRepositoryAsync VisualAcuities { get; set; }
+        public IVitalSignsRepositoryAsync VitalSigns { get; set; }
 
         public async Task Complete()
         {

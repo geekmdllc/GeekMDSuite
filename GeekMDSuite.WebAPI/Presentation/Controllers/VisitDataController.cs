@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public abstract class VisitDataController<T> : EntityDataController<T> where T : class, IVisitData<T>
     {
-        private readonly IRepositoryAssociatedWithVisit<T> _repo;
+        private readonly IRepositoryAssociatedWithVisitAsync<T> _repo;
 
         protected VisitDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

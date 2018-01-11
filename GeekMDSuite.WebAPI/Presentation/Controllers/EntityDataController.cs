@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public abstract class EntityDataController<T> : Controller where T : class, IEntity<T>
     {
-        private readonly IRepository<T> _repo;
+        private readonly IRepositoryAsync<T> _repo;
 
         protected readonly IUnitOfWork UnitOfWork;
 

@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public class VisitsRepositoryTests
     {
-        private readonly IVisitsRepository _repo = new VisitsRepository(FakeGeekMdSuiteContextBuilder.Context);
+        private readonly IVisitsRepositoryAsync _repo = new VisitsRepositoryAsync(FakeGeekMdSuiteContextBuilder.Context);
 
         [Fact]
         public async Task FindByDateOfBirth_GivenDateInRepository_ReturnsProperIEnumerableOfVisitEntities()

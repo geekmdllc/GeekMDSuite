@@ -1,8 +1,4 @@
 ﻿using System;
-using AspNet.Mvc.TypedRouting.Routing;
-using GeekMDSuite.Analytics.Classification;
-using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
@@ -11,17 +7,11 @@ using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.DataAccess.Services;
-using GeekMDSuite.WebAPI.Presentation.Controllers;
-using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers;
-using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.CompositeScores;
-using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using With = Microsoft.AspNetCore.Builder.With;
 
 namespace GeekMDSuite.WebAPI
 {
