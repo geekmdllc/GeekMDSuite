@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
-            var newVisit = await _service.WithUnitOfWork(_unitOfWork).GenerateUsing(
+            var newVisit = await _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatient(
                 new VisitEntity
                 {
                     PatientGuid = Guid.NewGuid()
@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WhenProperlyLoadedAndGivenNullPatient_ThrowsArgumentNullException()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).GenerateUsing(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatient(null));
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         {
             await Assert.ThrowsAsync<InvalidDataException>(() => _service
                 .WithUnitOfWork(_unitOfWork)
-                .GenerateUsing(new VisitEntity
+                .UsingTemplatePatient(new VisitEntity
                 {
                     PatientGuid = Guid.Empty
                 }));
@@ -48,7 +48,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
         {
-            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.GenerateUsing(new VisitEntity()));
+            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.UsingTemplatePatient(new VisitEntity()));
         }
     }
 }

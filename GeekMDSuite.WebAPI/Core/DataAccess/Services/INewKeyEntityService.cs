@@ -8,6 +8,6 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Services
         where TTemplate : class
     {
         INewKeyEntityService<TObject, TTemplate> WithUnitOfWork(IUnitOfWork unitOfWork);
-        Task<TObject> GenerateUsing(TTemplate visit);
+        Task<TObject> UsingTemplatePatient(TTemplate visit);
     }
 }

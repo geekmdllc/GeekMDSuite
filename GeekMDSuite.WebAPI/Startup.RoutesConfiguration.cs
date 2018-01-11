@@ -17,17 +17,17 @@ namespace GeekMDSuite.WebAPI
         private Action<ITypedRouteBuilder> RoutesConfiguration()
         {
             var baseUrl = Configuration.GetSection("ApiBaseUrl").Value;
-            const string findUrlComponent = "find/";
+            
             return routes =>
             {
-                ConfigurePatientControllerRoutes(baseUrl, findUrlComponent, routes);
-                ConfigureVisitControllerRoutes(baseUrl, findUrlComponent, routes);
+                ConfigurePatientControllerRoutes(baseUrl, routes);
+                ConfigureVisitControllerRoutes(baseUrl, routes);
                 ConfigureDataRoutes(baseUrl, routes);
                 ConfigureAnalyticsRoutes(baseUrl, routes);
             };
         }
 
-        private static void ConfigurePatientControllerRoutes(string baseUrl, string findUrlComponent,
+        private static void ConfigurePatientControllerRoutes(string baseUrl,
             ITypedRouteBuilder routes)
         {
             routes.Add(baseUrl + "patient/", 
@@ -35,18 +35,20 @@ namespace GeekMDSuite.WebAPI
             routes.Get("search", 
                 route => route.ToAction<PatientController>(a => a.Search(With.Any<PatientDataSearchFilter>())));
             routes.Get("{guid}/visits",
-                route => route.ToAction<PatientController>(a => a.Visits(With.Any<Guid>())));
-            routes.Get(findUrlComponent + "byguid/{guid}",
+                route => route.ToAction<PatientController>(a => a.GetVisits(With.Any<Guid>())));
+            routes.Get("{guid}",
                 route => route.ToAction<PatientController>(a => a.GetByGuid(With.Any<Guid>())));
         }
 
-        private static void ConfigureVisitControllerRoutes(string baseUrl, string findUrlComponent,
+        private static void ConfigureVisitControllerRoutes(string baseUrl,
             ITypedRouteBuilder routes)
         {
             routes.Add(baseUrl + "visit/", 
                 route => route.ToController<VisitController>());
             routes.Get("search", 
                 route => route.ToAction<VisitController>(a => a.Search(With.Any<VisitDataSearchFilter>())));
+            routes.Get("{guid}",
+                route => route.ToAction<VisitController>(a => a.GetByVisitGuid(With.Any<Guid>())));
         }
 
         private static void ConfigureAnalyticsRoutes(string baseUrl, ITypedRouteBuilder routes)
@@ -71,7 +73,11 @@ namespace GeekMDSuite.WebAPI
         private static void ConfigureDataRoutes(string baseUrl, ITypedRouteBuilder routes)
         {
             var dataUri = baseUrl + "data/";
-            routes.Add(dataUri + "audiogram", route => route.ToController<AudiogramController>());
+            routes.Add(dataUri + "audiogram/", route => route.ToController<AudiogramController>());
+            routes.Get("", route => route.ToAction<AudiogramController>(a => a.GetAll()));
+            routes.Get("{id}", route => route.ToAction<AudiogramController>(a => a.GetByPrimaryKey(With.Any<int>())));
+            routes.Get("{guid}", route => route.ToAction<AudiogramController>(a => a.GetByVisitGuid(With.Any<Guid>())));
+            
             routes.Add(dataUri + "bp/", route => route.ToController<BloodPressureController>());
             routes.Add(dataUri + "bodycomp/", route => route.ToController<BodyCompositionController>());
             routes.Add(dataUri + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());

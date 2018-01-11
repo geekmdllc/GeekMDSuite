@@ -21,13 +21,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _newVisitService = newVisitService;
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public override async Task<IActionResult> GetByPrimaryKey(int id)
+        {
+            return NotFound();
+        }
+
         public override async Task<IActionResult> Post([FromBody] VisitEntity visitEntity)
         {
             try
             {
                 var newVisit = await _newVisitService
                     .WithUnitOfWork(UnitOfWork)
-                    .GenerateUsing(visitEntity);
+                    .UsingTemplatePatient(visitEntity);
 
                 await UnitOfWork.Visits.Add(newVisit);
                 await UnitOfWork.Complete();

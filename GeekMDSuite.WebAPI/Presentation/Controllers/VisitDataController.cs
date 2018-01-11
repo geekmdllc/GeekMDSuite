@@ -5,6 +5,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -19,6 +20,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _repo = UnitOfWork.VisitData<T>();
         }
 
+        [HttpGet]
+        [Route("visit/{guid}")]
         public async Task<IActionResult> GetByVisitGuid(Guid guid)
         {
             try

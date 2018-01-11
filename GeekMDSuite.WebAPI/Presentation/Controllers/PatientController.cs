@@ -20,13 +20,39 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _newPatientService = newPatientService;
         }
 
+        public async Task<IActionResult> GetByGuid(Guid guid)
+        {
+            try
+            {
+                return Ok(await UnitOfWork.Patients.FindByGuid(guid));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("An empty Guid was provided.");
+            }
+            catch (RepositoryElementNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        public override async Task<IActionResult> GetByPrimaryKey(int id)
+        {
+            return NotFound();
+        }
+
+        public async Task<IActionResult> Search(PatientDataSearchFilter filter)
+        {
+            return Ok(await UnitOfWork.Patients.Search(filter));
+        }
+
         public override async Task<IActionResult> Post([FromBody] PatientEntity patient)
         {
             try
             {
                 var newPatient = await _newPatientService
                     .WithUnitOfWork(UnitOfWork)
-                    .GenerateUsing(patient);
+                    .UsingTemplatePatient(patient);
                 
                 await UnitOfWork.Patients.Add(newPatient);
                 await UnitOfWork.Complete();
@@ -49,32 +75,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest(e.Message);
             }
         }
-        
-        public async Task<IActionResult> Visits(Guid guid)
+                
+        public async Task<IActionResult> GetVisits(Guid guid)
         {                      
             var patient = await UnitOfWork.Patients.FindByGuid(guid);
             return Ok((await UnitOfWork.Visits.All()).Where( v => v.PatientGuid == guid));
         }
 
-        public async Task<IActionResult> GetByGuid(Guid guid)
-        {
-            try
-            {
-                return Ok(await UnitOfWork.Patients.FindByGuid(guid));
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return BadRequest("An empty Guid was provided.");
-            }
-            catch (RepositoryElementNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-        }
-
-        public async Task<IActionResult> Search(PatientDataSearchFilter filter)
-        {
-            return Ok(await UnitOfWork.Patients.Search(filter));
-        }
     }
 }

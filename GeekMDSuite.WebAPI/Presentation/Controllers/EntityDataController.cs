@@ -21,7 +21,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             UnitOfWork = unitOfWork;
             _repo = UnitOfWork.EntityData<T>();
         }
+
         [HttpGet]
+        [Route("")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -35,7 +37,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             
         }
 
-        public async Task<IActionResult> GetByPrimaryKey(int id)
+        [HttpGet]
+        [Route("{id}")]
+        public virtual async Task<IActionResult> GetByPrimaryKey(int id)
         {
             try
             {
@@ -47,6 +51,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
+        [HttpPost]
         public virtual async Task<IActionResult> Post([FromBody] T entity)
         {
             try
@@ -65,6 +70,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] T entity)
         {
             try
@@ -83,6 +89,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

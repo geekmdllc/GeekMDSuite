@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
     public class NewPatientService : NewKeyEntityService<PatientEntity, Patient>, INewPatientService
     {
-        public override async Task<PatientEntity> GenerateUsing(Patient patient)
+        public override async Task<PatientEntity> UsingTemplatePatient(Patient patient)
         {
             VerifyContextIsLoaded();
             ValidatePatientFormat(patient);

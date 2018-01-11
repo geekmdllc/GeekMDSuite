@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             return this;
         }
 
-        public abstract Task<TObject> GenerateUsing(TTemplate template);
+        public abstract Task<TObject> UsingTemplatePatient(TTemplate template);
 
         protected void VerifyContextIsLoaded()
         {
