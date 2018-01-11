@@ -11,12 +11,14 @@ using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.DataAccess.Services;
+using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.CompositeScores;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,12 +41,12 @@ namespace GeekMDSuite.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
-            const string baseUri = "app/rest/";
+            var baseUrl = Configuration.GetSection("ApiBaseUrl").Value;
 
             services.AddMvc()
                 .AddXmlSerializerFormatters()
                 .AddXmlDataContractSerializerFormatters()
-                .AddTypedRouting(RoutesConfiguration(baseUri));
+                .AddTypedRouting(RoutesConfiguration(baseUrl));
             services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite(connection));
             services.AddSingleton<INewPatientService, NewPatientService>();
             services.AddSingleton<INewVisitService, NewVisitService>();

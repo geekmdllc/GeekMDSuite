@@ -19,37 +19,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly IRepository<T> _repo;
 
         protected readonly IUnitOfWork UnitOfWork;
-        protected readonly List<ErrorPayload> ErrorPayloads;
 
         protected EntityDataController(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
-            ErrorPayloads = new List<ErrorPayload>();
             _repo = UnitOfWork.EntityData<T>();
         }
-
         [HttpGet]
         [Route("all/")]
         public async Task<IActionResult> GetAll()
         {
-            
             try
             {
                 return Ok(await _repo.All());
             }
             catch (RepositoryElementNotFoundException)
             {
-                const ErrorPayloadCode error = ErrorPayloadCode.RepositoryEntityNotFound;
-                ErrorPayloads.Add(new ErrorPayload()
-                {
-                    ErrorCode = error,
-                    InternalMessage = $"ERROR: {error}. Empty repository for entities of type ${typeof(T)}.",
-                    MoreInfo = $"https://docs.geekmd.io/phs/{error.Value()}",
-                    UserMessage = "We are unable to find any entries."
-                });
+                return NotFound();
             }
             
-            return NotFound(ErrorPayloads);
         }
 
         [HttpGet("{id}")]
