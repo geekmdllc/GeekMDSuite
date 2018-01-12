@@ -74,10 +74,6 @@ namespace GeekMDSuite.WebAPI
         {
             var dataUri = baseUrl + "data/";
             routes.Add(dataUri + "audiogram/", route => route.ToController<AudiogramController>());
-            routes.Get("", route => route.ToAction<AudiogramController>(a => a.GetAll()));
-            routes.Get("{id}", route => route.ToAction<AudiogramController>(a => a.GetByPrimaryKey(With.Any<int>())));
-            routes.Get("{guid}", route => route.ToAction<AudiogramController>(a => a.GetByVisitGuid(With.Any<Guid>())));
-            
             routes.Add(dataUri + "bp/", route => route.ToController<BloodPressureController>());
             routes.Add(dataUri + "bodycomp/", route => route.ToController<BodyCompositionController>());
             routes.Add(dataUri + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());

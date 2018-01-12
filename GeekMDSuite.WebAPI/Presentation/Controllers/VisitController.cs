@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -29,7 +31,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                return Ok(await UnitOfWork.Visits.FindByVisit(guid));
+                var visit = (await UnitOfWork.Visits.FindByVisit(guid)).FirstOrDefault();
+                if (visit == null)
+                    throw new ArgumentNullException(nameof(visit));
+                var patient = await UnitOfWork.Patients.FindByGuid(visit.PatientGuid);
+                return Ok(new VisitResourceModel(visit, patient));
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -51,7 +57,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
                 await UnitOfWork.Visits.Add(newVisit);
                 await UnitOfWork.Complete();
-                return Ok();
+                return Ok(newVisit);
             }
             catch (InvalidDataException)
             {

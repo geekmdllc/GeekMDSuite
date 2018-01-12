@@ -43,48 +43,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task Get_GivenEmptyUnitOfwork_ReturnsNotFoundObjectResult()
-        {
-            var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
-
-            var result = await controller.GetAll();
-
-            Assert.Same(typeof(NotFoundObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task Get_GivenSeededUnitOfWork_ReturnsOkObjectResult()
-        {
-            var controller = new FakeEntityDataController(new FakeUnitOfWorkSeeded());
-
-            var result = await controller.GetAll();
-
-            Assert.Equal(typeof(OkObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetId_GivenIdInEmtpyUnitOfWorkContext_ReturnsNotFoundObjectResult()
-        {
-            var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
-
-            var result = await controller.GetByPrimaryKey(1);
-
-            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
-        }
-
-        [Fact]
-        public async Task GetId_GivenIdInSeededUnitOfWorkContext_ReturnsOkObjectResult()
-        {
-            var uow = new FakeUnitOfWorkSeeded();
-            var controller = new FakeEntityDataController(uow);
-            var found = (await (uow.Audiograms.All())).First();
-
-            var result = await controller.GetByPrimaryKey(found.Id);
-
-            Assert.Equal(typeof(OkObjectResult), result.GetType());
-        }
-
-        [Fact]
         public async Task Post_GivenEntity_ReturnsOkayResult()
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());

@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.Models;
+using GeekMDSuite.WebAPI.Core.Presentation;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
@@ -15,15 +16,17 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(visitEntity);
         }
 
-        public Guid PatientGuid { get; set; }
-        public DateTime Date { get; set; }
         public int Id { get; set; }
         public Guid VisitId { get; set; }
+        public DateTime Date { get; set; }
+        public Guid PatientGuid { get; set; }
+        public VisitStatus Status { get; set; }
 
-        public void MapValues(VisitEntity subject)
+        public virtual void MapValues(VisitEntity subject)
         {
             PatientGuid = subject.PatientGuid;
             Date = subject.Date;
+            Status = subject.Status;
         }
     }
 }
