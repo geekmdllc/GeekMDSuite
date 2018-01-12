@@ -32,7 +32,7 @@ namespace GeekMDSuite.WebAPI
         {
             routes.Add(baseUrl + "patient/", 
                 route => route.ToController<PatientController>());
-            routes.Get("search", 
+            routes.Get("", 
                 route => route.ToAction<PatientController>(a => a.Search(With.Any<PatientDataSearchFilter>())));
             routes.Get("{guid}/visits",
                 route => route.ToAction<PatientController>(a => a.GetVisits(With.Any<Guid>())));
@@ -45,7 +45,7 @@ namespace GeekMDSuite.WebAPI
         {
             routes.Add(baseUrl + "visit/", 
                 route => route.ToController<VisitController>());
-            routes.Get("search", 
+            routes.Get("", 
                 route => route.ToAction<VisitController>(a => a.Search(With.Any<VisitDataSearchFilter>())));
             routes.Get("{guid}",
                 route => route.ToAction<VisitController>(a => a.GetByVisitGuid(With.Any<Guid>())));

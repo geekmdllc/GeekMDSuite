@@ -36,11 +36,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        public override async Task<IActionResult> GetByPrimaryKey(int id)
-        {
-            return NotFound();
-        }
-
         public async Task<IActionResult> Search(PatientDataSearchFilter filter)
         {
             return Ok(await UnitOfWork.Patients.Search(filter));

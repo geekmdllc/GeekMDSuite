@@ -22,35 +22,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _repo = UnitOfWork.EntityData<T>();
         }
 
-        [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetAll()
-        {
-            try
-            {
-                return Ok(await _repo.All());
-            }
-            catch (RepositoryElementNotFoundException)
-            {
-                return NotFound();
-            }
-            
-        }
-
-        [HttpGet]
-        [Route("{id}")]
-        public virtual async Task<IActionResult> GetByPrimaryKey(int id)
-        {
-            try
-            {
-                return Ok(await _repo.FindById(id));
-            }
-            catch (RepositoryElementNotFoundException)
-            {
-                return NotFound($"Cannot locate element with id {id}.");
-            }
-        }
-
         [HttpPost]
         public virtual async Task<IActionResult> Post([FromBody] T entity)
         {

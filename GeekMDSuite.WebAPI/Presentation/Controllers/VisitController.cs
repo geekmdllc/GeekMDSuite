@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
-using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -12,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
-    public class VisitController : VisitDataController<VisitEntity>
+    public class VisitController : EntityDataController<VisitEntity>
     {
         private readonly INewVisitService _newVisitService;
 
@@ -20,12 +19,26 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             _newVisitService = newVisitService;
         }
-
-        [HttpGet]
-        [Route("{id}")]
-        public override async Task<IActionResult> GetByPrimaryKey(int id)
+        
+        public async Task<IActionResult> Search(VisitDataSearchFilter filter)
         {
-            return NotFound();
+            return Ok(await UnitOfWork.Visits.Search(filter));
+        }
+        
+        public async Task<IActionResult> GetByVisitGuid(Guid guid)
+        {
+            try
+            {
+                return Ok(await UnitOfWork.Visits.FindByVisit(guid));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("An emtpy Guid was provided.");
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         public override async Task<IActionResult> Post([FromBody] VisitEntity visitEntity)
@@ -50,9 +63,5 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        public async Task<IActionResult> Search(VisitDataSearchFilter filter)
-        {
-            return Ok(await UnitOfWork.Visits.Search(filter));
-        }
     }
 }
