@@ -12,6 +12,7 @@ using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
+using GeekMDSuite.WebAPI.Presentation.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -22,9 +23,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly INewVisitService _newVisitService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUrlLinksService _linksService;
 
-        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper)
+        public VisitController(IUnitOfWork unitOfWork, 
+            INewVisitService newVisitService, 
+            IMapper mapper,
+            IUrlLinksService linkService)
         {
+            _linksService = linkService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _newVisitService = newVisitService;
@@ -54,13 +60,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     new ResourceLink
                     {
-                        Rel = UrlRelationship.Self, 
-                        Href = "localhost"
+                        Rel = UrlRelationship.Self,
+                        Href = _linksService.DisplayUrl
                     },
                     new ResourceLink
                     {
-                        Rel = UrlRelationship.Child,
-                        Href = "localhost/child"
+                        Rel = UrlRelationship.Parent,
+                        Href = _linksService.BackOne
                     }
                 };
 

@@ -8,8 +8,10 @@ using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.DataAccess.Services;
+using GeekMDSuite.WebAPI.Presentation.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +44,8 @@ namespace GeekMDSuite.WebAPI
             services.AddSingleton<INewPatientService, NewPatientService>();
             services.AddSingleton<INewVisitService, NewVisitService>();
             services.AddSingleton<IClassificationRepository, ClassificationRepository>();
+            services.AddSingleton<IUrlLinksService, UrlLinksService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             if (Environment.IsDevelopment())
                 services.AddSingleton<IUnitOfWork, FakeUnitOfWorkSeeded>(); // Bypasses Sqlite with in-memory DB
             else if (Environment.IsProduction())
