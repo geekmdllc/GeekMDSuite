@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
+using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
+using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -16,9 +19,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     public class PatientController : EntityDataController<PatientEntity>
     {
         private readonly INewPatientService _newPatientService;
+        private readonly IMapper _mapper;
 
-        public PatientController(IUnitOfWork unitOfWork, INewPatientService newPatientService) : base(unitOfWork)
+        public PatientController(IUnitOfWork unitOfWork, 
+            INewPatientService newPatientService, 
+            IMapper mapper) : base(unitOfWork)
         {
+            _mapper = mapper;
             _newPatientService = newPatientService;
         }
 
@@ -29,7 +36,26 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var patient = await UnitOfWork.Patients.FindByGuid(guid);
                 var visits = (await UnitOfWork.Visits.All()).Where(v => v.PatientGuid == guid);
 
-                return Ok(new PatientResourceModel(patient, visits));
+                var links = new List<ResourceLink>
+                {
+                    new ResourceLink
+                    {
+                        Rel = UrlRelationship.Self, 
+                        Href = "localhost"
+                    },
+                    new ResourceLink
+                    {
+                        Rel = UrlRelationship.Child,
+                        Href = "localhost/child"
+                    }
+                };
+                
+                return Ok(new PatientResource
+                {
+                    Patient = _mapper.Map<PatientEntity, PatientStub>(patient), 
+                    Visits = visits.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit)).ToList(), 
+                    Links = links
+                });
             }
             catch (ArgumentOutOfRangeException)
             {

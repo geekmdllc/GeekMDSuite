@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
+using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +16,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
     {
         public VisitsControllerTests()
         {
-            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService());
+            Mapper.Initialize(v => v.AddProfile(new MappingProfile()));
+            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance);
         }
 
         private readonly VisitController _controller;
@@ -24,7 +27,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var visitDate = DateTime.Now;
             var unitOfWork = new FakeUnitOfWorkEmpty();
-            var controller = new VisitController(unitOfWork, new NewVisitService());
+            var controller = new VisitController(unitOfWork, new NewVisitService(), Mapper.Instance);
 
             await controller.Post(new VisitEntity
             {
@@ -35,6 +38,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var addedVisits = (await unitOfWork.Visits.All()).FirstOrDefault();
 
             Assert.True(addedVisits != null && addedVisits.VisitId != Guid.Empty);
+            Mapper.Reset();
         }
 
         [Fact]
@@ -43,6 +47,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var result = await _controller.Post(null);
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
+            Mapper.Reset();
         }
 
         [Fact]
@@ -54,6 +59,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             });
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
+            Mapper.Reset();
         }
     }
 }

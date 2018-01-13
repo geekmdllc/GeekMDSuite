@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
@@ -36,6 +37,7 @@ namespace GeekMDSuite.WebAPI
                 .AddXmlSerializerFormatters()
                 .AddXmlDataContractSerializerFormatters()
                 .AddTypedRouting(RoutesConfiguration());
+            services.AddAutoMapper();
             services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite(connection));
             services.AddSingleton<INewPatientService, NewPatientService>();
             services.AddSingleton<INewVisitService, NewVisitService>();

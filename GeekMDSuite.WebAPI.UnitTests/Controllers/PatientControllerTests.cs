@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
+using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
@@ -17,7 +20,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             _controller = new PatientController(
                 new FakeUnitOfWorkSeeded(),
-                new NewPatientService());
+                new NewPatientService(),
+                Mapper.Instance);
         }
 
         private readonly PatientController _controller;

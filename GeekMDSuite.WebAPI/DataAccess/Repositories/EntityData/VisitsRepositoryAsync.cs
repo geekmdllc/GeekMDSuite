@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class VisitsRepositoryAsync : RepositoryAssociatedWithVisitAsync<VisitEntity>, IVisitsRepositoryAsync
+    public class VisitsRepositoryAsync : RepositoryAsync<VisitEntity>, IVisitsRepositoryAsync
     {
         public VisitsRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {
@@ -47,5 +47,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
                 ? found.OrderBy(v => v.Date) 
                 : found.OrderByDescending(v => v.Date);
         }
+
+        public Task<VisitEntity> FindByGuid(Guid guid) => Context.Visits.FirstAsync(v => v.VisitId == guid);
     }
 }

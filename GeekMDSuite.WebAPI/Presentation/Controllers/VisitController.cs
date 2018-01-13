@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
+using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
+using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -16,9 +20,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     public class VisitController : EntityDataController<VisitEntity>
     {
         private readonly INewVisitService _newVisitService;
+        private readonly IMapper _mapper;
 
-        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService) : base(unitOfWork)
+        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper) : base(unitOfWork)
         {
+            _mapper = mapper;
             _newVisitService = newVisitService;
         }
         
@@ -31,11 +37,32 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var visit = (await UnitOfWork.Visits.FindByVisit(guid)).FirstOrDefault();
-                if (visit == null)
-                    throw new ArgumentNullException(nameof(visit));
-                var patient = await UnitOfWork.Patients.FindByGuid(visit.PatientGuid);
-                return Ok(new VisitResourceModel(visit, patient));
+                var visitEntity = await UnitOfWork.Visits.FindByGuid(guid);
+                var visit = _mapper.Map<VisitEntity, VisitStub>(visitEntity);
+                
+                var patientEntity = await UnitOfWork.Patients.FindByGuid(visitEntity.PatientGuid);
+                var patient = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
+                
+                var links = new List<ResourceLink>
+                {
+                    new ResourceLink
+                    {
+                        Rel = UrlRelationship.Self, 
+                        Href = "localhost"
+                    },
+                    new ResourceLink
+                    {
+                        Rel = UrlRelationship.Child,
+                        Href = "localhost/child"
+                    }
+                };
+
+                return Ok(new VisitResourceModel
+                {
+                    Visit = visit,
+                    Patient = patient,
+                    Links = links
+                });
             }
             catch (ArgumentOutOfRangeException)
             {
