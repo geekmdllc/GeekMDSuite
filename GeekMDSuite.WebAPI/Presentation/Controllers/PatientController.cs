@@ -8,7 +8,6 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Presentation;
-using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
@@ -38,10 +37,31 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBySearch(PatientDataSearchFilter filter)
         {
-            var patients = await _unitOfWork.Patients.Search(filter);
-            var patientStubs = patients.Select(patient => _mapper.Map<PatientEntity, PatientStub>(patient));
+            var patientResourceSelectionAsync = 
+                (await _unitOfWork.Patients.Search(filter))
+                .Select(patient => _mapper.Map<PatientEntity, PatientStub>(patient))
+                .Select(async patient => new PatientResource
+                {
+                    Patient = patient,
+                    Visits = await MapVisitStubs(patient),
+                    Links = new List<ResourceLink>
+                    {
+                         new ResourceLink
+                         {
+                             Rel = UrlRelationship.Child,
+                             Href = _urlHelper.Action<PatientController>(a => a.GetVisits(patient.Guid))
+                         },
+                        new ResourceLink
+                        {
+                            Rel = UrlRelationship.Self,
+                            Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patient.Guid))
+                        }
+                    }
+                }
+            );
 
-            return Ok(patientStubs);
+            var patientResources = await Task.WhenAll(patientResourceSelectionAsync);
+            return Ok(patientResources);
         }
 
         private async Task<List<VisitStub>> MapVisitStubs(PatientStub patient)

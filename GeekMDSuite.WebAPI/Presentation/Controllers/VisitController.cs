@@ -37,16 +37,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         public async Task<IActionResult> GetBySearch(VisitDataSearchFilter filter)
         {
-            var visitEntities = await _unitOfWork.Visits.Search(filter);
-            var visitStubs = visitEntities.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
+            var visitStubs = 
+                (await _unitOfWork.Visits.Search(filter))
+                .Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
+            
             var visitResources = new List<VisitResource>();
             foreach (var visit in visitStubs)
             {
+                var patient = await _unitOfWork.Patients.FindByGuid(visit.PatientGuid);
                 visitResources.Add(
                     new VisitResource
                     {
                         Visit = visit,
-                        Patient = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(visit.PatientGuid)),
+                        Patient = _mapper.Map<PatientEntity, PatientStub>(patient),
                         Links = new List<ResourceLink>
                         {
                             new ResourceLink
@@ -61,7 +64,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                             }
                         }
                     }
-                    );
+                );
             }
             return Ok(visitResources);
         }
@@ -72,10 +75,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var visitEntity = await _unitOfWork.Visits.FindByGuid(guid);
-                var visit = _mapper.Map<VisitEntity, VisitStub>(visitEntity);
-                
-                var patientEntity = await _unitOfWork.Patients.FindByGuid(visitEntity.PatientGuid);
+                var visitStub = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid));
+                var patientEntity = await _unitOfWork.Patients.FindByGuid((await _unitOfWork.Visits.FindByGuid(guid)).PatientGuid);
                 var patient = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
                 
                 var links = new List<ResourceLink>
@@ -83,7 +84,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     new ResourceLink
                     {
                         Rel = UrlRelationship.Self,
-                        Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visit.VisitId))
+                        Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.VisitId))
                     },
                     new ResourceLink
                     {
@@ -94,7 +95,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
                 return Ok(new VisitResource
                 {
-                    Visit = visit,
+                    Visit = visitStub,
                     Patient = patient,
                     Links = links
                 });
