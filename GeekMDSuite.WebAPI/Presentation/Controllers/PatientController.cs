@@ -12,7 +12,6 @@ using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
-using GeekMDSuite.WebAPI.Presentation.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -23,14 +22,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly INewPatientService _newPatientService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private IUrlLinksService _linksService;
+        private readonly IUrlHelper _urlHelper;
 
         public PatientController(IUnitOfWork unitOfWork, 
             INewPatientService newPatientService, 
             IMapper mapper,
-            IUrlLinksService linksService)
+            IUrlHelper urlHelper)
         {
-            _linksService = linksService;
+            _urlHelper = urlHelper;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _newPatientService = newPatientService;
@@ -41,8 +40,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             var patients = await _unitOfWork.Patients.Search(filter);
             var patientStubs = patients.Select(patient => _mapper.Map<PatientEntity, PatientStub>(patient));
-            
+
             return Ok(patientStubs);
+        }
+
+        private async Task<List<VisitStub>> MapVisitStubs(PatientStub patient)
+        {
+            var visits = (await _unitOfWork.Visits.All()).Where(visit => visit.PatientGuid == patient.Guid);
+            var visitStubs = visits.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
+            return visitStubs.ToList();
         }
 
         [HttpGet]
@@ -59,17 +65,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     new ResourceLink
                     {
                         Rel = UrlRelationship.Child, 
-                        Href = _linksService.CreateDisplayUrlWithAppendedRoute("visits")
+                        Href = _urlHelper.Action<PatientController>(a => a.GetVisits(patient.Guid))
                     },
                     new ResourceLink
                     {
                         Rel = UrlRelationship.Self,
-                        Href = _linksService.DisplayUrl
+                        Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patient.Guid))
                     },
                     new ResourceLink
                     {
                         Rel = UrlRelationship.Parent,
-                        Href = _linksService.BackOne
+                        Href = _urlHelper.Action<PatientController>(a => a.GetBySearch(null))
                     }
                 };
                 
