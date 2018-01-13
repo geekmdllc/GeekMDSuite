@@ -17,30 +17,37 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
-    public class VisitController : EntityDataController<VisitEntity>
+    public class VisitController : Controller
     {
         private readonly INewVisitService _newVisitService;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper) : base(unitOfWork)
+        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper)
         {
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _newVisitService = newVisitService;
         }
         
-        public async Task<IActionResult> Search(VisitDataSearchFilter filter)
+        public async Task<IActionResult> GetBySearch(VisitDataSearchFilter filter)
         {
-            return Ok(await UnitOfWork.Visits.Search(filter));
+            var visitEntities = await _unitOfWork.Visits.Search(filter);
+            var visits = visitEntities.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
+            
+            return Ok(visits);
         }
         
+        [HttpGet]
+        [Route("{guid}")]
         public async Task<IActionResult> GetByVisitGuid(Guid guid)
         {
             try
             {
-                var visitEntity = await UnitOfWork.Visits.FindByGuid(guid);
+                var visitEntity = await _unitOfWork.Visits.FindByGuid(guid);
                 var visit = _mapper.Map<VisitEntity, VisitStub>(visitEntity);
                 
-                var patientEntity = await UnitOfWork.Patients.FindByGuid(visitEntity.PatientGuid);
+                var patientEntity = await _unitOfWork.Patients.FindByGuid(visitEntity.PatientGuid);
                 var patient = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
                 
                 var links = new List<ResourceLink>
@@ -74,16 +81,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        public override async Task<IActionResult> Post([FromBody] VisitEntity visitEntity)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] VisitStub visitStub)
         {
+            var newVisitEntity = _mapper.Map<VisitStub, VisitEntity>(visitStub);
             try
             {
                 var newVisit = await _newVisitService
-                    .WithUnitOfWork(UnitOfWork)
-                    .UsingTemplatePatient(visitEntity);
+                    .WithUnitOfWork(_unitOfWork)
+                    .UsingTemplatePatient(newVisitEntity);
 
-                await UnitOfWork.Visits.Add(newVisit);
-                await UnitOfWork.Complete();
+                await _unitOfWork.Visits.Add(newVisit);
+                await _unitOfWork.Complete();
                 return Ok(newVisit);
             }
             catch (InvalidDataException)
@@ -93,6 +102,47 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             catch (ArgumentNullException)
             {
                 return BadRequest($"{nameof(VisitEntity)} is malformed.");
+            }
+        }
+        
+        [HttpPut]
+        [Route("{guid}")]
+        public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStub entity)
+        {
+            var updatedEntity = _mapper.Map<VisitStub, VisitEntity>(entity);
+            var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.VisitId);
+            trackedEntity.MapValues(updatedEntity);
+            
+            try
+            {
+                await _unitOfWork.Visits.Update(trackedEntity);
+                await _unitOfWork.Complete();
+                return Ok();
+            }
+            catch (RepositoryElementNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest("A null entity was provided.");
+            }
+        }
+
+        [HttpDelete]
+        [Route("{guid}")]
+        public async Task<IActionResult> Delete(Guid guid)
+        {
+            var trackedEntity = await _unitOfWork.Visits.FindByGuid(guid);
+            try
+            {
+                await _unitOfWork.Visits.Delete(trackedEntity.Id);
+                await _unitOfWork.Complete();
+                return Ok();
+            }
+            catch (RepositoryElementNotFoundException e)
+            {
+                return NotFound(e.Message);
             }
         }
 

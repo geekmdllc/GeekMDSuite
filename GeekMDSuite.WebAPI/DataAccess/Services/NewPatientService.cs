@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GeekMDSuite.Core.Models;
 using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -10,22 +9,20 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
-    public class NewPatientService : NewKeyEntityService<PatientEntity, Patient>, INewPatientService
+    public class NewPatientService : NewKeyEntityService<PatientEntity, PatientEntity>, INewPatientService
     {
-        public override async Task<PatientEntity> UsingTemplatePatient(Patient patient)
+        public override async Task<PatientEntity> UsingTemplatePatient(PatientEntity patient)
         {
             VerifyContextIsLoaded();
             ValidatePatientFormat(patient);
             await MedicalRecordNumberAlreadyExists(patient);
 
-            var newPatient = new PatientEntity();
-            newPatient.MapValues(patient);
-            newPatient.Guid = Guid.NewGuid();
+            var newPatient = new PatientEntity { Guid = Guid.NewGuid() };
 
             return newPatient;
         }
 
-        private static void ValidatePatientFormat(Patient patient)
+        private static void ValidatePatientFormat(PatientEntity patient)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
 
@@ -41,7 +38,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             if (message.Any()) throw new FormatException(string.Join(", ", message));
         }
 
-        private async Task MedicalRecordNumberAlreadyExists(Patient patient)
+        private async Task MedicalRecordNumberAlreadyExists(PatientEntity patient)
         {
             var mrnExists = false;
             try

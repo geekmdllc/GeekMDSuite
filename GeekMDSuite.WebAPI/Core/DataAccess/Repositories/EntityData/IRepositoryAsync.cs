@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface IRepositoryAsync<T> where T : class, IEntity<T>
+    public interface IRepositoryAsync<T> where T : class
     {
         Task<IEnumerable<T>> All();
         Task<T> FindById(int id);

@@ -8,6 +8,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Presentation;
+using GeekMDSuite.WebAPI.DataAccess;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
@@ -16,25 +17,38 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
-    public class PatientController : EntityDataController<PatientEntity>
+    public class PatientController : EntityDataController
     {
         private readonly INewPatientService _newPatientService;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
         public PatientController(IUnitOfWork unitOfWork, 
             INewPatientService newPatientService, 
-            IMapper mapper) : base(unitOfWork)
+            IMapper mapper)
         {
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _newPatientService = newPatientService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetBySearch(PatientDataSearchFilter filter)
+        {
+            var patients = await _unitOfWork.Patients.Search(filter);
+            var patientStubs = patients.Select(patient => _mapper.Map<PatientEntity, PatientStub>(patient));
+            
+            return Ok(patientStubs);
+        }
+
+        [HttpGet]
+        [Route("{guid}")]
         public async Task<IActionResult> GetByGuid(Guid guid)
         {
             try
             {
-                var patient = await UnitOfWork.Patients.FindByGuid(guid);
-                var visits = (await UnitOfWork.Visits.All()).Where(v => v.PatientGuid == guid);
+                var patient = await _unitOfWork.Patients.FindByGuid(guid);
+                var visits = (await _unitOfWork.Visits.All()).Where(v => v.PatientGuid == guid);
 
                 var links = new List<ResourceLink>
                 {
@@ -67,21 +81,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        public async Task<IActionResult> Search(PatientDataSearchFilter filter)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] PatientStub patient)
         {
-            return Ok(await UnitOfWork.Patients.Search(filter));
-        }
-
-        public override async Task<IActionResult> Post([FromBody] PatientEntity patient)
-        {
+            var newPatientEntity = _mapper.Map<PatientStub, PatientEntity>(patient);
             try
             {
                 var newPatient = await _newPatientService
-                    .WithUnitOfWork(UnitOfWork)
-                    .UsingTemplatePatient(patient);
+                    .WithUnitOfWork(_unitOfWork)
+                    .UsingTemplatePatient(newPatientEntity);
                 
-                await UnitOfWork.Patients.Add(newPatient);
-                await UnitOfWork.Complete();
+                await _unitOfWork.Patients.Add(newPatient);
+                await _unitOfWork.Complete();
                 return Ok();
             }
             catch (MedicalRecordAlreadyExistsException e)
@@ -101,11 +112,39 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPut]
+        [Route("{guid}")]
+        public async Task<IActionResult> Put(Guid guid, [FromBody] PatientStub patientStub)
+        {
+            var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
+            var updatedPatient = _mapper.Map<PatientStub, PatientEntity>(patientStub);
+            
+            trackedPatient.MapValues(updatedPatient);
+            await _unitOfWork.Complete();
+            return Ok(_mapper.Map<PatientEntity, PatientStub>(trackedPatient));
+        }
+        
+        [HttpDelete]
+        [Route("{guid}")]
+        public async Task<IActionResult> Delete(Guid guid)
+        {
+            var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
+            await _unitOfWork.Patients.Delete(trackedPatient.Id);
+            await _unitOfWork.Complete();
+            
+            return NoContent();
+        }
                 
+        [HttpGet]
+        [Route("{guid}/visits")]
         public async Task<IActionResult> GetVisits(Guid guid)
         {                      
-            var patient = await UnitOfWork.Patients.FindByGuid(guid);
-            return Ok((await UnitOfWork.Visits.All()).Where( v => v.PatientGuid == guid));
+            var patient = await _unitOfWork.Patients.FindByGuid(guid);
+            var visitEntities = (await _unitOfWork.Visits.All()).Where(v => v.PatientGuid == guid);
+            var visitStubs = visitEntities.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
+            
+            return Ok(visitStubs);
         }
 
     }
