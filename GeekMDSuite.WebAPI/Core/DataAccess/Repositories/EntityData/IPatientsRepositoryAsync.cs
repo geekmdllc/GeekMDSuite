@@ -10,5 +10,6 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
     {
         Task<PatientEntity> FindByGuid(Guid guid);
         Task<IEnumerable<PatientEntity>> FilteredSearch(PatientDataSearchFilter filter);
+        Task<PatientEntity> FindByVisit(Guid guid);
     }
 }

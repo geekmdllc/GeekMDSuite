@@ -48,6 +48,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
                 : found.OrderByDescending(v => v.Date);
         }
 
-        public Task<VisitEntity> FindByGuid(Guid guid) => Context.Visits.FirstAsync(v => v.VisitId == guid);
+        public async Task<VisitEntity> FindByGuid(Guid guid) 
+            => await Context.Visits.FirstAsync(v => v.Guid == guid);
+        
+        public async Task<IEnumerable<VisitEntity>> FindByPatient(Guid guid) 
+            => await Context.Visits.Where(v => v.PatientGuid == guid).ToListAsync();
     }
 }

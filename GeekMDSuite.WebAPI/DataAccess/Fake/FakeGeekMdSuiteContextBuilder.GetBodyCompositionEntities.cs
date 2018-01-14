@@ -15,13 +15,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetHips(40)
                     .SetWaist(34)
                     .SetWeight(210)
-                    .Build()) {VisitId = BruceWaynesVisitGuid},
+                    .Build()) {Guid = BruceWaynesVisitGuid},
                 new BodyCompositionEntity(BodyCompositionBuilder.Initialize()
                     .SetHeight(66)
                     .SetHips(39)
                     .SetWaist(23)
                     .SetWeight(132)
-                    .Build()) {VisitId = XerMajestiesVisitGuid}
+                    .Build()) {Guid = XerMajestiesVisitGuid}
             };
         }
     }

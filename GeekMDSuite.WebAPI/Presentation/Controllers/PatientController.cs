@@ -130,12 +130,71 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpGet]
         [Route("{guid}/visits")]
         public async Task<IActionResult> GetVisits(Guid guid)
-        {                      
-            var patient = await _unitOfWork.Patients.FindByGuid(guid);
-            var visitEntities = (await _unitOfWork.Visits.All()).Where(v => v.PatientGuid == guid);
+        {
+            var visitEntities = await _unitOfWork.Visits.FindByPatient(guid);
             var visitStubs = visitEntities.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
+            var visitResources = new List<VisitResource>();
+            foreach (var visitStub in visitStubs)
+            {
+                var patientEntity = await _unitOfWork.Patients.FindByGuid(visitStub.PatientGuid);
+                var patientStub = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
+                var patientResource = await CreatePatientResource(patientStub);
+                visitResources.Add(GenerateVisitResource(visitStub, patientResource));
+            }
             
-            return Ok(visitStubs);
+            return Ok(visitResources);
+        }
+        
+        private async Task<PatientResource> CreatePatientResource(PatientStub patientStub)
+        {
+            var patientResource = new PatientResource
+            {
+                Patient = patientStub,
+                Visits = (await _unitOfWork.Visits.All())
+                    .Where(v => v.PatientGuid == patientStub.Guid)
+                    .Select(v => _mapper.Map<VisitEntity, VisitStub>(v)).ToList(),
+                Links = new List<ResourceLink>
+                {
+                    new ResourceLink
+                    {
+                        Description = "Get patient",
+                        Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patientStub.Guid)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    }
+                }
+            };
+            return patientResource;
+        }
+        
+        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientResource patientResource)
+        {
+            
+            return new VisitResource
+            {
+                Visit = visitStub,
+                Patient = patientResource,
+                Links = GenerateVisitLinks(visitStub)
+            };
+        }
+        
+        private List<ResourceLink> GenerateVisitLinks(VisitStub visitStub)
+        {
+            return new List<ResourceLink>
+            {
+                new ResourceLink
+                {
+                    Description = $"Search for visits",
+                    Relationship = UrlRelationship.Search,
+                    Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null))
+                },
+                new ResourceLink
+                {
+                    Description = $"Get this visit",
+                    Relationship = UrlRelationship.Next,
+                    Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.Guid))
+                }
+            };
         }
 
         private async Task<PatientResource> GeneratePatientResource(PatientStub patient)
@@ -161,22 +220,29 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 },
                 new ResourceLink
                 {
-                    Description = $"Delete patient",
-                    Relationship = UrlRelationship.Self,
-                    Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patient.Guid)),
-                    HtmlMethod = HtmlMethod.Delete
-                },
-                new ResourceLink
-                {
-                    Description = $"Update patient",
+                    Description = $"Get patient",
                     Relationship = UrlRelationship.Self,
                     Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patient.Guid)),
                     HtmlMethod = HtmlMethod.Put
                 },
                 new ResourceLink
                 {
+                    Description = $"Delete patient",
+                    Relationship = UrlRelationship.Self,
+                    Href = _urlHelper.Action<PatientController>(a => a.Delete(patient.Guid)),
+                    HtmlMethod = HtmlMethod.Delete
+                },
+                new ResourceLink
+                {
+                    Description = $"Update patient",
+                    Relationship = UrlRelationship.Self,
+                    Href = _urlHelper.Action<PatientController>(a => a.Put(patient.Guid, null)),
+                    HtmlMethod = HtmlMethod.Put
+                },
+                new ResourceLink
+                {
                     Description = $"Create patient",
-                    Relationship = UrlRelationship.Next,
+                    Relationship = UrlRelationship.Up,
                     Href = _urlHelper.Action<PatientController>(a => a.Post(null)),
                     HtmlMethod = HtmlMethod.Post
                 },

@@ -12,11 +12,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             {
                 new CardiovascularRegimenEntity(CardiovascularRegimen.Build(6, 60, ExerciseIntensity.High))
                 {
-                    VisitId = BruceWaynesVisitGuid
+                    Guid = BruceWaynesVisitGuid
                 },
                 new CardiovascularRegimenEntity(CardiovascularRegimen.Build(0, 0, ExerciseIntensity.None))
                 {
-                    VisitId = XerMajestiesVisitGuid
+                    Guid = XerMajestiesVisitGuid
                 },
             };
         }

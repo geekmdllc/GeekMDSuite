@@ -16,11 +16,11 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         {
             Left = new CarotidUltrasoundResult();
             Right = new CarotidUltrasoundResult();
-            VisitId = Guid.Empty;
+            Guid = Guid.Empty;
         }
 
         public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid Guid { get; set; }
 
         public void MapValues(CarotidUltrasound subject)
         {

@@ -10,8 +10,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         {
             return new List<SitupsEntity>
             {
-                new SitupsEntity(Situps.Build(190)) {VisitId = BruceWaynesVisitGuid},
-                new SitupsEntity(Situps.Build(23)) {VisitId = XerMajestiesVisitGuid}
+                new SitupsEntity(Situps.Build(190)) {Guid = BruceWaynesVisitGuid},
+                new SitupsEntity(Situps.Build(23)) {Guid = XerMajestiesVisitGuid}
             };
         }
     }

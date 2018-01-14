@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
+﻿using System.Collections.Generic;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels

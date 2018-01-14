@@ -52,5 +52,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
                 ? patients.OrderBy(p => p.Name.Last)
                 : patients.OrderByDescending(p => p.Name.Last);
         }
+
+        public async Task<PatientEntity> FindByVisit(Guid guid)
+        {
+            var visit = await Context.Visits.FirstAsync(v => v.Guid == guid);
+            return await FindByGuid(visit.PatientGuid);
+        }
     }
 }

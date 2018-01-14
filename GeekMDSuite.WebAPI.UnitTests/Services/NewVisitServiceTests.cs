@@ -25,7 +25,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
                     PatientGuid = Guid.NewGuid()
                 });
 
-            Assert.True(newVisit != null && newVisit.VisitId != Guid.Empty);
+            Assert.True(newVisit != null && newVisit.Guid != Guid.Empty);
         }
 
         [Fact]

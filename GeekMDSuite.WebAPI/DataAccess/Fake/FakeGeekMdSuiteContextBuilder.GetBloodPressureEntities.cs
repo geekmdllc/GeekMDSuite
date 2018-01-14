@@ -10,8 +10,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         {
             return new List<BloodPressureEntity>
             {
-                new BloodPressureEntity(BloodPressure.Build(115, 75)) {VisitId = XerMajestiesVisitGuid},
-                new BloodPressureEntity(BloodPressure.Build(190, 110, true)) {VisitId = BruceWaynesVisitGuid}
+                new BloodPressureEntity(BloodPressure.Build(115, 75)) {Guid = XerMajestiesVisitGuid},
+                new BloodPressureEntity(BloodPressure.Build(190, 110, true)) {Guid = BruceWaynesVisitGuid}
             };
         }
     }

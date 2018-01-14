@@ -37,7 +37,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 
             var addedVisits = (await unitOfWork.Visits.All()).FirstOrDefault();
 
-            Assert.True(addedVisits != null && addedVisits.VisitId != Guid.Empty);
+            Assert.True(addedVisits != null && addedVisits.Guid != Guid.Empty);
             Mapper.Reset();
         }
 
@@ -55,7 +55,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var result = await _controller.Post(new VisitEntity
             {
-                VisitId = Guid.Empty
+                Guid = Guid.Empty
             });
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());

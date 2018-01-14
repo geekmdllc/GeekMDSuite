@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -10,12 +9,7 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
     public class VisitResource : ResourceModel
     {
         public VisitStub Visit { get; set; }
-        public PatientStub Patient { get; set; }
+        public PatientResource Patient { get; set; }
         
-    }
-
-    public abstract class ResourceModel
-    {    
-        public List<ResourceLink> Links { get; set; }
     }
 }

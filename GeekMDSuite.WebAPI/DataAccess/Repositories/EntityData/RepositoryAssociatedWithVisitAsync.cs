@@ -24,7 +24,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             if (visitGuid == Guid.Empty)
                 throw new ArgumentOutOfRangeException($"{nameof(visitGuid)} must not be an empty Guid.");
 
-            var result = await Context.Set<T>().Where(set => set.VisitId == visitGuid).ToListAsync();
+            var result = await Context.Set<T>().Where(set => set.Guid == visitGuid).ToListAsync();
 
             if (!result.Any())
                 throw new RepositoryElementNotFoundException(visitGuid.ToString());

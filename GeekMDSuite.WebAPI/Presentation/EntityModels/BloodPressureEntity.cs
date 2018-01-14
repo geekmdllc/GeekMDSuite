@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public BloodPressureEntity()
         {
-            VisitId = Guid.Empty;
+            Guid = Guid.Empty;
         }
 
         public BloodPressureEntity(BloodPressure bloodPressure) : this()
@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         }
 
         public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid Guid { get; set; }
 
         public void MapValues(BloodPressure subject)
         {

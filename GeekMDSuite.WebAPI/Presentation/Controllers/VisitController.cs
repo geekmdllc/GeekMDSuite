@@ -34,15 +34,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             var visitStubs = (await _unitOfWork.Visits.FilteredSearch(filter))
                 .Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
-            
+
             var visitResources = new List<VisitResource>();
             foreach (var visitStub in visitStubs)
             {
-                var patientStub = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(visitStub.PatientGuid));
-                visitResources.Add(GenerateVisitResource(visitStub, patientStub));
+                var patientEntity = await _unitOfWork.Patients.FindByGuid(visitStub.PatientGuid);
+                var patientStub = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
+                var patientResource = await CreatePatientResource(patientStub);
+                visitResources.Add(GenerateVisitResource(visitStub, patientResource));
             }
+            
             return Ok(visitResources);
         }
+
 
         [HttpGet]
         [Route("{guid}")]
@@ -50,29 +54,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             try
             {
-                var visitStub = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid));
-                var patientEntity = await _unitOfWork.Patients.FindByGuid((await _unitOfWork.Visits.FindByGuid(guid)).PatientGuid);
-                var patient = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
-                
-                var links = new List<ResourceLink>
-                {
-                    new ResourceLink
-                    {
-                        Relationship = UrlRelationship.Self,
-                        Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.VisitId))
-                    },
-                    new ResourceLink
-                    {
-                        Relationship = UrlRelationship.Prev,
-                        Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null))
-                    }
-                };
+                var patientEntity = await _unitOfWork.Patients.FindByVisit(guid);
+                var patientStub = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
 
                 return Ok(new VisitResource
                 {
-                    Visit = visitStub,
-                    Patient = patient,
-                    Links = links
+                    Visit = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
+                    Patient = await CreatePatientResource(patientStub),
+                    Links = GenerateVisitLinks(_mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)))
                 });
             }
             catch (ArgumentOutOfRangeException)
@@ -114,7 +103,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStub entity)
         {
             var updatedEntity = _mapper.Map<VisitStub, VisitEntity>(entity);
-            var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.VisitId);
+            var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.Guid);
             trackedEntity.MapValues(updatedEntity);
             
             try
@@ -142,7 +131,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 await _unitOfWork.Visits.Delete(trackedEntity.Id);
                 await _unitOfWork.Complete();
-                return Ok();
+                return NoContent();
             }
             catch (RepositoryElementNotFoundException e)
             {
@@ -155,39 +144,56 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly IUrlHelper _urlHelper;
         
         
-        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientStub)
+        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientResource patientResource)
         {
+            
             return new VisitResource
             {
                 Visit = visitStub,
-                Patient = patientStub,
-                Links = GenerateVisitLinks(visitStub, patientStub)
+                Patient = patientResource,
+                Links = GenerateVisitLinks(visitStub)
             };
         }
 
-        private List<ResourceLink> GenerateVisitLinks(VisitStub visitStub, PatientStub patientStub)
+        private List<ResourceLink> GenerateVisitLinks(VisitStub visitStub)
         {
             return new List<ResourceLink>
             {
                 new ResourceLink
                 {
-                    Description = $"GET filterable list of visits",
-                    Relationship = UrlRelationship.Self,
+                    Description = $"Search for visits",
+                    Relationship = UrlRelationship.Search,
                     Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null))
                 },
                 new ResourceLink
                 {
-                    Description = $"GET, PUT, DELETE visit {visitStub.VisitId}",
+                    Description = $"Get this visit",
                     Relationship = UrlRelationship.Next,
-                    Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.VisitId))
-                },
-                new ResourceLink
-                {
-                    Description = $"GET, PUT, DELETE patient {patientStub.Guid}",
-                    Relationship = UrlRelationship.Next,
-                    Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(visitStub.PatientGuid))
+                    Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.Guid))
                 }
             };
+        }
+
+        private async Task<PatientResource> CreatePatientResource(PatientStub patientStub)
+        {
+            var patientResource = new PatientResource
+            {
+                Patient = patientStub,
+                Visits = (await _unitOfWork.Visits.All())
+                    .Where(v => v.PatientGuid == patientStub.Guid)
+                    .Select(v => _mapper.Map<VisitEntity, VisitStub>(v)).ToList(),
+                Links = new List<ResourceLink>
+                {
+                    new ResourceLink
+                    {
+                        Description = "Get patient",
+                        Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patientStub.Guid)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    }
+                }
+            };
+            return patientResource;
         }
     }
 }

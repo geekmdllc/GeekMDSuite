@@ -20,7 +20,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetAverageSessionDuration(90)
                     .SetIntensity(ExerciseIntensity.High)
                     .SetSessionsPerWeek(4)
-                    .Build()) {VisitId = BruceWaynesVisitGuid},
+                    .Build()) {Guid = BruceWaynesVisitGuid},
                 new ResistanceRegimenEntity(ResistanceRegimenBuilder.Initialize()
                     .ConfirmLowerBodyTrained()
                     .ConfirmPullingMovementsPerformed()
@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetAverageSessionDuration(90)
                     .SetIntensity(ExerciseIntensity.High)
                     .SetSessionsPerWeek(4)
-                    .Build()) {VisitId = XerMajestiesVisitGuid},
+                    .Build()) {Guid = XerMajestiesVisitGuid},
             };
         }
     }
