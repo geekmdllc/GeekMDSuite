@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class GripStrengthsRepositoryAsync : RepositoryAssociatedWithVisitAsync<GripStrengthEntity>, IGripStrengthsRepositoryAsync
+    public class GripStrengthsRepositoryAsync : RepositoryAssociatedWithVisitAsync<GripStrengthEntity>,
+        IGripStrengthsRepositoryAsync
     {
         public GripStrengthsRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {

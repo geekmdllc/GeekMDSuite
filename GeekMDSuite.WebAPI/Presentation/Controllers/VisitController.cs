@@ -19,8 +19,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class VisitController : Controller
     {
-        public VisitController(IUnitOfWork unitOfWork, 
-            INewVisitService newVisitService, 
+        private readonly IMapper _mapper;
+        private readonly INewVisitService _newVisitService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUrlHelper _urlHelper;
+
+        public VisitController(IUnitOfWork unitOfWork,
+            INewVisitService newVisitService,
             IMapper mapper,
             IUrlHelper linkService)
         {
@@ -29,7 +34,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             _mapper = mapper;
             _newVisitService = newVisitService;
         }
-        
+
         public async Task<IActionResult> GetBySearch(VisitDataSearchFilter filter)
         {
             var visitStubs = (await _unitOfWork.Visits.FilteredSearch(filter))
@@ -42,7 +47,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var patientStub = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
                 visitResources.Add(GenerateVisitResource(visitStub, patientStub));
             }
-            
+
             return Ok(visitResources);
         }
 
@@ -60,7 +65,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     Visit = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
                     Patient = patientStub,
-                    Links = GenerateVisitLinks(_mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)))
+                    Links = GenerateVisitLinks(
+                        _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)))
                 });
             }
             catch (ArgumentOutOfRangeException)
@@ -96,7 +102,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest($"{nameof(VisitEntity)} is malformed.");
             }
         }
-        
+
         [HttpPut]
         [Route("{guid}")]
         public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStubFromUser entity)
@@ -104,7 +110,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var updatedEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(entity);
             var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.Guid);
             trackedEntity.MapValues(updatedEntity);
-            
+
             try
             {
                 await _unitOfWork.Visits.Update(trackedEntity);
@@ -137,15 +143,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound(e.Message);
             }
         }
-        private readonly INewVisitService _newVisitService;
-        private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IUrlHelper _urlHelper;
-        
-        
+
+
         private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientResource)
         {
-            
             return new VisitResource
             {
                 Visit = visitStub,

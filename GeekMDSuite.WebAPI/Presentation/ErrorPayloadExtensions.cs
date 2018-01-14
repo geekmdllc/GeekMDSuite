@@ -4,6 +4,9 @@ namespace GeekMDSuite.WebAPI.Presentation
 {
     public static class ErrorPayloadExtensions
     {
-        public static int Value(this ErrorPayloadCode code) => (int) code;
+        public static int Value(this ErrorPayloadCode code)
+        {
+            return (int) code;
+        }
     }
 }

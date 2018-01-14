@@ -8,14 +8,15 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class TreadmillExerciseStressTestsClassificationParameters
     {
-        public TreadmillExerciseStressTestsClassificationParameters(TreadmillExerciseStressTest treadmillExerciseStressTest, Patient patient)
+        public TreadmillExerciseStressTestsClassificationParameters(
+            TreadmillExerciseStressTest treadmillExerciseStressTest, Patient patient)
         {
             TreadmillExerciseStressTest = treadmillExerciseStressTest;
             Patient = patient;
         }
 
-        public TreadmillExerciseStressTest TreadmillExerciseStressTest { get; private set; }
-        public Patient Patient { get; private set; }
+        public TreadmillExerciseStressTest TreadmillExerciseStressTest { get; }
+        public Patient Patient { get; }
     }
 
     public class FitTreadmillScoreClassification : IClassifiable<FitTreadmillScoreMortality>
@@ -28,7 +29,8 @@ namespace GeekMDSuite.Analytics.Classification
         {
             _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
             _treadmillExerciseStressTest = parameters.TreadmillExerciseStressTest ??
-                                           throw new ArgumentNullException(nameof(parameters.TreadmillExerciseStressTest));
+                                           throw new ArgumentNullException(
+                                               nameof(parameters.TreadmillExerciseStressTest));
         }
 
         public double Value => CalculateScore();

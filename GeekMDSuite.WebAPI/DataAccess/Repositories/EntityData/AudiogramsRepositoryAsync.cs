@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class AudiogramsRepositoryAsync : RepositoryAssociatedWithVisitAsync<AudiogramEntity>, IAudiogramsRepositoryAsync
+    public class AudiogramsRepositoryAsync : RepositoryAssociatedWithVisitAsync<AudiogramEntity>,
+        IAudiogramsRepositoryAsync
     {
         public AudiogramsRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {

@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         {
             var uow = new UnitOfWork(FakeGeekMdSuiteContextBuilder.Context);
             var audiogram = (await uow.Audiograms.All()).First();
-                
+
 
             await uow.Audiograms.Delete(audiogram.Id);
             await uow.Complete();

@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI
         private Action<ITypedRouteBuilder> RoutesConfiguration()
         {
             var baseUrl = Configuration.GetSection("ApiBaseUrl").Value;
-            
+
             return routes =>
             {
                 ConfigurePatientControllerRoutes(baseUrl, routes);
@@ -30,9 +30,9 @@ namespace GeekMDSuite.WebAPI
         private static void ConfigurePatientControllerRoutes(string baseUrl,
             ITypedRouteBuilder routes)
         {
-            routes.Add(baseUrl + "patient/", 
+            routes.Add(baseUrl + "patient/",
                 route => route.ToController<PatientController>());
-            routes.Get("", 
+            routes.Get("",
                 route => route.ToAction<PatientController>(a => a.GetBySearch(With.Any<PatientDataSearchFilter>())));
             routes.Get("{guid}/visits",
                 route => route.ToAction<PatientController>(a => a.GetVisits(With.Any<Guid>())));
@@ -43,9 +43,9 @@ namespace GeekMDSuite.WebAPI
         private static void ConfigureVisitControllerRoutes(string baseUrl,
             ITypedRouteBuilder routes)
         {
-            routes.Add(baseUrl + "visit/", 
+            routes.Add(baseUrl + "visit/",
                 route => route.ToController<VisitController>());
-            routes.Get("", 
+            routes.Get("",
                 route => route.ToAction<VisitController>(a => a.GetBySearch(With.Any<VisitDataSearchFilter>())));
             routes.Get("{guid}",
                 route => route.ToAction<VisitController>(a => a.GetByGuid(With.Any<Guid>())));

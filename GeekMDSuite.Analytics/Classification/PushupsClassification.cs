@@ -2,7 +2,8 @@
 {
     public class PushupsClassification : MuscularStrengthClassification
     {
-        public PushupsClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test, parameters.Patient)
+        public PushupsClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test,
+            parameters.Patient)
         {
         }
     }

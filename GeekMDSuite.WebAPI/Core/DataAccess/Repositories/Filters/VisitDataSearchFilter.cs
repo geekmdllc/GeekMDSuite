@@ -1,6 +1,4 @@
 ﻿using System;
-using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
-using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters
 {

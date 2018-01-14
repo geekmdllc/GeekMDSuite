@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -11,7 +10,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
         where TObject : class, IEntity<TObject>
         where TTemplate : class
     {
-
         protected IUnitOfWork UnitOfWork;
 
         private bool ContextNotLoaded => UnitOfWork == null;

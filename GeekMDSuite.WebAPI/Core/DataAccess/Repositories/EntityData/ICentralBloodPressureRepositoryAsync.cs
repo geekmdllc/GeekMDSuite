@@ -2,7 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface ICentralBloodPressureRepositoryAsync : IRepositoryAssociatedWithVisitAsync<CentralBloodPressureEntity>
+    public interface
+        ICentralBloodPressureRepositoryAsync : IRepositoryAssociatedWithVisitAsync<CentralBloodPressureEntity>
     {
     }
 }

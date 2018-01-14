@@ -12,6 +12,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
 {
     public class PatientsRepositoryTests
     {
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
 
 
         [Fact]
@@ -41,7 +42,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task Update_GivenNewDateOfBirth_PersistsChanges()
         {
-            var found = (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter { Name = "bruce" })).First();
+            var found =
+                (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {Name = "bruce"})).First();
             var originalBirthDate = found.DateOfBirth;
             var newBirthDate = new DateTime(1955, 5, 5);
             found.DateOfBirth = newBirthDate;
@@ -58,7 +60,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task Update_GivenNewGender_PersistsChanges()
         {
-            var patientBefore = (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter { MedicalRecordNumber = "12345"})).First();
+            var patientBefore =
+                (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {MedicalRecordNumber = "12345"}))
+                .First();
             var genderBefore = Gender.Build(patientBefore.Gender.Category);
             var updatedPatient = new PatientEntity
             {
@@ -79,7 +83,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task Update_GivenNewMedicalRecordNumber_PersistsChanges()
         {
-            var patientBefore = (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter { MedicalRecordNumber = "12345"})).First();
+            var patientBefore =
+                (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {MedicalRecordNumber = "12345"}))
+                .First();
             var mrnBefore = patientBefore.MedicalRecordNumber;
             var updatedPatient = new PatientEntity
             {
@@ -99,7 +105,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task Update_GivenNewName_PersistsChanges()
         {
-            var patientBefore = (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter { MedicalRecordNumber = "12345" })).First();
+            var patientBefore =
+                (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {MedicalRecordNumber = "12345"}))
+                .First();
             var nameBefore = Name.Build(patientBefore.Name.First, patientBefore.Name.Last, patientBefore.Name.Middle);
             var newName = Name.Build(nameBefore.First, nameBefore.Last, "Robert");
             var updatedPatient = new PatientEntity
@@ -122,7 +130,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task Update_GivenNewRace_PersistsChanges()
         {
-            var patientBefore = (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter { MedicalRecordNumber = "12345" })).First();
+            var patientBefore =
+                (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {MedicalRecordNumber = "12345"}))
+                .First();
             var raceBefore = patientBefore.Race;
             const Race newRace = Race.Asian;
             var updatedPatient = new PatientEntity
@@ -139,7 +149,5 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             Assert.Equal(newRace, patientAfter.Race);
             Assert.NotEqual(raceBefore, patientAfter.Race);
         }
-        
-        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
     }
 }

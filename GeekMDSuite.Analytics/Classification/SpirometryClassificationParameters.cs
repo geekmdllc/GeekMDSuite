@@ -5,15 +5,16 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class SpirometryClassificationParameters
     {
-        public SpirometryClassificationParameters(Spirometry spirometry, Patient patient, BodyComposition bodyComposition)
+        public SpirometryClassificationParameters(Spirometry spirometry, Patient patient,
+            BodyComposition bodyComposition)
         {
             Spirometry = spirometry;
             Patient = patient;
             BodyComposition = bodyComposition;
         }
 
-        public Spirometry Spirometry { get; private set; }
-        public Patient Patient { get; private set; }
-        public BodyComposition BodyComposition { get; private set; }
+        public Spirometry Spirometry { get; }
+        public Patient Patient { get; }
+        public BodyComposition BodyComposition { get; }
     }
 }

@@ -6,18 +6,18 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
     public class ResistanceRegimenEntity : ResistanceRegimen, IVisitData<ResistanceRegimen>
     {
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-
         public ResistanceRegimenEntity()
         {
-            
         }
 
         public ResistanceRegimenEntity(ResistanceRegimen resistanceRegimen)
         {
             MapValues(resistanceRegimen);
         }
+
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
+
         public void MapValues(ResistanceRegimen subject)
         {
             Features.Clear();

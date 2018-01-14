@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
-    public abstract class VisitDataController<TResourceStub> : EntityDataController<TResourceStub> where TResourceStub : class, IVisitData<TResourceStub>, new()
+    public abstract class VisitDataController<TResourceStub> : EntityDataController<TResourceStub>
+        where TResourceStub : class, IVisitData<TResourceStub>, new()
     {
         private readonly IRepositoryAssociatedWithVisitAsync<TResourceStub> _repo;
 
@@ -16,7 +17,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             _repo = UnitOfWork.VisitData<TResourceStub>();
         }
-        
+
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetAll()

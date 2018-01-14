@@ -19,13 +19,16 @@ namespace GeekMDSuite.Analytics.Classification
         }
 
         public HipToWaistRatio HipToWaistRatio =>
-            new HipToWaistClassification(new BodyCompositionClassificationParameters(_bodyComposition, _patient)).Classification;
+            new HipToWaistClassification(new BodyCompositionClassificationParameters(_bodyComposition, _patient))
+                .Classification;
 
         public WaistToHeightRatio WaistToHeightRatio =>
-            new WaistToHeightRatioClassification(new BodyCompositionClassificationParameters(_bodyComposition, _patient)).Classification;
+            new WaistToHeightRatioClassification(
+                new BodyCompositionClassificationParameters(_bodyComposition, _patient)).Classification;
 
         public BodyMassIndex BodyMassIndex =>
-            new BodyMassIndexClassification(new BodyCompositionClassificationParameters(_bodyComposition, _patient)).Classification;
+            new BodyMassIndexClassification(new BodyCompositionClassificationParameters(_bodyComposition, _patient))
+                .Classification;
 
         protected virtual BodyCompositionClassificationResult Classify()
         {

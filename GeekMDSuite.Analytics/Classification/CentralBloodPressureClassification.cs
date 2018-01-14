@@ -15,20 +15,12 @@ namespace GeekMDSuite.Analytics.Classification
             Patient = patient;
         }
 
-        public CentralBloodPressure CentralBloodPressure { get; private set; }
-        public Patient Patient { get; private set; }
+        public CentralBloodPressure CentralBloodPressure { get; }
+        public Patient Patient { get; }
     }
 
     public class CentralBloodPressureClassification : IClassifiable<CentralBloodPressureClassificationResult>
     {
-
-        public CentralBloodPressureClassification(CentralBloodPressureParameters parameters)
-        {
-            _centralBloodPressure =
-                parameters.CentralBloodPressure ?? throw new ArgumentNullException(nameof(parameters.CentralBloodPressure));
-            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
-        }
-        
         private static readonly Dictionary<CentralBloodPressureCategory, int> CategoryValueMap =
             new Dictionary<CentralBloodPressureCategory, int>
             {
@@ -41,6 +33,14 @@ namespace GeekMDSuite.Analytics.Classification
 
         private readonly CentralBloodPressure _centralBloodPressure;
         private readonly Patient _patient;
+
+        public CentralBloodPressureClassification(CentralBloodPressureParameters parameters)
+        {
+            _centralBloodPressure =
+                parameters.CentralBloodPressure ??
+                throw new ArgumentNullException(nameof(parameters.CentralBloodPressure));
+            _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
+        }
 
         private int AgeReferenceGroupUpperLimit
         {

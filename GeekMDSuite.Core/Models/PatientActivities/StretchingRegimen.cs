@@ -9,7 +9,6 @@
 
         protected StretchingRegimen()
         {
-            
         }
 
         public static StretchingRegimen Build(double sessionsPerWeek, double averageSessionDuration,

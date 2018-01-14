@@ -5,7 +5,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
     public class TreadmillExerciseStressTestsRepositoryAsync :
-        RepositoryAssociatedWithVisitAsync<TreadmillExerciseStressTestEntity>, ITreadmillExerciseStressTestsRepositoryAsync
+        RepositoryAssociatedWithVisitAsync<TreadmillExerciseStressTestEntity>,
+        ITreadmillExerciseStressTestsRepositoryAsync
     {
         public TreadmillExerciseStressTestsRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {

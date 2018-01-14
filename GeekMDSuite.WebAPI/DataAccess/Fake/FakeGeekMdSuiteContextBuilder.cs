@@ -1,10 +1,5 @@
 using System;
-using System.Collections.Generic;
-using GeekMDSuite.Core.Builders.PatientActivities;
-using GeekMDSuite.Core.Models.PatientActivities;
-using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.DataAccess.Context;
-using GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Fake

@@ -14,12 +14,14 @@ namespace GeekMDSuite.Analytics.Classification
             _patient = patient ?? throw new ArgumentNullException(nameof(patient));
             _vo2Max = vo2Max;
         }
-        
-        public Vo2MaxClassification(Vo2MaxClassificationParameters parameters) 
-            : this(CalculateVo2Max.FromTreadmillStressTest(parameters.TreadmillExerciseTest, parameters.Patient), parameters.Patient)
+
+        public Vo2MaxClassification(Vo2MaxClassificationParameters parameters)
+            : this(CalculateVo2Max.FromTreadmillStressTest(parameters.TreadmillExerciseTest, parameters.Patient),
+                parameters.Patient)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-            if (parameters.TreadmillExerciseTest == null) throw new ArgumentNullException(nameof(parameters.TreadmillExerciseTest));
+            if (parameters.TreadmillExerciseTest == null)
+                throw new ArgumentNullException(nameof(parameters.TreadmillExerciseTest));
         }
 
         public FitnessClassification Classification => Classify();

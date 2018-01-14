@@ -1,7 +1,4 @@
 ﻿using GeekMDSuite.Analytics.Classification.CompositeScores;
-using GeekMDSuite.Core.Builders;
-using GeekMDSuite.Core.Builders.LaboratoryData;
-using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +13,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.Compo
         {
             _classifications = classifications;
         }
-       
+
         [HttpPost]
         public IActionResult AscvdScore([FromBody] AscvdParameters parameters)
         {

@@ -9,7 +9,7 @@
 
         public static double CelciusToFarenheight(double celcius)
         {
-            return (celcius * 9.0 / 5.0) + 32;
+            return celcius * 9.0 / 5.0 + 32;
         }
     }
 }

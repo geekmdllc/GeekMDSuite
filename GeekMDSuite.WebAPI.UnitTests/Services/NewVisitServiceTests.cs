@@ -31,7 +31,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WhenProperlyLoadedAndGivenNullPatient_ThrowsArgumentNullException()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatientEntity(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatientEntity(null));
         }
 
         [Fact]
@@ -48,7 +49,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
         {
-            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.UsingTemplatePatientEntity(new VisitEntity()));
+            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() =>
+                _service.UsingTemplatePatientEntity(new VisitEntity()));
         }
     }
 }

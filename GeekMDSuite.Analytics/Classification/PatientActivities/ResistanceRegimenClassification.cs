@@ -35,7 +35,7 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
 
         public static Interval<int> RestIntervalGoalRange =>
             ExerciseRegimenGoalsRepository.GetResistanceRestIntervalGoals();
-        
+
         protected sealed override ExerciseDurationGoals Goals { get; }
 
         private bool FeaturesOfRegimenAreIdeal

@@ -16,11 +16,12 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(visitEntity);
         }
 
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
         public DateTime Date { get; set; }
         public Guid PatientGuid { get; set; }
         public VisitStatus Status { get; set; }
+
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
 
         public virtual void MapValues(VisitEntity subject)
         {

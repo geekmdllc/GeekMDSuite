@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class ResistanceRegimenRepostoryAsync : RepositoryAssociatedWithVisitAsync<ResistanceRegimenEntity>, IResistanceRegimenRepositoryAsync
+    public class ResistanceRegimenRepostoryAsync : RepositoryAssociatedWithVisitAsync<ResistanceRegimenEntity>,
+        IResistanceRegimenRepositoryAsync
     {
         public ResistanceRegimenRepostoryAsync(GeekMdSuiteDbContext context) : base(context)
         {

@@ -17,13 +17,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class PatientController : EntityDataController
     {
-        private readonly INewPatientService _newPatientService;
         private readonly IMapper _mapper;
+        private readonly INewPatientService _newPatientService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUrlHelper _urlHelper;
 
-        public PatientController(IUnitOfWork unitOfWork, 
-            INewPatientService newPatientService, 
+        public PatientController(IUnitOfWork unitOfWork,
+            INewPatientService newPatientService,
             IMapper mapper,
             IUrlHelper urlHelper)
         {
@@ -39,11 +39,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var patientStubs = (await _unitOfWork.Patients.FilteredSearch(filter))
                 .Select(patient => _mapper.Map<PatientEntity, PatientStub>(patient))
                 .ToList();
-            
+
             UpdatePatientStubSelfLinks(patientStubs);
 
-            var patientResources = await Task.WhenAll(patientStubs.Select(async patient => await GeneratePatientResource(patient)));
-            
+            var patientResources =
+                await Task.WhenAll(patientStubs.Select(async patient => await GeneratePatientResource(patient)));
+
             return Ok(patientResources);
         }
 
@@ -53,9 +54,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         public async Task<IActionResult> GetByGuid(Guid guid)
         {
             var patientStub = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(guid));
-            
+
             var patientResource = GeneratePatientResource(patientStub);
-            
+
             return Ok(patientResource);
         }
 
@@ -63,8 +64,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         public async Task<IActionResult> Post([FromBody] PatientStubFromUser patient)
         {
             var newPatientEntity = _mapper.Map<PatientStubFromUser, PatientEntity>(patient);
-            var newPatient = await _newPatientService.WithUnitOfWork(_unitOfWork).UsingTemplatePatientEntity(newPatientEntity);
-                
+            var newPatient = await _newPatientService.WithUnitOfWork(_unitOfWork)
+                .UsingTemplatePatientEntity(newPatientEntity);
+
             await _unitOfWork.Patients.Add(newPatient);
             await _unitOfWork.Complete();
             return Ok();
@@ -76,13 +78,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
             var updatedPatient = _mapper.Map<PatientStubFromUser, PatientEntity>(patientStub);
-            
+
             trackedPatient.MapValues(updatedPatient);
             await _unitOfWork.Complete();
-            
+
             return Ok(_mapper.Map<PatientEntity, PatientStub>(trackedPatient));
         }
-        
+
         [HttpDelete]
         [Route("{guid}")]
         public async Task<IActionResult> Delete(Guid guid)
@@ -90,10 +92,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
             await _unitOfWork.Patients.Delete(trackedPatient.Id);
             await _unitOfWork.Complete();
-            
+
             return NoContent();
         }
-                
+
         [HttpGet]
         [Route("{guid}/visits")]
         public async Task<IActionResult> GetVisits(Guid guid)
@@ -104,10 +106,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             UpdateVisitStubsSelfLinks(visitStubs);
 
             var visitResources = await CompileVisitResources(visitStubs);
-            foreach (var visit in visitResources)
-            {
-                UpdatePatientStubSelfLinks(visit.Patient);
-            }
+            foreach (var visit in visitResources) UpdatePatientStubSelfLinks(visit.Patient);
 
             return Ok(visitResources);
         }
@@ -115,7 +114,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private void UpdateVisitStubsSelfLinks(List<VisitStub> visitStubs)
         {
             foreach (var stub in visitStubs)
-            {
                 stub.Link = new ResourceLink
                 {
                     Description = "Link to self",
@@ -123,7 +121,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 };
-            }
         }
 
         private async Task<List<VisitResource>> CompileVisitResources(List<VisitStub> visitStubs)
@@ -143,7 +140,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientResource)
         {
-            
             return new VisitResource
             {
                 Visit = visitStub,
@@ -151,7 +147,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 Links = GenerateVisitLinks(visitStub)
             };
         }
-        
+
         private List<ResourceLink> GenerateVisitLinks(VisitStub visitStub)
         {
             return new List<ResourceLink>
@@ -235,7 +231,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var visits = (await _unitOfWork.Visits.All()).Where(visit => visit.PatientGuid == patient.Guid);
             var visitStubs = visits.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit)).ToList();
             foreach (var stub in visitStubs)
-            {
                 stub.Link = new ResourceLink
                 {
                     Description = "Link to self",
@@ -243,14 +238,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 };
-            }
             return visitStubs;
         }
-        
+
         private void UpdatePatientStubSelfLinks(List<PatientStub> patientStubs)
         {
             foreach (var stub in patientStubs)
-            {
                 stub.Link = new ResourceLink
                 {
                     Description = "Link to self",
@@ -258,12 +251,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 };
-            }
         }
 
         private void UpdatePatientStubSelfLinks(PatientStub patientStub)
         {
-            UpdatePatientStubSelfLinks(new List<PatientStub>{patientStub});
+            UpdatePatientStubSelfLinks(new List<PatientStub> {patientStub});
         }
     }
 }

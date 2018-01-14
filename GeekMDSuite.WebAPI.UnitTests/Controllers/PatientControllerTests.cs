@@ -4,14 +4,11 @@ using AutoMapper;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
-using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
@@ -69,7 +66,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenDateTooNew_ReturnsBadRequestObjectResult()
         {
-            var result = await _controller.Post(new PatientStubFromUser()
+            var result = await _controller.Post(new PatientStubFromUser
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = DateTime.Now.AddYears(1),

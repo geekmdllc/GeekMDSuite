@@ -3,7 +3,8 @@
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
     public interface
-        ITreadmillExerciseStressTestsRepositoryAsync : IRepositoryAssociatedWithVisitAsync<TreadmillExerciseStressTestEntity>
+        ITreadmillExerciseStressTestsRepositoryAsync : IRepositoryAssociatedWithVisitAsync<
+            TreadmillExerciseStressTestEntity>
     {
     }
 }

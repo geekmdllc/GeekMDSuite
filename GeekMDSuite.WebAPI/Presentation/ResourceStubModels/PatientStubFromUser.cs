@@ -7,6 +7,13 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceStubModels
 {
     public class PatientStubFromUser
     {
+        public PatientStubFromUser()
+        {
+            Comorbidities = new List<ChronicDisease>();
+            Gender = new Gender();
+            Name = new Name();
+        }
+
         public Guid Guid { get; set; }
         public Name Name { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -15,12 +22,5 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceStubModels
         public Gender Gender { get; set; }
         public Race Race { get; set; }
         public List<ChronicDisease> Comorbidities { get; set; }
-
-        public PatientStubFromUser()
-        {
-            Comorbidities = new List<ChronicDisease>();
-            Gender = new Gender();
-            Name = new Name();
-        }
     }
 }

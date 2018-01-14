@@ -6,18 +6,17 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
     public class CardiovascularRegimenEntity : CardiovascularRegimen, IVisitData<CardiovascularRegimen>
     {
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-
         public CardiovascularRegimenEntity()
         {
-            
         }
 
         public CardiovascularRegimenEntity(CardiovascularRegimen regimen)
         {
             MapValues(regimen);
         }
+
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
 
         public void MapValues(CardiovascularRegimen subject)
         {

@@ -2,8 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface ICardiovascularRegimenRepositoryAsync : IRepositoryAssociatedWithVisitAsync<CardiovascularRegimenEntity>
+    public interface
+        ICardiovascularRegimenRepositoryAsync : IRepositoryAssociatedWithVisitAsync<CardiovascularRegimenEntity>
     {
-        
     }
 }

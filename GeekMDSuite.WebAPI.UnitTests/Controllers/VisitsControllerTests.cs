@@ -6,7 +6,6 @@ using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -19,7 +18,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         public VisitsControllerTests()
         {
             Mapper.Initialize(v => v.AddProfile(new MappingProfile()));
-            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance, new UrlHelper(new ActionContext()));
+            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance,
+                new UrlHelper(new ActionContext()));
         }
 
         private readonly VisitController _controller;
@@ -29,7 +29,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var visitDate = DateTime.Now;
             var unitOfWork = new FakeUnitOfWorkEmpty();
-            var controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance, new UrlHelper(new ActionContext()));
+            var controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance,
+                new UrlHelper(new ActionContext()));
 
             await controller.Post(new VisitStubFromUser
             {

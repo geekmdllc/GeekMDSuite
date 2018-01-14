@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class VitalSignsRepositoryAsync : RepositoryAssociatedWithVisitAsync<VitalSignsEntity>, IVitalSignsRepositoryAsync
+    public class VitalSignsRepositoryAsync : RepositoryAssociatedWithVisitAsync<VitalSignsEntity>,
+        IVitalSignsRepositoryAsync
     {
         public VitalSignsRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {

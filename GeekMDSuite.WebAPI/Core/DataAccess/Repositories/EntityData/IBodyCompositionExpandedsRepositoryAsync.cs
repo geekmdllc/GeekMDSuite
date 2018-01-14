@@ -2,7 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface IBodyCompositionExpandedsRepositoryAsync : IRepositoryAssociatedWithVisitAsync<BodyCompositionExpandedEntity>
+    public interface
+        IBodyCompositionExpandedsRepositoryAsync : IRepositoryAssociatedWithVisitAsync<BodyCompositionExpandedEntity>
     {
     }
 }

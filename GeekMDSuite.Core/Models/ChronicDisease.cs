@@ -13,6 +13,6 @@
         DiagnosedCardiovascularDisease = 8,
         Asthma = 9,
         ChronicObstructivePulmonaryDisease = 10,
-        CirrhosisOfLiver = 11 
+        CirrhosisOfLiver = 11
     }
 }

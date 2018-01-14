@@ -35,7 +35,7 @@ namespace GeekMDSuite.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
-            
+
 
             services.AddMvc()
                 .AddXmlSerializerFormatters()

@@ -6,18 +6,17 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
     public class StretchingRegimenEntity : StretchingRegimen, IVisitData<StretchingRegimen>
     {
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-
         public StretchingRegimenEntity()
         {
-            
         }
 
         public StretchingRegimenEntity(StretchingRegimen regimen)
         {
             MapValues(regimen);
         }
+
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
 
         public void MapValues(StretchingRegimen subject)
         {

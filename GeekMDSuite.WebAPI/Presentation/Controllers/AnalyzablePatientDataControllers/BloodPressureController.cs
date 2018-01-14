@@ -7,7 +7,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class BloodPressureController : VisitDataController<BloodPressureEntity>
     {
-
         public BloodPressureController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }

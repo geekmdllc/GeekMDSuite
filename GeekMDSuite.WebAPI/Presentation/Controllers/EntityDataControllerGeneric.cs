@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
-    public abstract class EntityDataController<TResourceStub> : EntityDataController where TResourceStub : class, IEntity<TResourceStub>, new()
+    public abstract class EntityDataController<TResourceStub> : EntityDataController
+        where TResourceStub : class, IEntity<TResourceStub>, new()
     {
         private readonly IRepositoryAsync<TResourceStub> _repo;
 
@@ -74,6 +75,5 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound(e.Message);
             }
         }
-
     }
 }

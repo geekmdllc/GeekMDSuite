@@ -53,9 +53,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(bodyComposition);
             }
         }
-        
+
         [HttpPost]
-        public IActionResult PostToBodyCompositionExpanded([FromBody] BodyCompositionExpandedClassificationParameters bodyCompositionExpanded)
+        public IActionResult PostToBodyCompositionExpanded(
+            [FromBody] BodyCompositionExpandedClassificationParameters bodyCompositionExpanded)
         {
             try
             {

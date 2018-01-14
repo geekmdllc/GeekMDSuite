@@ -4,11 +4,11 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceStubModels
 {
     public class SelfLinkingStub
     {
-        public ResourceLink Link { get; set; }
-
         public SelfLinkingStub()
         {
             Link = new ResourceLink();
         }
+
+        public ResourceLink Link { get; set; }
     }
 }

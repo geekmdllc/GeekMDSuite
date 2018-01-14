@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class SitAndReachesRepositoryAsync : RepositoryAssociatedWithVisitAsync<SitAndReachEntity>, ISitAndReachesRepositoryAsync
+    public class SitAndReachesRepositoryAsync : RepositoryAssociatedWithVisitAsync<SitAndReachEntity>,
+        ISitAndReachesRepositoryAsync
     {
         public SitAndReachesRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {

@@ -1,6 +1,4 @@
-﻿using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
-using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
+﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services
 {

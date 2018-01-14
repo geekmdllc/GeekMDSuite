@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class CardiovascularRegimenRepositoryAsync : RepositoryAssociatedWithVisitAsync<CardiovascularRegimenEntity>, ICardiovascularRegimenRepositoryAsync
+    public class CardiovascularRegimenRepositoryAsync : RepositoryAssociatedWithVisitAsync<CardiovascularRegimenEntity>,
+        ICardiovascularRegimenRepositoryAsync
     {
         public CardiovascularRegimenRepositoryAsync(GeekMdSuiteDbContext context) : base(context)
         {

@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             ValidatePatientFormat(patient);
             await MedicalRecordNumberAlreadyExists(patient);
 
-            var newPatient = new PatientEntity { Guid = Guid.NewGuid() };
+            var newPatient = new PatientEntity {Guid = Guid.NewGuid()};
 
             return newPatient;
         }

@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<StretchingRegimenEntity> GetStretchingRegimenEntities()
         {
-            return new List<StretchingRegimenEntity>()
+            return new List<StretchingRegimenEntity>
             {
                 new StretchingRegimenEntity(StretchingRegimen.Build(7, 10, ExerciseIntensity.High))
                 {

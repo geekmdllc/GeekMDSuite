@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<CardiovascularRegimenEntity> GetCardiovascularRegimenEntities()
         {
-            return new List<CardiovascularRegimenEntity>()
+            return new List<CardiovascularRegimenEntity>
             {
                 new CardiovascularRegimenEntity(CardiovascularRegimen.Build(6, 60, ExerciseIntensity.High))
                 {
@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                 new CardiovascularRegimenEntity(CardiovascularRegimen.Build(0, 0, ExerciseIntensity.None))
                 {
                     Guid = XerMajestiesVisitGuid
-                },
+                }
             };
         }
     }

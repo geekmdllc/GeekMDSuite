@@ -28,7 +28,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         public async Task FindById_ReturnsCorrectEntity()
         {
             var firstEntity = (await _unitOfWorkSeeded.EntityData<AudiogramEntity>().All()).First();
-            var foundEntity = (await _unitOfWorkSeeded.EntityData<AudiogramEntity>().FindById(firstEntity.Id));
+            var foundEntity = await _unitOfWorkSeeded.EntityData<AudiogramEntity>().FindById(firstEntity.Id);
             Assert.Equal(firstEntity, foundEntity);
         }
     }

@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Presentation.EntityModels;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class BodyCompositionExpandedsRepositoryAsync : RepositoryAssociatedWithVisitAsync<BodyCompositionExpandedEntity>,
+    public class BodyCompositionExpandedsRepositoryAsync :
+        RepositoryAssociatedWithVisitAsync<BodyCompositionExpandedEntity>,
         IBodyCompositionExpandedsRepositoryAsync
     {
         public BodyCompositionExpandedsRepositoryAsync(GeekMdSuiteDbContext context) : base(context)

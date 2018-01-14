@@ -9,7 +9,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static IEnumerable<ResistanceRegimenEntity> GetResistanceRegimenEntities()
         {
-            return new List<ResistanceRegimenEntity>()
+            return new List<ResistanceRegimenEntity>
             {
                 new ResistanceRegimenEntity(ResistanceRegimenBuilder.Initialize()
                     .ConfirmLowerBodyTrained()
@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetAverageSessionDuration(90)
                     .SetIntensity(ExerciseIntensity.High)
                     .SetSessionsPerWeek(4)
-                    .Build()) {Guid = XerMajestiesVisitGuid},
+                    .Build()) {Guid = XerMajestiesVisitGuid}
             };
         }
     }

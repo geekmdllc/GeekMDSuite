@@ -1,8 +1,4 @@
-﻿using System;
-using GeekMDSuite.Core.Models;
-using GeekMDSuite.WebAPI.Core.Presentation;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
-using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
+﻿using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
@@ -10,6 +6,5 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
     {
         public VisitStub Visit { get; set; }
         public PatientStub Patient { get; set; }
-        
     }
 }
