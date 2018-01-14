@@ -9,12 +9,12 @@ namespace GeekMDSuite.WebAPI.Core.Exceptions
         }
 
         public RepositoryElementNotFoundException(string element)
-            : base($"{element} could not be located in the repository.")
+            : base($"{element} could not be located.")
         {
         }
 
         public RepositoryElementNotFoundException(int index)
-            : base($"An item with index {index} could not be located in the repository.")
+            : base($"{index} could not be located.")
         {
         }
     }

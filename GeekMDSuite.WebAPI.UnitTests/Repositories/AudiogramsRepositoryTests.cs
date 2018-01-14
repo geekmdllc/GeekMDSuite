@@ -76,7 +76,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             var newAudiogramEntity = NewAudiogramEntity(index);
 
             await _unitOfWork.Audiograms.Update(newAudiogramEntity);
-            _unitOfWork.Complete();
+            await _unitOfWork.Complete();
 
             var audiogramAfter = await _unitOfWork.Audiograms.FindById(index);
 

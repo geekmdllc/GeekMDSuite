@@ -20,13 +20,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 
         public async Task<PatientEntity> FindByGuid(Guid guid)
         {
-            if (guid == Guid.Empty)
-                throw new ArgumentOutOfRangeException(guid.ToString());
             try
             {
                 return await Context.Patients.FirstAsync(p => p.Guid == guid);
             }
-            catch (InvalidOperationException)
+            catch
             {
                 throw new RepositoryElementNotFoundException(guid.ToString());
             }
@@ -34,6 +32,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 
         public async Task<IEnumerable<PatientEntity>> FilteredSearch(PatientDataSearchFilter filter)
         {
+            if (filter == null) throw new ArgumentNullException(nameof(filter));
+            
             var patients = await Context.Patients.ToListAsync();
 
             if (filter.BirthDay != null)
@@ -42,10 +42,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
                 patients.RemoveAll(p => p.DateOfBirth.Month != filter.BirthMonth);
             if (filter.BirthYear != null)
                 patients.RemoveAll(p => p.DateOfBirth.Year != filter.BirthYear);
-            if (!string.IsNullOrEmpty(filter.Name))
-                patients.RemoveAll(p => !p.Name.IsSimilarTo(filter.Name));
-            if (!string.IsNullOrEmpty(filter.MedicalRecordNumber))
-                patients.RemoveAll(p => !p.MedicalRecordNumber.HasStringsInCommonWith(filter.Name));
+            if (filter.Name.IsNotNullOrEmpty())
+                patients.RemoveAll(p => p.Name.IsNotSimilarTo(filter.Name));
+            if (filter.MedicalRecordNumber.IsNotNullOrEmpty())
+                patients.RemoveAll(p => p.MedicalRecordNumber.DoesNotHaveStringsInCommonWith(filter.MedicalRecordNumber));
 
             if (filter.SortOrder == null) return patients;
             return filter.SortOrder == SortOrder.Ascending
@@ -55,8 +55,15 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 
         public async Task<PatientEntity> FindByVisit(Guid guid)
         {
-            var visit = await Context.Visits.FirstAsync(v => v.Guid == guid);
-            return await FindByGuid(visit.PatientGuid);
+            try
+            {
+                var visit = await Context.Visits.FirstAsync(v => v.Guid == guid);
+                return await FindByGuid(visit.PatientGuid);
+            }
+            catch
+            {
+                throw new RepositoryElementNotFoundException(guid.ToString());
+            }
         }
     }
 }
