@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
     public class NewPatientService : NewKeyEntityService<PatientEntity, PatientEntity>, INewPatientService
     {
-        public override async Task<PatientEntity> UsingTemplatePatient(PatientEntity patient)
+        public override async Task<PatientEntity> UsingTemplatePatientEntity(PatientEntity patient)
         {
             VerifyContextIsLoaded();
             ValidatePatientFormat(patient);

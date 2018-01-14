@@ -22,7 +22,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             return this;
         }
 
-        public abstract Task<TObject> UsingTemplatePatient(TTemplate template);
+        public abstract Task<TObject> UsingTemplatePatientEntity(TTemplate template);
 
         protected void VerifyContextIsLoaded()
         {

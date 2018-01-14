@@ -18,7 +18,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
-            var newPatient = await _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatient(
+            var newPatient = await _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatientEntity(
                 new Patient
                 {
                     Name = Name.Build("Joe", "Schmoe"),
@@ -31,13 +31,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WhenProperlyLoadedAndGivenNullPatient_ThrowsArgumentNullException()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatient(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatientEntity(null));
         }
 
         [Fact]
         public async Task GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
         {
-            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.UsingTemplatePatient(new Patient()));
+            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.UsingTemplatePatientEntity(new Patient()));
         }
     }
 }

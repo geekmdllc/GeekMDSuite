@@ -9,9 +9,11 @@ namespace GeekMDSuite.WebAPI.Mapping
         public MappingProfile()
         {
             CreateMap<VisitEntity, VisitStub>();
-            CreateMap<VisitStub, VisitEntity>();
+            CreateMap<VisitStubFromUser, VisitEntity>();
+            CreateMap<VisitStubFromUser, VisitStub>();
             CreateMap<PatientEntity, PatientStub>();
-            CreateMap<PatientStub, PatientEntity>();
+            CreateMap<PatientStubFromUser, PatientEntity>();
+            CreateMap<PatientStubFromUser, PatientStub>();
         }
     }
 }

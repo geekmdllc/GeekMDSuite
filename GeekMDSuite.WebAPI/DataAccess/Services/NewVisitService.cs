@@ -12,12 +12,12 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
     public class NewVisitService : NewKeyEntityService<VisitEntity, VisitEntity>, INewVisitService
     {
 
-        public override async Task<VisitEntity> UsingTemplatePatient(VisitEntity template)
+        public override async Task<VisitEntity> UsingTemplatePatientEntity(VisitEntity template)
         {
             VerifyContextIsLoaded();
             if (template == null) throw new ArgumentNullException(nameof(template));
             if (template.PatientGuid == Guid.Empty)
-                throw new InvalidDataException($"{nameof(UsingTemplatePatient)} must receive a {nameof(VisitEntity)} with a valid PatientGuid.");
+                throw new InvalidDataException($"{nameof(UsingTemplatePatientEntity)} must receive a {nameof(VisitEntity)} with a valid PatientGuid.");
 
             var newVisitEntity = new VisitEntity
             {

@@ -50,7 +50,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         [HttpGet]
         [Route("{guid}")]
-        public async Task<IActionResult> GetByVisitGuid(Guid guid)
+        public async Task<IActionResult> GetByGuid(Guid guid)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 var newVisit = await _newVisitService
                     .WithUnitOfWork(_unitOfWork)
-                    .UsingTemplatePatient(newVisitEntity);
+                    .UsingTemplatePatientEntity(newVisitEntity);
 
                 await _unitOfWork.Visits.Add(newVisit);
                 await _unitOfWork.Complete();
@@ -163,13 +163,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     Description = $"Search for visits",
                     Relationship = UrlRelationship.Search,
-                    Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null))
+                    Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null)),
+                    HtmlMethod = HtmlMethod.Post
                 },
                 new ResourceLink
                 {
                     Description = $"Get this visit",
                     Relationship = UrlRelationship.Next,
-                    Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.Guid))
+                    Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(visitStub.Guid)),
+                    HtmlMethod = HtmlMethod.Get
                 }
             };
         }

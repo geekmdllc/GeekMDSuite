@@ -48,7 +48,7 @@ namespace GeekMDSuite.WebAPI
             routes.Get("", 
                 route => route.ToAction<VisitController>(a => a.GetBySearch(With.Any<VisitDataSearchFilter>())));
             routes.Get("{guid}",
-                route => route.ToAction<VisitController>(a => a.GetByVisitGuid(With.Any<Guid>())));
+                route => route.ToAction<VisitController>(a => a.GetByGuid(With.Any<Guid>())));
         }
 
         private static void ConfigureAnalyticsRoutes(string baseUrl, ITypedRouteBuilder routes)

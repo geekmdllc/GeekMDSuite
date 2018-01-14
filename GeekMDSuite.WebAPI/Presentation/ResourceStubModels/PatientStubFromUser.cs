@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Utilities.Extensions;
-using GeekMDSuite.WebAPI.Presentation.EntityModels;
-using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceStubModels
 {
-    public class PatientStub : SelfLinkingStub
+    public class PatientStubFromUser
     {
         public Guid Guid { get; set; }
         public Name Name { get; set; }
@@ -18,7 +16,7 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceStubModels
         public Race Race { get; set; }
         public List<ChronicDisease> Comorbidities { get; set; }
 
-        public PatientStub()
+        public PatientStubFromUser()
         {
             Comorbidities = new List<ChronicDisease>();
             Gender = new Gender();
