@@ -7,8 +7,10 @@ using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
@@ -21,7 +23,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             _controller = new PatientController(
                 new FakeUnitOfWorkSeeded(),
                 new NewPatientService(),
-                Mapper.Instance);
+                Mapper.Instance,
+                new UrlHelper(new ActionContext()));
         }
 
         private readonly PatientController _controller;
@@ -53,7 +56,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_EmptyFirstName_ReturnsBadRequestObjectResult()
         {
-            var result = await _controller.Post(new PatientEntity
+            var result = await _controller.Post(new PatientStubFromUser
             {
                 Name = new Name {First = string.Empty, Last = "Last"},
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -66,7 +69,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenDateTooNew_ReturnsBadRequestObjectResult()
         {
-            var result = await _controller.Post(new PatientEntity
+            var result = await _controller.Post(new PatientStubFromUser()
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = DateTime.Now.AddYears(1),
@@ -79,7 +82,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenDateTooOld_ReturnsBadRequestObjectResult()
         {
-            var result = await _controller.Post(new PatientEntity
+            var result = await _controller.Post(new PatientStubFromUser
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = DateTime.Now.AddYears(-151),
@@ -92,7 +95,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenEmptyLastName_ReturnsBadRequestObjectResult()
         {
-            var result = await _controller.Post(new PatientEntity
+            var result = await _controller.Post(new PatientStubFromUser
             {
                 Name = new Name {First = "First", Last = string.Empty},
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -105,7 +108,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenEmptyMedicalRecord_ReturnsBadRequestObjectResult()
         {
-            var result = await _controller.Post(new PatientEntity
+            var result = await _controller.Post(new PatientStubFromUser
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -118,7 +121,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenMedicalRecordThatAlreadyExistsInRepository_ReturnsConflictRequest()
         {
-            var result = await _controller.Post(new PatientEntity
+            var result = await _controller.Post(new PatientStubFromUser
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),
@@ -139,7 +142,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenProperlyPreparedPatientEntity_ReturnsOkRequest()
         {
-            var result = await _controller.Post(new PatientEntity
+            var result = await _controller.Post(new PatientStubFromUser
             {
                 Name = Name.Build("Joe", "Johson"),
                 DateOfBirth = new DateTime(1977, 3, 2),

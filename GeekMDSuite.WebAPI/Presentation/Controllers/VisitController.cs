@@ -40,8 +40,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 var patientEntity = await _unitOfWork.Patients.FindByGuid(visitStub.PatientGuid);
                 var patientStub = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
-                var patientResource = await CreatePatientResource(patientStub);
-                visitResources.Add(GenerateVisitResource(visitStub, patientResource));
+                visitResources.Add(GenerateVisitResource(visitStub, patientStub));
             }
             
             return Ok(visitResources);
@@ -60,7 +59,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return Ok(new VisitResource
                 {
                     Visit = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
-                    Patient = await CreatePatientResource(patientStub),
+                    Patient = patientStub,
                     Links = GenerateVisitLinks(_mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)))
                 });
             }
@@ -75,9 +74,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] VisitStub visitStub)
+        public async Task<IActionResult> Post([FromBody] VisitStubFromUser visitStub)
         {
-            var newVisitEntity = _mapper.Map<VisitStub, VisitEntity>(visitStub);
+            var newVisitEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(visitStub);
             try
             {
                 var newVisit = await _newVisitService
@@ -100,9 +99,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         [HttpPut]
         [Route("{guid}")]
-        public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStub entity)
+        public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStubFromUser entity)
         {
-            var updatedEntity = _mapper.Map<VisitStub, VisitEntity>(entity);
+            var updatedEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(entity);
             var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.Guid);
             trackedEntity.MapValues(updatedEntity);
             
@@ -144,7 +143,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly IUrlHelper _urlHelper;
         
         
-        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientResource patientResource)
+        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientResource)
         {
             
             return new VisitResource

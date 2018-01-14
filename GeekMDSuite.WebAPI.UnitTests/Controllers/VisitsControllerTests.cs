@@ -7,7 +7,9 @@ using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
@@ -17,7 +19,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         public VisitsControllerTests()
         {
             Mapper.Initialize(v => v.AddProfile(new MappingProfile()));
-            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance);
+            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance, new UrlHelper(new ActionContext()));
         }
 
         private readonly VisitController _controller;
@@ -27,9 +29,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var visitDate = DateTime.Now;
             var unitOfWork = new FakeUnitOfWorkEmpty();
-            var controller = new VisitController(unitOfWork, new NewVisitService(), Mapper.Instance);
+            var controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance, new UrlHelper(new ActionContext()));
 
-            await controller.Post(new VisitEntity
+            await controller.Post(new VisitStubFromUser
             {
                 Date = visitDate,
                 PatientGuid = Guid.NewGuid()
@@ -53,7 +55,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Post_GivenPatientWithEmptyGuid_ReturnsBadRequestObjectResul()
         {
-            var result = await _controller.Post(new VisitEntity
+            var result = await _controller.Post(new VisitStubFromUser
             {
                 Guid = Guid.Empty
             });

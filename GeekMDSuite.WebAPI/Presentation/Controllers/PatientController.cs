@@ -106,8 +106,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var visitResources = await CompileVisitResources(visitStubs);
             foreach (var visit in visitResources)
             {
-                UpdatePatientStubSelfLinks(visit.Patient.Patient);
-                UpdateVisitStubsSelfLinks(visit.Patient.Visits);
+                UpdatePatientStubSelfLinks(visit.Patient);
             }
 
             return Ok(visitResources);
@@ -117,7 +116,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             foreach (var stub in visitStubs)
             {
-                stub.Self = new ResourceLink
+                stub.Link = new ResourceLink
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
@@ -136,36 +135,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var patientEntity = await _unitOfWork.Patients.FindByGuid(visitStub.PatientGuid);
                 var patientStub = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
                 UpdatePatientStubSelfLinks(patientStub);
-                var patientResource = await CreatePatientResource(patientStub);
-                visitResources.Add(GenerateVisitResource(visitStub, patientResource));
+                visitResources.Add(GenerateVisitResource(visitStub, patientStub));
             }
 
             return visitResources;
         }
 
-        private async Task<PatientResource> CreatePatientResource(PatientStub patientStub)
-        {
-            var patientResource = new PatientResource
-            {
-                Patient = patientStub,
-                Visits = (await _unitOfWork.Visits.All())
-                    .Where(v => v.PatientGuid == patientStub.Guid)
-                    .Select(v => _mapper.Map<VisitEntity, VisitStub>(v)).ToList(),
-                Links = new List<ResourceLink>
-                {
-                    new ResourceLink
-                    {
-                        Description = "Get patient",
-                        Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patientStub.Guid)),
-                        HtmlMethod = HtmlMethod.Get,
-                        Relationship = UrlRelationship.Next
-                    }
-                }
-            };
-            return patientResource;
-        }
-        
-        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientResource patientResource)
+        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientResource)
         {
             
             return new VisitResource
@@ -260,7 +236,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             var visitStubs = visits.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit)).ToList();
             foreach (var stub in visitStubs)
             {
-                stub.Self = new ResourceLink
+                stub.Link = new ResourceLink
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
@@ -275,7 +251,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             foreach (var stub in patientStubs)
             {
-                stub.Self = new ResourceLink
+                stub.Link = new ResourceLink
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(stub.Guid)),

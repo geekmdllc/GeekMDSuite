@@ -6,6 +6,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Services
@@ -19,7 +20,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         public async Task GenerateUsing_WhenProperlyLoadedAndGivenNewPatient_Succeeds()
         {
             var newPatient = await _service.WithUnitOfWork(_unitOfWork).UsingTemplatePatientEntity(
-                new Patient
+                new PatientEntity
                 {
                     Name = Name.Build("Joe", "Schmoe"),
                     MedicalRecordNumber = Guid.NewGuid().ToString(),
@@ -37,7 +38,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         [Fact]
         public async Task GenerateUsing_WithoutLoadingContext_ThrowsContextNotLoadedException()
         {
-            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.UsingTemplatePatientEntity(new Patient()));
+            await Assert.ThrowsAsync<UnitOfWorkNotLoadedException>(() => _service.UsingTemplatePatientEntity(new PatientEntity()));
         }
     }
 }
