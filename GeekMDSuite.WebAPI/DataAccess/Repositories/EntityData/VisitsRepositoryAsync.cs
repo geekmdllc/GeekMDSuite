@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             
         }
 
-        public async Task<IEnumerable<VisitEntity>> Search(VisitDataSearchFilter filter)
+        public async Task<IEnumerable<VisitEntity>> FilteredSearch(VisitDataSearchFilter filter)
         {
             var patients = await Context.Patients.ToListAsync();
             if (filter.SortOrder == SortOrder.Ascending)

@@ -19,11 +19,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class VisitController : Controller
     {
-        private readonly INewVisitService _newVisitService;
-        private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IUrlHelper _urlHelper;
-
         public VisitController(IUnitOfWork unitOfWork, 
             INewVisitService newVisitService, 
             IMapper mapper,
@@ -37,38 +32,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         
         public async Task<IActionResult> GetBySearch(VisitDataSearchFilter filter)
         {
-            var visitStubs = 
-                (await _unitOfWork.Visits.Search(filter))
+            var visitStubs = (await _unitOfWork.Visits.FilteredSearch(filter))
                 .Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit));
             
             var visitResources = new List<VisitResource>();
-            foreach (var visit in visitStubs)
+            foreach (var visitStub in visitStubs)
             {
-                var patient = await _unitOfWork.Patients.FindByGuid(visit.PatientGuid);
-                visitResources.Add(
-                    new VisitResource
-                    {
-                        Visit = visit,
-                        Patient = _mapper.Map<PatientEntity, PatientStub>(patient),
-                        Links = new List<ResourceLink>
-                        {
-                            new ResourceLink
-                            {
-                                Rel = UrlRelationship.Self,
-                                Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(filter))
-                            },
-                            new ResourceLink
-                            {
-                                Rel = UrlRelationship.Child,
-                                Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visit.VisitId))
-                            }
-                        }
-                    }
-                );
+                var patientStub = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(visitStub.PatientGuid));
+                visitResources.Add(GenerateVisitResource(visitStub, patientStub));
             }
             return Ok(visitResources);
         }
-        
+
         [HttpGet]
         [Route("{guid}")]
         public async Task<IActionResult> GetByVisitGuid(Guid guid)
@@ -83,12 +58,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     new ResourceLink
                     {
-                        Rel = UrlRelationship.Self,
+                        Relationship = UrlRelationship.Self,
                         Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.VisitId))
                     },
                     new ResourceLink
                     {
-                        Rel = UrlRelationship.Parent,
+                        Relationship = UrlRelationship.Prev,
                         Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null))
                     }
                 };
@@ -174,6 +149,45 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return NotFound(e.Message);
             }
         }
+        private readonly INewVisitService _newVisitService;
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUrlHelper _urlHelper;
+        
+        
+        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientStub)
+        {
+            return new VisitResource
+            {
+                Visit = visitStub,
+                Patient = patientStub,
+                Links = GenerateVisitLinks(visitStub, patientStub)
+            };
+        }
 
+        private List<ResourceLink> GenerateVisitLinks(VisitStub visitStub, PatientStub patientStub)
+        {
+            return new List<ResourceLink>
+            {
+                new ResourceLink
+                {
+                    Description = $"GET filterable list of visits",
+                    Relationship = UrlRelationship.Self,
+                    Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null))
+                },
+                new ResourceLink
+                {
+                    Description = $"GET, PUT, DELETE visit {visitStub.VisitId}",
+                    Relationship = UrlRelationship.Next,
+                    Href = _urlHelper.Action<VisitController>(a => a.GetByVisitGuid(visitStub.VisitId))
+                },
+                new ResourceLink
+                {
+                    Description = $"GET, PUT, DELETE patient {patientStub.Guid}",
+                    Relationship = UrlRelationship.Next,
+                    Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(visitStub.PatientGuid))
+                }
+            };
+        }
     }
 }

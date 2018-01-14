@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
     public interface IVisitsRepositoryAsync : IRepositoryAsync<VisitEntity>
     {
-        Task<IEnumerable<VisitEntity>> Search(VisitDataSearchFilter filter);
+        Task<IEnumerable<VisitEntity>> FilteredSearch(VisitDataSearchFilter filter);
         Task<VisitEntity> FindByGuid(Guid guid);
     }
 }

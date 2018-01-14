@@ -9,6 +9,6 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
     public interface IPatientsRepositoryAsync : IRepositoryAsync<PatientEntity>
     {
         Task<PatientEntity> FindByGuid(Guid guid);
-        Task<IEnumerable<PatientEntity>> Search(PatientDataSearchFilter filter);
+        Task<IEnumerable<PatientEntity>> FilteredSearch(PatientDataSearchFilter filter);
     }
 }

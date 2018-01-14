@@ -32,7 +32,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             }
         }
 
-        public async Task<IEnumerable<PatientEntity>> Search(PatientDataSearchFilter filter)
+        public async Task<IEnumerable<PatientEntity>> FilteredSearch(PatientDataSearchFilter filter)
         {
             var patients = await Context.Patients.ToListAsync();
 
