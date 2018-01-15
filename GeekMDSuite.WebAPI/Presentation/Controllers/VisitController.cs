@@ -11,7 +11,8 @@ using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
-using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
+using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -63,7 +64,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
                 return Ok(new VisitResource
                 {
-                    Visit = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
+                    Properties = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
                     Patient = patientStub,
                     Links = GenerateVisitLinks(
                         _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)))
@@ -149,7 +150,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             return new VisitResource
             {
-                Visit = visitStub,
+                Properties = visitStub,
                 Patient = patientResource,
                 Links = GenerateVisitLinks(visitStub)
             };
@@ -180,7 +181,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             var patientResource = new PatientResource
             {
-                Patient = patientStub,
+                Properties = patientStub,
                 Visits = (await _unitOfWork.Visits.All())
                     .Where(v => v.PatientGuid == patientStub.Guid)
                     .Select(v => _mapper.Map<VisitEntity, VisitStub>(v)).ToList(),

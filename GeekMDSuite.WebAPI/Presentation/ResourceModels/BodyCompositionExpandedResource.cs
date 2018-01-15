@@ -2,8 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
-    public class VisitResource : Resource<VisitStub>
+    public class BodyCompositionExpandedResource : Resource<BodyCompositionExpandedStub>
     {
-        public PatientStub Patient { get; set; }
+        
     }
 }

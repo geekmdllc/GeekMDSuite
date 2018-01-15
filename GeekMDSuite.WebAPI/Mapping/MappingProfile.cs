@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
-using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
+using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 
 namespace GeekMDSuite.WebAPI.Mapping
 {

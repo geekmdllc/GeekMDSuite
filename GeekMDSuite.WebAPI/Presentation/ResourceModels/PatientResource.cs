@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
-    public class PatientResource : ResourceModel
+    public class PatientResource : Resource<PatientStub>
     {
-        public PatientStub Patient { get; set; }
         public List<VisitStub> Visits { get; set; }
     }
 }

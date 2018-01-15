@@ -1,6 +1,6 @@
 ﻿using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 
-namespace GeekMDSuite.WebAPI.Presentation.ResourceStubModels
+namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
     public class SelfLinkingStub
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
@@ -9,26 +10,29 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
-    public abstract class EntityDataController<TResourceStub> : EntityDataController
-        where TResourceStub : class, IEntity<TResourceStub>, new()
+    public abstract class EntityDataController<TEntity,  TResourceStubFromUser> : EntityDataController
+        where TEntity : class, IEntity<TEntity>, new()
     {
-        private readonly IRepositoryAsync<TResourceStub> _repo;
+        private readonly IRepositoryAsync<TEntity> _repo;
 
         protected readonly IUnitOfWork UnitOfWork;
+        protected readonly IMapper Mapper;
 
-        protected EntityDataController(IUnitOfWork unitOfWork)
+        protected EntityDataController(IUnitOfWork unitOfWork, IMapper mapper)
         {
+            Mapper = mapper;
             UnitOfWork = unitOfWork;
-            _repo = UnitOfWork.EntityData<TResourceStub>();
+            _repo = UnitOfWork.EntityData<TEntity>();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TResourceStub entity)
+        public async Task<IActionResult> Post([FromBody] TResourceStubFromUser obj)
         {
             if (!ModelState.IsValid)
-                return BadRequest(entity);
+                return BadRequest(obj);
             try
             {
+                var entity = Mapper.Map<TResourceStubFromUser, TEntity>(obj);
                 await _repo.Add(entity);
                 await UnitOfWork.Complete();
                 return Ok();
@@ -44,10 +48,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] TResourceStub entity)
+        public async Task<IActionResult> Put([FromBody] TResourceStubFromUser obj)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(obj);
             try
             {
+                var entity = Mapper.Map<TResourceStubFromUser, TEntity>(obj);
                 await _repo.Update(entity);
                 await UnitOfWork.Complete();
                 return Ok();

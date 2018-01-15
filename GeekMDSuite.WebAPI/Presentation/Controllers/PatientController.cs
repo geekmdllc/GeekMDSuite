@@ -10,7 +10,8 @@ using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
-using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
+using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -166,7 +167,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             return new VisitResource
             {
-                Visit = visitStub,
+                Properties = visitStub,
                 Patient = patientResource,
                 Links = GenerateVisitLinks(visitStub)
             };
@@ -195,7 +196,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             return new PatientResource
             {
-                Patient = patient,
+                Properties = patient,
                 Visits = await MapVisitStubs(patient),
                 Links = GeneratePatientResourceLinks(patient)
             };

@@ -1,9 +1,9 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.Presentation;
 
-namespace GeekMDSuite.WebAPI.Presentation.ResourceStubModels
+namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class VisitStubFromUser
+    public class VisitStub : SelfLinkingStub
     {
         public Guid Guid { get; set; }
         public DateTime Date { get; set; }
