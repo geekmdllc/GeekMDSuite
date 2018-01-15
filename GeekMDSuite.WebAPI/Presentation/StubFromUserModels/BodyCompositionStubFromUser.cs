@@ -1,9 +1,10 @@
 ﻿using System;
 using GeekMDSuite.Utilities.MeasurementUnits;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
 {
-    public class BodyCompositionStubFromUser
+    public class BodyCompositionStubFromUser : IStub
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

@@ -181,7 +181,7 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine("Ishihara Six Plate Screener");
             Console.WriteLine($"{ishiharaSix}{NewLine}");
 
-            var ocularPressure = OcularPressure.Build(15, 13);
+            var ocularPressure = OccularPressure.Build(15, 13);
             Console.WriteLine($"Ocular pressure: {ocularPressure}{NewLine}");
 
             var peripheralVision = PeripheralVision.Build(85, 85);

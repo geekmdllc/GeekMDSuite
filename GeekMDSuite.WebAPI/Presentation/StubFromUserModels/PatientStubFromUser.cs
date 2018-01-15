@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Utilities.Extensions;
 
-namespace GeekMDSuite.WebAPI.Presentation.StubModels
+namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
 {
     public class PatientStubFromUser
     {

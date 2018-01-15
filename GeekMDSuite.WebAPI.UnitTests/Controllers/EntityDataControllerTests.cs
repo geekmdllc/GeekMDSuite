@@ -1,20 +1,38 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
-using GeekMDSuite.WebAPI.Presentation.Controllers;
+using GeekMDSuite.WebAPI.Mapping;
+using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
+using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 {
     public class EntityDataControllerTests
     {
-        private class FakeEntityDataController : EntityDataController<AudiogramEntity>
+
+        public EntityDataControllerTests()
         {
-            public FakeEntityDataController(IUnitOfWork unitOfWork) : base(unitOfWork)
+
+        }
+        private class FakeEntityDataController : AudiogramController
+        {
+            public FakeEntityDataController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
             {
+                
+            }
+
+            public FakeEntityDataController(IUnitOfWork unitOfWork) : this(
+                unitOfWork, 
+                new Mapper(new MapperConfiguration(configure => configure.AddProfile(new MappingProfile()))), 
+                new UrlHelper(new ActionContext()))
+            {
+                
             }
         }
 
@@ -46,7 +64,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkEmpty());
 
-            var result = await controller.Post(new AudiogramEntity());
+            var result = await controller.Post(new AudiogramStubFromUser());
 
             Assert.Equal(typeof(OkResult), result.GetType());
         }
@@ -69,8 +87,12 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             audiogram.Left.F2000.Value = 150;
 
             var controller = new FakeEntityDataController(uow);
+            
+            Mapper.Initialize(cfg => cfg.AddProfile(new MappingProfile()));
 
-            var result = await controller.Put(audiogram);
+            var result = await controller.Put(Mapper.Map<AudiogramEntity, AudiogramStubFromUser>(audiogram));
+            
+            Mapper.Reset();
 
             Assert.Equal(typeof(OkResult), result.GetType());
         }
@@ -80,7 +102,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         {
             var controller = new FakeEntityDataController(new FakeUnitOfWorkSeeded());
 
-            var result = await controller.Put(new AudiogramEntity {Id = int.MaxValue});
+            var result = await controller.Put(new AudiogramStubFromUser {Id = int.MaxValue});
 
             Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
         }

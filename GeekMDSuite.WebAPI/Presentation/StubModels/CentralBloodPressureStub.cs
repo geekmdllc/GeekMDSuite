@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class CentralBloodPressureStub
+    public class CentralBloodPressureStub : IStub
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

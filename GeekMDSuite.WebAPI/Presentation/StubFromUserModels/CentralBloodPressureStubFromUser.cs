@@ -1,8 +1,9 @@
 ﻿using System;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
 {
-    public class CentralBloodPressureStubFromUser
+    public class CentralBloodPressureStubFromUser : IStub
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

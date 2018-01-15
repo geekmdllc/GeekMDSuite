@@ -6,12 +6,12 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 {
     public static partial class FakeGeekMdSuiteContextBuilder
     {
-        private static List<OcularPressureEntity> GetOcularPressureEntities()
+        private static List<OccularPressureEntity> GetOcularPressureEntities()
         {
-            return new List<OcularPressureEntity>
+            return new List<OccularPressureEntity>
             {
-                new OcularPressureEntity(OcularPressure.Build(20, 30)) {Guid = BruceWaynesVisitGuid},
-                new OcularPressureEntity(OcularPressure.Build(15, 15)) {Guid = XerMajestiesVisitGuid}
+                new OccularPressureEntity(OccularPressure.Build(20, 30)) {Guid = BruceWaynesVisitGuid},
+                new OccularPressureEntity(OccularPressure.Build(15, 15)) {Guid = XerMajestiesVisitGuid}
             };
         }
     }

@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData
 {
-    public interface IOccularPressuresRepositoryAsync : IRepositoryAssociatedWithVisitAsync<OcularPressureEntity>
+    public interface IOccularPressuresRepositoryAsync : IRepositoryAssociatedWithVisitAsync<OccularPressureEntity>
     {
     }
 }

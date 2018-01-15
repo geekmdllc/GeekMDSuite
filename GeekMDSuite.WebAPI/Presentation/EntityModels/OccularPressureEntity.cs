@@ -4,21 +4,21 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class OcularPressureEntity : OcularPressure, IVisitData<OcularPressure>
+    public class OccularPressureEntity : OccularPressure, IVisitData<OccularPressure>
     {
-        public OcularPressureEntity()
+        public OccularPressureEntity()
         {
         }
 
-        public OcularPressureEntity(OcularPressure ocularPressure)
+        public OccularPressureEntity(OccularPressure occularPressure)
         {
-            MapValues(ocularPressure);
+            MapValues(occularPressure);
         }
 
         public int Id { get; set; }
         public Guid Guid { get; set; }
 
-        public void MapValues(OcularPressure subject)
+        public void MapValues(OccularPressure subject)
         {
             Left = subject.Left;
             Right = subject.Right;

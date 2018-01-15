@@ -1,12 +1,12 @@
 ﻿namespace GeekMDSuite.Core.Models.Procedures
 {
-    public class OcularPressure
+    public class OccularPressure
     {
-        protected OcularPressure()
+        protected OccularPressure()
         {
         }
 
-        private OcularPressure(int leftMmHg, int rightMmHg) : this()
+        private OccularPressure(int leftMmHg, int rightMmHg) : this()
         {
             Left = leftMmHg;
             Right = rightMmHg;
@@ -15,9 +15,9 @@
         public int Left { get; set; }
         public int Right { get; set; }
 
-        public static OcularPressure Build(int leftMmHg, int rightMmHg)
+        public static OccularPressure Build(int leftMmHg, int rightMmHg)
         {
-            return new OcularPressure(leftMmHg, rightMmHg);
+            return new OccularPressure(leftMmHg, rightMmHg);
         }
 
         public override string ToString()

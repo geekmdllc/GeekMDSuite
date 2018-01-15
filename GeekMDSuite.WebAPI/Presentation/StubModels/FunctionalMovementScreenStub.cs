@@ -3,7 +3,7 @@ using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class FunctionalMovementScreenStub
+    public class FunctionalMovementScreenStub : IStub
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }  

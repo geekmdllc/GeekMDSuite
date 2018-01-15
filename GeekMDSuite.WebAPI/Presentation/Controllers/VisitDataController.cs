@@ -7,7 +7,9 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Core.Presentation;
+using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -16,6 +18,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     public abstract class VisitDataController<TEntity, TResourceStub, TResourceStubFromUser, TResource, TController> 
         : EntityDataController<TEntity, TResourceStubFromUser>
         where TEntity : class, IVisitData<TEntity>, new()
+        where TResourceStub : IStub
+        where TResourceStubFromUser : IStub
         where TResource : Resource<TResourceStub>, new()
         where TController : VisitDataController<TEntity, TResourceStub, TResourceStubFromUser, TResource, TController>
     {
@@ -32,17 +36,26 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [Route("")]
         public async Task<IActionResult> GetAll() 
         {
-            return await GetAllForCurrentController();
+            try
+            {
+                var entities = await _repo.All();
+                var stubs = entities.Select(entity => Mapper.Map<TEntity, TResourceStub>(entity)).ToList();
+                var resources = stubs.Select(stub => new TResource
+                {
+                    Properties = stub,
+                    Links = GenerateGetAllLinks()
+                });
+                return Ok(resources);
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetByPrimaryKey(int id) 
-        {
-            return await GetByPrimaryKeyForCurrentController(id);
-        }
-
-        private async Task<IActionResult> GetByPrimaryKeyForCurrentController(int id)
         {
             try
             {
@@ -51,16 +64,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var resource = new TResource
                 {
                     Properties = stub,
-                    Links = new List<ResourceLink>
-                    {
-                        new ResourceLink
-                        {
-                            Description = "Description",
-                            Href = _urlHelper.Action<TController>(p => p.GetAll()),
-                            HtmlMethod = HtmlMethod.Post,
-                            Relationship = UrlRelationship.Self
-                        }
-                    }
+                    Links = GenerateGetByPrimaryKeyLinks(stub)
                 };
                 return Ok(resource);
             }
@@ -70,32 +74,47 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
         }
 
-        private async Task<IActionResult> GetAllForCurrentController() 
+        private List<ResourceLink> GenerateGetByPrimaryKeyLinks(TResourceStub stub)
         {
-            try
+            return new List<ResourceLink>
             {
-                var entities = await _repo.All();
-                var stubs = entities.Select(entity => Mapper.Map<TEntity, TResourceStub>(entity)).ToList();
-                var resources = stubs.Select(stub => new TResource
+                new ResourceLink
                 {
-                    Properties = stub,
-                    Links = new List<ResourceLink>
-                    {
-                        new ResourceLink
-                        {
-                            Description = "Description",
-                            Href = _urlHelper.Action<TController>(p => p.GetAll()),
-                            HtmlMethod = HtmlMethod.Post,
-                            Relationship = UrlRelationship.Self
-                        }
-                    }
-                });
-                return Ok(resources);
-            }
-            catch (RepositoryElementNotFoundException)
+                    Description = "Get this item.",
+                    Href = _urlHelper.Action($"{nameof(GetByPrimaryKey)}"),
+                    HtmlMethod = HtmlMethod.Get,
+                    Relationship = UrlRelationship.Self
+                },
+                new ResourceLink
+                {
+                    Description = "View visit for this item.",
+                    Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
+                    HtmlMethod = HtmlMethod.Get,
+                    Relationship = UrlRelationship.Prev
+                }
+            };
+        }
+
+
+        private List<ResourceLink> GenerateGetAllLinks()
+        {
+            return new List<ResourceLink>
             {
-                return NotFound();
-            }
+                new ResourceLink
+                {
+                    Description = "Get all.",
+                    Href = _urlHelper.Action($"{nameof(GetAll)}"),
+                    HtmlMethod = HtmlMethod.Post,
+                    Relationship = UrlRelationship.Self
+                },
+                new ResourceLink
+                {
+                    Description = "Get all visits.",
+                    Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null)),
+                    HtmlMethod = HtmlMethod.Get,
+                    Relationship = UrlRelationship.Prev
+                }
+            };
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.Presentation;
 
-namespace GeekMDSuite.WebAPI.Presentation.StubModels
+namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
 {
     public class VisitStubFromUser
     {

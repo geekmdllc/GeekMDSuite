@@ -3,7 +3,7 @@ using GeekMDSuite.Utilities.MeasurementUnits;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class BodyCompositionStub
+    public class BodyCompositionStub : IStub
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

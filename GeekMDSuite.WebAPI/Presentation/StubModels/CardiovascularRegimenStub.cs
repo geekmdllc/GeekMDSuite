@@ -3,7 +3,7 @@ using GeekMDSuite.Core.Models.PatientActivities;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class CardiovascularRegimenStub
+    public class CardiovascularRegimenStub : IStub
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

@@ -1,9 +1,10 @@
 ﻿using System;
 using GeekMDSuite.Core.Models.Procedures;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
 {
-    public class FunctionalMovementScreenStubFromUser
+    public class FunctionalMovementScreenStubFromUser : IStub
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }  
