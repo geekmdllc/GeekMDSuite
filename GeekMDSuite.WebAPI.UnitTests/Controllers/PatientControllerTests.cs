@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
+using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.StubModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
@@ -24,7 +27,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
                 new FakeUnitOfWorkSeeded(),
                 new NewPatientService(),
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))), 
-                new UrlHelper(new ActionContext()));
+                new UrlHelper(new ActionContext()),
+                new ErrorService(new ConfigurationRoot(new List<Microsoft.Extensions.Configuration.IConfigurationProvider>())));
         }
 
         private readonly PatientController _controller;
