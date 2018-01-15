@@ -139,7 +139,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task Post_GivenProperlyPreparedPatientEntity_ReturnsOkRequest()
+        public async Task Post_GivenProperlyPreparedPatientEntity_ReturnsCreatedResult()
         {
             var result = await _controller.Post(new PatientStubFromUser
             {
@@ -148,7 +148,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
                 MedicalRecordNumber = Guid.NewGuid().ToString()
             });
 
-            Assert.Equal(typeof(OkResult), result.GetType());
+            Assert.Equal(typeof(CreatedResult), result.GetType());
         }
     }
 }
