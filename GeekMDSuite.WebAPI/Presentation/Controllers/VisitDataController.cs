@@ -16,8 +16,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     public abstract class VisitDataController<TEntity, TResourceStub, TResourceStubFromUser, TResource, TController> 
         : EntityDataController<TEntity, TResourceStubFromUser>
         where TEntity : class, IMapProperties<TEntity>, Core.Models.IVisitData, new()
-        where TResourceStub : IVisitData
-        where TResourceStubFromUser : IVisitData
+        where TResourceStub : class, IVisitData, new()
+        where TResourceStubFromUser : class, IVisitData, new()
         where TResource : Resource<TResourceStub>, new()
         where TController : VisitDataController<TEntity, TResourceStub, TResourceStubFromUser, TResource, TController>
     {
