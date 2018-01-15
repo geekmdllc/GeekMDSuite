@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeekMDSuite.Core.Models.PatientActivities;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class ResistanceRegimenStub : IStub
+    public class ResistanceRegimenStub : IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
     public class RepositoryAssociatedWithVisitAsync<T> : RepositoryAsync<T>, IRepositoryAssociatedWithVisitAsync<T>
-        where T : class, IVisitData<T>
+        where T : class, IMapProperties<T>, IVisitData
     {
         public RepositoryAssociatedWithVisitAsync(GeekMdSuiteDbContext context) : base(context)
         {

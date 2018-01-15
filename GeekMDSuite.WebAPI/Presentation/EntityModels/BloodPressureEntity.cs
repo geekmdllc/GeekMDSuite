@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class BloodPressureEntity : BloodPressure, IVisitData<BloodPressure>
+    public class BloodPressureEntity : BloodPressure, IMapProperties<BloodPressure>, IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

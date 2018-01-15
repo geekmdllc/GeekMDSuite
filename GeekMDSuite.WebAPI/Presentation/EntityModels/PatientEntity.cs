@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class PatientEntity : Patient, IEntity<Patient>
+    public class PatientEntity : Patient, IMapProperties<Patient>, IEntity
     {
         public PatientEntity()
         {

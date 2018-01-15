@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class RepositoryAsync<T> : IRepositoryAsync<T> where T : class, IEntity<T>
+    public class RepositoryAsync<T> : IRepositoryAsync<T> where T : class, IMapProperties<T>, IEntity
     {
         protected readonly GeekMdSuiteDbContext Context;
 

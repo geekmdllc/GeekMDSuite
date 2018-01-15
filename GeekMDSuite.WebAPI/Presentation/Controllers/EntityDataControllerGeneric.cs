@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
     public abstract class EntityDataController<TEntity,  TResourceStubFromUser> : EntityDataController
-        where TEntity : class, IEntity<TEntity>, new()
+        where TEntity : class, IMapProperties<TEntity>, IEntity, new()
     {
         private readonly IRepositoryAsync<TEntity> _repo;
 

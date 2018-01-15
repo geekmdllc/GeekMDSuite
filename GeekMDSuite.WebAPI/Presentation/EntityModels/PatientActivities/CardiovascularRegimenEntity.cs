@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
-    public class CardiovascularRegimenEntity : CardiovascularRegimen, IVisitData<CardiovascularRegimen>
+    public class CardiovascularRegimenEntity : CardiovascularRegimen, IMapProperties<CardiovascularRegimen>, IVisitData
     {
         public CardiovascularRegimenEntity()
         {

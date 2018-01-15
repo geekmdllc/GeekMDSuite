@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class SitupsEntity : Situps, IVisitData<Situps>
+    public class SitupsEntity : Situps, IMapProperties<Situps>, IVisitData
     {
         public SitupsEntity()
         {

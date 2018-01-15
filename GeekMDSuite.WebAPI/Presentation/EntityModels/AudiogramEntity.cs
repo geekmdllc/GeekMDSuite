@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class AudiogramEntity : Audiogram, IVisitData<Audiogram>
+    public class AudiogramEntity : Audiogram, IMapProperties<Audiogram>, IVisitData
     {
         public AudiogramEntity(Audiogram audiogram) : this()
         {

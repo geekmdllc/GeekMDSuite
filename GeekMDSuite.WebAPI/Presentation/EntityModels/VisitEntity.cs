@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Presentation;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class VisitEntity : IVisitData<VisitEntity>
+    public class VisitEntity : IMapProperties<VisitEntity>, IVisitData
     {
         public VisitEntity()
         {

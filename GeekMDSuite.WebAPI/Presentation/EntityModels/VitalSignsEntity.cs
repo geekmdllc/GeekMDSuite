@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class VitalSignsEntity : VitalSigns, IVisitData<VitalSigns>
+    public class VitalSignsEntity : VitalSigns, IMapProperties<VitalSigns>, IVisitData
     {
         public VitalSignsEntity()
         {

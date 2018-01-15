@@ -40,12 +40,12 @@ namespace GeekMDSuite.WebAPI.DataAccess
         }
 
 
-        public IRepositoryAssociatedWithVisitAsync<T> VisitData<T>() where T : class, IVisitData<T>
+        public IRepositoryAssociatedWithVisitAsync<T> VisitData<T>() where T : class, IMapProperties<T>, IVisitData
         {
             return new RepositoryAssociatedWithVisitAsync<T>(_context);
         }
 
-        public IRepositoryAsync<T> EntityData<T>() where T : class, IEntity<T>
+        public IRepositoryAsync<T> EntityData<T>() where T : class, IMapProperties<T>, IEntity
         {
             return new RepositoryAsync<T>(_context);
         }

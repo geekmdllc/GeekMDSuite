@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
-    public class ResistanceRegimenEntity : ResistanceRegimen, IVisitData<ResistanceRegimen>
+    public class ResistanceRegimenEntity : ResistanceRegimen, IMapProperties<ResistanceRegimen>, IVisitData
     {
         public ResistanceRegimenEntity()
         {

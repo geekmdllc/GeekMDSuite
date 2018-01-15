@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class BodyCompositionEntity : BodyComposition, IVisitData<BodyComposition>
+    public class BodyCompositionEntity : BodyComposition, IMapProperties<BodyComposition>, IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

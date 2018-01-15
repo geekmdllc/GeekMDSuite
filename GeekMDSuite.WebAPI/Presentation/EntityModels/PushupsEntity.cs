@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class PushupsEntity : Pushups, IVisitData<Pushups>
+    public class PushupsEntity : Pushups, IMapProperties<Pushups>, IVisitData
     {
         public PushupsEntity()
         {

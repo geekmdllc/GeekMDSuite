@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class PeripheralVisionEntity : PeripheralVision, IVisitData<PeripheralVision>
+    public class PeripheralVisionEntity : PeripheralVision, IMapProperties<PeripheralVision>, IVisitData
     {
         public PeripheralVisionEntity()
         {

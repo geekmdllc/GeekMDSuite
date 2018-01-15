@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
-    public class StretchingRegimenEntity : StretchingRegimen, IVisitData<StretchingRegimen>
+    public class StretchingRegimenEntity : StretchingRegimen, IMapProperties<StretchingRegimen>, IVisitData
     {
         public StretchingRegimenEntity()
         {

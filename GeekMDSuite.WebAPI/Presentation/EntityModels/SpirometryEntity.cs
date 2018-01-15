@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class SpirometryEntity : Spirometry, IVisitData<Spirometry>
+    public class SpirometryEntity : Spirometry, IMapProperties<Spirometry>, IVisitData
     {
         public SpirometryEntity()
         {

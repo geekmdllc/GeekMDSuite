@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IVisitData<FunctionalMovementScreen>
+    public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IMapProperties<FunctionalMovementScreen>, IVisitData
     {
         public FunctionalMovementScreenEntity()
         {

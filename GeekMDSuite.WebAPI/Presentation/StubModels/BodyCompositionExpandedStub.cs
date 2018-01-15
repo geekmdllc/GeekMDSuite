@@ -1,9 +1,10 @@
 ﻿using System;
 using GeekMDSuite.Utilities.MeasurementUnits;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class BodyCompositionExpandedStub : IStub
+    public class BodyCompositionExpandedStub : IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

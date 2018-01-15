@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class OccularPressureEntity : OccularPressure, IVisitData<OccularPressure>
+    public class OccularPressureEntity : OccularPressure, IMapProperties<OccularPressure>, IVisitData
     {
         public OccularPressureEntity()
         {

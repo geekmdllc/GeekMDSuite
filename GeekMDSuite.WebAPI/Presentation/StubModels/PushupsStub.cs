@@ -1,9 +1,10 @@
 ﻿using System;
 using GeekMDSuite.Core.Models.Procedures;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class PushupsStub : IStub
+    public class PushupsStub : IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

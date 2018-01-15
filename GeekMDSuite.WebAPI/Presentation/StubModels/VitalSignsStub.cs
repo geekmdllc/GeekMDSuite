@@ -1,10 +1,11 @@
 ﻿using System;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Utilities.MeasurementUnits;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class VitalSignsStub : IStub
+    public class VitalSignsStub : IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

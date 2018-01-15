@@ -7,9 +7,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Core.Presentation;
-using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
-using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
@@ -17,9 +15,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public abstract class VisitDataController<TEntity, TResourceStub, TResourceStubFromUser, TResource, TController> 
         : EntityDataController<TEntity, TResourceStubFromUser>
-        where TEntity : class, IVisitData<TEntity>, new()
-        where TResourceStub : IStub
-        where TResourceStubFromUser : IStub
+        where TEntity : class, IMapProperties<TEntity>, Core.Models.IVisitData, new()
+        where TResourceStub : IVisitData
+        where TResourceStubFromUser : IVisitData
         where TResource : Resource<TResourceStub>, new()
         where TController : VisitDataController<TEntity, TResourceStub, TResourceStubFromUser, TResource, TController>
     {

@@ -5,7 +5,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class TreadmillExerciseStressTestEntity : TreadmillExerciseStressTest,
-        IVisitData<TreadmillExerciseStressTest>
+        IMapProperties<TreadmillExerciseStressTest>, IVisitData
     {
         public TreadmillExerciseStressTestEntity()
         {

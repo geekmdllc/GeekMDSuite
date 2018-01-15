@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class IshiharaSixPlateEntity : IshiharaSixPlate, IVisitData<IshiharaSixPlate>
+    public class IshiharaSixPlateEntity : IshiharaSixPlate, IMapProperties<IshiharaSixPlate>, IVisitData
     {
         public IshiharaSixPlateEntity()
         {

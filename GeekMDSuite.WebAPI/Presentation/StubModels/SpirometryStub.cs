@@ -1,8 +1,9 @@
 ﻿using System;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class SpirometryStub : IStub
+    public class SpirometryStub : IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

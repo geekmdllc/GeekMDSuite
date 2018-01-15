@@ -1,8 +1,9 @@
 ﻿using System;
+using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class PeripheralVistionStub : IStub
+    public class PeripheralVistionStub : IVisitData
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }
