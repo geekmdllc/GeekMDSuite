@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
@@ -15,10 +16,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 {
     public class VisitsControllerTests
     {
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
         public VisitsControllerTests()
         {
-            Mapper.Initialize(v => v.AddProfile(new MappingProfile()));
-            _controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance,
+            _controller = new VisitController(
+                _unitOfWork, 
+                new NewVisitService(), 
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))),
                 new UrlHelper(new ActionContext()));
         }
 
@@ -27,21 +31,15 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         [Fact]
         public async Task Add_GivenNewVisit_CreatesAVisitWithVisitGuid()
         {
-            var visitDate = DateTime.Now;
-            var unitOfWork = new FakeUnitOfWorkEmpty();
-            var controller = new VisitController(new FakeUnitOfWorkSeeded(), new NewVisitService(), Mapper.Instance,
-                new UrlHelper(new ActionContext()));
-
-            await controller.Post(new VisitStubFromUser
+            await _controller.Post(new VisitStubFromUser
             {
-                Date = visitDate,
+                Date = DateTime.Now,
                 PatientGuid = Guid.NewGuid()
             });
 
-            var addedVisits = (await unitOfWork.Visits.All()).FirstOrDefault();
+            var addedVisits = (await _unitOfWork.Visits.All()).FirstOrDefault();
 
             Assert.True(addedVisits != null && addedVisits.Guid != Guid.Empty);
-            Mapper.Reset();
         }
 
         [Fact]
@@ -50,7 +48,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             var result = await _controller.Post(null);
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
-            Mapper.Reset();
         }
 
         [Fact]
@@ -62,7 +59,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             });
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
-            Mapper.Reset();
         }
     }
 }

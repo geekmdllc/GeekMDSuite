@@ -5,9 +5,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     public abstract class EntityDataController : Controller
     {
-        public ConflictResult Conflict(string message)
+        public ConflictResult Conflict(object obj)
         {
-            return new ConflictResult(message);
+            return new ConflictResult(obj);
         }
     }
 }

@@ -4,6 +4,7 @@ using AutoMapper;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
+using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
@@ -13,6 +14,7 @@ using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 {
+    
     public class PatientEntityControllerTests
     {
         public PatientEntityControllerTests()
@@ -20,7 +22,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
             _controller = new PatientController(
                 new FakeUnitOfWorkSeeded(),
                 new NewPatientService(),
-                Mapper.Instance,
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))), 
                 new UrlHelper(new ActionContext()));
         }
 
@@ -35,11 +37,11 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task GetByGuid_GivenGuidThatDoesNotExistInRepository_ReturnsNotFound()
+        public async Task GetByGuid_GivenGuidThatDoesNotExistInRepository_ReturnsBadRequestObjectResult()
         {
             var result = await _controller.GetByGuid(Guid.NewGuid());
 
-            Assert.Equal(typeof(NotFoundObjectResult), result.GetType());
+            Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
         }
 
         [Fact]

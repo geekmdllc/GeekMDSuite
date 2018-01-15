@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
-using GeekMDSuite.WebAPI.Presentation.ResourceStubModels;
-using Microsoft.Azure.KeyVault.Models;
 using Xunit;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Repositories
@@ -139,22 +136,19 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         public async Task Update_GivenNewValues_PersistsChanges()
         {
             var trackedVisit = await _unitOfWork.Visits.FindByGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesVisitGuid);
-            Mapper.Initialize(cfg => {
-                cfg.CreateMap<VisitEntity, VisitStubFromUser>();
-                cfg.CreateMap<VisitStubFromUser, VisitEntity>();
-            });
-            var stub = Mapper.Map<VisitEntity, VisitStubFromUser>(trackedVisit);
-            stub.Status = VisitStatus.Complete;
-            stub.Date = DateTime.Now;
+            var updatedVisit = new VisitEntity();
+            updatedVisit.MapValues(trackedVisit);
+            updatedVisit.Status = VisitStatus.Complete;
+            updatedVisit.Date = DateTime.Now;
             
-            trackedVisit.MapValues(Mapper.Map<VisitStubFromUser, VisitEntity>(stub));
+            trackedVisit.MapValues(updatedVisit);
+            await _unitOfWork.Visits.Update(trackedVisit);
             await _unitOfWork.Complete();
             
             var result = await _unitOfWork.Visits.FindByGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesVisitGuid);
+            Assert.Equal(updatedVisit.Date.ToShortDateString(), result.Date.ToShortDateString());
+            Assert.Equal(updatedVisit.Status, result.Status);
             _unitOfWork.Dispose();
-            
-            Assert.Equal(stub.Date.ToShortDateString(), result.Date.ToShortDateString());
-            Assert.Equal(stub.Status, result.Status);
         }
     }
 }

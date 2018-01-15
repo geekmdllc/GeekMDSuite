@@ -2,9 +2,9 @@
 
 namespace GeekMDSuite.WebAPI.Core.Exceptions
 {
-    public class MedicalRecordAlreadyExistsException : Exception
+    public class MedicalRecordNumberNotUniqueException : Exception
     {
-        public MedicalRecordAlreadyExistsException(string mrn)
+        public MedicalRecordNumberNotUniqueException(string mrn)
             : base($"{mrn} is not unique. Please verify before resubmitting request")
         {
         }

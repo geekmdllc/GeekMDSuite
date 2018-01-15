@@ -14,15 +14,15 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
         public override async Task<PatientEntity> UsingTemplatePatientEntity(PatientEntity patient)
         {
             VerifyContextIsLoaded();
-            ValidatePatientFormat(patient);
-            await MedicalRecordNumberAlreadyExists(patient);
+            ValidatePatientModel(patient);
+            await EnsureMedicalRecordNumberIsNew(patient);
 
             var newPatient = new PatientEntity {Guid = Guid.NewGuid()};
 
             return newPatient;
         }
 
-        private static void ValidatePatientFormat(PatientEntity patient)
+        private static void ValidatePatientModel(PatientEntity patient)
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
 
@@ -38,7 +38,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             if (message.Any()) throw new FormatException(string.Join(", ", message));
         }
 
-        private async Task MedicalRecordNumberAlreadyExists(PatientEntity patient)
+        private async Task EnsureMedicalRecordNumberIsNew(PatientEntity patient)
         {
             var mrnExists = false;
             try
@@ -52,7 +52,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
                 mrnExists = false;
             }
 
-            if (mrnExists) throw new MedicalRecordAlreadyExistsException(patient.MedicalRecordNumber);
+            if (mrnExists) throw new MedicalRecordNumberNotUniqueException(patient.MedicalRecordNumber);
         }
     }
 }

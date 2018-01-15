@@ -6,6 +6,7 @@ using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
@@ -53,23 +54,46 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [Route("{guid}")]
         public async Task<IActionResult> GetByGuid(Guid guid)
         {
-            var patientStub = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(guid));
+            if (guid == Guid.Empty) return BadRequest(guid);
 
-            var patientResource = GeneratePatientResource(patientStub);
+            try
+            {
+                var patientStub = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(guid));
 
-            return Ok(patientResource);
+                var patientResource = GeneratePatientResource(patientStub);
+
+                return Ok(patientResource);
+            }
+            catch (RepositoryElementNotFoundException)
+            {
+                return BadRequest(guid);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientStubFromUser patient)
         {
-            var newPatientEntity = _mapper.Map<PatientStubFromUser, PatientEntity>(patient);
-            var newPatient = await _newPatientService.WithUnitOfWork(_unitOfWork)
-                .UsingTemplatePatientEntity(newPatientEntity);
+            if (!ModelState.IsValid) 
+                return BadRequest(patient);
 
-            await _unitOfWork.Patients.Add(newPatient);
-            await _unitOfWork.Complete();
-            return Ok();
+            try
+            {
+                var newPatientEntity = _mapper.Map<PatientStubFromUser, PatientEntity>(patient);
+                var newPatient = await CreateNewPatientEntity(newPatientEntity);
+                return Created(nameof(Post), newPatient);
+            }
+            catch (FormatException)
+            {
+                return BadRequest(patient);
+            }
+            catch (MedicalRecordNumberNotUniqueException)
+            {
+                return Conflict(patient);
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest(patient);
+            }
         }
 
         [HttpPut]
@@ -257,5 +281,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             UpdatePatientStubSelfLinks(new List<PatientStub> {patientStub});
         }
+        
+        
+        private async Task<PatientEntity> CreateNewPatientEntity(PatientEntity newPatientEntity)
+        {
+            var newPatient = await _newPatientService.WithUnitOfWork(_unitOfWork)
+                .UsingTemplatePatientEntity(newPatientEntity);
+
+            await _unitOfWork.Patients.Add(newPatient);
+            await _unitOfWork.Complete();
+            return newPatient;
+        }
+
     }
 }

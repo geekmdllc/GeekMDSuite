@@ -23,8 +23,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Post([FromBody] TResourceStub entity)
+        public async Task<IActionResult> Post([FromBody] TResourceStub entity)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(entity);
             try
             {
                 await _repo.Add(entity);
