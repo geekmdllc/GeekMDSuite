@@ -100,7 +100,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             if (!ModelState.IsValid)
             {
                 var error = _errorService.PayloadBuilder
-                    .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromClientIsInvalid)
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromUserIsInvalid)
                     .HasInternalMessage("The data model supplied did not pass model validation. The resource was therefore not created.")
                     .TellsUser("The information provided is not properly formatted and the visit was not created.")
                     .Build();
@@ -117,14 +117,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
                 await _unitOfWork.Visits.Add(newVisit);
                 await _unitOfWork.Complete();
-                return Created(_urlHelper.Action<VisitController>(a => a.Post(null)), newVisit);
+                return Created(nameof(Post), newVisit);
             }
             catch (FormatException)
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.PatientReceivedWithEmptyGuid)
                     .HasInternalMessage("The patient has an empty Guid which is not acceptable.")
-                    .TellsUser("The patent information was not formatted properly, it is missing critical identifying information")
+                    .TellsUser(
+                        "The patent information was not formatted properly, it is missing critical identifying information")
+                    .Build();
+                return BadRequest(error);
+            }
+            catch (ArgumentNullException)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromUserIsInvalid)
+                    .HasInternalMessage("The visit was received as null. No resource was created.")
+                    .TellsUser("The visit could not be created becuase the request was not properly formatted")
                     .Build();
                 return BadRequest(error);
             }
@@ -137,7 +147,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             if (!ModelState.IsValid)
             {
                 var error = _errorService.PayloadBuilder
-                    .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromClientIsInvalid)
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromUserIsInvalid)
                     .HasInternalMessage("The data model supplied did not pass model validation and could not be updated.")
                     .TellsUser("The information provided is not properly formatted and therefore it could not be updated.")
                     .Build();

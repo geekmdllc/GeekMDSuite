@@ -10,7 +10,7 @@
         RepositoryEntityNotFound = 5,
         VisitNotFoundInRepository = 6,
         PatientReceivedWithEmptyGuid = 7,
-        VisitDataFromClientIsInvalid = 8,
+        VisitDataFromUserIsInvalid = 8,
         PatientStubFromUserIsInvalid = 9,
         MedicalRecordNumberIsNotUniqe = 10
     }

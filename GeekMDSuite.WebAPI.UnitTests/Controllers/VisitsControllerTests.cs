@@ -35,7 +35,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
         private readonly VisitController _controller;
 
         [Fact]
-        public async Task Add_GivenNewVisit_CreatesAVisitWithVisitGuid()
+        public async Task Post_GivenNewVisit_CreatesAVisitWithVisitGuid()
         {
             await _controller.Post(new VisitStubFromUser
             {

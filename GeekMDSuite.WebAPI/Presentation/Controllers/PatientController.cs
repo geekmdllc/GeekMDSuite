@@ -23,7 +23,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly INewPatientService _newPatientService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUrlHelper _urlHelper;
-        private IErrorService _errorService;
+        private readonly IErrorService _errorService;
 
         public PatientController(IUnitOfWork unitOfWork,
             INewPatientService newPatientService,
@@ -81,12 +81,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientStubFromUser patient)
         {
+            const string userBadRequest = "The patient could not be created due to a poorly formatted request";
             if (!ModelState.IsValid)
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.PatientStubFromUserIsInvalid)
                     .HasInternalMessage("The model did not pass validation and therefore the resource was not created")
-                    .TellsUser("The patient could not be created due to a poorly formatted request")
+                    .TellsUser(userBadRequest)
                     .Build();
                 return BadRequest(error);
             }
@@ -104,7 +105,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     .HasInternalMessage(
                         "The may have passed validation, but there was a problem in the formatting of it's properties. Exception details:  " +
                         e.Message)
-                    .TellsUser("The patient could not be created due to a poorly formatted request")
+                    .TellsUser(userBadRequest)
                     .Build();
                 return BadRequest(error);
             }
@@ -117,6 +118,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     .TellsUser("The patient could not be created because the medical record number already exists")
                     .Build();
                 return Conflict(error);
+            }
+            catch (ArgumentNullException)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientStubFromUserIsInvalid)
+                    .HasInternalMessage("The model was received as null. Resource was not created.")
+                    .TellsUser(userBadRequest);
+
+                return BadRequest(error);
             }
         }
 

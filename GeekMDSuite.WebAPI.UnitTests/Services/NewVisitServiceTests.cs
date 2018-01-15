@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
@@ -36,9 +35,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Services
         }
 
         [Fact]
-        public async Task GenerateUsing_WhenProperlyLoadedAndGivenPatientWithEmptyGuid_ThrowsInvalidDataException()
+        public async Task GenerateUsing_WhenProperlyLoadedAndGivenPatientWithEmptyGuid_ThrowsFormatException()
         {
-            await Assert.ThrowsAsync<InvalidDataException>(() => _service
+            await Assert.ThrowsAsync<FormatException>(() => _service
                 .WithUnitOfWork(_unitOfWork)
                 .UsingTemplatePatientEntity(new VisitEntity
                 {
