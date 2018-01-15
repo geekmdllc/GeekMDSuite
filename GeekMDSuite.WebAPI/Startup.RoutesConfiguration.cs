@@ -1,5 +1,4 @@
-﻿using System;
-using AspNet.Mvc.TypedRouting.Routing;
+﻿using AspNet.Mvc.TypedRouting.Routing;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
@@ -9,6 +8,7 @@ using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.CompositeScores;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using Microsoft.AspNetCore.Builder;
+using System;
 
 namespace GeekMDSuite.WebAPI
 {

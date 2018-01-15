@@ -27,7 +27,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         {
             var results = await Context.Set<T>().ToListAsync();
             if (!results.Any())
-                throw new RepositoryElementNotFoundException();
+                throw new RepositoryEntityNotFoundException();
 
             return results;
         }
@@ -40,7 +40,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             }
             catch
             {
-                throw new RepositoryElementNotFoundException(id);
+                throw new RepositoryEntityNotFoundException(id);
             }
         }
 

@@ -14,7 +14,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             VerifyContextIsLoaded();
             if (template == null) throw new ArgumentNullException(nameof(template));
             if (template.PatientGuid == Guid.Empty)
-                throw new InvalidDataException(
+                throw new FormatException(
                     $"{nameof(UsingTemplatePatientEntity)} must receive a {nameof(VisitEntity)} with a valid PatientGuid.");
 
             var newVisitEntity = new VisitEntity

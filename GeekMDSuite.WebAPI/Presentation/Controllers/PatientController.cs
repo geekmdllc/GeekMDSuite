@@ -23,12 +23,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly INewPatientService _newPatientService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUrlHelper _urlHelper;
+        private IErrorService _errorService;
 
         public PatientController(IUnitOfWork unitOfWork,
             INewPatientService newPatientService,
             IMapper mapper,
-            IUrlHelper urlHelper)
+            IUrlHelper urlHelper,
+            IErrorService errorService)
         {
+            _errorService = errorService;
             _urlHelper = urlHelper;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -60,22 +63,33 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             try
             {
                 var patientStub = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(guid));
-
                 var patientResource = GeneratePatientResource(patientStub);
-
                 return Ok(patientResource);
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryEntityNotFoundException)
             {
-                return BadRequest(guid);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientNotFoundInRepository)
+                    .HasInternalMessage($"A search for Guid {guid} yielded no patients.")
+                    .TellsUser("The requested user could not be found")
+                    .Build();
+                
+                return BadRequest(error);
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientStubFromUser patient)
         {
-            if (!ModelState.IsValid) 
-                return BadRequest(patient);
+            if (!ModelState.IsValid)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientStubFromUserIsInvalid)
+                    .HasInternalMessage("The model did not pass validation and therefore the resource was not created")
+                    .TellsUser("The patient could not be created due to a poorly formatted request")
+                    .Build();
+                return BadRequest(error);
+            }
 
             try
             {
@@ -83,17 +97,26 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var newPatient = await CreateNewPatientEntity(newPatientEntity);
                 return Created(nameof(Post), newPatient);
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
-                return BadRequest(patient);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientStubFromUserIsInvalid)
+                    .HasInternalMessage(
+                        "The may have passed validation, but there was a problem in the formatting of it's properties. Exception details:  " +
+                        e.Message)
+                    .TellsUser("The patient could not be created due to a poorly formatted request")
+                    .Build();
+                return BadRequest(error);
             }
             catch (MedicalRecordNumberNotUniqueException)
             {
-                return Conflict(patient);
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest(patient);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.MedicalRecordNumberIsNotUniqe)
+                    .HasInternalMessage(
+                        $"Medical record number {patient.MedicalRecordNumber} is not unique in the repository. Resource not created.")
+                    .TellsUser("The patient could not be created because the medical record number already exists")
+                    .Build();
+                return Conflict(error);
             }
         }
 

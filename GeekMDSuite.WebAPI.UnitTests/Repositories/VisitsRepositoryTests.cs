@@ -114,7 +114,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task FindByGuid_GivenEmptyGuid_ReturnsRepositoryElementNotFound()
         {
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
                 _unitOfWork.Visits.FindByGuid(Guid.NewGuid()));
         }
 

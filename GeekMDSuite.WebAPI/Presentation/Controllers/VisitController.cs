@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -24,12 +23,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly INewVisitService _newVisitService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUrlHelper _urlHelper;
+        private readonly IErrorService _errorService;
 
         public VisitController(IUnitOfWork unitOfWork,
             INewVisitService newVisitService,
             IMapper mapper,
-            IUrlHelper linkService)
+            IUrlHelper linkService,
+            IErrorService errorService)
         {
+            _errorService = errorService;
             _urlHelper = linkService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -72,17 +74,40 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             }
             catch (ArgumentOutOfRangeException)
             {
-                return BadRequest("An emtpy Guid was provided.");
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitNotFoundInRepository)
+                    .HasInternalMessage($"Guid {guid} is not valid.")
+                    .TellsUser("We were not able to process the request due it's improper formatting.")
+                    .Build();
+                
+                return BadRequest(error);
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryEntityNotFoundException)
             {
-                return NotFound();
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
+                    .HasInternalMessage($"A entity with Guid {guid} could not be located in the repository.")
+                    .TellsUser($"We were not able to locate the requested visit")
+                    .Build();
+                
+                return NotFound(error);
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] VisitStubFromUser visitStub)
         {
+            if (!ModelState.IsValid)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromClientIsInvalid)
+                    .HasInternalMessage("The data model supplied did not pass model validation. The resource was therefore not created.")
+                    .TellsUser("The information provided is not properly formatted and the visit was not created.")
+                    .Build();
+
+                return BadRequest(error);
+            }
+            
             var newVisitEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(visitStub);
             try
             {
@@ -92,15 +117,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
                 await _unitOfWork.Visits.Add(newVisit);
                 await _unitOfWork.Complete();
-                return Ok(newVisit);
+                return Created(_urlHelper.Action<VisitController>(a => a.Post(null)), newVisit);
             }
-            catch (InvalidDataException)
+            catch (FormatException)
             {
-                return BadRequest("PatientGuid is empty.");
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest($"{nameof(VisitEntity)} is malformed.");
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientReceivedWithEmptyGuid)
+                    .HasInternalMessage("The patient has an empty Guid which is not acceptable.")
+                    .TellsUser("The patent information was not formatted properly, it is missing critical identifying information")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -108,23 +134,34 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [Route("{guid}")]
         public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStubFromUser entity)
         {
-            var updatedEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(entity);
-            var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.Guid);
-            trackedEntity.MapValues(updatedEntity);
+            if (!ModelState.IsValid)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromClientIsInvalid)
+                    .HasInternalMessage("The data model supplied did not pass model validation and could not be updated.")
+                    .TellsUser("The information provided is not properly formatted and therefore it could not be updated.")
+                    .Build();
+
+                return BadRequest(error);
+            }
 
             try
             {
+                var updatedEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(entity);
+                var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.Guid);
+                trackedEntity.MapValues(updatedEntity);
                 await _unitOfWork.Visits.Update(trackedEntity);
                 await _unitOfWork.Complete();
                 return Ok();
             }
-            catch (RepositoryElementNotFoundException e)
+            catch (RepositoryEntityNotFoundException)
             {
-                return NotFound(e.Message);
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest("A null entity was provided.");
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitNotFoundInRepository)
+                    .HasInternalMessage($"Visit {entity.Guid} could not be located. No resource was updated.")
+                    .TellsUser($"There was an error locating the visit and we could not update it.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -132,16 +169,21 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [Route("{guid}")]
         public async Task<IActionResult> Delete(Guid guid)
         {
-            var trackedEntity = await _unitOfWork.Visits.FindByGuid(guid);
             try
             {
+                var trackedEntity = await _unitOfWork.Visits.FindByGuid(guid);
                 await _unitOfWork.Visits.Delete(trackedEntity.Id);
                 await _unitOfWork.Complete();
                 return NoContent();
             }
-            catch (RepositoryElementNotFoundException e)
+            catch (RepositoryEntityNotFoundException)
             {
-                return NotFound(e.Message);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.VisitNotFoundInRepository)
+                    .HasInternalMessage($"Visit {guid} could not be located. No resource was updated.")
+                    .TellsUser($"There was an error locating the visit and we could not update it.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -175,28 +217,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     HtmlMethod = HtmlMethod.Get
                 }
             };
-        }
-
-        private async Task<PatientResource> CreatePatientResource(PatientStub patientStub)
-        {
-            var patientResource = new PatientResource
-            {
-                Properties = patientStub,
-                Visits = (await _unitOfWork.Visits.All())
-                    .Where(v => v.PatientGuid == patientStub.Guid)
-                    .Select(v => _mapper.Map<VisitEntity, VisitStub>(v)).ToList(),
-                Links = new List<ResourceLink>
-                {
-                    new ResourceLink
-                    {
-                        Description = "Get patient",
-                        Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patientStub.Guid)),
-                        HtmlMethod = HtmlMethod.Get,
-                        Relationship = UrlRelationship.Next
-                    }
-                }
-            };
-            return patientResource;
         }
     }
 }

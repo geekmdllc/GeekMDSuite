@@ -25,7 +25,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             var result = await Context.Set<T>().Where(set => set.Guid == visitGuid).ToListAsync();
 
             if (!result.Any())
-                throw new RepositoryElementNotFoundException(visitGuid.ToString());
+                throw new RepositoryEntityNotFoundException(visitGuid.ToString());
 
             return result;
         }

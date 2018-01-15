@@ -25,7 +25,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task FindByGuid_GivenEmptyGuid_ThrowsRepositoryElementyNotFoundException()
         {
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() => _unitOfWork.Patients.FindByGuid(Guid.Empty));
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() => _unitOfWork.Patients.FindByGuid(Guid.Empty));
         }
 
         [Fact]
@@ -148,7 +148,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task FindByVisit_GivenGuidThatDoesNotExistInRepository_ThrowsRepositoryElementNotFoundException()
         {
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
                 _unitOfWork.Patients.FindByVisit(Guid.NewGuid()));
         }
 

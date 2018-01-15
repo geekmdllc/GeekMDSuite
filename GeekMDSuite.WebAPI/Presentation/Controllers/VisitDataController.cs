@@ -45,7 +45,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 });
                 return Ok(resources);
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryEntityNotFoundException)
             {
                 return NotFound();
             }
@@ -66,7 +66,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 };
                 return Ok(resource);
             }
-            catch (RepositoryElementNotFoundException)
+            catch (RepositoryEntityNotFoundException)
             {
                 return NotFound($"Cannot locate element with id {id}.");
             }

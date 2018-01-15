@@ -8,6 +8,7 @@ using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.DataAccess.Services;
+using GeekMDSuite.WebAPI.Presentation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +49,7 @@ namespace GeekMDSuite.WebAPI
             services.AddSingleton<IClassificationRepository, ClassificationRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddSingleton<IErrorService, ErrorService>();
             services.AddScoped<IUrlHelper>(factory =>
             {
                 var actionContext = factory.GetService<IActionContextAccessor>()

@@ -20,14 +20,14 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
             await uow.Audiograms.Delete(audiogram.Id);
             await uow.Complete();
 
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
                 uow.Audiograms.FindById(audiogram.Id));
         }
 
         [Fact]
         public async Task Delete_GivenIndexOutOfRange_ThrowsRepositoryElementNotFoundException()
         {
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
                 _unitOfWorkSeeded.VisitData<AudiogramEntity>().Delete(int.MaxValue));
         }
     }

@@ -59,7 +59,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 await UnitOfWork.Complete();
                 return Ok();
             }
-            catch (RepositoryElementNotFoundException e)
+            catch (RepositoryEntityNotFoundException e)
             {
                 return NotFound(e.Message);
             }
@@ -79,7 +79,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 await UnitOfWork.Complete();
                 return Ok();
             }
-            catch (RepositoryElementNotFoundException e)
+            catch (RepositoryEntityNotFoundException e)
             {
                 return NotFound(e.Message);
             }

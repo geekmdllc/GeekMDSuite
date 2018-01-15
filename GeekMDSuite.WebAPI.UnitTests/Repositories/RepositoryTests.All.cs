@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         [Fact]
         public async Task All_GivenEmptyContext_ThrowsRepositoryElementNotFoundException()
         {
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() =>
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
                 _unitOfWorkEmpty.VisitData<AudiogramEntity>().All());
         }
 

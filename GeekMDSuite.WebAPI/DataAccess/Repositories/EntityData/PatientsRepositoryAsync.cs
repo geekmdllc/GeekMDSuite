@@ -26,7 +26,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             }
             catch
             {
-                throw new RepositoryElementNotFoundException(guid.ToString());
+                throw new RepositoryEntityNotFoundException(guid.ToString());
             }
         }
 
@@ -55,6 +55,9 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 
         public async Task<PatientEntity> FindByVisit(Guid guid)
         {
+            if (guid == Guid.Empty)
+                throw new ArgumentOutOfRangeException();
+            
             try
             {
                 var visit = await Context.Visits.FirstAsync(v => v.Guid == guid);
@@ -62,7 +65,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             }
             catch
             {
-                throw new RepositoryElementNotFoundException(guid.ToString());
+                throw new RepositoryEntityNotFoundException(guid.ToString());
             }
         }
     }

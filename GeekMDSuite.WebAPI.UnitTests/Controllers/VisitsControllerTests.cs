@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -6,12 +7,15 @@ using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
+using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.Extensions.Configuration;
 using Xunit;
+using IConfigurationProvider = Microsoft.Extensions.Configuration.IConfigurationProvider;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Controllers
 {
@@ -24,7 +28,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Controllers
                 _unitOfWork, 
                 new NewVisitService(), 
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))),
-                new UrlHelper(new ActionContext()));
+                new UrlHelper(new ActionContext()),
+                new ErrorService(new ConfigurationRoot(new List<IConfigurationProvider>())));
         }
 
         private readonly VisitController _controller;

@@ -54,7 +54,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             }
             catch
             {
-                throw new RepositoryElementNotFoundException(guid.ToString());
+                throw new RepositoryEntityNotFoundException(guid.ToString());
             }
         }
 

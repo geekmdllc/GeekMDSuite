@@ -13,7 +13,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         {
             var repository = _unitOfWorkEmpty.VisitData<AudiogramEntity>();
 
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() => repository.FindById(1));
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() => repository.FindById(1));
         }
 
         [Fact]
@@ -21,7 +21,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Repositories
         {
             var audiograms = _unitOfWorkSeeded.VisitData<AudiogramEntity>();
 
-            await Assert.ThrowsAsync<RepositoryElementNotFoundException>(() => audiograms.FindById(int.MaxValue));
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() => audiograms.FindById(int.MaxValue));
         }
 
         [Fact]
