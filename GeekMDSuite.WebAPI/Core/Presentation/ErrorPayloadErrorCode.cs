@@ -2,7 +2,7 @@
 {
     public enum ErrorPayloadErrorCode
     {
-        PatientNotFoundInRepository = 0,
+        PatientNotFoundByGuidInRepository = 0,
         PatientNotFoundByIdInRepository = 1,
         PatientNotFoundByNameInRepository = 2,
         PatientNotFoundByMedicalRecordNumberInRepository = 3,

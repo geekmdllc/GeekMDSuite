@@ -69,7 +69,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             catch (RepositoryEntityNotFoundException)
             {
                 var error = _errorService.PayloadBuilder
-                    .HasErrorCode(ErrorPayloadErrorCode.PatientNotFoundInRepository)
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientNotFoundByGuidInRepository)
                     .HasInternalMessage($"A search for Guid {guid} yielded no patients.")
                     .TellsUser("The requested user could not be found")
                     .Build();
@@ -124,24 +124,60 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [Route("{guid}")]
         public async Task<IActionResult> Put(Guid guid, [FromBody] PatientStubFromUser patientStub)
         {
-            var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
-            var updatedPatient = _mapper.Map<PatientStubFromUser, PatientEntity>(patientStub);
+            if (!ModelState.IsValid)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientStubFromUserIsInvalid)
+                    .HasInternalMessage("The model did not pass validation and therefore the resource was not updated.")
+                    .TellsUser("The patient could not be updated due to a poorly formatted request.")
+                    .Build();
+                return BadRequest(error);
+            }
+            
+            try
+            {
+                var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
+                var updatedPatient = _mapper.Map<PatientStubFromUser, PatientEntity>(patientStub);
 
-            trackedPatient.MapValues(updatedPatient);
-            await _unitOfWork.Complete();
+                trackedPatient.MapValues(updatedPatient);
+                await _unitOfWork.Complete();
 
-            return Ok(_mapper.Map<PatientEntity, PatientStub>(trackedPatient));
+                return Ok(_mapper.Map<PatientEntity, PatientStub>(trackedPatient));
+            }
+            catch (RepositoryEntityNotFoundException)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientNotFoundByGuidInRepository)
+                    .HasInternalMessage($"A patient with Guid {guid} could not be located in the repository. Resource not updated.")
+                    .TellsUser("The patient couldnot be found and therefore was not updated")
+                    .Build();
+
+                return BadRequest(error);
+            }
         }
 
         [HttpDelete]
         [Route("{guid}")]
         public async Task<IActionResult> Delete(Guid guid)
         {
-            var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
-            await _unitOfWork.Patients.Delete(trackedPatient.Id);
-            await _unitOfWork.Complete();
+            try
+            {
+                var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
+                await _unitOfWork.Patients.Delete(trackedPatient.Id);
+                await _unitOfWork.Complete();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (RepositoryEntityNotFoundException)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.PatientNotFoundByGuidInRepository)
+                    .HasInternalMessage($"A patient with Guid {guid} could not be located in the repository. Resource not deleted.")
+                    .TellsUser("The patient couldnot be found and therefore was not deleted.")
+                    .Build();
+
+                return BadRequest(error);
+            }
         }
 
         [HttpGet]
@@ -154,7 +190,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             UpdateVisitStubsSelfLinks(visitStubs);
 
             var visitResources = await CompileVisitResources(visitStubs);
-            foreach (var visit in visitResources) UpdatePatientStubSelfLinks(visit.Patient);
+            foreach (var visit in visitResources) 
+                UpdatePatientStubSelfLinks(visit.Patient);
 
             return Ok(visitResources);
         }
