@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.DataAccess.Context;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +48,14 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 
         public async Task<VisitEntity> FindByGuid(Guid guid)
         {
-            return await Context.Visits.FirstAsync(v => v.Guid == guid);
+            try
+            {
+                return await Context.Visits.FirstAsync(v => v.Guid == guid);
+            }
+            catch
+            {
+                throw new RepositoryElementNotFoundException(guid.ToString());
+            }
         }
 
         public async Task<IEnumerable<VisitEntity>> FindByPatient(Guid guid)
