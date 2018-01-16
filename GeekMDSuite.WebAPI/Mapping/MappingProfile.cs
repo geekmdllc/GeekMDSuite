@@ -67,7 +67,7 @@ namespace GeekMDSuite.WebAPI.Mapping
             CreateMap<PatientStubFromUser, PatientEntity>();
             CreateMap<PatientStubFromUser, PatientStub>();
             // Peripheral Vision
-            CreateMap<PeripheralVisionEntity, PeripheralVistionStub>();
+            CreateMap<PeripheralVisionEntity, PeripheralVisionStub>();
             CreateMap<PeripheralVisionStubFromUser, PeripheralVisionEntity>();
             CreateMap<PeripheralVisionStubFromUser, PeripheralVisionEntity>();
             // Pushups 

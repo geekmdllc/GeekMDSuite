@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class PeripheralVisionController : VisitDataController<PeripheralVisionEntity, PeripheralVistionStub, PeripheralVisionStubFromUser, PeripheralVisionResource, PeripheralVisionController>
+    public class PeripheralVisionController : VisitDataController<PeripheralVisionEntity, PeripheralVisionStub, PeripheralVisionStubFromUser, PeripheralVisionResource, PeripheralVisionController>
     {
         public PeripheralVisionController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
         {

@@ -2,7 +2,7 @@
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
-    public class PeripheralVisionResource : Resource<PeripheralVistionStub>
+    public class PeripheralVisionResource : Resource<PeripheralVisionStub>
     {
         
     }
