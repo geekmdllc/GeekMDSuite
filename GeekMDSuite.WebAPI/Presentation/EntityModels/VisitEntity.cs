@@ -1,13 +1,14 @@
 ﻿using System;
 using GeekMDSuite.WebAPI.Core.Models;
+using GeekMDSuite.WebAPI.Core.Presentation;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class VisitEntity : IVisitData<VisitEntity>
+    public class VisitEntity : IMapProperties<VisitEntity>, IVisitData
     {
         public VisitEntity()
         {
-            VisitId = Guid.Empty;
+            Guid = Guid.Empty;
         }
 
         public VisitEntity(VisitEntity visitEntity) : this()
@@ -15,15 +16,18 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(visitEntity);
         }
 
-        public Guid PatientGuid { get; set; }
         public DateTime Date { get; set; }
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid PatientGuid { get; set; }
+        public VisitStatus Status { get; set; }
 
-        public void MapValues(VisitEntity subject)
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
+
+        public virtual void MapValues(VisitEntity subject)
         {
             PatientGuid = subject.PatientGuid;
             Date = subject.Date;
+            Status = subject.Status;
         }
     }
 }

@@ -7,11 +7,11 @@ namespace GeekMDSuite.Analytics.Classification
     {
         public static readonly int UpperLimitOfNormal = 21;
 
-        private readonly OcularPressure _ocularPressure;
+        private readonly OccularPressure _occularPressure;
 
-        public OcularPressureClassification(OcularPressure pressure)
+        public OcularPressureClassification(OccularPressure pressure)
         {
-            _ocularPressure = pressure ?? throw new ArgumentNullException(nameof(pressure));
+            _occularPressure = pressure ?? throw new ArgumentNullException(nameof(pressure));
         }
 
         public OcularPressureClassificationResult Left => ClassifyLeft();
@@ -26,19 +26,19 @@ namespace GeekMDSuite.Analytics.Classification
 
         private OcularPressureClassificationResult Classify()
         {
-            return _ocularPressure.Left > _ocularPressure.Right
+            return _occularPressure.Left > _occularPressure.Right
                 ? ClassifyLeft()
                 : ClassifyRight();
         }
 
         private OcularPressureClassificationResult ClassifyLeft()
         {
-            return ClassifySide(_ocularPressure.Left);
+            return ClassifySide(_occularPressure.Left);
         }
 
         private OcularPressureClassificationResult ClassifyRight()
         {
-            return ClassifySide(_ocularPressure.Right);
+            return ClassifySide(_occularPressure.Right);
         }
 
         private static OcularPressureClassificationResult ClassifySide(int side)

@@ -14,8 +14,8 @@ namespace GeekMDSuite.Analytics.Classification
             Patient = patient;
         }
 
-        public GripStrength GripStrength { get; private set; }
-        public Patient Patient { get; private set; }
+        public GripStrength GripStrength { get; }
+        public Patient Patient { get; }
     }
 
     public class GripStrengthClassification : IClassifiable<GripStrengthClassificationResult>

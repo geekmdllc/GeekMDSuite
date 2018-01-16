@@ -3,7 +3,6 @@ using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-
     public class HipToWaistClassification : IClassifiable<HipToWaistRatio>
     {
         private readonly BodyComposition _bodyComposition;
@@ -12,7 +11,8 @@ namespace GeekMDSuite.Analytics.Classification
         public HipToWaistClassification(BodyCompositionClassificationParameters parameters)
         {
             _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
-            _bodyComposition = parameters.BodyComposition ?? throw new ArgumentNullException(nameof(parameters.BodyComposition));
+            _bodyComposition = parameters.BodyComposition ??
+                               throw new ArgumentNullException(nameof(parameters.BodyComposition));
         }
 
         public double Ratio => _bodyComposition.Waist.Inches / _bodyComposition.Hips.Inches;

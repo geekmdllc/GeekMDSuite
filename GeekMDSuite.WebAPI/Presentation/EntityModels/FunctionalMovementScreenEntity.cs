@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IVisitData<FunctionalMovementScreen>
+    public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IMapProperties<FunctionalMovementScreen>, IVisitData
     {
         public FunctionalMovementScreenEntity()
         {
@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             RotaryStability = new FmsMovementSet();
             ShoulderMobility = new FmsMovementSet();
             TrunkStabilityPushup = new FmsMovementData();
-            VisitId = Guid.Empty;
+            Guid = Guid.Empty;
         }
 
         public FunctionalMovementScreenEntity(FunctionalMovementScreen functionalMovementScreen) : this()
@@ -24,7 +24,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         }
 
         public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid Guid { get; set; }
 
         public void MapValues(FunctionalMovementScreen subject)
         {

@@ -8,9 +8,8 @@
         {
         }
 
-        public CardiovascularRegimen() : base()
+        public CardiovascularRegimen()
         {
-            
         }
 
         public static CardiovascularRegimen Build(double sessionsPerWeek, double averageSessionDuration,

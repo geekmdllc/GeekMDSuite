@@ -8,15 +8,15 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<StretchingRegimenEntity> GetStretchingRegimenEntities()
         {
-            return new List<StretchingRegimenEntity>()
+            return new List<StretchingRegimenEntity>
             {
                 new StretchingRegimenEntity(StretchingRegimen.Build(7, 10, ExerciseIntensity.High))
                 {
-                    VisitId = BruceWaynesVisitGuid
+                    Guid = BruceWaynesVisitGuid
                 },
                 new StretchingRegimenEntity(StretchingRegimen.Build(1, 5, ExerciseIntensity.Low))
                 {
-                    VisitId = XerMajestiesVisitGuid
+                    Guid = XerMajestiesVisitGuid
                 }
             };
         }

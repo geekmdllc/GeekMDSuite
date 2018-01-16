@@ -30,7 +30,9 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
                 .SetWaist(ratio)
                 .BuildWithoutModelValidation();
 
-            var classification = new HipToWaistClassification(new BodyCompositionClassificationParameters(bodyComposition, _patient)).Classification;
+            var classification =
+                new HipToWaistClassification(new BodyCompositionClassificationParameters(bodyComposition, _patient))
+                    .Classification;
             Assert.Equal(expectedClassifcation, classification);
         }
 
@@ -40,14 +42,17 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullBodyComposition_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new HipToWaistClassification(new BodyCompositionClassificationParameters(BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null)));
+                new HipToWaistClassification(
+                    new BodyCompositionClassificationParameters(
+                        BodyCompositionBuilder.Initialize().BuildWithoutModelValidation(), null)));
         }
 
         [Fact]
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new HipToWaistClassification(new BodyCompositionClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation())));
+                new HipToWaistClassification(new BodyCompositionClassificationParameters(null,
+                    PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
     }
 }

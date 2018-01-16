@@ -11,7 +11,7 @@ namespace GeekMDSuite.Analytics.Classification
             Patient = patient;
         }
 
-        public MuscularStrengthTest Test { get; private set; }
-        public Patient Patient { get; private set; }
+        public MuscularStrengthTest Test { get; }
+        public Patient Patient { get; }
     }
 }

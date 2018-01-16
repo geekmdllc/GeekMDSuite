@@ -4,13 +4,17 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class BodyCompositionEntity : BodyComposition, IVisitData<BodyComposition>
+    public class BodyCompositionEntity : BodyComposition, IMapProperties<BodyComposition>, IVisitData
     {
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
+        
         public BodyCompositionEntity()
         {
+            Guid = Guid.Empty;
         }
 
-        public BodyCompositionEntity(BodyComposition bodyComposition)
+        public BodyCompositionEntity(BodyComposition bodyComposition) : this()
         {
             MapValues(bodyComposition);
         }
@@ -22,8 +26,5 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Waist.Inches = subject.Waist.Inches;
             Weight.Pounds = subject.Weight.Pounds;
         }
-
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
     }
 }

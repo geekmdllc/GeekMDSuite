@@ -15,7 +15,7 @@ namespace GeekMDSuite.Analytics.Classification
         {
             if (patient == null) throw new ArgumentNullException(nameof(patient));
             _test = test ?? throw new ArgumentNullException(nameof(test));
-            
+
             if (_test.Type == StrengthTest.Pushups)
                 _ranges = PushupsRepository.GetRanges(patient);
             else if (_test.Type == StrengthTest.Situps)

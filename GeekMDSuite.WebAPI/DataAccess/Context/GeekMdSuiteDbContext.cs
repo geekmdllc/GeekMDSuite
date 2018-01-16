@@ -1,7 +1,6 @@
 ﻿using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.WindowsAzure.Storage.Blob.Protocol;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Context
 {
@@ -24,7 +23,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<FunctionalMovementScreenEntity> FunctionalMovementScreens { get; set; }
         public virtual DbSet<GripStrengthEntity> GripStrengths { get; set; }
         public virtual DbSet<IshiharaSixPlateEntity> IshiharaSixPlates { get; set; }
-        public virtual DbSet<OcularPressureEntity> OcularPressures { get; set; }
+        public virtual DbSet<OccularPressureEntity> OcularPressures { get; set; }
         public virtual DbSet<PatientEntity> Patients { get; set; }
         public virtual DbSet<PeripheralVisionEntity> PeripheralVisions { get; set; }
         public virtual DbSet<PushupsEntity> Pushups { get; set; }
@@ -35,7 +34,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
         public virtual DbSet<VisitEntity> Visits { get; set; }
         public virtual DbSet<VisualAcuityEntity> VisualAcuities { get; set; }
         public virtual DbSet<VitalSignsEntity> VitalSigns { get; set; }
-        
+
         public virtual DbSet<ResistanceRegimenEntity> ResistanceRegimens { get; set; }
         public virtual DbSet<CardiovascularRegimenEntity> CardiovascularRegimens { get; set; }
         public virtual DbSet<StretchingRegimenEntity> StretchingRegimens { get; set; }

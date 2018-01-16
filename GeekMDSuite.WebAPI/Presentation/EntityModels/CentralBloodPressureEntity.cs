@@ -4,11 +4,11 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class CentralBloodPressureEntity : CentralBloodPressure, IVisitData<CentralBloodPressure>
+    public class CentralBloodPressureEntity : CentralBloodPressure, IMapProperties<CentralBloodPressure>, IVisitData
     {
         public CentralBloodPressureEntity()
         {
-            VisitId = Guid.Empty;
+            Guid = Guid.Empty;
         }
 
         public CentralBloodPressureEntity(CentralBloodPressure centralBloodPressure) : this()
@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         }
 
         public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid Guid { get; set; }
 
         public void MapValues(CentralBloodPressure subject)
         {

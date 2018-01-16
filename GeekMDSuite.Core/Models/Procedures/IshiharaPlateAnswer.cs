@@ -8,7 +8,7 @@
             PlateRead = plateRead;
         }
 
-        protected internal IshiharaPlateAnswer()
+        public IshiharaPlateAnswer()
         {
         }
 

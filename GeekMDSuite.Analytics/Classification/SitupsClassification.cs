@@ -1,13 +1,11 @@
 ﻿using System;
-using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-
     public class SitupsClassification : MuscularStrengthClassification
     {
-        public SitupsClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test, parameters.Patient)
+        public SitupsClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test,
+            parameters.Patient)
         {
             if (parameters.Test == null) throw new ArgumentNullException(nameof(parameters.Test));
             if (parameters.Patient == null) throw new ArgumentNullException(nameof(parameters.Patient));

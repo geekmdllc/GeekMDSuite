@@ -9,10 +9,11 @@ namespace GeekMDSuite.Analytics.Classification
         private readonly BodyComposition _bodyComposition;
         private readonly Patient _patient;
 
-        public BodyMassIndexClassification( BodyCompositionClassificationParameters parameters)
+        public BodyMassIndexClassification(BodyCompositionClassificationParameters parameters)
         {
             _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
-            _bodyComposition = parameters.BodyComposition ?? throw new ArgumentNullException(nameof(parameters.BodyComposition));
+            _bodyComposition = parameters.BodyComposition ??
+                               throw new ArgumentNullException(nameof(parameters.BodyComposition));
         }
 
         public BodyMassIndex Classification => Classify();

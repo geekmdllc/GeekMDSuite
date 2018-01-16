@@ -10,7 +10,7 @@ namespace GeekMDSuite.Analytics.Classification
             Patient = patient;
         }
 
-        public BodyComposition BodyComposition { get; private set; }
-        public Patient Patient { get; private set; }
+        public BodyComposition BodyComposition { get; }
+        public Patient Patient { get; }
     }
 }

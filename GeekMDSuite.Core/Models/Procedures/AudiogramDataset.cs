@@ -24,7 +24,7 @@
             F8000 = f8000;
         }
 
-        protected internal AudiogramDataset()
+        public AudiogramDataset()
         {
             F125 = new AudiogramDatapoint();
             F250 = new AudiogramDatapoint();

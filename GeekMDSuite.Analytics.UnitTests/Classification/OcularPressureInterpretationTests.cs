@@ -15,7 +15,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void Classify_GivenValues_ReturnsExpectedClassification(int left, int right,
             OcularPressureClassificationResult expectedClassificationResult)
         {
-            var ocularPressure = OcularPressure.Build(left, right);
+            var ocularPressure = OccularPressure.Build(left, right);
             var classification = new OcularPressureClassification(ocularPressure).Classification;
 
             Assert.Equal(expectedClassificationResult, classification);

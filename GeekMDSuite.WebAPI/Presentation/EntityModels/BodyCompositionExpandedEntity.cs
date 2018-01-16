@@ -4,8 +4,11 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class BodyCompositionExpandedEntity : BodyCompositionExpanded, IVisitData<BodyCompositionExpanded>
+    public class BodyCompositionExpandedEntity : BodyCompositionExpanded, IMapProperties<BodyCompositionExpanded>, IVisitData
     {
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
+        
         public BodyCompositionExpandedEntity()
         {
         }
@@ -25,7 +28,5 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             VisceralFat = subject.VisceralFat;
         }
 
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
     }
 }

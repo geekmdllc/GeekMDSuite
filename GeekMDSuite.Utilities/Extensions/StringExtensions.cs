@@ -5,10 +5,11 @@ namespace GeekMDSuite.Utilities.Extensions
 {
     public static class StringExtensions
     {
-        public static bool IsEmpty(this string query)
-        {
-            return string.IsNullOrWhiteSpace(query);
-        }
+        public static bool DoesNotContain(this string self, string comparison) => !self.Contains(comparison);
+        
+        public static bool IsNotNullOrEmpty(this string self) => !IsEmpty(self);
+
+        public static bool IsEmpty(this string self) => string.IsNullOrWhiteSpace(self);
 
         public static bool HasStringsInCommonWith(this string self, string comparison)
         {
@@ -23,16 +24,21 @@ namespace GeekMDSuite.Utilities.Extensions
             return discoverd;
         }
 
-        public static bool IsEqualTo(this string query, string comparison)
+        public static bool DoesNotHaveStringsInCommonWith(this string self, string comparison)
         {
-            return string.Equals(query, comparison, StringComparison.OrdinalIgnoreCase);
+            return !HasStringsInCommonWith(self, comparison);
         }
 
-        public static string SplitAtCapitalization(this string str)
+        public static bool IsEqualTo(this string self, string comparison)
+        {
+            return string.Equals(self, comparison, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static string SplitAtCapitalization(this string self)
         {
             var i = 0;
             var newString = string.Empty;
-            foreach (var c in str) newString += $"{(char.IsUpper(c) && i++ > 0 ? $" {c}" : $"{c}")}";
+            foreach (var c in self) newString += $"{(char.IsUpper(c) && i++ > 0 ? $" {c}" : $"{c}")}";
 
             return newString;
         }

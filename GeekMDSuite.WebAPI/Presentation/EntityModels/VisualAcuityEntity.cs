@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class VisualAcuityEntity : VisualAcuity, IVisitData<VisualAcuity>
+    public class VisualAcuityEntity : VisualAcuity, IMapProperties<VisualAcuity>, IVisitData
     {
         public VisualAcuityEntity()
         {
@@ -23,6 +23,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         }
 
         public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid Guid { get; set; }
     }
 }

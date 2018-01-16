@@ -4,20 +4,19 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
-    public class StretchingRegimenEntity : StretchingRegimen, IVisitData<StretchingRegimen>
+    public class StretchingRegimenEntity : StretchingRegimen, IMapProperties<StretchingRegimen>, IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
-
         public StretchingRegimenEntity()
         {
-            
         }
 
         public StretchingRegimenEntity(StretchingRegimen regimen)
         {
             MapValues(regimen);
         }
+
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
 
         public void MapValues(StretchingRegimen subject)
         {

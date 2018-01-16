@@ -16,7 +16,8 @@ namespace GeekMDSuite.Analytics.Classification
         {
             _spirometry = parameters.Spirometry ?? throw new ArgumentNullException(nameof(parameters.Spirometry));
             _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
-            _bodyComposition = parameters.BodyComposition ?? throw new ArgumentNullException(nameof(parameters.BodyComposition));
+            _bodyComposition = parameters.BodyComposition ??
+                               throw new ArgumentNullException(nameof(parameters.BodyComposition));
         }
 
         public double PredictedForcedExpiratoryVolume1Second => Gender.IsGenotypeXy(_patient.Gender)

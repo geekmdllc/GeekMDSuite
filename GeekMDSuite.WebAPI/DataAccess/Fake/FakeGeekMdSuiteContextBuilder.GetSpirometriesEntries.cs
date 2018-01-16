@@ -16,14 +16,14 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetForcedExpiratoryVolume1Second(4.3)
                     .SetForcedVitalCapacity(6.7)
                     .SetPeakExpiratoryFlow(9.4)
-                    .Build()) {VisitId = BruceWaynesVisitGuid},
+                    .Build()) {Guid = BruceWaynesVisitGuid},
                 new SpirometryEntity(SpirometryBuilder.Initialize()
                     .SetForcedExpiratoryFlow25To75(4.5)
                     .SetForcedExpiratoryTime(5.5)
                     .SetForcedExpiratoryVolume1Second(3.3)
                     .SetForcedVitalCapacity(5.7)
                     .SetPeakExpiratoryFlow(8.4)
-                    .Build()) {VisitId = XerMajestiesVisitGuid}
+                    .Build()) {Guid = XerMajestiesVisitGuid}
             };
         }
     }

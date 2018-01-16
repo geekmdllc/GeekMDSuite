@@ -14,23 +14,6 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
             AverageSessionDuration = regimen.AverageSessionDuration;
             Intensity = regimen.Intensity;
         }
-        
-        public virtual ExericiseRegimen Classification
-        {
-            get
-            {
-                if (RegimenIsAdequate && TimeAspirationalOrHigher)
-                    return ExericiseRegimen.Aspirational;
-                return RegimenIsAdequate
-                    ? ExericiseRegimen.Adequate
-                    : ExericiseRegimen.Insufficient;
-            }
-        }
-
-        public override string ToString()
-        {
-            return Classification.ToString();
-        }
 
 
         public virtual bool RegimenIsAdequate => DurationAndIntensityAreAdequate;
@@ -39,17 +22,17 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
 
         public double DurationPercentOfGoalAchieved =>
             GoalMinutes > 0 ? 100 * TotalMinutes / GoalMinutes : 0;
-        
+
         public bool IntensityIsAdequate => IsHighIntensity || IsModerateIntensity;
 
         public bool DurationIsAdequate => IntensityIsAdequate && TimeGoalOrHigher;
-        
+
         public double SessionsPerWeek { get; }
-        
+
         public double AverageSessionDuration { get; }
-        
+
         public ExerciseIntensity Intensity { get; }
-        
+
         public double GoalMinutes
         {
             get
@@ -59,9 +42,9 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
                 return IsModerateIntensity ? Goals.ModerateIntensity : 0;
             }
         }
-        
+
         protected abstract ExerciseDurationGoals Goals { get; }
-        
+
         protected static double GoalMinutesHighIntensity =>
             ExerciseRegimenGoalsRepository.GetTotalWeeklyDurationGoals(ExerciseClassification.Cardiovascular)
                 .HighIntensity;
@@ -78,7 +61,24 @@ namespace GeekMDSuite.Analytics.Classification.PatientActivities
 
         protected bool IsModerateIntensity => Intensity == ExerciseIntensity.Moderate;
 
-        protected bool IsHighIntensity => Intensity == ExerciseIntensity.High || Intensity == ExerciseIntensity.Vigorous;
+        protected bool IsHighIntensity =>
+            Intensity == ExerciseIntensity.High || Intensity == ExerciseIntensity.Vigorous;
 
+        public virtual ExericiseRegimen Classification
+        {
+            get
+            {
+                if (RegimenIsAdequate && TimeAspirationalOrHigher)
+                    return ExericiseRegimen.Aspirational;
+                return RegimenIsAdequate
+                    ? ExericiseRegimen.Adequate
+                    : ExericiseRegimen.Insufficient;
+            }
+        }
+
+        public override string ToString()
+        {
+            return Classification.ToString();
+        }
     }
 }

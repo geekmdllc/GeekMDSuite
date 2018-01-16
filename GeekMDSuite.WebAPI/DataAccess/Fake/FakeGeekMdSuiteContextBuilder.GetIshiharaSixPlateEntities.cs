@@ -28,8 +28,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             return new List<IshiharaSixPlateEntity>
             {
-                new IshiharaSixPlateEntity(set1) {VisitId = BruceWaynesVisitGuid},
-                new IshiharaSixPlateEntity(set2) {VisitId = XerMajestyGuid}
+                new IshiharaSixPlateEntity(set1) {Guid = BruceWaynesVisitGuid},
+                new IshiharaSixPlateEntity(set2) {Guid = XerMajestyGuid}
             };
         }
     }

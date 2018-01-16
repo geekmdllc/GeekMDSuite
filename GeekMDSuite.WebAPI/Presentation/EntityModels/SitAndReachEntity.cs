@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class SitAndReachEntity : SitAndReach, IVisitData<SitAndReach>
+    public class SitAndReachEntity : SitAndReach, IMapProperties<SitAndReach>, IVisitData
     {
         public SitAndReachEntity()
         {
@@ -21,6 +21,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         }
 
         public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid Guid { get; set; }
     }
 }

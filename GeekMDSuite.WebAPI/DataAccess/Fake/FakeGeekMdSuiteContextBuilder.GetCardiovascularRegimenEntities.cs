@@ -8,16 +8,16 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
     {
         private static List<CardiovascularRegimenEntity> GetCardiovascularRegimenEntities()
         {
-            return new List<CardiovascularRegimenEntity>()
+            return new List<CardiovascularRegimenEntity>
             {
                 new CardiovascularRegimenEntity(CardiovascularRegimen.Build(6, 60, ExerciseIntensity.High))
                 {
-                    VisitId = BruceWaynesVisitGuid
+                    Guid = BruceWaynesVisitGuid
                 },
                 new CardiovascularRegimenEntity(CardiovascularRegimen.Build(0, 0, ExerciseIntensity.None))
                 {
-                    VisitId = XerMajestiesVisitGuid
-                },
+                    Guid = XerMajestiesVisitGuid
+                }
             };
         }
     }

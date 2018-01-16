@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class GripStrengthEntity : GripStrength, IVisitData<GripStrength>
+    public class GripStrengthEntity : GripStrength, IMapProperties<GripStrength>, IVisitData
     {
         public GripStrengthEntity()
         {
@@ -24,6 +24,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         }
 
         public int Id { get; set; }
-        public Guid VisitId { get; set; }
+        public Guid Guid { get; set; }
     }
 }

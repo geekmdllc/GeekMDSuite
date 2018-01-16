@@ -4,20 +4,20 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
 {
-    public class ResistanceRegimenEntity : ResistanceRegimen, IVisitData<ResistanceRegimen>
+    public class ResistanceRegimenEntity : ResistanceRegimen, IMapProperties<ResistanceRegimen>, IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitId { get; set; }
-
         public ResistanceRegimenEntity()
         {
-            
         }
 
         public ResistanceRegimenEntity(ResistanceRegimen resistanceRegimen)
         {
             MapValues(resistanceRegimen);
         }
+
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
+
         public void MapValues(ResistanceRegimen subject)
         {
             Features.Clear();

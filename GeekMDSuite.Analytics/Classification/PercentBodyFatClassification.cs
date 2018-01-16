@@ -3,14 +3,14 @@ using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-
     public class PercentBodyFatClassification : IClassifiable<PercentBodyFat>
     {
         private readonly Patient _patient;
 
         public PercentBodyFatClassification(BodyCompositionExpandedClassificationParameters parameters)
         {
-            if (parameters.BodyCompositionExpanded == null) throw new ArgumentNullException(nameof(parameters.BodyCompositionExpanded));
+            if (parameters.BodyCompositionExpanded == null)
+                throw new ArgumentNullException(nameof(parameters.BodyCompositionExpanded));
             _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
             Value = parameters.BodyCompositionExpanded.PercentBodyFat;
         }

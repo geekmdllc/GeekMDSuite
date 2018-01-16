@@ -3,18 +3,23 @@ using GeekMDSuite.Core.Models;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-    public class BodyCompositionExpandedClassification : BodyCompositionBaseClassification, IClassifiable<BodyCompositionClassificationResult>
+    public class BodyCompositionExpandedClassification : BodyCompositionBaseClassification,
+        IClassifiable<BodyCompositionClassificationResult>
     {
+        private readonly BodyCompositionExpanded _parameters;
+        private readonly Patient _patient;
+
         public BodyCompositionExpandedClassification(BodyCompositionExpandedClassificationParameters parameters)
             : base(parameters.BodyCompositionExpanded, parameters.Patient)
         {
             _parameters = parameters.BodyCompositionExpanded ??
-                                       throw new ArgumentNullException(nameof(parameters.BodyCompositionExpanded));
+                          throw new ArgumentNullException(nameof(parameters.BodyCompositionExpanded));
             _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
         }
 
         public PercentBodyFat PercentBodyFat =>
-            new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(_parameters, _patient)).Classification;
+            new PercentBodyFatClassification(new BodyCompositionExpandedClassificationParameters(_parameters, _patient))
+                .Classification;
 
         public VisceralFat VisceralFat =>
             new VisceralFatClassification(_parameters).Classification;
@@ -25,9 +30,6 @@ namespace GeekMDSuite.Analytics.Classification
         {
             return Classification.ToString();
         }
-        
-        private readonly BodyCompositionExpanded _parameters;
-        private readonly Patient _patient;
 
 
         protected override BodyCompositionClassificationResult Classify()

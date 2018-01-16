@@ -3,8 +3,10 @@
     public class BodyCompositionClassification : BodyCompositionBaseClassification,
         IClassifiable<BodyCompositionClassificationResult>
     {
-        public BodyCompositionClassification(BodyCompositionClassificationParameters bodyCompositionClassificationParameters)
-            : base(bodyCompositionClassificationParameters.BodyComposition, bodyCompositionClassificationParameters.Patient)
+        public BodyCompositionClassification(
+            BodyCompositionClassificationParameters bodyCompositionClassificationParameters)
+            : base(bodyCompositionClassificationParameters.BodyComposition,
+                bodyCompositionClassificationParameters.Patient)
         {
         }
 

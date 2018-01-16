@@ -36,7 +36,9 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             _patient.Gender = Gender.Build(genderIdentity);
             _patient.DateOfBirth = DateTime.Now.AddYears(-age);
 
-            var classification = new PushupsClassification(new MuscularStrengthClassificationParameters(pushups, _patient)).Classification;
+            var classification =
+                new PushupsClassification(new MuscularStrengthClassificationParameters(pushups, _patient))
+                    .Classification;
 
             Assert.Equal(expectedClassification, classification);
         }
@@ -54,7 +56,8 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void GivenNullPushups_ThrowsArgumentNullError()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PushupsClassification(new MuscularStrengthClassificationParameters(null, PatientBuilder.Initialize().BuildWithoutModelValidation())));
+                new PushupsClassification(new MuscularStrengthClassificationParameters(null,
+                    PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
     }
 }
