@@ -15,27 +15,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
     public class EntityDataControllerTests
     {
-
-        public EntityDataControllerTests()
-        {
-
-        }
-        private class FakeEntityDataController : AudiogramController
-        {
-            public FakeEntityDataController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
-            {
-                
-            }
-
-            public FakeEntityDataController(IUnitOfWork unitOfWork) : this(
-                unitOfWork, 
-                new Mapper(new MapperConfiguration(configure => configure.AddProfile(new MappingProfile()))), 
-                new UrlHelper(new ActionContext()))
-            {
-                
-            }
-        }
-
         [Fact]
         public async Task Delete_GivenAppropriateElement_ReturnsOkay()
         {
@@ -87,12 +66,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
             audiogram.Left.F2000.Value = 150;
 
             var controller = new FakeEntityDataController(uow);
-            
-            Mapper.Initialize(cfg => cfg.AddProfile(new MappingProfile()));
 
             var result = await controller.Put(Mapper.Map<AudiogramEntity, AudiogramStubFromUser>(audiogram));
-            
-            Mapper.Reset();
 
             Assert.Equal(typeof(OkResult), result.GetType());
         }
@@ -115,6 +90,28 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
             var result = await controller.Put(null);
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());
+        }
+        
+        private static readonly IMapper Mapper = new Mapper(new MapperConfiguration(configure => configure.AddProfile(new MappingProfile())));
+        
+        public EntityDataControllerTests()
+        {
+        }
+        
+        private class FakeEntityDataController : AudiogramController
+        {
+            public FakeEntityDataController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+            {
+                
+            }
+
+            public FakeEntityDataController(IUnitOfWork unitOfWork) : this(
+                unitOfWork, 
+                EntityDataControllerTests.Mapper, 
+                new UrlHelper(new ActionContext()))
+            {
+
+            }
         }
     }
 }
