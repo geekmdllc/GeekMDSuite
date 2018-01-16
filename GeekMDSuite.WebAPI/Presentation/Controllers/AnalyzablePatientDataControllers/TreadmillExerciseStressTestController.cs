@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             TreadmillExerciseStressTestResource, 
             TreadmillExerciseStressTestController>
     {
-        public TreadmillExerciseStressTestController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public TreadmillExerciseStressTestController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

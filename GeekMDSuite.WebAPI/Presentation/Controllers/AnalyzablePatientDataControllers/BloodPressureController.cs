@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     public class BloodPressureController 
         : VisitDataController<BloodPressureEntity, BloodPressureStub, BloodPressureStubFromUser, BloodPressureResource, BloodPressureController>
     {
-        public BloodPressureController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public BloodPressureController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

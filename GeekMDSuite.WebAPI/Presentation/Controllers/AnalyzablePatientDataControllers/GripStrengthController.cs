@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class GripStrengthController : VisitDataController<GripStrengthEntity, GripStrengthStub, GripStrengthStubFromUser, GripStrengthResource, GripStrengthController>
     {
-        public GripStrengthController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public GripStrengthController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

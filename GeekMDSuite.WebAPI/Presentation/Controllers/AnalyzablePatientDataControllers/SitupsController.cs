@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class SitupsController : VisitDataController<SitupsEntity, SitupsStub, SitupsStubFromUser, SitupsResource, SitupsController>
     {
-        public SitupsController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public SitupsController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

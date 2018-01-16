@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class IshiharaSixPlateController : VisitDataController<IshiharaSixPlateEntity, IshiharaSixPlateStub, IshiharaSixPlateStubFromUser, IshiharaSixPlateResource, IshiharaSixPlateController>
     {
-        public IshiharaSixPlateController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public IshiharaSixPlateController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class StretchingRegimenController : VisitDataController<StretchingRegimenEntity, StretchingRegimenStub, StretchingRegimenStubFromUser, StretchingRegimenResource, StretchingRegimenController>
     {
-        public StretchingRegimenController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public StretchingRegimenController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

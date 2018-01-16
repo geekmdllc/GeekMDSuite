@@ -11,7 +11,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class PushupController : VisitDataController<PushupsEntity, PushupsStub, PushupsStubFromUser, PushupsResource, PushupController>
     {
-        public PushupController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper  urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public PushupController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper  urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

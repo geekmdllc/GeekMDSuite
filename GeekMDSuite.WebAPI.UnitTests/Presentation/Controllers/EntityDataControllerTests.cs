@@ -1,15 +1,19 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
+using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
-using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
+using GeekMDSuite.WebAPI.Presentation;
+using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.Extensions.Configuration;
 using Xunit;
+using IConfigurationProvider = Microsoft.Extensions.Configuration.IConfigurationProvider;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
@@ -98,9 +102,9 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
         {
         }
         
-        private class FakeEntityDataController : AudiogramController
+        private class FakeEntityDataController : EntityDataController<AudiogramEntity,  AudiogramStubFromUser>
         {
-            public FakeEntityDataController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+            public FakeEntityDataController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
             {
                 
             }
@@ -108,7 +112,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
             public FakeEntityDataController(IUnitOfWork unitOfWork) : this(
                 unitOfWork, 
                 EntityDataControllerTests.Mapper, 
-                new UrlHelper(new ActionContext()))
+                new ErrorService(new ConfigurationRoot(new List<IConfigurationProvider>())))
             {
 
             }

@@ -20,17 +20,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class VisitController : Controller
     {
-        private readonly IMapper _mapper;
-        private readonly INewVisitService _newVisitService;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IUrlHelper _urlHelper;
-        private readonly IErrorService _errorService;
-
-        public VisitController(IUnitOfWork unitOfWork,
-            INewVisitService newVisitService,
-            IMapper mapper,
-            IUrlHelper linkService,
-            IErrorService errorService)
+        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper, IUrlHelper linkService, IErrorService errorService)
         {
             _errorService = errorService;
             _urlHelper = linkService;
@@ -125,8 +115,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.PatientReceivedWithEmptyGuid)
                     .HasInternalMessage("The patient has an empty Guid which is not acceptable.")
-                    .TellsUser(
-                        "The patent information was not formatted properly, it is missing critical identifying information")
+                    .TellsUser("The patent information was not formatted properly, it is missing critical identifying information")
                     .Build();
                 return BadRequest(error);
             }
@@ -145,6 +134,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [Route("{guid}")]
         public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStubFromUser entity)
         {
+            // todo: test this logic
+            if (guid != entity.Guid && entity.Guid == Guid.Empty)
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
+                    .HasInternalMessage($"The end point targeted is for visit with Guid {guid}, but the entity provided has Guid {entity.Guid}. Resource not updated")
+                    .TellsUser("The identifier for the visit provided does not match the intended target and it cannot be updated")
+                    .Build();
+
+                return BadRequest(error);
+            }
             if (!ModelState.IsValid)
             {
                 var error = _errorService.PayloadBuilder
@@ -197,7 +197,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest(error);
             }
         }
-
+                
+        private readonly IMapper _mapper;
+        private readonly INewVisitService _newVisitService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUrlHelper _urlHelper;
+        private readonly IErrorService _errorService;
 
         private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientResource)
         {

@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     public class BodyCompositionController 
         : VisitDataController<BodyCompositionEntity, BodyCompositionStub, BodyCompositionStubFromUser, BodyCompositionResource, BodyCompositionController>
     {
-        public BodyCompositionController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public BodyCompositionController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

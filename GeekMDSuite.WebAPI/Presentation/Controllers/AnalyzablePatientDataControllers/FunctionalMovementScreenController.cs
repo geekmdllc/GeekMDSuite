@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     public class FunctionalMovementScreenController 
         : VisitDataController<FunctionalMovementScreenEntity, FunctionalMovementScreenStub, FunctionalMovementScreenStubFromUser, FunctionalMovementScreenResource, FunctionalMovementScreenController>
     {
-        public FunctionalMovementScreenController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public FunctionalMovementScreenController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

@@ -12,7 +12,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     public class AudiogramController 
         : VisitDataController<AudiogramEntity, AudiogramStub, AudiogramStubFromUser, AudiogramResource, AudiogramController>
     {
-        public AudiogramController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper, urlHelper)
+        public AudiogramController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, urlHelper, errorService)
         {
         }
     }

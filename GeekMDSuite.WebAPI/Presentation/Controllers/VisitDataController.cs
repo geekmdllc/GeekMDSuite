@@ -25,7 +25,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly IRepositoryAssociatedWithVisitAsync<TEntity> _repo;
         private readonly IUrlHelper _urlHelper;
 
-        protected VisitDataController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper) : base(unitOfWork, mapper)
+        protected VisitDataController(IUnitOfWork unitOfWork, IMapper mapper, IUrlHelper urlHelper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
         {
             _urlHelper = urlHelper;
             _repo = UnitOfWork.VisitData<TEntity>();
