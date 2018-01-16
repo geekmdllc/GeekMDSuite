@@ -8,7 +8,6 @@ using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
-using GeekMDSuite.WebAPI.Presentation.StubModels;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
-namespace GeekMDSuite.WebAPI.UnitTests.Controllers
+namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
     
     public class PatientEntityControllerTests

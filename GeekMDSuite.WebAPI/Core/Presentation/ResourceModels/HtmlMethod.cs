@@ -1,4 +1,4 @@
-﻿namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
+﻿namespace GeekMDSuite.WebAPI.Core.Presentation.ResourceModels
 {
     public enum HtmlMethod
     {

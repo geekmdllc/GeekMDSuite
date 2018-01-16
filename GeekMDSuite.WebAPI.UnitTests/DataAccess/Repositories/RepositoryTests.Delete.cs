@@ -6,7 +6,7 @@ using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
-namespace GeekMDSuite.WebAPI.UnitTests.Repositories
+namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Repositories
 {
     public partial class RepositoryTests
     {

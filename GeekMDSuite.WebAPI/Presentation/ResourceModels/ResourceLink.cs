@@ -1,4 +1,5 @@
 ﻿using GeekMDSuite.WebAPI.Core.Presentation;
+using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
 using Newtonsoft.Json;
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels

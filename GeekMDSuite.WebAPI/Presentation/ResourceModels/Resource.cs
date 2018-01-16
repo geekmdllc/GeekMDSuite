@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {

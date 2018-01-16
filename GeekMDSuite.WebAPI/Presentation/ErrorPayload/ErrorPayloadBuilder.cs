@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Text;
-using GeekMDSuite.Core.Builders;
 using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.Presentation;
 
-namespace GeekMDSuite.WebAPI.Presentation
+namespace GeekMDSuite.WebAPI.Presentation.ErrorPayload
 {
     public class ErrorPayloadBuilder 
     {

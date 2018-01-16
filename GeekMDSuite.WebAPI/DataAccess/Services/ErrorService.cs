@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GeekMDSuite.WebAPI.Core.DataAccess.Services;
+using GeekMDSuite.WebAPI.Presentation;
+using GeekMDSuite.WebAPI.Presentation.ErrorPayload;
+using Microsoft.Extensions.Configuration;
 
-namespace GeekMDSuite.WebAPI.Presentation
+namespace GeekMDSuite.WebAPI.DataAccess.Services
 {
     public class ErrorService : IErrorService
     {

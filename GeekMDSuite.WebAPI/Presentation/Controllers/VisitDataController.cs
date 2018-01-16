@@ -7,6 +7,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.EntityData;
 using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Core.Presentation;
+using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using Microsoft.AspNetCore.Mvc;
 

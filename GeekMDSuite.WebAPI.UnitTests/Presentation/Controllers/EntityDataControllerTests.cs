@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Xunit;
 
-namespace GeekMDSuite.WebAPI.UnitTests.Controllers
+namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
     public class EntityDataControllerTests
     {

@@ -1,7 +1,7 @@
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 
-namespace GeekMDSuite.WebAPI.UnitTests.Repositories
+namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Repositories
 {
     public partial class RepositoryTests
     {

@@ -10,14 +10,13 @@ using GeekMDSuite.WebAPI.Mapping;
 using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
-using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 using IConfigurationProvider = Microsoft.Extensions.Configuration.IConfigurationProvider;
 
-namespace GeekMDSuite.WebAPI.UnitTests.Controllers
+namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
     public class VisitsControllerTests
     {

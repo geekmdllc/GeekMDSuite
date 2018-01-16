@@ -9,7 +9,7 @@ using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Xunit;
 
-namespace GeekMDSuite.WebAPI.UnitTests.Services
+namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Services
 {
     public class NewPatientServiceTests
     {
