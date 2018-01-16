@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class RepositoryAsync<T> : IRepositoryAsync<T> where T : class, IMapProperties<T>, IEntity
+    public class RepositoryAsync<TEntity> : IRepositoryAsync<TEntity> where TEntity : class, IMapProperties<TEntity>, IEntity
     {
         protected readonly GeekMdSuiteDbContext Context;
 
@@ -23,20 +23,20 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             Context = context;
         }
 
-        public async Task<IEnumerable<T>> All()
+        public async Task<IEnumerable<TEntity>> All()
         {
-            var results = await Context.Set<T>().ToListAsync();
+            var results = await Context.Set<TEntity>().ToListAsync();
             if (!results.Any())
                 throw new RepositoryEntityNotFoundException();
 
             return results;
         }
 
-        public async Task<T> FindById(int id)
+        public async Task<TEntity> FindById(int id)
         {
             try
             {
-                return await Context.Set<T>().Where(p => p.Id == id).FirstAsync();
+                return await Context.Set<TEntity>().Where(p => p.Id == id).FirstAsync();
             }
             catch
             {
@@ -44,15 +44,15 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             }
         }
 
-        public async Task Add(T entity)
+        public async Task Add(TEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (Context.Set<T>().Find(entity.Id) != null)
+            if (Context.Set<TEntity>().Find(entity.Id) != null)
                 throw new EntityNotUniqeException(entity.Id);
 
-            await Context.Set<T>().AddAsync(entity);
+            await Context.Set<TEntity>().AddAsync(entity);
         }
 
 
@@ -60,11 +60,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         {
             var entity = await FindById(id);
 
-            Context.Set<T>().Remove(entity);
+            Context.Set<TEntity>().Remove(entity);
         }
 
 
-        public async Task Update(T entity)
+        public async Task Update(TEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
