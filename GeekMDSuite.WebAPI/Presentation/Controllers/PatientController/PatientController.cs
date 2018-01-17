@@ -64,7 +64,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             try
             {
                 var patientStub = _mapper.Map<PatientEntity, PatientStub>(await _unitOfWork.Patients.FindByGuid(guid));
-                var patientResource = GeneratePatientResource(patientStub);
+                var patientResource = await GeneratePatientResource(patientStub);
                 return Ok(patientResource);
             }
             catch (RepositoryEntityNotFoundException)
@@ -214,7 +214,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethod = HtmlMethod.Get,
+                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
                     Relationship = UrlRelationship.Next
                 };
         }
@@ -279,45 +279,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             {
                 new ResourceLink
                 {
-                    Description = $"Get patient visits",
-                    Relationship = UrlRelationship.Next,
-                    Href = _urlHelper.Action<PatientController>(a => a.GetVisits(patient.Guid)),
-                    HtmlMethod = HtmlMethod.Get
-                },
-                new ResourceLink
-                {
-                    Description = $"Get patient",
+                    Description = $"Access or modify a patient",
                     Relationship = UrlRelationship.Self,
                     Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patient.Guid)),
-                    HtmlMethod = HtmlMethod.Put
-                },
-                new ResourceLink
-                {
-                    Description = $"Delete patient",
-                    Relationship = UrlRelationship.Self,
-                    Href = _urlHelper.Action<PatientController>(a => a.Delete(patient.Guid)),
-                    HtmlMethod = HtmlMethod.Delete
-                },
-                new ResourceLink
-                {
-                    Description = $"Update patient",
-                    Relationship = UrlRelationship.Self,
-                    Href = _urlHelper.Action<PatientController>(a => a.Put(patient.Guid, null)),
-                    HtmlMethod = HtmlMethod.Put
+                    HtmlMethods = new List<HtmlMethod> { HtmlMethod.Put, HtmlMethod.Get, HtmlMethod.Delete } 
                 },
                 new ResourceLink
                 {
                     Description = $"Create patient",
                     Relationship = UrlRelationship.Up,
                     Href = _urlHelper.Action<PatientController>(a => a.Post(null)),
-                    HtmlMethod = HtmlMethod.Post
+                    HtmlMethods = new List<HtmlMethod> { HtmlMethod.Post }
                 },
                 new ResourceLink
                 {
                     Description = $"Patient search",
                     Relationship = UrlRelationship.Search,
                     Href = _urlHelper.Action<PatientController>(a => a.GetBySearch(null)),
-                    HtmlMethod = HtmlMethod.Get
+                    HtmlMethods = new List<HtmlMethod> { HtmlMethod.Get }
                 }
             };
         }
@@ -331,7 +310,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethod = HtmlMethod.Get,
+                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
                     Relationship = UrlRelationship.Next
                 };
             return visitStubs;
@@ -344,7 +323,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethod = HtmlMethod.Get,
+                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
                     Relationship = UrlRelationship.Next
                 };
         }

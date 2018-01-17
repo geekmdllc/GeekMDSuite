@@ -1,4 +1,6 @@
-﻿using GeekMDSuite.WebAPI.Core.Presentation;
+﻿using System.Collections.Generic;
+using System.Text;
+using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
 using Newtonsoft.Json;
 
@@ -15,8 +17,13 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
         public string Rel => Relationship.ToString();
 
         [JsonIgnore]
-        public HtmlMethod HtmlMethod { get; set; }
+        public IEnumerable<HtmlMethod> HtmlMethods { get; set; }
 
-        public string Method => HtmlMethod.ToString();
+        public string Methods => string.Join(", ", HtmlMethods);
+
+        public ResourceLink()
+        {
+            HtmlMethods = new List<HtmlMethod>();
+        }
     }
 }

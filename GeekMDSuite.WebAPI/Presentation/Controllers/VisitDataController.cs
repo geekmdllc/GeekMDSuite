@@ -81,14 +81,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     Description = "Get this item.",
                     Href = _urlHelper.Action($"{nameof(GetByPrimaryKey)}"),
-                    HtmlMethod = HtmlMethod.Get,
+                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
                     Relationship = UrlRelationship.Self
                 },
                 new ResourceLink
                 {
                     Description = "View visit for this item.",
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethod = HtmlMethod.Get,
+                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
                     Relationship = UrlRelationship.Prev
                 }
             };
@@ -103,14 +103,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     Description = "Get all.",
                     Href = _urlHelper.Action($"{nameof(GetAll)}"),
-                    HtmlMethod = HtmlMethod.Post,
+                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
                     Relationship = UrlRelationship.Self
                 },
                 new ResourceLink
                 {
                     Description = "Get all visits.",
                     Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null)),
-                    HtmlMethod = HtmlMethod.Get,
+                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
                     Relationship = UrlRelationship.Prev
                 }
             };
