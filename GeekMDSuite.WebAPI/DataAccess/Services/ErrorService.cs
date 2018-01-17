@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess.Services;
-using GeekMDSuite.WebAPI.Presentation;
+﻿using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.ErrorPayload;
 using Microsoft.Extensions.Configuration;
 
