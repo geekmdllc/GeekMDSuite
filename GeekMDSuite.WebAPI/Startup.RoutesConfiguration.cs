@@ -9,6 +9,7 @@ using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.Composite
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using Microsoft.AspNetCore.Builder;
 using System;
+using GeekMDSuite.WebAPI.Presentation.Controllers.PatientController;
 
 namespace GeekMDSuite.WebAPI
 {
