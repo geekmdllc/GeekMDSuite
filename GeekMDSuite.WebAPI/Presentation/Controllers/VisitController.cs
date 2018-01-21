@@ -223,14 +223,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     Description = $"Search for visits",
                     Relationship = UrlRelationship.Search,
                     Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Post},
+                    HtmlMethod = HtmlMethod.Post,
                 },
                 new ResourceLink
                 {
                     Description = $"Get this visit",
                     Relationship = UrlRelationship.Next,
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(visitStub.Guid)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
+                    HtmlMethod = HtmlMethod.Get,
                 }
             };
         }

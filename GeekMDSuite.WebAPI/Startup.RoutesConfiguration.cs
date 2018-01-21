@@ -10,6 +10,7 @@ using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControlle
 using Microsoft.AspNetCore.Builder;
 using System;
 using GeekMDSuite.WebAPI.Presentation.Controllers.PatientController;
+using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 
 namespace GeekMDSuite.WebAPI
 {
@@ -78,6 +79,9 @@ namespace GeekMDSuite.WebAPI
             routes.Add(dataUrl + "bp/", route => route.ToController<BloodPressureController>());
             routes.Get("", route => route.ToAction<BloodPressureController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
             routes.Get("{id}", route => route.ToAction<BloodPressureController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<BloodPressureController>(a => a.Post(With.Any<BloodPressureStubFromUser>())));
+            routes.Put("", route => route.ToAction<BloodPressureController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<BloodPressureController>(a => a.Delete(With.Any<int>())));
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
 //            routes.Add(dataUrl + "carotidultrasound/", route => route.ToController<CarotidUltrasoundController>());

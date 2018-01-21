@@ -215,7 +215,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
+                    HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 };
         }
@@ -283,21 +283,21 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                     Description = $"Access or modify a patient",
                     Relationship = UrlRelationship.Self,
                     Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(patient.Guid)),
-                    HtmlMethods = new List<HtmlMethod> { HtmlMethod.Put, HtmlMethod.Get, HtmlMethod.Delete } 
+                    HtmlMethod = HtmlMethod.Put,
                 },
                 new ResourceLink
                 {
                     Description = $"Create patient",
                     Relationship = UrlRelationship.Up,
                     Href = _urlHelper.Action<PatientController>(a => a.Post(null)),
-                    HtmlMethods = new List<HtmlMethod> { HtmlMethod.Post }
+                    HtmlMethod = HtmlMethod.Post 
                 },
                 new ResourceLink
                 {
                     Description = $"Patient search",
                     Relationship = UrlRelationship.Search,
                     Href = _urlHelper.Action<PatientController>(a => a.GetBySearch(null)),
-                    HtmlMethods = new List<HtmlMethod> { HtmlMethod.Get }
+                    HtmlMethod = HtmlMethod.Get
                 }
             };
         }
@@ -311,7 +311,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
+                    HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 };
             return visitStubs;
@@ -324,7 +324,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = "Link to self",
                     Href = _urlHelper.Action<PatientController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
+                    HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 };
         }

@@ -63,34 +63,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             return Ok(resource);
         }
 
-        private List<ResourceLink> GenerateGetByIdLinks(int id)
-        {
-            return new List<ResourceLink>
-            {
-                new ResourceLink
-                {
-                    Description = "Get blood pressure resource by it's unique identifier.",
-                    Href = UrlHelper.Action<BloodPressureController>(a => a.GetById(id)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
-                    Relationship = UrlRelationship.Self
-                },
-                new ResourceLink
-                {
-                    Description = "Search for blood pressures resources with filters and pagination",
-                    Href = UrlHelper.Action<BloodPressureController>(a => a.GetBySearch(null)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
-                    Relationship = UrlRelationship.Search
-                },
-                new ResourceLink
-                {
-                    Description = "Go to the application data root",
-                    Href = UrlHelper.Action<DataController>(a => a.Get()),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
-                    Relationship = UrlRelationship.Up
-                }
-            };
-        }
-
         public async Task<IActionResult> Post([FromBody] BloodPressureStubFromUser stub)
         {
             var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
@@ -111,6 +83,55 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             await UnitOfWork.BloodPressures.Delete(id);
             return NoContent();
         }
+        
+        private List<ResourceLink> GenerateGetByIdLinks(int id)
+        {
+            return new List<ResourceLink>
+            {
+                new ResourceLink
+                {
+                    Description = "Get blood pressure resource by it's unique identifier.",
+                    Href = UrlHelper.Action<BloodPressureController>(a => a.GetById(id)),
+                    HtmlMethod = HtmlMethod.Get,
+                    Relationship = UrlRelationship.Self
+                },
+                new ResourceLink
+                {
+                    Description = "Delete blood pressure resource by it's unique identifier.",
+                    Href = UrlHelper.Action<BloodPressureController>(a => a.Delete(id)),
+                    HtmlMethod = HtmlMethod.Delete,
+                    Relationship = UrlRelationship.Next
+                },
+                new ResourceLink
+                {
+                    Description = "Search for blood pressures resources with filters and pagination",
+                    Href = UrlHelper.Action<BloodPressureController>(a => a.GetBySearch(null)),
+                    HtmlMethod = HtmlMethod.Get,
+                    Relationship = UrlRelationship.Search
+                },
+                new ResourceLink
+                {
+                    Description = "Add a new blood pressure resource",
+                    Href = UrlHelper.Action<BloodPressureController>(a => a.Post(null)),
+                    HtmlMethod = HtmlMethod.Post,
+                    Relationship = UrlRelationship.Search
+                },
+                new ResourceLink
+                {
+                    Description = "Update the values for this existing blood pressure resource",
+                    Href = UrlHelper.Action<BloodPressureController>(a => a.Put(id, null)),
+                    HtmlMethod = HtmlMethod.Put,
+                    Relationship = UrlRelationship.Search
+                },
+                new ResourceLink
+                {
+                    Description = "Go to the application data root",
+                    Href = UrlHelper.Action<DataController>(a => a.Get()),
+                    HtmlMethod = HtmlMethod.Get,
+                    Relationship = UrlRelationship.Up
+                }
+            };
+        }
 
         private List<ResourceLink> GenerateLinksForGetBySearch(IEntity stub)
         {
@@ -120,14 +141,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 {
                     Description = "Get this blood pressure resource",
                     Href = UrlHelper.Action<BloodPressureController>(a => a.GetById(stub.Id)),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
+                    HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 },
                 new ResourceLink
                 {
                     Description = "Go to the application data root",
                     Href = UrlHelper.Action<DataController>(a => a.Get()),
-                    HtmlMethods = new List<HtmlMethod> {HtmlMethod.Get},
+                    HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Up
                 }
             };

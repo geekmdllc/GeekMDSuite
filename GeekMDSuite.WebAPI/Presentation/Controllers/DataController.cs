@@ -34,7 +34,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     {
                         Description = "Blood pressure resource data for patient visits. Can be filtered and paginated as follows...",
                         Href = _urlHelper.Action<BloodPressureController>(a => a.GetBySearch(null)),
-                        HtmlMethods = new List<HtmlMethod> { HtmlMethod.Get },
+                        HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     } 
                 }

@@ -34,28 +34,28 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     {
                         Description = _configuration.GetSection("PatientsControllerDescription").Value,
                         Href = _urlHelper.Action<PatientController.PatientController>(a => a.GetBySearch(null)),
-                        HtmlMethods = new List<HtmlMethod> { HtmlMethod.Get, HtmlMethod.Post },
+                        HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     Visits = new ResourceLink
                     {
                         Description = _configuration.GetSection("VisitsControllerDescription").Value,
                         Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null)),
-                        HtmlMethods = new List<HtmlMethod> { HtmlMethod.Get, HtmlMethod.Post },
+                        HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     Data = new  ResourceLink
                     {    
                         Description = _configuration.GetSection("DataControllerDescription").Value,
                         Href = _urlHelper.Action<HomeController>(a => a.Get()),
-                        HtmlMethods = new List<HtmlMethod> { HtmlMethod.Get},
+                        HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     Analytics = new  ResourceLink
                     {    
                         Description = _configuration.GetSection("AnalyticsControllerDescription").Value,
                         Href = _urlHelper.Action<HomeController>(a => a.Get()),
-                        HtmlMethods = new List<HtmlMethod> { HtmlMethod.Get},
+                        HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     }
                 }

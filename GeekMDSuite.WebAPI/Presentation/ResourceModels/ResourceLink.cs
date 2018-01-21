@@ -17,13 +17,8 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
         public string Rel => Relationship.ToString();
 
         [JsonIgnore]
-        public IEnumerable<HtmlMethod> HtmlMethods { get; set; }
+        public HtmlMethod HtmlMethod { get; set; }
 
-        public string Methods => string.Join(", ", HtmlMethods);
-
-        public ResourceLink()
-        {
-            HtmlMethods = new List<HtmlMethod>();
-        }
+        public string Method => HtmlMethod.ToString();
     }
 }
