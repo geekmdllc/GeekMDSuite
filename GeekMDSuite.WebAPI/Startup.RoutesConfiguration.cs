@@ -6,7 +6,6 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Filters;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.CompositeScores;
-using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using Microsoft.AspNetCore.Builder;
 using System;
 using GeekMDSuite.WebAPI.Presentation.Controllers.PatientController;
@@ -23,8 +22,9 @@ namespace GeekMDSuite.WebAPI
             {
                 ConfigurePatientControllerRoutes(baseUrl, routes);
                 ConfigureVisitControllerRoutes(baseUrl, routes);
-                ConfigureDataRoutes(baseUrl, routes);
                 ConfigureAnalyticsRoutes(baseUrl, routes);
+                routes.Add(baseUrl + "bp/", route => route.ToController<BloodPressureController>());
+                routes.Get("", route => route.ToAction<BloodPressureController>(a => a.Get()));
             };
         }
 
@@ -71,32 +71,5 @@ namespace GeekMDSuite.WebAPI
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());
         }
 
-        private static void ConfigureDataRoutes(string baseUrl, ITypedRouteBuilder routes)
-        {
-            var dataUri = baseUrl + "data/";
-            routes.Add(dataUri + "audiogram/", route => route.ToController<AudiogramController>());
-            routes.Add(dataUri + "bp/", route => route.ToController<BloodPressureController>());
-            routes.Add(dataUri + "bodycomp/", route => route.ToController<BodyCompositionController>());
-            routes.Add(dataUri + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
-            routes.Add(dataUri + "carotidultrasound/", route => route.ToController<CarotidUltrasoundController>());
-            routes.Add(dataUri + "centralbp/", route => route.ToController<CentralBloodPressureController>());
-            routes.Add(dataUri + "fms/", route => route.ToController<FunctionalMovementScreenController>());
-            routes.Add(dataUri + "grip/", route => route.ToController<GripStrengthController>());
-            routes.Add(dataUri + "ishihara/", route => route.ToController<IshiharaSixPlateController>());
-            routes.Add(dataUri + "occularpressure/", route => route.ToController<OccularPressureController>());
-            routes.Add(dataUri + "peripheralvision/", route => route.ToController<PeripheralVisionController>());
-            routes.Add(dataUri + "pushups/", route => route.ToController<PushupController>());
-            routes.Add(dataUri + "sitandreach/", route => route.ToController<SitAndReachController>());
-            routes.Add(dataUri + "situps/", route => route.ToController<SitupsController>());
-            routes.Add(dataUri + "spirometry/", route => route.ToController<SpirometryController>());
-            routes.Add(dataUri + "treadmill/", route => route.ToController<TreadmillExerciseStressTestController>());
-            routes.Add(dataUri + "visualacuity/", route => route.ToController<VisualAcuityController>());
-            routes.Add(dataUri + "vitals/", route => route.ToController<VitalSignsController>());
-
-            var patientActivitiesUri = dataUri + "activities/";
-            routes.Add(patientActivitiesUri + "resistance", route => route.ToController<ResistanceRegimenController>());
-            routes.Add(patientActivitiesUri + "cardio", route => route.ToController<CardiovascularRegimenController>());
-            routes.Add(patientActivitiesUri + "stretching", route => route.ToController<StretchingRegimenController>());
-        }
     }
 }
