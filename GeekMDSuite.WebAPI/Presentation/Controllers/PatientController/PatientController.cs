@@ -14,11 +14,12 @@ using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
+using GeekMDSuite.WebAPI.Presentation.Controllers;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
 {
     [Produces("application/json", "application/xml")]
-    public partial class PatientController : EntityDataController
+    public partial class PatientController :  EntityDataController
     {
         private readonly IMapper _mapper;
         private readonly INewPatientService _newPatientService;

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
-    public abstract class EntityDataController : Controller
+    public class EntityDataController : Controller
     {
         public ConflictResult Conflict(object obj)
         {

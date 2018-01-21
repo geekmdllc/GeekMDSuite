@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Produces("application/json", "application/xml")]
-    public class VisitController : Controller
+    public class VisitController : EntityDataController
     {
         public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper, IUrlHelper linkService, IErrorService errorService)
         {

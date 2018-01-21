@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Presentation.StubModels;
+﻿using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
+using GeekMDSuite.WebAPI.Presentation.StubModels;
 
 namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
