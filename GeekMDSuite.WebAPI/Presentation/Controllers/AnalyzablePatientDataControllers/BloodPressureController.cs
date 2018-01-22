@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess;
+using GeekMDSuite.WebAPI.Core.Exceptions;
 using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
@@ -36,39 +37,105 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
         public async Task<IActionResult> GetById(int id)
         {
-            var entity = await UnitOfWork.BloodPressures.FindById(id);
-            var stub = Mapper.Map<BloodPressureEntity, BloodPressureStub>(entity);
-            var resource = new BloodPressureResource
+            try
             {
-                Links = GenerateGetByIdLinks(id),
-                Properties = stub
-            };
+                var entity = await UnitOfWork.BloodPressures.FindById(id);
+                var stub = Mapper.Map<BloodPressureEntity, BloodPressureStub>(entity);
+                var resource = new BloodPressureResource
+                {
+                    Links = GenerateGetByIdLinks(id),
+                    Properties = stub
+                };
 
-            return Ok(resource);
+                return Ok(resource);
+            }
+            catch (RepositoryEntityNotFoundException)
+            {
+                var error = ErrorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
+                    .HasInternalMessage($"An blood pressure entity with the id {id} could not be located in the repository.")
+                    .TellsUser("The requested blood pressure entry could not be found")
+                    .Build();
+                return BadRequest(error);
+            }
         }
 
         public async Task<IActionResult> Post([FromBody] BloodPressureStubFromUser stub)
         {
-            var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
-            await UnitOfWork.BloodPressures.Add(entity);
-            await UnitOfWork.Complete();
-            var url = UrlHelper.Action<BloodPressureController>(a => a.Post(stub));
-            return Created(url, entity);
+            try
+            {
+                var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
+                await UnitOfWork.BloodPressures.Add(entity);
+                await UnitOfWork.Complete();
+                var url = UrlHelper.Action<BloodPressureController>(a => a.Post(stub));
+                return Created(url, entity);
+            }
+            catch (ArgumentNullException)
+            {
+                var error = ErrorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("A null object was included in the request body and cannot be processed as a blood pressure entity") 
+                    .TellsUser("The request to create a new blood pressure entry was malformed and likely empty. Please retry.")
+                    .Build();
+                return BadRequest(error);
+            }
+            catch (EntityNotUniqeException)
+            {
+                var error = ErrorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.EntityIdIsNotUniqe)
+                    .HasInternalMessage($"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0") 
+                    .TellsUser("The request to create a new blood pressure entry was imporoperly formatted ")
+                    .Build();
+                return Conflict(error);
+            }
         }
 
         public async Task<IActionResult> Put(int id, [FromBody] BloodPressureStubFromUser stub)
         {
-            var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
-            await UnitOfWork.BloodPressures.Update(entity);
-            await UnitOfWork.Complete();
-            return Ok(stub);
+            try
+            {
+                var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
+                await UnitOfWork.BloodPressures.Update(entity);
+                await UnitOfWork.Complete();
+                return Ok(stub);
+            }
+            catch (RepositoryEntityNotFoundException)
+            {
+                var error = ErrorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
+                    .HasInternalMessage($"A blood pressure entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The request could not be processed because the blood pressure entry identified for update couldn't not be found")
+                    .Build();
+                return BadRequest(error);
+            }
+            catch (ArgumentNullException)
+            {
+                var error = ErrorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("The blood pressure data model received from client was null and could not be processed.")
+                    .TellsUser("The request to createa a new blood pressure was improperly formatted")
+                    .Build();
+                return BadRequest(error);
+            }
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            await UnitOfWork.BloodPressures.Delete(id);
-            await UnitOfWork.Complete();
-            return NoContent();
+            try
+            {
+                await UnitOfWork.BloodPressures.Delete(id);
+                await UnitOfWork.Complete();
+                return NoContent();
+            }
+            catch (RepositoryEntityNotFoundException)
+            {
+                var error = ErrorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
+                    .HasInternalMessage($"A blood pressure element with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The requested blood pressure resource could not be found")
+                    .Build();
+                return BadRequest(error);
+            }
         }
         
         private List<ResourceLink> GenerateGetByIdLinks(int id)
