@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GeekMDSuite.WebAPI.Core.Presentation;
+﻿using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
@@ -30,6 +29,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 Description = "This is persisted patient visit data, not including patients and visits themselves.",
                 Links = new ApiLinks
                 {
+                    Home = new ResourceLink
+                    {
+                        Description = "Go to application root.",
+                        Href = _urlHelper.Action<HomeController>(a => a.Get()),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
                     BloodPressures = new ResourceLink
                     {
                         Description = "Blood pressure resource data for patient visits. Can be filtered and paginated as follows...",
@@ -57,6 +63,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
         private class ApiLinks
         {
+            public ResourceLink Home { get; set; }
             public ResourceLink BloodPressures { get; set; }
 
         }

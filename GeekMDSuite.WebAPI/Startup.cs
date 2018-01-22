@@ -50,7 +50,7 @@ namespace GeekMDSuite.WebAPI
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddSingleton<IErrorService, ErrorService>();
-            services.AddSingleton<IUrlHelper>(factory =>
+            services.AddScoped<IUrlHelper>(factory =>
             {
                 var actionContext = factory.GetService<IActionContextAccessor>()
                     .ActionContext;

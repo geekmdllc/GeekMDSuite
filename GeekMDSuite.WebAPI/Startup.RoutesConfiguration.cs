@@ -80,7 +80,7 @@ namespace GeekMDSuite.WebAPI
             routes.Get("", route => route.ToAction<BloodPressureController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
             routes.Get("{id}", route => route.ToAction<BloodPressureController>(a => a.GetById(With.Any<int>())));
             routes.Post("", route => route.ToAction<BloodPressureController>(a => a.Post(With.Any<BloodPressureStubFromUser>())));
-            routes.Put("", route => route.ToAction<BloodPressureController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<BloodPressureController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<BloodPressureController>(a => a.Delete(With.Any<int>())));
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());

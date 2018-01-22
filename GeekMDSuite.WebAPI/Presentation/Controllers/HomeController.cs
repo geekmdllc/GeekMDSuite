@@ -47,7 +47,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     Data = new  ResourceLink
                     {    
                         Description = _configuration.GetSection("DataControllerDescription").Value,
-                        Href = _urlHelper.Action<HomeController>(a => a.Get()),
+                        Href = _urlHelper.Action<DataController>(a => a.Get()),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },

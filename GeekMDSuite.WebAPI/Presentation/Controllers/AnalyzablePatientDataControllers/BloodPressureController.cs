@@ -17,22 +17,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
-    public abstract class VisitDataController : EntityDataController
-    {
-        protected readonly IUnitOfWork UnitOfWork;
-        protected readonly IMapper Mapper;
-        protected readonly IErrorService ErrorService;
-        protected readonly IUrlHelper UrlHelper;
-
-        public VisitDataController(IUnitOfWork unitOfWork, IMapper mapper,  IErrorService errorService, IUrlHelper urlHelper) 
-        {
-            UrlHelper = urlHelper;
-            ErrorService = errorService;
-            Mapper = mapper;
-            UnitOfWork = unitOfWork;
-            
-        }
-    }
     [Produces("application/json", "application/xml")]
     public class BloodPressureController : VisitDataController
     {
@@ -67,6 +51,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
             await UnitOfWork.BloodPressures.Add(entity);
+            await UnitOfWork.Complete();
             var url = UrlHelper.Action<BloodPressureController>(a => a.Post(stub));
             return Created(url, entity);
         }
@@ -75,12 +60,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
             await UnitOfWork.BloodPressures.Update(entity);
+            await UnitOfWork.Complete();
             return Ok(stub);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             await UnitOfWork.BloodPressures.Delete(id);
+            await UnitOfWork.Complete();
             return NoContent();
         }
         
@@ -104,6 +91,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 },
                 new ResourceLink
                 {
+                    Description = "Update the values for this existing blood pressure resource",
+                    Href = UrlHelper.Action<BloodPressureController>(a => a.Put(id, null)),
+                    HtmlMethod = HtmlMethod.Put,
+                    Relationship = UrlRelationship.Search
+                },
+                new ResourceLink
+                {
                     Description = "Search for blood pressures resources with filters and pagination",
                     Href = UrlHelper.Action<BloodPressureController>(a => a.GetBySearch(null)),
                     HtmlMethod = HtmlMethod.Get,
@@ -114,13 +108,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                     Description = "Add a new blood pressure resource",
                     Href = UrlHelper.Action<BloodPressureController>(a => a.Post(null)),
                     HtmlMethod = HtmlMethod.Post,
-                    Relationship = UrlRelationship.Search
-                },
-                new ResourceLink
-                {
-                    Description = "Update the values for this existing blood pressure resource",
-                    Href = UrlHelper.Action<BloodPressureController>(a => a.Put(id, null)),
-                    HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
