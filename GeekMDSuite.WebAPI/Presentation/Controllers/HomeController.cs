@@ -12,13 +12,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class HomeController : Controller
     {
-        private readonly IUrlHelper _urlHelper;
         private readonly IConfiguration _configuration;
 
-        public HomeController(IUrlHelper urlHelper, IConfiguration configuration)
+        public HomeController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _urlHelper = urlHelper;
         }
 
         [HttpGet]
@@ -33,28 +31,28 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     Patients = new ResourceLink
                     {
                         Description = _configuration.GetSection("PatientsControllerDescription").Value,
-                        Href = _urlHelper.Action<PatientController.PatientController>(a => a.GetBySearch(null)),
+                        Href = Url.Action<PatientController.PatientController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     Visits = new ResourceLink
                     {
                         Description = _configuration.GetSection("VisitsControllerDescription").Value,
-                        Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null)),
+                        Href = Url.Action<VisitController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     Data = new  ResourceLink
                     {    
                         Description = _configuration.GetSection("DataControllerDescription").Value,
-                        Href = _urlHelper.Action<DataController>(a => a.Get()),
+                        Href = Url.Action<DataController>(a => a.Get()),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     Analytics = new  ResourceLink
                     {    
                         Description = _configuration.GetSection("AnalyticsControllerDescription").Value,
-                        Href = _urlHelper.Action<HomeController>(a => a.Get()),
+                        Href = Url.Action<HomeController>(a => a.Get()),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     }
