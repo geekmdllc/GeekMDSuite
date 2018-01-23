@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using GeekMDSuite.Utilities.Extensions;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.Exceptions;
-using GeekMDSuite.WebAPI.Core.Models;
 using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.EntityModels;
@@ -20,18 +17,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class BloodPressureController : VisitDataController
+    public class AudiogramController : VisitDataController
     {
-        
-        public BloodPressureController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public AudiogramController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
         {
         }
 
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
-            var entities = await GetFilteredEntities<BloodPressureEntity>(filter);
+            var entities = await GetFilteredEntities<AudiogramEntity>(filter);
             
-            var resources = GenerateBloodPressureResources(entities);
+            var resources = GenerateAudiogramResources(entities);
 
             return Ok(resources);
         }
@@ -40,9 +36,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                var entity = await UnitOfWork.BloodPressures.FindById(id);
-                var stub = Mapper.Map<BloodPressureEntity, BloodPressureStub>(entity);
-                var resource = new BloodPressureResource
+                var entity = await UnitOfWork.Audiograms.FindById(id);
+                var stub = Mapper.Map<AudiogramEntity, AudiogramStub>(entity);
+                var resource = new AudiogramResource
                 {
                     Links = GenerateGetByIdLinks(id),
                     Properties = stub
@@ -61,22 +57,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             }
         }
 
-        public async Task<IActionResult> Post([FromBody] BloodPressureStubFromUser stub)
+        public async Task<IActionResult> Post([FromBody] AudiogramStubFromUser stub)
         {
             try
             {
-                var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
-                await UnitOfWork.BloodPressures.Add(entity);
+                var entity = Mapper.Map<AudiogramStubFromUser, AudiogramEntity>(stub);
+                await UnitOfWork.Audiograms.Add(entity);
                 await UnitOfWork.Complete();
-                var url = Url.Action<BloodPressureController>(a => a.Post(stub));
+                var url = Url.Action<AudiogramController>(a => a.Post(stub));
                 return Created(url, entity);
             }
             catch (ArgumentNullException)
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("A null object was included in the request body and cannot be processed as a blood pressure entity") 
-                    .TellsUser("The request to create a new blood pressure entry was malformed and likely empty. Please retry.")
+                    .HasInternalMessage(
+                        "A null object was included in the request body and cannot be processed as an audiogram entity")
+                    .TellsUser(
+                        "The request to create a new audiogram entry was malformed and likely empty. Please retry.")
                     .Build();
                 return BadRequest(error);
             }
@@ -84,8 +82,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.EntityIdIsNotUniqe)
-                    .HasInternalMessage($"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0") 
-                    .TellsUser("The request to create a new blood pressure entry was imporoperly formatted ")
+                    .HasInternalMessage(
+                        $"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
+                    .TellsUser("The request to create a new audiogram entry was imporoperly formatted ")
                     .Build();
                 return Conflict(error);
             }
@@ -93,22 +92,22 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The blood pressure data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The blood pressure recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage("The audiogram data model receieved is not associated with a valid visit Guid")
+                    .TellsUser("The audiogram recieved is not properly associated with a visit and could not be added")
                     .Build();
                     
                 return BadRequest(error);
             }
         }
 
-        public async Task<IActionResult> Put(int id, [FromBody] BloodPressureStubFromUser stub)
+        public async Task<IActionResult> Put(int id, [FromBody] AudiogramStubFromUser stub)
         {
             if (stub != null && id != stub.Id)
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a blood pressure entity with Id {id}, but the blood pressure resource object contained Id {stub.Id}")
-                    .TellsUser("The blood pressure entry provided for update doesn't match the intended target.")
+                    .HasInternalMessage($"There endpoint targeted a audiogram entity with Id {id}, but the audiogram resource object contained Id {stub.Id}")
+                    .TellsUser("The audiogram entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
@@ -116,8 +115,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             
             try
             {
-                var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
-                await UnitOfWork.BloodPressures.Update(entity);
+                var entity = Mapper.Map<AudiogramStubFromUser, AudiogramEntity>(stub);
+                await UnitOfWork.Audiograms.Update(entity);
                 await UnitOfWork.Complete();
                 return Ok(stub);
             }
@@ -125,8 +124,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"A blood pressure entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the blood pressure entry identified for update couldn't not be found")
+                    .HasInternalMessage($"An audiogram entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The request could not be processed because the audiogram entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -134,8 +133,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The blood pressure data model received from client was null and could not be processed.")
-                    .TellsUser("The request to createa a new blood pressure was improperly formatted")
+                    .HasInternalMessage("The audiogram data model received from client was null and could not be processed.")
+                    .TellsUser("The request to createa a new audiogram was improperly formatted")
                     .Build();
                 return BadRequest(error);
             }
@@ -145,7 +144,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                await UnitOfWork.BloodPressures.Delete(id);
+                await UnitOfWork.Audiograms.Delete(id);
                 await UnitOfWork.Complete();
                 return NoContent();
             }
@@ -153,11 +152,39 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"A blood pressure element with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The requested blood pressure resource could not be found")
+                    .HasInternalMessage($"An audiogram element with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The requested audiogram resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
+        }
+
+        private IEnumerable<AudiogramResource> GenerateAudiogramResources(IEnumerable<AudiogramEntity> entities)
+        {
+            var stubs = entities.Select(Mapper.Map<AudiogramEntity, AudiogramStub>);
+            var resources = stubs.Select(stub => new AudiogramResource
+            {
+                Properties = stub,
+                Links = new List<ResourceLink>
+                {
+                    new ResourceLink
+                    {
+                        Description = "Get this audiogram resource",
+                        Href = Url.Action<AudiogramController>(a => a.GetById(stub.Id)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    new ResourceLink
+                    {
+                        Description = "Go to the application data root",
+                        Href = Url.Action<DataController>(a => a.Get()),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    }
+                }
+            });
+
+            return resources;
         }
         
         private List<ResourceLink> GenerateGetByIdLinks(int id)
@@ -167,35 +194,35 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Get blood pressure resource by it's unique identifier.",
-                    Href = Url.Action<BloodPressureController>(a => a.GetById(id)),
+                    Href = Url.Action<AudiogramController>(a => a.GetById(id)),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Self
                 },
                 new ResourceLink
                 {
                     Description = "Delete blood pressure resource by it's unique identifier.",
-                    Href = Url.Action<BloodPressureController>(a => a.Delete(id)),
+                    Href = Url.Action<AudiogramController>(a => a.Delete(id)),
                     HtmlMethod = HtmlMethod.Delete,
                     Relationship = UrlRelationship.Next
                 },
                 new ResourceLink
                 {
                     Description = "Update the values for this existing blood pressure resource",
-                    Href = Url.Action<BloodPressureController>(a => a.Put(id, With.No<BloodPressureStubFromUser>())),
+                    Href = Url.Action<AudiogramController>(a => a.Put(id, With.No<AudiogramStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for blood pressures resources with filters and pagination",
-                    Href = Url.Action<BloodPressureController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href = Url.Action<AudiogramController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new blood pressure resource",
-                    Href = Url.Action<BloodPressureController>(a => a.Post(With.No<BloodPressureStubFromUser>())),
+                    Href = Url.Action<AudiogramController>(a => a.Post(With.No<AudiogramStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },
@@ -209,53 +236,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             };
         }
 
-        private List<ResourceLink> GenerateLinksForGetBySearch(IEntity stub)
-        {
-            return new List<ResourceLink>
-            {
-                new ResourceLink
-                {
-                    Description = "Get this blood pressure resource",
-                    Href = Url.Action<BloodPressureController>(a => a.GetById(stub.Id)),
-                    HtmlMethod = HtmlMethod.Get,
-                    Relationship = UrlRelationship.Next
-                },
-                new ResourceLink
-                {
-                    Description = "Go to the application data root",
-                    Href = Url.Action<DataController>(a => a.Get()),
-                    HtmlMethod = HtmlMethod.Get,
-                    Relationship = UrlRelationship.Up
-                }
-            };
-        }
-
-        private IEnumerable<BloodPressureResource> GenerateBloodPressureResources(IEnumerable<BloodPressureEntity> entities)
-        {
-            var stubs = entities.Select(Mapper.Map<BloodPressureEntity, BloodPressureStub>);
-            var resources = stubs.Select(stub => new BloodPressureResource
-            {
-                Links = GenerateLinksForGetBySearch(stub),
-                Properties = stub
-            });
-            return resources;
-        }
-    }
-
-    public class EntityDataFindFilter
-    {
-        public Guid? VisitGuid { get; set; }
-        public int? Offset { get; set; }
-        public int? Take { get; set; }
-
-        public override string ToString()
-        {
-            var builder = new StringBuilder();
-            if (VisitGuid.IsNotNullOrEmtpy()) builder.Append($"{nameof(VisitGuid)}={VisitGuid}");
-            if (Offset != null) builder.Append($"{nameof(Offset)}={Offset}");
-            if (Take != null) builder.Append($"{nameof(Take)}={Take}");
-
-            return string.Join("&", builder);
-        }
+        
     }
 }

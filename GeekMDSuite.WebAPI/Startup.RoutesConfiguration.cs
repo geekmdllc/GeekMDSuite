@@ -75,13 +75,21 @@ namespace GeekMDSuite.WebAPI
         private static void ConfigureDataRoutes(string baseUrl, ITypedRouteBuilder routes)
         {
             var dataUrl = baseUrl + "data/";
-//            routes.Add(dataUrl + "audiogram/", route => route.ToController<AudiogramController>());
+            
+            routes.Add(dataUrl + "audiogram/", route => route.ToController<AudiogramController>());
+            routes.Get("", route => route.ToAction<AudiogramController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<AudiogramController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<AudiogramController>(a => a.Post(With.Any<AudiogramStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<AudiogramController>(a => a.Put(With.Any<int>(), With.Any<AudiogramStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<AudiogramController>(a => a.Delete(With.Any<int>())));
+            
             routes.Add(dataUrl + "bp/", route => route.ToController<BloodPressureController>());
             routes.Get("", route => route.ToAction<BloodPressureController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
             routes.Get("{id}", route => route.ToAction<BloodPressureController>(a => a.GetById(With.Any<int>())));
             routes.Post("", route => route.ToAction<BloodPressureController>(a => a.Post(With.Any<BloodPressureStubFromUser>())));
             routes.Put("{id}", route => route.ToAction<BloodPressureController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<BloodPressureController>(a => a.Delete(With.Any<int>())));
+            
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
 //            routes.Add(dataUrl + "carotidultrasound/", route => route.ToController<CarotidUltrasoundController>());

@@ -11,13 +11,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class DataController : Controller
     {
-        private readonly IUrlHelper _urlHelper;
         private readonly IConfiguration _configuration;
 
-        public DataController(IUrlHelper urlHelper, IConfiguration configuration)
+        public DataController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _urlHelper = urlHelper;
         }
 
         [HttpGet]
@@ -32,14 +30,21 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     Home = new ResourceLink
                     {
                         Description = "Go to application root.",
-                        Href = _urlHelper.Action<HomeController>(a => a.Get()),
+                        Href = Url.Action<HomeController>(a => a.Get()),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     BloodPressures = new ResourceLink
                     {
                         Description = "Blood pressure resource data for patient visits. Can be filtered and paginated as follows...",
-                        Href = _urlHelper.Action<BloodPressureController>(a => a.GetBySearch(null)),
+                        Href = Url.Action<BloodPressureController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    Audiograms = new ResourceLink
+                    {
+                        Description = "Audiogram resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<AudiogramController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     } 
@@ -65,6 +70,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             public ResourceLink Home { get; set; }
             public ResourceLink BloodPressures { get; set; }
+            public ResourceLink Audiograms { get; set; }
 
         }
     }
