@@ -96,6 +96,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<PeripheralVisionsController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
+                    },
+                    Pushups = new ResourceLink
+                    {
+                        Description = "Pushups resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<PushupsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
                     }
                 }
             };
@@ -114,6 +121,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink IshiharaSixPlateScreens { get; set; }
             public ResourceLink OccularPressures { get; set; }
             public ResourceLink PeripheralVisions { get; set; }
+            public ResourceLink Pushups { get; set; }
         }
     }
 }

@@ -139,9 +139,15 @@ namespace GeekMDSuite.WebAPI
             routes.Put("{id}", route => route.ToAction<PeripheralVisionsController>(a => a.Put(With.Any<int>(), With.Any<PeripheralVisionStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<PeripheralVisionsController>(a => a.Delete(With.Any<int>())));
             
+            routes.Add(dataUrl + "pushups/", route => route.ToController<PushupsController>());
+            routes.Get("", route => route.ToAction<PushupsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<PushupsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<PushupsController>(a => a.Post(With.Any<PushupsStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<PushupsController>(a => a.Put(With.Any<int>(), With.Any<PushupsStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<PushupsController>(a => a.Delete(With.Any<int>())));
+            
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
-//            routes.Add(dataUrl + "pushups/", route => route.ToController<PushupController>());
 //            routes.Add(dataUrl + "sitandreach/", route => route.ToController<SitAndReachController>());
 //            routes.Add(dataUrl + "situps/", route => route.ToController<SitupsController>());
 //            routes.Add(dataUrl + "spirometry/", route => route.ToController<SpirometryController>());
