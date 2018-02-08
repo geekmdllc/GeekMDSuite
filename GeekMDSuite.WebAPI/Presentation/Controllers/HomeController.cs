@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GeekMDSuite.WebAPI.Core.Presentation;
+﻿using GeekMDSuite.WebAPI.Core.Presentation;
 using GeekMDSuite.WebAPI.Core.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using Microsoft.AspNetCore.Mvc;

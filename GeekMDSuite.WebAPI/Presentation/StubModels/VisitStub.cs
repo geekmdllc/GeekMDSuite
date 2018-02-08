@@ -3,7 +3,7 @@ using GeekMDSuite.WebAPI.Core.Presentation;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class VisitStub : SelfLinkingStub
+    public class VisitStub 
     {
         public Guid Guid { get; set; }
         public DateTime Date { get; set; }

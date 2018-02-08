@@ -27,7 +27,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
                 _unitOfWork, 
                 new NewVisitService(), 
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))),
-                new UrlHelper(new ActionContext()),
                 new ErrorService(new ConfigurationRoot(new List<IConfigurationProvider>())));
         }
 

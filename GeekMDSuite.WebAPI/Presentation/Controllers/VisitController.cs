@@ -20,10 +20,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class VisitController : EntityDataController
     {
-        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper, IUrlHelper linkService, IErrorService errorService)
+        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper, IErrorService errorService)
         {
             _errorService = errorService;
-            _urlHelper = linkService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _newVisitService = newVisitService;
@@ -60,7 +59,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     Properties = _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
                     Patient = patientStub,
                     Links = GenerateVisitLinks(
-                        _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)))
+                        _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
+                        patientStub
+                        )
                 });
             }
             catch (ArgumentOutOfRangeException)
@@ -201,20 +202,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         private readonly IMapper _mapper;
         private readonly INewVisitService _newVisitService;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUrlHelper _urlHelper;
         private readonly IErrorService _errorService;
 
-        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientResource)
+        private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientStub)
         {
             return new VisitResource
             {
                 Properties = visitStub,
-                Patient = patientResource,
-                Links = GenerateVisitLinks(visitStub)
+                Patient = patientStub,
+                Links = GenerateVisitLinks(visitStub, patientStub)
             };
         }
 
-        private List<ResourceLink> GenerateVisitLinks(VisitStub visitStub)
+        private List<ResourceLink> GenerateVisitLinks(VisitStub visitStub, PatientStub patientStub)
         {
             return new List<ResourceLink>
             {
@@ -222,15 +222,22 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     Description = $"Search for visits",
                     Relationship = UrlRelationship.Search,
-                    Href = _urlHelper.Action<VisitController>(a => a.GetBySearch(null)),
+                    Href = Url.Action<VisitController>(a => a.GetBySearch(null)),
                     HtmlMethod = HtmlMethod.Post,
                 },
                 new ResourceLink
                 {
                     Description = $"Get this visit",
                     Relationship = UrlRelationship.Next,
-                    Href = _urlHelper.Action<VisitController>(a => a.GetByGuid(visitStub.Guid)),
+                    Href = Url.Action<VisitController>(a => a.GetByGuid(visitStub.Guid)),
                     HtmlMethod = HtmlMethod.Get,
+                },
+                new ResourceLink
+                {
+                    Description = $"Get this patient",
+                    Relationship = UrlRelationship.Next,
+                    Href = Url.Action<PatientController.PatientController>(a => a.GetByGuid(patientStub.Guid)),
+                    HtmlMethod = HtmlMethod.Get
                 }
             };
         }

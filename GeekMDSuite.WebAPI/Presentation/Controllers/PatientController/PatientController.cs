@@ -14,7 +14,6 @@ using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using GeekMDSuite.WebAPI.Presentation.StubModels;
 using Microsoft.AspNetCore.Mvc;
-using GeekMDSuite.WebAPI.Presentation.Controllers;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
 {
@@ -43,8 +42,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             var patientStubs = (await _unitOfWork.Patients.FilteredSearch(filter))
                 .Select(patient => _mapper.Map<PatientEntity, PatientStub>(patient))
                 .ToList();
-
-            UpdatePatientStubSelfLinks(patientStubs);
 
             var patientResources =
                 await Task.WhenAll(patientStubs.Select(async patient => await GeneratePatientResource(patient)));
@@ -196,36 +193,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             var visitStubs = (await _unitOfWork.Visits.FindByPatient(guid))
                 .Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit)).ToList();
 
-            UpdateVisitStubsSelfLinks(visitStubs);
-
             var visitResources = await CompileVisitResources(visitStubs);
-            foreach (var visit in visitResources) 
-                UpdatePatientStubSelfLinks(visit.Patient);
 
             return Ok(visitResources);
-        }
-
-        private void UpdateVisitStubsSelfLinks(List<VisitStub> visitStubs)
-        {
-            foreach (var stub in visitStubs)
-                stub.Link = new ResourceLink
-                {
-                    Description = "Link to self",
-                    Href = Url.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethod = HtmlMethod.Get,
-                    Relationship = UrlRelationship.Next
-                };
         }
 
         private async Task<List<VisitResource>> CompileVisitResources(List<VisitStub> visitStubs)
         {
             var visitResources = new List<VisitResource>();
-            UpdateVisitStubsSelfLinks(visitStubs);
+
             foreach (var visitStub in visitStubs)
             {
                 var patientEntity = await _unitOfWork.Patients.FindByGuid(visitStub.PatientGuid);
                 var patientStub = _mapper.Map<PatientEntity, PatientStub>(patientEntity);
-                UpdatePatientStubSelfLinks(patientStub);
                 visitResources.Add(GenerateVisitResource(visitStub, patientStub));
             }
 
@@ -295,6 +275,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                     Relationship = UrlRelationship.Search,
                     Href = Url.Action<PatientController>(a => a.GetBySearch(null)),
                     HtmlMethod = HtmlMethod.Get
+                },
+                new ResourceLink
+                {
+                    Description = $"Get a list of all visits for this patient",
+                    Relationship = UrlRelationship.Search,
+                    Href = Url.Action<PatientController>(a => a.GetVisits(patient.Guid)),
+                    HtmlMethod = HtmlMethod.Get
                 }
             };
         }
@@ -303,34 +290,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
         {
             var visits = (await _unitOfWork.Visits.All()).Where(visit => visit.PatientGuid == patient.Guid);
             var visitStubs = visits.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit)).ToList();
-            foreach (var stub in visitStubs)
-                stub.Link = new ResourceLink
-                {
-                    Description = "Link to self",
-                    Href = Url.Action<VisitController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethod = HtmlMethod.Get,
-                    Relationship = UrlRelationship.Next
-                };
+
             return visitStubs;
         }
-
-        private void UpdatePatientStubSelfLinks(List<PatientStub> patientStubs)
-        {
-            foreach (var stub in patientStubs)
-                stub.Link = new ResourceLink
-                {
-                    Description = "Link to self",
-                    Href = Url.Action<PatientController>(a => a.GetByGuid(stub.Guid)),
-                    HtmlMethod = HtmlMethod.Get,
-                    Relationship = UrlRelationship.Next
-                };
-        }
-
-        private void UpdatePatientStubSelfLinks(PatientStub patientStub)
-        {
-            UpdatePatientStubSelfLinks(new List<PatientStub> {patientStub});
-        }
-        
         
         private async Task<PatientEntity> CreateNewPatientEntity(PatientEntity newPatientEntity)
         {

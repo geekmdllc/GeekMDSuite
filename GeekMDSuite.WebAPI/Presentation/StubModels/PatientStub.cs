@@ -5,7 +5,7 @@ using GeekMDSuite.Utilities.Extensions;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class PatientStub : SelfLinkingStub
+    public class PatientStub 
     {
         public PatientStub()
         {
