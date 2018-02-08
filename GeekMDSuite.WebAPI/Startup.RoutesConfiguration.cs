@@ -32,41 +32,28 @@ namespace GeekMDSuite.WebAPI
         private static void ConfigurePatientControllerRoutes(string baseUrl,
             ITypedRouteBuilder routes)
         {
-            routes.Add(baseUrl + "patient/",
-                route => route.ToController<PatientController>());
-            routes.Get("",
-                route => route.ToAction<PatientController>(a => a.GetBySearch(With.Any<PatientDataSearchFilter>())));
-            routes.Get("{guid}/visits",
-                route => route.ToAction<PatientController>(a => a.GetVisits(With.Any<Guid>())));
-            routes.Get("{guid}",
-                route => route.ToAction<PatientController>(a => a.GetByGuid(With.Any<Guid>())));
+            routes.Add(baseUrl + "patient/", route => route.ToController<PatientController>());
+            routes.Get("", route => route.ToAction<PatientController>(a => a.GetBySearch(With.Any<PatientDataSearchFilter>())));
+            routes.Get("{guid}/visits", route => route.ToAction<PatientController>(a => a.GetVisits(With.Any<Guid>())));
+            routes.Get("{guid}", route => route.ToAction<PatientController>(a => a.GetByGuid(With.Any<Guid>())));
         }
 
         private static void ConfigureVisitControllerRoutes(string baseUrl,
             ITypedRouteBuilder routes)
         {
-            routes.Add(baseUrl + "visit/",
-                route => route.ToController<VisitController>());
-            routes.Get("",
-                route => route.ToAction<VisitController>(a => a.GetBySearch(With.Any<VisitDataSearchFilter>())));
-            routes.Get("{guid}",
-                route => route.ToAction<VisitController>(a => a.GetByGuid(With.Any<Guid>())));
+            routes.Add(baseUrl + "visit/", route => route.ToController<VisitController>());
+            routes.Get("", route => route.ToAction<VisitController>(a => a.GetBySearch(With.Any<VisitDataSearchFilter>())));
+            routes.Get("{guid}", route => route.ToAction<VisitController>(a => a.GetByGuid(With.Any<Guid>())));
         }
 
         private static void ConfigureAnalyticsRoutes(string baseUrl, ITypedRouteBuilder routes)
         {
             var classifyUri = baseUrl + "classify/";
             routes.Add(classifyUri, route => route.ToController<ClassifyController>());
-            routes.Post("audiogram/",
-                route => route.ToAction<ClassifyController>(a => a.PostToAudiogram(With.Any<Audiogram>())));
-            routes.Post("bp/",
-                route => route.ToAction<ClassifyController>(a => a.PostToBloodPressure(With.Any<BloodPressure>())));
-            routes.Post("bodycomp/",
-                route => route.ToAction<ClassifyController>(a =>
-                    a.PostToBodyComposition(With.Any<BodyCompositionClassificationParameters>())));
-            routes.Post("bodycompexp/",
-                route => route.ToAction<ClassifyController>(a =>
-                    a.PostToBodyCompositionExpanded(With.Any<BodyCompositionExpandedClassificationParameters>())));
+            routes.Post("audiogram/", route => route.ToAction<ClassifyController>(a => a.PostToAudiogram(With.Any<Audiogram>())));
+            routes.Post("bp/", route => route.ToAction<ClassifyController>(a => a.PostToBloodPressure(With.Any<BloodPressure>())));
+            routes.Post("bodycomp/", route => route.ToAction<ClassifyController>(a => a.PostToBodyComposition(With.Any<BodyCompositionClassificationParameters>())));
+            routes.Post("bodycompexp/", route => route.ToAction<ClassifyController>(a => a.PostToBodyCompositionExpanded(With.Any<BodyCompositionExpandedClassificationParameters>())));
 
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());
@@ -89,6 +76,27 @@ namespace GeekMDSuite.WebAPI
             routes.Post("", route => route.ToAction<BloodPressuresController>(a => a.Post(With.Any<BloodPressureStubFromUser>())));
             routes.Put("{id}", route => route.ToAction<BloodPressuresController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<BloodPressuresController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionsController>());
+            routes.Get("", route => route.ToAction<BodyCompositionsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<BodyCompositionsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<BodyCompositionsController>(a => a.Post(With.Any<BodyCompositionStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<BodyCompositionsController>(a => a.Put(With.Any<int>(), With.Any<BodyCompositionStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<BodyCompositionsController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "bodycompexpandeds/", route => route.ToController<BodyCompositionExpandedsController>());
+            routes.Get("", route => route.ToAction<BodyCompositionExpandedsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<BodyCompositionExpandedsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<BodyCompositionExpandedsController>(a => a.Post(With.Any<BodyCompositionExpandedStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<BodyCompositionExpandedsController>(a => a.Put(With.Any<int>(), With.Any<BodyCompositionExpandedStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<BodyCompositionExpandedsController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "cardioregimens/", route => route.ToController<CardiovascularRegimensController>());
+            routes.Get("", route => route.ToAction<CardiovascularRegimensController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<CardiovascularRegimensController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<CardiovascularRegimensController>(a => a.Post(With.Any<CardiovascularRegimenStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<CardiovascularRegimensController>(a => a.Put(With.Any<int>(), With.Any<CardiovascularRegimenStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<CardiovascularRegimensController>(a => a.Delete(With.Any<int>())));
             
             routes.Add(dataUrl + "carotidus/", route => route.ToController<CarotidUltrasoundsController>());
             routes.Get("", route => route.ToAction<CarotidUltrasoundsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
@@ -145,20 +153,62 @@ namespace GeekMDSuite.WebAPI
             routes.Post("", route => route.ToAction<PushupsController>(a => a.Post(With.Any<PushupsStubFromUser>())));
             routes.Put("{id}", route => route.ToAction<PushupsController>(a => a.Put(With.Any<int>(), With.Any<PushupsStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<PushupsController>(a => a.Delete(With.Any<int>())));
+                        
+            routes.Add(dataUrl + "resistanceregimens/", route => route.ToController<ResistanceRegimensController>());
+            routes.Get("", route => route.ToAction<ResistanceRegimensController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<ResistanceRegimensController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<ResistanceRegimensController>(a => a.Post(With.Any<ResistanceRegimenStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<ResistanceRegimensController>(a => a.Put(With.Any<int>(), With.Any<ResistanceRegimenStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<ResistanceRegimensController>(a => a.Delete(With.Any<int>())));
             
-//            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
-//            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
-//            routes.Add(dataUrl + "sitandreach/", route => route.ToController<SitAndReachController>());
-//            routes.Add(dataUrl + "situps/", route => route.ToController<SitupsController>());
-//            routes.Add(dataUrl + "spirometry/", route => route.ToController<SpirometryController>());
-//            routes.Add(dataUrl + "treadmill/", route => route.ToController<TreadmillExerciseStressTestController>());
-//            routes.Add(dataUrl + "visualacuity/", route => route.ToController<VisualAcuityController>());
-//            routes.Add(dataUrl + "vitals/", route => route.ToController<VitalSignsController>());
-//
-//            var patientActivitiesUri = dataUrl + "activities/";
-//            routes.Add(patientActivitiesUri + "resistance", route => route.ToController<ResistanceRegimenController>());
-//            routes.Add(patientActivitiesUri + "cardio", route => route.ToController<CardiovascularRegimenController>());
-//            routes.Add(patientActivitiesUri + "stretching", route => route.ToController<StretchingRegimenController>());
+            routes.Add(dataUrl + "sitandreaches/", route => route.ToController<SitAndReachesController>());
+            routes.Get("", route => route.ToAction<SitAndReachesController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<SitAndReachesController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<SitAndReachesController>(a => a.Post(With.Any<SitAndReachStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<SitAndReachesController>(a => a.Put(With.Any<int>(), With.Any<SitAndReachStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<SitAndReachesController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "situps/", route => route.ToController<SitupsController>());
+            routes.Get("", route => route.ToAction<SitupsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<SitupsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<SitupsController>(a => a.Post(With.Any<SitupsStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<SitupsController>(a => a.Put(With.Any<int>(), With.Any<SitupsStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<SitupsController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "spirometries/", route => route.ToController<SpirometriesController>());
+            routes.Get("", route => route.ToAction<SpirometriesController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<SpirometriesController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<SpirometriesController>(a => a.Post(With.Any<SpirometryStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<SpirometriesController>(a => a.Put(With.Any<int>(), With.Any<SpirometryStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<SpirometriesController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "stretchingregimens/", route => route.ToController<StretchingRegimensController>());
+            routes.Get("", route => route.ToAction<StretchingRegimensController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<StretchingRegimensController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<StretchingRegimensController>(a => a.Post(With.Any<StretchingRegimenStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<StretchingRegimensController>(a => a.Put(With.Any<int>(), With.Any<StretchingRegimenStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<StretchingRegimensController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "treadmills/", route => route.ToController<TreadmillExerciseStressTestsController>());
+            routes.Get("", route => route.ToAction<TreadmillExerciseStressTestsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<TreadmillExerciseStressTestsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<TreadmillExerciseStressTestsController>(a => a.Post(With.Any<TreadmillExerciseStressTestStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<TreadmillExerciseStressTestsController>(a => a.Put(With.Any<int>(), With.Any<TreadmillExerciseStressTestStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<TreadmillExerciseStressTestsController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "visualacuities/", route => route.ToController<VisualAcuitiesController>());
+            routes.Get("", route => route.ToAction<VisualAcuitiesController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<VisualAcuitiesController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<VisualAcuitiesController>(a => a.Post(With.Any<VisualAcuityStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<VisualAcuitiesController>(a => a.Put(With.Any<int>(), With.Any<VisualAcuityStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<VisualAcuitiesController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "vitalsigns/", route => route.ToController<VitalSignsController>());
+            routes.Get("", route => route.ToAction<VitalSignsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<VitalSignsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<VitalSignsController>(a => a.Post(With.Any<VitalSignsStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<VitalSignsController>(a => a.Put(With.Any<int>(), With.Any<VitalSignsStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<VitalSignsController>(a => a.Delete(With.Any<int>())));
         }
     }
 }

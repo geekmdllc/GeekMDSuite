@@ -41,6 +41,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
+                    BodyCompositions = new ResourceLink
+                    {
+                        Description = "Body compositions resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<BodyCompositionsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    BodyCompositionExpandeds = new ResourceLink
+                    {
+                        Description = "Body composition expandeds resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<BodyCompositionExpandedsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
                     Audiograms = new ResourceLink
                     {
                         Description = "Audiogram resource data for patient visits. Can be filtered and paginated as follows...",
@@ -48,6 +62,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
+                    CardiovascularRegimen = new ResourceLink
+                    {
+                        Description = "Cardiovascular regimens resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<CardiovascularRegimensController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    } ,
                     CarotidUltrasounds = new ResourceLink
                     {
                         Description = "Carotid ultrasound resource data for patient visits. Can be filtered and paginated as follows...",
@@ -103,6 +124,62 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<PushupsController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
+                    },
+                    ResistanceRegimens = new ResourceLink
+                    {
+                        Description = "Resistance regimens resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<ResistanceRegimensController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    SitAndReaches = new ResourceLink
+                    {
+                        Description = "Sit and reaches resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<SitAndReachesController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    Situps = new ResourceLink
+                    {
+                        Description = "Situps resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<SitupsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    Spirometries = new ResourceLink
+                    {
+                        Description = "Spirometries resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<SpirometriesController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    StretchingRegimens = new ResourceLink
+                    {
+                        Description = "Stretching regimens resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<StretchingRegimensController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    TreadmillExerciseStressTests = new ResourceLink
+                    {
+                        Description = "Treadmill exercises stress tests resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<TreadmillExerciseStressTestsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    VisualAcuities = new ResourceLink
+                    {
+                        Description = "Visual acuities resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<VisualAcuitiesController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    VitalSigns = new ResourceLink
+                    {
+                        Description = "Vital signs resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<VitalSignsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
                     }
                 }
             };
@@ -113,7 +190,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             public ResourceLink Home { get; set; }
             public ResourceLink Audiograms { get; set; }
+            public ResourceLink BodyCompositions { get; set; }
+            public ResourceLink BodyCompositionExpandeds { get; set; }
             public ResourceLink BloodPressures { get; set; }
+            public ResourceLink CardiovascularRegimen { get; set; }
             public ResourceLink CarotidUltrasounds { get; set; }
             public ResourceLink CentralBloodPressures { get; set; }
             public ResourceLink FunctionalMovementScreens { get; set; }
@@ -122,6 +202,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink OccularPressures { get; set; }
             public ResourceLink PeripheralVisions { get; set; }
             public ResourceLink Pushups { get; set; }
+            public ResourceLink ResistanceRegimens { get; set; }
+            public ResourceLink SitAndReaches { get; set; }
+            public ResourceLink Situps { get; set; }
+            public ResourceLink Spirometries { get; set; }
+            public ResourceLink StretchingRegimens { get; set; }
+            public ResourceLink TreadmillExerciseStressTests { get; set; }
+            public ResourceLink VisualAcuities { get; set; }
+            public ResourceLink VitalSigns { get; set; }
         }
     }
 }
