@@ -14,7 +14,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var entity = new SpirometryEntity
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 
@@ -29,7 +29,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new SpirometryStubFromUser
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 
@@ -44,7 +44,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new SpirometryStubFromUser
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 

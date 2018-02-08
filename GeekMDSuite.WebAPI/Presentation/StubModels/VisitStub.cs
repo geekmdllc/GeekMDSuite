@@ -5,7 +5,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
     public class VisitStub 
     {
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public DateTime Date { get; set; }
         public VisitStatus Status { get; set; }
         public Guid PatientGuid { get; set; }

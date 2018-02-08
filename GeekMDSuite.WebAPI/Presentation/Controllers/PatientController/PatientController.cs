@@ -236,7 +236,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = $"Get this visit",
                     Relationship = UrlRelationship.Next,
-                    Href = Url.Action<VisitController>(a => a.GetByGuid(visitStub.Guid))
+                    Href = Url.Action<VisitController>(a => a.GetByGuid(visitStub.VisitGuid))
                 }
             };
         }
@@ -259,7 +259,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = $"Access or modify a patient",
                     Relationship = UrlRelationship.Self,
-                    Href = Url.Action<PatientController>(a => a.GetByGuid(patient.Guid)),
+                    Href = Url.Action<PatientController>(a => a.GetByGuid(patient.PatientGuid)),
                     HtmlMethod = HtmlMethod.Put,
                 },
                 new ResourceLink
@@ -280,7 +280,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 {
                     Description = $"Get a list of all visits for this patient",
                     Relationship = UrlRelationship.Search,
-                    Href = Url.Action<PatientController>(a => a.GetVisits(patient.Guid)),
+                    Href = Url.Action<PatientController>(a => a.GetVisits(patient.PatientGuid)),
                     HtmlMethod = HtmlMethod.Get
                 }
             };
@@ -288,7 +288,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
 
         private async Task<List<VisitStub>> MapVisitStubs(PatientStub patient)
         {
-            var visits = (await _unitOfWork.Visits.All()).Where(visit => visit.PatientGuid == patient.Guid);
+            var visits = (await _unitOfWork.Visits.All()).Where(visit => visit.PatientGuid == patient.PatientGuid);
             var visitStubs = visits.Select(visit => _mapper.Map<VisitEntity, VisitStub>(visit)).ToList();
 
             return visitStubs;

@@ -16,7 +16,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
         }
 
         [Required]
-        public Guid Guid { get; set; }
+        public Guid PatientGuid { get; set; }
         [Required]
         public Name Name { get; set; }
         [Required]

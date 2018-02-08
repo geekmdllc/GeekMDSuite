@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
     public class GripStrengthStubFromUser : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public GripMeasurement Left { get; set; }
         public GripMeasurement Right { get; set; }
 

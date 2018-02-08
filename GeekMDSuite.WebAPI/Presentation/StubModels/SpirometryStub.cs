@@ -6,7 +6,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
     public class SpirometryStub : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public double ForcedExpiratoryVolume1Second { get; set; }
         public double ForcedVitalCapacity { get; set; }
         public double PeakExpiratoryFlow { get; set; }

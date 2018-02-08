@@ -16,7 +16,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var cvrEntity = new StretchingRegimenEntity
             {
                 AverageSessionDuration = 5,
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
                 Intensity = ExerciseIntensity.Moderate,
                 SessionsPerWeek = 5
@@ -34,7 +34,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stub = new StretchingRegimenStubFromUser
             {
                 AverageSessionDuration = 5,
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
                 Intensity = ExerciseIntensity.Moderate,
                 SessionsPerWeek = 5
@@ -52,7 +52,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new StretchingRegimenStubFromUser
             {
                 AverageSessionDuration = 5,
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
                 Intensity = ExerciseIntensity.Moderate,
                 SessionsPerWeek = 5

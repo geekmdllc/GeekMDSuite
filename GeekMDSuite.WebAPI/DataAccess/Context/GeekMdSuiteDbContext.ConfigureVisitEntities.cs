@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Context
     {
         private static void ConfigureVisitEntities(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<VisitEntity>().HasIndex(v => v.Guid).IsUnique();
+            modelBuilder.Entity<VisitEntity>().HasIndex(v => v.VisitGuid).IsUnique();
         }
     }
 }

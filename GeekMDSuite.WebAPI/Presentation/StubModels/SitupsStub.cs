@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
     public class SitupsStub : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public double Value { get; set; }
         public StrengthTest Type { get; set; }
     }

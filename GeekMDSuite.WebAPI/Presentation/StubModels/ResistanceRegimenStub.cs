@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
     public class ResistanceRegimenStub : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public int SecondsRestDurationPerSet { get; set; }
         public List<ResistenceRegimenFeatures> Features { get; set; }
         public double SessionsPerWeek { get; set; }

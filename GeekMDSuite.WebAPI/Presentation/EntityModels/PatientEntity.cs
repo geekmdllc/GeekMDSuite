@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(patient);
         }
 
-        public Guid Guid { get; set; }
+        public Guid PatientGuid { get; set; }
         public int Id { get; set; }
 
         public void MapValues(Patient subject)

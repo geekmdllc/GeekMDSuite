@@ -9,7 +9,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
     public class VitalSignsStubFromUser : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public BloodPressure BloodPressure { get; set; }
         public int OxygenSaturation { get; set; }
         public int PulseRate { get; set; }

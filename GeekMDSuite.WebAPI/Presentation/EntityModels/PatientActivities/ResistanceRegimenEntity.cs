@@ -16,7 +16,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
         }
 
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
 
         public void MapValues(ResistanceRegimen subject)
         {

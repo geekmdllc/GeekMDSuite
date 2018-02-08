@@ -9,7 +9,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
     public class TreadmillExerciseStressTestStub : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public TreadmillProtocol Protocol { get; set; }
         public TimeDuration Time { get; set; }
         public TmstResult Result { get; set; }

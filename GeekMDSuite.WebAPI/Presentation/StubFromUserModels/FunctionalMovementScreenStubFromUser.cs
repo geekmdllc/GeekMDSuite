@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
     public class FunctionalMovementScreenStubFromUser : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }  
+        public Guid VisitGuid { get; set; }  
         public FmsMovementData DeepSquat { get; set; }
         public FmsMovementSet HurdleStep { get; set; }
         public FmsMovementSet InlineLunge { get; set; }

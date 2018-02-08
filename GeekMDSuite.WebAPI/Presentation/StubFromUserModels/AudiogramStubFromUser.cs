@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
     public class AudiogramStubFromUser : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public AudiogramDataset Left { get; set; }
         public AudiogramDataset Right { get; set; }
 

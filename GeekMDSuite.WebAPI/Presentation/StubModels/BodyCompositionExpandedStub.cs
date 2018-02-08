@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
     public class BodyCompositionExpandedStub : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public Height Height { get; set; }
         public Waist Waist { get; set; }
         public Hips Hips { get; set; }

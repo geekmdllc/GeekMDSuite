@@ -26,7 +26,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             var entities = await UnitOfWork.VisitData<TEntity>().All();
             if (filter == null) return entities;
             if (filter.VisitGuid != null)
-                entities = entities.Where(e => e.Guid == filter.VisitGuid);
+                entities = entities.Where(e => e.VisitGuid == filter.VisitGuid);
             if (filter.Offset != null)
                 entities = entities.Skip((int) filter.Offset);
             if (filter.Take != null)

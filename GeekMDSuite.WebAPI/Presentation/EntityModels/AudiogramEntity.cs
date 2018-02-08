@@ -13,11 +13,11 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 
         public AudiogramEntity()
         {
-            Guid = Guid.Empty;
+            VisitGuid = Guid.Empty;
         }
 
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
 
         public void MapValues(Audiogram subject)
         {

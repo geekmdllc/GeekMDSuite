@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
     public class IshiharaSixPlateStub : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public IshiharaPlateAnswer Plate1 { get; set; }
         public IshiharaPlateAnswer Plate2 { get; set; }
         public IshiharaPlateAnswer Plate3 { get; set; }

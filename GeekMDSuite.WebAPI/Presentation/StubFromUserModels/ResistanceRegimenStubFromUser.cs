@@ -9,7 +9,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
     public class ResistanceRegimenStubFromUser : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public int SecondsRestDurationPerSet { get; set; }
         public List<ResistenceRegimenFeatures> Features { get; set; }
         public double SessionsPerWeek { get; set; }

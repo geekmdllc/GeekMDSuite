@@ -14,7 +14,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var entity = new IshiharaSixPlateEntity
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 
@@ -29,7 +29,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new IshiharaSixPlateStubFromUser
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 
@@ -44,7 +44,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new IshiharaSixPlateStubFromUser
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 

@@ -26,7 +26,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Services
                     MedicalRecordNumber = Guid.NewGuid().ToString(),
                     DateOfBirth = new DateTime(1985, 4, 19)
                 });
-            Assert.True(newPatient != null && newPatient.Guid != Guid.Empty);
+            Assert.True(newPatient != null && newPatient.PatientGuid != Guid.Empty);
         }
 
         [Fact]

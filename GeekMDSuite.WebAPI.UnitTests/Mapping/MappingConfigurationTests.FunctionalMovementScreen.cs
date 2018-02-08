@@ -14,7 +14,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var entity = new FunctionalMovementScreenEntity
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 
@@ -30,7 +30,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new FunctionalMovementScreenStubFromUser
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 
@@ -46,7 +46,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new FunctionalMovementScreenStubFromUser
             {
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
             };
 

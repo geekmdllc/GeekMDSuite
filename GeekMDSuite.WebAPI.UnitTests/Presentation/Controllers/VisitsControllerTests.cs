@@ -43,7 +43,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 
             var addedVisits = (await _unitOfWork.Visits.All()).FirstOrDefault();
 
-            Assert.True(addedVisits != null && addedVisits.Guid != Guid.Empty);
+            Assert.True(addedVisits != null && addedVisits.VisitGuid != Guid.Empty);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
         {
             var result = await _controller.Post(new VisitStubFromUser
             {
-                Guid = Guid.Empty
+                VisitGuid = Guid.Empty
             });
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());

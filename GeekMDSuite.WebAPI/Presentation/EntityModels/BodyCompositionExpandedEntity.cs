@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     public class BodyCompositionExpandedEntity : BodyCompositionExpanded, IMapProperties<BodyCompositionExpanded>, IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         
         public BodyCompositionExpandedEntity()
         {

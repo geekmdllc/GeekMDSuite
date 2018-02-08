@@ -22,7 +22,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         {
             try
             {
-                return await Context.Patients.FirstAsync(p => p.Guid == guid);
+                return await Context.Patients.FirstAsync(p => p.PatientGuid == guid);
             }
             catch
             {
@@ -60,7 +60,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             
             try
             {
-                var visit = await Context.Visits.FirstAsync(v => v.Guid == guid);
+                var visit = await Context.Visits.FirstAsync(v => v.VisitGuid == guid);
                 return await FindByGuid(visit.PatientGuid);
             }
             catch

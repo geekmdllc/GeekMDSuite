@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
     public class CentralBloodPressureStubFromUser : IVisitData
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         public double SystolicPressure { get; set; }
         public double PulsePressure { get; set; }
         public double AugmentedPressure { get; set; }

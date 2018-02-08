@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var cvrEntity = new ResistanceRegimenEntity
             {
                 AverageSessionDuration = 5,
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
                 Intensity = ExerciseIntensity.Moderate,
                 SessionsPerWeek = 5
@@ -35,7 +35,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var cvrStubFromUser = new ResistanceRegimenStubFromUser
             {
                 AverageSessionDuration = 5,
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
                 Intensity = ExerciseIntensity.Moderate,
                 SessionsPerWeek = 5
@@ -53,7 +53,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var resiStubFromUser = new ResistanceRegimenStubFromUser
             {
                 AverageSessionDuration = 5,
-                Guid = new Guid(),
+                VisitGuid = new Guid(),
                 Id = 0,
                 Intensity = ExerciseIntensity.Moderate,
                 SessionsPerWeek = 5,

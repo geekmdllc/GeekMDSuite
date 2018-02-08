@@ -4,6 +4,6 @@ namespace GeekMDSuite.WebAPI.Core.Models
 {
     public interface IVisitData : IEntity
     {
-        Guid Guid { get; set; }
+        Guid VisitGuid { get; set; }
     }
 }

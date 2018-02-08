@@ -8,7 +8,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public VisitEntity()
         {
-            Guid = Guid.Empty;
+            VisitGuid = Guid.Empty;
         }
 
         public VisitEntity(VisitEntity visitEntity) : this()
@@ -21,7 +21,7 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
         public VisitStatus Status { get; set; }
 
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
 
         public virtual void MapValues(VisitEntity subject)
         {

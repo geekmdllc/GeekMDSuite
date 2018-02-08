@@ -19,7 +19,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 
             var newVisitEntity = new VisitEntity
             {
-                Guid = Guid.NewGuid(),
+                VisitGuid = Guid.NewGuid(),
                 Status = VisitStatus.Scheduled
             };
 

@@ -7,7 +7,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
     public class VisitStubFromUser
     {
         [Required]
-        public Guid Guid { get; set; }
+        public Guid VisitGuid { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [Required]

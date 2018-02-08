@@ -136,11 +136,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         public async Task<IActionResult> Put(Guid guid, [FromBody] VisitStubFromUser entity)
         {
             // todo: test this logic
-            if (guid != entity.Guid && entity.Guid == Guid.Empty)
+            if (guid != entity.VisitGuid && entity.VisitGuid == Guid.Empty)
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"The end point targeted is for visit with Guid {guid}, but the entity provided has Guid {entity.Guid}. Resource not updated")
+                    .HasInternalMessage($"The end point targeted is for visit with Guid {guid}, but the entity provided has Guid {entity.VisitGuid}. Resource not updated")
                     .TellsUser("The identifier for the visit provided does not match the intended target and it cannot be updated")
                     .Build();
 
@@ -160,7 +160,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             try
             {
                 var updatedEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(entity);
-                var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.Guid);
+                var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.VisitGuid);
                 trackedEntity.MapValues(updatedEntity);
                 await _unitOfWork.Visits.Update(trackedEntity);
                 await _unitOfWork.Complete();
@@ -170,7 +170,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.VisitNotFoundInRepository)
-                    .HasInternalMessage($"Visit {entity.Guid} could not be located. No resource was updated.")
+                    .HasInternalMessage($"Visit {entity.VisitGuid} could not be located. No resource was updated.")
                     .TellsUser($"There was an error locating the visit and we could not update it.")
                     .Build();
                 return BadRequest(error);
@@ -229,14 +229,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 {
                     Description = $"Get this visit",
                     Relationship = UrlRelationship.Next,
-                    Href = Url.Action<VisitController>(a => a.GetByGuid(visitStub.Guid)),
+                    Href = Url.Action<VisitController>(a => a.GetByGuid(visitStub.VisitGuid)),
                     HtmlMethod = HtmlMethod.Get,
                 },
                 new ResourceLink
                 {
                     Description = $"Get this patient",
                     Relationship = UrlRelationship.Next,
-                    Href = Url.Action<PatientController.PatientController>(a => a.GetByGuid(patientStub.Guid)),
+                    Href = Url.Action<PatientController.PatientController>(a => a.GetByGuid(patientStub.PatientGuid)),
                     HtmlMethod = HtmlMethod.Get
                 }
             };

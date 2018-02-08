@@ -23,7 +23,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             if (visitGuid == Guid.Empty)
                 throw new ArgumentOutOfRangeException($"{nameof(visitGuid)} must not be an empty Guid.");
 
-            var result = await Context.Set<TEntity>().Where(set => set.Guid == visitGuid).ToListAsync();
+            var result = await Context.Set<TEntity>().Where(set => set.VisitGuid == visitGuid).ToListAsync();
 
             if (!result.Any())
                 throw new RepositoryEntityNotFoundException(visitGuid.ToString());
@@ -33,14 +33,14 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         
         public async Task<IEnumerable<TEntity>> FindByPatient(Guid paitentGuid)
         {
-            var patients = await Context.Patients.Where(patient => patient.Guid == paitentGuid).ToListAsync();
+            var patients = await Context.Patients.Where(patient => patient.PatientGuid == paitentGuid).ToListAsync();
             var patientVisits = new List<VisitEntity>();
             foreach (var patient in patients)
-                patientVisits.AddRange(await Context.Visits.Where(v => v.PatientGuid == patient.Guid).ToListAsync());
+                patientVisits.AddRange(await Context.Visits.Where(v => v.PatientGuid == patient.PatientGuid).ToListAsync());
 
             var entities = new List<TEntity>();
             foreach (var patientVisit in patientVisits)
-                entities.AddRange(await Context.Set<TEntity>().Where(v => v.Guid == patientVisit.Guid).ToListAsync());
+                entities.AddRange(await Context.Set<TEntity>().Where(v => v.VisitGuid == patientVisit.VisitGuid).ToListAsync());
 
             return entities;
         }
