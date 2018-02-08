@@ -20,10 +20,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class BloodPressureController : VisitDataController
+    public class BloodPressuresController : VisitDataController
     {
         
-        public BloodPressureController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public BloodPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
         {
         }
 
@@ -68,7 +68,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
                 await UnitOfWork.BloodPressures.Add(entity);
                 await UnitOfWork.Complete();
-                var url = Url.Action<BloodPressureController>(a => a.Post(stub));
+                var url = Url.Action<BloodPressuresController>(a => a.Post(stub));
                 return Created(url, entity);
             }
             catch (ArgumentNullException)
@@ -167,35 +167,35 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Get blood pressure resource by it's unique identifier.",
-                    Href = Url.Action<BloodPressureController>(a => a.GetById(id)),
+                    Href = Url.Action<BloodPressuresController>(a => a.GetById(id)),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Self
                 },
                 new ResourceLink
                 {
                     Description = "Delete blood pressure resource by it's unique identifier.",
-                    Href = Url.Action<BloodPressureController>(a => a.Delete(id)),
+                    Href = Url.Action<BloodPressuresController>(a => a.Delete(id)),
                     HtmlMethod = HtmlMethod.Delete,
                     Relationship = UrlRelationship.Next
                 },
                 new ResourceLink
                 {
                     Description = "Update the values for this existing blood pressure resource",
-                    Href = Url.Action<BloodPressureController>(a => a.Put(id, With.No<BloodPressureStubFromUser>())),
+                    Href = Url.Action<BloodPressuresController>(a => a.Put(id, With.No<BloodPressureStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for blood pressures resources with filters and pagination",
-                    Href = Url.Action<BloodPressureController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href = Url.Action<BloodPressuresController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new blood pressure resource",
-                    Href = Url.Action<BloodPressureController>(a => a.Post(With.No<BloodPressureStubFromUser>())),
+                    Href = Url.Action<BloodPressuresController>(a => a.Post(With.No<BloodPressureStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },
@@ -216,7 +216,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Get this blood pressure resource",
-                    Href = Url.Action<BloodPressureController>(a => a.GetById(stub.Id)),
+                    Href = Url.Action<BloodPressuresController>(a => a.GetById(stub.Id)),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 },

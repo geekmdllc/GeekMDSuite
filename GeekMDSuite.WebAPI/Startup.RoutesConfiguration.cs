@@ -76,32 +76,50 @@ namespace GeekMDSuite.WebAPI
         {
             var dataUrl = baseUrl + "data/";
             
-            routes.Add(dataUrl + "audiogram/", route => route.ToController<AudiogramController>());
-            routes.Get("", route => route.ToAction<AudiogramController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
-            routes.Get("{id}", route => route.ToAction<AudiogramController>(a => a.GetById(With.Any<int>())));
-            routes.Post("", route => route.ToAction<AudiogramController>(a => a.Post(With.Any<AudiogramStubFromUser>())));
-            routes.Put("{id}", route => route.ToAction<AudiogramController>(a => a.Put(With.Any<int>(), With.Any<AudiogramStubFromUser>())));
-            routes.Delete("{id}", route => route.ToAction<AudiogramController>(a => a.Delete(With.Any<int>())));
+            routes.Add(dataUrl + "audiogram/", route => route.ToController<AudiogramsController>());
+            routes.Get("", route => route.ToAction<AudiogramsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<AudiogramsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<AudiogramsController>(a => a.Post(With.Any<AudiogramStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<AudiogramsController>(a => a.Put(With.Any<int>(), With.Any<AudiogramStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<AudiogramsController>(a => a.Delete(With.Any<int>())));
             
-            routes.Add(dataUrl + "bp/", route => route.ToController<BloodPressureController>());
-            routes.Get("", route => route.ToAction<BloodPressureController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
-            routes.Get("{id}", route => route.ToAction<BloodPressureController>(a => a.GetById(With.Any<int>())));
-            routes.Post("", route => route.ToAction<BloodPressureController>(a => a.Post(With.Any<BloodPressureStubFromUser>())));
-            routes.Put("{id}", route => route.ToAction<BloodPressureController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
-            routes.Delete("{id}", route => route.ToAction<BloodPressureController>(a => a.Delete(With.Any<int>())));
+            routes.Add(dataUrl + "bp/", route => route.ToController<BloodPressuresController>());
+            routes.Get("", route => route.ToAction<BloodPressuresController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<BloodPressuresController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<BloodPressuresController>(a => a.Post(With.Any<BloodPressureStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<BloodPressuresController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<BloodPressuresController>(a => a.Delete(With.Any<int>())));
             
-            routes.Add(dataUrl + "carotidus/", route => route.ToController<CarotidUltrasoundController>());
-            routes.Get("", route => route.ToAction<CarotidUltrasoundController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
-            routes.Get("{id}", route => route.ToAction<CarotidUltrasoundController>(a => a.GetById(With.Any<int>())));
-            routes.Post("", route => route.ToAction<CarotidUltrasoundController>(a => a.Post(With.Any<CarotidUltrasoundStubFromUser>())));
-            routes.Put("{id}", route => route.ToAction<CarotidUltrasoundController>(a => a.Put(With.Any<int>(), With.Any<CarotidUltrasoundStubFromUser>())));
-            routes.Delete("{id}", route => route.ToAction<CarotidUltrasoundController>(a => a.Delete(With.Any<int>())));
+            routes.Add(dataUrl + "carotidus/", route => route.ToController<CarotidUltrasoundsController>());
+            routes.Get("", route => route.ToAction<CarotidUltrasoundsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<CarotidUltrasoundsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<CarotidUltrasoundsController>(a => a.Post(With.Any<CarotidUltrasoundStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<CarotidUltrasoundsController>(a => a.Put(With.Any<int>(), With.Any<CarotidUltrasoundStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<CarotidUltrasoundsController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "centralbp/", route => route.ToController<CentralBloodPressuresController>());
+            routes.Get("", route => route.ToAction<CentralBloodPressuresController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<CentralBloodPressuresController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<CentralBloodPressuresController>(a => a.Post(With.Any<CentralBloodPressureStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<CentralBloodPressuresController>(a => a.Put(With.Any<int>(), With.Any<CentralBloodPressureStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<CentralBloodPressuresController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "fms/", route => route.ToController<FunctionalMovementScreensController>());
+            routes.Get("", route => route.ToAction<FunctionalMovementScreensController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<FunctionalMovementScreensController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<FunctionalMovementScreensController>(a => a.Post(With.Any<FunctionalMovementScreenStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<FunctionalMovementScreensController>(a => a.Put(With.Any<int>(), With.Any<FunctionalMovementScreenStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<FunctionalMovementScreensController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "gripstrength/", route => route.ToController<GripStrengthsController>());
+            routes.Get("", route => route.ToAction<GripStrengthsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<GripStrengthsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<GripStrengthsController>(a => a.Post(With.Any<GripStrengthStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<GripStrengthsController>(a => a.Put(With.Any<int>(), With.Any<GripStrengthStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<GripStrengthsController>(a => a.Delete(With.Any<int>())));
             
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
-//            routes.Add(dataUrl + "centralbp/", route => route.ToController<CentralBloodPressureController>());
-//            routes.Add(dataUrl + "fms/", route => route.ToController<FunctionalMovementScreenController>());
-//            routes.Add(dataUrl + "grip/", route => route.ToController<GripStrengthController>());
 //            routes.Add(dataUrl + "ishihara/", route => route.ToController<IshiharaSixPlateController>());
 //            routes.Add(dataUrl + "occularpressure/", route => route.ToController<OccularPressureController>());
 //            routes.Add(dataUrl + "peripheralvision/", route => route.ToController<PeripheralVisionController>());

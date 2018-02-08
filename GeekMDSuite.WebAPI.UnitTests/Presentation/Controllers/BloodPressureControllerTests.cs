@@ -19,24 +19,24 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
     public class BloodPressureControllerTests
     {
-        private readonly BloodPressureController _bloodPressureController;
+        private readonly BloodPressuresController _bloodPressuresController;
 
         public BloodPressureControllerTests()
         {
-            _bloodPressureController = new BloodPressureController(
+            _bloodPressuresController = new BloodPressuresController(
                 new FakeUnitOfWorkSeeded(),
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))),
                 new ErrorService(new ConfigurationRoot(new List<IConfigurationProvider>())));
 
             var mock = new Mock<IUrlHelper>();
-            mock.Setup(m => m.Action<BloodPressureController>(a => a.GetById(With.No<int>()))).Returns("mock");
-            _bloodPressureController.Url = mock.Object;
+            mock.Setup(m => m.Action<BloodPressuresController>(a => a.GetById(With.No<int>()))).Returns("mock");
+            _bloodPressuresController.Url = mock.Object;
         }
 
         [Fact]
         public async Task GetById_GivenIdThatExistsInDatabase_ReturnsOkResult()
         {
-            var result = await _bloodPressureController.GetById(1);
+            var result = await _bloodPressuresController.GetById(1);
             Assert.Equal(typeof(OkObjectResult), result.GetType());
         }
     }

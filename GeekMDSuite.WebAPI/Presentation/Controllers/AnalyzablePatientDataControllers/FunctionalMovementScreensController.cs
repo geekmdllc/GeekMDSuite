@@ -17,17 +17,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class AudiogramController : VisitDataController
+    public class FunctionalMovementScreensController : VisitDataController
     {
-        public AudiogramController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public FunctionalMovementScreensController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
         {
         }
-
+        
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
-            var entities = await GetFilteredEntities<AudiogramEntity>(filter);
+            var entities = await GetFilteredEntities<FunctionalMovementScreenEntity>(filter);
             
-            var resources = GenerateAudiogramResources(entities);
+            var resources = GenerateFunctionalMovementScreenResources(entities);
 
             return Ok(resources);
         }
@@ -36,9 +36,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                var entity = await UnitOfWork.Audiograms.FindById(id);
-                var stub = Mapper.Map<AudiogramEntity, AudiogramStub>(entity);
-                var resource = new AudiogramResource
+                var entity = await UnitOfWork.FunctionalMovementScreens.FindById(id);
+                var stub = Mapper.Map<FunctionalMovementScreenEntity, FunctionalMovementScreenStub>(entity);
+                var resource = new FunctionalMovementScreenResource
                 {
                     Links = GenerateGetByIdLinks(id),
                     Properties = stub
@@ -50,21 +50,21 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An audiogram entity with the id {id} could not be located in the repository.")
-                    .TellsUser("The requested audiogram entry could not be found")
+                    .HasInternalMessage($"An functional movement screen entity with the id {id} could not be located in the repository.")
+                    .TellsUser("The requested functional movement screen entry could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        public async Task<IActionResult> Post([FromBody] AudiogramStubFromUser stub)
+        public async Task<IActionResult> Post([FromBody] FunctionalMovementScreenStubFromUser stub)
         {
             try
             {
-                var entity = Mapper.Map<AudiogramStubFromUser, AudiogramEntity>(stub);
-                await UnitOfWork.Audiograms.Add(entity);
+                var entity = Mapper.Map<FunctionalMovementScreenStubFromUser, FunctionalMovementScreenEntity>(stub);
+                await UnitOfWork.FunctionalMovementScreens.Add(entity);
                 await UnitOfWork.Complete();
-                var url = Url.Action<AudiogramController>(a => a.Post(stub));
+                var url = Url.Action<FunctionalMovementScreensController>(a => a.Post(stub));
                 return Created(url, entity);
             }
             catch (ArgumentNullException)
@@ -72,9 +72,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
                     .HasInternalMessage(
-                        "A null object was included in the request body and cannot be processed as an audiogram entity")
+                        "A null object was included in the request body and cannot be processed as an functional movement screen entity")
                     .TellsUser(
-                        "The request to create a new audiogram entry was malformed and likely empty. Please retry.")
+                        "The request to create a new functional movement screen entry was malformed and likely empty. Please retry.")
                     .Build();
                 return BadRequest(error);
             }
@@ -84,7 +84,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                     .HasErrorCode(ErrorPayloadErrorCode.EntityIdIsNotUniqe)
                     .HasInternalMessage(
                         $"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
-                    .TellsUser("The request to create a new audiogram entry was imporoperly formatted ")
+                    .TellsUser("The request to create a new functional movement screen entry was imporoperly formatted ")
                     .Build();
                 return Conflict(error);
             }
@@ -92,22 +92,22 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The audiogram data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The audiogram recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage("The functional movement screen data model receieved is not associated with a valid visit Guid")
+                    .TellsUser("The functional movement screen recieved is not properly associated with a visit and could not be added")
                     .Build();
                     
                 return BadRequest(error);
             }
         }
 
-        public async Task<IActionResult> Put(int id, [FromBody] AudiogramStubFromUser stub)
+        public async Task<IActionResult> Put(int id, [FromBody] FunctionalMovementScreenStubFromUser stub)
         {
             if (stub != null && id != stub.Id)
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a audiogram entity with Id {id}, but the audiogram resource object contained Id {stub.Id}")
-                    .TellsUser("The audiogram entry provided for update doesn't match the intended target.")
+                    .HasInternalMessage($"There endpoint targeted a functional movement screen entity with Id {id}, but the functional movement screen resource object contained Id {stub.Id}")
+                    .TellsUser("The functional movement screen entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
@@ -115,8 +115,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             
             try
             {
-                var entity = Mapper.Map<AudiogramStubFromUser, AudiogramEntity>(stub);
-                await UnitOfWork.Audiograms.Update(entity);
+                var entity = Mapper.Map<FunctionalMovementScreenStubFromUser, FunctionalMovementScreenEntity>(stub);
+                await UnitOfWork.FunctionalMovementScreens.Update(entity);
                 await UnitOfWork.Complete();
                 return Ok(stub);
             }
@@ -124,8 +124,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An audiogram entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the audiogram entry identified for update couldn't not be found")
+                    .HasInternalMessage($"An functional movement screen entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The request could not be processed because the functional movement screen entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,8 +133,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The audiogram data model received from client was null and could not be processed.")
-                    .TellsUser("The request to createa a new audiogram was improperly formatted")
+                    .HasInternalMessage("The functional movement screen data model received from client was null and could not be processed.")
+                    .TellsUser("The request to createa a new functional movement screen was improperly formatted")
                     .Build();
                 return BadRequest(error);
             }
@@ -144,7 +144,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                await UnitOfWork.Audiograms.Delete(id);
+                await UnitOfWork.FunctionalMovementScreens.Delete(id);
                 await UnitOfWork.Complete();
                 return NoContent();
             }
@@ -152,25 +152,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An audiogram element with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The requested audiogram resource could not be found")
+                    .HasInternalMessage($"An functional movement screen element with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The requested functional movement screen resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<AudiogramResource> GenerateAudiogramResources(IEnumerable<AudiogramEntity> entities)
+        private IEnumerable<FunctionalMovementScreenResource> GenerateFunctionalMovementScreenResources(IEnumerable<FunctionalMovementScreenEntity> entities)
         {
-            var stubs = entities.Select(Mapper.Map<AudiogramEntity, AudiogramStub>);
-            var resources = stubs.Select(stub => new AudiogramResource
+            var stubs = entities.Select(Mapper.Map<FunctionalMovementScreenEntity, FunctionalMovementScreenStub>);
+            var resources = stubs.Select(stub => new FunctionalMovementScreenResource
             {
                 Properties = stub,
                 Links = new List<ResourceLink>
                 {
                     new ResourceLink
                     {
-                        Description = "Get this audiogram resource",
-                        Href = Url.Action<AudiogramController>(a => a.GetById(stub.Id)),
+                        Description = "Get this functional movement screen resource",
+                        Href = Url.Action<FunctionalMovementScreensController>(a => a.GetById(stub.Id)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
@@ -193,36 +193,36 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 new ResourceLink
                 {
-                    Description = "Get audiogram resource by it's unique identifier.",
-                    Href = Url.Action<AudiogramController>(a => a.GetById(id)),
+                    Description = "Get functional movement screen resource by it's unique identifier.",
+                    Href = Url.Action<FunctionalMovementScreensController>(a => a.GetById(id)),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Self
                 },
                 new ResourceLink
                 {
-                    Description = "Delete audiogram resource by it's unique identifier.",
-                    Href = Url.Action<AudiogramController>(a => a.Delete(id)),
+                    Description = "Delete functional movement screen resource by it's unique identifier.",
+                    Href = Url.Action<FunctionalMovementScreensController>(a => a.Delete(id)),
                     HtmlMethod = HtmlMethod.Delete,
                     Relationship = UrlRelationship.Next
                 },
                 new ResourceLink
                 {
-                    Description = "Update the values for this existing audiogram resource",
-                    Href = Url.Action<AudiogramController>(a => a.Put(id, With.No<AudiogramStubFromUser>())),
+                    Description = "Update the values for this existing functional movement screen resource",
+                    Href = Url.Action<FunctionalMovementScreensController>(a => a.Put(id, With.No<FunctionalMovementScreenStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
-                    Description = "Search for audiograms resources with filters and pagination",
-                    Href = Url.Action<AudiogramController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Description = "Search for FunctionalMovementScreens resources with filters and pagination",
+                    Href = Url.Action<FunctionalMovementScreensController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
-                    Description = "Add a new audiogram resource",
-                    Href = Url.Action<AudiogramController>(a => a.Post(With.No<AudiogramStubFromUser>())),
+                    Description = "Add a new functional movement screen resource",
+                    Href = Url.Action<FunctionalMovementScreensController>(a => a.Post(With.No<FunctionalMovementScreenStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },
@@ -235,7 +235,5 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 }
             };
         }
-
-        
     }
 }

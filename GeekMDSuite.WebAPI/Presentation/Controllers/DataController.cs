@@ -37,24 +37,45 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     BloodPressures = new ResourceLink
                     {
                         Description = "Blood pressure resource data for patient visits. Can be filtered and paginated as follows...",
-                        Href = Url.Action<BloodPressureController>(a => a.GetBySearch(null)),
+                        Href = Url.Action<BloodPressuresController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     Audiograms = new ResourceLink
                     {
                         Description = "Audiogram resource data for patient visits. Can be filtered and paginated as follows...",
-                        Href = Url.Action<AudiogramController>(a => a.GetBySearch(null)),
+                        Href = Url.Action<AudiogramsController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
                     CarotidUltrasounds = new ResourceLink
                     {
                         Description = "Carotid ultrasound resource data for patient visits. Can be filtered and paginated as follows...",
-                        Href = Url.Action<CarotidUltrasoundController>(a => a.GetBySearch(null)),
+                        Href = Url.Action<CarotidUltrasoundsController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
-                    } 
+                    } ,
+                    CentralBloodPressures = new ResourceLink
+                    {
+                        Description = "Central blood pressure resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<CentralBloodPressuresController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    FunctionalMovementScreens = new ResourceLink
+                    {
+                        Description = "Functional Movement Screen resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<FunctionalMovementScreensController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    GripStrengths = new ResourceLink
+                    {
+                        Description = "Grip strength resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<GripStrengthsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    }
                 }
             };
             return Ok(nav);
@@ -66,6 +87,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink Audiograms { get; set; }
             public ResourceLink BloodPressures { get; set; }
             public ResourceLink CarotidUltrasounds { get; set; }
+            public ResourceLink CentralBloodPressures { get; set; }
+            public ResourceLink FunctionalMovementScreens { get; set; }
+            public ResourceLink GripStrengths { get; set; }
         }
     }
 }
