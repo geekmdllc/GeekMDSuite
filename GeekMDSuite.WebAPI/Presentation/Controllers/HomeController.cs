@@ -21,11 +21,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var navStructure = new ApiNavigationStructure
+            var navStructure = new ApiDirectoryNavigationModel<HomeLinks>
             {
                 Title = $"{_configuration.GetSection("ApiTitle").Value} v{_configuration.GetSection("ApiVersion").Value}",
                 Description = _configuration.GetSection("ApiDescription").Value,
-                Links = new ApiLinks
+                Links = new HomeLinks
                 {
                     Patients = new ResourceLink
                     {
@@ -61,20 +61,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             return Ok(navStructure);
         }
 
-        private class ApiNavigationStructure
-        {
-            public string Title { get; set; }
-            public string Description { get; set; }
-            public ApiLinks Links { get; set; }
-
-            public ApiNavigationStructure()
-            {
-                Links = new ApiLinks();
-            }
-            
-        }
-
-        private class ApiLinks
+        private class HomeLinks
         {
             public ResourceLink Patients { get; set; }
             public ResourceLink Visits { get; set; }

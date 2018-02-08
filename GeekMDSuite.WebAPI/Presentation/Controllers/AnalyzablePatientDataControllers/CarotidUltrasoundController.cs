@@ -17,17 +17,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class AudiogramController : VisitDataController
+    public class CarotidUltrasoundController : VisitDataController
     {
-        public AudiogramController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public CarotidUltrasoundController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
         {
         }
-
+        
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
-            var entities = await GetFilteredEntities<AudiogramEntity>(filter);
+            var entities = await GetFilteredEntities<CarotidUltrasoundEntity>(filter);
             
-            var resources = GenerateAudiogramResources(entities);
+            var resources = GenerateCarotidUltrasoundResources(entities);
 
             return Ok(resources);
         }
@@ -36,9 +36,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                var entity = await UnitOfWork.Audiograms.FindById(id);
-                var stub = Mapper.Map<AudiogramEntity, AudiogramStub>(entity);
-                var resource = new AudiogramResource
+                var entity = await UnitOfWork.CarotidUltrasounds.FindById(id);
+                var stub = Mapper.Map<CarotidUltrasoundEntity, CarotidUltrasoundStub>(entity);
+                var resource = new CarotidUltrasoundResource
                 {
                     Links = GenerateGetByIdLinks(id),
                     Properties = stub
@@ -50,31 +50,29 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An audiogram entity with the id {id} could not be located in the repository.")
-                    .TellsUser("The requested audiogram entry could not be found")
+                    .HasInternalMessage($"A carotid ultrasound entity with the id {id} could not be located in the repository.")
+                    .TellsUser("The requested carotid ultrasound entry could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        public async Task<IActionResult> Post([FromBody] AudiogramStubFromUser stub)
+        public async Task<IActionResult> Post([FromBody] CarotidUltrasoundStubFromUser stub)
         {
             try
             {
-                var entity = Mapper.Map<AudiogramStubFromUser, AudiogramEntity>(stub);
-                await UnitOfWork.Audiograms.Add(entity);
+                var entity = Mapper.Map<CarotidUltrasoundStubFromUser, CarotidUltrasoundEntity>(stub);
+                await UnitOfWork.CarotidUltrasounds.Add(entity);
                 await UnitOfWork.Complete();
-                var url = Url.Action<AudiogramController>(a => a.Post(stub));
+                var url = Url.Action<CarotidUltrasoundController>(a => a.Post(stub));
                 return Created(url, entity);
             }
             catch (ArgumentNullException)
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage(
-                        "A null object was included in the request body and cannot be processed as an audiogram entity")
-                    .TellsUser(
-                        "The request to create a new audiogram entry was malformed and likely empty. Please retry.")
+                    .HasInternalMessage("A null object was included in the request body and cannot be processed as a carotid ultrasound entity")
+                    .TellsUser("The request to create a new carotid ultrasound entry was malformed and likely empty. Please retry.")
                     .Build();
                 return BadRequest(error);
             }
@@ -82,9 +80,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.EntityIdIsNotUniqe)
-                    .HasInternalMessage(
-                        $"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
-                    .TellsUser("The request to create a new audiogram entry was imporoperly formatted ")
+                    .HasInternalMessage($"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
+                    .TellsUser("The request to create a new carotid ultrasound entry was imporoperly formatted ")
                     .Build();
                 return Conflict(error);
             }
@@ -92,22 +89,22 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The audiogram data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The audiogram recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage("The carotid ultrasound data model receieved is not associated with a valid visit Guid")
+                    .TellsUser("The carotid ultrasound recieved is not properly associated with a visit and could not be added")
                     .Build();
                     
                 return BadRequest(error);
             }
         }
 
-        public async Task<IActionResult> Put(int id, [FromBody] AudiogramStubFromUser stub)
+        public async Task<IActionResult> Put(int id, [FromBody] CarotidUltrasoundStubFromUser stub)
         {
             if (stub != null && id != stub.Id)
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a audiogram entity with Id {id}, but the audiogram resource object contained Id {stub.Id}")
-                    .TellsUser("The audiogram entry provided for update doesn't match the intended target.")
+                    .HasInternalMessage($"There endpoint targeted a carotid ultrasound entity with Id {id}, but the carotid ultrasound resource object contained Id {stub.Id}")
+                    .TellsUser("The carotid ultrasound entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
@@ -115,8 +112,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             
             try
             {
-                var entity = Mapper.Map<AudiogramStubFromUser, AudiogramEntity>(stub);
-                await UnitOfWork.Audiograms.Update(entity);
+                var entity = Mapper.Map<CarotidUltrasoundStubFromUser, CarotidUltrasoundEntity>(stub);
+                await UnitOfWork.CarotidUltrasounds.Update(entity);
                 await UnitOfWork.Complete();
                 return Ok(stub);
             }
@@ -124,8 +121,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An audiogram entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the audiogram entry identified for update couldn't not be found")
+                    .HasInternalMessage($"A carotid ultrasound entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The request could not be processed because the carotid ultrasound entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,8 +130,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The audiogram data model received from client was null and could not be processed.")
-                    .TellsUser("The request to createa a new audiogram was improperly formatted")
+                    .HasInternalMessage("The carotid ultrasound data model received from client was null and could not be processed.")
+                    .TellsUser("The request to create a new carotid ultrasound was improperly formatted.")
                     .Build();
                 return BadRequest(error);
             }
@@ -144,7 +141,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                await UnitOfWork.Audiograms.Delete(id);
+                await UnitOfWork.CarotidUltrasounds.Delete(id);
                 await UnitOfWork.Complete();
                 return NoContent();
             }
@@ -152,25 +149,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An audiogram element with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The requested audiogram resource could not be found")
+                    .HasInternalMessage($"A carotid ultrasound element with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser("The requested caroitd ultrasound resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<AudiogramResource> GenerateAudiogramResources(IEnumerable<AudiogramEntity> entities)
+        private IEnumerable<CarotidUltrasoundResource> GenerateCarotidUltrasoundResources(IEnumerable<CarotidUltrasoundEntity> entities)
         {
-            var stubs = entities.Select(Mapper.Map<AudiogramEntity, AudiogramStub>);
-            var resources = stubs.Select(stub => new AudiogramResource
+            var stubs = entities.Select(Mapper.Map<CarotidUltrasoundEntity, CarotidUltrasoundStub>);
+            var resources = stubs.Select(stub => new CarotidUltrasoundResource
             {
                 Properties = stub,
                 Links = new List<ResourceLink>
                 {
                     new ResourceLink
                     {
-                        Description = "Get this audiogram resource",
-                        Href = Url.Action<AudiogramController>(a => a.GetById(stub.Id)),
+                        Description = "Get this carotid ultrasound resource",
+                        Href = Url.Action<CarotidUltrasoundController>(a => a.GetById(stub.Id)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
@@ -193,36 +190,36 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 new ResourceLink
                 {
-                    Description = "Get audiogram resource by it's unique identifier.",
-                    Href = Url.Action<AudiogramController>(a => a.GetById(id)),
+                    Description = "Get carotid ultrasound resource by it's unique identifier.",
+                    Href = Url.Action<CarotidUltrasoundController>(a => a.GetById(id)),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Self
                 },
                 new ResourceLink
                 {
-                    Description = "Delete audiogram resource by it's unique identifier.",
-                    Href = Url.Action<AudiogramController>(a => a.Delete(id)),
+                    Description = "Delete carotid ultrasound resource by it's unique identifier.",
+                    Href = Url.Action<CarotidUltrasoundController>(a => a.Delete(id)),
                     HtmlMethod = HtmlMethod.Delete,
                     Relationship = UrlRelationship.Next
                 },
                 new ResourceLink
                 {
-                    Description = "Update the values for this existing audiogram resource",
-                    Href = Url.Action<AudiogramController>(a => a.Put(id, With.No<AudiogramStubFromUser>())),
+                    Description = "Update the values for this existing carotid ultrasound resource",
+                    Href = Url.Action<CarotidUltrasoundController>(a => a.Put(id, With.No<CarotidUltrasoundStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
-                    Description = "Search for audiograms resources with filters and pagination",
-                    Href = Url.Action<AudiogramController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Description = "Search for carotid ultrasound resources with filters and pagination",
+                    Href = Url.Action<CarotidUltrasoundController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
-                    Description = "Add a new audiogram resource",
-                    Href = Url.Action<AudiogramController>(a => a.Post(With.No<AudiogramStubFromUser>())),
+                    Description = "Add a new carotid ultrasound resource",
+                    Href = Url.Action<CarotidUltrasoundController>(a => a.Post(With.No<CarotidUltrasoundStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },
@@ -235,7 +232,5 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 }
             };
         }
-
-        
     }
 }

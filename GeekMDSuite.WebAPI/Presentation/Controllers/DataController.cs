@@ -21,11 +21,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var nav = new ApiNavigationStructure
+            var nav = new ApiDirectoryNavigationModel<DataLinks>
             {
                 Title = "Data",
                 Description = "This is persisted patient visit data, not including patients and visits themselves.",
-                Links = new ApiLinks
+                Links = new DataLinks
                 {
                     Home = new ResourceLink
                     {
@@ -47,31 +47,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<AudiogramController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
+                    },
+                    CarotidUltrasounds = new ResourceLink
+                    {
+                        Description = "Carotid ultrasound resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<CarotidUltrasoundController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
                     } 
                 }
             };
             return Ok(nav);
         }
-        
-        private class ApiNavigationStructure
-        {
-            public string Title { get; set; }
-            public string Description { get; set; }
-            public ApiLinks Links { get; set; }
 
-            public ApiNavigationStructure()
-            {
-                Links = new ApiLinks();
-            }
-            
-        }
-
-        private class ApiLinks
+        private class DataLinks
         {
             public ResourceLink Home { get; set; }
-            public ResourceLink BloodPressures { get; set; }
             public ResourceLink Audiograms { get; set; }
-
+            public ResourceLink BloodPressures { get; set; }
+            public ResourceLink CarotidUltrasounds { get; set; }
         }
     }
 }

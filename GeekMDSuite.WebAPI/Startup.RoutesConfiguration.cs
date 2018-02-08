@@ -90,9 +90,15 @@ namespace GeekMDSuite.WebAPI
             routes.Put("{id}", route => route.ToAction<BloodPressureController>(a => a.Put(With.Any<int>(), With.Any<BloodPressureStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<BloodPressureController>(a => a.Delete(With.Any<int>())));
             
+            routes.Add(dataUrl + "carotidus/", route => route.ToController<CarotidUltrasoundController>());
+            routes.Get("", route => route.ToAction<CarotidUltrasoundController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<CarotidUltrasoundController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<CarotidUltrasoundController>(a => a.Post(With.Any<CarotidUltrasoundStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<CarotidUltrasoundController>(a => a.Put(With.Any<int>(), With.Any<CarotidUltrasoundStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<CarotidUltrasoundController>(a => a.Delete(With.Any<int>())));
+            
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
-//            routes.Add(dataUrl + "carotidultrasound/", route => route.ToController<CarotidUltrasoundController>());
 //            routes.Add(dataUrl + "centralbp/", route => route.ToController<CentralBloodPressureController>());
 //            routes.Add(dataUrl + "fms/", route => route.ToController<FunctionalMovementScreenController>());
 //            routes.Add(dataUrl + "grip/", route => route.ToController<GripStrengthController>());
