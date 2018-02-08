@@ -75,6 +75,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<GripStrengthsController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
+                    },
+                    IshiharaSixPlateScreens = new ResourceLink
+                    {
+                        Description = "Ishihara six plate screens resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<IshiharaSixPlateScreensController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
                     }
                 }
             };
@@ -90,6 +97,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink CentralBloodPressures { get; set; }
             public ResourceLink FunctionalMovementScreens { get; set; }
             public ResourceLink GripStrengths { get; set; }
+            public ResourceLink IshiharaSixPlateScreens { get; set; }
         }
     }
 }

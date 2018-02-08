@@ -118,9 +118,15 @@ namespace GeekMDSuite.WebAPI
             routes.Put("{id}", route => route.ToAction<GripStrengthsController>(a => a.Put(With.Any<int>(), With.Any<GripStrengthStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<GripStrengthsController>(a => a.Delete(With.Any<int>())));
             
+            routes.Add(dataUrl + "ishihara/", route => route.ToController<IshiharaSixPlateScreensController>());
+            routes.Get("", route => route.ToAction<IshiharaSixPlateScreensController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<IshiharaSixPlateScreensController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<IshiharaSixPlateScreensController>(a => a.Post(With.Any<IshiharaSixPlateStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<IshiharaSixPlateScreensController>(a => a.Put(With.Any<int>(), With.Any<IshiharaSixPlateStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<IshiharaSixPlateScreensController>(a => a.Delete(With.Any<int>())));
+            
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
-//            routes.Add(dataUrl + "ishihara/", route => route.ToController<IshiharaSixPlateController>());
 //            routes.Add(dataUrl + "occularpressure/", route => route.ToController<OccularPressureController>());
 //            routes.Add(dataUrl + "peripheralvision/", route => route.ToController<PeripheralVisionController>());
 //            routes.Add(dataUrl + "pushups/", route => route.ToController<PushupController>());
