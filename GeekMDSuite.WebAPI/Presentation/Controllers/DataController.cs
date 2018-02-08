@@ -82,6 +82,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<IshiharaSixPlateScreensController>(a => a.GetBySearch(null)),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
+                    },
+                    OccularPressures = new ResourceLink
+                    {
+                        Description = "Occular pressure resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<OccularPressuresController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    PeripheralVisions = new ResourceLink
+                    {
+                        Description = "Peripheral visions resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<PeripheralVisionsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
                     }
                 }
             };
@@ -98,6 +112,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink FunctionalMovementScreens { get; set; }
             public ResourceLink GripStrengths { get; set; }
             public ResourceLink IshiharaSixPlateScreens { get; set; }
+            public ResourceLink OccularPressures { get; set; }
+            public ResourceLink PeripheralVisions { get; set; }
         }
     }
 }

@@ -125,10 +125,22 @@ namespace GeekMDSuite.WebAPI
             routes.Put("{id}", route => route.ToAction<IshiharaSixPlateScreensController>(a => a.Put(With.Any<int>(), With.Any<IshiharaSixPlateStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<IshiharaSixPlateScreensController>(a => a.Delete(With.Any<int>())));
             
+            routes.Add(dataUrl + "occularpressures/", route => route.ToController<OccularPressuresController>());
+            routes.Get("", route => route.ToAction<OccularPressuresController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<OccularPressuresController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<OccularPressuresController>(a => a.Post(With.Any<OccularPressureStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<OccularPressuresController>(a => a.Put(With.Any<int>(), With.Any<OccularPressureStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<OccularPressuresController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "peripheralvisions/", route => route.ToController<PeripheralVisionsController>());
+            routes.Get("", route => route.ToAction<PeripheralVisionsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<PeripheralVisionsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<PeripheralVisionsController>(a => a.Post(With.Any<PeripheralVisionStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<PeripheralVisionsController>(a => a.Put(With.Any<int>(), With.Any<PeripheralVisionStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<PeripheralVisionsController>(a => a.Delete(With.Any<int>())));
+            
 //            routes.Add(dataUrl + "bodycomp/", route => route.ToController<BodyCompositionController>());
 //            routes.Add(dataUrl + "bodycompexp/", route => route.ToController<BodyCompositionExpandedController>());
-//            routes.Add(dataUrl + "occularpressure/", route => route.ToController<OccularPressureController>());
-//            routes.Add(dataUrl + "peripheralvision/", route => route.ToController<PeripheralVisionController>());
 //            routes.Add(dataUrl + "pushups/", route => route.ToController<PushupController>());
 //            routes.Add(dataUrl + "sitandreach/", route => route.ToController<SitAndReachController>());
 //            routes.Add(dataUrl + "situps/", route => route.ToController<SitupsController>());
