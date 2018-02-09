@@ -125,6 +125,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
+                    QualitativeLabs = new ResourceLink
+                    {
+                        Description = "Qualitative labs resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<QualitativeLabsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
+                    QuantitativeLabs = new ResourceLink
+                    {
+                        Description = "Quantitative labs resource data for patient visits. Can be filtered and paginated as follows...",
+                        Href = Url.Action<QuantitativeLabsController>(a => a.GetBySearch(null)),
+                        HtmlMethod = HtmlMethod.Get,
+                        Relationship = UrlRelationship.Next
+                    },
                     ResistanceRegimens = new ResourceLink
                     {
                         Description = "Resistance regimens resource data for patient visits. Can be filtered and paginated as follows...",
@@ -202,6 +216,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink OccularPressures { get; set; }
             public ResourceLink PeripheralVisions { get; set; }
             public ResourceLink Pushups { get; set; }
+            public ResourceLink QualitativeLabs { get; set; }
+            public ResourceLink QuantitativeLabs { get; set; }
             public ResourceLink ResistanceRegimens { get; set; }
             public ResourceLink SitAndReaches { get; set; }
             public ResourceLink Situps { get; set; }

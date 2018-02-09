@@ -153,7 +153,21 @@ namespace GeekMDSuite.WebAPI
             routes.Post("", route => route.ToAction<PushupsController>(a => a.Post(With.Any<PushupsStubFromUser>())));
             routes.Put("{id}", route => route.ToAction<PushupsController>(a => a.Put(With.Any<int>(), With.Any<PushupsStubFromUser>())));
             routes.Delete("{id}", route => route.ToAction<PushupsController>(a => a.Delete(With.Any<int>())));
-                        
+                  
+            routes.Add(dataUrl + "qualitativelabs/", route => route.ToController<QualitativeLabsController>());
+            routes.Get("", route => route.ToAction<QualitativeLabsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<QualitativeLabsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<QualitativeLabsController>(a => a.Post(With.Any<QualitativeLabsStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<QualitativeLabsController>(a => a.Put(With.Any<int>(), With.Any<QualitativeLabsStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<QualitativeLabsController>(a => a.Delete(With.Any<int>())));
+            
+            routes.Add(dataUrl + "quantitativelabs/", route => route.ToController<QuantitativeLabsController>());
+            routes.Get("", route => route.ToAction<QuantitativeLabsController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
+            routes.Get("{id}", route => route.ToAction<QuantitativeLabsController>(a => a.GetById(With.Any<int>())));
+            routes.Post("", route => route.ToAction<QuantitativeLabsController>(a => a.Post(With.Any<QuantitativeLabStubFromUser>())));
+            routes.Put("{id}", route => route.ToAction<QuantitativeLabsController>(a => a.Put(With.Any<int>(), With.Any<QuantitativeLabStubFromUser>())));
+            routes.Delete("{id}", route => route.ToAction<QuantitativeLabsController>(a => a.Delete(With.Any<int>())));
+                
             routes.Add(dataUrl + "resistanceregimens/", route => route.ToController<ResistanceRegimensController>());
             routes.Get("", route => route.ToAction<ResistanceRegimensController>(a => a.GetBySearch(With.Any<EntityDataFindFilter>())));
             routes.Get("{id}", route => route.ToAction<ResistanceRegimensController>(a => a.GetById(With.Any<int>())));

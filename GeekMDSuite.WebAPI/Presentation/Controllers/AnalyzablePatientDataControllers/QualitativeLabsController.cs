@@ -18,18 +18,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers
 {
     [Produces("application/json", "application/xml")]
-    public class BloodPressuresController : VisitDataController
+    public class QualitativeLabsController : VisitDataController
     {
-        
-        public BloodPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public QualitativeLabsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
         {
         }
-
+        
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
-            var entities = await GetFilteredEntities<BloodPressureEntity>(filter);
+            var entities = await GetFilteredEntities<QualitativeLabEntity>(filter);
             
-            var resources = GenerateBloodPressureResources(entities);
+            var resources = GenerateQualitativeLabsResources(entities);
 
             return Ok(resources);
         }
@@ -38,9 +37,9 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                var entity = await UnitOfWork.BloodPressures.FindById(id);
-                var stub = Mapper.Map<BloodPressureEntity, BloodPressureStub>(entity);
-                var resource = new BloodPressureResource
+                var entity = await UnitOfWork.QualitativeLabs.FindById(id);
+                var stub = Mapper.Map<QualitativeLabEntity, QualitativeLabsStub>(entity);
+                var resource = new QualitativeLabsResource
                 {
                     Links = GenerateGetByIdLinks(id),
                     Properties = stub
@@ -59,14 +58,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             }
         }
 
-        public async Task<IActionResult> Post([FromBody] BloodPressureStubFromUser stub)
+        public async Task<IActionResult> Post([FromBody] QualitativeLabsStubFromUser stub)
         {
             try
             {
-                var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
-                await UnitOfWork.BloodPressures.Add(entity);
+                var entity = Mapper.Map<QualitativeLabsStubFromUser, QualitativeLabEntity>(stub);
+                await UnitOfWork.QualitativeLabs.Add(entity);
                 await UnitOfWork.Complete();
-                var url = Url.Action<BloodPressuresController>(a => a.Post(stub));
+                var url = Url.Action<QualitativeLabsController>(a => a.Post(stub));
                 return Created(url, entity);
             }
             catch (ArgumentNullException)
@@ -99,7 +98,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             }
         }
 
-        public async Task<IActionResult> Put(int id, [FromBody] BloodPressureStubFromUser stub)
+        public async Task<IActionResult> Put(int id, [FromBody] QualitativeLabsStubFromUser stub)
         {
             if (stub != null && id != stub.Id)
             {
@@ -114,8 +113,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             
             try
             {
-                var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
-                await UnitOfWork.BloodPressures.Update(entity);
+                var entity = Mapper.Map<QualitativeLabsStubFromUser, QualitativeLabEntity>(stub);
+                await UnitOfWork.QualitativeLabs.Update(entity);
                 await UnitOfWork.Complete();
                 return Ok(stub);
             }
@@ -143,7 +142,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                await UnitOfWork.BloodPressures.Delete(id);
+                await UnitOfWork.QualitativeLabs.Delete(id);
                 await UnitOfWork.Complete();
                 return NoContent();
             }
@@ -165,35 +164,35 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Get blood pressure resource by it's unique identifier.",
-                    Href = Url.Action<BloodPressuresController>(a => a.GetById(id)),
+                    Href = Url.Action<QualitativeLabsController>(a => a.GetById(id)),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Self
                 },
                 new ResourceLink
                 {
                     Description = "Delete blood pressure resource by it's unique identifier.",
-                    Href = Url.Action<BloodPressuresController>(a => a.Delete(id)),
+                    Href = Url.Action<QualitativeLabsController>(a => a.Delete(id)),
                     HtmlMethod = HtmlMethod.Delete,
                     Relationship = UrlRelationship.Next
                 },
                 new ResourceLink
                 {
                     Description = "Update the values for this existing blood pressure resource",
-                    Href = Url.Action<BloodPressuresController>(a => a.Put(id, With.No<BloodPressureStubFromUser>())),
+                    Href = Url.Action<QualitativeLabsController>(a => a.Put(id, With.No<QualitativeLabsStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for blood pressures resources with filters and pagination",
-                    Href = Url.Action<BloodPressuresController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href = Url.Action<QualitativeLabsController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new blood pressure resource",
-                    Href = Url.Action<BloodPressuresController>(a => a.Post(With.No<BloodPressureStubFromUser>())),
+                    Href = Url.Action<QualitativeLabsController>(a => a.Post(With.No<QualitativeLabsStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },
@@ -214,7 +213,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Get this blood pressure resource",
-                    Href = Url.Action<BloodPressuresController>(a => a.GetById(stub.Id)),
+                    Href = Url.Action<QualitativeLabsController>(a => a.GetById(stub.Id)),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Next
                 },
@@ -228,10 +227,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             };
         }
 
-        private IEnumerable<BloodPressureResource> GenerateBloodPressureResources(IEnumerable<BloodPressureEntity> entities)
+        private IEnumerable<QualitativeLabsResource> GenerateQualitativeLabsResources(IEnumerable<QualitativeLabEntity> entities)
         {
-            var stubs = entities.Select(Mapper.Map<BloodPressureEntity, BloodPressureStub>);
-            var resources = stubs.Select(stub => new BloodPressureResource
+            var stubs = entities.Select(Mapper.Map<QualitativeLabEntity, QualitativeLabsStub>);
+            var resources = stubs.Select(stub => new QualitativeLabsResource
             {
                 Links = GenerateLinksForGetBySearch(stub),
                 Properties = stub

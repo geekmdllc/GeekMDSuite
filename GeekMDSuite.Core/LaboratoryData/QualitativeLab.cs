@@ -2,14 +2,18 @@
 {
     public class QualitativeLab
     {
+        public QualitativeLab()
+        {
+            
+        }
         private QualitativeLab(QualitativeLabType type, QualitativeLabResult result)
         {
             Type = type;
             Result = result;
         }
 
-        public QualitativeLabType Type { get; }
-        public QualitativeLabResult Result { get; }
+        public QualitativeLabType Type { get; set; }
+        public QualitativeLabResult Result { get; set; }
 
         public static QualitativeLab Create(QualitativeLabType type, QualitativeLabResult result)
         {

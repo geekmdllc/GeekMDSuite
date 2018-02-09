@@ -74,6 +74,14 @@ namespace GeekMDSuite.WebAPI.Mapping
             CreateMap<PushupsEntity, PushupsStub>();
             CreateMap<PushupsStubFromUser, PushupsEntity>();
             CreateMap<PushupsStubFromUser, PushupsStub>();
+            // Qualitative labs 
+            CreateMap<QualitativeLabEntity, QualitativeLabsStub>();
+            CreateMap<QualitativeLabsStubFromUser, QualitativeLabEntity>();
+            CreateMap<QualitativeLabsStubFromUser, QualitativeLabsStub>();
+            // Quantitative labs 
+            CreateMap<QuantitativeLabEntity, QuantitativeLabStub>();
+            CreateMap<QuantitativeLabStubFromUser, QuantitativeLabEntity>();
+            CreateMap<QuantitativeLabStubFromUser, QuantitativeLabStub>();
             // Sit and Reach
             CreateMap<SitAndReachEntity, SitAndReachStub>();
             CreateMap<SitAndReachStubFromUser, SitAndReachEntity>();
