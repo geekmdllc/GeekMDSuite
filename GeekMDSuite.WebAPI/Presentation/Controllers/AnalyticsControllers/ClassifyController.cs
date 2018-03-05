@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core.Models;
+using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using Microsoft.AspNetCore.Mvc;
