@@ -78,6 +78,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
+                    CentralBloodPressures = new ResourceLink
+                    {
+                        Description = "Interpret a patients central blood pressures",
+                        Href = Url.Action<ClassifyController>(a => a.PostToCentralBloodPressure(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
                 }
             };
 

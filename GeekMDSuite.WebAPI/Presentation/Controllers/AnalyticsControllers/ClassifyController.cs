@@ -95,5 +95,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(cardiovascularRegimen);
             }
         }
+
+        [HttpPost]
+        public IActionResult PostToCentralBloodPressure([FromBody] CentralBloodPressureParameters centralBloodPressure)
+        {
+            try
+            {
+                return Ok(_classifications.CentralBloodPressures.Classify(centralBloodPressure));
+            }
+            catch
+            {
+                return BadRequest(centralBloodPressure);
+            }
+        }
     }
 }

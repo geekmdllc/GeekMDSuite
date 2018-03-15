@@ -17,6 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             BodyCompositionsExpanded = new BodyCompositionsExpandedClassificationService();
             CarotidUltrasounds = new CarotidUltrasoundClassificationService();
             CardiovascularRegimens = new CardiovascularRegimenClassificationService();
+            CentralBloodPressures = new CentralBloodPressureClassificationService();
             ResistanceRegimens = new ResistanceRegimenClassificationServiceService();
         }
 
@@ -27,6 +28,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
         public IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
         public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; set; }
         public ICardiovascularRegimenClassificationService CardiovascularRegimens { get; set; }
+        public ICentralBloodPressureClassificationService CentralBloodPressures { get; set; }
         public IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }
