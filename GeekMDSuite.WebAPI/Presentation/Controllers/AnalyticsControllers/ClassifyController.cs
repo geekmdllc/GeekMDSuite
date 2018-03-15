@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Analytics.Classification;
+﻿using System;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Core.Models.Procedures;
@@ -66,6 +67,32 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             catch
             {
                 return BadRequest(bodyCompositionExpanded);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult PostToCarotidUltrasound([FromBody] CarotidUltrasound carotidUltrasound)
+        {
+            try
+            {
+                return Ok(_classifications.CarotidUltrasounds.Classify(carotidUltrasound));
+            }
+            catch
+            {
+                return BadRequest(carotidUltrasound);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult PostToCardiovascularRegimen([FromBody] CardiovascularRegimen cardiovascularRegimen)
+        {
+            try
+            {
+                return Ok(_classifications.CardiovascularRegimens.Classify(cardiovascularRegimen));
+            }
+            catch
+            {
+                return BadRequest(cardiovascularRegimen);
             }
         }
     }

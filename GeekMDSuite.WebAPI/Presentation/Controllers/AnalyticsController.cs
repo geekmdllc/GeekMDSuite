@@ -64,7 +64,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    
+                    CarotidUltrasounds = new ResourceLink
+                    {
+                        Description = "Interpret a patients carotid ultrasound",
+                        Href = Url.Action<ClassifyController>(a => a.PostToCarotidUltrasound(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    CardiovascularRegimen = new ResourceLink
+                    {
+                        Description = "Interpret a patients cardiovascular regimen",
+                        Href = Url.Action<ClassifyController>(a => a.PostToCardiovascularRegimen(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
                 }
             };
 

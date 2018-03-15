@@ -9,6 +9,7 @@ using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.Composite
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using Microsoft.AspNetCore.Builder;
 using System;
+using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.WebAPI.Presentation.Controllers.PatientController;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 
@@ -48,13 +49,15 @@ namespace GeekMDSuite.WebAPI
 
         private static void ConfigureAnalyticsRoutes(string baseUrl, ITypedRouteBuilder routes)
         {
-            var classifyUri = baseUrl + "classify/";
+            var classifyUri = baseUrl + "analytics/";
             routes.Add(classifyUri, route => route.ToController<ClassifyController>());
             routes.Post("audiogram/", route => route.ToAction<ClassifyController>(a => a.PostToAudiogram(With.Any<Audiogram>())));
             routes.Post("bp/", route => route.ToAction<ClassifyController>(a => a.PostToBloodPressure(With.Any<BloodPressure>())));
             routes.Post("bodycomp/", route => route.ToAction<ClassifyController>(a => a.PostToBodyComposition(With.Any<BodyCompositionClassificationParameters>())));
             routes.Post("bodycompexp/", route => route.ToAction<ClassifyController>(a => a.PostToBodyCompositionExpanded(With.Any<BodyCompositionExpandedClassificationParameters>())));
-
+            routes.Post("carotidus/", route => route.ToAction<ClassifyController>(a => a.PostToCarotidUltrasound(With.Any<CarotidUltrasound>())));
+            routes.Post("cardioregimen/", route => route.ToAction<ClassifyController>(a => a.PostToCardiovascularRegimen(With.Any<CardiovascularRegimen>())));
+            
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());
         }
