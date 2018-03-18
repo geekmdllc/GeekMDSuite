@@ -1,5 +1,6 @@
 ﻿using GeekMDSuite.Analytics.Classification.PatientActivities;
 using GeekMDSuite.Core.Models.PatientActivities;
+using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification

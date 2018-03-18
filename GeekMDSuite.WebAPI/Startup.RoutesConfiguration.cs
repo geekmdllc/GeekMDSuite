@@ -58,6 +58,8 @@ namespace GeekMDSuite.WebAPI
             routes.Post("carotidus/", route => route.ToAction<ClassifyController>(a => a.PostToCarotidUltrasound(With.Any<CarotidUltrasound>())));
             routes.Post("cardioregimen/", route => route.ToAction<ClassifyController>(a => a.PostToCardiovascularRegimen(With.Any<CardiovascularRegimen>())));
             routes.Post("centralbloodpressure/", route => route.ToAction<ClassifyController>(a => a.PostToCentralBloodPressure(With.Any<CentralBloodPressureParameters>())));
+            routes.Post("fms/", route => route.ToAction<ClassifyController>(a => a.PostToFunctionalMovementScreen(With.Any<FunctionalMovementScreen>())));
+            routes.Post("gripstrengths/", route => route.ToAction<ClassifyController>(a => a.PostToGripStrength(With.Any<GripStrengthClassificationParameters>())));
             
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());

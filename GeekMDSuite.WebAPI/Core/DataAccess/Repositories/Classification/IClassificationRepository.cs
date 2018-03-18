@@ -13,6 +13,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         ICarotidUltrasoundClassificationService CarotidUltrasounds { get; }
         ICardiovascularRegimenClassificationService CardiovascularRegimens { get; }
         ICentralBloodPressureClassificationService CentralBloodPressures { get; }
+        IFunctionalMovementClassificationService FunctionalMovements { get; }
+        IGripStrengthClassificationService GripStrengths { get; }
         IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

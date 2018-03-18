@@ -1,23 +1,10 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Repositories;
-using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.Utilities.MeasurementUnits;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-    public class GripStrengthClassificationParameters
-    {
-        public GripStrengthClassificationParameters(GripStrength gripStrength, Patient patient)
-        {
-            GripStrength = gripStrength;
-            Patient = patient;
-        }
-
-        public GripStrength GripStrength { get; }
-        public Patient Patient { get; }
-    }
-
     public class GripStrengthClassification : IClassifiable<GripStrengthClassificationResult>
     {
         private readonly GripStrength _gripStrength;

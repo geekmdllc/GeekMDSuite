@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess;
+﻿using GeekMDSuite.Analytics.Classification;
+using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification.CompositeScores;
@@ -18,6 +19,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             CarotidUltrasounds = new CarotidUltrasoundClassificationService();
             CardiovascularRegimens = new CardiovascularRegimenClassificationService();
             CentralBloodPressures = new CentralBloodPressureClassificationService();
+            FunctionalMovements = new FunctionalMovementScreenClassificationService();
+            GripStrengths = new GripStrengthClassificationService();
             ResistanceRegimens = new ResistanceRegimenClassificationServiceService();
         }
 
@@ -29,6 +32,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
         public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; set; }
         public ICardiovascularRegimenClassificationService CardiovascularRegimens { get; set; }
         public ICentralBloodPressureClassificationService CentralBloodPressures { get; set; }
+        public IFunctionalMovementClassificationService FunctionalMovements { get; set; }
+        public IGripStrengthClassificationService GripStrengths { get; set; }
         public IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

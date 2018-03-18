@@ -108,5 +108,32 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(centralBloodPressure);
             }
         }
+
+        [HttpPost]
+        public IActionResult PostToFunctionalMovementScreen([FromBody] FunctionalMovementScreen functionalMovementScreen)
+        {
+            try
+            {
+                return Ok(_classifications.FunctionalMovements.Classify(functionalMovementScreen));
+            }
+            catch
+            {
+                return BadRequest(functionalMovementScreen);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult PostToGripStrength(
+            [FromBody] GripStrengthClassificationParameters gripStrengthClassificationParameters)
+        {
+            try
+            {
+                return Ok(_classifications.GripStrengths.Classify(gripStrengthClassificationParameters));
+            }
+            catch
+            {
+                return BadRequest(gripStrengthClassificationParameters);
+            }
+        }
     }
 }

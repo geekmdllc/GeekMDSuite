@@ -85,6 +85,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
+                    FunctionalMovementScreens = new ResourceLink
+                    {
+                        Description = "Interpret a patients Funtional Movement Screen",
+                        Href = Url.Action<ClassifyController>(a => a.PostToFunctionalMovementScreen(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    GripStrengths = new ResourceLink
+                    {
+                        Description = "Interpret a patients grip strength",
+                        Href = Url.Action<ClassifyController>(a => a.PostToGripStrength(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
                 }
             };
 
