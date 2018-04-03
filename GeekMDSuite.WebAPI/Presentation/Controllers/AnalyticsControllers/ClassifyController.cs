@@ -148,5 +148,31 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(ishiharaSixPlate);
             }
         }
+
+        [HttpPost]
+        public IActionResult PostToOccularPressure([FromBody] OccularPressure occularPressure)
+        {
+            try
+            {
+                return Ok(_classifications.OccularPressureService.Classify(occularPressure));
+            }
+            catch
+            {
+                return BadRequest(occularPressure);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult PostToPeripheralVision([FromBody] PeripheralVision peripheralVision)
+        {
+            try
+            {
+                return Ok(_classifications.PeripheralVisionService.Classify(peripheralVision));
+            }
+            catch
+            {
+                return BadRequest(peripheralVision);
+            }
+        }
     }
 }

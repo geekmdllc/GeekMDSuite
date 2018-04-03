@@ -105,6 +105,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
+                    },
+                    OccularPressures = new ResourceLink
+                    {
+                        Description = "Interpret a patients occular pressure screen",
+                        Href = Url.Action<ClassifyController>(a => a.PostToOccularPressure(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    PeripheralVisions = new ResourceLink
+                    {
+                        Description = "Interpret a patients peripheral vision screen",
+                        Href = Url.Action<ClassifyController>(a => a.PostToPeripheralVision(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
                     }
                 }
             };

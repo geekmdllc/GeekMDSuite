@@ -16,6 +16,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         IFunctionalMovementClassificationService FunctionalMovements { get; }
         IGripStrengthClassificationService GripStrengths { get; }
         IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
+        IOccularPressureService OccularPressureService { get; }
+        IPeripheralVisionService PeripheralVisionService { get; }
         IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

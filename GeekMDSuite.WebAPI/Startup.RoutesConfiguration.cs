@@ -59,8 +59,10 @@ namespace GeekMDSuite.WebAPI
             routes.Post("cardioregimen/", route => route.ToAction<ClassifyController>(a => a.PostToCardiovascularRegimen(With.Any<CardiovascularRegimen>())));
             routes.Post("centralbloodpressure/", route => route.ToAction<ClassifyController>(a => a.PostToCentralBloodPressure(With.Any<CentralBloodPressureParameters>())));
             routes.Post("fms/", route => route.ToAction<ClassifyController>(a => a.PostToFunctionalMovementScreen(With.Any<FunctionalMovementScreen>())));
-            routes.Post("gripstrengths/", route => route.ToAction<ClassifyController>(a => a.PostToGripStrength(With.Any<GripStrengthClassificationParameters>())));
+            routes.Post("gripstrength/", route => route.ToAction<ClassifyController>(a => a.PostToGripStrength(With.Any<GripStrengthClassificationParameters>())));
             routes.Post("ishiharasixplates/", route => route.ToAction<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(With.Any<IshiharaSixPlate>())));
+            routes.Post("occularpressure/", route => route.ToAction<ClassifyController>(a => a.PostToOccularPressure(With.Any<OccularPressure>())));
+            routes.Post("peripheralvision/", route => route.ToAction<ClassifyController>(a => a.PostToPeripheralVision(With.Any<PeripheralVision>())));
             
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());

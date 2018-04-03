@@ -294,7 +294,7 @@ namespace GeekMDSuite.ConsoleDemo
             var ishiharaSixInterp = new IshiharaSixPlateClassification(ishiharaSix);
             Console.WriteLine($"Ishihara 6 Plate: {ishiharaSixInterp}{NewLine}");
 
-            var ocularPressureInterp = new OcularPressureClassification(ocularPressure);
+            var ocularPressureInterp = new OccularPressureClassification(ocularPressure);
             Console.WriteLine($"Ocular Pressure: {ocularPressureInterp}{NewLine}");
 
             var percentBodyFatInterp =

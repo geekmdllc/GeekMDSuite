@@ -22,6 +22,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             FunctionalMovements = new FunctionalMovementScreenClassificationService();
             GripStrengths = new GripStrengthClassificationService();
             IshiharaSixPlateScreens = new IshiharaSixPlateScreenService();
+            OccularPressureService = new OccularPressureService();
+            PeripheralVisionService = new PeripheralVisionService();
             ResistanceRegimens = new ResistanceRegimenClassificationServiceService();
         }
 
@@ -36,6 +38,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
         public IFunctionalMovementClassificationService FunctionalMovements { get;  }
         public IGripStrengthClassificationService GripStrengths { get;  }
         public IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
+        public IOccularPressureService OccularPressureService { get;  }
+        public IPeripheralVisionService PeripheralVisionService { get;  }
         public IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

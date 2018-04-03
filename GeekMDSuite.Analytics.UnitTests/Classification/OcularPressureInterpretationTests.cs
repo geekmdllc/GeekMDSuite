@@ -8,15 +8,15 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
     public class OcularPressureInterpretationTests
     {
         [Theory]
-        [InlineData(18, 18, OcularPressureClassificationResult.Normal)]
-        [InlineData(25, 18, OcularPressureClassificationResult.OcularHypertension)]
-        [InlineData(18, 25, OcularPressureClassificationResult.OcularHypertension)]
-        [InlineData(25, 25, OcularPressureClassificationResult.OcularHypertension)]
+        [InlineData(18, 18, OccularPressureClassificationResult.Normal)]
+        [InlineData(25, 18, OccularPressureClassificationResult.OcularHypertension)]
+        [InlineData(18, 25, OccularPressureClassificationResult.OcularHypertension)]
+        [InlineData(25, 25, OccularPressureClassificationResult.OcularHypertension)]
         public void Classify_GivenValues_ReturnsExpectedClassification(int left, int right,
-            OcularPressureClassificationResult expectedClassificationResult)
+            OccularPressureClassificationResult expectedClassificationResult)
         {
             var ocularPressure = OccularPressure.Build(left, right);
-            var classification = new OcularPressureClassification(ocularPressure).Classification;
+            var classification = new OccularPressureClassification(ocularPressure).Classification;
 
             Assert.Equal(expectedClassificationResult, classification);
         }
@@ -24,7 +24,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         [Fact]
         public void NullOcularPressure_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new OcularPressureClassification(null));
+            Assert.Throws<ArgumentNullException>(() => new OccularPressureClassification(null));
         }
     }
 }
