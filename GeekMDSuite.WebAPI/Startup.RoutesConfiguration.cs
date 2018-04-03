@@ -58,15 +58,15 @@ namespace GeekMDSuite.WebAPI
             routes.Post("bodycompexp/", route => route.ToAction<ClassifyController>(a => a.PostToBodyCompositionExpanded(With.Any<BodyCompositionExpandedClassificationParameters>())));
             routes.Post("carotidus/", route => route.ToAction<ClassifyController>(a => a.PostToCarotidUltrasound(With.Any<CarotidUltrasound>())));
             routes.Post("cardioregimen/", route => route.ToAction<ClassifyController>(a => a.PostToCardiovascularRegimen(With.Any<CardiovascularRegimen>())));
-            routes.Post("centralbloodpressure/", route => route.ToAction<ClassifyController>(a => a.PostToCentralBloodPressure(With.Any<CentralBloodPressureParameters>())));
+            routes.Post("centralbp/", route => route.ToAction<ClassifyController>(a => a.PostToCentralBloodPressure(With.Any<CentralBloodPressureParameters>())));
             routes.Post("fms/", route => route.ToAction<ClassifyController>(a => a.PostToFunctionalMovementScreen(With.Any<FunctionalMovementScreen>())));
             routes.Post("gripstrength/", route => route.ToAction<ClassifyController>(a => a.PostToGripStrength(With.Any<GripStrengthClassificationParameters>())));
-            routes.Post("ishiharasixplates/", route => route.ToAction<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(With.Any<IshiharaSixPlate>())));
+            routes.Post("ishiharasixplate/", route => route.ToAction<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(With.Any<IshiharaSixPlate>())));
             routes.Post("occularpressure/", route => route.ToAction<ClassifyController>(a => a.PostToOccularPressure(With.Any<OccularPressure>())));
             routes.Post("peripheralvision/", route => route.ToAction<ClassifyController>(a => a.PostToPeripheralVision(With.Any<PeripheralVision>())));
             // Pushups
-            routes.Post("qualitativelabs/", route => route.ToAction<ClassifyController>(a => a.PostToQualitativeLabs(With.Any<QualitativeLab>())));
-            routes.Post("quantitativelabs/", route => route.ToAction<ClassifyController>(a => a.PostToQuantitativeLabs(With.Any<QuantitativeLabClassificationParameters>())));
+            routes.Post("qualitativelab/", route => route.ToAction<ClassifyController>(a => a.PostToQualitativeLabs(With.Any<QualitativeLab>())));
+            routes.Post("quantitativelab/", route => route.ToAction<ClassifyController>(a => a.PostToQuantitativeLabs(With.Any<QuantitativeLabClassificationParameters>())));
             
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());
