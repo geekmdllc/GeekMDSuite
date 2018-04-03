@@ -18,6 +18,9 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
         IOccularPressureService OccularPressureService { get; }
         IPeripheralVisionService PeripheralVisionService { get; }
+        // IPushups
+        IQualitativeLabsService QualitativeLabsService { get; }
+        IQuantitativeLabsService QuantitativeLabsService { get; }
         IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

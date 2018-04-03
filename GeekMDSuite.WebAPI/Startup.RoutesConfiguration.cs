@@ -9,6 +9,7 @@ using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers.Composite
 using GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataControllers;
 using Microsoft.AspNetCore.Builder;
 using System;
+using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.WebAPI.Presentation.Controllers.PatientController;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
@@ -63,6 +64,9 @@ namespace GeekMDSuite.WebAPI
             routes.Post("ishiharasixplates/", route => route.ToAction<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(With.Any<IshiharaSixPlate>())));
             routes.Post("occularpressure/", route => route.ToAction<ClassifyController>(a => a.PostToOccularPressure(With.Any<OccularPressure>())));
             routes.Post("peripheralvision/", route => route.ToAction<ClassifyController>(a => a.PostToPeripheralVision(With.Any<PeripheralVision>())));
+            // Pushups
+            routes.Post("qualitativelabs/", route => route.ToAction<ClassifyController>(a => a.PostToQualitativeLabs(With.Any<QualitativeLab>())));
+            routes.Post("quantitativelabs/", route => route.ToAction<ClassifyController>(a => a.PostToQuantitativeLabs(With.Any<QuantitativeLabClassificationParameters>())));
             
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());

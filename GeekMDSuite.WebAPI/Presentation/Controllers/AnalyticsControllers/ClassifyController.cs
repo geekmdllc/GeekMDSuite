@@ -1,5 +1,6 @@
 ﻿using System;
 using GeekMDSuite.Analytics.Classification;
+using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Core.Models.Procedures;
@@ -172,6 +173,32 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             catch
             {
                 return BadRequest(peripheralVision);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult PostToQualitativeLabs([FromBody] QualitativeLab qualitativeLab)
+        {
+            try
+            {
+                return Ok(_classifications.QualitativeLabsService.Classify(qualitativeLab));
+            }
+            catch
+            {
+                return BadRequest(qualitativeLab);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToQuantitativeLabs([FromBody] QuantitativeLabClassificationParameters quantitativeLab)
+        {
+            try
+            {
+                return Ok(_classifications.QuantitativeLabsService.Classify(quantitativeLab));
+            }
+            catch
+            {
+                return BadRequest(quantitativeLab);
             }
         }
     }

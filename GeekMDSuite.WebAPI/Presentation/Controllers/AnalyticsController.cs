@@ -119,6 +119,21 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<ClassifyController>(a => a.PostToPeripheralVision(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
+                    },
+                    // pushups
+                    QualitativeLabs = new ResourceLink
+                    {
+                        Description = "Interpret a patients qualitative labs",
+                        Href = Url.Action<ClassifyController>(a => a.PostToQualitativeLabs(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    QuantitativeLabs = new ResourceLink
+                    {
+                        Description = "Interpret a patients quantitative labs",
+                        Href = Url.Action<ClassifyController>(a => a.PostToQuantitativeLabs(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
                     }
                 }
             };

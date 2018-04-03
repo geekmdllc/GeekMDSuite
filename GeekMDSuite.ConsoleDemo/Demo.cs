@@ -312,13 +312,13 @@ namespace GeekMDSuite.ConsoleDemo
             var qualitativeLabInterp = new QualitativeLabClassification(qualitativeLab);
             Console.WriteLine($"Qualitative Lab: {qualitativeLabInterp}{NewLine}");
 
-            var quantLabInterpTotalChol = new QuantitativeLabClassification(quantitativeLabChoesterol, patient);
+            var quantLabInterpTotalChol = new QuantitativeLabClassification(new QuantitativeLabClassificationParameters(quantitativeLabChoesterol, patient));
             Console.WriteLine($"Quantitative Lab: {quantLabInterpTotalChol}{NewLine}");
 
-            var quantLabInterpHdlC = new QuantitativeLabClassification(quantitativeLabHdlC, patient);
+            var quantLabInterpHdlC = new QuantitativeLabClassification(new QuantitativeLabClassificationParameters(quantitativeLabHdlC, patient));
             Console.WriteLine($"Quantitative Lab: {quantLabInterpHdlC}{NewLine}");
 
-            var quantLabInterpLdlC = new QuantitativeLabClassification(quantitativeLabLdlC, patient);
+            var quantLabInterpLdlC = new QuantitativeLabClassification(new QuantitativeLabClassificationParameters(quantitativeLabLdlC, patient));
             Console.WriteLine($"Quantitative Lab: {quantLabInterpLdlC}{NewLine}");
 
             var sitAndReachInterp =

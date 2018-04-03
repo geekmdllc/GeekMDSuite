@@ -10,11 +10,11 @@ namespace GeekMDSuite.Analytics.Classification
         private readonly QuantitativeLab _lab;
         private readonly Patient _patient;
 
-        public QuantitativeLabClassification(QuantitativeLab lab, Patient patient)
+        public QuantitativeLabClassification(QuantitativeLabClassificationParameters quantitativeLabClassificationParameters)
         {
-            _lab = lab ?? throw new ArgumentNullException(nameof(lab));
-            _patient = patient ?? throw new ArgumentNullException(nameof(patient));
-            Lab = QuantitativeLabRepository.GetLab(lab);
+            _lab = quantitativeLabClassificationParameters.Lab ?? throw new ArgumentNullException(nameof(quantitativeLabClassificationParameters.Lab));
+            _patient = quantitativeLabClassificationParameters.Patient ?? throw new ArgumentNullException(nameof(quantitativeLabClassificationParameters.Patient));
+            Lab = QuantitativeLabRepository.GetLab(quantitativeLabClassificationParameters.Lab);
         }
 
         public QuantitativeLabClassificationModel Lab { get; }

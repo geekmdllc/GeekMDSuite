@@ -1,4 +1,5 @@
-﻿using GeekMDSuite.Analytics.Classification;
+﻿using System;
+using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
@@ -24,6 +25,9 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             IshiharaSixPlateScreens = new IshiharaSixPlateScreenService();
             OccularPressureService = new OccularPressureService();
             PeripheralVisionService = new PeripheralVisionService();
+            // Pushups
+            QualitativeLabsService = new QualitativeLabService();
+            QuantitativeLabsService = new QuantitativeLabService();
             ResistanceRegimens = new ResistanceRegimenClassificationServiceService();
         }
 
@@ -40,6 +44,9 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
         public IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
         public IOccularPressureService OccularPressureService { get;  }
         public IPeripheralVisionService PeripheralVisionService { get;  }
+        // Pushups
+        public IQualitativeLabsService QualitativeLabsService { get; set; }
+        public IQuantitativeLabsService QuantitativeLabsService { get; set; }
         public IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }
