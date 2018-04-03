@@ -15,6 +15,7 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         ICentralBloodPressureClassificationService CentralBloodPressures { get; }
         IFunctionalMovementClassificationService FunctionalMovements { get; }
         IGripStrengthClassificationService GripStrengths { get; }
+        IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
         IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }

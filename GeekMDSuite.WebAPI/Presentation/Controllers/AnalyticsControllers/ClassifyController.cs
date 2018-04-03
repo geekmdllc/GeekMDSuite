@@ -135,5 +135,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(gripStrengthClassificationParameters);
             }
         }
+
+        [HttpPost]
+        public IActionResult PostToIshiharaSixPlateScreen([FromBody] IshiharaSixPlate ishiharaSixPlate)
+        {
+            try
+            {
+                return Ok(_classifications.IshiharaSixPlateScreens.Classify(ishiharaSixPlate));
+            }
+            catch
+            {
+                return BadRequest(ishiharaSixPlate);
+            }
+        }
     }
 }

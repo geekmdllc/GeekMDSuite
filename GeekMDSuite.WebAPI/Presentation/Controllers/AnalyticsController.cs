@@ -99,6 +99,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
+                    IshiharaSixPlateScreens = new ResourceLink
+                    {
+                        Description = "Interpret a patients Ishihara six plate screen",
+                        Href = Url.Action<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    }
                 }
             };
 

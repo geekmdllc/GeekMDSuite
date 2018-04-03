@@ -21,19 +21,21 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             CentralBloodPressures = new CentralBloodPressureClassificationService();
             FunctionalMovements = new FunctionalMovementScreenClassificationService();
             GripStrengths = new GripStrengthClassificationService();
+            IshiharaSixPlateScreens = new IshiharaSixPlateScreenService();
             ResistanceRegimens = new ResistanceRegimenClassificationServiceService();
         }
 
-        public IAscvdClassificationService AscvdScores { get; set; }
-        public IAudiogramClassificationService Audiograms { get; set; }
-        public IBloodPressureClassificationService BloodPressures { get; set; }
-        public IBodyCompositionClassificationService BodyCompositions { get; set; }
+        public IAscvdClassificationService AscvdScores { get; }
+        public IAudiogramClassificationService Audiograms { get; }
+        public IBloodPressureClassificationService BloodPressures { get;  }
+        public IBodyCompositionClassificationService BodyCompositions { get;  }
         public IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
-        public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; set; }
-        public ICardiovascularRegimenClassificationService CardiovascularRegimens { get; set; }
-        public ICentralBloodPressureClassificationService CentralBloodPressures { get; set; }
-        public IFunctionalMovementClassificationService FunctionalMovements { get; set; }
-        public IGripStrengthClassificationService GripStrengths { get; set; }
+        public ICarotidUltrasoundClassificationService CarotidUltrasounds { get;  }
+        public ICardiovascularRegimenClassificationService CardiovascularRegimens { get;  }
+        public ICentralBloodPressureClassificationService CentralBloodPressures { get;  }
+        public IFunctionalMovementClassificationService FunctionalMovements { get;  }
+        public IGripStrengthClassificationService GripStrengths { get;  }
+        public IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
         public IResistanceRegimenClassificationService ResistanceRegimens { get; }
     }
 }
