@@ -3,8 +3,9 @@ using GeekMDSuite.Core.Models.PatientActivities;
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification
 {
-    public interface IResistanceRegimenClassificationService : IClassificationService<ResistanceRegimen,
-            ResistanceRegimenClassification>
+    public interface IStretchingRegimenClassificationService : IClassificationService<StretchingRegimen,
+            StretchingRegimenClassification>
     {
+        
     }
 }

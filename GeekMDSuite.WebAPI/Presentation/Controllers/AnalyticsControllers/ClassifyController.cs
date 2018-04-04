@@ -155,7 +155,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         {
             try
             {
-                return Ok(_classifications.OccularPressureService.Classify(occularPressure));
+                return Ok(_classifications.OccularPressures.Classify(occularPressure));
             }
             catch
             {
@@ -181,7 +181,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         {
             try
             {
-                return Ok(_classifications.QualitativeLabsService.Classify(qualitativeLab));
+                return Ok(_classifications.QualitativeLabs.Classify(qualitativeLab));
             }
             catch
             {
@@ -194,11 +194,63 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         {
             try
             {
-                return Ok(_classifications.QuantitativeLabsService.Classify(quantitativeLab));
+                return Ok(_classifications.QuantitativeLabs.Classify(quantitativeLab));
             }
             catch
             {
                 return BadRequest(quantitativeLab);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToResistanceRegimen([FromBody] ResistanceRegimen resistanceRegimen)
+        {
+            try
+            {
+                return Ok(_classifications.ResistanceRegimen.Classify(resistanceRegimen));
+            }
+            catch
+            {
+                return BadRequest(resistanceRegimen);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToSpirometry([FromBody] SpirometryClassificationParameters spirometry)
+        {
+            try
+            {
+                return Ok(_classifications.Spirometry.Classify(spirometry));
+            }
+            catch
+            {
+                return BadRequest(spirometry);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToStretchingRegimen([FromBody] StretchingRegimen stretching)
+        {
+            try
+            {
+                return Ok(_classifications.Stretching.Classify(stretching));
+            }
+            catch
+            {
+                return BadRequest(stretching);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToFitTreadmillScore([FromBody] TreadmillExerciseStressTestsClassificationParameters fitTreadmillScoreClassificationParams)
+        {
+            try
+            {
+                return Ok(_classifications.FitTreadmillScore.Classify(fitTreadmillScoreClassificationParams));
+            }
+            catch
+            {
+                return BadRequest(fitTreadmillScoreClassificationParams);
             }
         }
     }

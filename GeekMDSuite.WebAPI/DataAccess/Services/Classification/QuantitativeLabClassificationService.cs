@@ -4,7 +4,7 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification
 {
-    public class QuantitativeLabService : IQuantitativeLabsService
+    public class QuantitativeLabClassificationService : IQuantitativeLabsClassificationService
     {
         public QuantitativeLabResult Classify(QuantitativeLabClassificationParameters obj)
         {

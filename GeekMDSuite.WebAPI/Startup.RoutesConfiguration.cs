@@ -67,6 +67,9 @@ namespace GeekMDSuite.WebAPI
             // Pushups
             routes.Post("qualitativelab/", route => route.ToAction<ClassifyController>(a => a.PostToQualitativeLabs(With.Any<QualitativeLab>())));
             routes.Post("quantitativelab/", route => route.ToAction<ClassifyController>(a => a.PostToQuantitativeLabs(With.Any<QuantitativeLabClassificationParameters>())));
+            routes.Post("resistanceregimen/", route => route.ToAction<ClassifyController>(a => a.PostToResistanceRegimen(With.Any<ResistanceRegimen>())));
+            routes.Post("spirometry/", route => route.ToAction<ClassifyController>(a => a.PostToSpirometry(With.Any<SpirometryClassificationParameters>())));
+            routes.Post("stretchingregimen/", route => route.ToAction<ClassifyController>(a => a.PostToStretchingRegimen(With.Any<StretchingRegimen>())));
             
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());

@@ -5,12 +5,12 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification
 {
-    public class IshiharaSixPlateScreenService : IIshiharaSixPlateScreenService
+    public class OccularPressureClassificationService : IOccularPressureClassificationService
     {
-        public IshiharaResultFlag Classify(IshiharaSixPlate obj)
+        public OccularPressureClassificationResult Classify(OccularPressure obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            return new IshiharaSixPlateClassification(obj).Classification;
+            return new OccularPressureClassification(obj).Classification;
         }
     }
 }

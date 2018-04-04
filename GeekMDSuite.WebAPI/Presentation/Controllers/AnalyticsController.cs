@@ -85,7 +85,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    FunctionalMovementScreens = new ResourceLink
+                    FunctionalMovementScreen = new ResourceLink
                     {
                         Description = "Interpret a patients Funtional Movement Screen",
                         Href = Url.Action<ClassifyController>(a => a.PostToFunctionalMovementScreen(null)),
@@ -99,21 +99,21 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    IshiharaSixPlateScreens = new ResourceLink
+                    IshiharaSixPlateScreen = new ResourceLink
                     {
                         Description = "Interpret a patients Ishihara six plate screen",
                         Href = Url.Action<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    OccularPressures = new ResourceLink
+                    OccularPressure = new ResourceLink
                     {
                         Description = "Interpret a patients occular pressure screen",
                         Href = Url.Action<ClassifyController>(a => a.PostToOccularPressure(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    PeripheralVisions = new ResourceLink
+                    PeripheralVision = new ResourceLink
                     {
                         Description = "Interpret a patients peripheral vision screen",
                         Href = Url.Action<ClassifyController>(a => a.PostToPeripheralVision(null)),
@@ -134,7 +134,38 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<ClassifyController>(a => a.PostToQuantitativeLabs(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
-                    }
+                    },
+                    ResistanceRegimens = new ResourceLink
+                    {
+                        Description = "Interpret a patients resistance regimen",
+                        Href = Url.Action<ClassifyController>(a => a.PostToResistanceRegimen(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    // Sit and reach
+                    // Situps
+                    Spirometry = new ResourceLink
+                    {
+                        Description = "Interpret a patients spirometry",
+                        Href = Url.Action<ClassifyController>(a => a.PostToSpirometry(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    StretchingRegimens = new ResourceLink
+                    {
+                        Description = "Interpret a patients stretching regimen",
+                        Href = Url.Action<ClassifyController>(a => a.PostToStretchingRegimen(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    FitTreadmillScore = new ResourceLink
+                    {
+                        Description = "Interpret a patients Fit Treadmill Score",
+                        Href = Url.Action<ClassifyController>(a => a.PostToFitTreadmillScore(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+
                 }
             };
 
@@ -150,20 +181,20 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink CardiovascularRegimen { get; set; }
             public ResourceLink CarotidUltrasounds { get; set; }
             public ResourceLink CentralBloodPressures { get; set; }
-            public ResourceLink FunctionalMovementScreens { get; set; }
+            public ResourceLink FunctionalMovementScreen { get; set; }
             public ResourceLink GripStrengths { get; set; }
-            public ResourceLink IshiharaSixPlateScreens { get; set; }
-            public ResourceLink OccularPressures { get; set; }
-            public ResourceLink PeripheralVisions { get; set; }
+            public ResourceLink IshiharaSixPlateScreen { get; set; }
+            public ResourceLink OccularPressure { get; set; }
+            public ResourceLink PeripheralVision { get; set; }
             public ResourceLink Pushups { get; set; }
             public ResourceLink QualitativeLabs { get; set; }
             public ResourceLink QuantitativeLabs { get; set; }
             public ResourceLink ResistanceRegimens { get; set; }
             public ResourceLink SitAndReaches { get; set; }
             public ResourceLink Situps { get; set; }
-            public ResourceLink Spirometries { get; set; }
+            public ResourceLink Spirometry { get; set; }
             public ResourceLink StretchingRegimens { get; set; }
-            public ResourceLink TreadmillExerciseStressTests { get; set; }
+            public ResourceLink FitTreadmillScore { get; set; }
             public ResourceLink VisualAcuities { get; set; }
             public ResourceLink VitalSigns { get; set; }
         }

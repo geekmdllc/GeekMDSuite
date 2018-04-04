@@ -5,12 +5,12 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification
 {
-    public class OccularPressureService : IOccularPressureService
+    public class PeripheralVisionClassificationService : IPeripheralVisionClassificationService
     {
-        public OccularPressureClassificationResult Classify(OccularPressure obj)
+        public PeripheralVisionClassificationResult Classify(PeripheralVision obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            return new OccularPressureClassification(obj).Classification;
+            return new PeripheralVisionClassification(obj).Classification;
         }
     }
 }
