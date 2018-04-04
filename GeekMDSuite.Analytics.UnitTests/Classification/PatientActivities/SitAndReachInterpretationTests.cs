@@ -37,7 +37,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
             var sitAndReach = SitAndReach.Build(distance);
 
             var classification =
-                new SitAndReachClassification(new MuscularStrengthClassificationParameters(sitAndReach, _patient))
+                new SitAndReachClassification(new SitAndReachClassificationParameters(sitAndReach, _patient))
                     .Classification;
 
             Assert.Equal(expectedFitnessClassification, classification);
@@ -50,14 +50,14 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification.PatientActivities
         {
             Assert.Throws<ArgumentNullException>(() =>
                 new SitAndReachClassification(
-                    new MuscularStrengthClassificationParameters(SitAndReach.Build(0), null)));
+                    new SitAndReachClassificationParameters(SitAndReach.Build(0), null)));
         }
 
         [Fact]
         public void NullSitAndReach_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitAndReachClassification(new MuscularStrengthClassificationParameters(null,
+                new SitAndReachClassification(new SitAndReachClassificationParameters(null,
                     PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
     }

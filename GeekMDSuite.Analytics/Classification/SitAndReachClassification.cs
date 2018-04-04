@@ -4,7 +4,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class SitAndReachClassification : MuscularStrengthClassification
     {
-        public SitAndReachClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test,
+        public SitAndReachClassification(SitAndReachClassificationParameters parameters) : base(parameters.Test,
             parameters.Patient)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));

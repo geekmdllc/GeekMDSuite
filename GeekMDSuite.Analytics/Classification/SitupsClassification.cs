@@ -4,7 +4,7 @@ namespace GeekMDSuite.Analytics.Classification
 {
     public class SitupsClassification : MuscularStrengthClassification
     {
-        public SitupsClassification(MuscularStrengthClassificationParameters parameters) : base(parameters.Test,
+        public SitupsClassification(SitupsClassificationParameters parameters) : base(parameters.Test,
             parameters.Patient)
         {
             if (parameters.Test == null) throw new ArgumentNullException(nameof(parameters.Test));

@@ -306,7 +306,7 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine($"Peripheral Vision: {peripheralVisionInterp}{NewLine}");
 
             var pushupsInterp =
-                new PushupsClassification(new MuscularStrengthClassificationParameters(pushups, patient));
+                new PushupsClassification(new PushupsClassificationParameters(pushups, patient));
             Console.WriteLine($"Pushups: {pushupsInterp}{NewLine}");
 
             var qualitativeLabInterp = new QualitativeLabClassification(qualitativeLab);
@@ -322,10 +322,10 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine($"Quantitative Lab: {quantLabInterpLdlC}{NewLine}");
 
             var sitAndReachInterp =
-                new SitAndReachClassification(new MuscularStrengthClassificationParameters(sitAndReach, patient));
+                new SitAndReachClassification(new  SitAndReachClassificationParameters(sitAndReach, patient));
             Console.WriteLine($"Sit & Reach: {sitAndReachInterp}{NewLine}");
 
-            var situpsInterp = new SitupsClassification(new MuscularStrengthClassificationParameters(situps, patient));
+            var situpsInterp = new SitupsClassification(new SitupsClassificationParameters(situps, patient));
             Console.WriteLine($"Situps: {situpsInterp}{NewLine}");
 
             var spirometryInterp =

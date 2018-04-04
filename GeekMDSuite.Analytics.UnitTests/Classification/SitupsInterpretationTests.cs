@@ -38,7 +38,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             var situps = Situps.Build(distance);
 
             var classification =
-                new SitupsClassification(new MuscularStrengthClassificationParameters(situps, _patient)).Classification;
+                new SitupsClassification(new SitupsClassificationParameters(situps, _patient)).Classification;
 
             Assert.Equal(expectedFitnessClassification, classification);
         }
@@ -49,14 +49,14 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitupsClassification(new MuscularStrengthClassificationParameters(Situps.Build(0), null)));
+                new SitupsClassification(new SitupsClassificationParameters(Situps.Build(0), null)));
         }
 
         [Fact]
         public void NullSitAndReach_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SitupsClassification(new MuscularStrengthClassificationParameters(null,
+                new SitupsClassification(new SitupsClassificationParameters(null,
                     PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
     }

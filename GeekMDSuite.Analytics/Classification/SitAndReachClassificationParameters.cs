@@ -3,9 +3,9 @@ using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-    public class PushupsClassificationParameters : MuscularStrengthClassificationParameters
+    public class SitAndReachClassificationParameters : MuscularStrengthClassificationParameters
     {
-        public PushupsClassificationParameters(Pushups test, Patient patient)
+        public SitAndReachClassificationParameters(SitAndReach test, Patient patient)
         {
             Test = test;
             Patient = patient;
