@@ -30,6 +30,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             Spirometry = new SpirometryClassificationService();
             Stretching = new StretchingRegimenClassificationService();
             FitTreadmillScore = new FitTreadmillScoreClassificationService();
+            VisualAcuity = new VisualAcuityClassificationService();
         }
 
         public IAscvdClassificationService AscvdScores { get; }
@@ -52,5 +53,6 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
         public ISpirometryClassificationService Spirometry { get; set; }
         public IStretchingRegimenClassificationService Stretching { get; set; }
         public IFitTreadmillScoreClassificationService FitTreadmillScore { get; set; }
+        public IVisualAcuityClassificationService VisualAcuity { get; set; }
     }
 }

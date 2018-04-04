@@ -71,6 +71,7 @@ namespace GeekMDSuite.WebAPI
             routes.Post("spirometry/", route => route.ToAction<ClassifyController>(a => a.PostToSpirometry(With.Any<SpirometryClassificationParameters>())));
             routes.Post("stretchingregimen/", route => route.ToAction<ClassifyController>(a => a.PostToStretchingRegimen(With.Any<StretchingRegimen>())));
             routes.Post("fitscore/", route => route.ToAction<ClassifyController>(a => a.PostToFitTreadmillScore(With.Any<TreadmillExerciseStressTestsClassificationParameters>())));
+            routes.Post("visualacuity/", route => route.ToAction<ClassifyController>(a => a.PostToVisualAcuity(With.Any<VisualAcuity>())));
             
             var compositeScoresUri = classifyUri + "composite/";
             routes.Add(compositeScoresUri, route => route.ToController<CompositeScoresController>());

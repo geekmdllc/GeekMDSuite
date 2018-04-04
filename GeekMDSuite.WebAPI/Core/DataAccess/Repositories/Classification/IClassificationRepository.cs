@@ -25,5 +25,6 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         ISpirometryClassificationService Spirometry { get; }
         IStretchingRegimenClassificationService Stretching { get; }
         IFitTreadmillScoreClassificationService FitTreadmillScore { get; }
+        IVisualAcuityClassificationService VisualAcuity { get; }
     }
 }

@@ -253,5 +253,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(fitTreadmillScoreClassificationParams);
             }
         }
+        
+        [HttpPost]
+        public IActionResult PostToVisualAcuity([FromBody] VisualAcuity visualAcuity)
+        {
+            try
+            {
+                return Ok(_classifications.VisualAcuity.Classify(visualAcuity));
+            }
+            catch
+            {
+                return BadRequest(visualAcuity);
+            }
+        }
     }
 }

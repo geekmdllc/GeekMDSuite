@@ -19,11 +19,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         }
         
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get() => Ok(BuildApiDirectoryNavigationModel());
+
+        private ApiDirectoryNavigationModel<DataLinks> BuildApiDirectoryNavigationModel()
         {
             var nav = new ApiDirectoryNavigationModel<DataLinks>()
             {
-                
                 Title = "Analytics",
                 Description = "Perform analytics on patient data.",
                 Links = new DataLinks
@@ -43,9 +44,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    BodyCompositions =  new ResourceLink
+                    BodyCompositions = new ResourceLink
                     {
-                        Description = "Interpet body compositions. This is WITHOUT body fat percentage and visceral fat content.",
+                        Description =
+                            "Interpet body compositions. This is WITHOUT body fat percentage and visceral fat content.",
                         Href = Url.Action<ClassifyController>(a => a.PostToBodyComposition(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
@@ -165,12 +167,18 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-
+                    VisualAcuity = new ResourceLink
+                    {
+                        Description = "Interpret a patients visual acuity",
+                        Href = Url.Action<ClassifyController>(a => a.PostToVisualAcuity(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
                 }
             };
-
-            return Ok(nav);
+            return nav;
         }
+
         private class DataLinks
         {
             public ResourceLink Home { get; set; }
@@ -195,8 +203,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             public ResourceLink Spirometry { get; set; }
             public ResourceLink StretchingRegimens { get; set; }
             public ResourceLink FitTreadmillScore { get; set; }
-            public ResourceLink VisualAcuities { get; set; }
-            public ResourceLink VitalSigns { get; set; }
+            public ResourceLink VisualAcuity { get; set; }
         }
     }
 }
