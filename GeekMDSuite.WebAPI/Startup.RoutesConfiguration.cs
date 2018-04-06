@@ -64,13 +64,15 @@ namespace GeekMDSuite.WebAPI
             routes.Post("ishiharasixplate/", route => route.ToAction<ClassifyController>(a => a.PostToIshiharaSixPlateScreen(With.Any<IshiharaSixPlate>())));
             routes.Post("occularpressure/", route => route.ToAction<ClassifyController>(a => a.PostToOccularPressure(With.Any<OccularPressure>())));
             routes.Post("peripheralvision/", route => route.ToAction<ClassifyController>(a => a.PostToPeripheralVision(With.Any<PeripheralVision>())));
-            // Pushups
+            routes.Post("pushups/", route => route.ToAction<ClassifyController>(a => a.PostToPushups(With.Any<PushupsClassificationParameters>())));
             routes.Post("qualitativelab/", route => route.ToAction<ClassifyController>(a => a.PostToQualitativeLabs(With.Any<QualitativeLab>())));
             routes.Post("quantitativelab/", route => route.ToAction<ClassifyController>(a => a.PostToQuantitativeLabs(With.Any<QuantitativeLabClassificationParameters>())));
             routes.Post("resistanceregimen/", route => route.ToAction<ClassifyController>(a => a.PostToResistanceRegimen(With.Any<ResistanceRegimen>())));
+            routes.Post("situps/", route => route.ToAction<ClassifyController>(a => a.PostToSitAndReach(With.Any<SitAndReachClassificationParameters>())));
+            routes.Post("sitandreach/", route => route.ToAction<ClassifyController>(a => a.PostToSitups(With.Any<SitupsClassificationParameters>())));
             routes.Post("spirometry/", route => route.ToAction<ClassifyController>(a => a.PostToSpirometry(With.Any<SpirometryClassificationParameters>())));
             routes.Post("stretchingregimen/", route => route.ToAction<ClassifyController>(a => a.PostToStretchingRegimen(With.Any<StretchingRegimen>())));
-            routes.Post("fitscore/", route => route.ToAction<ClassifyController>(a => a.PostToFitTreadmillScore(With.Any<TreadmillExerciseStressTestsClassificationParameters>())));
+            routes.Post("fitscore/", route => route.ToAction<ClassifyController>(a => a.PostToFitTreadmillScore(With.Any<TreadmillExerciseStressTestClassificationParameters>())));
             routes.Post("visualacuity/", route => route.ToAction<ClassifyController>(a => a.PostToVisualAcuity(With.Any<VisualAcuity>())));
             
             var compositeScoresUri = classifyUri + "composite/";

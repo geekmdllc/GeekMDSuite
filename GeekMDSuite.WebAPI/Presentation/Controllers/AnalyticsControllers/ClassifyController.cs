@@ -5,6 +5,7 @@ using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
+using GeekMDSuite.WebAPI.Core.Presentation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
@@ -13,9 +14,11 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
     public class ClassifyController : Controller
     {
         private readonly IClassificationRepository _classifications;
+        private readonly IErrorService _errorService;
 
-        public ClassifyController(IClassificationRepository classifications)
+        public ClassifyController(IClassificationRepository classifications, IErrorService errorService)
         {
+            _errorService = errorService;
             _classifications = classifications;
         }
 
@@ -27,7 +30,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(audiogram);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("Audiogram model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the audiogram was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -40,7 +48,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(bloodPressure);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("BloodPressure model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the blood pressure was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -53,7 +66,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(bodyComposition);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("BodyCompositionClassifcationParameters model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the BodyCompositionClassificationParameters model was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -67,7 +85,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(bodyCompositionExpanded);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("BodyCompositionExpandedClassificationParameters model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the BodyCompositionExpandedClassificationParamters was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -80,7 +103,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(carotidUltrasound);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("CarotidUltrasound model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the carotid ultrasound was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -93,7 +121,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(cardiovascularRegimen);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("CardiovascularRegimen model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the cardiovascular regimen was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -106,7 +139,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(centralBloodPressure);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("CentralBloodPressureParameters model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the central blood pressure paramters was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -119,7 +157,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(functionalMovementScreen);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("FunctionalMovementScreen model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the functional movement screen was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -133,7 +176,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(gripStrengthClassificationParameters);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("GripStrengthClassificationParamters model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the GripStrengthClassificationParameters was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -146,7 +194,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(ishiharaSixPlate);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("IshiharaSixPlate model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the Ishihara six plate color vision screening was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -159,7 +212,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(occularPressure);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("OccularPresure model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the OccularPressure was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -168,11 +226,34 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         {
             try
             {
-                return Ok(_classifications.PeripheralVisionService.Classify(peripheralVision));
+                return Ok(_classifications.PeripheralVision.Classify(peripheralVision));
             }
             catch
             {
-                return BadRequest(peripheralVision);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("PeripheralVisiohn model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the peripheral vision was sent properly.")
+                    .Build();
+                return BadRequest(error);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToPushups([FromBody] PushupsClassificationParameters pushups)
+        {
+            try
+            {
+                return Ok(_classifications.Pushups.Classify(pushups));
+            }
+            catch
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("Pushups model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the pushups was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
 
@@ -185,7 +266,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(qualitativeLab);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("QualitativeLab model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the QualitativeLab was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
         
@@ -198,7 +284,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(quantitativeLab);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("QuantitativeLab model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the QuantitativeLab was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
         
@@ -211,7 +302,48 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(resistanceRegimen);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("ResistanceRegimen model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the resistance regimen was sent properly.")
+                    .Build();
+                return BadRequest(error);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToSitAndReach([FromBody] SitAndReachClassificationParameters sitAndReach)
+        {
+            try
+            {
+                return Ok(_classifications.SitAndReach.Classify(sitAndReach));
+            }
+            catch
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("SitAndReach model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the SitAndReach was sent properly.")
+                    .Build();
+                return BadRequest(error);
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult PostToSitups([FromBody] SitupsClassificationParameters situps)
+        {
+            try
+            {
+                return Ok(_classifications.Situps.Classify(situps));
+            }
+            catch
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("Situps model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the situps was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
         
@@ -224,7 +356,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(spirometry);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("SpirometryClassificationParameters model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the spirometry classfication paremeters were sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
         
@@ -237,12 +374,17 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(stretching);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("StretchingRegimen model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the StretchingRegimen was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
         
         [HttpPost]
-        public IActionResult PostToFitTreadmillScore([FromBody] TreadmillExerciseStressTestsClassificationParameters fitTreadmillScoreClassificationParams)
+        public IActionResult PostToFitTreadmillScore([FromBody] TreadmillExerciseStressTestClassificationParameters fitTreadmillScoreClassificationParams)
         {
             try
             {
@@ -250,7 +392,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(fitTreadmillScoreClassificationParams);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("TreadmillExerciseStressTestClassificationParamters model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the TreadmillExerciseStressTestClassifcationParamters was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
         
@@ -263,7 +410,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             }
             catch
             {
-                return BadRequest(visualAcuity);
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("VisualAcuity model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the VisualAcuity was sent properly.")
+                    .Build();
+                return BadRequest(error);
             }
         }
     }

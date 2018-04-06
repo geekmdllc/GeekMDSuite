@@ -17,11 +17,13 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         IGripStrengthClassificationService GripStrengths { get; }
         IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
         IOccularPressureClassificationService OccularPressures { get; }
-        IPeripheralVisionClassificationService PeripheralVisionService { get; }
-        // IPushups
+        IPeripheralVisionClassificationService PeripheralVision { get; }
+        IPushupsClassificationService Pushups { get; }
         IQualitativeLabsClassificationService QualitativeLabs { get; }
         IQuantitativeLabsClassificationService QuantitativeLabs { get; }
         IResistanceRegimenClassificationService ResistanceRegimen { get; }
+        ISitupsClassificationService Situps { get; }
+        ISitAndReachClassificationService SitAndReach { get; }
         ISpirometryClassificationService Spirometry { get; }
         IStretchingRegimenClassificationService Stretching { get; }
         IFitTreadmillScoreClassificationService FitTreadmillScore { get; }

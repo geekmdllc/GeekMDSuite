@@ -29,7 +29,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 Description = "Perform analytics on patient data.",
                 Links = new DataLinks
                 {
-                    // Links go here.
                     Home = new ResourceLink
                     {
                         Description = "Go to application root.",
@@ -44,7 +43,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    BodyCompositions = new ResourceLink
+                    BodyComposition = new ResourceLink
                     {
                         Description =
                             "Interpet body compositions. This is WITHOUT body fat percentage and visceral fat content.",
@@ -52,21 +51,21 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    BodyCompositionExpandeds = new ResourceLink
+                    BodyCompositionExpanded = new ResourceLink
                     {
                         Description = "Interpet body compositions, including body fat percentage and visceral fat content.",
                         Href = Url.Action<ClassifyController>(a => a.PostToBodyCompositionExpanded(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    BloodPressures = new ResourceLink
+                    BloodPressure = new ResourceLink
                     {
                         Description = "Interpret blood pressures",
                         Href = Url.Action<ClassifyController>(a => a.PostToBloodPressure(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    CarotidUltrasounds = new ResourceLink
+                    CarotidUltrasound = new ResourceLink
                     {
                         Description = "Interpret a patients carotid ultrasound",
                         Href = Url.Action<ClassifyController>(a => a.PostToCarotidUltrasound(null)),
@@ -80,7 +79,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    CentralBloodPressures = new ResourceLink
+                    CentralBloodPressure = new ResourceLink
                     {
                         Description = "Interpret a patients central blood pressures",
                         Href = Url.Action<ClassifyController>(a => a.PostToCentralBloodPressure(null)),
@@ -94,7 +93,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    GripStrengths = new ResourceLink
+                    GripStrength = new ResourceLink
                     {
                         Description = "Interpret a patients grip strength",
                         Href = Url.Action<ClassifyController>(a => a.PostToGripStrength(null)),
@@ -122,30 +121,48 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    // pushups
-                    QualitativeLabs = new ResourceLink
+                    Pushups = new ResourceLink
+                    {
+                        Description = "Interpret a patients pushups",
+                        Href = Url.Action<ClassifyController>(a => a.PostToPushups(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    QualitativeLab = new ResourceLink
                     {
                         Description = "Interpret a patients qualitative labs",
                         Href = Url.Action<ClassifyController>(a => a.PostToQualitativeLabs(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    QuantitativeLabs = new ResourceLink
+                    QuantitativeLab = new ResourceLink
                     {
                         Description = "Interpret a patients quantitative labs",
                         Href = Url.Action<ClassifyController>(a => a.PostToQuantitativeLabs(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    ResistanceRegimens = new ResourceLink
+                    ResistanceRegimen = new ResourceLink
                     {
                         Description = "Interpret a patients resistance regimen",
                         Href = Url.Action<ClassifyController>(a => a.PostToResistanceRegimen(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    // Sit and reach
-                    // Situps
+                    SitAndReach = new ResourceLink
+                    {
+                        Description = "Interpret a patients sit and reach test",
+                        Href = Url.Action<ClassifyController>(a => a.PostToSitAndReach(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
+                    Situps = new ResourceLink
+                    {
+                        Description = "Interpret a patients situps test",
+                        Href = Url.Action<ClassifyController>(a => a.PostToSitups(null)),
+                        HtmlMethod = HtmlMethod.Post,
+                        Relationship = UrlRelationship.Next
+                    },
                     Spirometry = new ResourceLink
                     {
                         Description = "Interpret a patients spirometry",
@@ -153,7 +170,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
                     },
-                    StretchingRegimens = new ResourceLink
+                    StretchingRegimen = new ResourceLink
                     {
                         Description = "Interpret a patients stretching regimen",
                         Href = Url.Action<ClassifyController>(a => a.PostToStretchingRegimen(null)),
@@ -183,25 +200,25 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             public ResourceLink Home { get; set; }
             public ResourceLink Audiograms { get; set; }
-            public ResourceLink BodyCompositions { get; set; }
-            public ResourceLink BodyCompositionExpandeds { get; set; }
-            public ResourceLink BloodPressures { get; set; }
+            public ResourceLink BodyComposition { get; set; }
+            public ResourceLink BodyCompositionExpanded { get; set; }
+            public ResourceLink BloodPressure { get; set; }
             public ResourceLink CardiovascularRegimen { get; set; }
-            public ResourceLink CarotidUltrasounds { get; set; }
-            public ResourceLink CentralBloodPressures { get; set; }
+            public ResourceLink CarotidUltrasound { get; set; }
+            public ResourceLink CentralBloodPressure { get; set; }
             public ResourceLink FunctionalMovementScreen { get; set; }
-            public ResourceLink GripStrengths { get; set; }
+            public ResourceLink GripStrength { get; set; }
             public ResourceLink IshiharaSixPlateScreen { get; set; }
             public ResourceLink OccularPressure { get; set; }
             public ResourceLink PeripheralVision { get; set; }
             public ResourceLink Pushups { get; set; }
-            public ResourceLink QualitativeLabs { get; set; }
-            public ResourceLink QuantitativeLabs { get; set; }
-            public ResourceLink ResistanceRegimens { get; set; }
-            public ResourceLink SitAndReaches { get; set; }
+            public ResourceLink QualitativeLab { get; set; }
+            public ResourceLink QuantitativeLab { get; set; }
+            public ResourceLink ResistanceRegimen { get; set; }
+            public ResourceLink SitAndReach { get; set; }
             public ResourceLink Situps { get; set; }
             public ResourceLink Spirometry { get; set; }
-            public ResourceLink StretchingRegimens { get; set; }
+            public ResourceLink StretchingRegimen { get; set; }
             public ResourceLink FitTreadmillScore { get; set; }
             public ResourceLink VisualAcuity { get; set; }
         }

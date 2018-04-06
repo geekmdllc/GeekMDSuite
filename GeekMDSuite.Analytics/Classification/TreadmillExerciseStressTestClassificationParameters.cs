@@ -3,9 +3,9 @@ using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-    public class TreadmillExerciseStressTestsClassificationParameters
+    public class TreadmillExerciseStressTestClassificationParameters
     {
-        public TreadmillExerciseStressTestsClassificationParameters(
+        public TreadmillExerciseStressTestClassificationParameters(
             TreadmillExerciseStressTest treadmillExerciseStressTest, Patient patient)
         {
             TreadmillExerciseStressTest = treadmillExerciseStressTest;

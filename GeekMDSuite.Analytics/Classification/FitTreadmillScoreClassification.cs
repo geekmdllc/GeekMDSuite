@@ -12,7 +12,7 @@ namespace GeekMDSuite.Analytics.Classification
 
         private readonly TreadmillExerciseStressTest _treadmillExerciseStressTest;
 
-        public FitTreadmillScoreClassification(TreadmillExerciseStressTestsClassificationParameters parameters)
+        public FitTreadmillScoreClassification(TreadmillExerciseStressTestClassificationParameters parameters)
         {
             _patient = parameters.Patient ?? throw new ArgumentNullException(nameof(parameters.Patient));
             _treadmillExerciseStressTest = parameters.TreadmillExerciseStressTest ??

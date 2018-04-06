@@ -22,11 +22,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             GripStrengths = new GripStrengthClassificationService();
             IshiharaSixPlateScreens = new IshiharaSixPlateScreenClassificationService();
             OccularPressures = new OccularPressureClassificationService();
-            PeripheralVisionService = new PeripheralVisionClassificationService();
-            // Pushups
+            PeripheralVision = new PeripheralVisionClassificationService();
+            Pushups = new PushupsClassificationService();
             QualitativeLabs = new QualitativeLabClassificationService();
             QuantitativeLabs = new QuantitativeLabClassificationService();
             ResistanceRegimen = new ResistanceRegimenClassificationService();
+            SitAndReach = new SitAndReachClassificationService();
+            Situps = new SitupsClassificationService();
             Spirometry = new SpirometryClassificationService();
             Stretching = new StretchingRegimenClassificationService();
             FitTreadmillScore = new FitTreadmillScoreClassificationService();
@@ -45,11 +47,13 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
         public IGripStrengthClassificationService GripStrengths { get;  }
         public IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
         public IOccularPressureClassificationService OccularPressures { get;  }
-        public IPeripheralVisionClassificationService PeripheralVisionService { get;  }
-        // Pushups
+        public IPeripheralVisionClassificationService PeripheralVision { get;  }
+        public IPushupsClassificationService Pushups { get; set; }
         public IQualitativeLabsClassificationService QualitativeLabs { get; set; }
         public IQuantitativeLabsClassificationService QuantitativeLabs { get; set; }
         public IResistanceRegimenClassificationService ResistanceRegimen { get; }
+        public ISitupsClassificationService Situps { get; set; }
+        public ISitAndReachClassificationService SitAndReach { get; set; }
         public ISpirometryClassificationService Spirometry { get; set; }
         public IStretchingRegimenClassificationService Stretching { get; set; }
         public IFitTreadmillScoreClassificationService FitTreadmillScore { get; set; }

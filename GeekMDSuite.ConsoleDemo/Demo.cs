@@ -276,7 +276,7 @@ namespace GeekMDSuite.ConsoleDemo
 
             var fitScoreInterp =
                 new FitTreadmillScoreClassification(
-                    new TreadmillExerciseStressTestsClassificationParameters(treadmillStressTest, patient));
+                    new TreadmillExerciseStressTestClassificationParameters(treadmillStressTest, patient));
             Console.WriteLine($"FIT Score: {fitScoreInterp}{NewLine}");
 
             var fmsInterpretation = new FunctionalMovementScreenClassification(functionalMovementScreen);

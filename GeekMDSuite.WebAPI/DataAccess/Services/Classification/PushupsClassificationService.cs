@@ -4,12 +4,12 @@ using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification
 {
-    public class FitTreadmillScoreClassificationService : IFitTreadmillScoreClassificationService
+    public class PushupsClassificationService : IPushupsClassificationService
     {
-        public FitTreadmillScoreMortality Classify(TreadmillExerciseStressTestClassificationParameters obj)
+        public FitnessClassification Classify(PushupsClassificationParameters obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            return new FitTreadmillScoreClassification(obj).Classification;
+            return new PushupsClassification(obj).Classification;
         }
     }
 }
