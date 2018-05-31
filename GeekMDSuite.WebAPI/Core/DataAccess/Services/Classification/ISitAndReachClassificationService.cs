@@ -2,8 +2,9 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification
 {
-    public interface ISitAndReachClassificationService : IClassificationService<SitAndReachClassificationParameters, FitnessClassification>
+    public interface
+        ISitAndReachClassificationService : IClassificationService<SitAndReachClassificationParameters,
+            FitnessClassification>
     {
-        
     }
 }

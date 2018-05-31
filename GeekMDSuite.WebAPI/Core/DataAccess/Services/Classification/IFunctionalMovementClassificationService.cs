@@ -6,6 +6,5 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification
     public interface IFunctionalMovementClassificationService
         : IClassificationService<FunctionalMovementScreen, FunctionalMovementScreenClassification>
     {
-        
     }
 }

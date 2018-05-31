@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class BodyCompositionExpandedsController : VisitDataController
     {
-        public BodyCompositionExpandedsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public BodyCompositionExpandedsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) :
+            base(unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<BodyCompositionExpandedEntity>(filter);
-            
+
             var resources = GenerateBodyCompositionExpandedResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An BodyCompositionExpanded entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An BodyCompositionExpanded entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested BodyCompositionExpanded entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The BodyCompositionExpanded data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The BodyCompositionExpanded recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The BodyCompositionExpanded data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The BodyCompositionExpanded recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a BodyCompositionExpanded entity with Id {id}, but the BodyCompositionExpanded resource object contained Id {stub.Id}")
-                    .TellsUser("The BodyCompositionExpanded entry provided for update doesn't match the intended target.")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a BodyCompositionExpanded entity with Id {id}, but the BodyCompositionExpanded resource object contained Id {stub.Id}")
+                    .TellsUser(
+                        "The BodyCompositionExpanded entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<BodyCompositionExpandedStubFromUser, BodyCompositionExpandedEntity>(stub);
@@ -124,8 +130,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An BodyCompositionExpanded entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the BodyCompositionExpanded entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An BodyCompositionExpanded entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the BodyCompositionExpanded entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +141,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The BodyCompositionExpanded data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The BodyCompositionExpanded data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new BodyCompositionExpanded was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +161,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An BodyCompositionExpanded element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An BodyCompositionExpanded element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested BodyCompositionExpanded resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<BodyCompositionExpandedResource> GenerateBodyCompositionExpandedResources(IEnumerable<BodyCompositionExpandedEntity> entities)
+        private IEnumerable<BodyCompositionExpandedResource> GenerateBodyCompositionExpandedResources(
+            IEnumerable<BodyCompositionExpandedEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<BodyCompositionExpandedEntity, BodyCompositionExpandedStub>);
             var resources = stubs.Select(stub => new BodyCompositionExpandedResource
@@ -186,7 +197,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -208,21 +219,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Update the values for this existing BodyCompositionExpanded resource",
-                    Href = Url.Action<BodyCompositionExpandedsController>(a => a.Put(id, With.No<BodyCompositionExpandedStubFromUser>())),
+                    Href = Url.Action<BodyCompositionExpandedsController>(a =>
+                        a.Put(id, With.No<BodyCompositionExpandedStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for BodyCompositionExpandeds resources with filters and pagination",
-                    Href = Url.Action<BodyCompositionExpandedsController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href = Url.Action<BodyCompositionExpandedsController>(a =>
+                        a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new BodyCompositionExpanded resource",
-                    Href = Url.Action<BodyCompositionExpandedsController>(a => a.Post(With.No<BodyCompositionExpandedStubFromUser>())),
+                    Href = Url.Action<BodyCompositionExpandedsController>(a =>
+                        a.Post(With.No<BodyCompositionExpandedStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },

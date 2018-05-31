@@ -11,7 +11,7 @@ namespace GeekMDSuite.Analytics.Classification
             Patient = patient;
         }
 
-        public QuantitativeLab Lab { get; private set; }
-        public Patient Patient { get; private set; }
+        public QuantitativeLab Lab { get; }
+        public Patient Patient { get; }
     }
 }

@@ -16,34 +16,13 @@ namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Repositories
         private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
 
         [Fact]
-        public async Task FindByGuid_GivenGuidThatExistsInRepository_ReturnsPatientEntity()
-        {
-            var found = await _unitOfWork.Patients.FindByGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid);
-            Assert.IsType<PatientEntity>(found);
-        }
-
-        [Fact]
-        public async Task FindByGuid_GivenEmptyGuid_ThrowsRepositoryElementyNotFoundException()
-        {
-            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() => _unitOfWork.Patients.FindByGuid(Guid.Empty));
-        }
-
-        [Fact]
-        public async Task FilteredSearch_GivenNotFilterParamters_ReturnsAllRepostioryElements()
-        {
-            var totalCount = (await _unitOfWork.Patients.All()).Count();
-            var foundCount = (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter())).Count();
-            Assert.Equal(totalCount, foundCount);
-        }
-
-        [Fact]
         public async Task FilteredSearch_GivenBirthDay_ReturnsElementsWithThatBirthDay()
         {
             var actual = (await _unitOfWork.Patients.All()).Where(p => p.DateOfBirth.Day == 1);
             var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {BirthDay = 1});
             Assert.Equal(actual.Count(), found.Count());
         }
-        
+
         [Fact]
         public async Task FilteredSearch_GivenBirthMonth_ReturnsElementsWithThatBirthDay()
         {
@@ -51,7 +30,40 @@ namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Repositories
             var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {BirthMonth = 1});
             Assert.Equal(actual.Count(), found.Count());
         }
-        
+
+        [Fact]
+        public async Task FilteredSearch_GivenBirthYear_ReturnsElementsWithThatBirthDay()
+        {
+            var actual = (await _unitOfWork.Patients.All()).Where(p => p.DateOfBirth.Year == 1900);
+            var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {BirthYear = 1900});
+            Assert.Equal(actual.Count(), found.Count());
+        }
+
+        [Fact]
+        public async Task FilteredSearch_GivenBirthYearThatDoesNotExist_ReturnsEmptySet()
+        {
+            var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {BirthYear = 1400});
+            Assert.Empty(found);
+        }
+
+        [Fact]
+        public async Task
+            FilteredSearch_GivenCompleteMedicalRecordNumberThatExists_ReturnsElementsWithThatCompleteMedicalRecordNumber()
+        {
+            var actual = (await _unitOfWork.Patients.All())
+                .Where(
+                    p => p.MedicalRecordNumber.Contains(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber));
+
+            var filter = new PatientDataSearchFilter
+            {
+                MedicalRecordNumber = FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber
+            };
+
+            var found = await _unitOfWork.Patients.FilteredSearch(filter);
+
+            Assert.Equal(actual.Count(), found.Count());
+        }
+
         [Fact]
         public async Task FilteredSearch_GivenExactBirthDate_ReturnsElementsWithThatBirthDate()
         {
@@ -66,23 +78,34 @@ namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Repositories
                 BirthMonth = 1,
                 BirthDay = 1
             };
-            
+
             var found = await _unitOfWork.Patients.FilteredSearch(filter);
             Assert.Equal(actual.Count(), found.Count());
         }
-        
+
         [Fact]
-        public async Task FilteredSearch_GivenBirthYear_ReturnsElementsWithThatBirthDay()
+        public async Task
+            FilteredSearch_GivenIncompleteMedicalRecordNumberThatExists_ReturnsElementsWithThatIncompleteMedicalRecordNumber()
         {
-            var actual = (await _unitOfWork.Patients.All()).Where(p => p.DateOfBirth.Year == 1900);
-            var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {BirthYear = 1900});
-            Assert.Equal(actual.Count(), found.Count());
+            var all = (await _unitOfWork.Patients.All()).ToList();
+            var actual = all.Where(p => p.MedicalRecordNumber.Contains("3"));
+
+            var filter = new PatientDataSearchFilter
+            {
+                MedicalRecordNumber = "3"
+            };
+
+            var found = await _unitOfWork.Patients.FilteredSearch(filter);
+
+            Assert.Equal(all.Count(), found.Count());
+            Assert.Equal(actual.Count(), all.Count());
         }
-        
+
         [Fact]
-        public async Task FilteredSearch_GivenBirthYearThatDoesNotExist_ReturnsEmptySet()
+        public async Task FilteredSearch_GivenNameThatDoesNotExist_ReturnsEmptySet()
         {
-            var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {BirthYear = 1400});
+            var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {Name = "Jar Jar"});
+
             Assert.Empty(found);
         }
 
@@ -91,51 +114,39 @@ namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Repositories
         {
             var actual = (await _unitOfWork.Patients.All())
                 .Where(p => p.Name.IsSimilarTo("Bruce"));
-            
+
             var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {Name = "Bruce"});
-    
+
             Assert.Equal(actual.Count(), found.Count());
         }
-        
+
         [Fact]
-        public async Task FilteredSearch_GivenNameThatDoesNotExist_ReturnsEmptySet()
+        public async Task FilteredSearch_GivenNotFilterParamters_ReturnsAllRepostioryElements()
         {
-             var found = await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter {Name = "Jar Jar"});
-    
-            Assert.Empty(found);
+            var totalCount = (await _unitOfWork.Patients.All()).Count();
+            var foundCount = (await _unitOfWork.Patients.FilteredSearch(new PatientDataSearchFilter())).Count();
+            Assert.Equal(totalCount, foundCount);
         }
-        
+
         [Fact]
-        public async Task FilteredSearch_GivenCompleteMedicalRecordNumberThatExists_ReturnsElementsWithThatCompleteMedicalRecordNumber()
+        public async Task FindByGuid_GivenEmptyGuid_ThrowsRepositoryElementyNotFoundException()
         {
-            var actual = (await _unitOfWork.Patients.All())
-                .Where(p => p.MedicalRecordNumber.Contains(FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber));
-            
-            var filter = new PatientDataSearchFilter
-            {
-                MedicalRecordNumber = FakeGeekMdSuiteContextBuilder.BruceWaynesMedicalRecordNumber
-            };
-            
-            var found = await _unitOfWork.Patients.FilteredSearch(filter);
-    
-            Assert.Equal(actual.Count(), found.Count());
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
+                _unitOfWork.Patients.FindByGuid(Guid.Empty));
         }
-        
+
         [Fact]
-        public async Task FilteredSearch_GivenIncompleteMedicalRecordNumberThatExists_ReturnsElementsWithThatIncompleteMedicalRecordNumber()
+        public async Task FindByGuid_GivenGuidThatExistsInRepository_ReturnsPatientEntity()
         {
-            var all = (await _unitOfWork.Patients.All()).ToList();
-            var actual = all.Where(p => p.MedicalRecordNumber.Contains("3"));
-            
-            var filter = new PatientDataSearchFilter
-            {
-                MedicalRecordNumber = "3"
-            };
-            
-            var found = await _unitOfWork.Patients.FilteredSearch(filter);
-    
-            Assert.Equal(all.Count(), found.Count());
-            Assert.Equal(actual.Count(), all.Count());
+            var found = await _unitOfWork.Patients.FindByGuid(FakeGeekMdSuiteContextBuilder.BruceWaynesGuid);
+            Assert.IsType<PatientEntity>(found);
+        }
+
+        [Fact]
+        public async Task FindByVisit_GivenGuidThatDoesNotExistInRepository_ThrowsRepositoryElementNotFoundException()
+        {
+            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
+                _unitOfWork.Patients.FindByVisit(Guid.NewGuid()));
         }
 
         [Fact]
@@ -143,13 +154,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.DataAccess.Repositories
         {
             var found = await _unitOfWork.Patients.FindByVisit(FakeGeekMdSuiteContextBuilder.BruceWaynesVisitGuid);
             Assert.IsType<PatientEntity>(found);
-        }
-        
-        [Fact]
-        public async Task FindByVisit_GivenGuidThatDoesNotExistInRepository_ThrowsRepositoryElementNotFoundException()
-        {
-            await Assert.ThrowsAsync<RepositoryEntityNotFoundException>(() =>
-                _unitOfWork.Patients.FindByVisit(Guid.NewGuid()));
         }
 
         [Fact]

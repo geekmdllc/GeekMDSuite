@@ -7,17 +7,17 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
     public class VitalSignsStub : IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-        public BloodPressure BloodPressure { get; set; }
-        public int OxygenSaturation { get; set; }
-        public int PulseRate { get; set; }
-        public Temperature Temperature { get; set; }
-
         public VitalSignsStub()
         {
             BloodPressure = new BloodPressure();
             Temperature = new Temperature();
         }
+
+        public BloodPressure BloodPressure { get; set; }
+        public int OxygenSaturation { get; set; }
+        public int PulseRate { get; set; }
+        public Temperature Temperature { get; set; }
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using GeekMDSuite.Analytics.Tools.Cardiology;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Models.PatientActivities;
 
 namespace GeekMDSuite.Analytics.Classification.CompositeScores
 {

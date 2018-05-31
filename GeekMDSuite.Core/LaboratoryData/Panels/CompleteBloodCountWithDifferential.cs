@@ -2,12 +2,6 @@
 {
     public class CompleteBloodCountWithDifferential : CompleteBloodCount
     {
-        public QuantitativeLab Neutrophils { get; set; }
-        public QuantitativeLab Lymphocytes { get; set; }
-        public QuantitativeLab Basophils { get; set; }
-        public QuantitativeLab Eosinophils { get; set; }
-        public QuantitativeLab Monocytes { get; set; }
-
         public CompleteBloodCountWithDifferential()
         {
             Neutrophils = new QuantitativeLab();
@@ -16,5 +10,11 @@
             Eosinophils = new QuantitativeLab();
             Monocytes = new QuantitativeLab();
         }
+
+        public QuantitativeLab Neutrophils { get; set; }
+        public QuantitativeLab Lymphocytes { get; set; }
+        public QuantitativeLab Basophils { get; set; }
+        public QuantitativeLab Eosinophils { get; set; }
+        public QuantitativeLab Monocytes { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         public async Task<IEnumerable<PatientEntity>> FilteredSearch(PatientDataSearchFilter filter)
         {
             if (filter == null) throw new ArgumentNullException(nameof(filter));
-            
+
             var patients = await Context.Patients.ToListAsync();
 
             if (filter.BirthDay != null)
@@ -45,7 +45,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
             if (filter.Name.IsNotNullOrEmpty())
                 patients.RemoveAll(p => p.Name.IsNotSimilarTo(filter.Name));
             if (filter.MedicalRecordNumber.IsNotNullOrEmpty())
-                patients.RemoveAll(p => p.MedicalRecordNumber.DoesNotHaveStringsInCommonWith(filter.MedicalRecordNumber));
+                patients.RemoveAll(
+                    p => p.MedicalRecordNumber.DoesNotHaveStringsInCommonWith(filter.MedicalRecordNumber));
 
             if (filter.SortOrder == null) return patients;
             return filter.SortOrder == SortOrder.Ascending
@@ -57,7 +58,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         {
             if (guid == Guid.Empty)
                 throw new ArgumentOutOfRangeException();
-            
+
             try
             {
                 var visit = await Context.Visits.FirstAsync(v => v.VisitGuid == guid);

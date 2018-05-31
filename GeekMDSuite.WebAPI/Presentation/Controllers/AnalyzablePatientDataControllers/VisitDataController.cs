@@ -9,18 +9,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 {
     public abstract class VisitDataController : EntityDataController
     {
-        protected readonly IUnitOfWork UnitOfWork;
-        protected readonly IMapper Mapper;
         protected readonly IErrorService ErrorService;
+        protected readonly IMapper Mapper;
+        protected readonly IUnitOfWork UnitOfWork;
 
-        public VisitDataController(IUnitOfWork unitOfWork, IMapper mapper,  IErrorService errorService) 
+        public VisitDataController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService)
         {
             ErrorService = errorService;
             Mapper = mapper;
             UnitOfWork = unitOfWork;
         }
-        
-        protected async Task<IEnumerable<TEntity>> GetFilteredEntities<TEntity>(EntityDataFindFilter filter) where TEntity 
+
+        protected async Task<IEnumerable<TEntity>> GetFilteredEntities<TEntity>(EntityDataFindFilter filter) where
+            TEntity
             : class, IMapProperties<TEntity>, IVisitData
         {
             var entities = await UnitOfWork.VisitData<TEntity>().All();

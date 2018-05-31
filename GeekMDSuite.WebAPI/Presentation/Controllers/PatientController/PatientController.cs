@@ -18,12 +18,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
 {
     [Produces("application/json", "application/xml")]
-    public partial class PatientController :  EntityDataController
+    public partial class PatientController : EntityDataController
     {
+        private readonly IErrorService _errorService;
         private readonly IMapper _mapper;
         private readonly INewPatientService _newPatientService;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IErrorService _errorService;
 
         public PatientController(IUnitOfWork unitOfWork,
             INewPatientService newPatientService,
@@ -69,7 +69,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                     .HasInternalMessage($"A search for Guid {guid} yielded no patients.")
                     .TellsUser("The requested user could not be found")
                     .Build();
-                
+
                 return BadRequest(error);
             }
         }
@@ -139,7 +139,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                     .Build();
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var trackedPatient = await _unitOfWork.Patients.FindByGuid(guid);
@@ -154,7 +154,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.PatientNotFoundByGuidInRepository)
-                    .HasInternalMessage($"A patient with Guid {guid} could not be located in the repository. Resource not updated.")
+                    .HasInternalMessage(
+                        $"A patient with Guid {guid} could not be located in the repository. Resource not updated.")
                     .TellsUser("The patient couldnot be found and therefore was not updated")
                     .Build();
 
@@ -178,7 +179,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.PatientNotFoundByGuidInRepository)
-                    .HasInternalMessage($"A patient with Guid {guid} could not be located in the repository. Resource not deleted.")
+                    .HasInternalMessage(
+                        $"A patient with Guid {guid} could not be located in the repository. Resource not deleted.")
                     .TellsUser("The patient couldnot be found and therefore was not deleted.")
                     .Build();
 
@@ -260,14 +262,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                     Description = $"Access or modify a patient",
                     Relationship = UrlRelationship.Self,
                     Href = Url.Action<PatientController>(a => a.GetByGuid(patient.PatientGuid)),
-                    HtmlMethod = HtmlMethod.Put,
+                    HtmlMethod = HtmlMethod.Put
                 },
                 new ResourceLink
                 {
                     Description = $"Create patient",
                     Relationship = UrlRelationship.Up,
                     Href = Url.Action<PatientController>(a => a.Post(null)),
-                    HtmlMethod = HtmlMethod.Post 
+                    HtmlMethod = HtmlMethod.Post
                 },
                 new ResourceLink
                 {
@@ -293,7 +295,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
 
             return visitStubs;
         }
-        
+
         private async Task<PatientEntity> CreateNewPatientEntity(PatientEntity newPatientEntity)
         {
             var newPatient = await _newPatientService.WithUnitOfWork(_unitOfWork)
@@ -303,6 +305,5 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             await _unitOfWork.Complete();
             return newPatient;
         }
-
     }
 }

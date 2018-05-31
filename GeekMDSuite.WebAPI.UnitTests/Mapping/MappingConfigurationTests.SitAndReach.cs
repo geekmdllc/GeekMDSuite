@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var entity = new SitAndReachEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<SitAndReachEntity, SitAndReachStub>(entity);
@@ -30,7 +30,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new SitAndReachStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<SitAndReachStubFromUser, SitAndReachEntity>(stubFromUser);
@@ -45,7 +45,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new SitAndReachStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<SitAndReachStubFromUser, SitAndReachStub>(stubFromUser);

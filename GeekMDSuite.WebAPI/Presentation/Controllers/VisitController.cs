@@ -20,7 +20,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
     [Produces("application/json", "application/xml")]
     public class VisitController : EntityDataController
     {
-        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper, IErrorService errorService)
+        private readonly IErrorService _errorService;
+
+        private readonly IMapper _mapper;
+        private readonly INewVisitService _newVisitService;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public VisitController(IUnitOfWork unitOfWork, INewVisitService newVisitService, IMapper mapper,
+            IErrorService errorService)
         {
             _errorService = errorService;
             _unitOfWork = unitOfWork;
@@ -61,7 +68,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     Links = GenerateVisitLinks(
                         _mapper.Map<VisitEntity, VisitStub>(await _unitOfWork.Visits.FindByGuid(guid)),
                         patientStub
-                        )
+                    )
                 });
             }
             catch (ArgumentOutOfRangeException)
@@ -71,7 +78,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     .HasInternalMessage($"Guid {guid} is not valid.")
                     .TellsUser("We were not able to process the request due it's improper formatting.")
                     .Build();
-                
+
                 return BadRequest(error);
             }
             catch (RepositoryEntityNotFoundException)
@@ -81,7 +88,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     .HasInternalMessage($"A entity with Guid {guid} could not be located in the repository.")
                     .TellsUser($"We were not able to locate the requested visit")
                     .Build();
-                
+
                 return NotFound(error);
             }
         }
@@ -93,13 +100,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromUserIsInvalid)
-                    .HasInternalMessage("The data model supplied did not pass model validation. The resource was therefore not created.")
+                    .HasInternalMessage(
+                        "The data model supplied did not pass model validation. The resource was therefore not created.")
                     .TellsUser("The information provided is not properly formatted and the visit was not created.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             var newVisitEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(visitStub);
             try
             {
@@ -116,7 +124,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.PatientReceivedWithEmptyGuid)
                     .HasInternalMessage("The patient has an empty Guid which is not acceptable.")
-                    .TellsUser("The patent information was not formatted properly, it is missing critical identifying information")
+                    .TellsUser(
+                        "The patent information was not formatted properly, it is missing critical identifying information")
                     .Build();
                 return BadRequest(error);
             }
@@ -140,18 +149,23 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"The end point targeted is for visit with Guid {guid}, but the entity provided has Guid {entity.VisitGuid}. Resource not updated")
-                    .TellsUser("The identifier for the visit provided does not match the intended target and it cannot be updated")
+                    .HasInternalMessage(
+                        $"The end point targeted is for visit with Guid {guid}, but the entity provided has Guid {entity.VisitGuid}. Resource not updated")
+                    .TellsUser(
+                        "The identifier for the visit provided does not match the intended target and it cannot be updated")
                     .Build();
 
                 return BadRequest(error);
             }
+
             if (!ModelState.IsValid)
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.VisitDataFromUserIsInvalid)
-                    .HasInternalMessage("The data model supplied did not pass model validation and could not be updated.")
-                    .TellsUser("The information provided is not properly formatted and therefore it could not be updated.")
+                    .HasInternalMessage(
+                        "The data model supplied did not pass model validation and could not be updated.")
+                    .TellsUser(
+                        "The information provided is not properly formatted and therefore it could not be updated.")
                     .Build();
 
                 return BadRequest(error);
@@ -198,11 +212,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                 return BadRequest(error);
             }
         }
-                
-        private readonly IMapper _mapper;
-        private readonly INewVisitService _newVisitService;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IErrorService _errorService;
 
         private VisitResource GenerateVisitResource(VisitStub visitStub, PatientStub patientStub)
         {
@@ -223,14 +232,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     Description = $"Search for visits",
                     Relationship = UrlRelationship.Search,
                     Href = Url.Action<VisitController>(a => a.GetBySearch(null)),
-                    HtmlMethod = HtmlMethod.Post,
+                    HtmlMethod = HtmlMethod.Post
                 },
                 new ResourceLink
                 {
                     Description = $"Get this visit",
                     Relationship = UrlRelationship.Next,
                     Href = Url.Action<VisitController>(a => a.GetByGuid(visitStub.VisitGuid)),
-                    HtmlMethod = HtmlMethod.Get,
+                    HtmlMethod = HtmlMethod.Get
                 },
                 new ResourceLink
                 {

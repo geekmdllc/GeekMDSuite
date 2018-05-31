@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var entity = new VisualAcuityEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<VisualAcuityEntity, VisualAcuityStub>(entity);
@@ -30,7 +30,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new VisualAcuityStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<VisualAcuityStubFromUser, VisualAcuityEntity>(stubFromUser);
@@ -45,7 +45,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new VisualAcuityStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<VisualAcuityStubFromUser, VisualAcuityStub>(stubFromUser);

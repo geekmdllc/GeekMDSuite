@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class IshiharaSixPlateScreensController : VisitDataController
     {
-        public IshiharaSixPlateScreensController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public IshiharaSixPlateScreensController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) :
+            base(unitOfWork, mapper, errorService)
         {
         }
 
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<IshiharaSixPlateEntity>(filter);
-            
+
             var resources = GenerateIshiharaSixPlateResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An ishihara six plate screen entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An ishihara six plate screen entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested ishihara six plate screen entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The ishihara six plate screen data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The ishihara six plate screen recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The ishihara six plate screen data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The ishihara six plate screen recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a ishihara six plate screen entity with Id {id}, but the ishihara six plate screen resource object contained Id {stub.Id}")
-                    .TellsUser("The ishihara six plate screen entry provided for update doesn't match the intended target.")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a ishihara six plate screen entity with Id {id}, but the ishihara six plate screen resource object contained Id {stub.Id}")
+                    .TellsUser(
+                        "The ishihara six plate screen entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<IshiharaSixPlateStubFromUser, IshiharaSixPlateEntity>(stub);
@@ -124,8 +130,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An ishihara six plate screen entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the ishihara six plate screen entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An ishihara six plate screen entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the ishihara six plate screen entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +141,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The ishihara six plate screen data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The ishihara six plate screen data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new ishihara six plate screen was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +161,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An ishihara six plate screen element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An ishihara six plate screen element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested ishihara six plate screen resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<IshiharaSixPlateResource> GenerateIshiharaSixPlateResources(IEnumerable<IshiharaSixPlateEntity> entities)
+        private IEnumerable<IshiharaSixPlateResource> GenerateIshiharaSixPlateResources(
+            IEnumerable<IshiharaSixPlateEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<IshiharaSixPlateEntity, IshiharaSixPlateStub>);
             var resources = stubs.Select(stub => new IshiharaSixPlateResource
@@ -186,7 +197,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -208,21 +219,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Update the values for this existing ishihara six plate screen resource",
-                    Href = Url.Action<IshiharaSixPlateScreensController>(a => a.Put(id, With.No<IshiharaSixPlateStubFromUser>())),
+                    Href = Url.Action<IshiharaSixPlateScreensController>(a =>
+                        a.Put(id, With.No<IshiharaSixPlateStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for IshiharaSixPlates resources with filters and pagination",
-                    Href = Url.Action<IshiharaSixPlateScreensController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href = Url.Action<IshiharaSixPlateScreensController>(a =>
+                        a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new ishihara six plate screen resource",
-                    Href = Url.Action<IshiharaSixPlateScreensController>(a => a.Post(With.No<IshiharaSixPlateStubFromUser>())),
+                    Href = Url.Action<IshiharaSixPlateScreensController>(a =>
+                        a.Post(With.No<IshiharaSixPlateStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },

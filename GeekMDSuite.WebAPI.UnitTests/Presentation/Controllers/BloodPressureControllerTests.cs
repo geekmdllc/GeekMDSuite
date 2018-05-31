@@ -15,8 +15,6 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
     public class BloodPressureControllerTests
     {
-        private readonly BloodPressuresController _bloodPressuresController;
-
         public BloodPressureControllerTests()
         {
             _bloodPressuresController = new BloodPressuresController(
@@ -28,6 +26,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
             mock.Setup(m => m.Action<BloodPressuresController>(a => a.GetById(With.No<int>()))).Returns("mock");
             _bloodPressuresController.Url = mock.Object;
         }
+
+        private readonly BloodPressuresController _bloodPressuresController;
 
         [Fact]
         public async Task GetById_GivenIdThatExistsInDatabase_ReturnsOkResult()

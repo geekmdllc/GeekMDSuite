@@ -16,9 +16,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             VisitGuid = Guid.Empty;
         }
 
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-
         public void MapValues(Audiogram subject)
         {
             Left.F125.Value = subject.Left.F125.Value;
@@ -41,5 +38,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Right.F6000.Value = subject.Right.F6000.Value;
             Right.F8000.Value = subject.Right.F8000.Value;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

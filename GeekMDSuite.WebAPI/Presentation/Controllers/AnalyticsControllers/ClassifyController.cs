@@ -1,5 +1,4 @@
-﻿using System;
-using GeekMDSuite.Analytics.Classification;
+﻿using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.Models;
 using GeekMDSuite.Core.Models.PatientActivities;
@@ -69,7 +68,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
                     .HasInternalMessage("BodyCompositionClassifcationParameters model arrived incomplete or malformed.")
-                    .TellsUser("Ensure that the data model for the BodyCompositionClassificationParameters model was sent properly.")
+                    .TellsUser(
+                        "Ensure that the data model for the BodyCompositionClassificationParameters model was sent properly.")
                     .Build();
                 return BadRequest(error);
             }
@@ -87,8 +87,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("BodyCompositionExpandedClassificationParameters model arrived incomplete or malformed.")
-                    .TellsUser("Ensure that the data model for the BodyCompositionExpandedClassificationParamters was sent properly.")
+                    .HasInternalMessage(
+                        "BodyCompositionExpandedClassificationParameters model arrived incomplete or malformed.")
+                    .TellsUser(
+                        "Ensure that the data model for the BodyCompositionExpandedClassificationParamters was sent properly.")
                     .Build();
                 return BadRequest(error);
             }
@@ -149,7 +151,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         }
 
         [HttpPost]
-        public IActionResult PostToFunctionalMovementScreen([FromBody] FunctionalMovementScreen functionalMovementScreen)
+        public IActionResult PostToFunctionalMovementScreen(
+            [FromBody] FunctionalMovementScreen functionalMovementScreen)
         {
             try
             {
@@ -179,7 +182,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
                     .HasInternalMessage("GripStrengthClassificationParamters model arrived incomplete or malformed.")
-                    .TellsUser("Ensure that the data model for the GripStrengthClassificationParameters was sent properly.")
+                    .TellsUser(
+                        "Ensure that the data model for the GripStrengthClassificationParameters was sent properly.")
                     .Build();
                 return BadRequest(error);
             }
@@ -197,7 +201,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
                     .HasInternalMessage("IshiharaSixPlate model arrived incomplete or malformed.")
-                    .TellsUser("Ensure that the data model for the Ishihara six plate color vision screening was sent properly.")
+                    .TellsUser(
+                        "Ensure that the data model for the Ishihara six plate color vision screening was sent properly.")
                     .Build();
                 return BadRequest(error);
             }
@@ -238,7 +243,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToPushups([FromBody] PushupsClassificationParameters pushups)
         {
@@ -274,7 +279,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToQuantitativeLabs([FromBody] QuantitativeLabClassificationParameters quantitativeLab)
         {
@@ -292,7 +297,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToResistanceRegimen([FromBody] ResistanceRegimen resistanceRegimen)
         {
@@ -310,7 +315,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToSitAndReach([FromBody] SitAndReachClassificationParameters sitAndReach)
         {
@@ -328,7 +333,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToSitups([FromBody] SitupsClassificationParameters situps)
         {
@@ -346,7 +351,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToSpirometry([FromBody] SpirometryClassificationParameters spirometry)
         {
@@ -359,12 +364,13 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
                     .HasInternalMessage("SpirometryClassificationParameters model arrived incomplete or malformed.")
-                    .TellsUser("Ensure that the data model for the spirometry classfication paremeters were sent properly.")
+                    .TellsUser(
+                        "Ensure that the data model for the spirometry classfication paremeters were sent properly.")
                     .Build();
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToStretchingRegimen([FromBody] StretchingRegimen stretching)
         {
@@ -382,9 +388,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
-        public IActionResult PostToFitTreadmillScore([FromBody] TreadmillExerciseStressTestClassificationParameters fitTreadmillScoreClassificationParams)
+        public IActionResult PostToFitTreadmillScore(
+            [FromBody] TreadmillExerciseStressTestClassificationParameters fitTreadmillScoreClassificationParams)
         {
             try
             {
@@ -394,13 +401,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
             {
                 var error = _errorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("TreadmillExerciseStressTestClassificationParamters model arrived incomplete or malformed.")
-                    .TellsUser("Ensure that the data model for the TreadmillExerciseStressTestClassifcationParamters was sent properly.")
+                    .HasInternalMessage(
+                        "TreadmillExerciseStressTestClassificationParamters model arrived incomplete or malformed.")
+                    .TellsUser(
+                        "Ensure that the data model for the TreadmillExerciseStressTestClassifcationParamters was sent properly.")
                     .Build();
                 return BadRequest(error);
             }
         }
-        
+
         [HttpPost]
         public IActionResult PostToVisualAcuity([FromBody] VisualAcuity visualAcuity)
         {

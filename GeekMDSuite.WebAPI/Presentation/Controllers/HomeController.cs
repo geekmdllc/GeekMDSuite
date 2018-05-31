@@ -4,7 +4,6 @@ using GeekMDSuite.WebAPI.Presentation.ResourceModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
-
 namespace GeekMDSuite.WebAPI.Presentation.Controllers
 {
     [Route("app/rest")]
@@ -23,7 +22,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             var navStructure = new ApiDirectoryNavigationModel<HomeLinks>
             {
-                Title = $"{_configuration.GetSection("ApiTitle").Value} v{_configuration.GetSection("ApiVersion").Value}",
+                Title =
+                    $"{_configuration.GetSection("ApiTitle").Value} v{_configuration.GetSection("ApiVersion").Value}",
                 Description = _configuration.GetSection("ApiDescription").Value,
                 Links = new HomeLinks
                 {
@@ -41,15 +41,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
-                    Data = new  ResourceLink
-                    {    
+                    Data = new ResourceLink
+                    {
                         Description = _configuration.GetSection("DataControllerDescription").Value,
                         Href = Url.Action<DataController>(a => a.Get()),
                         HtmlMethod = HtmlMethod.Get,
                         Relationship = UrlRelationship.Next
                     },
-                    Analytics = new  ResourceLink
-                    {    
+                    Analytics = new ResourceLink
+                    {
                         Description = _configuration.GetSection("AnalyticsControllerDescription").Value,
                         Href = Url.Action<AnalyticsController>(a => a.Get()),
                         HtmlMethod = HtmlMethod.Get,
@@ -57,7 +57,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     }
                 }
             };
-            
+
             return Ok(navStructure);
         }
 

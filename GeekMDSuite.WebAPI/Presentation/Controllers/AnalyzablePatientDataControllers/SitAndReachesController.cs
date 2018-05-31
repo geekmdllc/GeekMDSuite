@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class SitAndReachesController : VisitDataController
     {
-        public SitAndReachesController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public SitAndReachesController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(
+            unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<SitAndReachEntity>(filter);
-            
+
             var resources = GenerateSitAndReachResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An sit and reach entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An sit and reach entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested sit and reach entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The sit and reach data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The sit and reach recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The sit and reach data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The sit and reach recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a sit and reach entity with Id {id}, but the sit and reach resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a sit and reach entity with Id {id}, but the sit and reach resource object contained Id {stub.Id}")
                     .TellsUser("The sit and reach entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<SitAndReachStubFromUser, SitAndReachEntity>(stub);
@@ -124,8 +129,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An sit and reach entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the sit and reach entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An sit and reach entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the sit and reach entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +140,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The sit and reach data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The sit and reach data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new sit and reach was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,7 +160,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An sit and reach element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An sit and reach element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested sit and reach resource could not be found")
                     .Build();
                 return BadRequest(error);
@@ -186,7 +195,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>

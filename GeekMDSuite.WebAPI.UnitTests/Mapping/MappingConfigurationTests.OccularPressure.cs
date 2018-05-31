@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var entity = new OccularPressureEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<OccularPressureEntity, OccularPressureStub>(entity);
@@ -30,7 +30,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new OccularPressureStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<OccularPressureStubFromUser, OccularPressureEntity>(stubFromUser);
@@ -45,7 +45,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new OccularPressureStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<OccularPressureStubFromUser, OccularPressureStub>(stubFromUser);

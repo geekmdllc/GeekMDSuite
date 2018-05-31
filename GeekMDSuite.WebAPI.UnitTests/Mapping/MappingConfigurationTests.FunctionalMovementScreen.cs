@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var entity = new FunctionalMovementScreenEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<FunctionalMovementScreenEntity, FunctionalMovementScreenStub>(entity);
@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new FunctionalMovementScreenStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<FunctionalMovementScreenStubFromUser, FunctionalMovementScreenEntity>(stubFromUser);
@@ -47,7 +47,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new FunctionalMovementScreenStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<FunctionalMovementScreenStubFromUser, FunctionalMovementScreenStub>(stubFromUser);

@@ -37,17 +37,17 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
 
         public IAscvdClassificationService AscvdScores { get; }
         public IAudiogramClassificationService Audiograms { get; }
-        public IBloodPressureClassificationService BloodPressures { get;  }
-        public IBodyCompositionClassificationService BodyCompositions { get;  }
+        public IBloodPressureClassificationService BloodPressures { get; }
+        public IBodyCompositionClassificationService BodyCompositions { get; }
         public IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
-        public ICarotidUltrasoundClassificationService CarotidUltrasounds { get;  }
-        public ICardiovascularRegimenClassificationService CardiovascularRegimens { get;  }
-        public ICentralBloodPressureClassificationService CentralBloodPressures { get;  }
-        public IFunctionalMovementClassificationService FunctionalMovements { get;  }
-        public IGripStrengthClassificationService GripStrengths { get;  }
+        public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; }
+        public ICardiovascularRegimenClassificationService CardiovascularRegimens { get; }
+        public ICentralBloodPressureClassificationService CentralBloodPressures { get; }
+        public IFunctionalMovementClassificationService FunctionalMovements { get; }
+        public IGripStrengthClassificationService GripStrengths { get; }
         public IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
-        public IOccularPressureClassificationService OccularPressures { get;  }
-        public IPeripheralVisionClassificationService PeripheralVision { get;  }
+        public IOccularPressureClassificationService OccularPressures { get; }
+        public IPeripheralVisionClassificationService PeripheralVision { get; }
         public IPushupsClassificationService Pushups { get; set; }
         public IQualitativeLabsClassificationService QualitativeLabs { get; set; }
         public IQuantitativeLabsClassificationService QuantitativeLabs { get; set; }

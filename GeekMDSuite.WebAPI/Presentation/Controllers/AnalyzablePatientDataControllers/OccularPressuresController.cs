@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class OccularPressuresController : VisitDataController
     {
-        public OccularPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public OccularPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(
+            unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<OccularPressureEntity>(filter);
-            
+
             var resources = GenerateOccularPressureResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"Anocculare pressures entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"Anocculare pressures entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requestedocculare pressures entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("Theocculare pressures data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("Theocculare pressures recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "Theocculare pressures data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "Theocculare pressures recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted aocculare pressures entity with Id {id}, but theocculare pressures resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted aocculare pressures entity with Id {id}, but theocculare pressures resource object contained Id {stub.Id}")
                     .TellsUser("Theocculare pressures entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<OccularPressureStubFromUser, OccularPressureEntity>(stub);
@@ -124,8 +129,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"Anocculare pressures entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because theocculare pressures entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"Anocculare pressures entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because theocculare pressures entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +140,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("Theocculare pressures data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "Theocculare pressures data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a newocculare pressures was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +160,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"Anocculare pressures element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"Anocculare pressures element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requestedocculare pressures resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<OccularPressureResource> GenerateOccularPressureResources(IEnumerable<OccularPressureEntity> entities)
+        private IEnumerable<OccularPressureResource> GenerateOccularPressureResources(
+            IEnumerable<OccularPressureEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<OccularPressureEntity, OccularPressureStub>);
             var resources = stubs.Select(stub => new OccularPressureResource
@@ -186,7 +196,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -208,7 +218,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Update the values for this existingocculare pressures resource",
-                    Href = Url.Action<OccularPressuresController>(a => a.Put(id, With.No<OccularPressureStubFromUser>())),
+                    Href = Url.Action<OccularPressuresController>(
+                        a => a.Put(id, With.No<OccularPressureStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },

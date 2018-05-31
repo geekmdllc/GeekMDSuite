@@ -11,7 +11,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
 {
-    public class RepositoryAsync<TEntity> : IRepositoryAsync<TEntity> where TEntity : class, IMapProperties<TEntity>, IEntity
+    public class RepositoryAsync<TEntity> : IRepositoryAsync<TEntity>
+        where TEntity : class, IMapProperties<TEntity>, IEntity
     {
         protected readonly GeekMdSuiteDbContext Context;
 
@@ -48,7 +49,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.EntityData
         public async Task Add(TEntity entity)
         {
             if (typeof(TEntity) == typeof(IVisitData))
-                if ((entity as IVisitData)?.VisitGuid == Guid.Empty) throw new InvalidDataException(nameof(entity));
+                if ((entity as IVisitData)?.VisitGuid == Guid.Empty)
+                    throw new InvalidDataException(nameof(entity));
 
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));

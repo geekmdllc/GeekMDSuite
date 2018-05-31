@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GeekMDSuite.Analytics.Tools.Cardiology;
 using GeekMDSuite.Core.LaboratoryData;
 using GeekMDSuite.Core.Models;
-using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Utilities.Generic;
 
 namespace GeekMDSuite.Analytics.Classification.CompositeScores

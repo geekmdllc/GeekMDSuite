@@ -10,7 +10,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services.Classification
         public CardiovascularRegimenClassification Classify(CardiovascularRegimen obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            
+
             return new CardiovascularRegimenClassification(obj);
         }
     }

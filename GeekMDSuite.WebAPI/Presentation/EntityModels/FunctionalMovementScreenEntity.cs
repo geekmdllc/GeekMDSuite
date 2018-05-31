@@ -4,7 +4,8 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
-    public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IMapProperties<FunctionalMovementScreen>, IVisitData
+    public class FunctionalMovementScreenEntity : FunctionalMovementScreen, IMapProperties<FunctionalMovementScreen>,
+        IVisitData
     {
         public FunctionalMovementScreenEntity()
         {
@@ -23,9 +24,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(functionalMovementScreen);
         }
 
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-
         public void MapValues(FunctionalMovementScreen subject)
         {
             MapTrunkStability(subject);
@@ -36,6 +34,9 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapRotaryStability(subject);
             MapShoulderMobility(subject);
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
 
         private void MapShoulderMobility(FunctionalMovementScreen subject)
         {

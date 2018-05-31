@@ -6,9 +6,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
 {
     public class BodyCompositionEntity : BodyComposition, IMapProperties<BodyComposition>, IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-        
         public BodyCompositionEntity()
         {
             VisitGuid = Guid.Empty;
@@ -26,5 +23,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Waist.Inches = subject.Waist.Inches;
             Weight.Pounds = subject.Weight.Pounds;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

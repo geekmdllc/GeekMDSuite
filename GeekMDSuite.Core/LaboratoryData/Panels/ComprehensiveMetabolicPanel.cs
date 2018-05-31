@@ -2,13 +2,6 @@
 {
     public class ComprehensiveMetabolicPanel : BasicMetabolicPanel
     {
-        public QuantitativeLab TotalProtein { get; set; }
-        public QuantitativeLab Albumin { get; set; }
-        public QuantitativeLab AlkalinePhosphatase { get; set; }
-        public QuantitativeLab TotalBilirubin { get; set; }
-        public QuantitativeLab AlanineAminotransferase { get; set; }
-        public QuantitativeLab AspartateAminotransferase { get; set; }
-
         public ComprehensiveMetabolicPanel()
         {
             TotalProtein = new QuantitativeLab();
@@ -18,5 +11,12 @@
             AlanineAminotransferase = new QuantitativeLab();
             AspartateAminotransferase = new QuantitativeLab();
         }
+
+        public QuantitativeLab TotalProtein { get; set; }
+        public QuantitativeLab Albumin { get; set; }
+        public QuantitativeLab AlkalinePhosphatase { get; set; }
+        public QuantitativeLab TotalBilirubin { get; set; }
+        public QuantitativeLab AlanineAminotransferase { get; set; }
+        public QuantitativeLab AspartateAminotransferase { get; set; }
     }
 }

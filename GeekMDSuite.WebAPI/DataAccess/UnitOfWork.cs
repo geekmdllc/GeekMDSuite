@@ -42,7 +42,6 @@ namespace GeekMDSuite.WebAPI.DataAccess
         }
 
 
-
         public IRepositoryAssociatedWithVisitAsync<T> VisitData<T>() where T : class, IMapProperties<T>, IVisitData
         {
             return new RepositoryAssociatedWithVisitAsync<T>(_context);

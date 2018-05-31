@@ -2,8 +2,8 @@
 
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification
 {
-    public interface ISitupsClassificationService : IClassificationService<SitupsClassificationParameters, FitnessClassification>
+    public interface
+        ISitupsClassificationService : IClassificationService<SitupsClassificationParameters, FitnessClassification>
     {
-        
     }
 }

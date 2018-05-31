@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class StretchingRegimensController : VisitDataController
     {
-        public StretchingRegimensController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public StretchingRegimensController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(
+            unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<StretchingRegimenEntity>(filter);
-            
+
             var resources = GenerateStretchingRegimenResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An StretchingRegimen entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An StretchingRegimen entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested StretchingRegimen entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The StretchingRegimen data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The StretchingRegimen recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The StretchingRegimen data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The StretchingRegimen recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a StretchingRegimen entity with Id {id}, but the StretchingRegimen resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a StretchingRegimen entity with Id {id}, but the StretchingRegimen resource object contained Id {stub.Id}")
                     .TellsUser("The StretchingRegimen entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<StretchingRegimenStubFromUser, StretchingRegimenEntity>(stub);
@@ -124,8 +129,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An StretchingRegimen entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the StretchingRegimen entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An StretchingRegimen entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the StretchingRegimen entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +140,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The StretchingRegimen data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The StretchingRegimen data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new StretchingRegimen was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +160,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An StretchingRegimen element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An StretchingRegimen element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested StretchingRegimen resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<StretchingRegimenResource> GenerateStretchingRegimenResources(IEnumerable<StretchingRegimenEntity> entities)
+        private IEnumerable<StretchingRegimenResource> GenerateStretchingRegimenResources(
+            IEnumerable<StretchingRegimenEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<StretchingRegimenEntity, StretchingRegimenStub>);
             var resources = stubs.Select(stub => new StretchingRegimenResource
@@ -186,7 +196,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -208,21 +218,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Update the values for this existing StretchingRegimen resource",
-                    Href = Url.Action<StretchingRegimensController>(a => a.Put(id, With.No<StretchingRegimenStubFromUser>())),
+                    Href = Url.Action<StretchingRegimensController>(a =>
+                        a.Put(id, With.No<StretchingRegimenStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for StretchingRegimen resources with filters and pagination",
-                    Href = Url.Action<StretchingRegimensController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href =
+                        Url.Action<StretchingRegimensController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new StretchingRegimen resource",
-                    Href = Url.Action<StretchingRegimensController>(a => a.Post(With.No<StretchingRegimenStubFromUser>())),
+                    Href = Url.Action<StretchingRegimensController>(a =>
+                        a.Post(With.No<StretchingRegimenStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },

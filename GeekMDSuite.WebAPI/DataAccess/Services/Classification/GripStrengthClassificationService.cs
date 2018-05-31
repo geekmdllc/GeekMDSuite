@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using GeekMDSuite.Analytics.Classification;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification;
 

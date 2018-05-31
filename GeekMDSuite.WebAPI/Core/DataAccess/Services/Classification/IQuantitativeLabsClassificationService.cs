@@ -3,8 +3,8 @@
 namespace GeekMDSuite.WebAPI.Core.DataAccess.Services.Classification
 {
     public interface
-        IQuantitativeLabsClassificationService : IClassificationService<QuantitativeLabClassificationParameters, QuantitativeLabResult>
+        IQuantitativeLabsClassificationService : IClassificationService<QuantitativeLabClassificationParameters,
+            QuantitativeLabResult>
     {
-        
     }
 }

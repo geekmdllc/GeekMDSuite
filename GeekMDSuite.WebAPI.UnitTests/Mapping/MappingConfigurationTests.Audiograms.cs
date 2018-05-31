@@ -16,7 +16,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var ag = new AudiogramEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var agStub = _mapper.Map<AudiogramEntity, AudiogramStub>(ag);
@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var agStubFromUser = new AudiogramStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var ag = _mapper.Map<AudiogramStubFromUser, Audiogram>(agStubFromUser);
@@ -46,7 +46,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var agStubeFromUser = new AudiogramStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var agStub = _mapper.Map<AudiogramStubFromUser, AudiogramStub>(agStubeFromUser);

@@ -5,8 +5,23 @@ using GeekMDSuite.WebAPI.Core.Presentation;
 
 namespace GeekMDSuite.WebAPI.Presentation.ErrorPayload
 {
-    public class ErrorPayloadBuilder 
+    public class ErrorPayloadBuilder
     {
+        private readonly string _baseUrl;
+
+        private readonly ErrorPayload _payload;
+        private bool _errorCodeIsSet;
+
+        private ErrorPayloadBuilder()
+        {
+            _payload = new ErrorPayload();
+        }
+
+        public ErrorPayloadBuilder(string baseUrl) : this()
+        {
+            _baseUrl = baseUrl;
+        }
+
         public ErrorPayload Build()
         {
             ValidatePreBuildState();
@@ -33,20 +48,6 @@ namespace GeekMDSuite.WebAPI.Presentation.ErrorPayload
             return this;
         }
 
-        private ErrorPayloadBuilder()
-        {
-            _payload = new ErrorPayload();
-        }
-        
-        public ErrorPayloadBuilder(string baseUrl) : this()
-        {
-            _baseUrl = baseUrl;
-        }
-
-        private readonly ErrorPayload _payload;
-        private bool _errorCodeIsSet;
-        private readonly string _baseUrl;
-
         private void ValidatePreBuildState()
         {
             var builder = new StringBuilder();
@@ -57,7 +58,6 @@ namespace GeekMDSuite.WebAPI.Presentation.ErrorPayload
             var message = builder.ToString();
             if (message.IsNotNullOrEmpty())
                 throw new MissingMethodException(message);
-
         }
     }
 }

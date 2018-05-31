@@ -7,10 +7,10 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
 {
     public class QualitativeLabsStubFromUser : IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
         public QualitativeLabType Type { get; set; }
         public QualitativeLabResult Result { get; set; }
         public MeasurementSystem MeasurementSystem { get; set; }
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

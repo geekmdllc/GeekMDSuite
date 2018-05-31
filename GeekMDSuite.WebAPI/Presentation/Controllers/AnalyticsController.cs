@@ -17,13 +17,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
         {
             _configuration = configuration;
         }
-        
+
         [HttpGet]
-        public IActionResult Get() => Ok(BuildApiDirectoryNavigationModel());
+        public IActionResult Get()
+        {
+            return Ok(BuildApiDirectoryNavigationModel());
+        }
 
         private ApiDirectoryNavigationModel<DataLinks> BuildApiDirectoryNavigationModel()
         {
-            var nav = new ApiDirectoryNavigationModel<DataLinks>()
+            var nav = new ApiDirectoryNavigationModel<DataLinks>
             {
                 Title = "Analytics",
                 Description = "Perform analytics on patient data.",
@@ -53,7 +56,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                     },
                     BodyCompositionExpanded = new ResourceLink
                     {
-                        Description = "Interpet body compositions, including body fat percentage and visceral fat content.",
+                        Description =
+                            "Interpet body compositions, including body fat percentage and visceral fat content.",
                         Href = Url.Action<ClassifyController>(a => a.PostToBodyCompositionExpanded(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
@@ -190,7 +194,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
                         Href = Url.Action<ClassifyController>(a => a.PostToVisualAcuity(null)),
                         HtmlMethod = HtmlMethod.Post,
                         Relationship = UrlRelationship.Next
-                    },
+                    }
                 }
             };
             return nav;

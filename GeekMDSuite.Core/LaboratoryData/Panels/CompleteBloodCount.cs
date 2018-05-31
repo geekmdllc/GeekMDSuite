@@ -2,16 +2,6 @@
 {
     public class CompleteBloodCount
     {
-        public QuantitativeLab WhiteBloodCells { get; set; }
-        public QuantitativeLab RedBloodCells { get; set; }
-        public QuantitativeLab MeanCorpuscularVolume { get; set; }
-        public QuantitativeLab MeanCorpuscularHemoglobin { get; set; }
-        public QuantitativeLab MeanCorpuscularHemoglobinConcentration { get; set; }
-        public QuantitativeLab RedCellDistributionWidth { get; set; }
-        public QuantitativeLab Hemoglobin { get; set; }
-        public QuantitativeLab Hematocrit { get; set; }
-        public QuantitativeLab Platelets { get; set; }
-
         public CompleteBloodCount()
         {
             WhiteBloodCells = new QuantitativeLab();
@@ -24,5 +14,15 @@
             Hematocrit = new QuantitativeLab();
             Platelets = new QuantitativeLab();
         }
+
+        public QuantitativeLab WhiteBloodCells { get; set; }
+        public QuantitativeLab RedBloodCells { get; set; }
+        public QuantitativeLab MeanCorpuscularVolume { get; set; }
+        public QuantitativeLab MeanCorpuscularHemoglobin { get; set; }
+        public QuantitativeLab MeanCorpuscularHemoglobinConcentration { get; set; }
+        public QuantitativeLab RedCellDistributionWidth { get; set; }
+        public QuantitativeLab Hemoglobin { get; set; }
+        public QuantitativeLab Hematocrit { get; set; }
+        public QuantitativeLab Platelets { get; set; }
     }
 }

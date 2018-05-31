@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class PeripheralVisionsController : VisitDataController
     {
-        public PeripheralVisionsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public PeripheralVisionsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(
+            unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<PeripheralVisionEntity>(filter);
-            
+
             var resources = GeneratePeripheralVisionResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An peripheral visions entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An peripheral visions entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested peripheral visions entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The peripheral visions data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The peripheral visions recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The peripheral visions data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The peripheral visions recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a peripheral visions entity with Id {id}, but the peripheral visions resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a peripheral visions entity with Id {id}, but the peripheral visions resource object contained Id {stub.Id}")
                     .TellsUser("The peripheral visions entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<PeripheralVisionStubFromUser, PeripheralVisionEntity>(stub);
@@ -124,8 +129,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An peripheral visions entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the peripheral visions entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An peripheral visions entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the peripheral visions entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +140,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The peripheral visions data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The peripheral visions data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new peripheral visions was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +160,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An peripheral visions element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An peripheral visions element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested peripheral visions resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<PeripheralVisionResource> GeneratePeripheralVisionResources(IEnumerable<PeripheralVisionEntity> entities)
+        private IEnumerable<PeripheralVisionResource> GeneratePeripheralVisionResources(
+            IEnumerable<PeripheralVisionEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<PeripheralVisionEntity, PeripheralVisionStub>);
             var resources = stubs.Select(stub => new PeripheralVisionResource
@@ -186,7 +196,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -208,7 +218,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Update the values for this existing peripheral visions resource",
-                    Href = Url.Action<PeripheralVisionsController>(a => a.Put(id, With.No<PeripheralVisionStubFromUser>())),
+                    Href = Url.Action<PeripheralVisionsController>(a =>
+                        a.Put(id, With.No<PeripheralVisionStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
@@ -222,7 +233,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Add a new peripheral visions resource",
-                    Href = Url.Action<PeripheralVisionsController>(a => a.Post(With.No<PeripheralVisionStubFromUser>())),
+                    Href =
+                        Url.Action<PeripheralVisionsController>(a => a.Post(With.No<PeripheralVisionStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },

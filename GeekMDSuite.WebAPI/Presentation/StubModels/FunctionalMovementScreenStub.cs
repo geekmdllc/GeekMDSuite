@@ -6,16 +6,6 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
     public class FunctionalMovementScreenStub : IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }  
-        public FmsMovementData DeepSquat { get; set; }
-        public FmsMovementSet HurdleStep { get; set; }
-        public FmsMovementSet InlineLunge { get; set; }
-        public FmsMovementSet ShoulderMobility { get; set; }
-        public FmsMovementSet ActiveStraightLegRaise { get; set; }
-        public FmsMovementData TrunkStabilityPushup { get; set; }
-        public FmsMovementSet RotaryStability { get; set; }
-
         public FunctionalMovementScreenStub()
         {
             DeepSquat = new FmsMovementData();
@@ -26,5 +16,15 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
             TrunkStabilityPushup = new FmsMovementData();
             RotaryStability = new FmsMovementSet();
         }
+
+        public FmsMovementData DeepSquat { get; set; }
+        public FmsMovementSet HurdleStep { get; set; }
+        public FmsMovementSet InlineLunge { get; set; }
+        public FmsMovementSet ShoulderMobility { get; set; }
+        public FmsMovementSet ActiveStraightLegRaise { get; set; }
+        public FmsMovementData TrunkStabilityPushup { get; set; }
+        public FmsMovementSet RotaryStability { get; set; }
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

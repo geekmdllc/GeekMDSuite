@@ -8,8 +8,13 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
     public class TreadmillExerciseStressTestStub : IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
+        public TreadmillExerciseStressTestStub()
+        {
+            Time = new TimeDuration();
+            SupineBloodPressure = new BloodPressure();
+            MaximumBloodPressure = new BloodPressure();
+        }
+
         public TreadmillProtocol Protocol { get; set; }
         public TimeDuration Time { get; set; }
         public TmstResult Result { get; set; }
@@ -17,12 +22,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
         public int SupineHeartRate { get; set; }
         public BloodPressure MaximumBloodPressure { get; set; }
         public int MaximumHeartRate { get; set; }
-
-        public TreadmillExerciseStressTestStub()
-        {
-            Time = new TimeDuration();
-            SupineBloodPressure = new BloodPressure();
-            MaximumBloodPressure = new BloodPressure();
-        }
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

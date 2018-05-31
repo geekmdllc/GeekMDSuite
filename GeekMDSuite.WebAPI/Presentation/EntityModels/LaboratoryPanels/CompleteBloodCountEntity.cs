@@ -4,11 +4,8 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.LaboratoryPanels
 {
-    public class CompleteBloodCountEntity :  CompleteBloodCount, IMapProperties<CompleteBloodCount>, IVisitData
+    public class CompleteBloodCountEntity : CompleteBloodCount, IMapProperties<CompleteBloodCount>, IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-        
         public void MapValues(CompleteBloodCount subject)
         {
             Hematocrit = subject.Hematocrit;
@@ -21,5 +18,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.LaboratoryPanels
             RedCellDistributionWidth = subject.RedCellDistributionWidth;
             WhiteBloodCells = subject.WhiteBloodCells;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

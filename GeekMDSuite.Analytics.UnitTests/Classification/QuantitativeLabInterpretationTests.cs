@@ -30,7 +30,9 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
             _patient.Gender = Gender.Build(genderIdentity);
             var test = Quantitative.Serum.TestosteroneTotal(result);
 
-            var classification = new QuantitativeLabClassification(new QuantitativeLabClassificationParameters(test, _patient)).Classification;
+            var classification =
+                new QuantitativeLabClassification(new QuantitativeLabClassificationParameters(test, _patient))
+                    .Classification;
 
             Assert.Equal(expectedResult, classification);
         }

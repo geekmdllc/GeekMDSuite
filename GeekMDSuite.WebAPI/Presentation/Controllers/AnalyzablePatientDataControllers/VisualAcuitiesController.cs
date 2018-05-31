@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class VisualAcuitiesController : VisitDataController
     {
-        public VisualAcuitiesController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public VisualAcuitiesController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(
+            unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<VisualAcuityEntity>(filter);
-            
+
             var resources = GenerateVisualAcuityResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An VisualAcuity entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An VisualAcuity entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested VisualAcuity entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The VisualAcuity data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The VisualAcuity recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The VisualAcuity data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The VisualAcuity recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a VisualAcuity entity with Id {id}, but the VisualAcuity resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a VisualAcuity entity with Id {id}, but the VisualAcuity resource object contained Id {stub.Id}")
                     .TellsUser("The VisualAcuity entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<VisualAcuityStubFromUser, VisualAcuityEntity>(stub);
@@ -124,8 +129,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An VisualAcuity entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the VisualAcuity entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An VisualAcuity entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the VisualAcuity entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +140,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The VisualAcuity data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The VisualAcuity data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new VisualAcuity was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +160,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An VisualAcuity element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An VisualAcuity element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested VisualAcuity resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<VisualAcuityResource> GenerateVisualAcuityResources(IEnumerable<VisualAcuityEntity> entities)
+        private IEnumerable<VisualAcuityResource> GenerateVisualAcuityResources(
+            IEnumerable<VisualAcuityEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<VisualAcuityEntity, VisualAcuityStub>);
             var resources = stubs.Select(stub => new VisualAcuityResource
@@ -186,7 +196,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>

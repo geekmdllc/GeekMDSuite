@@ -20,15 +20,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class BloodPressuresController : VisitDataController
     {
-        
-        public BloodPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public BloodPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(
+            unitOfWork, mapper, errorService)
         {
         }
 
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<BloodPressureEntity>(filter);
-            
+
             var resources = GenerateBloodPressureResources(entities);
 
             return Ok(resources);
@@ -52,7 +52,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An blood pressure entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An blood pressure entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested blood pressure entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -73,8 +74,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("A null object was included in the request body and cannot be processed as a blood pressure entity") 
-                    .TellsUser("The request to create a new blood pressure entry was malformed and likely empty. Please retry.")
+                    .HasInternalMessage(
+                        "A null object was included in the request body and cannot be processed as a blood pressure entity")
+                    .TellsUser(
+                        "The request to create a new blood pressure entry was malformed and likely empty. Please retry.")
                     .Build();
                 return BadRequest(error);
             }
@@ -82,7 +85,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.EntityIdIsNotUniqe)
-                    .HasInternalMessage($"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0") 
+                    .HasInternalMessage(
+                        $"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
                     .TellsUser("The request to create a new blood pressure entry was imporoperly formatted ")
                     .Build();
                 return Conflict(error);
@@ -91,10 +95,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The blood pressure data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The blood pressure recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The blood pressure data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The blood pressure recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -105,13 +111,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a blood pressure entity with Id {id}, but the blood pressure resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a blood pressure entity with Id {id}, but the blood pressure resource object contained Id {stub.Id}")
                     .TellsUser("The blood pressure entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<BloodPressureStubFromUser, BloodPressureEntity>(stub);
@@ -123,8 +130,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"A blood pressure entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the blood pressure entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"A blood pressure entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the blood pressure entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -132,7 +141,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The blood pressure data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The blood pressure data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new blood pressure was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -151,13 +161,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"A blood pressure element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"A blood pressure element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested blood pressure resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -228,7 +239,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             };
         }
 
-        private IEnumerable<BloodPressureResource> GenerateBloodPressureResources(IEnumerable<BloodPressureEntity> entities)
+        private IEnumerable<BloodPressureResource> GenerateBloodPressureResources(
+            IEnumerable<BloodPressureEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<BloodPressureEntity, BloodPressureStub>);
             var resources = stubs.Select(stub => new BloodPressureResource

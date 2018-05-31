@@ -15,19 +15,20 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
             Name = new Name();
         }
 
-        [Required]
-        public Guid PatientGuid { get; set; }
-        [Required]
-        public Name Name { get; set; }
-        [Required]
-        public DateTime DateOfBirth { get; set; }
+        [Required] public Guid PatientGuid { get; set; }
+
+        [Required] public Name Name { get; set; }
+
+        [Required] public DateTime DateOfBirth { get; set; }
+
         public int Age => DateOfBirth.ElapsedYears();
-        [Required]
-        public string MedicalRecordNumber { get; set; }
-        [Required]
-        public Gender Gender { get; set; }
-        [Required]
-        public Race Race { get; set; }
+
+        [Required] public string MedicalRecordNumber { get; set; }
+
+        [Required] public Gender Gender { get; set; }
+
+        [Required] public Race Race { get; set; }
+
         public List<ChronicDisease> Comorbidities { get; set; }
     }
 }

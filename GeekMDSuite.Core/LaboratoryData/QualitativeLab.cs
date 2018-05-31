@@ -4,8 +4,8 @@
     {
         public QualitativeLab()
         {
-            
         }
+
         private QualitativeLab(QualitativeLabType type, QualitativeLabResult result)
         {
             Type = type;

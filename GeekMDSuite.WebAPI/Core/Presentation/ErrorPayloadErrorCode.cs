@@ -15,6 +15,6 @@
         MedicalRecordNumberIsNotUniqe = 10,
         DataModelFromUserIsInvalid = 11,
         EntityIdIsNotUniqe = 12,
-        WrongApiEndpointTargeted = 13,
+        WrongApiEndpointTargeted = 13
     }
 }

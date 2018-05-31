@@ -15,14 +15,14 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
             MapValues(regimen);
         }
 
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-
         public void MapValues(StretchingRegimen subject)
         {
             AverageSessionDuration = subject.AverageSessionDuration;
             Intensity = subject.Intensity;
             SessionsPerWeek = subject.SessionsPerWeek;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

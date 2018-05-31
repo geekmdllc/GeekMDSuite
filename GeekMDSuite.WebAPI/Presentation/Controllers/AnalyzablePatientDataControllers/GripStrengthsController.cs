@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class GripStrengthsController : VisitDataController
     {
-        public GripStrengthsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public GripStrengthsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(
+            unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<GripStrengthEntity>(filter);
-            
+
             var resources = GenerateGripStrengthResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An grip strength entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An grip strength entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested grip strength entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -92,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The grip strength data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The grip strength recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The grip strength data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The grip strength recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +110,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a grip strength entity with Id {id}, but the grip strength resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a grip strength entity with Id {id}, but the grip strength resource object contained Id {stub.Id}")
                     .TellsUser("The grip strength entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<GripStrengthStubFromUser, GripStrengthEntity>(stub);
@@ -124,8 +129,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An grip strength entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the grip strength entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An grip strength entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the grip strength entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +140,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The grip strength data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The grip strength data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new grip strength was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +160,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An grip strength element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An grip strength element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested grip strength resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<GripStrengthResource> GenerateGripStrengthResources(IEnumerable<GripStrengthEntity> entities)
+        private IEnumerable<GripStrengthResource> GenerateGripStrengthResources(
+            IEnumerable<GripStrengthEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<GripStrengthEntity, GripStrengthStub>);
             var resources = stubs.Select(stub => new GripStrengthResource
@@ -186,7 +196,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>

@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class SitupsController : VisitDataController
     {
-        public SitupsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public SitupsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork,
+            mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<SitupsEntity>(filter);
-            
+
             var resources = GenerateSitupsResources(entities);
 
             return Ok(resources);
@@ -95,7 +96,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                     .HasInternalMessage("The situps data model receieved is not associated with a valid visit Guid")
                     .TellsUser("The situps recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,13 +107,14 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a situps entity with Id {id}, but the situps resource object contained Id {stub.Id}")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a situps entity with Id {id}, but the situps resource object contained Id {stub.Id}")
                     .TellsUser("The situps entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<SitupsStubFromUser, SitupsEntity>(stub);
@@ -124,8 +126,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An situps entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the situps entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An situps entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the situps entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +137,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The situps data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The situps data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new situps was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,7 +157,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An situps element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An situps element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested situps resource could not be found")
                     .Build();
                 return BadRequest(error);
@@ -186,7 +192,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using GeekMDSuite.Core.Models.Procedures;
 
 namespace GeekMDSuite.Analytics.Classification

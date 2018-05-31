@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var entity = new VisitEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<VisitEntity, VisitStub>(entity);
@@ -29,7 +29,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new VisitStubFromUser
             {
-                VisitGuid = new Guid(),
+                VisitGuid = new Guid()
             };
 
             var stub = _mapper.Map<VisitStubFromUser, VisitEntity>(stubFromUser);
@@ -43,7 +43,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
         {
             var stubFromUser = new VisitStubFromUser
             {
-                VisitGuid = new Guid(),
+                VisitGuid = new Guid()
             };
 
             var stub = _mapper.Map<VisitStubFromUser, VisitStub>(stubFromUser);

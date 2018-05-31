@@ -19,14 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class TreadmillExerciseStressTestsController : VisitDataController
     {
-        public TreadmillExerciseStressTestsController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public TreadmillExerciseStressTestsController(IUnitOfWork unitOfWork, IMapper mapper,
+            IErrorService errorService) : base(unitOfWork, mapper, errorService)
         {
         }
-        
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<TreadmillExerciseStressTestEntity>(filter);
-            
+
             var resources = GenerateTreadmillExerciseStressTestResources(entities);
 
             return Ok(resources);
@@ -50,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An TreadmillExerciseStressTest entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"An TreadmillExerciseStressTest entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested TreadmillExerciseStressTest entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -61,7 +63,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
         {
             try
             {
-                var entity = Mapper.Map<TreadmillExerciseStressTestStubFromUser, TreadmillExerciseStressTestEntity>(stub);
+                var entity =
+                    Mapper.Map<TreadmillExerciseStressTestStubFromUser, TreadmillExerciseStressTestEntity>(stub);
                 await UnitOfWork.TreadmillExerciseStressTests.Add(entity);
                 await UnitOfWork.Complete();
                 var url = Url.Action<TreadmillExerciseStressTestsController>(a => a.Post(stub));
@@ -84,7 +87,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                     .HasErrorCode(ErrorPayloadErrorCode.EntityIdIsNotUniqe)
                     .HasInternalMessage(
                         $"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
-                    .TellsUser("The request to create a new TreadmillExerciseStressTest entry was imporoperly formatted ")
+                    .TellsUser(
+                        "The request to create a new TreadmillExerciseStressTest entry was imporoperly formatted ")
                     .Build();
                 return Conflict(error);
             }
@@ -92,10 +96,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The TreadmillExerciseStressTest data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The TreadmillExerciseStressTest recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The TreadmillExerciseStressTest data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The TreadmillExerciseStressTest recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -106,16 +112,19 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a TreadmillExerciseStressTest entity with Id {id}, but the TreadmillExerciseStressTest resource object contained Id {stub.Id}")
-                    .TellsUser("The TreadmillExerciseStressTest entry provided for update doesn't match the intended target.")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a TreadmillExerciseStressTest entity with Id {id}, but the TreadmillExerciseStressTest resource object contained Id {stub.Id}")
+                    .TellsUser(
+                        "The TreadmillExerciseStressTest entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
-                var entity = Mapper.Map<TreadmillExerciseStressTestStubFromUser, TreadmillExerciseStressTestEntity>(stub);
+                var entity =
+                    Mapper.Map<TreadmillExerciseStressTestStubFromUser, TreadmillExerciseStressTestEntity>(stub);
                 await UnitOfWork.TreadmillExerciseStressTests.Update(entity);
                 await UnitOfWork.Complete();
                 return Ok(stub);
@@ -124,8 +133,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An TreadmillExerciseStressTest entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the TreadmillExerciseStressTest entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"An TreadmillExerciseStressTest entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the TreadmillExerciseStressTest entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -133,7 +144,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The TreadmillExerciseStressTest data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The TreadmillExerciseStressTest data model received from client was null and could not be processed.")
                     .TellsUser("The request to createa a new TreadmillExerciseStressTest was improperly formatted")
                     .Build();
                 return BadRequest(error);
@@ -152,14 +164,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"An TreadmillExerciseStressTest element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"An TreadmillExerciseStressTest element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested TreadmillExerciseStressTest resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<TreadmillExerciseStressTestResource> GenerateTreadmillExerciseStressTestResources(IEnumerable<TreadmillExerciseStressTestEntity> entities)
+        private IEnumerable<TreadmillExerciseStressTestResource> GenerateTreadmillExerciseStressTestResources(
+            IEnumerable<TreadmillExerciseStressTestEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<TreadmillExerciseStressTestEntity, TreadmillExerciseStressTestStub>);
             var resources = stubs.Select(stub => new TreadmillExerciseStressTestResource
@@ -186,7 +200,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -208,21 +222,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Update the values for this existing TreadmillExerciseStressTest resource",
-                    Href = Url.Action<TreadmillExerciseStressTestsController>(a => a.Put(id, With.No<TreadmillExerciseStressTestStubFromUser>())),
+                    Href = Url.Action<TreadmillExerciseStressTestsController>(a =>
+                        a.Put(id, With.No<TreadmillExerciseStressTestStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for TreadmillExerciseStressTests resources with filters and pagination",
-                    Href = Url.Action<TreadmillExerciseStressTestsController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href = Url.Action<TreadmillExerciseStressTestsController>(a =>
+                        a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new TreadmillExerciseStressTest resource",
-                    Href = Url.Action<TreadmillExerciseStressTestsController>(a => a.Post(With.No<TreadmillExerciseStressTestStubFromUser>())),
+                    Href = Url.Action<TreadmillExerciseStressTestsController>(a =>
+                        a.Post(With.No<TreadmillExerciseStressTestStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },

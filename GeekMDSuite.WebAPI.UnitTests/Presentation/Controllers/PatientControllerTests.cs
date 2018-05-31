@@ -12,10 +12,10 @@ using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Xunit;
+using IConfigurationProvider = Microsoft.Extensions.Configuration.IConfigurationProvider;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
-    
     public class PatientEntityControllerTests
     {
         public PatientEntityControllerTests()
@@ -23,8 +23,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
             _controller = new PatientController(
                 new FakeUnitOfWorkSeeded(),
                 new NewPatientService(),
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))), 
-                new ErrorService(new ConfigurationRoot(new List<Microsoft.Extensions.Configuration.IConfigurationProvider>())));
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))),
+                new ErrorService(new ConfigurationRoot(new List<IConfigurationProvider>())));
         }
 
         private readonly PatientController _controller;

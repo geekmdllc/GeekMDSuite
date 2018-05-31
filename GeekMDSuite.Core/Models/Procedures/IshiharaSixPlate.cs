@@ -8,6 +8,18 @@ namespace GeekMDSuite.Core.Models.Procedures
     {
         private readonly IshiharaPlateAnswer[] _answers;
 
+        private IshiharaPlateAnswer _plate1;
+
+        private IshiharaPlateAnswer _plate2;
+
+        private IshiharaPlateAnswer _plate3;
+
+        private IshiharaPlateAnswer _plate4;
+
+        private IshiharaPlateAnswer _plate5;
+
+        private IshiharaPlateAnswer _plate6;
+
         protected internal IshiharaSixPlate()
         {
             _answers = new IshiharaPlateAnswer[6];
@@ -30,42 +42,36 @@ namespace GeekMDSuite.Core.Models.Procedures
             Plate6 = plates[5];
         }
 
-        private IshiharaPlateAnswer _plate1;
         public IshiharaPlateAnswer Plate1
         {
             get => _plate1;
             set => _plate1 = _answers[0] = value;
         }
 
-        private IshiharaPlateAnswer _plate2;
         public IshiharaPlateAnswer Plate2
         {
             get => _plate2;
             set => _plate2 = _answers[1] = value;
         }
 
-        private IshiharaPlateAnswer _plate3;
         public IshiharaPlateAnswer Plate3
         {
             get => _plate3;
             set => _plate3 = _answers[2] = value;
         }
 
-        private IshiharaPlateAnswer _plate4;
         public IshiharaPlateAnswer Plate4
         {
             get => _plate4;
             set => _plate4 = _answers[3] = value;
         }
 
-        private IshiharaPlateAnswer _plate5;
         public IshiharaPlateAnswer Plate5
         {
             get => _plate5;
             set => _plate5 = _answers[4] = value;
         }
 
-        private IshiharaPlateAnswer _plate6;
         public IshiharaPlateAnswer Plate6
         {
             get => _plate6;
@@ -77,8 +83,14 @@ namespace GeekMDSuite.Core.Models.Procedures
             return new IshiharaSixPlate(plates);
         }
 
-        public List<IshiharaPlateAnswer> GetAnswers() => _answers.ToList();
+        public List<IshiharaPlateAnswer> GetAnswers()
+        {
+            return _answers.ToList();
+        }
 
-        public override string ToString() => string.Join("\n", GetAnswers());
+        public override string ToString()
+        {
+            return string.Join("\n", GetAnswers());
+        }
     }
 }

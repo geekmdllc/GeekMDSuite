@@ -16,7 +16,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var entity = new TreadmillExerciseStressTestEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<TreadmillExerciseStressTestEntity, TreadmillExerciseStressTestStub>(entity);
@@ -32,7 +32,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new TreadmillExerciseStressTestStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub =
@@ -49,7 +49,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new TreadmillExerciseStressTestStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub =

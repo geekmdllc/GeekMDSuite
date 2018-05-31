@@ -19,9 +19,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             VisitGuid = Guid.Empty;
         }
 
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-
         public void MapValues(CarotidUltrasound subject)
         {
             Left.Character = subject.Left.Character;
@@ -34,5 +31,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Right.IntimaMediaMeasurementMillimeters = subject.Right.IntimaMediaMeasurementMillimeters;
             Right.Stenosis = subject.Right.Stenosis;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

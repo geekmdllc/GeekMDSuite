@@ -4,11 +4,9 @@ using GeekMDSuite.WebAPI.Core.Models;
 
 namespace GeekMDSuite.WebAPI.Presentation.EntityModels.LaboratoryPanels
 {
-    public class ComprehensiveMetabolicPanelEntity : ComprehensiveMetabolicPanel, IMapProperties<ComprehensiveMetabolicPanel>, IVisitData
+    public class ComprehensiveMetabolicPanelEntity : ComprehensiveMetabolicPanel,
+        IMapProperties<ComprehensiveMetabolicPanel>, IVisitData
     {
-        public int Id { get; set; }
-        public Guid VisitGuid { get; set; }
-        
         public void MapValues(ComprehensiveMetabolicPanel subject)
         {
             AlanineAminotransferase = subject.AlanineAminotransferase;
@@ -25,5 +23,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.LaboratoryPanels
             TotalBilirubin = subject.TotalBilirubin;
             TotalProtein = subject.TotalProtein;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var entity = new BodyCompositionExpandedEntity
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<BodyCompositionExpandedEntity, BodyCompositionExpandedStub>(entity);
@@ -31,7 +31,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new BodyCompositionExpandedStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<BodyCompositionExpandedStubFromUser, BodyCompositionExpandedEntity>(stubFromUser);
@@ -47,7 +47,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Mapping
             var stubFromUser = new BodyCompositionExpandedStubFromUser
             {
                 VisitGuid = new Guid(),
-                Id = 0,
+                Id = 0
             };
 
             var stub = _mapper.Map<BodyCompositionExpandedStubFromUser, BodyCompositionExpandedStub>(stubFromUser);

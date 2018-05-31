@@ -11,6 +11,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             var baseUrl = configuration.GetSection("ErrorDocumentationBaseUrl").Value;
             PayloadBuilder = new ErrorPayloadBuilder(baseUrl);
         }
+
         public ErrorPayloadBuilder PayloadBuilder { get; }
     }
 }

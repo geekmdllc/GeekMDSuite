@@ -7,8 +7,8 @@ namespace GeekMDSuite.Analytics.Classification
     {
         protected MuscularStrengthClassificationParameters()
         {
-            
         }
+
         public MuscularStrengthClassificationParameters(MuscularStrengthTest test, Patient patient)
         {
             Test = test;

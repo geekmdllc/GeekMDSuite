@@ -19,13 +19,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
     [Produces("application/json", "application/xml")]
     public class CentralBloodPressuresController : VisitDataController
     {
-        public CentralBloodPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) : base(unitOfWork, mapper, errorService)
+        public CentralBloodPressuresController(IUnitOfWork unitOfWork, IMapper mapper, IErrorService errorService) :
+            base(unitOfWork, mapper, errorService)
         {
         }
+
         public async Task<IActionResult> GetBySearch(EntityDataFindFilter filter)
         {
             var entities = await GetFilteredEntities<CentralBloodPressureEntity>(filter);
-            
+
             var resources = GenerateCentralBloodPressureResources(entities);
 
             return Ok(resources);
@@ -49,7 +51,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"A central blood pressure entity with the id {id} could not be located in the repository.")
+                    .HasInternalMessage(
+                        $"A central blood pressure entity with the id {id} could not be located in the repository.")
                     .TellsUser("The requested central blood pressure entry could not be found")
                     .Build();
                 return BadRequest(error);
@@ -70,8 +73,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("A null object was included in the request body and cannot be processed as a central blood pressure entity")
-                    .TellsUser("The request to create a new central blood pressure entry was malformed and likely empty. Please retry.")
+                    .HasInternalMessage(
+                        "A null object was included in the request body and cannot be processed as a central blood pressure entity")
+                    .TellsUser(
+                        "The request to create a new central blood pressure entry was malformed and likely empty. Please retry.")
                     .Build();
                 return BadRequest(error);
             }
@@ -79,7 +84,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.EntityIdIsNotUniqe)
-                    .HasInternalMessage($"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
+                    .HasInternalMessage(
+                        $"The object provided in the request body has id {stub.Id} and already exists in the repository. Either this is not a new object, or the new object was incorrectly formatted. In order for the object to be created correctly it should be 0")
                     .TellsUser("The request to create a new central blood pressure entry was imporoperly formatted ")
                     .Build();
                 return Conflict(error);
@@ -88,10 +94,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The central blood pressure data model receieved is not associated with a valid visit Guid")
-                    .TellsUser("The central blood pressure recieved is not properly associated with a visit and could not be added")
+                    .HasInternalMessage(
+                        "The central blood pressure data model receieved is not associated with a valid visit Guid")
+                    .TellsUser(
+                        "The central blood pressure recieved is not properly associated with a visit and could not be added")
                     .Build();
-                    
+
                 return BadRequest(error);
             }
         }
@@ -102,13 +110,15 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.WrongApiEndpointTargeted)
-                    .HasInternalMessage($"There endpoint targeted a central blood pressure entity with Id {id}, but the central blood pressure resource object contained Id {stub.Id}")
-                    .TellsUser("The central blood pressure entry provided for update doesn't match the intended target.")
+                    .HasInternalMessage(
+                        $"There endpoint targeted a central blood pressure entity with Id {id}, but the central blood pressure resource object contained Id {stub.Id}")
+                    .TellsUser(
+                        "The central blood pressure entry provided for update doesn't match the intended target.")
                     .Build();
 
                 return BadRequest(error);
             }
-            
+
             try
             {
                 var entity = Mapper.Map<CentralBloodPressureStubFromUser, CentralBloodPressureEntity>(stub);
@@ -120,8 +130,10 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"A central blood pressure entity with Id {id} could not be located in the repository. No changes were made.")
-                    .TellsUser("The request could not be processed because the central blood pressure entry identified for update couldn't not be found")
+                    .HasInternalMessage(
+                        $"A central blood pressure entity with Id {id} could not be located in the repository. No changes were made.")
+                    .TellsUser(
+                        "The request could not be processed because the central blood pressure entry identified for update couldn't not be found")
                     .Build();
                 return BadRequest(error);
             }
@@ -129,7 +141,8 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
-                    .HasInternalMessage("The central blood pressure data model received from client was null and could not be processed.")
+                    .HasInternalMessage(
+                        "The central blood pressure data model received from client was null and could not be processed.")
                     .TellsUser("The request to create a new central blood pressure was improperly formatted.")
                     .Build();
                 return BadRequest(error);
@@ -148,14 +161,16 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
             {
                 var error = ErrorService.PayloadBuilder
                     .HasErrorCode(ErrorPayloadErrorCode.RepositoryEntityNotFound)
-                    .HasInternalMessage($"A central blood pressure element with Id {id} could not be located in the repository. No changes were made.")
+                    .HasInternalMessage(
+                        $"A central blood pressure element with Id {id} could not be located in the repository. No changes were made.")
                     .TellsUser("The requested caroitd ultrasound resource could not be found")
                     .Build();
                 return BadRequest(error);
             }
         }
 
-        private IEnumerable<CentralBloodPressureResource> GenerateCentralBloodPressureResources(IEnumerable<CentralBloodPressureEntity> entities)
+        private IEnumerable<CentralBloodPressureResource> GenerateCentralBloodPressureResources(
+            IEnumerable<CentralBloodPressureEntity> entities)
         {
             var stubs = entities.Select(Mapper.Map<CentralBloodPressureEntity, CentralBloodPressureStub>);
             var resources = stubs.Select(stub => new CentralBloodPressureResource
@@ -182,7 +197,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
 
             return resources;
         }
-        
+
         private List<ResourceLink> GenerateGetByIdLinks(int id)
         {
             return new List<ResourceLink>
@@ -204,21 +219,24 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyzablePatientDataContr
                 new ResourceLink
                 {
                     Description = "Update the values for this existing central blood pressure resource",
-                    Href = Url.Action<CentralBloodPressuresController>(a => a.Put(id, With.No<CentralBloodPressureStubFromUser>())),
+                    Href = Url.Action<CentralBloodPressuresController>(a =>
+                        a.Put(id, With.No<CentralBloodPressureStubFromUser>())),
                     HtmlMethod = HtmlMethod.Put,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Search for central blood pressure resources with filters and pagination",
-                    Href = Url.Action<CentralBloodPressuresController>(a => a.GetBySearch(With.No<EntityDataFindFilter>())),
+                    Href = Url.Action<CentralBloodPressuresController>(a =>
+                        a.GetBySearch(With.No<EntityDataFindFilter>())),
                     HtmlMethod = HtmlMethod.Get,
                     Relationship = UrlRelationship.Search
                 },
                 new ResourceLink
                 {
                     Description = "Add a new central blood pressure resource",
-                    Href = Url.Action<CentralBloodPressuresController>(a => a.Post(With.No<CentralBloodPressureStubFromUser>())),
+                    Href = Url.Action<CentralBloodPressuresController>(a =>
+                        a.Post(With.No<CentralBloodPressureStubFromUser>())),
                     HtmlMethod = HtmlMethod.Post,
                     Relationship = UrlRelationship.Search
                 },
