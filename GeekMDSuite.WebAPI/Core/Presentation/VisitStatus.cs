@@ -5,6 +5,8 @@
         Scheduled = 0,
         Active = 1,
         Incomplete = 2,
-        Complete = 3
+        Complete = 3, 
+        Cancelled = 4,
+        NoShow = 5
     }
 }

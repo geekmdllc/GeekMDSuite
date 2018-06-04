@@ -49,9 +49,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
             return Ok(patientResources);
         }
 
-
         [HttpGet]
-        [Route("{guid}")]
         public async Task<IActionResult> GetByGuid(Guid guid)
         {
             if (guid == Guid.Empty) return BadRequest(guid);
@@ -73,7 +71,7 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
                 return BadRequest(error);
             }
         }
-
+    
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientStubFromUser patient)
         {
@@ -127,7 +125,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
         }
 
         [HttpPut]
-        [Route("{guid}")]
         public async Task<IActionResult> Put(Guid guid, [FromBody] PatientStubFromUser patientStub)
         {
             if (!ModelState.IsValid)
@@ -164,7 +161,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
         }
 
         [HttpDelete]
-        [Route("{guid}")]
         public async Task<IActionResult> Delete(Guid guid)
         {
             try
@@ -189,7 +185,6 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.PatientController
         }
 
         [HttpGet]
-        [Route("{guid}/visits")]
         public async Task<IActionResult> GetVisits(Guid guid)
         {
             var visitStubs = (await _unitOfWork.Visits.FindByPatient(guid))

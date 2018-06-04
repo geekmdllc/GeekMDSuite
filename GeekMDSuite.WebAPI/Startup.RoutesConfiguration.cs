@@ -35,10 +35,12 @@ namespace GeekMDSuite.WebAPI
             ITypedRouteBuilder routes)
         {
             routes.Add(baseUrl + "patient/", route => route.ToController<PatientController>());
-            routes.Get("",
-                route => route.ToAction<PatientController>(a => a.GetBySearch(With.Any<PatientDataSearchFilter>())));
+            routes.Get("", route => route.ToAction<PatientController>(a => a.GetBySearch(With.Any<PatientDataSearchFilter>())));
             routes.Get("{guid}/visits", route => route.ToAction<PatientController>(a => a.GetVisits(With.Any<Guid>())));
             routes.Get("{guid}", route => route.ToAction<PatientController>(a => a.GetByGuid(With.Any<Guid>())));
+            routes.Post("", route => route.ToAction<PatientController>(a => a.Post(With.Any<PatientStubFromUser>())));
+            routes.Put("{guid}", route => route.ToAction<PatientController>(a => a.Put(With.Any<Guid>(), With.Any<PatientStubFromUser>())));
+            routes.Delete("{guid}", route => route.ToAction<PatientController>(a => a.Delete(With.Any<Guid>())));
         }
 
         private static void ConfigureVisitControllerRoutes(string baseUrl,

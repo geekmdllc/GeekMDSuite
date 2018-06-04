@@ -97,7 +97,7 @@ namespace GeekMDSuite.ConsoleDemo
             var audiogramDataLeft = AudiogramDatasetBuilder
                 .Initialize()
                 .Set125HertzDataPoint(10)
-                .Set125HertzDataPoint(20)
+                .Set250HertzDataPoint(20)
                 .Set500HertzDataPoint(30)
                 .Set1000HertzDataPoint(10)
                 .Set2000HertzDataPoint(25)
@@ -110,7 +110,7 @@ namespace GeekMDSuite.ConsoleDemo
             var audiogramDataRight = AudiogramDatasetBuilder
                 .Initialize()
                 .Set125HertzDataPoint(10)
-                .Set125HertzDataPoint(20)
+                .Set250HertzDataPoint(20)
                 .Set500HertzDataPoint(30)
                 .Set1000HertzDataPoint(10)
                 .Set2000HertzDataPoint(25)

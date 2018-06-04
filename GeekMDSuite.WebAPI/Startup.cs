@@ -41,6 +41,7 @@ namespace GeekMDSuite.WebAPI
                 .AddXmlDataContractSerializerFormatters()
                 .AddTypedRouting(RoutesConfiguration());
             services.AddAutoMapper();
+            services.AddCors();
             services.AddDbContext<GeekMdSuiteDbContext>(options => options.UseSqlite(connection));
             services.AddSingleton<INewPatientService, NewPatientService>();
             services.AddSingleton<INewVisitService, NewVisitService>();
@@ -60,8 +61,13 @@ namespace GeekMDSuite.WebAPI
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
-
+                app.UseCors(builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            }
             app.UseMvc();
         }
     }
