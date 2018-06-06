@@ -58,6 +58,12 @@ namespace GeekMDSuite.WebAPI
             routes.Add(classifyUri, route => route.ToController<ClassifyController>());
             routes.Post("audiogram/",
                 route => route.ToAction<ClassifyController>(a => a.PostToAudiogram(With.Any<Audiogram>())));
+            routes.Get("audiogram/",
+                route => route.ToAction<ClassifyController>(a => a.GetAudiogram(With.Any<int>(), 
+                    With.Any<int>(), With.Any<int>(), With.Any<int>(), With.Any<int>(), With.Any<int>(), 
+                    With.Any<int>(), With.Any<int>(),  With.Any<int>(),With.Any<int>(),With.Any<int>(),
+                    With.Any<int>(),With.Any<int>(),With.Any<int>(),With.Any<int>(),With.Any<int>(),
+                    With.Any<int>(),With.Any<int>())));
             routes.Post("bp/",
                 route => route.ToAction<ClassifyController>(a => a.PostToBloodPressure(With.Any<BloodPressure>())));
             routes.Post("bodycomp/",

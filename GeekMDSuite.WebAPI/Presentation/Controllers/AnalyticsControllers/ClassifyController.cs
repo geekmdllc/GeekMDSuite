@@ -5,6 +5,7 @@ using GeekMDSuite.Core.Models.PatientActivities;
 using GeekMDSuite.Core.Models.Procedures;
 using GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification;
 using GeekMDSuite.WebAPI.Core.Presentation;
+using GeekMDSuite.WebAPI.Presentation.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
@@ -19,6 +20,60 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers.AnalyticsControllers
         {
             _errorService = errorService;
             _classifications = classifications;
+        }
+
+        public IActionResult GetAudiogram(
+            int l125, int l250, int l500, int l1000, int l2000, int l3000, int l4000, int l6000, int l8000,
+            int r125, int r250, int r500, int r1000, int r2000, int r3000, int r4000, int r6000, int r8000)
+        {
+            var audiogram = BuildAudiogram(l125, l250, l500, l1000, l2000, l4000, l6000, l8000, 
+                                            r125, r250, r500, r1000, r2000, r4000, r6000, r8000);
+
+            try
+            {
+                return Ok(_classifications.Audiograms.Classify(audiogram));
+            }
+            catch
+            {
+                var error = _errorService.PayloadBuilder
+                    .HasErrorCode(ErrorPayloadErrorCode.DataModelFromUserIsInvalid)
+                    .HasInternalMessage("Audiogram model arrived incomplete or malformed.")
+                    .TellsUser("Ensure that the data model for the audiogram was sent properly.")
+                    .Build();
+                return BadRequest(error);
+            }
+        }
+
+        private static AudiogramEntity BuildAudiogram(int l125, int l250, int l500, int l1000, int l2000, int l4000, int l6000,
+            int l8000, int r125, int r250, int r500, int r1000, int r2000, int r4000, int r6000, int r8000)
+        {
+            var left = new AudiogramDatasetBuilder()
+                .Set125HertzDataPoint(l125)
+                .Set250HertzDataPoint(l250)
+                .Set500HertzDataPoint(l500)
+                .Set1000HertzDataPoint(l1000)
+                .Set2000HertzDataPoint(l2000)
+                .Set4000HertzDataPoint(l4000)
+                .Set6000HertzDataPoint(l6000)
+                .Set8000HertzDataPoint(l8000)
+                .Build();
+            var right = new AudiogramDatasetBuilder()
+                .Set125HertzDataPoint(r125)
+                .Set250HertzDataPoint(r250)
+                .Set500HertzDataPoint(r500)
+                .Set1000HertzDataPoint(r1000)
+                .Set2000HertzDataPoint(r2000)
+                .Set4000HertzDataPoint(r4000)
+                .Set6000HertzDataPoint(r6000)
+                .Set8000HertzDataPoint(r8000)
+                .Build();
+
+            var audiogram = new AudiogramEntity
+            {
+                Left = left,
+                Right = right
+            };
+            return audiogram;
         }
 
         public IActionResult PostToAudiogram([FromBody] Audiogram audiogram)
