@@ -173,12 +173,12 @@ namespace GeekMDSuite.WebAPI.Presentation.Controllers
 
             try
             {
-                var updatedEntity = _mapper.Map<VisitStubFromUser, VisitEntity>(entity);
-                var trackedEntity = await _unitOfWork.Visits.FindByGuid(entity.VisitGuid);
-                trackedEntity.MapValues(updatedEntity);
-                await _unitOfWork.Visits.Update(trackedEntity);
+                var updatedVisit = _mapper.Map<VisitStubFromUser, VisitEntity>(entity);
+                var trackedVisit = await _unitOfWork.Visits.FindByGuid(entity.VisitGuid);
+                trackedVisit.MapValues(updatedVisit);
+                await _unitOfWork.Visits.Update(trackedVisit);
                 await _unitOfWork.Complete();
-                return Ok();
+                return Ok(_mapper.Map<VisitEntity, VisitStubFromUser>(trackedVisit));
             }
             catch (RepositoryEntityNotFoundException)
             {
