@@ -59,8 +59,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             return new List<AudiogramEntity>
             {
-                new AudiogramEntity(audiogram) {Guid = XerMajestiesVisitGuid},
-                new AudiogramEntity(audiogram2) {Guid = BruceWaynesVisitGuid}
+                new AudiogramEntity(audiogram) {VisitGuid = XerMajestiesVisitGuid},
+                new AudiogramEntity(audiogram2) {VisitGuid = BruceWaynesVisitGuid}
             };
         }
     }

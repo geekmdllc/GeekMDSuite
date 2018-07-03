@@ -6,15 +6,15 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
     public class CarotidUltrasoundStub : IVisitData
     {
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-        public CarotidUltrasoundResult Left { get; set; }
-        public CarotidUltrasoundResult Right { get; set; }
-
         public CarotidUltrasoundStub()
         {
             Left = new CarotidUltrasoundResult();
             Right = new CarotidUltrasoundResult();
         }
+
+        public CarotidUltrasoundResult Left { get; set; }
+        public CarotidUltrasoundResult Right { get; set; }
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

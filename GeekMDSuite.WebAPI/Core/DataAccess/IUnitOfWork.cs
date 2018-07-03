@@ -30,7 +30,8 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess
         IResistanceRegimenRepositoryAsync ResistanceRegimens { get; }
         ICardiovascularRegimenRepositoryAsync CardiovascularRegimens { get; }
         IStretchingRegimenRepositoryAsync StretchingRegimens { get; }
-
+        IQualitativeLabsRepositoryAsync QualitativeLabs { get; }
+        IQuantitativeLabsRepositoryAsync QuantitativeLabs { get; }
         IRepositoryAssociatedWithVisitAsync<T> VisitData<T>() where T : class, IMapProperties<T>, IVisitData;
         IRepositoryAsync<T> EntityData<T>() where T : class, IMapProperties<T>, IEntity;
         Task Complete();

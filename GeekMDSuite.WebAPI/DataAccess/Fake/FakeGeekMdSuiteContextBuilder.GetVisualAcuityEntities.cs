@@ -10,8 +10,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
         {
             return new List<VisualAcuityEntity>
             {
-                new VisualAcuityEntity(VisualAcuity.Build(20, 20, 20)) {Guid = BruceWaynesVisitGuid},
-                new VisualAcuityEntity(VisualAcuity.Build(30, 40, 40)) {Guid = XerMajestiesVisitGuid}
+                new VisualAcuityEntity(VisualAcuity.Build(20, 20, 20)) {VisitGuid = BruceWaynesVisitGuid},
+                new VisualAcuityEntity(VisualAcuity.Build(30, 40, 40)) {VisitGuid = XerMajestiesVisitGuid}
             };
         }
     }

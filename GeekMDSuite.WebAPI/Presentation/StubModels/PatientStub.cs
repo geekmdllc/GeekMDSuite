@@ -5,7 +5,7 @@ using GeekMDSuite.Utilities.Extensions;
 
 namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
-    public class PatientStub : SelfLinkingStub
+    public class PatientStub
     {
         public PatientStub()
         {
@@ -14,7 +14,7 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
             Name = new Name();
         }
 
-        public Guid Guid { get; set; }
+        public Guid PatientGuid { get; set; }
         public Name Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Age => DateOfBirth.ElapsedYears();

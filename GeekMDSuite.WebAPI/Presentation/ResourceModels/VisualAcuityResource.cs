@@ -4,6 +4,5 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
     public class VisualAcuityResource : Resource<VisualAcuityStub>
     {
-        
     }
 }

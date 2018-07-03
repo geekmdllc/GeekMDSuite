@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using GeekMDSuite.WebAPI.Core.DataAccess.Services;
 using GeekMDSuite.WebAPI.Core.Presentation;
@@ -19,8 +18,10 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
 
             var newVisitEntity = new VisitEntity
             {
-                Guid = Guid.NewGuid(),
-                Status = VisitStatus.Scheduled
+                VisitGuid = Guid.NewGuid(),
+                Status = VisitStatus.Scheduled,
+                Date = template.Date,
+                PatientGuid = template.PatientGuid
             };
 
             return newVisitEntity;

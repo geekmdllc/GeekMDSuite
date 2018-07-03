@@ -16,15 +16,47 @@ namespace GeekMDSuite.WebAPI.DataAccess.Repositories.Classification
             BodyCompositions = new BodyCompositionClassificationService();
             BodyCompositionsExpanded = new BodyCompositionsExpandedClassificationService();
             CarotidUltrasounds = new CarotidUltrasoundClassificationService();
-            ResistanceRegimens = new ResistanceRegimenClassificationServiceService();
+            CardiovascularRegimens = new CardiovascularRegimenClassificationService();
+            CentralBloodPressures = new CentralBloodPressureClassificationService();
+            FunctionalMovements = new FunctionalMovementScreenClassificationService();
+            GripStrengths = new GripStrengthClassificationService();
+            IshiharaSixPlateScreens = new IshiharaSixPlateScreenClassificationService();
+            OccularPressures = new OccularPressureClassificationService();
+            PeripheralVision = new PeripheralVisionClassificationService();
+            Pushups = new PushupsClassificationService();
+            QualitativeLabs = new QualitativeLabClassificationService();
+            QuantitativeLabs = new QuantitativeLabClassificationService();
+            ResistanceRegimen = new ResistanceRegimenClassificationService();
+            SitAndReach = new SitAndReachClassificationService();
+            Situps = new SitupsClassificationService();
+            Spirometry = new SpirometryClassificationService();
+            Stretching = new StretchingRegimenClassificationService();
+            FitTreadmillScore = new FitTreadmillScoreClassificationService();
+            VisualAcuity = new VisualAcuityClassificationService();
         }
 
-        public IAscvdClassificationService AscvdScores { get; set; }
-        public IAudiogramClassificationService Audiograms { get; set; }
-        public IBloodPressureClassificationService BloodPressures { get; set; }
-        public IBodyCompositionClassificationService BodyCompositions { get; set; }
+        public IAscvdClassificationService AscvdScores { get; }
+        public IAudiogramClassificationService Audiograms { get; }
+        public IBloodPressureClassificationService BloodPressures { get; }
+        public IBodyCompositionClassificationService BodyCompositions { get; }
         public IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
-        public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; set; }
-        public IResistanceRegimenClassificationService ResistanceRegimens { get; }
+        public ICarotidUltrasoundClassificationService CarotidUltrasounds { get; }
+        public ICardiovascularRegimenClassificationService CardiovascularRegimens { get; }
+        public ICentralBloodPressureClassificationService CentralBloodPressures { get; }
+        public IFunctionalMovementClassificationService FunctionalMovements { get; }
+        public IGripStrengthClassificationService GripStrengths { get; }
+        public IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
+        public IOccularPressureClassificationService OccularPressures { get; }
+        public IPeripheralVisionClassificationService PeripheralVision { get; }
+        public IPushupsClassificationService Pushups { get; set; }
+        public IQualitativeLabsClassificationService QualitativeLabs { get; set; }
+        public IQuantitativeLabsClassificationService QuantitativeLabs { get; set; }
+        public IResistanceRegimenClassificationService ResistanceRegimen { get; }
+        public ISitupsClassificationService Situps { get; set; }
+        public ISitAndReachClassificationService SitAndReach { get; set; }
+        public ISpirometryClassificationService Spirometry { get; set; }
+        public IStretchingRegimenClassificationService Stretching { get; set; }
+        public IFitTreadmillScoreClassificationService FitTreadmillScore { get; set; }
+        public IVisualAcuityClassificationService VisualAcuity { get; set; }
     }
 }

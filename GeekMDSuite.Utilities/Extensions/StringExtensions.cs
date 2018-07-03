@@ -5,11 +5,20 @@ namespace GeekMDSuite.Utilities.Extensions
 {
     public static class StringExtensions
     {
-        public static bool DoesNotContain(this string self, string comparison) => !self.Contains(comparison);
-        
-        public static bool IsNotNullOrEmpty(this string self) => !IsEmpty(self);
+        public static bool DoesNotContain(this string self, string comparison)
+        {
+            return !self.Contains(comparison);
+        }
 
-        public static bool IsEmpty(this string self) => string.IsNullOrWhiteSpace(self);
+        public static bool IsNotNullOrEmpty(this string self)
+        {
+            return !IsEmpty(self);
+        }
+
+        public static bool IsEmpty(this string self)
+        {
+            return string.IsNullOrWhiteSpace(self);
+        }
 
         public static bool HasStringsInCommonWith(this string self, string comparison)
         {

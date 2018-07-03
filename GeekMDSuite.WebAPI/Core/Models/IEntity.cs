@@ -1,6 +1,4 @@
-﻿using GeekMDSuite.Core.Models;
-
-namespace GeekMDSuite.WebAPI.Core.Models
+﻿namespace GeekMDSuite.WebAPI.Core.Models
 {
     public interface IEntity
     {

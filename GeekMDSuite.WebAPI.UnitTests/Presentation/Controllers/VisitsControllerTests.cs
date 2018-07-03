@@ -7,11 +7,9 @@ using GeekMDSuite.WebAPI.Core.DataAccess;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
-using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.Controllers;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 using IConfigurationProvider = Microsoft.Extensions.Configuration.IConfigurationProvider;
@@ -20,16 +18,16 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
     public class VisitsControllerTests
     {
-        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
         public VisitsControllerTests()
         {
             _controller = new VisitController(
-                _unitOfWork, 
-                new NewVisitService(), 
+                _unitOfWork,
+                new NewVisitService(),
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))),
-                new UrlHelper(new ActionContext()),
                 new ErrorService(new ConfigurationRoot(new List<IConfigurationProvider>())));
         }
+
+        private readonly IUnitOfWork _unitOfWork = new FakeUnitOfWorkSeeded();
 
         private readonly VisitController _controller;
 
@@ -44,7 +42,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 
             var addedVisits = (await _unitOfWork.Visits.All()).FirstOrDefault();
 
-            Assert.True(addedVisits != null && addedVisits.Guid != Guid.Empty);
+            Assert.True(addedVisits != null && addedVisits.VisitGuid != Guid.Empty);
         }
 
         [Fact]
@@ -60,7 +58,7 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
         {
             var result = await _controller.Post(new VisitStubFromUser
             {
-                Guid = Guid.Empty
+                VisitGuid = Guid.Empty
             });
 
             Assert.Equal(typeof(BadRequestObjectResult), result.GetType());

@@ -29,19 +29,40 @@ namespace GeekMDSuite.Core.Models
             return new Name(first, last, middle);
         }
 
-        public bool IsMissingFirstOrLast() => First.IsEmpty() || Last.IsEmpty();
+        public bool IsMissingFirstOrLast()
+        {
+            return First.IsEmpty() || Last.IsEmpty();
+        }
 
-        public bool IsSimilarTo(string comparison) => ToString().HasStringsInCommonWith(comparison);
+        public bool IsSimilarTo(string comparison)
+        {
+            return ToString().HasStringsInCommonWith(comparison);
+        }
 
-        public bool IsNotSimilarTo(string comparison) => !IsSimilarTo(comparison);
+        public bool IsNotSimilarTo(string comparison)
+        {
+            return !IsSimilarTo(comparison);
+        }
 
-        public bool IsSimilarTo(Name comparison) => ToString().HasStringsInCommonWith(comparison.ToString());
+        public bool IsSimilarTo(Name comparison)
+        {
+            return ToString().HasStringsInCommonWith(comparison.ToString());
+        }
 
-        public bool IsNotSimilarTo(Name comparison) => !IsSimilarTo(comparison);
+        public bool IsNotSimilarTo(Name comparison)
+        {
+            return !IsSimilarTo(comparison);
+        }
 
-        public bool IsSameAs(string comparison) => ToString().IsEqualTo(comparison);
+        public bool IsSameAs(string comparison)
+        {
+            return ToString().IsEqualTo(comparison);
+        }
 
-        public bool IsNotSameAs(string comparison) => !IsSameAs(comparison);
+        public bool IsNotSameAs(string comparison)
+        {
+            return !IsSameAs(comparison);
+        }
 
         public override string ToString()
         {

@@ -15,9 +15,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(ishiharaSixPlate);
         }
 
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-
         public void MapValues(IshiharaSixPlate subject)
         {
             if (subject == null) throw new ArgumentNullException(nameof(subject));
@@ -34,5 +31,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Plate6.PlateNumber = subject.Plate6.PlateNumber;
             Plate6.PlateRead = subject.Plate6.PlateRead;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

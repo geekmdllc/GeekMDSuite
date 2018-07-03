@@ -28,6 +28,8 @@ namespace GeekMDSuite.WebAPI.DataAccess
             Patients = new PatientsRepositoryAsync(_context);
             PeripheralVisions = new PeripheralVisionsRepositoryAsync(_context);
             Pushups = new PushupsRepositoryAsync(_context);
+            QualitativeLabs = new QualitativeLabsRepositoryAsync(_context);
+            QuantitativeLabs = new QuantitativeLabsRepositoryAsync(_context);
             ResistanceRegimens = new ResistanceRegimenRepostoryAsync(_context);
             SitAndReaches = new SitAndReachesRepositoryAsync(_context);
             Situps = new SitupsRepositoryAsync(_context);
@@ -65,6 +67,8 @@ namespace GeekMDSuite.WebAPI.DataAccess
         public IPatientsRepositoryAsync Patients { get; }
         public IPeripheralVisionsRepositoryAsync PeripheralVisions { get; }
         public IPushupsRepositoryAsync Pushups { get; }
+        public IQualitativeLabsRepositoryAsync QualitativeLabs { get; set; }
+        public IQuantitativeLabsRepositoryAsync QuantitativeLabs { get; set; }
         public ISitAndReachesRepositoryAsync SitAndReaches { get; }
         public ISitupsRepositoryAsync Situps { get; set; }
         public ISpirometriesRepositoryAsync Spirometries { get; set; }

@@ -97,7 +97,7 @@ namespace GeekMDSuite.ConsoleDemo
             var audiogramDataLeft = AudiogramDatasetBuilder
                 .Initialize()
                 .Set125HertzDataPoint(10)
-                .Set125HertzDataPoint(20)
+                .Set250HertzDataPoint(20)
                 .Set500HertzDataPoint(30)
                 .Set1000HertzDataPoint(10)
                 .Set2000HertzDataPoint(25)
@@ -110,7 +110,7 @@ namespace GeekMDSuite.ConsoleDemo
             var audiogramDataRight = AudiogramDatasetBuilder
                 .Initialize()
                 .Set125HertzDataPoint(10)
-                .Set125HertzDataPoint(20)
+                .Set250HertzDataPoint(20)
                 .Set500HertzDataPoint(30)
                 .Set1000HertzDataPoint(10)
                 .Set2000HertzDataPoint(25)
@@ -276,7 +276,7 @@ namespace GeekMDSuite.ConsoleDemo
 
             var fitScoreInterp =
                 new FitTreadmillScoreClassification(
-                    new TreadmillExerciseStressTestsClassificationParameters(treadmillStressTest, patient));
+                    new TreadmillExerciseStressTestClassificationParameters(treadmillStressTest, patient));
             Console.WriteLine($"FIT Score: {fitScoreInterp}{NewLine}");
 
             var fmsInterpretation = new FunctionalMovementScreenClassification(functionalMovementScreen);
@@ -294,7 +294,7 @@ namespace GeekMDSuite.ConsoleDemo
             var ishiharaSixInterp = new IshiharaSixPlateClassification(ishiharaSix);
             Console.WriteLine($"Ishihara 6 Plate: {ishiharaSixInterp}{NewLine}");
 
-            var ocularPressureInterp = new OcularPressureClassification(ocularPressure);
+            var ocularPressureInterp = new OccularPressureClassification(ocularPressure);
             Console.WriteLine($"Ocular Pressure: {ocularPressureInterp}{NewLine}");
 
             var percentBodyFatInterp =
@@ -306,26 +306,32 @@ namespace GeekMDSuite.ConsoleDemo
             Console.WriteLine($"Peripheral Vision: {peripheralVisionInterp}{NewLine}");
 
             var pushupsInterp =
-                new PushupsClassification(new MuscularStrengthClassificationParameters(pushups, patient));
+                new PushupsClassification(new PushupsClassificationParameters(pushups, patient));
             Console.WriteLine($"Pushups: {pushupsInterp}{NewLine}");
 
             var qualitativeLabInterp = new QualitativeLabClassification(qualitativeLab);
             Console.WriteLine($"Qualitative Lab: {qualitativeLabInterp}{NewLine}");
 
-            var quantLabInterpTotalChol = new QuantitativeLabClassification(quantitativeLabChoesterol, patient);
+            var quantLabInterpTotalChol =
+                new QuantitativeLabClassification(
+                    new QuantitativeLabClassificationParameters(quantitativeLabChoesterol, patient));
             Console.WriteLine($"Quantitative Lab: {quantLabInterpTotalChol}{NewLine}");
 
-            var quantLabInterpHdlC = new QuantitativeLabClassification(quantitativeLabHdlC, patient);
+            var quantLabInterpHdlC =
+                new QuantitativeLabClassification(
+                    new QuantitativeLabClassificationParameters(quantitativeLabHdlC, patient));
             Console.WriteLine($"Quantitative Lab: {quantLabInterpHdlC}{NewLine}");
 
-            var quantLabInterpLdlC = new QuantitativeLabClassification(quantitativeLabLdlC, patient);
+            var quantLabInterpLdlC =
+                new QuantitativeLabClassification(
+                    new QuantitativeLabClassificationParameters(quantitativeLabLdlC, patient));
             Console.WriteLine($"Quantitative Lab: {quantLabInterpLdlC}{NewLine}");
 
             var sitAndReachInterp =
-                new SitAndReachClassification(new MuscularStrengthClassificationParameters(sitAndReach, patient));
+                new SitAndReachClassification(new SitAndReachClassificationParameters(sitAndReach, patient));
             Console.WriteLine($"Sit & Reach: {sitAndReachInterp}{NewLine}");
 
-            var situpsInterp = new SitupsClassification(new MuscularStrengthClassificationParameters(situps, patient));
+            var situpsInterp = new SitupsClassification(new SitupsClassificationParameters(situps, patient));
             Console.WriteLine($"Situps: {situpsInterp}{NewLine}");
 
             var spirometryInterp =

@@ -18,7 +18,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetSupineBloodPressure(115, 69)
                     .SetSupineHeartRate(55)
                     .SetTime(18, 33)
-                    .Build()) {Guid = BruceWaynesVisitGuid},
+                    .Build()) {VisitGuid = BruceWaynesVisitGuid},
                 new TreadmillExerciseStressTestEntity(TreadmillExerciseStressTestBuilder.Initialize()
                     .SetMaximumBloodPressure(220, 110)
                     .SetMaximumHeartRate(155)
@@ -27,7 +27,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetSupineBloodPressure(145, 79)
                     .SetSupineHeartRate(78)
                     .SetTime(7, 33)
-                    .Build()) {Guid = XerMajestiesVisitGuid}
+                    .Build()) {VisitGuid = XerMajestiesVisitGuid}
             };
         }
     }

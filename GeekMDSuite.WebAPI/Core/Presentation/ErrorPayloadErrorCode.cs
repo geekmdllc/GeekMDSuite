@@ -12,6 +12,9 @@
         PatientReceivedWithEmptyGuid = 7,
         VisitDataFromUserIsInvalid = 8,
         PatientStubFromUserIsInvalid = 9,
-        MedicalRecordNumberIsNotUniqe = 10
+        MedicalRecordNumberIsNotUniqe = 10,
+        DataModelFromUserIsInvalid = 11,
+        EntityIdIsNotUniqe = 12,
+        WrongApiEndpointTargeted = 13
     }
 }

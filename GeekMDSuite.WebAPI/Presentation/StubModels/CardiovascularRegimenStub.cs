@@ -6,10 +6,10 @@ namespace GeekMDSuite.WebAPI.Presentation.StubModels
 {
     public class CardiovascularRegimenStub : IVisitData
     {
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
         public double SessionsPerWeek { get; set; }
         public double AverageSessionDuration { get; set; }
         public ExerciseIntensity Intensity { get; set; }
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
 
             var fitScore =
                 new FitTreadmillScoreClassification(
-                    new TreadmillExerciseStressTestsClassificationParameters(tmst, _patient)).Value;
+                    new TreadmillExerciseStressTestClassificationParameters(tmst, _patient)).Value;
 
             Assert.InRange(fitScore, expectedScore - 0.001, expectedScore + 0.001);
         }
@@ -53,7 +53,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
 
             var tenYearMortality =
                 new FitTreadmillScoreClassification(
-                    new TreadmillExerciseStressTestsClassificationParameters(tmst, _patient)).TenYearMortality;
+                    new TreadmillExerciseStressTestClassificationParameters(tmst, _patient)).TenYearMortality;
 
             Assert.Equal(expectedTenYearMortality, tenYearMortality);
         }
@@ -75,7 +75,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
 
             var classification =
                 new FitTreadmillScoreClassification(
-                    new TreadmillExerciseStressTestsClassificationParameters(tmst, _patient)).Classification;
+                    new TreadmillExerciseStressTestClassificationParameters(tmst, _patient)).Classification;
 
             Assert.Equal(expectedClassification, classification);
         }
@@ -86,7 +86,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullPatient_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new FitTreadmillScoreClassification(new TreadmillExerciseStressTestsClassificationParameters(
+                new FitTreadmillScoreClassification(new TreadmillExerciseStressTestClassificationParameters(
                     TreadmillExerciseStressTestBuilder.Initialize().BuildWithoutModelValidation(), null)));
         }
 
@@ -94,7 +94,7 @@ namespace GeekMDSuite.Analytics.UnitTests.Classification
         public void NullTreadmillStressTest_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new FitTreadmillScoreClassification(new TreadmillExerciseStressTestsClassificationParameters(null,
+                new FitTreadmillScoreClassification(new TreadmillExerciseStressTestClassificationParameters(null,
                     PatientBuilder.Initialize().BuildWithoutModelValidation())));
         }
     }

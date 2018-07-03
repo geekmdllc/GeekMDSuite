@@ -8,16 +8,13 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
     {
         public CentralBloodPressureEntity()
         {
-            Guid = Guid.Empty;
+            VisitGuid = Guid.Empty;
         }
 
         public CentralBloodPressureEntity(CentralBloodPressure centralBloodPressure) : this()
         {
             MapValues(centralBloodPressure);
         }
-
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
 
         public void MapValues(CentralBloodPressure subject)
         {
@@ -28,5 +25,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             ReferenceAge = subject.ReferenceAge;
             SystolicPressure = subject.SystolicPressure;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

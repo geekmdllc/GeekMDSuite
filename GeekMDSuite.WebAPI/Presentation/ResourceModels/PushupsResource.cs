@@ -4,6 +4,5 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
     public class PushupsResource : Resource<PushupsStub>
     {
-        
     }
 }

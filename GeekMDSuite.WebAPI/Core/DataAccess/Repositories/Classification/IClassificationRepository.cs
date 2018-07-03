@@ -11,6 +11,22 @@ namespace GeekMDSuite.WebAPI.Core.DataAccess.Repositories.Classification
         IBodyCompositionClassificationService BodyCompositions { get; }
         IBodyCompositionExpandedClassificationService BodyCompositionsExpanded { get; }
         ICarotidUltrasoundClassificationService CarotidUltrasounds { get; }
-        IResistanceRegimenClassificationService ResistanceRegimens { get; }
+        ICardiovascularRegimenClassificationService CardiovascularRegimens { get; }
+        ICentralBloodPressureClassificationService CentralBloodPressures { get; }
+        IFunctionalMovementClassificationService FunctionalMovements { get; }
+        IGripStrengthClassificationService GripStrengths { get; }
+        IIshiharaSixPlateScreenService IshiharaSixPlateScreens { get; }
+        IOccularPressureClassificationService OccularPressures { get; }
+        IPeripheralVisionClassificationService PeripheralVision { get; }
+        IPushupsClassificationService Pushups { get; }
+        IQualitativeLabsClassificationService QualitativeLabs { get; }
+        IQuantitativeLabsClassificationService QuantitativeLabs { get; }
+        IResistanceRegimenClassificationService ResistanceRegimen { get; }
+        ISitupsClassificationService Situps { get; }
+        ISitAndReachClassificationService SitAndReach { get; }
+        ISpirometryClassificationService Spirometry { get; }
+        IStretchingRegimenClassificationService Stretching { get; }
+        IFitTreadmillScoreClassificationService FitTreadmillScore { get; }
+        IVisualAcuityClassificationService VisualAcuity { get; }
     }
 }

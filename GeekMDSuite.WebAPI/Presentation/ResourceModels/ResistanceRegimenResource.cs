@@ -4,6 +4,5 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
 {
     public class ResistanceRegimenResource : Resource<ResistanceRegimenStub>
     {
-        
     }
 }

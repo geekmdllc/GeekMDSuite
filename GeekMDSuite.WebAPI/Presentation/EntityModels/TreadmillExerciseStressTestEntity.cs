@@ -16,9 +16,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(treadmillExerciseStressTest);
         }
 
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-
         public void MapValues(TreadmillExerciseStressTest subject)
         {
             MaximumBloodPressure.Diastolic = subject.MaximumBloodPressure.Diastolic;
@@ -33,5 +30,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             Time.Minutes = subject.Time.Minutes;
             Time.Seconds = subject.Time.Seconds;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

@@ -17,7 +17,17 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             ValidatePatientModel(patient);
             await EnsureMedicalRecordNumberIsNew(patient);
 
-            var newPatient = new PatientEntity {Guid = Guid.NewGuid()};
+            var newPatient = new PatientEntity
+            {
+                PatientGuid = Guid.NewGuid(),
+                Comorbidities = patient.Comorbidities,
+                DateOfBirth = patient.DateOfBirth,
+                Gender =  patient.Gender,
+                MedicalRecordNumber = patient.MedicalRecordNumber,
+                Name = patient.Name,
+                Race = patient.Race
+                    
+            };
 
             return newPatient;
         }

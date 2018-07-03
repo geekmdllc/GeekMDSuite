@@ -5,6 +5,5 @@ namespace GeekMDSuite.WebAPI.Presentation.ResourceModels
     public class SpirometryResource : Resource<SpirometryStub>
 
     {
-
     }
 }

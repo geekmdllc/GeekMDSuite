@@ -15,9 +15,6 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
             MapValues(resistanceRegimen);
         }
 
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-
         public void MapValues(ResistanceRegimen subject)
         {
             Features.Clear();
@@ -27,5 +24,8 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels.PatientActivities
             Intensity = subject.Intensity;
             SessionsPerWeek = subject.SessionsPerWeek;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

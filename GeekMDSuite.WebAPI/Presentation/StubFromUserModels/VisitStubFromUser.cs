@@ -6,13 +6,12 @@ namespace GeekMDSuite.WebAPI.Presentation.StubFromUserModels
 {
     public class VisitStubFromUser
     {
-        [Required]
-        public Guid Guid { get; set; }
-        [Required]
-        public DateTime Date { get; set; }
-        [Required]
-        public VisitStatus Status { get; set; }
-        [Required]
-        public Guid PatientGuid { get; set; }
+        [Required] public Guid VisitGuid { get; set; }
+
+        [Required] public DateTime Date { get; set; }
+
+        [Required] public VisitStatus Status { get; set; }
+
+        [Required] public Guid PatientGuid { get; set; }
     }
 }

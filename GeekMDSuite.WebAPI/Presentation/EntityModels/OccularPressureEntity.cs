@@ -15,13 +15,13 @@ namespace GeekMDSuite.WebAPI.Presentation.EntityModels
             MapValues(occularPressure);
         }
 
-        public int Id { get; set; }
-        public Guid Guid { get; set; }
-
         public void MapValues(OccularPressure subject)
         {
             Left = subject.Left;
             Right = subject.Right;
         }
+
+        public int Id { get; set; }
+        public Guid VisitGuid { get; set; }
     }
 }

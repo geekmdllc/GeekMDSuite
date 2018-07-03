@@ -7,18 +7,7 @@ using MathNet.Numerics.Distributions;
 
 namespace GeekMDSuite.Analytics.Classification
 {
-    public class CentralBloodPressureParameters
-    {
-        public CentralBloodPressureParameters(CentralBloodPressure centralBloodPressure, Patient patient)
-        {
-            CentralBloodPressure = centralBloodPressure;
-            Patient = patient;
-        }
-
-        public CentralBloodPressure CentralBloodPressure { get; }
-        public Patient Patient { get; }
-    }
-
+    //TODO: Refactor this to return individual details about the different values; Aix and AP are most important.
     public class CentralBloodPressureClassification : IClassifiable<CentralBloodPressureClassificationResult>
     {
         private static readonly Dictionary<CentralBloodPressureCategory, int> CategoryValueMap =
@@ -133,11 +122,11 @@ namespace GeekMDSuite.Analytics.Classification
                 return CentralBloodPressureReferenceAge.MuchYoungerThanStated;
             if (_centralBloodPressure.ReferenceAge <= _patient.Age - 2)
                 return CentralBloodPressureReferenceAge.YoungerThanStated;
-            if (_centralBloodPressure.ReferenceAge < _patient.Age + 2)
+            if (_centralBloodPressure.ReferenceAge <= _patient.Age + 2)
                 return CentralBloodPressureReferenceAge.SimilarToStated;
-            return _centralBloodPressure.ReferenceAge < _patient.Age + 10
+            return _centralBloodPressure.ReferenceAge <= _patient.Age + 10
                 ? CentralBloodPressureReferenceAge.OlderThanStated
-                : CentralBloodPressureReferenceAge.YoungerThanStated;
+                : CentralBloodPressureReferenceAge.MuchOlderThanStated;
         }
 
         private double CentralSystolicPressurePercentile()

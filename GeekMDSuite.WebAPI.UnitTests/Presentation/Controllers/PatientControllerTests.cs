@@ -6,18 +6,16 @@ using GeekMDSuite.Core.Models;
 using GeekMDSuite.WebAPI.DataAccess.Fake;
 using GeekMDSuite.WebAPI.DataAccess.Services;
 using GeekMDSuite.WebAPI.Mapping;
-using GeekMDSuite.WebAPI.Presentation;
-using GeekMDSuite.WebAPI.Presentation.Controllers;
+using GeekMDSuite.WebAPI.Presentation.Controllers.PatientController;
 using GeekMDSuite.WebAPI.Presentation.StatusCodeResults;
 using GeekMDSuite.WebAPI.Presentation.StubFromUserModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Xunit;
+using IConfigurationProvider = Microsoft.Extensions.Configuration.IConfigurationProvider;
 
 namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
 {
-    
     public class PatientEntityControllerTests
     {
         public PatientEntityControllerTests()
@@ -25,9 +23,8 @@ namespace GeekMDSuite.WebAPI.UnitTests.Presentation.Controllers
             _controller = new PatientController(
                 new FakeUnitOfWorkSeeded(),
                 new NewPatientService(),
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))), 
-                new UrlHelper(new ActionContext()),
-                new ErrorService(new ConfigurationRoot(new List<Microsoft.Extensions.Configuration.IConfigurationProvider>())));
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()))),
+                new ErrorService(new ConfigurationRoot(new List<IConfigurationProvider>())));
         }
 
         private readonly PatientController _controller;

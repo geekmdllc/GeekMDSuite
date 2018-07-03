@@ -17,7 +17,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetVisceralFat(55)
                     .SetWaist(35)
                     .SetWeight(210)
-                    .Build()) {Guid = BruceWaynesVisitGuid},
+                    .Build()) {VisitGuid = BruceWaynesVisitGuid},
                 new BodyCompositionExpandedEntity(BodyCompositionExpandedBuilder.Initialize()
                     .SetBodyFatPercentage(29)
                     .SetHeight(66)
@@ -25,7 +25,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
                     .SetVisceralFat(105)
                     .SetWaist(29)
                     .SetWeight(135)
-                    .Build()) {Guid = XerMajestiesVisitGuid}
+                    .Build()) {VisitGuid = XerMajestiesVisitGuid}
             };
         }
     }

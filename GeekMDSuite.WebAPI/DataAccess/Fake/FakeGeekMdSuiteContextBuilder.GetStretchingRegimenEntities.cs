@@ -12,11 +12,11 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
             {
                 new StretchingRegimenEntity(StretchingRegimen.Build(7, 10, ExerciseIntensity.High))
                 {
-                    Guid = BruceWaynesVisitGuid
+                    VisitGuid = BruceWaynesVisitGuid
                 },
                 new StretchingRegimenEntity(StretchingRegimen.Build(1, 5, ExerciseIntensity.Low))
                 {
-                    Guid = XerMajestiesVisitGuid
+                    VisitGuid = XerMajestiesVisitGuid
                 }
             };
         }

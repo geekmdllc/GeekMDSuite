@@ -33,8 +33,8 @@ namespace GeekMDSuite.WebAPI.DataAccess.Fake
 
             return new List<PatientEntity>
             {
-                new PatientEntity(p1) {Guid = BruceWaynesGuid},
-                new PatientEntity(p2) {Guid = XerMajestyGuid}
+                new PatientEntity(p1) {PatientGuid = BruceWaynesGuid},
+                new PatientEntity(p2) {PatientGuid = XerMajestyGuid}
             };
         }
     }

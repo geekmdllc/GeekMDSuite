@@ -1,5 +1,4 @@
-﻿using GeekMDSuite.WebAPI.Core.DataAccess.Services;
-using GeekMDSuite.WebAPI.Presentation;
+﻿using GeekMDSuite.WebAPI.Presentation;
 using GeekMDSuite.WebAPI.Presentation.ErrorPayload;
 using Microsoft.Extensions.Configuration;
 
@@ -12,6 +11,7 @@ namespace GeekMDSuite.WebAPI.DataAccess.Services
             var baseUrl = configuration.GetSection("ErrorDocumentationBaseUrl").Value;
             PayloadBuilder = new ErrorPayloadBuilder(baseUrl);
         }
+
         public ErrorPayloadBuilder PayloadBuilder { get; }
     }
 }
