@@ -1,6 +1,7 @@
 */bin
 */obj
 .idea
+.vscode
 GeekMDSuite.sln.DotSettings.user
 GeekMDSuite.WebAPI/context.db
 GeekMDSuite.WebAPI/Migrations
