@@ -1,15 +1,4 @@
-﻿// Do not modify the "LabName" field.
-// Do not change the order of the lab fields.
-// These values are entered in US values, the conversion to SI is automatic.
-// BEGIN
-// NOTES: I believe I have utilized the bounds incorrectly. May need to 
-//        revise for triggers outside of normal range.  
-// [ip] US Units complete
-// [] SI Units complete
-// [] UsToSiConversionFactor complete
-// [] Interpretation complete
-// [] Comments complete
-[
+﻿[
     {
         "LabName": "sodiumserum",
         "LabNameFull": "Sodium, Serum",

@@ -1,7 +1,4 @@
-﻿// Do not modify the "LabName" field.
-// Do not change the order of the lab fields.
-// These values are entered in US values, the conversion to SI is automatic.
-[
+﻿[
     {
         "LabName": "hiv",
         "LabNameFull": "HIV, Rapid, Serum",
